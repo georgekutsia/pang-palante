@@ -20,6 +20,7 @@ start$$.addEventListener("click", function () {
     }
   }
 );
+
 restart$$.addEventListener("click", ()=>{
     window.location.reload();
 })

@@ -21,7 +21,7 @@ class Game {
       this.obstacleTick++;// Se inicia la cuenta de los obstáculos
       // Empiezan a aparecer obstáculos y criaturas a medida que pasa cierto tiempo
 
-      if(this.obstacleTick >= Math.floor(Math.random() * 100 + 200)){ //añade obtáculo en algún momento random 
+      if(this.obstacleTick >= Math.floor(Math.random() * 10 + 20)){ //añade obtáculo en algún momento random 
         this.addObstacle1(); // la función para añadir obstáculo
         this.obstacleTick = 0; //regresa el obstacleTick a 0 para reiniciar la cuenta
       }
@@ -59,7 +59,8 @@ class Game {
   
 //funciones o metodos para crear obstaculos y criaturas
 addObstacle1() {  //función para añadir obstáculo
-  const obstacle = new Obstacle(this.ctx, 10);
+  // const obstacle = new Obstacle(this.ctx, 10, "../public/img/waterball.png", 120);// si quieres cambiarle el dibujo o especificar a qué altura sale
+  const obstacle = new Obstacle(this.ctx, 10)
   this.obstacles.push(obstacle);
 }
 

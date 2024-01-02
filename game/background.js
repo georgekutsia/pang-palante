@@ -6,7 +6,7 @@ class Background {
     this.w = this.ctx.canvas.width;
     this.h = this.ctx.canvas.height;
     this.img = new Image();
-    this.img.src = "../public/Imagenes/background1.png";
+    this.img.src = "../public/Imagenes/pangBackgroundBeach.jpg";
   }
   draw() {
     this.ctx.drawImage(this.img, this.x, this.y, this.w, this.h);

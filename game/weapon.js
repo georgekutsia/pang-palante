@@ -3,8 +3,8 @@ class Weapon1 {
     this.ctx = ctx;
     this.x = x;
     this.y = y;
-    this.vy = 0;
-    this.vx = 1;
+    this.vy = -1;
+    this.vx = 0;
     this.img = new Image();
     this.img.src = "../public/img/waterspin.png";
     this.img.frame = 0;
