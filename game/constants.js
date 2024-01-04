@@ -25,3 +25,4 @@ const A = 65;
 const W = 87;
 const S = 83;
 const D = 68;
+let recharge = 5000;

@@ -21,7 +21,7 @@ class Game {
       this.obstacleTick++;// Se inicia la cuenta de los obstáculos
       // Empiezan a aparecer obstáculos y criaturas a medida que pasa cierto tiempo
 
-      if(this.obstacleTick >= Math.floor(Math.random() * 10 + 20)){ //añade obtáculo en algún momento random 
+      if(this.obstacleTick >= Math.floor(Math.random() * 10 + 30)){ //añade obtáculo en algún momento random 
         this.addObstacle1(); // la función para añadir obstáculo
         this.obstacleTick = 0; //regresa el obstacleTick a 0 para reiniciar la cuenta
       }

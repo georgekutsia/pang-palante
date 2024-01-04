@@ -40,7 +40,7 @@ class Player {
       this.img.frame++;
       this.count = 0;
     }
-    if (this.img.frame > 2) {
+    if (this.img.frame > 4) {
       this.img.frame = 0;
     }
 
@@ -88,6 +88,14 @@ class Player {
       this.frameAmount = 2;
       this.img.frame = 1;
       this.shoot();
+      B = 0;
+      recharge -= 1000;
+      if(recharge <= 1000){
+        recharge = 1000;
+      }
+      setTimeout(() => {
+        B = 66;
+      }, recharge);
     }
   }
   keyUp(key) {
@@ -110,6 +118,12 @@ class Player {
     }
     if (key === S) {
       this.vy = 0;
+    }
+
+    if (key === B) {
+      this.img.src = "../public/Imagenes/pangStandShoot.png";
+      this.frameAmount = 2;
+      this.img.frame = 0;
     }
   }
 
