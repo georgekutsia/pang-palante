@@ -2,15 +2,15 @@ class Player {
   constructor(ctx) {
     this.ctx = ctx;
     this.x = 50;
-    this.y = 50;
+    this.y = this.ctx.canvas.height - 20;
     this.w = this.ctx.canvas.width / 15;
     this.h = this.ctx.canvas.width / 15;
     this.vx = 0;
     this.vy = 0;
     this.img = new Image();
     this.img.src = "../public/Imagenes/pangRunRight.png";
-    this.img.frame = 0;
-    this.count= 0;
+    this.img.frame = 3;
+    this.count = 1;
     this.bulletArray = [];
     this.frameAmount = 5;
   }
@@ -27,14 +27,13 @@ class Player {
       this.w,
       this.h
     );
-    // ctx.fillStyle = '#FF0000';  // Color del cuadrado (rojo en este caso)
-    // ctx.fillRect(this.x, this.y, this.w, this.h); 
     this.bulletArray.forEach((bullet) => {bullet.draw();}); // paso 3: dibujo cada bullet que se dispare
   }
 
   move() {
     this.x += this.vx ;
     this.y += this.vy;
+      console.log(this.count)
 
     if (this.count > 1 ) {
       this.img.frame++;
@@ -44,6 +43,7 @@ class Player {
       this.img.frame = 0;
     }
 
+    // lo que hace que el personaje no se salga de la pantalla. se podría meter en una función aparte y luego llamarla aquí
     if (this.y <= 0) {
       this.y = 0;
       this.vy = 0;
@@ -66,22 +66,22 @@ class Player {
 //consultar constantes para el código de cada tecla
   keyDown(key) {
     if (key === W) {
-      this.vy = -0.5;
+      this.vy = -2.5;
     }
     if (key === A) {
-    this.vx = -0.5;
+      this.count++;
+    this.vx = -2.5;
     this.img.src = "../public/Imagenes/pangRunLeft.png";
     this.frameAmount = 5;
-    this.count++;
     }
     if (key === D) {
-    this.vx = 0.5;
+      this.count++;
+    this.vx = 2.5;
     this.img.src = "../public/Imagenes/pangRunRight.png";
     this.frameAmount = 5;
-    this.count++;
     }
     if (key === S) {
-      this.vy = 0.5;
+      this.vy = 2.5;
     }
     if(key === B){
       this.img.src = "../public/Imagenes/pangStandShoot.png";

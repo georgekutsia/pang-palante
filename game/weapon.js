@@ -35,6 +35,6 @@ class Weapon1 {
     return colX && colY;
   }
   isVisible() {
-    return this.x < this.ctx.canvas.width;
+    return this.y >= 0;
   }
 }
