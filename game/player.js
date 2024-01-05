@@ -2,7 +2,7 @@ class Player {
   constructor(ctx) {
     this.ctx = ctx;
     this.x = 50;
-    this.y = this.ctx.canvas.height - 20;
+    this.y = this.ctx.canvas.height - 21;
     this.w = this.ctx.canvas.width / 15;
     this.h = this.ctx.canvas.width / 15;
     this.vx = 0;
@@ -48,12 +48,12 @@ class Player {
       this.y = 0;
       this.vy = 0;
     }
-    if (this.y + this.h > this.ctx.canvas.height + 5) {
-      this.y = this.ctx.canvas.height - this.h + 5;
+    if (this.y + this.h > this.ctx.canvas.height + 5) {//TODO: no se que hace el + 5 exactamente y la vy
+      this.y = this.ctx.canvas.height - this.h - 1;
       this.vy = 0;
     }
     if (this.x <= -10) {
-      this.x = -10;
+      this.x = 0;
       this.vx = 0;
     }
     if (this.x + this.w >= this.ctx.canvas.width) {

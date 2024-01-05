@@ -3,3 +3,7 @@
 choca contra la pared o es el eje x más la anchura de la burbuja lo que choca contra la pared.
 3) que las burbujas salgan en direcciones random cuando aparecen. o incluso cambiarles la dirección cuando les disparas. Bueno para practirar randoms y como funciona impactos
 4) dificultad alta: que la bubuja rebote cada vez menos. el primer rebote sube a 10 metros por ejemplo, el segundo rebote a 6 metros, el tercero al 3 y así hasta que se queda quieto
+
+
+
+player.js linea 51 //TODO: no se que hace el + 5 exactamente y la vy
