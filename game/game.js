@@ -6,7 +6,7 @@ class Game {
     this.background = new Background(ctx);   // traemos la clase Background para usarlo
     this.bubbles = [];  // un array que almacena todos los obstáculos que aparecen en la pantalla
     this.interval = null;  //sirve para pausar el juego
-    this.gameTime = 0; //cuando el juego se inicia va sumando. Se usa para lleavar cuenta del tiempo
+    this.gameTime = 0; //cuando el juego se inicia va sumando. Se usa para llevar cuenta del tiempo
     this.bubbleTick = 0;
     this.setListeners();  // para que se pueda usar el teclado 
   }
@@ -62,7 +62,9 @@ class Game {
 addbubble1() {  //función para añadir obstáculo
   // const bubble = new bubble(this.ctx, 10, "../public/img/waterball.png", 120);// si quieres cambiarle el dibujo o especificar a qué altura sale
   const bubble = new Bubble(this.ctx, 10)
-  this.bubbles.push(bubble);
+  if(this.bubbles.length < 10){
+     this.bubbles.push(bubble);
+  }
 }
 
   checkCollisions() {  //función para comprobar las colisiones

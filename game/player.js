@@ -2,9 +2,9 @@ class Player {
   constructor(ctx) {
     this.ctx = ctx;
     this.x = 50;
-    this.y = this.ctx.canvas.height - 21;
-    this.w = this.ctx.canvas.width / 15;
     this.h = this.ctx.canvas.width / 15;
+    this.y = this.ctx.canvas.height - this.h;
+    this.w = this.ctx.canvas.width / 15;
     this.vx = 0;
     this.vy = 0;
     this.img = new Image();
@@ -48,8 +48,8 @@ class Player {
       this.y = 0;
       this.vy = 0;
     }
-    if (this.y + this.h > this.ctx.canvas.height + 5) {//todo: bloqueo para el limite inferior. No se que hace el + 5 exactamente y la vy
-      this.y = this.ctx.canvas.height - this.h - 1;
+    if (this.y + this.h > this.ctx.canvas.height) {//todo: bloqueo para el limite inferior.
+      this.y = this.ctx.canvas.height - this.h -1;
       this.vy = 0;
     }
     if (this.x <= 0) { //todo: bloque para el límite izquierdo
@@ -81,7 +81,7 @@ class Player {
     this.img.src = "../public/Imagenes/pangRunRight.png";
     this.frameAmount = 5;
     }
-    if (key === S && this.y + this.h < this.ctx.canvas.height - 21) {//todo: bloqueo para el limite inferior
+    if (key === S /*&& this.y + this.h < this.ctx.canvas.height - this.h*/) {//todo: bloqueo para el limite inferior
       this.vy = 2.5;
     }
     if(key === B){
