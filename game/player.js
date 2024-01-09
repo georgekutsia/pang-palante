@@ -99,8 +99,6 @@ class Player {
 
     if(key === N){
       this.amountOfFireShoots -= 1;
-      console.log("disparos actuales", this.amountOfFireShoots); 
-      console.log("maximo de disparos",this.amountOfFireShoots); 
       this.shootFire();
       if(this.amountOfFireShoots <= 0){
         N = 0;

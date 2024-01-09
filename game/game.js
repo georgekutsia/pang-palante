@@ -6,6 +6,7 @@ class Game {
     this.background = new Background(ctx);   // traemos la clase Background para usarlo
     this.bubbles = [];  // un array que almacena todos los obstáculos que aparecen en la pantalla
     this.aditionalWeapons = []; // salen nuevas tipos de armas
+    this.puffBubbles = []; // para cuando estalla la burbuja
     this.interval = null;  //sirve para pausar el juego
     this.gameTime = 0; //cuando el juego se inicia va sumando. Se usa para llevar cuenta del tiempo
     this.bubbleTick = 0;
@@ -58,20 +59,22 @@ class Game {
     this.player.bulletArray = this.player.bulletArray.filter((e) => e.isVisible()); //elimina cada bullet que ya no es visible y vacía el array
     this.bubbles = this.bubbles.filter((bubble) => bubble.isVisible()); //elimina cada obstáculo que ya no es visible y vacía el array
     this.aditionalWeapons = this.aditionalWeapons.filter((flamethrower) => flamethrower.isVisible()); //elimina cada obstáculo que ya no es visible y vacía el array
+    this.puffBubbles = this.puffBubbles.filter((puff) => puff.isVisible()); //elimina cada obstáculo que ya no es visible y vacía el array
   }
 
   draw() {
     this.background.draw();  //dibuja el background
     this.player.draw(); //dibuja al personaje y todo lo que se dibuja en la clase de personaje
+    this.puffBubbles.forEach((e) => e.draw());  //dibuja cada obstáculo
     this.bubbles.forEach((e) => e.draw());  //dibuja cada obstáculo
     this.aditionalWeapons.forEach((e) => e.draw());  //dibuja cada obstáculo
-
     if(this.player.life <= 0) this.gameOver(); // cuando el player muere se llama a la funcion gameOver()
   }
   move() {
     this.player.move();  //muve al personaje y todo lo que se mueve en la clase de personaje
     this.bubbles.forEach((e) => e.move());  //mueve los obstáculos
     this.aditionalWeapons.forEach((e) => e.move());  //mueve los obstáculos
+    this.puffBubbles.forEach((e) => e.move());  //mueve los obstáculos
   }
   setListeners() { //permite hacer keyup y keydown para usar teclado para mover el personaje
     document.addEventListener("keydown", (ev) => {
@@ -87,7 +90,7 @@ addbubble1() {  //función para añadir obstáculo
   // const bubble = new bubble(this.ctx, 10, "../public/img/waterball.png", 120);// si quieres cambiarle el dibujo o especificar a qué altura sale
   const bubble = new Bubble(this.ctx, 10)
   if(this.bubbles.length < 10){
-     this.bubbles.push(bubble);
+    this.bubbles.push(bubble);
   }
 }
 aditionalWeapon() {  //función para añadir obstáculo
@@ -95,13 +98,14 @@ aditionalWeapon() {  //función para añadir obstáculo
   this.aditionalWeapons.push(flamethrower)
 }
 
+
   checkCollisions() {  //función para comprobar las colisiones
    // bubble  choca con el personaje
     this.bubbles.forEach((bubble) => {
       if (bubble.collides(this.player)) {
         this.player.life -= 10;
-        // this.playerDamageSound1.play()
-        this.bubbleSplash2.play()
+        this.playerDamageSound1.play();
+        this.bubbleSplash2.play();
         bubble.x = - 100; // situa fuera del canvas la burbuja que colisiona con el player y luego isVisible la elimina del array
       } else return true
     });
@@ -121,8 +125,12 @@ aditionalWeapon() {  //función para añadir obstáculo
     this.bubbles.forEach((bubble) => {
       this.player.bulletArray = this.player.bulletArray.filter((bullet) => {
         if(bullet.collides(bubble)){
+          const elx = bubble.x;
+          const ely = bubble.y
+          console.log(elx, ely)
           this.bubblePopSound1.play(); //todo -- Sonido paso 3) invocar el sonido
-          bubble.x = -100;
+          const puffBubble = new BubblePuff(this.ctx, elx, ely)
+          this.puffBubbles.push(puffBubble)
           return false;
         } else return true;
       })
