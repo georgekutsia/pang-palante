@@ -2,9 +2,9 @@ class Player {
   constructor(ctx) {
     this.ctx = ctx;
     this.x = 50;
-    this.y = this.ctx.canvas.height - 20;
-    this.w = this.ctx.canvas.width / 15;
     this.h = this.ctx.canvas.width / 15;
+    this.y = this.ctx.canvas.height - this.h;
+    this.w = this.ctx.canvas.width / 15;
     this.vx = 0;
     this.vy = 0;
     this.img = new Image();
@@ -13,6 +13,7 @@ class Player {
     this.count = 1;
     this.bulletArray = [];
     this.frameAmount = 5;
+    this.life = 100;
   }
 
   draw() {
@@ -28,12 +29,15 @@ class Player {
       this.h
     );
     this.bulletArray.forEach((bullet) => {bullet.draw();}); // paso 3: dibujo cada bullet que se dispare
+    
+    
+    this.ctx.fillText(`Life ${this.life}`, this.ctx.canvas.width - 50, 15); // contador de vida 
+
   }
 
   move() {
-    this.x += this.vx ;
+    this.x += this.vx;
     this.y += this.vy;
-      console.log(this.count)
 
     if (this.count > 1 ) {
       this.img.frame++;
@@ -43,23 +47,24 @@ class Player {
       this.img.frame = 0;
     }
 
-    // lo que hace que el personaje no se salga de la pantalla. se podría meter en una función aparte y luego llamarla aquí
+    //todo: lo que hace que el personaje no se salga de la pantalla. se podría meter en una función aparte y luego llamarla aquí
     if (this.y <= 0) {
       this.y = 0;
       this.vy = 0;
     }
-    if (this.y + this.h > this.ctx.canvas.height + 5) {
-      this.y = this.ctx.canvas.height - this.h + 5;
+    if (this.y + this.h > this.ctx.canvas.height) {//todo: bloqueo para el limite inferior.
+      this.y = this.ctx.canvas.height - this.h -1;
       this.vy = 0;
     }
-    if (this.x <= -10) {
-      this.x = -10;
+    if (this.x <= 0) { //todo: bloque para el límite izquierdo
+      this.x = 0;
       this.vx = 0;
     }
-    if (this.x + this.w >= this.ctx.canvas.width) {
+    if (this.x + this.w >= this.ctx.canvas.width) {//todo: bloqueo para el limite derecha
       this.x = this.ctx.canvas.width - this.w;
       this.vx = 0;
     }
+    
 
     this.bulletArray.forEach((bullet) => {bullet.move();}); //paso 4: mueve cada bullet que se dispare
   }
@@ -80,7 +85,7 @@ class Player {
     this.img.src = "../public/Imagenes/pangRunRight.png";
     this.frameAmount = 5;
     }
-    if (key === S) {
+    if (key === S /*&& this.y + this.h < this.ctx.canvas.height - this.h*/) {//todo: bloqueo para el limite inferior
       this.vy = 2.5;
     }
     if(key === B){
