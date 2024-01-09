@@ -22,7 +22,7 @@ class Background {
 //     this.w = this.ctx.canvas.width;
 //     this.h = this.ctx.canvas.height;
 //     this.img = new Image();
-//     this.img.src = "../public/img/back-canvas.jpeg";
+//     this.img.src = "../public/Imagenes/back.avif";
 //   }
 //   draw() {
 //     this.ctx.drawImage(this.img, this.x, this.y, this.w, this.h);
