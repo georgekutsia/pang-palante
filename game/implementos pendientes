@@ -1,9 +1,6 @@
 /////todo - 1) el personaje que se mantenga dentro del area del canvas y que no se vean partes del cuerpo cortadas cuando va hacia abajo
-//todo - 2) que las burbujas reboten entre las paredes. el truco es manipular vx   y tener en cuenta que a veces hay que comprobar si el eje x de la burbujas
-//todo - choca contra la pared o es el eje x más la anchura de la burbuja lo que choca contra la pared.
+/////todo - 2) que las burbujas reboten entre las paredes. el truco es manipular vx   y tener en cuenta que a veces hay que comprobar si el eje x de la burbujas
+/////todo - choca contra la pared o es el eje x más la anchura de la burbuja lo que choca contra la pared.
 //todo - 3) que las burbujas salgan en direcciones random cuando aparecen. o incluso cambiarles la dirección cuando les disparas. Bueno para practirar randoms y como funciona impactos
 //todo - 4) dificultad alta: que la bubuja rebote cada vez menos. el primer rebote sube a 10 metros por ejemplo, el segundo rebote a 6 metros, el tercero al 3 y así hasta que se queda quieto
-
-
-
-//? - player.js linea 51 no se que hace el + 5 exactamente.
+//todo - 5) crear una nueva clase "Escalera", que se dibuje en la pantalla en  vertical y que cuando el pesonaje choque con ella salga un mensaje console.log("Ha chocado")

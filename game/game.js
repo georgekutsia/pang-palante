@@ -37,13 +37,15 @@ class Game {
     this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
     this.player.bulletArray = this.player.bulletArray.filter((e) => e.isVisible()); //elimina cada bullet que ya no es visible y vacía el array
     this.bubbles = this.bubbles.filter((bubble) => bubble.isVisible()); //elimina cada obstáculo que ya no es visible y vacía el array
-
   }
 
   draw() {
     this.background.draw();  //dibuja el background
     this.player.draw(); //dibuja al personaje y todo lo que se dibuja en la clase de personaje
     this.bubbles.forEach((e) => e.draw());  //dibuja cada obstáculo
+
+
+    if(this.player.life <= 0) this.gameOver(); // cuando el player muere se llama a la funcion gameOver()
   }
   move() {
     this.player.move();  //muve al personaje y todo lo que se mueve en la clase de personaje
@@ -91,6 +93,11 @@ addbubble1() {  //función para añadir obstáculo
 
   gameOver() {  //Función para terminar el juego y vaciar todos los arrays.
     this.stop();
-    this.bubble = [];
+    this.bubbles = [];
+    this.ctx.save(); // guarda los estilos previos antes de ejecutar los siguientes para que no salgan los estilos estos en todos lados
+    this.ctx.font = "30px Arial"
+    this.ctx.fillStyle = "orange";
+    this.ctx.fillText("Game Over", 50, this.ctx.canvas.height / 2); // contador de vida 
+    this.ctx.restore(); //reestablece el estilo al estado principal.
   }
 }
