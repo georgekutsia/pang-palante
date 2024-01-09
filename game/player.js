@@ -14,6 +14,7 @@ class Player {
     this.bulletArray = [];
     this.frameAmount = 5;
     this.life = 100;
+    this.amountOfFireShoots = 0;
   }
 
   draw() {
@@ -29,10 +30,7 @@ class Player {
       this.h
     );
     this.bulletArray.forEach((bullet) => {bullet.draw();}); // paso 3: dibujo cada bullet que se dispare
-    
-    
     this.ctx.fillText(`Life ${this.life}`, this.ctx.canvas.width - 50, 15); // contador de vida 
-
   }
 
   move() {
@@ -94,13 +92,20 @@ class Player {
       this.img.frame = 1;
       this.shoot();
       B = 0;
-      recharge -= 1000;
-      if(recharge <= 1000){
-        recharge = 1000;
-      }
       setTimeout(() => {
         B = 66;
       }, recharge);
+    }
+
+    if(key === N){
+      this.amountOfFireShoots -= 1;
+      console.log("disparos actuales", this.amountOfFireShoots); 
+      console.log("maximo de disparos",this.amountOfFireShoots); 
+      this.shootFire();
+      if(this.amountOfFireShoots <= 0){
+        N = 0;
+        this.amountOfFireShoots = 5;
+      }
     }
   }
   keyUp(key) {
@@ -142,6 +147,10 @@ class Player {
   shoot() {// paso 1: invoca el disparo desde la posicion del personaje o su cercanía
     const bullet = new Weapon1(this.ctx, this.x , this.y);
     this.bulletArray.push(bullet);//paso 2: crea un array vacío en el constructor y luego haz un push de cada bullet;
+  }
 
+  shootFire(){
+    const bulletFire = new WeaponFire(this.ctx, this.x, this.y)
+    this.bulletArray.push(bulletFire);
   }
 }

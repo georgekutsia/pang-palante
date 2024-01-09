@@ -6,18 +6,18 @@ class Weapon1 {
     this.vy = -1;
     this.vx = 0;
     this.img = new Image();
-    this.img.src = "../public/img/waterspin.png";
+    this.img.src = "../public/Imagenes/weaponStone.png";
     this.img.frame = 0;
-    this.w = this.ctx.canvas.width/ 20;
-    this.h = this.ctx.canvas.width/ 20;
+    this.w = this.ctx.canvas.width/ 60;
+    this.h = this.ctx.canvas.width/ 25;
   }
 
   draw() {
     this.ctx.drawImage(
       this.img,
       0,
-      (this.img.frame * this.img.width) / 8,
-      this.img.width / 8,
+      (this.img.frame * this.img.width) / 1,
+      this.img.width / 1,
       this.img.height,
       this.x,
       this.y,
