@@ -6,7 +6,7 @@ class Game {
     this.background = new Background(ctx);   // traemos la clase Background para usarlo
     this.bubbles = [];  // un array que almacena todos los obstáculos que aparecen en la pantalla
     this.interval = null;  //sirve para pausar el juego
-    this.gameTime = 0; //cuando el juego se inicia va sumando. Se usa para lleavar cuenta del tiempo
+    this.gameTime = 0; //cuando el juego se inicia va sumando. Se usa para llevar cuenta del tiempo
     this.bubbleTick = 0;
     this.setListeners();  // para que se pueda usar el teclado 
   }
@@ -37,13 +37,15 @@ class Game {
     this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
     this.player.bulletArray = this.player.bulletArray.filter((e) => e.isVisible()); //elimina cada bullet que ya no es visible y vacía el array
     this.bubbles = this.bubbles.filter((bubble) => bubble.isVisible()); //elimina cada obstáculo que ya no es visible y vacía el array
-
   }
 
   draw() {
     this.background.draw();  //dibuja el background
     this.player.draw(); //dibuja al personaje y todo lo que se dibuja en la clase de personaje
     this.bubbles.forEach((e) => e.draw());  //dibuja cada obstáculo
+
+
+    if(this.player.life <= 0) this.gameOver(); // cuando el player muere se llama a la funcion gameOver()
   }
   move() {
     this.player.move();  //muve al personaje y todo lo que se mueve en la clase de personaje
@@ -62,13 +64,18 @@ class Game {
 addbubble1() {  //función para añadir obstáculo
   // const bubble = new bubble(this.ctx, 10, "../public/img/waterball.png", 120);// si quieres cambiarle el dibujo o especificar a qué altura sale
   const bubble = new Bubble(this.ctx, 10)
-  this.bubbles.push(bubble);
+  if(this.bubbles.length < 10){
+     this.bubbles.push(bubble);
+  }
 }
 
   checkCollisions() {  //función para comprobar las colisiones
    // obstaculo  choca con el personaje
     this.bubbles.forEach((bubble) => {
       if (bubble.collides(this.player)) {
+        this.player.life -= 50;
+        bubble.x = - 100; // situa fuera del canvas la burbuja que colisiona con el player y luego isVisible la elimina del array
+        console.log("despues del impacto" + this.player.life);
       } else return true
     });
 
@@ -86,6 +93,11 @@ addbubble1() {  //función para añadir obstáculo
 
   gameOver() {  //Función para terminar el juego y vaciar todos los arrays.
     this.stop();
-    this.bubble = [];
+    this.bubbles = [];
+    this.ctx.save(); // guarda los estilos previos antes de ejecutar los siguientes para que no salgan los estilos estos en todos lados
+    this.ctx.font = "30px Arial"
+    this.ctx.fillStyle = "orange";
+    this.ctx.fillText("Game Over", 50, this.ctx.canvas.height / 2); // contador de vida 
+    this.ctx.restore(); //reestablece el estilo al estado principal.
   }
 }
