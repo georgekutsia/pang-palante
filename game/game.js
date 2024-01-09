@@ -71,6 +71,9 @@ addbubble1() {  //función para añadir obstáculo
    // obstaculo  choca con el personaje
     this.bubbles.forEach((bubble) => {
       if (bubble.collides(this.player)) {
+        this.player.life -= 50;
+        bubble.x = - 100; // situa fuera del canvas la burbuja que colisiona con el player y luego isVisible la elimina del array
+        console.log("despues del impacto" + this.player.life);
       } else return true
     });
 

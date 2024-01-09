@@ -13,6 +13,7 @@ class Player {
     this.count = 1;
     this.bulletArray = [];
     this.frameAmount = 5;
+    this.life = 100;
   }
 
   draw() {
@@ -28,12 +29,15 @@ class Player {
       this.h
     );
     this.bulletArray.forEach((bullet) => {bullet.draw();}); // paso 3: dibujo cada bullet que se dispare
+    
+    
+    this.ctx.fillText(`Life ${this.life}`, this.ctx.canvas.width - 50, 15); // contador de vida 
+
   }
 
   move() {
     this.x += this.vx;
     this.y += this.vy;
-      console.log(this.count)
 
     if (this.count > 1 ) {
       this.img.frame++;
