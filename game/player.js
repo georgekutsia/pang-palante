@@ -93,6 +93,9 @@ class Player {
       this.shoot();
       B = 0;
       setTimeout(() => {
+        this.img.frame = 0;
+      }, 50); // para que parezca que dispara y se levanta al poco tiempo
+      setTimeout(() => {
         B = 66;
       }, recharge);
     }
@@ -126,12 +129,6 @@ class Player {
     }
     if (key === S) {
       this.vy = 0;
-    }
-
-    if (key === B) {
-      this.img.src = "../public/Imagenes/pangStandShoot.png";
-      this.frameAmount = 2;
-      this.img.frame = 0;
     }
   }
   

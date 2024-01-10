@@ -3,7 +3,7 @@ class Weapon1 {
     this.ctx = ctx;
     this.x = x;
     this.y = y;
-    this.vy = -2;
+    this.vy = -3;
     this.vx = 0;
     this.img = new Image();
     this.img.src = "../public/Imagenes/weaponStone.png";
