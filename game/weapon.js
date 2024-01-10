@@ -30,7 +30,7 @@ class Weapon1 {
     this.y += this.vy;
   }
   collides(objetivo) {
-    const colX =this.x <= objetivo.x + objetivo.w && this.x + this.w > objetivo.x + 10;
+    const colX =this.x <= objetivo.x + objetivo.w && this.x + this.w > objetivo.x;
     const colY =this.y + this.h > objetivo.y && this.y < objetivo.y + objetivo.h;
     return colX && colY;
   }

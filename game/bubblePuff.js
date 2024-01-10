@@ -1,22 +1,22 @@
 class BubblePuff {
-  constructor(ctx,x, y) {
+  constructor(ctx, x, y, w, h) {
     this.ctx = ctx;
     this.x = x;
     this.y = y;
     this.img = new Image();
-    this.img.src = "../public/Imagenes/puffBubble.png";
+    this.img.src = "../public/Imagenes/puffBubble1.png";
     this.img.frame = 0;
-    this.w = this.ctx.canvas.width/ 5;
-    this.h = this.ctx.canvas.width/ 5;
+    this.w = w ;
+    this.h = h;
     this.puffTick = 0;
   }
 
   draw() {
     this.ctx.drawImage(
       this.img,
-      (this.img.frame * this.img.width) / 4,
+      (this.img.frame * this.img.width) / 5,
       0,
-      this.img.width / 4,
+      this.img.width / 5,
       this.img.height,
       this.x,
       this.y,
@@ -26,11 +26,11 @@ class BubblePuff {
   }
   move() {
     this.puffTick++
-    if(this.puffTick >= 3){
+    if(this.puffTick >= 2){
       this.img.frame++
       this.puffTick = 0
     }
-    if(this.img.frame > 3){
+    if(this.img.frame > 4){
       this.img.frame = 0;
       this.x = -200 
     }
