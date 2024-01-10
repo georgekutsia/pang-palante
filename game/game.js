@@ -159,10 +159,10 @@ aditionalWeapon() {  //función para añadir obstáculo
     })
 
     // Verificar colisión con la escalera
-    if (this.stair.collides(this.player)) {
-      this.player.y = this.stair.y - this.player.h; // Ajustar la posición para que parezca en la escalera
-      console.log("colision")
-    }
+    // if (this.stair.collides(this.player)) {
+    //   this.player.y = this.stair.y - this.player.h; // Ajustar la posición para que parezca en la escalera
+    //   console.log("colision")
+    // }
   }
 
   gameOver() {  //Función para terminar el juego y vaciar todos los arrays.
