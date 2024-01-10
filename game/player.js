@@ -134,7 +134,7 @@ class Player {
       this.img.frame = 0;
     }
   }
-
+  
   
   collides(objetivo) {
     const colX =this.x <= objetivo.x + objetivo.w && this.x + this.w > objetivo.x + 10;

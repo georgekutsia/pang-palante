@@ -39,7 +39,7 @@ class Game {
       this.aditionalWeaponTick++;// Se inicia la cuenta de los obstáculos
       // Empiezan a aparecer obstáculos y criaturas a medida que pasa cierto tiempo
       if(this.bubbleTick >= Math.floor(Math.random() * 10 + 100)){ //añade obtáculo en algún momento random 
-        this.addbubble1(); // la función para añadir obstáculo
+        this.addbubble(); // la función para añadir obstáculo
         this.bubbleTick = 0; //regresa el bubbleTick a 0 para reiniciar la cuenta
       }
       if(this.aditionalWeaponTick >= 200){ //añade obtáculo en algún momento random 
@@ -86,13 +86,14 @@ class Game {
   }
   
 //funciones o metodos para crear obstaculos y criaturas
-addbubble1() {  //función para añadir obstáculo
+addbubble() {  //función para añadir obstáculo
   // const bubble = new bubble(this.ctx, 10, "../public/img/waterball.png", 120);// si quieres cambiarle el dibujo o especificar a qué altura sale
-  const bubble = new Bubble(this.ctx, 10)
-  if(this.bubbles.length < 10){
+  const bubble = new Bubble(this.ctx)
+  if(this.bubbles.length < 2){
     this.bubbles.push(bubble);
   }
 }
+
 aditionalWeapon() {  //función para añadir obstáculo
   const flamethrower = new Flamethrower(this.ctx)
   this.aditionalWeapons.push(flamethrower)
@@ -103,10 +104,10 @@ aditionalWeapon() {  //función para añadir obstáculo
    // bubble  choca con el personaje
     this.bubbles.forEach((bubble) => {
       if (bubble.collides(this.player)) {
-        this.player.life -= 10;
+        this.player.life -= bubble.damage; //el daño al jugador se le hace según lo que marca el daño de la burbuja. a burbuja más pequeña, menos daño
         this.playerDamageSound1.play();
         this.bubbleSplash2.play();
-        bubble.x = - 100; // situa fuera del canvas la burbuja que colisiona con el player y luego isVisible la elimina del array
+        bubble.vy = -3; // rebota encima del jugador haciéndole daño
       } else return true
     });
 
@@ -126,11 +127,14 @@ aditionalWeapon() {  //función para añadir obstáculo
       this.player.bulletArray = this.player.bulletArray.filter((bullet) => {
         if(bullet.collides(bubble)){
           const elx = bubble.x;
-          const ely = bubble.y
-          console.log(elx, ely)
-          this.bubblePopSound1.play(); //todo -- Sonido paso 3) invocar el sonido
-          const puffBubble = new BubblePuff(this.ctx, elx, ely)
+          const ely = bubble.y;
+          bubble.x = -100
+          const puffBubble = new BubblePuff(this.ctx, elx, ely, bubble.w, bubble.h)
           this.puffBubbles.push(puffBubble)
+          const smallBubble1 = new Bubble(this.ctx, -0.5, -1, elx, ely, bubble.w/2, bubble.h/2, bubble.g + 0.03, bubble.damage / 2 )// al explotar una burbuja, crea otra en su lugar, usando su ubicación y dimensiones para hacerla más pequeña
+          const smallBubble2 = new Bubble(this.ctx, 0.5, -1, elx, ely,bubble.w/2, bubble.h/2, bubble.g + 0.03, bubble.damage / 2 )
+          this.bubbles.push(smallBubble1, smallBubble2)
+          this.bubblePopSound1.play(); //todo -- Sonido paso 3) invocar el sonido
           return false;
         } else return true;
       })
@@ -147,7 +151,7 @@ aditionalWeapon() {  //función para añadir obstáculo
     this.ctx.save(); // guarda los estilos previos antes de ejecutar los siguientes para que no salgan los estilos estos en todos lados
     this.ctx.font = "30px Arial"
     this.ctx.fillStyle = "orange";
-    this.ctx.fillText("Game Over", 50, this.ctx.canvas.height / 2); // contador de vida 
+    this.ctx.fillText("Game Over", 70, this.ctx.canvas.height / 2); // contador de vida 
     this.ctx.restore(); //reestablece el estilo al estado principal.
   }
 }

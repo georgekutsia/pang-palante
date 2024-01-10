@@ -1,14 +1,14 @@
 class Bubble {  
-  constructor(ctx, damage, obstacleImg, obstacPlacing) {
+  constructor(ctx, vx, vy, x , y, w, h, g, damage, obstacleImg, obstacPlacing ) {
     this.ctx = ctx;
-    this.x = Math.random() * this.ctx.canvas.width; //el obstáculo aparece desde arriba del canvas 
-    this.y = obstacPlacing || -30; // el obstáculo sale de una altura específica o de alguna altura randóm
-    this.w = this.ctx.canvas.width / 17;  //anchura calculada respecto al canvas
-    this.h = this.ctx.canvas.width / 17;  //altura calculada respecto al canvas
-    this.vy = 0;
-    this.vx = -0.5;
-    this.g = 0.05;
-    this.damage = damage || 10; // daño especificado o 10
+    this.x = x || Math.random() * this.ctx.canvas.width; //el obstáculo aparece desde arriba del canvas 
+    this.y = y || obstacPlacing || -30; // el obstáculo sale de una altura específica o de alguna altura randóm
+    this.w = w || this.ctx.canvas.width / 10;  //anchura calculada respecto al canvas
+    this.h = h || this.ctx.canvas.width / 10;  //altura calculada respecto al canvas
+    this.vy = vy || 0;
+    this.vx = vx ||-0.5;
+    this.g = g || 0.05;
+    this.damage = damage || 20; // daño especificado o 10
     this.img = new Image();   //crear nueva imágene ne canvas
     this.img.src = obstacleImg || "../public/Imagenes/bubble.png";  //definir cual es la nueva imagen
 
@@ -17,6 +17,7 @@ class Bubble {
   }
   draw() {
     this.ctx.drawImage(this.img, this.x, this.y, this.w, this.h);  // dibuja el obstáculo
+    if(this.w <= this.ctx.canvas.width/80) this.x = -100
   }
   move() {
     this.vy += this.g;  //efecto gravedad, aumenta la velocidad a medida que baja
