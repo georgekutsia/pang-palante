@@ -22,9 +22,10 @@ class Game {
     this.playerDamageSound1 = new Audio("../public/sounds/playerDamageSound1.mp3");
     this.playerDamageSound1.volume = 0.1; //
     this.bubbleSplash2 = new Audio("../public/sounds/bubbleSplash2.mp3")
-    this.bubbleSplash2.volume = 0.1; //
-
+    this.bubbleSplash2.volume = 0.1; 
     this.setListeners();  // para que se pueda usar el teclado 
+    this.stairs = []; // Array para almacenar instancias de la clase Stair
+
   }
   
   start() {
@@ -46,6 +47,7 @@ class Game {
         this.aditionalWeapon(); // la función para añadir obstáculo
         this.aditionalWeaponTick = 0; //regresa el bubbleTick a 0 para reiniciar la cuenta
       }
+      this.addStair(); 
     }, 1000 / 60);
   }
 
@@ -64,6 +66,7 @@ class Game {
 
   draw() {
     this.background.draw();  //dibuja el background
+    this.drawStairs(); // dibujar escaleras
     this.player.draw(); //dibuja al personaje y todo lo que se dibuja en la clase de personaje
     this.puffBubbles.forEach((e) => e.draw());  //dibuja cada obstáculo
     this.bubbles.forEach((e) => e.draw());  //dibuja cada obstáculo
@@ -71,6 +74,7 @@ class Game {
     if(this.player.life <= 0) this.gameOver(); // cuando el player muere se llama a la funcion gameOver()
   }
   move() {
+    this.moveStairs(); // mover escaleras
     this.player.move();  //muve al personaje y todo lo que se mueve en la clase de personaje
     this.bubbles.forEach((e) => e.move());  //mueve los obstáculos
     this.aditionalWeapons.forEach((e) => e.move());  //mueve los obstáculos
@@ -98,6 +102,24 @@ aditionalWeapon() {  //función para añadir obstáculo
   const flamethrower = new Flamethrower(this.ctx)
   this.aditionalWeapons.push(flamethrower)
 }
+
+  addStair() {
+    const stair = new Stair(this.ctx);
+    this.stairs.push(stair);
+  }
+
+  drawStairs() {
+    this.stairs.forEach((stair) => {
+      stair.draw();
+    });
+  }
+
+  moveStairs() {
+    this.stairs.forEach((stair) => {
+      stair.move();
+    });
+  }
+
 
   checkCollisions() {  //función para comprobar las colisiones
    // bubble  choca con el personaje
@@ -135,6 +157,12 @@ aditionalWeapon() {  //función para añadir obstáculo
         } else return true;
       })
     })
+
+    // Verificar colisión con la escalera
+    if (this.stair.collides(this.player)) {
+      this.player.y = this.stair.y - this.player.h; // Ajustar la posición para que parezca en la escalera
+      console.log("colision")
+    }
   }
 
   gameOver() {  //Función para terminar el juego y vaciar todos los arrays.
