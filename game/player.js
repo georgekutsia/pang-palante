@@ -13,7 +13,7 @@ class Player {
     this.count = 1;
     this.bulletArray = [];
     this.frameAmount = 5;
-    this.life = 100;
+    this.life = 900;
     this.amountOfFireShoots = 0;
   }
 
@@ -129,6 +129,12 @@ class Player {
     }
     if (key === S) {
       this.vy = 0;
+    }
+
+    if (key === B ) {
+      this.img.src = "../public/Imagenes/pangStandShoot.png";
+      this.frameAmount = 2;
+      this.img.frame = 0;
     }
   }
   
