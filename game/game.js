@@ -99,7 +99,6 @@ aditionalWeapon() {  //función para añadir obstáculo
   this.aditionalWeapons.push(flamethrower)
 }
 
-
   checkCollisions() {  //función para comprobar las colisiones
    // bubble  choca con el personaje
     this.bubbles.forEach((bubble) => {
@@ -107,11 +106,9 @@ aditionalWeapon() {  //función para añadir obstáculo
         this.player.life -= bubble.damage; //el daño al jugador se le hace según lo que marca el daño de la burbuja. a burbuja más pequeña, menos daño
         this.playerDamageSound1.play();
         this.bubbleSplash2.play();
-        bubble.vy = -3; // rebota encima del jugador haciéndole daño
+        bubble.vy = -3.5; // rebota encima del jugador haciéndole daño
       } else return true
     });
-
-
    // aditionalweapon  choca con el personaje
     this.aditionalWeapons.forEach((weapon) => {
       if (weapon.collides(this.player)) {
@@ -120,8 +117,6 @@ aditionalWeapon() {  //función para añadir obstáculo
         weapon.x = - 100; // situa fuera del canvas la burbuja que colisiona con el player y luego isVisible la elimina del array
       } else return true
     });
-
-
     //  bubble choca con bullet
     this.bubbles.forEach((bubble) => {
       this.player.bulletArray = this.player.bulletArray.filter((bullet) => {
@@ -131,8 +126,9 @@ aditionalWeapon() {  //función para añadir obstáculo
           bubble.x = -100
           const puffBubble = new BubblePuff(this.ctx, elx, ely, bubble.w, bubble.h)
           this.puffBubbles.push(puffBubble)
+
           const smallBubble1 = new Bubble(this.ctx, -0.5, -1, elx, ely, bubble.w/2, bubble.h/2, bubble.g + 0.03, bubble.damage / 2 )// al explotar una burbuja, crea otra en su lugar, usando su ubicación y dimensiones para hacerla más pequeña
-          const smallBubble2 = new Bubble(this.ctx, 0.5, -1, elx, ely,bubble.w/2, bubble.h/2, bubble.g + 0.03, bubble.damage / 2 )
+          const smallBubble2 = new Bubble(this.ctx, 0.5, -1, elx, ely, bubble.w/2, bubble.h/2, bubble.g + 0.03, bubble.damage / 2 )
           this.bubbles.push(smallBubble1, smallBubble2)
           this.bubblePopSound1.play(); //todo -- Sonido paso 3) invocar el sonido
           return false;
