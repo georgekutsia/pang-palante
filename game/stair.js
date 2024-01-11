@@ -2,12 +2,9 @@ class Stair {
   constructor(ctx, vx, vy, x, y, w, h, g, obstacleImg, obstacPlacing) {
     this.ctx = ctx; // Contexto del canvas
     this.x = 100; // Posición horizontal (coordenada x), valor predeterminado o especificado
-    this.y = 100; // Posición vertical (coordenada y), valor predeterminado o especificado
     this.w = w || this.ctx.canvas.width / 9; // Ancho de la escalera, valor predeterminado o especificado
     this.h = h || this.ctx.canvas.width / 7; // Altura de la escalera, valor predeterminado o especificado
-    this.vy = 0; // Velocidad vertical, valor predeterminado o especificado
-    this.vx = 0; // Velocidad horizontal, valor predeterminado o especificado
-    this.g = 0; // Aceleración debida a la gravedad
+    this.y = this.ctx.canvas.height - this.h; // Posición vertical (coordenada y), valor predeterminado o especificado
     this.img = new Image(); // Imagen asociada a la escalera
     this.img.src = obstacleImg || "../public/Imagenes/stair1.png"; // Ruta de la imagen de la escalera
 
