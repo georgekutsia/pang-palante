@@ -111,7 +111,6 @@ aditionalWeapon() {  //función para añadir obstáculo
     this.stairs.push(stair2);
   }
 
-
   checkCollisions() {  //función para comprobar las colisiones
    // bubble  choca con el personaje
     this.bubbles.forEach((bubble) => {
