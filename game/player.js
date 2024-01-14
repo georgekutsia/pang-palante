@@ -7,6 +7,7 @@ class Player {
     this.w = this.ctx.canvas.width / 15;
     this.vx = 0;
     this.vy = 0;
+    this.g = 0.03;
     this.img = new Image();
     this.img.src = "../public/Imagenes/pangRunRight.png";
     this.img.frame = 3;
@@ -34,9 +35,9 @@ class Player {
   }
 
   move() {
+    this.vy += this.g
     this.x += this.vx;
     this.y += this.vy;
-
     if (this.count > 1 ) {
       this.img.frame++;
       this.count = 0;
@@ -44,15 +45,15 @@ class Player {
     if (this.img.frame > 4) {
       this.img.frame = 0;
     }
-
     //todo: lo que hace que el personaje no se salga de la pantalla. se podría meter en una función aparte y luego llamarla aquí
     if (this.y <= 0) {
       this.y = 0;
       this.vy = 0;
     }
-    if (this.y + this.h > this.ctx.canvas.height) {//todo: bloqueo para el limite inferior.
-      this.y = this.ctx.canvas.height - this.h -1;
+    if (this.y + this.h >= this.ctx.canvas.height) {//todo: bloqueo para el limite inferior.
+      this.y = this.ctx.canvas.height - this.h;
       this.vy = 0;
+      this.g = 0;
     }
     if (this.x <= 0) { //todo: bloque para el límite izquierdo
       this.x = 0;
@@ -68,7 +69,7 @@ class Player {
   }
 //consultar constantes para el código de cada tecla
   keyDown(key) {
-    if (key === W) {
+    if (key === W ) {
       this.vy = -2.5;
     }
     if (key === A) {
@@ -78,13 +79,14 @@ class Player {
     this.frameAmount = 5;
     }
     if (key === D) {
-      this.count++;
+    this.count++;
     this.vx = 2.5;
     this.img.src = "../public/Imagenes/pangRunRight.png";
     this.frameAmount = 5;
     }
     if (key === S /*&& this.y + this.h < this.ctx.canvas.height - this.h*/) {//todo: bloqueo para el limite inferior
       this.vy = 2.5;
+      this.y = this.y + 5;  // para que al estar encima de la escalera, hago un salto hacia abajo y deje de tener posición fija
     }
     if(key === B){
       this.img.src = "../public/Imagenes/pangStandShoot.png";

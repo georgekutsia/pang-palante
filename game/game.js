@@ -68,12 +68,12 @@ class Game {
   draw() {
     this.background.draw();  //dibuja el background
     this.stairs.forEach((e) => e.draw());
-    console.log("escalera", this.stairs)
     this.player.draw(); //dibuja al personaje y todo lo que se dibuja en la clase de personaje
     this.puffBubbles.forEach((e) => e.draw());  //dibuja cada obstáculo
     this.bubbles.forEach((e) => e.draw());  //dibuja cada obstáculo
     this.aditionalWeapons.forEach((e) => e.draw());  //dibuja cada obstáculo
     if(this.player.life <= 0) this.gameOver(); // cuando el player muere se llama a la funcion gameOver()
+
   }
   move() {
     this.player.move();  //muve al personaje y todo lo que se mueve en la clase de personaje
@@ -94,7 +94,7 @@ class Game {
 addbubble() {  //función para añadir obstáculo
   // const bubble = new bubble(this.ctx, 10, "../public/img/waterball.png", 120);// si quieres cambiarle el dibujo o especificar a qué altura sale
   const bubble = new Bubble(this.ctx)
-  if(this.bubbles.length < 2){
+  if(this.bubbles.length < 0){
     this.bubbles.push(bubble);
   }
 }
@@ -105,8 +105,10 @@ aditionalWeapon() {  //función para añadir obstáculo
 }
 
   addStair() {
-    const stair = new Stair(this.ctx);
+    const stair = new Stair(this.ctx, 10);
+    const stair2 = new Stair(this.ctx, 130);
     this.stairs.push(stair);
+    this.stairs.push(stair2);
   }
 
 
@@ -149,13 +151,24 @@ aditionalWeapon() {  //función para añadir obstáculo
 
     // Verificar colisión con la escalera
     this.stairs.forEach((stair) => {
-      if (stair.collides(this.player)) {
-        W = 87
-        if (this.player.y + this.player.h < stair.y) { 
+      if (stair.collidesTop(this.player)) {
+        this.player.vy = 0;
+        this.player.y = stair.y - this.player.h
+        W = 0;
+        this.player.g = 0.2;
+      }
+      if(stair.collidesSides(this.player)){
+        console.log("bulala")
+        this.player.vy = 0;
+        this.player.g = 0.2;
+        setTimeout(() => {
           W = 0;
-          console.log("colision");
-        }
-      } else W = 0;
+        }, 200);
+      }
+      if (stair.collides(this.player)) {
+        W = 87;
+      } else{return true;
+      }
     });
   }
 
