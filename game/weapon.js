@@ -28,6 +28,9 @@ class Weapon1 {
   move() {
     this.x += this.vx;
     this.y += this.vy;
+    if(this.y + this.h >= this.ctx.canvas.height) {
+    this.vy = -3
+    }
   }
   collides(objetivo) {
     const colX =this.x <= objetivo.x + objetivo.w && this.x + this.w > objetivo.x;
@@ -35,6 +38,6 @@ class Weapon1 {
     return colX && colY;
   }
   isVisible() {
-    return this.y >= 0;
+    return this.y >= 0 ;
   }
 }

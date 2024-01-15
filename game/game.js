@@ -112,16 +112,17 @@ aditionalWeapon() {  //función para añadir obstáculo
 
   addStair() {                         // this.ctx, ubicacion en eje x, ubicacion en eje y, ancho y alto. la última sería la imágen
     //! la escalera no debería colgar sola en el aire, debería tener una parte de la plataforma debajo o pasan cosas raras con la gravedad
-    // const stair1 = new Stair(this.ctx, 10, this.ctx.canvas.height - 50,  30, 50);
-    // const stair2 = new Stair(this.ctx, 200, this.ctx.canvas.height - 100,  20, 60);
-    // this.stairs.push(stair1, stair2);
+    const stair1 = new Stair(this.ctx, 1, this.ctx.canvas.height - 40,  30, 40);
+    const stair2 = new Stair(this.ctx, 200, this.ctx.canvas.height - 100,  20, 60);
+    this.stairs.push(stair1, stair2);
   }
 
-  addPlatforms(){                              // this.ctx, ubicacion en eje x, ubicacion en eje y, ancho y alto. la última sería la imágen
-    // const platform1 = new Platform(this.ctx)
-    // const platform2 = new Platform(this.ctx, 170, 109, 50, 10, "../public/Imagenes/obstacles/platformSolid3.png" )
-    // this.platforms.push(platform1, platform2)
-  }
+    addPlatforms(){                              // this.ctx, ubicacion en eje x, ubicacion en eje y, ancho y alto. la última sería la imágen
+      const platform1 = new Platform(this.ctx)
+      const platform2 = new Platform(this.ctx, 170, 109, 50, 10, "../public/Imagenes/obstacles/platformSolid3.png" )
+      const platform3 = new Platform(this.ctx, 30, 49, 50, 10, "../public/Imagenes/obstacles/platformSolid3.png" )
+      this.platforms.push(platform1, platform2, platform3)
+    }
 
     addBouncer(){
       const bouncer1 = new Bouncer(this.ctx, 60, 120, 20, 20)
@@ -187,7 +188,7 @@ aditionalWeapon() {  //función para añadir obstáculo
 
 
     // colisiones con Platform
-    this.platforms.forEach((platform) => { 
+    this.platforms.forEach((platform) => {  // platform con player
       if (platform.collides(this.player)) {
         this.player.vy = 0;
         if (this.player.y <= platform.y && this.player.x <= platform.x + platform.w  && this.player.x + this.player.w > platform.x) {
@@ -203,7 +204,16 @@ aditionalWeapon() {  //función para añadir obstáculo
         }
       }
     })
-
+    this.platforms.forEach((platform) => {
+      this.player.bulletArray.forEach((bullet) => {
+        if(bullet.collides(platform)){
+          bullet.vy = 3;
+          if(this.player.vx > 0) bullet.vx = 1;
+          if(this.player.vx < 0) bullet.vx = -1;
+          return false;
+        } else return true;
+      })
+    })
     //colisiones con bouncers
 
     this.bouncers.forEach((bouncer) => { 
@@ -218,13 +228,17 @@ aditionalWeapon() {  //función para añadir obstáculo
         }
         if (this.player.x >= bouncer.x + bouncer.w - 6 ) { //colisión por la derecha
           this.player.g = 0.2;
-          this.player.vx = 1;
-          
+          this.player.vx = 2;
+          setTimeout(() => {
+            this.player.vx = 0;
+          }, 500);
         }
         if (this.player.x -1  <= bouncer.x ) { //colisión por la izquierda
           this.player.g = 0.2;
-          this.player.vx = -1;
-          console.log("bla")
+          this.player.vx = -2;
+          setTimeout(() => {
+            this.player.vx = 0;
+          }, 500);
         }
       }
     })
@@ -233,7 +247,11 @@ aditionalWeapon() {  //función para añadir obstáculo
   gameOver() {  //Función para terminar el juego y vaciar todos los arrays.
     this.stop();
     this.bubbles = [];
-    this.aditionalWeapon = [];
+    this.aditionalWeapons = []
+    this.puffBubbles = [];
+    this.platforms = [];
+    this.bouncers = [];
+    this.stairs = [];
     this.gameBackgroundMusic.pause()
     this.gameOver1.play()
     this.gameOver2.play()
