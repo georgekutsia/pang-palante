@@ -22,9 +22,11 @@ class Game {
     this.playerDamageSound1 = new Audio("../public/sounds/playerDamageSound1.mp3");
     this.playerDamageSound1.volume = 0.1; //
     this.bubbleSplash2 = new Audio("../public/sounds/bubbleSplash2.mp3")
-    this.bubbleSplash2.volume = 0.1; //
-
+    this.bubbleSplash2.volume = 0.1; 
     this.setListeners();  // para que se pueda usar el teclado 
+    this.stairs = []; // Array para almacenar instancias de la clase Stair
+
+
   }
   
   start() {
@@ -47,6 +49,7 @@ class Game {
         this.aditionalWeaponTick = 0; //regresa el bubbleTick a 0 para reiniciar la cuenta
       }
     }, 1000 / 60);
+    this.addStair(); 
   }
 
   stop() {  //para pausar el juego
@@ -64,11 +67,13 @@ class Game {
 
   draw() {
     this.background.draw();  //dibuja el background
+    this.stairs.forEach((e) => e.draw());
     this.player.draw(); //dibuja al personaje y todo lo que se dibuja en la clase de personaje
     this.puffBubbles.forEach((e) => e.draw());  //dibuja cada obstáculo
     this.bubbles.forEach((e) => e.draw());  //dibuja cada obstáculo
     this.aditionalWeapons.forEach((e) => e.draw());  //dibuja cada obstáculo
     if(this.player.life <= 0) this.gameOver(); // cuando el player muere se llama a la funcion gameOver()
+
   }
   move() {
     this.player.move();  //muve al personaje y todo lo que se mueve en la clase de personaje
@@ -89,7 +94,7 @@ class Game {
 addbubble() {  //función para añadir obstáculo
   // const bubble = new bubble(this.ctx, 10, "../public/img/waterball.png", 120);// si quieres cambiarle el dibujo o especificar a qué altura sale
   const bubble = new Bubble(this.ctx)
-  if(this.bubbles.length < 2){
+  if(this.bubbles.length < 0){
     this.bubbles.push(bubble);
   }
 }
@@ -98,6 +103,13 @@ aditionalWeapon() {  //función para añadir obstáculo
   const flamethrower = new Flamethrower(this.ctx)
   this.aditionalWeapons.push(flamethrower)
 }
+
+  addStair() {
+    const stair = new Stair(this.ctx, 10);
+    const stair2 = new Stair(this.ctx, 130);
+    this.stairs.push(stair);
+    this.stairs.push(stair2);
+  }
 
   checkCollisions() {  //función para comprobar las colisiones
    // bubble  choca con el personaje
@@ -135,6 +147,28 @@ aditionalWeapon() {  //función para añadir obstáculo
         } else return true;
       })
     })
+
+    // Verificar colisión con la escalera
+    this.stairs.forEach((stair) => {
+      if (stair.collidesTop(this.player)) {
+        this.player.vy = 0;
+        this.player.y = stair.y - this.player.h
+        W = 0;
+        this.player.g = 0.2;
+      }
+      if(stair.collidesSides(this.player)){
+        console.log("bulala")
+        this.player.vy = 0;
+        this.player.g = 0.2;
+        setTimeout(() => {
+          W = 0;
+        }, 200);
+      }
+      if (stair.collides(this.player)) {
+        W = 87;
+      } else{return true;
+      }
+    });
   }
 
   gameOver() {  //Función para terminar el juego y vaciar todos los arrays.
