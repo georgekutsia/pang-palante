@@ -1,10 +1,10 @@
-class Platform {
+class Platform { //! la plataforma nunca debe ser creada a la misma altura que el eje Y del jugador o pasan cosas raras
   constructor(ctx, x,  y, w, h, obstacleImg) {
     this.ctx = ctx; // Contexto del canvas
     this.x = x || 100; // Posición horizontal (coordenada x), valor predeterminado o especificado
     this.w = w || this.ctx.canvas.width / 13; // Ancho de la escalera, valor predeterminado o especificado
     this.h = h || this.ctx.canvas.width / 40; // Altura de la escalera, valor predeterminado o especificado
-    this.y = y || this.ctx.canvas.height - this.h - 10; // Posición vertical (coordenada y), valor predeterminado o especificado
+    this.y = y || this.ctx.canvas.height - this.h - 20; // Posición vertical (coordenada y), valor predeterminado o especificado
     this.img = new Image(); // Imagen asociada a la escalera
     this.img.src = obstacleImg || "../public/Imagenes/obstacles/platfomJump1.png"; // Ruta de la imagen de la escalera
 
@@ -31,7 +31,7 @@ class Platform {
 
   collides(objetivo) {
     // Método para verificar colisiones con otro objeto (puedes ajustar según tus necesidades)
-    const colX = this.x <= objetivo.x + objetivo.w && this.x + this.w  > objetivo.x;
+    const colX = this.x + 7 <= objetivo.x + objetivo.w && this.x + this.w -3  >= objetivo.x;
     const colY = this.y + this.h > objetivo.y && this.y  < objetivo.y + objetivo.h;
     return colX && colY;
   }

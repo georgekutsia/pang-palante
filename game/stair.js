@@ -43,6 +43,10 @@ class Stair {
   collidesSides(objetivo) { //colisiona con los lados de la escalera para desactivar W y activar gravedad
     const colX = this.x -9 <= objetivo.x  &&  this.x - 2 >= objetivo.x ;
     const colY = this.x + this.w - 3  <= objetivo.x  &&  this.x + this.w >= objetivo.x;
-    return colX || colY
+    return colX || colY 
+  }
+  collidesUnder(objetivo) { 
+    const colZ = this. y + this.h - 3 <= objetivo.y && this.y + this.h >= objetivo.y //todo colision con la parte inferior
+      return colZ
   }
 }
