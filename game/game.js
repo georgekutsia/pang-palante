@@ -4,9 +4,6 @@ class Game {
     this.ctx = ctx;
     this.player = new Player(ctx);   //traemos la clase Player para usarlo. Todo lo que esté en la clase player también aparecerá
     this.background = new Background(ctx);   // traemos la clase Background para usarlo
-    this.bubbles = [];  // un array que almacena todos los obstáculos que aparecen en la pantalla
-    this.aditionalWeapons = []; // salen nuevas tipos de armas
-    this.puffBubbles = []; // para cuando estalla la burbuja
     this.interval = null;  //sirve para pausar el juego
     this.gameTime = 0; //cuando el juego se inicia va sumando. Se usa para llevar cuenta del tiempo
     this.bubbleTick = 0;
@@ -24,9 +21,11 @@ class Game {
     this.bubbleSplash2 = new Audio("../public/sounds/bubbleSplash2.mp3")
     this.bubbleSplash2.volume = 0.1; 
     this.setListeners();  // para que se pueda usar el teclado 
+    this.bubbles = [];  // un array que almacena todos los obstáculos que aparecen en la pantalla
+    this.aditionalWeapons = []; // salen nuevas tipos de armas
+    this.puffBubbles = []; // para cuando estalla la burbuja
+    this.platforms = []; // para cuando estalla la burbuja
     this.stairs = []; // Array para almacenar instancias de la clase Stair
-
-
   }
   
   start() {
@@ -50,6 +49,7 @@ class Game {
       }
     }, 1000 / 60);
     this.addStair(); 
+    this.addPlatforms();
   }
 
   stop() {  //para pausar el juego
@@ -68,6 +68,7 @@ class Game {
   draw() {
     this.background.draw();  //dibuja el background
     this.stairs.forEach((e) => e.draw());
+    this.platforms.forEach((e) => e.draw());
     this.player.draw(); //dibuja al personaje y todo lo que se dibuja en la clase de personaje
     this.puffBubbles.forEach((e) => e.draw());  //dibuja cada obstáculo
     this.bubbles.forEach((e) => e.draw());  //dibuja cada obstáculo
@@ -104,12 +105,18 @@ aditionalWeapon() {  //función para añadir obstáculo
   this.aditionalWeapons.push(flamethrower)
 }
 
-  addStair() {
-    const stair = new Stair(this.ctx, 10);
-    const stair2 = new Stair(this.ctx, 130);
+  addStair() {           // this.ctx, ubicacion en eje x, ubicacion en eje y, ancho y alto. la última sería la imágen
+    const stair = new Stair(this.ctx, 10, this.ctx.canvas.height - 50,  30, 50);
+    const stair2 = new Stair(this.ctx, 130, this.ctx.canvas.height - 100,  20, 60);
     this.stairs.push(stair);
     this.stairs.push(stair2);
   }
+
+  addPlatforms(){
+    const platform1 = new Platform(this.ctx)
+    this.platforms.push(platform1)
+  }
+
 
   checkCollisions() {  //función para comprobar las colisiones
    // bubble  choca con el personaje
