@@ -110,14 +110,13 @@ aditionalWeapon() {  //función para añadir obstáculo
     const stair = new Stair(this.ctx, 10, this.ctx.canvas.height - 50,  30, 50);
     const stair2 = new Stair(this.ctx, 200, this.ctx.canvas.height - 100,  20, 60);
     this.stairs.push(stair, stair2);
-
-
-  addPlatforms(){
+  }
+  addPlatforms(){                           // this.ctx, ubicacion en eje x, ubicacion en eje y, ancho y alto. la última sería la imágen
+    //! la plataforma nunca debe ser creada a la misma altura que el eje Y del jugador o pasan cosas raras
     const platform1 = new Platform(this.ctx)
     const platform2 = new Platform(this.ctx, 165, 113, 50, 10 )
     this.platforms.push(platform1, platform2)
   }
-
 
   checkCollisions() {  //función para comprobar las colisiones
    // bubble  choca con el personaje
