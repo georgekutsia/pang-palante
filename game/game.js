@@ -452,6 +452,23 @@ addbubble() {  //función para añadir obstáculo
     this.player.bulletArray = [];
     this.player.bulletBarArray = [];
     this.player.bulletFireArray = [];
+    let isOnStair = false;
+    let g = 0.05
+
+    this.stairs.forEach((stair) => {
+      if (stair.collides(this.player)) {
+        isOnStair = true;
+      }
+    });
+
+    if (isOnStair) {
+      W = 87;
+    } else {
+      W = 0;
+      this.player.x += g + this.player.vx
+      this.player.y += g + this.player.vy
+    }
+    console.log("¿Está en la escalera?", isOnStair);
   }
 
   gameOver() {  //Función para terminar el juego y vaciar todos los arrays.

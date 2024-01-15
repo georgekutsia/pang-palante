@@ -22,7 +22,7 @@ class Bouncer {
     // Método para actualizar la posición de la escalera en función de su velocidad
 
   }
-
+ 
   isVisible() {
     // Método para verificar si la escalera es visible en el canvas (puedes ajustar según tus necesidades)
     return this.x > -2 && this.x <= this.ctx.canvas.width;
