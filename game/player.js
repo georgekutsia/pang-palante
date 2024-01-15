@@ -4,7 +4,7 @@ class Player {
     this.x = 50;
     this.h = this.ctx.canvas.width / 15;
     this.y = this.ctx.canvas.height - this.h;
-    this.w = this.ctx.canvas.width / 15;
+    this.w = this.ctx.canvas.width / 18;
     this.vx = 0;
     this.vy = 0;
     this.g = 0.03;

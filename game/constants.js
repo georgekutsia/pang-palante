@@ -29,4 +29,4 @@ let D = 68;
 
 let recharge = 300;
 let jumpHeight = -4;
-let jumpCooldown = 1000;
+let jumpCooldown = 400;
