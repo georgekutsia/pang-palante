@@ -1,12 +1,12 @@
-class Platform { //! la plataforma nunca debe ser creada a la misma altura que el eje Y del jugador o pasan cosas raras
+class Bouncer { 
   constructor(ctx, x,  y, w, h, obstacleImg) {
     this.ctx = ctx; // Contexto del canvas
     this.x = x || 100; // Posición horizontal (coordenada x), valor predeterminado o especificado
     this.w = w || this.ctx.canvas.width / 13; // Ancho de la escalera, valor predeterminado o especificado
-    this.h = h || this.ctx.canvas.width / 30; // Altura de la escalera, valor predeterminado o especificado
+    this.h = h || this.ctx.canvas.width / 40; // Altura de la escalera, valor predeterminado o especificado
     this.y = y || this.ctx.canvas.height - this.h - 20; // Posición vertical (coordenada y), valor predeterminado o especificado
     this.img = new Image(); // Imagen asociada a la escalera
-    this.img.src = obstacleImg || "../public/Imagenes/obstacles/platformSolid2.png"; // Ruta de la imagen de la escalera
+    this.img.src = obstacleImg || "../public/Imagenes/obstacles/platfomJump3.png"; // Ruta de la imagen de la escalera
 
     // ** Se ha comentado la parte relacionada con el sonido
     // this.bubbleBounceSound = new Audio("../public/sounds/bubbleBounce.mp3");
