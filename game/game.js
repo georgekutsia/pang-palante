@@ -100,7 +100,7 @@ class Game {
 addbubble() {  //función para añadir obstáculo
   // const bubble = new bubble(this.ctx, 10, "../public/img/waterball.png", 120);// si quieres cambiarle el dibujo o especificar a qué altura sale
   const bubble = new Bubble(this.ctx)
-  if(this.bubbles.length < 0){
+  if(this.bubbles.length < 1){
     this.bubbles.push(bubble);
   }
 }
@@ -112,16 +112,16 @@ aditionalWeapon() {  //función para añadir obstáculo
 
   addStair() {                         // this.ctx, ubicacion en eje x, ubicacion en eje y, ancho y alto. la última sería la imágen
     //! la escalera no debería colgar sola en el aire, debería tener una parte de la plataforma debajo o pasan cosas raras con la gravedad
-    const stair1 = new Stair(this.ctx, 1, this.ctx.canvas.height - 40,  30, 40);
-    const stair2 = new Stair(this.ctx, 200, this.ctx.canvas.height - 100,  20, 60);
-    this.stairs.push(stair1, stair2);
+    // const stair1 = new Stair(this.ctx, 1, this.ctx.canvas.height - 40,  30, 40);
+    // const stair2 = new Stair(this.ctx, 200, this.ctx.canvas.height - 100,  20, 60);
+    // this.stairs.push(stair1, stair2);
   }
 
     addPlatforms(){                              // this.ctx, ubicacion en eje x, ubicacion en eje y, ancho y alto. la última sería la imágen
       const platform1 = new Platform(this.ctx)
       const platform2 = new Platform(this.ctx, 170, 109, 50, 10, "../public/Imagenes/obstacles/platformSolid3.png" )
-      const platform3 = new Platform(this.ctx, 30, 49, 50, 10, "../public/Imagenes/obstacles/platformSolid3.png" )
-      this.platforms.push(platform1, platform2, platform3)
+      // const platform3 = new Platform(this.ctx, 30, 49, 50, 10, "../public/Imagenes/obstacles/platformSolid3.png" )
+      this.platforms.push(platform1, platform2,)
     }
 
     addBouncer(){
@@ -165,6 +165,17 @@ aditionalWeapon() {  //función para añadir obstáculo
         } else return true;
       })
     })
+
+
+    this.bubbles.forEach((bubble) => {  //bubble con platform
+      this.platforms.forEach((platform) => {
+        if(platform.collides(bubble)){
+          bubble.vy = -3;
+        } else return true;
+      })
+    })
+
+
     // colisiones con la escalera
     this.stairs.forEach((stair) => {
       if (stair.collidesTop(this.player)) {
@@ -210,6 +221,8 @@ aditionalWeapon() {  //función para añadir obstáculo
           bullet.vy = 3;
           if(this.player.vx > 0) bullet.vx = 1;
           if(this.player.vx < 0) bullet.vx = -1;
+          platform.w -= 0.5;
+          platform.h -= 0.1;
           return false;
         } else return true;
       })
