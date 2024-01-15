@@ -110,6 +110,15 @@ class Player {
         this.amountOfFireShoots = 5;
       }
     }
+    if(key === ALT ){
+      this.vy = jumpHeight 
+      this.g = 0.2
+      ALT = 0;
+      setTimeout(() => {
+        ALT = 16;
+      }, jumpCooldown);
+    }
+
   }
   keyUp(key) {
     if (key === W) {
