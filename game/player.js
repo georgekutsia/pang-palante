@@ -152,8 +152,8 @@ class Player {
   
   
   collides(objetivo) {
-    const colX =this.x <= objetivo.x + objetivo.w && this.x + this.w > objetivo.x + 10;
-    const colY =this.y + this.h > objetivo.y && this.y < objetivo.y + objetivo.h;
+    const colX = this.x <= objetivo.x + objetivo.w && this.x + this.w > objetivo.x + 10;
+    const colY = this.y + this.h > objetivo.y && this.y < objetivo.y + objetivo.h;
     return colX && colY;
   }
 
