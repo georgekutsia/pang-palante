@@ -68,7 +68,6 @@ class Game {
   draw() {
     this.background.draw();  //dibuja el background
     this.stairs.forEach((e) => e.draw());
-    console.log("escalera", this.stairs)
     this.player.draw(); //dibuja al personaje y todo lo que se dibuja en la clase de personaje
     this.puffBubbles.forEach((e) => e.draw());  //dibuja cada obstáculo
     this.bubbles.forEach((e) => e.draw());  //dibuja cada obstáculo
@@ -147,16 +146,23 @@ aditionalWeapon() {  //función para añadir obstáculo
       })
     })
 
-    // Verificar colisión con la escalera
+    let isOnStair = false;
+    let g = 0.05
+
     this.stairs.forEach((stair) => {
       if (stair.collides(this.player)) {
-        W = 87
-        if (this.player.y + this.player.h < stair.y) { 
-          W = 0;
-          console.log("colision");
-        }
-      } else W = 0;
+        isOnStair = true;
+      }
     });
+
+    if (isOnStair) {
+      W = 87;
+    } else {
+      W = 0;
+      this.player.x += g + this.player.vx
+      this.player.y += g + this.player.vy
+    }
+    console.log("¿Está en la escalera?", isOnStair);
   }
 
   gameOver() {  //Función para terminar el juego y vaciar todos los arrays.
