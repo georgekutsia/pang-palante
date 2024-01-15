@@ -25,4 +25,8 @@ let A = 65;
 let W = 0; //87
 let S = 83;
 let D = 68;
+
+
 let recharge = 300;
+let jumpHeight = -4;
+let jumpCooldown = 400;

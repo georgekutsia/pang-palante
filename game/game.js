@@ -4,9 +4,6 @@ class Game {
     this.ctx = ctx;
     this.player = new Player(ctx);   //traemos la clase Player para usarlo. Todo lo que esté en la clase player también aparecerá
     this.background = new Background(ctx);   // traemos la clase Background para usarlo
-    this.bubbles = [];  // un array que almacena todos los obstáculos que aparecen en la pantalla
-    this.aditionalWeapons = []; // salen nuevas tipos de armas
-    this.puffBubbles = []; // para cuando estalla la burbuja
     this.interval = null;  //sirve para pausar el juego
     this.gameTime = 0; //cuando el juego se inicia va sumando. Se usa para llevar cuenta del tiempo
     this.bubbleTick = 0;
@@ -24,9 +21,12 @@ class Game {
     this.bubbleSplash2 = new Audio("../public/sounds/bubbleSplash2.mp3")
     this.bubbleSplash2.volume = 0.1; 
     this.setListeners();  // para que se pueda usar el teclado 
+    this.bubbles = [];  // un array que almacena todos los obstáculos que aparecen en la pantalla
+    this.aditionalWeapons = []; // salen nuevas tipos de armas
+    this.puffBubbles = []; // para cuando estalla la burbuja
+    this.platforms = []; // plataformas para saltar
+    this.bouncers = []; // plataformas que rebotan
     this.stairs = []; // Array para almacenar instancias de la clase Stair
-
-
   }
   
   start() {
@@ -50,6 +50,8 @@ class Game {
       }
     }, 1000 / 60);
     this.addStair(); 
+    this.addPlatforms();
+    this.addBouncer();
   }
 
   stop() {  //para pausar el juego
@@ -68,15 +70,20 @@ class Game {
   draw() {
     this.background.draw();  //dibuja el background
     this.stairs.forEach((e) => e.draw());
+    this.platforms.forEach((e) => e.draw());
+    this.bouncers.forEach((e) => e.draw());
     this.player.draw(); //dibuja al personaje y todo lo que se dibuja en la clase de personaje
     this.puffBubbles.forEach((e) => e.draw());  //dibuja cada obstáculo
     this.bubbles.forEach((e) => e.draw());  //dibuja cada obstáculo
     this.aditionalWeapons.forEach((e) => e.draw());  //dibuja cada obstáculo
     if(this.player.life <= 0) this.gameOver(); // cuando el player muere se llama a la funcion gameOver()
+
   }
   move() {
     this.player.move();  //muve al personaje y todo lo que se mueve en la clase de personaje
     this.bubbles.forEach((e) => e.move());  //mueve los obstáculos
+    this.platforms.forEach((e) => e.move());  //mueve los obstáculos
+    this.bouncers.forEach((e) => e.move());  //mueve los obstáculos
     this.aditionalWeapons.forEach((e) => e.move());  //mueve los obstáculos
     this.puffBubbles.forEach((e) => e.move());  //mueve los obstáculos
   }
@@ -93,7 +100,7 @@ class Game {
 addbubble() {  //función para añadir obstáculo
   // const bubble = new bubble(this.ctx, 10, "../public/img/waterball.png", 120);// si quieres cambiarle el dibujo o especificar a qué altura sale
   const bubble = new Bubble(this.ctx)
-  if(this.bubbles.length < 2){
+  if(this.bubbles.length < 0){
     this.bubbles.push(bubble);
   }
 }
@@ -103,11 +110,25 @@ aditionalWeapon() {  //función para añadir obstáculo
   this.aditionalWeapons.push(flamethrower)
 }
 
-  addStair() {
-    const stair = new Stair(this.ctx);
-    this.stairs.push(stair);
+  addStair() {                         // this.ctx, ubicacion en eje x, ubicacion en eje y, ancho y alto. la última sería la imágen
+    //! la escalera no debería colgar sola en el aire, debería tener una parte de la plataforma debajo o pasan cosas raras con la gravedad
+    const stair1 = new Stair(this.ctx, 1, this.ctx.canvas.height - 40,  30, 40);
+    const stair2 = new Stair(this.ctx, 200, this.ctx.canvas.height - 100,  20, 60);
+    this.stairs.push(stair1, stair2);
   }
 
+    addPlatforms(){                              // this.ctx, ubicacion en eje x, ubicacion en eje y, ancho y alto. la última sería la imágen
+      const platform1 = new Platform(this.ctx)
+      const platform2 = new Platform(this.ctx, 170, 109, 50, 10, "../public/Imagenes/obstacles/platformSolid3.png" )
+      const platform3 = new Platform(this.ctx, 30, 49, 50, 10, "../public/Imagenes/obstacles/platformSolid3.png" )
+      this.platforms.push(platform1, platform2, platform3)
+    }
+
+    addBouncer(){
+      const bouncer1 = new Bouncer(this.ctx, 60, 120, 20, 20)
+      const bouncer2 = new Bouncer(this.ctx, 160, 40, 20, 80)
+      this.bouncers.push(bouncer1, bouncer2)
+    }
 
   checkCollisions() {  //función para comprobar las colisiones
    // bubble  choca con el personaje
@@ -136,7 +157,6 @@ aditionalWeapon() {  //función para añadir obstáculo
           bubble.x = -100
           const puffBubble = new BubblePuff(this.ctx, elx, ely, bubble.w, bubble.h)
           this.puffBubbles.push(puffBubble)
-
           const smallBubble1 = new Bubble(this.ctx, -0.5, -1, elx, ely, bubble.w/2, bubble.h/2, bubble.g + 0.03, bubble.damage / 2 )// al explotar una burbuja, crea otra en su lugar, usando su ubicación y dimensiones para hacerla más pequeña
           const smallBubble2 = new Bubble(this.ctx, 0.5, -1, elx, ely, bubble.w/2, bubble.h/2, bubble.g + 0.03, bubble.damage / 2 )
           this.bubbles.push(smallBubble1, smallBubble2)
@@ -145,30 +165,93 @@ aditionalWeapon() {  //función para añadir obstáculo
         } else return true;
       })
     })
-
-    let isOnStair = false;
-    let g = 0.05
-
+    // colisiones con la escalera
     this.stairs.forEach((stair) => {
+      if (stair.collidesTop(this.player)) {
+        this.player.vy = 0;
+        this.player.y = stair.y - this.player.h
+        W = 0;
+        this.player.g = 0.2;
+      }
+      if(stair.collidesSides(this.player)){
+        this.player.vy = 0;
+        this.player.g = 0.2;
+        setTimeout(() => {
+          W = 0;
+        }, 200);
+      }
       if (stair.collides(this.player)) {
-        isOnStair = true;
+        W = 87;
+      } else{return true;
       }
     });
 
-    if (isOnStair) {
-      W = 87;
-    } else {
-      W = 0;
-      this.player.x += g + this.player.vx
-      this.player.y += g + this.player.vy
-    }
-    console.log("¿Está en la escalera?", isOnStair);
+
+    // colisiones con Platform
+    this.platforms.forEach((platform) => {  // platform con player
+      if (platform.collides(this.player)) {
+        this.player.vy = 0;
+        if (this.player.y <= platform.y && this.player.x <= platform.x + platform.w  && this.player.x + this.player.w > platform.x) {
+          this.player.y = platform.y - this.player.h ;
+          ALT = 16;
+        }
+        if (this.player.y + this.player.h >= platform.y + platform.h) { //colisión por la parte inferior de la plataforma
+          this.player.vy = 0;
+        }
+        if (this.player.x >= platform.x + platform.w - 6 || this.player.x <= platform.x) { //colisión por los lados de la plataforma
+          this.player.vy = 0;
+          this.player.g = 0.2
+        }
+      }
+    })
+    this.platforms.forEach((platform) => {
+      this.player.bulletArray.forEach((bullet) => {
+        if(bullet.collides(platform)){
+          bullet.vy = 3;
+          if(this.player.vx > 0) bullet.vx = 1;
+          if(this.player.vx < 0) bullet.vx = -1;
+          return false;
+        } else return true;
+      })
+    })
+    //colisiones con bouncers
+
+    this.bouncers.forEach((bouncer) => { 
+      if (bouncer.collides(this.player)) {
+        this.player.vy = 0;
+        if (this.player.y <= bouncer.y && this.player.x <= bouncer.x + bouncer.w  && this.player.x + this.player.w > bouncer.x - 30) {
+          this.player.vy = -4
+          this.player.y = bouncer.y - this.player.h ;
+        }
+        if (this.player.y + this.player.h >= bouncer.y + bouncer.h) { //colisión por la parte inferior de la plataforma
+          this.player.vy = 0;
+        }
+        if (this.player.x >= bouncer.x + bouncer.w - 6 ) { //colisión por la derecha
+          this.player.g = 0.2;
+          this.player.vx = 2;
+          setTimeout(() => {
+            this.player.vx = 0;
+          }, 500);
+        }
+        if (this.player.x -1  <= bouncer.x ) { //colisión por la izquierda
+          this.player.g = 0.2;
+          this.player.vx = -2;
+          setTimeout(() => {
+            this.player.vx = 0;
+          }, 500);
+        }
+      }
+    })
   }
 
   gameOver() {  //Función para terminar el juego y vaciar todos los arrays.
     this.stop();
     this.bubbles = [];
-    this.aditionalWeapon = [];
+    this.aditionalWeapons = []
+    this.puffBubbles = [];
+    this.platforms = [];
+    this.bouncers = [];
+    this.stairs = [];
     this.gameBackgroundMusic.pause()
     this.gameOver1.play()
     this.gameOver2.play()
