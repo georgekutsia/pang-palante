@@ -111,10 +111,12 @@ aditionalWeapon() {  //función para añadir obstáculo
     this.stairs.push(stair);
     this.stairs.push(stair2);
   }
+
   addPlatforms(){
     const platform1 = new Platform(this.ctx)
     this.platforms.push(platform1)
   }
+
 
   checkCollisions() {  //función para comprobar las colisiones
    // bubble  choca con el personaje
