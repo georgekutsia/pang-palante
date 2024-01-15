@@ -105,16 +105,17 @@ aditionalWeapon() {  //función para añadir obstáculo
   this.aditionalWeapons.push(flamethrower)
 }
 
-  addStair() {           // this.ctx, ubicacion en eje x, ubicacion en eje y, ancho y alto. la última sería la imágen
+  addStair() {                         // this.ctx, ubicacion en eje x, ubicacion en eje y, ancho y alto. la última sería la imágen
+    //! la escalera no debería colgar sola en el aire, debería tener una parte de la plataforma debajo o pasan cosas raras con la gravedad
     const stair = new Stair(this.ctx, 10, this.ctx.canvas.height - 50,  30, 50);
-    const stair2 = new Stair(this.ctx, 130, this.ctx.canvas.height - 100,  20, 60);
-    this.stairs.push(stair);
-    this.stairs.push(stair2);
-  }
+    const stair2 = new Stair(this.ctx, 200, this.ctx.canvas.height - 100,  20, 60);
+    this.stairs.push(stair, stair2);
+
 
   addPlatforms(){
     const platform1 = new Platform(this.ctx)
-    this.platforms.push(platform1)
+    const platform2 = new Platform(this.ctx, 165, 113, 50, 10 )
+    this.platforms.push(platform1, platform2)
   }
 
 
@@ -145,7 +146,6 @@ aditionalWeapon() {  //función para añadir obstáculo
           bubble.x = -100
           const puffBubble = new BubblePuff(this.ctx, elx, ely, bubble.w, bubble.h)
           this.puffBubbles.push(puffBubble)
-
           const smallBubble1 = new Bubble(this.ctx, -0.5, -1, elx, ely, bubble.w/2, bubble.h/2, bubble.g + 0.03, bubble.damage / 2 )// al explotar una burbuja, crea otra en su lugar, usando su ubicación y dimensiones para hacerla más pequeña
           const smallBubble2 = new Bubble(this.ctx, 0.5, -1, elx, ely, bubble.w/2, bubble.h/2, bubble.g + 0.03, bubble.damage / 2 )
           this.bubbles.push(smallBubble1, smallBubble2)
@@ -154,7 +154,6 @@ aditionalWeapon() {  //función para añadir obstáculo
         } else return true;
       })
     })
-
     // Verificar colisión con la escalera
     this.stairs.forEach((stair) => {
       if (stair.collidesTop(this.player)) {
@@ -164,18 +163,38 @@ aditionalWeapon() {  //función para añadir obstáculo
         this.player.g = 0.2;
       }
       if(stair.collidesSides(this.player)){
-        console.log("bulala")
         this.player.vy = 0;
         this.player.g = 0.2;
         setTimeout(() => {
           W = 0;
         }, 200);
       }
+      // if(stair.collidesUnder(this.player)){
+      //   this.player.vy = 0;
+      // }
       if (stair.collides(this.player)) {
         W = 87;
       } else{return true;
       }
     });
+    // colisiones con Platform
+    this.platforms.forEach((platform) => { 
+      console.log(this.player.g)
+      if (platform.collides(this.player)) {
+        this.player.vy = 0;
+        if (this.player.y <= platform.y && this.player.x <= platform.x + platform.w  && this.player.x + this.player.w > platform.x) {
+          this.player.y = platform.y - this.player.h ;
+        }
+        if (this.player.y + this.player.h >= platform.y + platform.h) { //colisión por la parte inferior de la plataforma
+          this.player.vy = 0;
+        }
+        if (this.player.x >= platform.x + platform.w - 6 || this.player.x <= platform.x) { //colisión por los lados de la plataforma
+          this.player.vy = 0;
+          this.player.g = 0.2
+          console.log("sides")
+        }
+      }
+    })
   }
 
   gameOver() {  //Función para terminar el juego y vaciar todos los arrays.

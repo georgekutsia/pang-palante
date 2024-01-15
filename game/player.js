@@ -123,6 +123,7 @@ class Player {
   keyUp(key) {
     if (key === W) {
       this.vy = 0;
+      W = 0;  //esto parece que soluciona un bug con la escalera, que si pulsas muy rapido y te sales a un lado, puedes flotar un rato
     }
     if (key === A) {
       this.vx = 0;
