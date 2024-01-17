@@ -1,10 +1,12 @@
 class Weapon1 {
-  constructor(ctx, x, y) {
+  constructor(ctx, x, y, direction) {
     this.ctx = ctx;
     this.x = x;
     this.y = y;
     this.vy = -3;
-    this.vx = 0;
+    this.vx =  0;
+    this.direction = direction; // recoge la dirección en la que se está moviendo player cuando se dispara, para luego usarlo al impactar sobre algunos objetos, tipo al rebotar de plataformas
+    console.log('%cMyProject%cline:7%cthis.vx ', 'color:#fff;background:#ee6f57;padding:3px;border-radius:2px', 'color:#fff;background:#1f3c88;padding:3px;border-radius:2px', 'color:#fff;background:rgb(179, 214, 110);padding:3px;border-radius:2px', this.vx )
     this.img = new Image();
     this.img.src = "../public/Imagenes/weaponStone.png";
     this.img.frame = 0;

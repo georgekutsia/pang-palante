@@ -8,6 +8,7 @@ class Bubble {
     this.vy = vy || 0;
     this.vx = vx || -0.5;
     this.g = g || 0.05;
+    this.explodingSize = this.ctx.canvas.width/80
     this.damage = damage || 20; // daño especificado o 10
     this.img = new Image();   //crear nueva imágene ne canvas
     this.img.src = obstacleImg || "../public/Imagenes/bubble.png";  //definir cual es la nueva imagen
@@ -17,7 +18,7 @@ class Bubble {
   }
   draw() {
     this.ctx.drawImage(this.img, this.x, this.y, this.w, this.h);  // dibuja el obstáculo
-    if(this.w <= this.ctx.canvas.width/80) this.x = -100;
+    if(this.w <= this.explodingSize) this.x = -100;
   }
   move() {
     this.vy += this.g;  //efecto gravedad, aumenta la velocidad a medida que baja

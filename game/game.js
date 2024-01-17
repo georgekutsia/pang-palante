@@ -27,6 +27,11 @@ class Game {
     this.platforms = []; // plataformas para saltar
     this.bouncers = []; // plataformas que rebotan
     this.stairs = []; // Array para almacenar instancias de la clase Stair
+
+
+    // sounds sounds sounds
+    this.bubbleBounceSound = new Audio("../public/sounds/bubbleBounce.mp3") //todo -- paso 1 traer el sonido y almacenarlo en una variable
+    this.bubbleBounceSound.volume = 0.1;  //todo -- paso 2, no obligatorio, determinarle volumen de 0 a 1, creo
   }
   
   start() {
@@ -62,6 +67,7 @@ class Game {
   clear() {
     this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
     this.player.bulletArray = this.player.bulletArray.filter((e) => e.isVisible()); //elimina cada bullet que ya no es visible y vacía el array
+    this.player.bulletFireArray = this.player.bulletFireArray.filter((e) => e.isVisible()); //elimina cada bullet que ya no es visible y vacía el array
     this.bubbles = this.bubbles.filter((bubble) => bubble.isVisible()); //elimina cada obstáculo que ya no es visible y vacía el array
     this.aditionalWeapons = this.aditionalWeapons.filter((flamethrower) => flamethrower.isVisible()); //elimina cada obstáculo que ya no es visible y vacía el array
     this.puffBubbles = this.puffBubbles.filter((puff) => puff.isVisible()); //elimina cada obstáculo que ya no es visible y vacía el array
@@ -122,14 +128,16 @@ aditionalWeapon() {  //función para añadir obstáculo
       const platform2 = new Platform(this.ctx, 40, 100, 35, 5, "../public/Imagenes/obstacles/platformSolid3.png" )
       const platform3 = new Platform(this.ctx, 80, 100, 45, 5 , "../public/Imagenes/obstacles/platformSolid3.png" )
       const platform4 = new Platform(this.ctx, 140, 100, 55, 5, "../public/Imagenes/obstacles/platformSolid3.png" )
-      this.platforms.push(platform1, platform2, platform3, platform4)
+      this.platforms.push(platform1, 
+        platform2, platform3, platform4
+        )
       //!  la anchura más la altura de la plataforma nunca debe superar 60, para que el total ea 240;
       //opciones de anchura y altura  son 25, 5 la estándar y mínima. Las siguiente suben de 10 en 10 en anchura
     }
 
     addBouncer(){
-      // const bouncer1 = new Bouncer(this.ctx, 60, 120, 20, 20)
-      // const bouncer2 = new Bouncer(this.ctx, 160, 40, 20, 80)
+      // const bouncer1 = new Bouncer(this.ctx, 30, 70, 20, 80)
+      // const bouncer2 = new Bouncer(this.ctx, 160, 70, 20, 80)
       // this.bouncers.push(bouncer1, bouncer2)
     }
 
@@ -151,6 +159,8 @@ aditionalWeapon() {  //función para añadir obstáculo
         weapon.x = - 100; // situa fuera del canvas la burbuja que colisiona con el player y luego isVisible la elimina del array
       } else return true
     });
+
+
     //  bubble choca con bullet
     this.bubbles.forEach((bubble) => {
       this.player.bulletArray = this.player.bulletArray.filter((bullet) => {
@@ -168,15 +178,57 @@ aditionalWeapon() {  //función para añadir obstáculo
         } else return true;
       })
     })
+    //  bubble choca con bulletFire
+    this.bubbles.forEach((bubble) => {
+      this.player.bulletFireArray.forEach((bullet) => {
+        if(bullet.collides(bubble)){
+          bubble.w -= bullet.damage;
+          bubble.h -= bullet.damage;
+         if(bubble.w <= bubble.explodingSize) {
+          const elx = bubble.x;
+          const ely = bubble.y;
+          const puffBubble = new BubblePuff(this.ctx, elx, ely, bubble.w, bubble.h)
+          this.puffBubbles.push(puffBubble)
+          bubble.x = -100;
+        }
+        } else return true;
+      })
+    })
 
 
     this.bubbles.forEach((bubble) => {  //bubble con platform
       this.platforms.forEach((platform) => {
         if(platform.collides(bubble)){
-          bubble.vy = -3;
+          if (bubble.y <= platform.y) { //para que rebote justo en el top
+            bubble.vy = -3;
+            this.bubbleBounceSound.play()//todo --paso 3 llamar a .play() para invocar el sonido donde sea necesario
+          } else if (bubble.vx < 0) {
+            bubble.vx = 0.5;
+            this.bubbleBounceSound.play()//todo --paso 3 llamar a .play() para invocar el sonido donde sea necesario
+          } else if (bubble.vx > 0) {
+            bubble.vx = -0.5;
+            this.bubbleBounceSound.play()//todo --paso 3 llamar a .play() para invocar el sonido donde sea necesario
+          }
         } else return true;
       })
     })
+
+    this.bubbles.forEach((bubble) => {//bubble con bouncer
+      this.bouncers.forEach((bouncer) => {
+        if (bouncer.collides(bubble)) {
+          if (bubble.y <= bouncer.y -20) { //para que rebote justo en el top
+            bubble.vy = -3;
+            this.bubbleBounceSound.play()//todo --paso 3 llamar a .play() para invocar el sonido donde sea necesario
+          } else if (bubble.vx < 0) {
+            bubble.vx = 0.5;
+            this.bubbleBounceSound.play()//todo --paso 3 llamar a .play() para invocar el sonido donde sea necesario
+          } else if (bubble.vx > 0) {
+            bubble.vx = -0.5;
+            this.bubbleBounceSound.play()//todo --paso 3 llamar a .play() para invocar el sonido donde sea necesario
+          }
+        } else return true;
+      });
+    });
 
 
     // colisiones con la escalera
@@ -202,6 +254,7 @@ aditionalWeapon() {  //función para añadir obstáculo
 
 
     // colisiones con Platform
+    // colisiones con Platform
     this.platforms.forEach((platform) => {  // platform con player
       if (platform.collides(this.player)) {
         this.player.vy = 0;
@@ -219,12 +272,11 @@ aditionalWeapon() {  //función para añadir obstáculo
       }
     })
 
-    this.platforms.forEach((platform) => { //platform con bullets
+    this.platforms.forEach((platform) => { //platform con bullets normales
       this.player.bulletArray.forEach((bullet) => {
         if(bullet.collides(platform)){
           bullet.vy = 3;
-          if(this.player.vx > 0) bullet.vx = 1;
-          if(this.player.vx < 0) bullet.vx = -1;
+          bullet.vx = bullet.direction;
           const newColor = platform.calculateNewColor();
           platform.color = newColor;
          if( platform.life <= 0){
@@ -234,6 +286,8 @@ aditionalWeapon() {  //función para añadir obstáculo
         } else return true;
       })
     })
+
+
     //colisiones con bouncers
 
     this.bouncers.forEach((bouncer) => { 

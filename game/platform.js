@@ -30,7 +30,6 @@ class Platform {
     this.ctx.fillStyle = `rgb(${this.red}, ${this.green}, ${this.blue})`;
     this.ctx.fillRect(this.x + 3 , this.y, this.w -6, this.h);
     this.ctx.restore();
-    console.log(this.w, this.divisibleWithLife, "left", this.redLeft)
     
     // Dibujar la imagen encima del color tintado
     this.ctx.drawImage(this.img, this.x, this.y, this.w, this.h);
