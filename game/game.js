@@ -126,11 +126,11 @@ aditionalWeapon() {  //función para añadir obstáculo
     addPlatforms(){                              // this.ctx, ubicacion en eje x, ubicacion en eje y, ancho y alto. la última sería la imágen
       const platform1 = new Platform(this.ctx, 10, 100, 25, 5)
       const platform2 = new Platform(this.ctx, 40, 100, 35, 5, "../public/Imagenes/obstacles/platformSolid3.png" )
-      const platform3 = new Platform(this.ctx, 80, 100, 45, 5 , "../public/Imagenes/obstacles/platformSolid3.png" )
+      const platform3 = new Platform(this.ctx, 80, 100, 45, 5 , "../public/Imagenes/obstacles/platformSolid1.png" )
       const platform4 = new Platform(this.ctx, 140, 100, 55, 5, "../public/Imagenes/obstacles/platformSolid3.png" )
-      this.platforms.push(platform1, 
-        platform2, platform3, platform4
-        )
+      const platform5 = new Platform(this.ctx, 140, 10, 55, 5, "../public/Imagenes/obstacles/platformSolid4.png" )      
+      this.platforms.push(platform1, platform2, platform3, platform4, platform5)
+      
       //!  la anchura más la altura de la plataforma nunca debe superar 60, para que el total ea 240;
       //opciones de anchura y altura  son 25, 5 la estándar y mínima. Las siguiente suben de 10 en 10 en anchura
     }
@@ -151,6 +151,8 @@ aditionalWeapon() {  //función para añadir obstáculo
         bubble.vy = -3.5; // rebota encima del jugador haciéndole daño
       } else return true
     });
+
+    
    // aditionalweapon  choca con el personaje
     this.aditionalWeapons.forEach((weapon) => {
       if (weapon.collides(this.player)) {
@@ -184,7 +186,7 @@ aditionalWeapon() {  //función para añadir obstáculo
         if(bullet.collides(bubble)){
           bubble.w -= bullet.damage;
           bubble.h -= bullet.damage;
-         if(bubble.w <= bubble.explodingSize) {
+          if(bubble.w <= bubble.explodingSize) {
           const elx = bubble.x;
           const ely = bubble.y;
           const puffBubble = new BubblePuff(this.ctx, elx, ely, bubble.w, bubble.h)
@@ -199,16 +201,7 @@ aditionalWeapon() {  //función para añadir obstáculo
     this.bubbles.forEach((bubble) => {  //bubble con platform
       this.platforms.forEach((platform) => {
         if(platform.collides(bubble)){
-          if (bubble.y <= platform.y) { //para que rebote justo en el top
-            bubble.vy = -3;
-            this.bubbleBounceSound.play()//todo --paso 3 llamar a .play() para invocar el sonido donde sea necesario
-          } else if (bubble.vx < 0) {
-            bubble.vx = 0.5;
-            this.bubbleBounceSound.play()//todo --paso 3 llamar a .play() para invocar el sonido donde sea necesario
-          } else if (bubble.vx > 0) {
-            bubble.vx = -0.5;
-            this.bubbleBounceSound.play()//todo --paso 3 llamar a .play() para invocar el sonido donde sea necesario
-          }
+          bubbleBounce(bubble, platform)
         } else return true;
       })
     })
@@ -216,16 +209,7 @@ aditionalWeapon() {  //función para añadir obstáculo
     this.bubbles.forEach((bubble) => {//bubble con bouncer
       this.bouncers.forEach((bouncer) => {
         if (bouncer.collides(bubble)) {
-          if (bubble.y <= bouncer.y -20) { //para que rebote justo en el top
-            bubble.vy = -3;
-            this.bubbleBounceSound.play()//todo --paso 3 llamar a .play() para invocar el sonido donde sea necesario
-          } else if (bubble.vx < 0) {
-            bubble.vx = 0.5;
-            this.bubbleBounceSound.play()//todo --paso 3 llamar a .play() para invocar el sonido donde sea necesario
-          } else if (bubble.vx > 0) {
-            bubble.vx = -0.5;
-            this.bubbleBounceSound.play()//todo --paso 3 llamar a .play() para invocar el sonido donde sea necesario
-          }
+          bubbleBounce(bubble, bouncer)
         } else return true;
       });
     });
