@@ -1,7 +1,7 @@
 class Player {
-  constructor(ctx) {
+  constructor(ctx, moving) {
     this.ctx = ctx;
-    this.x = 170;
+    this.x = 60;
     this.h = this.ctx.canvas.width / 15;
     this.y = this.ctx.canvas.height - this.h;
     this.w = this.ctx.canvas.width / 18;
@@ -13,9 +13,11 @@ class Player {
     this.img.frame = 3;
     this.count = 1;
     this.bulletArray = [];
+    this.bulletFireArray = [];
     this.frameAmount = 5;
     this.life = 900;
     this.amountOfFireShoots = 0;
+    this.moving = moving;
   }
 
   draw() {
@@ -31,6 +33,7 @@ class Player {
       this.h
     );
     this.bulletArray.forEach((bullet) => {bullet.draw();}); // paso 3: dibujo cada bullet que se dispare
+    this.bulletFireArray.forEach((bullet) => {bullet.draw();}); // paso 3: dibujo cada bullet que se dispare
     this.ctx.fillText(`Life ${this.life}`, this.ctx.canvas.width - 50, 15); // contador de vida 
   }
 
@@ -38,6 +41,7 @@ class Player {
     this.vy += this.g
     this.x += this.vx;
     this.y += this.vy;
+    this.moving = this.vx
     if (this.count > 1 ) {
       this.img.frame++;
       this.count = 0;
@@ -66,6 +70,7 @@ class Player {
     
 
     this.bulletArray.forEach((bullet) => {bullet.move();}); //paso 4: mueve cada bullet que se dispare
+    this.bulletFireArray.forEach((bullet) => {bullet.move();}); //paso 4: mueve cada bullet que se dispare
   }
 //consultar constantes para el código de cada tecla
   keyDown(key) {
@@ -158,12 +163,12 @@ class Player {
   }
 
   shoot() {// paso 1: invoca el disparo desde la posicion del personaje o su cercanía
-    const bullet = new Weapon1(this.ctx, this.x , this.y);
+    const bullet = new Weapon1(this.ctx, this.x + 5, this.y, this.moving);
     this.bulletArray.push(bullet);//paso 2: crea un array vacío en el constructor y luego haz un push de cada bullet;
   }
 
   shootFire(){
     const bulletFire = new WeaponFire(this.ctx, this.x, this.y)
-    this.bulletArray.push(bulletFire);
+    this.bulletFireArray.push(bulletFire);
   }
 }

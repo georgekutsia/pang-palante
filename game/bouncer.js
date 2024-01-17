@@ -30,7 +30,7 @@ class Bouncer {
 
   collides(objetivo) {
     // Método para verificar colisiones con otro objeto (puedes ajustar según tus necesidades)
-    const colX = this.x + 7 <= objetivo.x + objetivo.w && this.x + this.w -3  >= objetivo.x;
+    const colX = this.x <= objetivo.x + objetivo.w && this.x + this.w >= objetivo.x;
     const colY = this.y + this.h > objetivo.y && this.y  < objetivo.y + objetivo.h;
     return colX && colY;
   }
