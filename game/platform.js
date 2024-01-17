@@ -13,9 +13,14 @@ class Platform {
     this.green = Math.random() * 140;
     this.blue = Math.random() * 140;
     this.life =  this.red /2;   
-    this.divisibleWithLife = this.life / 25 //como le restamos vida de 25 en 25, obtenemos cuantas veces se le podrá restar antes de llegar a 0
     //la vida de la plataforma depende de su tamaño, lo que significa que depende de Red, que es la anchura más la altura multiplicada por 2. 
-    this.left = (250 - this.red) / this.divisibleWithLife
+    this.divisibleWithLife = this.life / 25 //como le restamos vida de 25 en 25, obtenemos cuantas veces se le podrá restar antes de llegar a 0 o menos
+    this.redLeft = (255 - this.red) / this.divisibleWithLife //restamos a 255 el numero/tamaño de red y se obtiene cuanto hay que sumar hasta llegar al máximo
+    //en RGB que sería lo necesario para llegar al color blanco. Luego lo dividimos por la cantidad de veces que podremos hacerlo hasta que desaparezca
+    //la plataforma. Así obtenemos una cifra estable que se sumará y la última suma será la justa y necesaria hasta llegar a 255.
+
+    this.greenLeft = (255 - this.green) / (this.divisibleWithLife -1) //le restamos 1 para que llegue al 255 en la paleta de colores en el disparo anterior a desaparecer
+    this.blueLeft = (255 - this.blue) / (this.divisibleWithLife -1)
   }
 
   draw() {
@@ -25,7 +30,8 @@ class Platform {
     this.ctx.fillStyle = `rgb(${this.red}, ${this.green}, ${this.blue})`;
     this.ctx.fillRect(this.x + 3 , this.y, this.w -6, this.h);
     this.ctx.restore();
-    console.log(this.w, this.divisibleWithLife, "left", this.left)
+    console.log(this.w, this.divisibleWithLife, "left", this.redLeft)
+    
     // Dibujar la imagen encima del color tintado
     this.ctx.drawImage(this.img, this.x, this.y, this.w, this.h);
     // const newColor = this.calculateNewColor();
@@ -40,10 +46,10 @@ class Platform {
   
   calculateNewColor() {
     // Calcular un nuevo color basado en la posición de la plataforma
-      this.life -= 25;
-      this.red += Math.floor(this.left)
-      this.green += 70;
-      this.blue += 70;
+      this.life -= 25;      
+      this.red += Math.floor(this.redLeft)    //Math.floor no lo lleva exacta exactamente hasta 255, pero no importa mucho
+      this.green += Math.floor(this.greenLeft);
+      this.blue += Math.floor(this.blueLeft);
   }
 
   isVisible() {
