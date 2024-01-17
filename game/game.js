@@ -118,16 +118,19 @@ aditionalWeapon() {  //función para añadir obstáculo
   }
 
     addPlatforms(){                              // this.ctx, ubicacion en eje x, ubicacion en eje y, ancho y alto. la última sería la imágen
-      const platform1 = new Platform(this.ctx)
-      const platform2 = new Platform(this.ctx, 170, 109, 50, 10, "../public/Imagenes/obstacles/platformSolid3.png" )
-      // const platform3 = new Platform(this.ctx, 30, 49, 50, 10, "../public/Imagenes/obstacles/platformSolid3.png" )
-      this.platforms.push(platform1, platform2,)
+      const platform1 = new Platform(this.ctx, 10, 100, 25, 5)
+      const platform2 = new Platform(this.ctx, 40, 100, 35, 5, "../public/Imagenes/obstacles/platformSolid3.png" )
+      const platform3 = new Platform(this.ctx, 80, 100, 45, 5 , "../public/Imagenes/obstacles/platformSolid3.png" )
+      const platform4 = new Platform(this.ctx, 140, 100, 55, 5, "../public/Imagenes/obstacles/platformSolid3.png" )
+      this.platforms.push(platform1, platform2, platform3, platform4)
+      //!  la anchura más la altura de la plataforma nunca debe superar 60, para que el total ea 240;
+      //opciones de anchura y altura  son 25, 5 la estándar y mínima. Las siguiente suben de 10 en 10 en anchura
     }
 
     addBouncer(){
-      const bouncer1 = new Bouncer(this.ctx, 60, 120, 20, 20)
-      const bouncer2 = new Bouncer(this.ctx, 160, 40, 20, 80)
-      this.bouncers.push(bouncer1, bouncer2)
+      // const bouncer1 = new Bouncer(this.ctx, 60, 120, 20, 20)
+      // const bouncer2 = new Bouncer(this.ctx, 160, 40, 20, 80)
+      // this.bouncers.push(bouncer1, bouncer2)
     }
 
   checkCollisions() {  //función para comprobar las colisiones
@@ -215,14 +218,18 @@ aditionalWeapon() {  //función para añadir obstáculo
         }
       }
     })
-    this.platforms.forEach((platform) => {
+
+    this.platforms.forEach((platform) => { //platform con bullets
       this.player.bulletArray.forEach((bullet) => {
         if(bullet.collides(platform)){
           bullet.vy = 3;
           if(this.player.vx > 0) bullet.vx = 1;
           if(this.player.vx < 0) bullet.vx = -1;
-          platform.w -= 0.5;
-          platform.h -= 0.1;
+          const newColor = platform.calculateNewColor();
+          platform.color = newColor;
+         if( platform.life <= 0){
+          platform.x = -200;
+         }
           return false;
         } else return true;
       })
