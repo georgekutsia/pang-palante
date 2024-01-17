@@ -11,6 +11,7 @@ class WeaponFire {
     this.w = this.ctx.canvas.width/ 20;
     this.h = this.ctx.canvas.width/ 20;
     this.flameSpinTick = 0;
+    this.damage = 0.1;
   }
 
   draw() {
@@ -46,6 +47,6 @@ class WeaponFire {
     return colX && colY;
   }
   isVisible() {
-    return this.y >= 0;
+    return this.y + this.h >= 0;
   }
 }
