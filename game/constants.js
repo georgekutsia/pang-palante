@@ -30,3 +30,4 @@ let D = 68;
 let recharge = 300;
 let jumpHeight = -4;
 let jumpCooldown = 400;
+let weaponBarSolidTick = 350;//el tiempo que se pasa la barra en estado sólido

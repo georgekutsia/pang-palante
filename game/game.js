@@ -68,6 +68,8 @@ class Game {
     this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
     this.player.bulletArray = this.player.bulletArray.filter((e) => e.isVisible()); //elimina cada bullet que ya no es visible y vacía el array
     this.player.bulletFireArray = this.player.bulletFireArray.filter((e) => e.isVisible()); //elimina cada bullet que ya no es visible y vacía el array
+    this.player.bulletBarArray= this.player.bulletBarArray.filter((e) => e.isVisible()); //elimina cada bullet que ya no es visible y vacía el array
+    console.log('%cMyProject%cline:71%cthis.player.bulletBarArray', 'color:#fff;background:#ee6f57;padding:3px;border-radius:2px', 'color:#fff;background:#1f3c88;padding:3px;border-radius:2px', 'color:#fff;background:rgb(95, 92, 51);padding:3px;border-radius:2px', this.player.bulletBarArray)
     this.bubbles = this.bubbles.filter((bubble) => bubble.isVisible()); //elimina cada obstáculo que ya no es visible y vacía el array
     this.aditionalWeapons = this.aditionalWeapons.filter((flamethrower) => flamethrower.isVisible()); //elimina cada obstáculo que ya no es visible y vacía el array
     this.puffBubbles = this.puffBubbles.filter((puff) => puff.isVisible()); //elimina cada obstáculo que ya no es visible y vacía el array
@@ -124,10 +126,10 @@ aditionalWeapon() {  //función para añadir obstáculo
   }
 
     addPlatforms(){                              // this.ctx, ubicacion en eje x, ubicacion en eje y, ancho y alto. la última sería la imágen
-      const platform1 = new Platform(this.ctx, 10, 45, 25, 5)
-      const platform2 = new Platform(this.ctx, 40, 45, 35, 5, "../public/Imagenes/obstacles/platformSolid3.png" )
-      const platform3 = new Platform(this.ctx, 80, 45, 45, 5 , "../public/Imagenes/obstacles/platformSolid1.png" )
-      const platform4 = new Platform(this.ctx, 140, 45, 55, 5, "../public/Imagenes/obstacles/platformSolid3.png" )
+      const platform1 = new Platform(this.ctx, 10, 80, 25, 5)
+      const platform2 = new Platform(this.ctx, 40, 80, 35, 5, "../public/Imagenes/obstacles/platformSolid3.png" )
+      const platform3 = new Platform(this.ctx, 80, 80, 45, 5 , "../public/Imagenes/obstacles/platformSolid1.png" )
+      const platform4 = new Platform(this.ctx, 140, 80, 55, 5, "../public/Imagenes/obstacles/platformSolid3.png" )
       this.platforms.push(platform1, platform2, platform3, platform4)
       
       //!  la anchura más la altura de la plataforma nunca debe superar 60, para que el total ea 240;
