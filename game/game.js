@@ -106,7 +106,7 @@ class Game {
 addbubble() {  //función para añadir obstáculo
   // const bubble = new bubble(this.ctx, 10, "../public/img/waterball.png", 120);// si quieres cambiarle el dibujo o especificar a qué altura sale
   const bubble = new Bubble(this.ctx)
-  if(this.bubbles.length < 1){
+  if(this.bubbles.length < 4){
     this.bubbles.push(bubble);
   }
 }
@@ -124,12 +124,11 @@ aditionalWeapon() {  //función para añadir obstáculo
   }
 
     addPlatforms(){                              // this.ctx, ubicacion en eje x, ubicacion en eje y, ancho y alto. la última sería la imágen
-      const platform1 = new Platform(this.ctx, 10, 100, 25, 5)
-      const platform2 = new Platform(this.ctx, 40, 100, 35, 5, "../public/Imagenes/obstacles/platformSolid3.png" )
-      const platform3 = new Platform(this.ctx, 80, 100, 45, 5 , "../public/Imagenes/obstacles/platformSolid1.png" )
-      const platform4 = new Platform(this.ctx, 140, 100, 55, 5, "../public/Imagenes/obstacles/platformSolid3.png" )
-      const platform5 = new Platform(this.ctx, 140, 10, 55, 5, "../public/Imagenes/obstacles/platformSolid4.png" )      
-      this.platforms.push(platform1, platform2, platform3, platform4, platform5)
+      const platform1 = new Platform(this.ctx, 10, 45, 25, 5)
+      const platform2 = new Platform(this.ctx, 40, 45, 35, 5, "../public/Imagenes/obstacles/platformSolid3.png" )
+      const platform3 = new Platform(this.ctx, 80, 45, 45, 5 , "../public/Imagenes/obstacles/platformSolid1.png" )
+      const platform4 = new Platform(this.ctx, 140, 45, 55, 5, "../public/Imagenes/obstacles/platformSolid3.png" )
+      this.platforms.push(platform1, platform2, platform3, platform4)
       
       //!  la anchura más la altura de la plataforma nunca debe superar 60, para que el total ea 240;
       //opciones de anchura y altura  son 25, 5 la estándar y mínima. Las siguiente suben de 10 en 10 en anchura
@@ -186,7 +185,7 @@ aditionalWeapon() {  //función para añadir obstáculo
         if(bullet.collides(bubble)){
           bubble.w -= bullet.damage;
           bubble.h -= bullet.damage;
-          if(bubble.w <= bubble.explodingSize) {
+          if(bubble.w <= bubble.explodingSize*2) {
           const elx = bubble.x;
           const ely = bubble.y;
           const puffBubble = new BubblePuff(this.ctx, elx, ely, bubble.w, bubble.h)

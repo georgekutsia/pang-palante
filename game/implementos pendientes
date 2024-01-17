@@ -9,3 +9,5 @@
 
 
 la plataforma no mueve al player mientras se desplaza
+
+las burbujas consiguientes pequeñas deberian rebotar según su velocidad vx e vy pero lo hacen con la original
