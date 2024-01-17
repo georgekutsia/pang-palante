@@ -5,7 +5,7 @@ class Bubble {
     this.y = y || obstacPlacing || -30; // el obstáculo sale de una altura específica o de alguna altura randóm
     this.w = w || this.ctx.canvas.width / 10;  //anchura calculada respecto al canvas
     this.h = h || this.ctx.canvas.width / 10;  //altura calculada respecto al canvas
-    this.vy = vy || 0;
+    this.vy = vy || 3;
     this.vx = vx || -0.5;
     this.g = g || 0.05;
     this.explodingSize = this.ctx.canvas.width/80
@@ -19,6 +19,7 @@ class Bubble {
   draw() {
     this.ctx.drawImage(this.img, this.x, this.y, this.w, this.h);  // dibuja el obstáculo
     if(this.w <= this.explodingSize) this.x = -100;
+    console.log('%cMyProject%cline:21%cthis.explodingSize', 'color:#fff;background:#ee6f57;padding:3px;border-radius:2px', 'color:#fff;background:#1f3c88;padding:3px;border-radius:2px', 'color:#fff;background:rgb(227, 160, 93);padding:3px;border-radius:2px', this.explodingSize)
   }
   move() {
     this.vy += this.g;  //efecto gravedad, aumenta la velocidad a medida que baja
