@@ -18,7 +18,6 @@ class Platform {
     this.redLeft = (255 - this.red) / this.divisibleWithLife //restamos a 255 el numero/tamaño de red y se obtiene cuanto hay que sumar hasta llegar al máximo
     //en RGB que sería lo necesario para llegar al color blanco. Luego lo dividimos por la cantidad de veces que podremos hacerlo hasta que desaparezca
     //la plataforma. Así obtenemos una cifra estable que se sumará y la última suma será la justa y necesaria hasta llegar a 255.
-
     this.greenLeft = (255 - this.green) / (this.divisibleWithLife -1) //le restamos 1 para que llegue al 255 en la paleta de colores en el disparo anterior a desaparecer
     this.blueLeft = (255 - this.blue) / (this.divisibleWithLife -1)
   }
