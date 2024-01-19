@@ -27,10 +27,14 @@ class Platform {
     // Dibujar la plataforma en el canvas y aplicar tintado
     this.ctx.save();
     this.ctx.globalCompositeOperation = "source-atop";
-    this.ctx.fillStyle = `rgb(${this.red}, ${this.green}, ${this.blue})`;
+    if(this.isSolid){
+      this.ctx.fillStyle = `rgb(${this.red}, ${this.green}, ${this.blue})`;
+    } else {
+      this.ctx.fillStyle = `black`;
+
+    }
     this.ctx.fillRect(this.x + 3 , this.y, this.w -6, this.h);
     this.ctx.restore();
-    
     // Dibujar la imagen encima del color tintado
     this.ctx.drawImage(this.img, this.x, this.y, this.w, this.h);
     // const newColor = this.calculateNewColor();
