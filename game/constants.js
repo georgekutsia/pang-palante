@@ -21,6 +21,7 @@ let F = 70 //70   rockets
 let G = 71 //71    teleport to hook
 let H = 72 //72   
 let K = 75 // 75
+
 let A = 65;
 let W = 0; //87
 let S = 83;
@@ -31,3 +32,6 @@ let recharge = 300;
 let jumpHeight = -4;
 let jumpCooldown = 400;
 let weaponBarSolidTick = 350;//el tiempo que se pasa la barra en estado sólido
+let fireSizing = 0.1 //el aumento de ancho y alto de la bala de fuego a medida que sube
+let barLife = 3;
+let immuneTime = 2000;

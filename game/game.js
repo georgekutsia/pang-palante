@@ -27,8 +27,6 @@ class Game {
     this.platforms = []; // plataformas para saltar
     this.bouncers = []; // plataformas que rebotan
     this.stairs = []; // Array para almacenar instancias de la clase Stair
-
-
     // sounds sounds sounds
     this.bubbleBounceSound = new Audio("../public/sounds/bubbleBounce.mp3") //todo -- paso 1 traer el sonido y almacenarlo en una variable
     this.bubbleBounceSound.volume = 0.1;  //todo -- paso 2, no obligatorio, determinarle volumen de 0 a 1, creo
@@ -69,7 +67,6 @@ class Game {
     this.player.bulletArray = this.player.bulletArray.filter((e) => e.isVisible()); //elimina cada bullet que ya no es visible y vacía el array
     this.player.bulletFireArray = this.player.bulletFireArray.filter((e) => e.isVisible()); //elimina cada bullet que ya no es visible y vacía el array
     this.player.bulletBarArray= this.player.bulletBarArray.filter((e) => e.isVisible()); //elimina cada bullet que ya no es visible y vacía el array
-    console.log('%cMyProject%cline:71%cthis.player.bulletBarArray', 'color:#fff;background:#ee6f57;padding:3px;border-radius:2px', 'color:#fff;background:#1f3c88;padding:3px;border-radius:2px', 'color:#fff;background:rgb(95, 92, 51);padding:3px;border-radius:2px', this.player.bulletBarArray)
     this.bubbles = this.bubbles.filter((bubble) => bubble.isVisible()); //elimina cada obstáculo que ya no es visible y vacía el array
     this.aditionalWeapons = this.aditionalWeapons.filter((flamethrower) => flamethrower.isVisible()); //elimina cada obstáculo que ya no es visible y vacía el array
     this.puffBubbles = this.puffBubbles.filter((puff) => puff.isVisible()); //elimina cada obstáculo que ya no es visible y vacía el array
@@ -84,8 +81,7 @@ class Game {
     this.puffBubbles.forEach((e) => e.draw());  //dibuja cada obstáculo
     this.bubbles.forEach((e) => e.draw());  //dibuja cada obstáculo
     this.aditionalWeapons.forEach((e) => e.draw());  //dibuja cada obstáculo
-    if(this.player.life <= 0) this.gameOver(); // cuando el player muere se llama a la funcion gameOver()
-
+    if(this.player.life.total <= 0) this.gameOver(); // cuando el player muere se llama a la funcion gameOver()
   }
   move() {
     this.player.move();  //muve al personaje y todo lo que se mueve en la clase de personaje
@@ -106,7 +102,6 @@ class Game {
   
 //funciones o metodos para crear obstaculos y criaturas
 addbubble() {  //función para añadir obstáculo
-  // const bubble = new bubble(this.ctx, 10, "../public/img/waterball.png", 120);// si quieres cambiarle el dibujo o especificar a qué altura sale
   const bubble = new Bubble(this.ctx)
   if(this.bubbles.length < 4){
     this.bubbles.push(bubble);
@@ -127,7 +122,7 @@ aditionalWeapon() {  //función para añadir obstáculo
 
     addPlatforms(){                              // this.ctx, ubicacion en eje x, ubicacion en eje y, ancho y alto. la última sería la imágen
       const platform1 = new Platform(this.ctx, 10, 80, 25, 5)
-      const platform2 = new Platform(this.ctx, 40, 80, 35, 5, "../public/Imagenes/obstacles/platformSolid3.png" )
+      const platform2 = new Platform(this.ctx, 40, 80, 35, 5, "../public/Imagenes/obstacles/platformSolid3.png", true )
       const platform3 = new Platform(this.ctx, 80, 80, 45, 5 , "../public/Imagenes/obstacles/platformSolid1.png" )
       const platform4 = new Platform(this.ctx, 140, 80, 55, 5, "../public/Imagenes/obstacles/platformSolid3.png" )
       this.platforms.push(platform1, platform2, platform3, platform4)
@@ -139,85 +134,20 @@ aditionalWeapon() {  //función para añadir obstáculo
     addBouncer(){
       // const bouncer1 = new Bouncer(this.ctx, 30, 70, 20, 80)
       // const bouncer2 = new Bouncer(this.ctx, 160, 70, 20, 80)
-      // this.bouncers.push(bouncer1, bouncer2)
+      // const bouncer3 = new Bouncer(this.ctx, 100, 10, 50, 20)
+      // this.bouncers.push(bouncer1, bouncer2, bouncer3)
     }
 
   checkCollisions() {  //función para comprobar las colisiones
-   // bubble  choca con el personaje
-    this.bubbles.forEach((bubble) => {
-      if (bubble.collides(this.player)) {
-        this.player.life -= bubble.damage; //el daño al jugador se le hace según lo que marca el daño de la burbuja. a burbuja más pequeña, menos daño
+    this.bubbles.forEach((bubble) => { //player con bubble
+      if (bubble.collides(this.player) && !this.player.immune) {
+        this.player.loseLife(bubble.damage); //el daño al jugador se le hace según lo que marca el daño de la burbuja. a burbuja más pequeña, menos daño
         this.playerDamageSound1.play();
         this.bubbleSplash2.play();
         bubble.vy = -3.5; // rebota encima del jugador haciéndole daño
       } else return true
     });
-
-    
-   // aditionalweapon  choca con el personaje
-    this.aditionalWeapons.forEach((weapon) => {
-      if (weapon.collides(this.player)) {
-        N = 78;
-        this.player.amountOfFireShoots += 5; // sumamos 5 balas de fuego 
-        weapon.x = - 100; // situa fuera del canvas la burbuja que colisiona con el player y luego isVisible la elimina del array
-      } else return true
-    });
-
-
-    //  bubble choca con bullet
-    this.bubbles.forEach((bubble) => {
-      this.player.bulletArray = this.player.bulletArray.filter((bullet) => {
-        if(bullet.collides(bubble)){
-          const elx = bubble.x;
-          const ely = bubble.y;
-          bubble.x = -100
-          const puffBubble = new BubblePuff(this.ctx, elx, ely, bubble.w, bubble.h)
-          this.puffBubbles.push(puffBubble)
-          const smallBubble1 = new Bubble(this.ctx, -0.5, -1, elx, ely, bubble.w/2, bubble.h/2, bubble.g + 0.03, bubble.damage / 2 )// al explotar una burbuja, crea otra en su lugar, usando su ubicación y dimensiones para hacerla más pequeña
-          const smallBubble2 = new Bubble(this.ctx, 0.5, -1, elx, ely, bubble.w/2, bubble.h/2, bubble.g + 0.03, bubble.damage / 2 )
-          this.bubbles.push(smallBubble1, smallBubble2)
-          this.bubblePopSound1.play(); //todo -- Sonido paso 3) invocar el sonido
-          return false;
-        } else return true;
-      })
-    })
-    //  bubble choca con bulletFire
-    this.bubbles.forEach((bubble) => {
-      this.player.bulletFireArray.forEach((bullet) => {
-        if(bullet.collides(bubble)){
-          bubble.w -= bullet.damage;
-          bubble.h -= bullet.damage;
-          if(bubble.w <= bubble.explodingSize*2) {
-          const elx = bubble.x;
-          const ely = bubble.y;
-          const puffBubble = new BubblePuff(this.ctx, elx, ely, bubble.w, bubble.h)
-          this.puffBubbles.push(puffBubble)
-          bubble.x = -100;
-        }
-        } else return true;
-      })
-    })
-
-
-    this.bubbles.forEach((bubble) => {  //bubble con platform
-      this.platforms.forEach((platform) => {
-        if(platform.collides(bubble)){
-          bubbleBounce(bubble, platform)
-        } else return true;
-      })
-    })
-
-    this.bubbles.forEach((bubble) => {//bubble con bouncer
-      this.bouncers.forEach((bouncer) => {
-        if (bouncer.collides(bubble)) {
-          bubbleBounce(bubble, bouncer)
-        } else return true;
-      });
-    });
-
-
-    // colisiones con la escalera
-    this.stairs.forEach((stair) => {
+    this.stairs.forEach((stair) => { //player con stair
       if (stair.collidesTop(this.player)) {
         this.player.vy = 0;
         this.player.y = stair.y - this.player.h
@@ -237,9 +167,93 @@ aditionalWeapon() {  //función para añadir obstáculo
       }
     });
 
+    //bubbles...bubbles...bubbles...bubbles...bubbles...
+    //bubbles...bubbles...bubbles...bubbles...bubbles...
+    this.bubbles.forEach((bubble) => {    //  bubble con bullet
+      this.player.bulletArray = this.player.bulletArray.filter((bullet) => {
+        if(bullet.collides(bubble)){
+          bubblePuff(bubble, this.puffBubbles, this.bubbles, this.ctx)
+          this.bubblePopSound1.play(); //todo -- Sonido paso 3) invocar el sonido
+          return false;
+        } else return true;
+      })
+    })
+    this.bubbles.forEach((bubble) => { //bubble con fire
+      this.player.bulletFireArray.forEach((bullet) => {
+        if(bullet.collides(bubble)){
+          bubble.w -= bullet.damage;
+          bubble.h -= bullet.damage;
+          if(bubble.w <= bubble.explodingSize*2) {
+          const elx = bubble.x;
+          const ely = bubble.y;
+          const puffBubble = new BubblePuff(this.ctx, elx, ely, bubble.w, bubble.h)
+          this.puffBubbles.push(puffBubble)
+          bubble.x = -100;
+        }
+        } else return true;
+      })
+    })
+    this.bubbles.forEach((bubble) => {  //bubble con platform
+      this.platforms.forEach((platform) => {
+        if(platform.collides(bubble)){
+          bubbleBounce(bubble, platform)
+        } else return true;
+      })
+    })
+    this.bubbles.forEach((bubble) => {//bubble con bouncer
+      this.bouncers.forEach((bouncer) => {
+        if (bouncer.collides(bubble)) {
+          bubbleBounce(bubble, bouncer)
+        } else return true;
+      });
+    });
 
-    // colisiones con Platform
-    // colisiones con Platform
+
+
+//weaponBar..weaponBar..weaponBar..weaponBar..
+//weaponBar..weaponBar..weaponBar..weaponBar..
+
+
+      this.player.bulletBarArray.forEach((bar =>{
+          this.platforms.forEach((platform) => {
+            if(bar.collides(platform)){
+                  bar.solidState = true;
+                  bar.y = platform.y+ platform.h;
+                  bar.vy = 0;
+                  bar.img.src =  "../public/Imagenes/weaponBarSolid.png";
+            }
+          })
+      }))
+      this.player.bulletBarArray.forEach((bar =>{
+          this.bouncers.forEach((bouncer) => {
+            if(bar.collides(bouncer)){
+                  bar.solidState = true;
+                  bar.y = bouncer.y+ bouncer.h;
+                  bar.vy = 0;
+                  bar.img.src =  "../public/Imagenes/weaponBarSolid.png";
+            }
+          })
+      }))
+        
+    this.bubbles.forEach((bubble) => {    //  bulletBar con Bubble
+      this.player.bulletBarArray.forEach((bullet) => {
+        if(bullet.collides(bubble)){
+          bullet.life -= 1;
+          if(bullet.life<=0){
+            bullet.y = -300;
+          }
+          bubblePuff(bubble, this.puffBubbles, this.bubbles, this.ctx)
+          this.bubblePopSound1.play(); //todo -- Sonido paso 3) invocar el sonido
+          return false;
+        } else return true;
+      })
+    })
+
+
+
+
+// colisiones con Platform
+// colisiones con Platform
     this.platforms.forEach((platform) => {  // platform con player
       if (platform.collides(this.player)) {
         this.player.vy = 0;
@@ -262,11 +276,13 @@ aditionalWeapon() {  //función para añadir obstáculo
         if(bullet.collides(platform)){
           bullet.vy = 3;
           bullet.vx = bullet.direction;
-          const newColor = platform.calculateNewColor();
-          platform.color = newColor;
-         if( platform.life <= 0){
-          platform.x = -200;
-         }
+          if(platform.isSolid){
+            const newColor = platform.calculateNewColor();
+            platform.color = newColor;
+            if( platform.life <= 0){
+              platform.x = -200;
+            }
+          }
           return false;
         } else return true;
       })
@@ -301,6 +317,16 @@ aditionalWeapon() {  //función para añadir obstáculo
         }
       }
     })
+
+    
+// items que mejoran el personaje
+this.aditionalWeapons.forEach((weapon) => {   // aditionalweapon  choca con el personaje
+  if (weapon.collides(this.player)) {
+    N = 78;
+    this.player.amountOfFireShoots += 5; // sumamos 5 balas de fuego 
+    weapon.x = - 100; // situa fuera del canvas la burbuja que colisiona con el player y luego isVisible la elimina del array
+  } else return true
+});
   }
 
   gameOver() {  //Función para terminar el juego y vaciar todos los arrays.

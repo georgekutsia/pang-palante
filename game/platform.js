@@ -1,5 +1,5 @@
 class Platform {
-  constructor(ctx, x, y, w, h, obstacleImg) {
+  constructor(ctx, x, y, w, h, obstacleImg, isSolid) {
     this.ctx = ctx;
     this.x = x || 100;
     this.w = w || this.ctx.canvas.width / 13;
@@ -13,6 +13,7 @@ class Platform {
     this.green = Math.random() * 140;
     this.blue = Math.random() * 140;
     this.life =  this.red /2;   
+    this.isSolid = isSolid || false;
     //la vida de la plataforma depende de su tamaño, lo que significa que depende de Red, que es la anchura más la altura multiplicada por 2. 
     this.divisibleWithLife = this.life / 25 //como le restamos vida de 25 en 25, obtenemos cuantas veces se le podrá restar antes de llegar a 0 o menos
     this.redLeft = (255 - this.red) / this.divisibleWithLife //restamos a 255 el numero/tamaño de red y se obtiene cuanto hay que sumar hasta llegar al máximo
