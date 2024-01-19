@@ -13,6 +13,8 @@ class WeaponBar {
     this.h = this.ctx.canvas.height;
     this.tick = weaponBarSolidTick;
     this.fading = 0;
+    this.solidState = false;  //al pasar a true, empieza la cuenta atrás para que desaparezca;
+    this.life = barLife //las veces que la barra puede chocar contra las burbujas antes de desaparecer
   }
 
   draw() {
@@ -36,7 +38,7 @@ class WeaponBar {
   move() {
     this.x += this.vx;
     this.y += this.vy;
-    if(this.y <= 0) {
+    if(this.y <= 1 || this.solidState) {
       this.tick--;
       this.img.src = "../public/Imagenes/weaponBarSolid.png";
       this.vy = 0;

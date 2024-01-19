@@ -12,3 +12,15 @@ function bubbleBounce(elem1, elem2){
     elem1.vx = 0.5;
   }
 }
+
+function bubblePuff(bubble, puffBubbles, bubbles, ctx){
+  const elx = bubble.x;
+  const ely = bubble.y;
+  bubble.x = -100
+  const puffBubble = new BubblePuff(ctx, elx, ely, bubble.w, bubble.h)
+  puffBubbles.push(puffBubble)
+  const smallBubble1 = new Bubble(ctx, -0.5, -1, elx, ely, bubble.w/2, bubble.h/2, bubble.g + 0.03, bubble.damage / 2 )// al explotar una burbuja, crea otra en su lugar, usando su ubicación y dimensiones para hacerla más pequeña
+  const smallBubble2 = new Bubble(ctx, 0.5, -1, elx, ely, bubble.w/2, bubble.h/2, bubble.g + 0.03, bubble.damage / 2 )
+  bubbles.push(smallBubble1, smallBubble2)
+}
+

@@ -9,7 +9,7 @@ class Bubble {
     this.vx = vx || -0.5;
     this.g = g || 0.05;
     this.explodingSize = this.ctx.canvas.width/80
-    this.damage = damage || 20; // daño especificado o 10
+    this.damage = damage || 1; // daño especificado o 10
     this.img = new Image();   //crear nueva imágene ne canvas
     this.img.src = obstacleImg || "../public/Imagenes/bubble.png";  //definir cual es la nueva imagen
 
