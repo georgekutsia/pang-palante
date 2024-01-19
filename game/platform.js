@@ -1,5 +1,5 @@
 class Platform {
-  constructor(ctx, x, y, w, h, obstacleImg, isSolid) {
+  constructor(ctx, x, y, w, h, obstacleImg, isSolid, isBrakable) {
     this.ctx = ctx;
     this.x = x || 100;
     this.w = w || this.ctx.canvas.width / 13;
@@ -14,6 +14,9 @@ class Platform {
     this.blue = Math.random() * 140;
     this.life =  this.red /2;   
     this.isSolid = isSolid || false;
+    this.isBrakable = isBrakable || false;
+    this.goingToBreak = false;
+    this.braking = 200;
     //la vida de la plataforma depende de su tamaño, lo que significa que depende de Red, que es la anchura más la altura multiplicada por 2. 
     this.divisibleWithLife = this.life / 25 //como le restamos vida de 25 en 25, obtenemos cuantas veces se le podrá restar antes de llegar a 0 o menos
     this.redLeft = (255 - this.red) / this.divisibleWithLife //restamos a 255 el numero/tamaño de red y se obtiene cuanto hay que sumar hasta llegar al máximo
@@ -31,11 +34,18 @@ class Platform {
       this.ctx.fillStyle = `rgb(${this.red}, ${this.green}, ${this.blue})`;
     } else {
       this.ctx.fillStyle = `black`;
-
     }
     this.ctx.fillRect(this.x + 3 , this.y, this.w -6, this.h);
     this.ctx.restore();
     // Dibujar la imagen encima del color tintado
+    if(this.goingToBreak){
+        if(this.braking <= 100){
+          this.img.src = "../public/Imagenes/obstacles/platfomJump3.png"
+        }
+        if(this.braking <= 0){
+          this.y = -300
+        }
+    }
     this.ctx.drawImage(this.img, this.x, this.y, this.w, this.h);
     // const newColor = this.calculateNewColor();
     // this.color = newColor;c

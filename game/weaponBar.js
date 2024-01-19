@@ -20,6 +20,7 @@ class WeaponBar {
   draw() {
     if(this.fading >= 10 ) {
       this.ctx.globalAlpha = 0.3;
+
     }
     this.ctx.drawImage(
       this.img,
@@ -33,7 +34,7 @@ class WeaponBar {
       this.h
     );
     this.ctx.globalAlpha = 1;
-
+    // invertImage(this.ctx, this.x, this.y, this.w, this.h, this.img);
   }
   move() {
     this.x += this.vx;
