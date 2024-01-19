@@ -19,8 +19,8 @@ class Player {
     this.frameAmount = 5;
     this.amountOfFireShoots = 0;
     this.moving = moving;
-    this.immune = false;
-    this.fading = 0;
+    this.immune = false; // al recibir daño se vuelve inmune durante unos segundos
+    this.fading = 0; //necesario para el parpadeo del personaje cuando es inmune
 
   }
 
@@ -46,7 +46,6 @@ class Player {
       this.h
     );
     this.ctx.globalAlpha = 1;
-    console.log("fading", this.fading)
     this.bulletArray.forEach((bullet) => {bullet.draw();}); // paso 3: dibujo cada bullet que se dispare
     this.bulletFireArray.forEach((bullet) => {bullet.draw();}); // paso 3: dibujo cada bullet que se dispare
     this.bulletBarArray.forEach((bullet) => {bullet.draw();}); // paso 3: dibujo cada bullet que se dispare
@@ -184,7 +183,7 @@ class Player {
   loseLife(damage){
     this.life.total -= damage;
     this.immune = true;
-    setTimeout(() => {
+    setTimeout(() => {  // para desactivar immune y que el personaje deje de parpadear
         this.immune = false;
         this.fading = 0;
     }, immuneTime);

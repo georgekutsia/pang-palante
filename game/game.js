@@ -103,7 +103,7 @@ class Game {
 //funciones o metodos para crear obstaculos y criaturas
 addbubble() {  //función para añadir obstáculo
   const bubble = new Bubble(this.ctx)
-  if(this.bubbles.length < 4){
+  if(this.bubbles.length < 1){
     this.bubbles.push(bubble);
   }
 }
