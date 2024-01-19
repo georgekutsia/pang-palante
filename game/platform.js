@@ -18,7 +18,7 @@ class Platform {
     this.goingToBreak = false;
     this.braking = 200;
     //la vida de la plataforma depende de su tamaño, lo que significa que depende de Red, que es la anchura más la altura multiplicada por 2. 
-    this.divisibleWithLife = this.life / 25 //como le restamos vida de 25 en 25, obtenemos cuantas veces se le podrá restar antes de llegar a 0 o menos
+    this.divisibleWithLife = this.life / 12.5 //como le restamos vida de 25 en 25, obtenemos cuantas veces se le podrá restar antes de llegar a 0 o menos//! a veces hay que restar 12.5 por un fallo
     this.redLeft = (255 - this.red) / this.divisibleWithLife //restamos a 255 el numero/tamaño de red y se obtiene cuanto hay que sumar hasta llegar al máximo
     //en RGB que sería lo necesario para llegar al color blanco. Luego lo dividimos por la cantidad de veces que podremos hacerlo hasta que desaparezca
     //la plataforma. Así obtenemos una cifra estable que se sumará y la última suma será la justa y necesaria hasta llegar a 255.
@@ -59,7 +59,8 @@ class Platform {
   
   calculateNewColor() {
     // Calcular un nuevo color basado en la posición de la plataforma
-      this.life -= 25;      
+      // this.life -= 25;      //! por alguna razón choca 3 veces contra la plataforma, cuando se arregle usamos 25, por ahora usamos la otra
+      this.life -= 12.5;
       this.red += Math.floor(this.redLeft)    //Math.floor no lo lleva exacta exactamente hasta 255, pero no importa mucho
       this.green += Math.floor(this.greenLeft);
       this.blue += Math.floor(this.blueLeft);

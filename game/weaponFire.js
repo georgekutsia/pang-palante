@@ -4,7 +4,7 @@ class WeaponFire {
     this.x = x;
     this.y = y;
     this.vy = -0.5;
-    this.vx = -0.09; // minimo ajuste para que el fuego vaya recto de verdad, ya que al aumentar de tamaño solo se expande hacia al derecha
+    this.vx = -0.08; // minimo ajuste para que el fuego vaya recto de verdad, ya que al aumentar de tamaño solo se expande hacia al derecha
     this.img = new Image();
     this.img.src = "../public/Imagenes/weaponFire1.png";
     this.img.frame = 0;
