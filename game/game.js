@@ -23,6 +23,7 @@ class Game {
     this.setListeners();  // para que se pueda usar el teclado 
     this.bubbles = [];  // un array que almacena todos los obstáculos que aparecen en la pantalla
     this.aditionalWeapons = []; // salen nuevas tipos de armas
+    this.healings = []; // salen nuevas tipos de armas
     this.puffBubbles = []; // para cuando estalla la burbuja
     this.platforms = []; // plataformas para saltar
     this.bouncers = []; // plataformas que rebotan
@@ -49,6 +50,7 @@ class Game {
       }
       if(this.aditionalWeaponTick >= 200){ //añade obtáculo en algún momento random 
         this.aditionalWeapon(); // la función para añadir obstáculo
+        this.healingItem();
         this.aditionalWeaponTick = 0; //regresa el bubbleTick a 0 para reiniciar la cuenta
       }
     }, 1000 / 60);
@@ -69,6 +71,7 @@ class Game {
     this.player.bulletBarArray= this.player.bulletBarArray.filter((e) => e.isVisible()); //elimina cada bullet que ya no es visible y vacía el array
     this.bubbles = this.bubbles.filter((bubble) => bubble.isVisible()); //elimina cada obstáculo que ya no es visible y vacía el array
     this.aditionalWeapons = this.aditionalWeapons.filter((flamethrower) => flamethrower.isVisible()); //elimina cada obstáculo que ya no es visible y vacía el array
+    this.healings = this.healings.filter((healing) => healing.isVisible()); //elimina cada obstáculo que ya no es visible y vacía el array
     this.puffBubbles = this.puffBubbles.filter((puff) => puff.isVisible()); //elimina cada obstáculo que ya no es visible y vacía el array
   }
 
@@ -81,6 +84,7 @@ class Game {
     this.puffBubbles.forEach((e) => e.draw());  //dibuja cada obstáculo
     this.bubbles.forEach((e) => e.draw());  //dibuja cada obstáculo
     this.aditionalWeapons.forEach((e) => e.draw());  //dibuja cada obstáculo
+    this.healings.forEach((e) => e.draw());  //dibuja cada obstáculo
     if(this.player.life.total <= 0) this.gameOver(); // cuando el player muere se llama a la funcion gameOver()
   }
   move() {
@@ -89,6 +93,7 @@ class Game {
     this.platforms.forEach((e) => e.move());  //mueve los obstáculos
     this.bouncers.forEach((e) => e.move());  //mueve los obstáculos
     this.aditionalWeapons.forEach((e) => e.move());  //mueve los obstáculos
+    this.healings.forEach((e) => e.move());  //mueve los obstáculos
     this.puffBubbles.forEach((e) => e.move());  //mueve los obstáculos
   }
   setListeners() { //permite hacer keyup y keydown para usar teclado para mover el personaje
@@ -112,6 +117,10 @@ aditionalWeapon() {  //función para añadir obstáculo
   const flamethrower = new Flamethrower(this.ctx)
   this.aditionalWeapons.push(flamethrower)
 }
+healingItem() {  //función para añadir obstáculo
+  const healingItem = new Healing(this.ctx)
+  this.healings.push(healingItem)
+}
 
   addStair() {                         // this.ctx, ubicacion en eje x, ubicacion en eje y, ancho y alto. la última sería la imágen
     //! la escalera no debería colgar sola en el aire, debería tener una parte de la plataforma debajo o pasan cosas raras con la gravedad
@@ -123,9 +132,10 @@ aditionalWeapon() {  //función para añadir obstáculo
     addPlatforms(){                              // this.ctx, ubicacion en eje x, ubicacion en eje y, ancho y alto. la última sería la imágen
       const platform1 = new Platform(this.ctx, 10, 80, 25, 5)
       const platform2 = new Platform(this.ctx, 40, 80, 35, 5, "../public/Imagenes/obstacles/platformSolid3.png", true )
-      const platform3 = new Platform(this.ctx, 80, 80, 45, 5 , "../public/Imagenes/obstacles/platformSolid1.png" )
+      const platform3 = new Platform(this.ctx, 80, 80, 45, 5 , "../public/Imagenes/obstacles/platformSolid1.png", false, true )
       const platform4 = new Platform(this.ctx, 140, 80, 55, 5, "../public/Imagenes/obstacles/platformSolid3.png" )
-      this.platforms.push(platform1, platform2, platform3, platform4)
+      const platform5 = new Platform(this.ctx, 180, 80, 5, 55, "../public/Imagenes/obstacles/platformSolid2.png" )
+      this.platforms.push(platform1, platform2, platform3, platform4, platform5)
       
       //!  la anchura más la altura de la plataforma nunca debe superar 60, para que el total ea 240;
       //opciones de anchura y altura  son 25, 5 la estándar y mínima. Las siguiente suben de 10 en 10 en anchura
@@ -256,17 +266,27 @@ aditionalWeapon() {  //función para añadir obstáculo
 // colisiones con Platform
     this.platforms.forEach((platform) => {  // platform con player
       if (platform.collides(this.player)) {
-        this.player.vy = 0;
-        if (this.player.y <= platform.y && this.player.x <= platform.x + platform.w  && this.player.x + this.player.w > platform.x) {
-          this.player.y = platform.y - this.player.h ;
-          ALT = 16;
-        }
-        if (this.player.y + this.player.h >= platform.y + platform.h) { //colisión por la parte inferior de la plataforma
+        if(platform.isBrakable){
+          if (this.player.y <= platform.y && this.player.x <= platform.x + platform.w  && this.player.x + this.player.w > platform.x) {
+            this.player.y = platform.y - this.player.h ;
+            this.player.vy = 0;
+            platform.braking--;
+            ALT = 16;
+            platform.goingToBreak = true;
+          }
+        } else {
           this.player.vy = 0;
-        }
-        if (this.player.x >= platform.x + platform.w - 6 || this.player.x <= platform.x) { //colisión por los lados de la plataforma
-          this.player.vy = 0;
-          this.player.g = 0.2
+          if (this.player.y <= platform.y && this.player.x <= platform.x + platform.w  && this.player.x + this.player.w > platform.x) {
+            this.player.y = platform.y - this.player.h ;
+            ALT = 16;
+          }
+          if (this.player.y + this.player.h >= platform.y + platform.h) { //colisión por la parte inferior de la plataforma
+            this.player.vy = 0;
+          }
+          if (this.player.x >= platform.x + platform.w - 6 || this.player.x <= platform.x) { //colisión por los lados de la plataforma
+            this.player.vy = 0;
+            this.player.g = 0.2
+          }
         }
       }
     })
@@ -274,8 +294,7 @@ aditionalWeapon() {  //función para añadir obstáculo
     this.platforms.forEach((platform) => { //platform con bullets normales
       this.player.bulletArray.forEach((bullet) => {
         if(bullet.collides(platform)){
-          bullet.vy = 3;
-          bullet.vx = bullet.direction;
+          basicBulletBounce(bullet, platform)
           if(platform.isSolid){
             const newColor = platform.calculateNewColor();
             platform.color = newColor;
@@ -320,13 +339,19 @@ aditionalWeapon() {  //función para añadir obstáculo
 
     
 // items que mejoran el personaje
-this.aditionalWeapons.forEach((weapon) => {   // aditionalweapon  choca con el personaje
-  if (weapon.collides(this.player)) {
-    N = 78;
-    this.player.amountOfFireShoots += 5; // sumamos 5 balas de fuego 
-    weapon.x = - 100; // situa fuera del canvas la burbuja que colisiona con el player y luego isVisible la elimina del array
-  } else return true
-});
+    this.aditionalWeapons.forEach((weapon) => {   // aditionalweapon  choca con el personaje
+        if (weapon.collides(this.player)) {
+          N = 78;
+          this.player.amountOfFireShoots += 5; // sumamos 5 balas de fuego 
+          weapon.x = - 100; // situa fuera del canvas la burbuja que colisiona con el player y luego isVisible la elimina del array
+        } else return true
+      });
+    this.healings.forEach((healing) => {   // aditionalhealing  choca con el personaje
+        if (healing.collides(this.player)) {
+          this.player.gainLife()
+          healing.x = - 100; // situa fuera del canvas la burbuja que colisiona con el player y luego isVisible la elimina del array
+        } else return true
+      });
   }
 
   gameOver() {  //Función para terminar el juego y vaciar todos los arrays.

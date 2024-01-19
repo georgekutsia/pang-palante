@@ -5,7 +5,7 @@ class Life {
     this.y = 0;
     this.w = 10;
     this.h = 10;
-    this.total = 3; // Puedes cambiar esto a cualquier número, entero o decimal
+    this.total = 6; // Puedes cambiar esto a cualquier número, entero o decimal
     this.img = new Image();
     this.img.src = "../public/Imagenes/stats/heart.png";
     this.imgHalf = new Image();

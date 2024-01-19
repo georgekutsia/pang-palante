@@ -9,8 +9,10 @@ class BasicWeapon {
     this.img = new Image();
     this.img.src = "../public/Imagenes/weaponStone.png";
     this.img.frame = 0;
+    this.tick = 0; //para que no rebote eternamente
     this.w = this.ctx.canvas.width/ 60;
     this.h = this.ctx.canvas.width/ 25;
+    this.bulletDirection = true;
   }
 
   draw() {
@@ -31,6 +33,10 @@ class BasicWeapon {
     this.y += this.vy;
     if(this.y + this.h >= this.ctx.canvas.height) {
     this.vy = -3
+    }
+    this.tick++
+    if(this.tick >= 250){
+      this.y = -200
     }
   }
   collides(objetivo) {

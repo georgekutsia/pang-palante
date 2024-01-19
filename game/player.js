@@ -25,6 +25,9 @@ class Player {
   }
 
   draw() {
+    this.bulletArray.forEach((bullet) => {bullet.draw();}); // paso 3: dibujo cada bullet que se dispare
+    this.bulletFireArray.forEach((bullet) => {bullet.draw();}); // paso 3: dibujo cada bullet que se dispare
+    this.bulletBarArray.forEach((bullet) => {bullet.draw();}); // paso 3: dibujo cada bullet que se dispare
     if(this.immune){
       this.fading++
       if(this.fading >= 20){
@@ -46,10 +49,8 @@ class Player {
       this.h
     );
     this.ctx.globalAlpha = 1;
-    this.bulletArray.forEach((bullet) => {bullet.draw();}); // paso 3: dibujo cada bullet que se dispare
-    this.bulletFireArray.forEach((bullet) => {bullet.draw();}); // paso 3: dibujo cada bullet que se dispare
-    this.bulletBarArray.forEach((bullet) => {bullet.draw();}); // paso 3: dibujo cada bullet que se dispare
     this.life.draw()
+    // console.log("x", this.x, "y", this.y)
     // this.ctx.fillText(`Life ${this.life}`, this.ctx.canvas.width - 50, 15); // contador de vida 
   }
 
@@ -188,6 +189,9 @@ class Player {
         this.fading = 0;
     }, immuneTime);
   }
+  gainLife(){
+    this.life.total += 1;
+  }
   shoot() {// paso 1: invoca el disparo desde la posicion del personaje o su cercanía
     const bullet = new BasicWeapon(this.ctx, this.x + 5, this.y, this.moving);
     this.bulletArray.push(bullet);//paso 2: crea un array vacío en el constructor y luego haz un push de cada bullet;
@@ -198,7 +202,7 @@ class Player {
     this.bulletFireArray.push(bulletFire);
   }
   shootBar(){
-    const bulletBar = new WeaponBar(this.ctx, this.x, this.y)
+    const bulletBar = new WeaponBar(this.ctx, this.x + 5, this.y)
     this.bulletBarArray.push(bulletBar);
   }
 }
