@@ -2,16 +2,21 @@ class Player {
   constructor(ctx, moving) {
     this.ctx = ctx;
     this.x = 60;
-    this.h = this.ctx.canvas.width / 15;
+    this.h = this.ctx.canvas.width / 19;
     this.y = this.ctx.canvas.height - this.h;
-    this.w = this.ctx.canvas.width / 18;
+    this.w = this.ctx.canvas.width / 23;
     this.life = new Life(ctx)
+    this.charger = new Charger(ctx)
     this.vx = 0;
     this.vy = 0;
     this.g = 0.03;
     this.img = new Image();
     this.img.src = "../public/Imagenes/pangRunRight.png";
     this.img.frame = 3;
+    this.auraImg = new Image();
+    this.auraImg.src = "/public/Imagenes/aura1.png";
+    this.auraIsActive = false;
+    this.auraTime = 0;
     this.count = 1;
     this.bulletArray = [];
     this.bulletFireArray = [];
@@ -28,6 +33,11 @@ class Player {
     this.bulletArray.forEach((bullet) => {bullet.draw();}); // paso 3: dibujo cada bullet que se dispare
     this.bulletFireArray.forEach((bullet) => {bullet.draw();}); // paso 3: dibujo cada bullet que se dispare
     this.bulletBarArray.forEach((bullet) => {bullet.draw();}); // paso 3: dibujo cada bullet que se dispare
+    this.life.draw()
+    if(this.amountOfFireShoots>=1){
+      this.charger.draw(this.x + 5, this.y + 10, this.amountOfFireShoots)
+    }
+    console.log('%cMyProject%cline:38%cthis.amountOfFireShoots', 'color:#fff;background:#ee6f57;padding:3px;border-radius:2px', 'color:#fff;background:#1f3c88;padding:3px;border-radius:2px', 'color:#fff;background:rgb(17, 63, 61);padding:3px;border-radius:2px', this.amountOfFireShoots)
     if(this.immune){
       this.fading++
       if(this.fading >= 20){
@@ -49,7 +59,9 @@ class Player {
       this.h
     );
     this.ctx.globalAlpha = 1;
-    this.life.draw()
+    if(this.auraIsActive){
+    this.ctx.drawImage(this.auraImg, this.x-7, this.y-5, this.w + 10, this.h+10);
+    }
     // console.log("x", this.x, "y", this.y)
     // this.ctx.fillText(`Life ${this.life}`, this.ctx.canvas.width - 50, 15); // contador de vida 
   }
@@ -124,12 +136,11 @@ class Player {
       }, recharge);
     }
 
-    if(key === N){
+    if(key === N && this.amountOfFireShoots > 0){ 
       this.amountOfFireShoots -= 1;
       this.shootFire();
       if(this.amountOfFireShoots <= 0){
         N = 0;
-        this.amountOfFireShoots = 5;
       }
     }
     if(key === M){
@@ -200,6 +211,7 @@ class Player {
   shootFire(){
     const bulletFire = new WeaponFire(this.ctx, this.x, this.y)
     this.bulletFireArray.push(bulletFire);
+
   }
   shootBar(){
     const bulletBar = new WeaponBar(this.ctx, this.x + 5, this.y)

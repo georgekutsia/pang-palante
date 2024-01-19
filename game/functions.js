@@ -1,14 +1,14 @@
 function bubbleBounce(elem1, elem2){
-  if (elem1.y < elem2.y + 5 ) {
+  if (elem1.y <= elem2.y + 5 ) {
     elem1.vy = -3;
   }
-  if(elem1.y > elem2.y + elem2.h -5){
+  if(elem1.y >= elem2.y + elem2.h -5){
     elem1.vy = 3;
   }
-  if(elem1.x < elem2.x +5){
+  if(elem1.x <= elem2.x +5){
     elem1.vx = -0.5;
   } 
-  if(elem1.x > elem2.x +elem2.w - 5){
+  if(elem1.x >= elem2.x +elem2.w - 5){
     elem1.vx = 0.5;
   }
 }
@@ -17,17 +17,17 @@ function basicBulletBounce(elem1, elem2){
     elem1.vx = elem1.direction;
     elem1.bulletDirection = false;
   }
-  if (elem1.y < elem2.y) {
-    elem1.vy = 3;
+  if (elem1.y <= elem2.y) {
+    elem1.vy = bubbleSpeedY;
   }
-  if(elem1.y > elem2.y + elem2.h){
-    elem1.vy = -3;
+  if(elem1.y >= elem2.y + elem2.h){
+    elem1.vy = -bubbleSpeedY;
   }
   if(elem1.x <= elem2.x){
-    elem1.vx = -3;
+    elem1.vx = -bubbleSpeedY;
   } 
   if(elem1.x >= elem2.x +elem2.w){
-    elem1.vx = 3;
+    elem1.vx = bubbleSpeedY;
   }
 }
 

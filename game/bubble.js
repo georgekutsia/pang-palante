@@ -5,9 +5,9 @@ class Bubble {
     this.y = y || obstacPlacing || -30; // el obstáculo sale de una altura específica o de alguna altura randóm
     this.w = w || this.ctx.canvas.width / 10;  //anchura calculada respecto al canvas
     this.h = h || this.ctx.canvas.width / 10;  //altura calculada respecto al canvas
-    this.vy = vy || 3;
-    this.vx = vx || -0.5;
-    this.g = g || 0.05;
+    this.vy = vy || bubbleSpeedY;
+    this.vx = vx || bubbleSpeedX;
+    this.g = g || 0.03;
     this.explodingSize = this.ctx.canvas.width/80
     this.damage = damage || 1; // daño especificado o 10
     this.img = new Image();   //crear nueva imágene ne canvas
@@ -26,15 +26,15 @@ class Bubble {
     this.x += this.vx;
     if (this.y + this.h >= this.ctx.canvas.height ){
       this.bubbleBounceSound.play()//todo --paso 3 llamar a .play() para invocar el sonido donde sea necesario
-      this.vy = -3.5; 
+      this.vy = -bubbleSpeedY; 
     }
     if(this.x + this.w >= this.ctx.canvas.width){
       this.bubbleBounceSound.play()//todo --paso 3 llamar a .play() para invocar el sonido donde sea necesario
-      this.vx = -0.5;
+      this.vx = -bubbleSpeedX;
     }
     if(this.x <= 0){
       this.bubbleBounceSound.play()//todo --paso 3 llamar a .play() para invocar el sonido donde sea necesario
-      this.vx = 0.5;
+      this.vx = bubbleSpeedX;
     }
 
   }
