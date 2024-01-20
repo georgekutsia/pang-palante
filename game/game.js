@@ -28,6 +28,7 @@ class Game {
     this.bouncers = []; // plataformas que rebotan
     this.stairs = []; // Array para almacenar instancias de la clase Stair
     this.auras = []; // Array para almacenar instancias de la clase Stair
+    this.boxes = []; // Array para almacenar instancias de la clase Stair
     // sounds sounds sounds
     this.bubbleBounceSound = new Audio("../public/sounds/bubbleBounce.mp3") //todo -- paso 1 traer el sonido y almacenarlo en una variable
     this.bubbleBounceSound.volume = 0.1;  //todo -- paso 2, no obligatorio, determinarle volumen de 0 a 1, creo
@@ -48,7 +49,7 @@ class Game {
         this.bubbleTick = 0; //regresa el bubbleTick a 0 para reiniciar la cuenta
       }
       if(GAMELEVEL === 0){
-        level1(this.gameTime, this.ctx, this.platforms, this.bouncers, this.stairs, this.flamethrowers, this.healings, this.auras)
+        level1(this.gameTime, this.ctx, this.platforms, this.bouncers, this.stairs, this.flamethrowers, this.healings, this.auras, this.boxes)
       }
     }, 1000 / 60);
   }
@@ -67,6 +68,7 @@ class Game {
     this.platforms = this.platforms.filter((e) => e.isVisible()); //elimina cada obstáculo que ya no es visible y vacía el array
     this.flamethrowers = this.flamethrowers.filter((e) => e.isVisible()); //elimina cada obstáculo que ya no es visible y vacía el array
     this.auras = this.auras.filter((e) => e.isVisible()); //elimina cada obstáculo que ya no es visible y vacía el array
+    this.boxes = this.boxes.filter((e) => e.isVisible()); //elimina cada obstáculo que ya no es visible y vacía el array
     this.healings = this.healings.filter((e) => e.isVisible()); //elimina cada obstáculo que ya no es visible y vacía el array
     this.puffBubbles = this.puffBubbles.filter((e) => e.isVisible()); //elimina cada obstáculo que ya no es visible y vacía el array
   }
@@ -81,6 +83,7 @@ class Game {
     this.bubbles.forEach((e) => e.draw());  //dibuja cada obstáculo
     this.flamethrowers.forEach((e) => e.draw());  //dibuja cada obstáculo
     this.auras.forEach((e) => e.draw());  //dibuja cada obstáculo
+    this.boxes.forEach((e) => e.draw());  //dibuja cada obstáculo
     this.healings.forEach((e) => e.draw());  //dibuja cada obstáculo
     if(this.player.life.total <= 0) this.gameOver(); // cuando el player muere se llama a la funcion gameOver()
   }
@@ -91,6 +94,7 @@ class Game {
     this.bouncers.forEach((e) => e.move());  //mueve los obstáculos
     this.flamethrowers.forEach((e) => e.move());  //mueve los obstáculos
     this.auras.forEach((e) => e.move());  //mueve los obstáculos
+    this.boxes.forEach((e) => e.move());  //mueve los obstáculos
     this.healings.forEach((e) => e.move());  //mueve los obstáculos
     this.puffBubbles.forEach((e) => e.move());  //mueve los obstáculos
   }
@@ -304,7 +308,7 @@ addbubble() {  //función para añadir obstáculo
     })
 
     
-// items que mejoran el personaje
+// items que mejoran el personaje y box
     this.flamethrowers.forEach((weapon) => {   // aditionalweapon  choca con el personaje
         if (weapon.collides(this.player)) {
           N = 78;
@@ -331,6 +335,20 @@ addbubble() {  //función para añadir obstáculo
           aura.x = - 100; // situa fuera del canvas la burbuja que colisiona con el player y luego isVisible la elimina del array
         } else return true
       });
+
+      this.boxes.forEach((box) => {    //  bubble con bullet
+        this.player.bulletArray = this.player.bulletArray.filter((bullet) => {
+          if(bullet.collides(box)){
+            box.boxHit();
+            if(box.boxImg.frame >8){
+                randomLootFromBox(this.ctx, this.flamethrowers, this.healings, this.auras, box.x, box.y)
+            }
+            const puffBubble = new BubblePuff(ctx, box.x, box.y + box.h/2, box.w, box.h)
+            this.puffBubbles.push(puffBubble)
+            return false;
+          } else return true;
+        })
+      })
   }
 
   gameOver() {  //Función para terminar el juego y vaciar todos los arrays.

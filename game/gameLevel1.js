@@ -1,16 +1,19 @@
-let tick = 0;
-function level1(gameTime, ctx, platforms, bouncers, stairs, flamethrowers, healings, auras){
+let tick = 440;
+function level1(gameTime, ctx, platforms, bouncers, stairs, flamethrowers, healings, auras, boxes){
   tick++
   addPlatforms(ctx, platforms)
   addBouncer(ctx, bouncers)
   addStair(ctx, stairs)
-  if(tick >= 20){
+  if(tick >= 460){
     flamethrowerItem(ctx, flamethrowers)
     healingItem(ctx, healings)
     auraItem(ctx, auras)
+       // ctx, array.push, nivel de resistencia, de 1 dificil a 3 fácil
+    boxItem(ctx, boxes, 1)
     tick = 0;
   }
 }
+
 function addPlatforms(ctx, platforms){
   const platform = new Platform(ctx, 20, 20, 25, 5, "../public/Imagenes/obstacles/platformSolid1.png", false, true);
   platforms.push(platform);
@@ -36,7 +39,7 @@ function flamethrowerItem(ctx, flamethrowers) {  //función para añadir obstác
 }
 
 function healingItem(ctx, healings) {  //función para añadir obstáculo
-  const healingItem = new Healing(ctx)
+  const healingItem = new Healing(ctx )
   healings.push(healingItem)
 }
 
@@ -45,3 +48,7 @@ function auraItem(ctx, auras) {  //función para añadir obstáculo
   auras.push(aura)
 }
 
+function boxItem(ctx, boxes,boxLevel) {  //función para añadir obstáculo
+  const box = new Box(ctx, boxLevel)
+  boxes.push(box)
+}

@@ -1,8 +1,8 @@
 class Aura {
-  constructor(ctx ) {
+  constructor(ctx, x, y ) {
     this.ctx = ctx;
-    this.x = 100;
-    this.y = 90;
+    this.x = x || Math.random() * this.ctx.canvas.width; ;
+    this.y = y ||  Math.random() * this.ctx.canvas.height - 40 ;
     this.w = this.ctx.canvas.width / 20;
     this.h = this.ctx.canvas.width / 20;
     this.tick = 0
