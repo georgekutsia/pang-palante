@@ -50,3 +50,20 @@ function invertImage(ctx, x, y, w, h, img) {
   ctx.drawImage(img, -w / 2, -h / 2, w, h);
   ctx.setTransform(1, 0, 0, 1, 0, 0);
 }
+
+
+
+
+function randomLootFromBox(ctx, flamethrowers, healings, auras, x, y){
+  const randomItem = Math.floor(Math.random() *3) + 1;
+  if(randomItem === 1){
+    const flamethrower = new Flamethrower(ctx, x, y  )
+    flamethrowers.push(flamethrower)
+  } else if(randomItem === 2){
+    const healingItem = new Healing(ctx, x, y )
+    healings.push(healingItem)
+  } else if(randomItem === 3){
+    const aura = new Aura(ctx, x, y)
+    auras.push(aura)
+  }
+}
