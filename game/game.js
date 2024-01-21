@@ -236,18 +236,14 @@ addbubble() {  //función para añadir obstáculo
 // colisiones con Platform
     this.platforms.forEach((platform) => {  // platform con player
       if (platform.collides(this.player)) {
-        if(platform.isBrakable){
-          if (this.player.y <= platform.y && this.player.x <= platform.x + platform.w  && this.player.x + this.player.w > platform.x) {
-            this.player.y = platform.y - this.player.h ;
-            this.player.vy = 0;
+        if (this.player.y <= platform.y && this.player.x <= platform.x + platform.w  && this.player.x + this.player.w > platform.x) {
+          if(platform.isBrakable){
             platform.braking--;
-            ALT = 16;
             platform.goingToBreak = true;
           }
-        } else {
-          this.player.vy = 0;
-          if (this.player.y <= platform.y && this.player.x <= platform.x + platform.w  && this.player.x + this.player.w > platform.x) {
             this.player.y = platform.y - this.player.h ;
+            this.player.x += platform.vx// si le digo que es igual player.vx = platform.vx, se ve el jugador moviendose por cómo estan configurados los frames de movimiento
+            this.player.vy = platform.vy;
             ALT = 16;
           }
           if (this.player.y + this.player.h >= platform.y + platform.h) { //colisión por la parte inferior de la plataforma
@@ -257,22 +253,23 @@ addbubble() {  //función para añadir obstáculo
             this.player.vy = 0;
             this.player.g = 0.2
           }
-        }
       }
     })
 
     this.platforms.forEach((platform) => { //platform con bullets normales
       this.player.bulletArray.forEach((bullet) => {
         if(bullet.collides(platform)){
-          basicBulletBounce(bullet, platform)
-          if(platform.isSolid){
+          if(!platform.isSolid){
+            basicBulletBounce(bullet, platform)
+          } else{
             const newColor = platform.calculateNewColor();
             platform.color = newColor;
+            bullet.x = -200;
             if( platform.life <= 0){
               platform.x = -200;
             }
           }
-          return false;
+          return true;
         } else return true;
       })
     })

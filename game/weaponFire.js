@@ -1,15 +1,15 @@
 class WeaponFire {
-  constructor(ctx, x, y) {
+  constructor(ctx, x, y,  w, h) {
     this.ctx = ctx;
     this.x = x;
     this.y = y;
+    this.vx = -0.065; // minimo ajuste para que el fuego vaya recto de verdad, ya que al aumentar de tamaño solo se expande hacia al derecha
     this.vy = -0.5;
-    this.vx = -0.08; // minimo ajuste para que el fuego vaya recto de verdad, ya que al aumentar de tamaño solo se expande hacia al derecha
     this.img = new Image();
     this.img.src = "../public/Imagenes/weaponFire1.png";
     this.img.frame = 0;
-    this.w = this.ctx.canvas.width/ 20;
-    this.h = this.ctx.canvas.width/ 20;
+    this.w = w  || this.ctx.canvas.width/ 29;
+    this.h = h || this.ctx.canvas.width/ 29;
     this.flameSpinTick = 0;
     this.damage = 0.2;
   }

@@ -15,6 +15,8 @@ class Player {
     this.img.frame = 3;
     this.auraImg = new Image();
     this.auraImg.src = "/public/Imagenes/aura1.png";
+    this.weaponFire = new Image();
+    this.weaponFire.src = "/public/Imagenes/weaponFire.png";
     this.auraIsActive = false;
     this.auraTime = 0;
     this.frameTick = 1;
@@ -26,7 +28,10 @@ class Player {
     this.moving = moving;
     this.immune = false; // al recibir daño se vuelve inmune durante unos segundos
     this.fading = 0; //necesario para el parpadeo del personaje cuando es inmune
-
+    this.charging = 0;  // acumula la carga, lo que dibuja el semicírculo
+    this.chargingFires = false;//se pone en true mientras carga el disparo fuerte de fuego
+    this.megaFireBlaster = false;
+    this.megaFireBlasterAmount = 31;
   }
 
   draw() {
@@ -34,8 +39,17 @@ class Player {
     this.bulletFireArray.forEach((bullet) => {bullet.draw();}); // paso 3: dibujo cada bullet que se dispare
     this.bulletBarArray.forEach((bullet) => {bullet.draw();}); // paso 3: dibujo cada bullet que se dispare
     this.life.draw()
-    if(this.amountOfFireShoots>=1){
-      this.charger.draw(this.x + 5, this.y + 10, this.amountOfFireShoots)
+    console.log(this.charging);
+    for (let i = 0; i < this.charging /10 -1; i++) {
+      if(this.charging >= 11)
+      this.ctx.drawImage(this.weaponFire, this.x-20 + i*5, this.y-15, this.w , this.h);
+    }
+    if(this.amountOfFireShoots>=1){    
+                   //x, y, la cantidad por la que se dibuja, radio exterior, radio interior, color de inicio, color de medio, color de final es negro
+      this.charger.draw(this.x + 5, this.y + 10, this.amountOfFireShoots, 20, 19, "aqua", "blue")
+    }
+    if(this.charging >=1){
+      this.charger.draw(this.x + 5, this.y + 10, this.charging, 16, 15, "yellow", "red")
     }
     if(this.immune){
       this.fading++
@@ -69,7 +83,7 @@ class Player {
     this.y += this.vy;
     this.moving = this.vx
     if(this.vx){
-     this.frameTick++
+      this.frameTick++
       if (this.frameTick > 10  ) {
         this.img.frame++;
         this.frameTick = 0;
@@ -145,7 +159,7 @@ class Player {
     if(key === M){
       this.shootBar();
     }
-    if(key === ALT ){
+    if(key === ALT && this.vy === 0 ){
       this.vy = jumpHeight 
       this.g = 0.2
       ALT = 0;
@@ -153,7 +167,13 @@ class Player {
         ALT = 16;
       }, jumpCooldown);
     }
-
+    if(key === K && this.megaFireBlaster ){
+      this.chargingFires = true;
+      this.charging++;
+      if(this.charging >= this.megaFireBlasterAmount){
+        this.charging = this.megaFireBlasterAmount;
+      }
+    }
   }
   keyUp(key) {
     if (key === W) {
@@ -183,6 +203,27 @@ class Player {
       this.frameAmount = 2;
       this.img.frame = 0;
     }
+    if(key === K){
+      console.log("bla")
+      this.chargingFires = false;
+      if(this.charging >= 3){
+        for (let i = 0; i < this.charging; i++) {
+          if(i % 10 === 0 && i >= 10 && i % 20 !==0 ){
+            const bulletFire = new WeaponFire(this.ctx, this.x + this.w-i, this.y, this.ctx.canvas.width/14, this.ctx.canvas.width/14)
+            this.bulletFireArray.push(bulletFire);
+          }
+          if(i % 20 === 0 && i >= 10){
+            const bulletFire = new WeaponFire(this.ctx, this.x +i, this.y, this.ctx.canvas.width/14, this.ctx.canvas.width/14)
+            this.bulletFireArray.push(bulletFire);
+          }
+          // if(i % 20 === 0 && i >= 11 ){
+          //   const bulletFire = new WeaponFire(this.ctx, this.x+i*2, this.y)
+          //   this.bulletFireArray.push(bulletFire);
+          // }
+        }
+        this.charging -= this.charging;
+      }
+    }
   }
   
   
@@ -210,7 +251,15 @@ class Player {
   shootFire(){
     const bulletFire = new WeaponFire(this.ctx, this.x, this.y)
     this.bulletFireArray.push(bulletFire);
-
+  }
+  shootMegaFire(){
+    const bulletFire1 = new WeaponFire(this.ctx, this.x-10, this.y)
+    const bulletFire2 = new WeaponFire(this.ctx, this.x, this.y)
+    const bulletFire3 = new WeaponFire(this.ctx, this.x+10, this.y)
+    const bulletFire4 = new WeaponFire(this.ctx, this.x-10, this.y+10, -0.3)
+    const bulletFire5 = new WeaponFire(this.ctx, this.x, this.y + 10)
+    const bulletFire6 = new WeaponFire(this.ctx, this.x+10, this.y + 10, 0.1)
+    this.bulletFireArray.push(bulletFire1, bulletFire2, bulletFire3,bulletFire4,bulletFire5,bulletFire6);
   }
   shootBar(){
     const bulletBar = new WeaponBar(this.ctx, this.x + 5, this.y)

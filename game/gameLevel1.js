@@ -6,8 +6,27 @@ function level1(gameTime, ctx, platforms, bouncers, stairs, flamethrowers, heali
   addPlatforms(ctx, platforms)
   addBouncer(ctx, bouncers)
   addStair(ctx, stairs)
-  // flamethrowerItem(ctx, flamethrowers)
+  flamethrowerItem(ctx, flamethrowers)
+  flamethrowerItem(ctx, flamethrowers)
+  flamethrowerItem(ctx, flamethrowers)
+  flamethrowerItem(ctx, flamethrowers)
+  flamethrowerItem(ctx, flamethrowers)
+  flamethrowerItem(ctx, flamethrowers)
+  flamethrowerItem(ctx, flamethrowers)
+  flamethrowerItem(ctx, flamethrowers)
+  flamethrowerItem(ctx, flamethrowers)
+  flamethrowerItem(ctx, flamethrowers)
+  flamethrowerItem(ctx, flamethrowers)
+  flamethrowerItem(ctx, flamethrowers)
+  flamethrowerItem(ctx, flamethrowers)
+  flamethrowerItem(ctx, flamethrowers)
+  flamethrowerItem(ctx, flamethrowers)
+  flamethrowerItem(ctx, flamethrowers)
+  flamethrowerItem(ctx, flamethrowers)
+  flamethrowerItem(ctx, flamethrowers)
+  flamethrowerItem(ctx, flamethrowers)
   // healingItem(ctx, healings)
+  flamethrowerItem(ctx, flamethrowers)
   auraItem(ctx, auras)
   boxItem(ctx, boxes)
   levelTick = 0;
@@ -16,9 +35,9 @@ function level1(gameTime, ctx, platforms, bouncers, stairs, flamethrowers, heali
 
 function addPlatforms(ctx, platforms){
                                                           //! ctx, x, y , w, h, image de 1 a 4,  si se puede romper o no a disparos, si se romperá al ponerse encima
-  const platform = new Platform(ctx, 20, 20, 25, 5, "../public/Imagenes/obstacles/platformSolid1.png", false, true);
-  const platform1 = new Platform(ctx, 60, 90, 25, 5, "../public/Imagenes/obstacles/platformSolid2.png", true, true);
-  const platform2 = new Platform(ctx, 90, 90, 25, 5, "../public/Imagenes/obstacles/platformSolid3.png", true, true);
+  const platform = new Platform(ctx, 20, 20, 25, 5, "../public/Imagenes/obstacles/platformSolid1.png", true, true);
+  const platform1 = new Platform(ctx, 30, 100, 45, 5, "../public/Imagenes/obstacles/platformSolid2.png", true, true, 0.05);
+  const platform2 = new Platform(ctx, 130, 100, 55, 5, "../public/Imagenes/obstacles/platformSolid3.png", true, true, 0.05, 0.02);
   platforms.push(platform, platform1,platform2);
 }
       //!  la anchura más la altura de la plataforma nunca debe superar 60, para que el total de red sea como máximo 240;
