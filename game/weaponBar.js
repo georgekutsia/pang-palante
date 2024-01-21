@@ -34,9 +34,7 @@ class WeaponBar {
       this.h
     );
     this.ctx.globalAlpha = 1;
-    setInterval(() => {
-  this.img.removeAttribute(Math.PI)      
-    }, 10);
+
   }
   move() {
     this.x += this.vx;
