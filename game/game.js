@@ -110,7 +110,7 @@ class Game {
 //funciones o metodos para crear obstaculos y criaturas
 addbubble() {  //función para añadir obstáculo
   const bubble = new Bubble(this.ctx)
-  if(this.bubbles.length < 2){
+  if(this.bubbles.length < 0){
     this.bubbles.push(bubble);
   }
 }
@@ -176,14 +176,14 @@ addbubble() {  //función para añadir obstáculo
     this.bubbles.forEach((bubble) => {  //bubble con platform
       this.platforms.forEach((platform) => {
         if(platform.collides(bubble)){
-          bubbleBounce(bubble, platform)
+          bounceFromObstacles(bubble, platform)
         } else return true;
       })
     })
     this.bubbles.forEach((bubble) => {//bubble con bouncer
       this.bouncers.forEach((bouncer) => {
         if (bouncer.collides(bubble)) {
-          bubbleBounce(bubble, bouncer)
+          bounceFromObstacles(bubble, bouncer)
         } else return true;
       });
     });
@@ -220,7 +220,7 @@ addbubble() {  //función para añadir obstáculo
         if(bullet.collides(bubble)){
           bullet.life -= 1;
           if(bullet.life<=0){
-            bullet.y = -300;
+            bullet.dispose = false;
           }
           bubblePuff(bubble, this.puffBubbles, this.bubbles, this.ctx)
           this.bubblePopSound1.play(); //todo -- Sonido paso 3) invocar el sonido
@@ -306,7 +306,14 @@ addbubble() {  //función para añadir obstáculo
         }
       }
     })
-
+    this.bouncers.forEach((bouncer) => { //bouncer con bullets normales
+      this.player.bulletArray.forEach((bullet) => {
+        if(bullet.collides(bouncer)){
+          bounceFromObstacles(bullet, bouncer)
+          return false;
+        } else return true;
+      })
+    })
     
 // items que mejoran el personaje y box
     this.flamethrowers.forEach((weapon) => {   // aditionalweapon  choca con el personaje
@@ -359,6 +366,9 @@ addbubble() {  //función para añadir obstáculo
     this.platforms = [];
     this.bouncers = [];
     this.stairs = [];
+    this.player.bulletArray = [];
+    this.player.bulletBarArray = [];
+    this.player.bulletFireArray = [];
     this.gameBackgroundMusic.pause()
     this.gameOver1.play()
     this.gameOver2.play()

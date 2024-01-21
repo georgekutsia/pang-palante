@@ -1,8 +1,8 @@
 class Box {
-  constructor(ctx, boxLevel) {
+  constructor(ctx,x, y, boxLevel) {
     this.ctx = ctx;
-    this.x = 140;
-    this.y = 20;
+    this.x = x || 100;
+    this.y = y || 20;
     this.w = this.ctx.canvas.width / 18;
     this.h = this.ctx.canvas.width / 18;
     this.tick = 0
@@ -11,7 +11,7 @@ class Box {
     this.g = 0
     this.dispose = true;
     this.boxImg = new Image();
-    this.boxImg.src = "/public/Imagenes/boxSprites3.png";
+    this.boxImg.src = "/public/Imagenes/box1.png";
     this.boxImg.frame = 0;
     this.imgTick = 0;
     this.boxHitSound = new Audio("/public/sounds/box/boxHit.mp3")
@@ -21,7 +21,7 @@ class Box {
     this.boxHitBreakingLongSound = new Audio("/public/sounds/box/boxBreakingLong.mp3")
     this.boxHitBreakingLongSound.volume = 0.1
     this.boxImpactMetalic = new Audio("/public/sounds/box/boxImpactMetalic.mp3")
-    this.boxImpactMetalic.volume = 0.1
+    this.boxImpactMetalic.volume = 0.08;
     this.boxLevel = boxLevel;// de 1 a 3 determina la resistenci de la caja
   }
 
@@ -29,7 +29,6 @@ class Box {
     if(this.boxLevel===1)this.boxImg.src = "/public/Imagenes/box1.png";
     if(this.boxLevel===2)this.boxImg.src = "/public/Imagenes/box2.png";
     if(this.boxLevel===3)this.boxImg.src = "/public/Imagenes/box3.png";
-
     this.ctx.drawImage(
       this.boxImg,
       (this.boxImg.frame * this.boxImg.width) / 9,
