@@ -1,36 +1,19 @@
 
 let levelTick = 2849;
-function level1(gameTime, ctx, platforms, bouncers, stairs, flamethrowers, healings, auras, boxes){
+function level1(gameTime, ctx, platforms, bouncers, stairs, flamethrowers, healings, auras, boxes, blasters, levelBalls){
    levelTick++
-  if(levelTick > 2850){
   addPlatforms(ctx, platforms)
   addBouncer(ctx, bouncers)
   addStair(ctx, stairs)
   flamethrowerItem(ctx, flamethrowers)
-  flamethrowerItem(ctx, flamethrowers)
-  flamethrowerItem(ctx, flamethrowers)
-  flamethrowerItem(ctx, flamethrowers)
-  flamethrowerItem(ctx, flamethrowers)
-  flamethrowerItem(ctx, flamethrowers)
-  flamethrowerItem(ctx, flamethrowers)
-  flamethrowerItem(ctx, flamethrowers)
-  flamethrowerItem(ctx, flamethrowers)
-  flamethrowerItem(ctx, flamethrowers)
-  flamethrowerItem(ctx, flamethrowers)
-  flamethrowerItem(ctx, flamethrowers)
-  flamethrowerItem(ctx, flamethrowers)
-  flamethrowerItem(ctx, flamethrowers)
-  flamethrowerItem(ctx, flamethrowers)
-  flamethrowerItem(ctx, flamethrowers)
-  flamethrowerItem(ctx, flamethrowers)
-  flamethrowerItem(ctx, flamethrowers)
-  flamethrowerItem(ctx, flamethrowers)
-  // healingItem(ctx, healings)
-  flamethrowerItem(ctx, flamethrowers)
+
   auraItem(ctx, auras)
   boxItem(ctx, boxes)
+  blasterItem(ctx, blasters)
+  blasterItem(ctx, blasters)
+  blasterItem(ctx, blasters)
+  levelBallItem(ctx, levelBalls)
   levelTick = 0;
-  }
 }
 
 function addPlatforms(ctx, platforms){

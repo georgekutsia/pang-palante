@@ -29,9 +29,14 @@ class Player {
     this.immune = false; // al recibir daño se vuelve inmune durante unos segundos
     this.fading = 0; //necesario para el parpadeo del personaje cuando es inmune
     this.charging = 0;  // acumula la carga, lo que dibuja el semicírculo
-    this.chargingFires = false;//se pone en true mientras carga el disparo fuerte de fuego
+    this.chargingFires = false; //   se pone en true mientras carga el disparo fuerte de fuego
     this.megaFireBlaster = false;
-    this.megaFireBlasterAmount = 31;
+    this.megaFireBlasterAmount = 91;
+
+    this.blasterExplosion = new Audio("../public/sounds/megablasterBlastSound.mp3");
+    this.blasterExplosion.volume = 1; //
+    this.blasterCharging = new Audio("../public/sounds/blasterChargindSound.mp3");
+    this.blasterCharging.volume = 1; //
   }
 
   draw() {
@@ -168,10 +173,15 @@ class Player {
       }, jumpCooldown);
     }
     if(key === K && this.megaFireBlaster ){
+      A = 0;
+      D = 0;
       this.chargingFires = true;
       this.charging++;
+      this.blasterCharging.volume = 1;
+      this.blasterCharging.play()
       if(this.charging >= this.megaFireBlasterAmount){
         this.charging = this.megaFireBlasterAmount;
+      this.blasterCharging.volume = 0;
       }
     }
   }
@@ -203,23 +213,23 @@ class Player {
       this.frameAmount = 2;
       this.img.frame = 0;
     }
-    if(key === K){
-      console.log("bla")
+    if(key === K && this.megaFireBlaster ){
+      A = 65;
+      D = 68;
       this.chargingFires = false;
+      this.megaFireBlaster = false;
       if(this.charging >= 3){
         for (let i = 0; i < this.charging; i++) {
+          this.blasterExplosion.play();
+          this.blasterCharging.volume = 0;
           if(i % 10 === 0 && i >= 10 && i % 20 !==0 ){
-            const bulletFire = new WeaponFire(this.ctx, this.x + this.w-i, this.y, this.ctx.canvas.width/14, this.ctx.canvas.width/14)
+            const bulletFire = new WeaponFire(this.ctx, this.x + this.w-i, this.y, this.ctx.canvas.width/20, this.ctx.canvas.width/18)
             this.bulletFireArray.push(bulletFire);
           }
           if(i % 20 === 0 && i >= 10){
-            const bulletFire = new WeaponFire(this.ctx, this.x +i, this.y, this.ctx.canvas.width/14, this.ctx.canvas.width/14)
+            const bulletFire = new WeaponFire(this.ctx, this.x +i, this.y, this.ctx.canvas.width/20, this.ctx.canvas.width/18)
             this.bulletFireArray.push(bulletFire);
           }
-          // if(i % 20 === 0 && i >= 11 ){
-          //   const bulletFire = new WeaponFire(this.ctx, this.x+i*2, this.y)
-          //   this.bulletFireArray.push(bulletFire);
-          // }
         }
         this.charging -= this.charging;
       }
@@ -251,15 +261,6 @@ class Player {
   shootFire(){
     const bulletFire = new WeaponFire(this.ctx, this.x, this.y)
     this.bulletFireArray.push(bulletFire);
-  }
-  shootMegaFire(){
-    const bulletFire1 = new WeaponFire(this.ctx, this.x-10, this.y)
-    const bulletFire2 = new WeaponFire(this.ctx, this.x, this.y)
-    const bulletFire3 = new WeaponFire(this.ctx, this.x+10, this.y)
-    const bulletFire4 = new WeaponFire(this.ctx, this.x-10, this.y+10, -0.3)
-    const bulletFire5 = new WeaponFire(this.ctx, this.x, this.y + 10)
-    const bulletFire6 = new WeaponFire(this.ctx, this.x+10, this.y + 10, 0.1)
-    this.bulletFireArray.push(bulletFire1, bulletFire2, bulletFire3,bulletFire4,bulletFire5,bulletFire6);
   }
   shootBar(){
     const bulletBar = new WeaponBar(this.ctx, this.x + 5, this.y)

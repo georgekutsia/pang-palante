@@ -82,3 +82,11 @@ function auraItem(ctx, auras) {
   const aura = new Aura(ctx)
   auras.push(aura)
 }
+function blasterItem(ctx, blasters) {  
+  const blaster = new MegaFireBlaster(ctx)
+  blasters.push(blaster)
+}
+function levelBallItem(ctx, levelBalls) {  
+  const levelBall = new LevelBall(ctx)
+  levelBalls.push(levelBall)
+}
