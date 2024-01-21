@@ -6,7 +6,7 @@ class Bouncer {
     this.h = h || this.ctx.canvas.width / 40; // Altura de la escalera, valor predeterminado o especificado
     this.y = y || this.ctx.canvas.height - this.h - 20; // Posición vertical (coordenada y), valor predeterminado o especificado
     this.img = new Image(); // Imagen asociada a la escalera
-    this.img.src = obstacleImg || "../public/Imagenes/obstacles/platfomJump3.png"; // Ruta de la imagen de la escalera
+    this.img.src = obstacleImg || "../../public/Imagenes/obstacles/platfomJump3.png"; // Ruta de la imagen de la escalera
 
     // ** Se ha comentado la parte relacionada con el sonido
     // this.bubbleBounceSound = new Audio("../public/sounds/bubbleBounce.mp3");

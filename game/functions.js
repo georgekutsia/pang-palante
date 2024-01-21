@@ -1,4 +1,4 @@
-function bubbleBounce(elem1, elem2){
+function bounceFromObstacles(elem1, elem2){
   if (elem1.y <= elem2.y + 5 ) {
     elem1.vy = -3;
   }
@@ -36,9 +36,9 @@ function bubblePuff(bubble, puffBubbles, bubbles, ctx){
   const ely = bubble.y;
   bubble.x = -100
   const puffBubble = new BubblePuff(ctx, elx, ely, bubble.w, bubble.h)
-  puffBubbles.push(puffBubble)
-  const smallBubble1 = new Bubble(ctx, -0.5, -1, elx, ely, bubble.w/2, bubble.h/2, bubble.g + 0.03, bubble.damage / 2 )// al explotar una burbuja, crea otra en su lugar, usando su ubicación y dimensiones para hacerla más pequeña
-  const smallBubble2 = new Bubble(ctx, 0.5, -1, elx, ely, bubble.w/2, bubble.h/2, bubble.g + 0.03, bubble.damage / 2 )
+  puffBubbles.push(puffBubble)      // 0.8 es la direccion y velocidad a la que salen las nuevas, el otro es la dirección
+  const smallBubble1 = new Bubble(ctx, -0.8, -1, elx, ely, bubble.w/2, bubble.h/2, bubble.g + 0.03, bubble.damage / 2 )// al explotar una burbuja, crea otra en su lugar, usando su ubicación y dimensiones para hacerla más pequeña
+  const smallBubble2 = new Bubble(ctx, 0.8, -1, elx, ely, bubble.w/2, bubble.h/2, bubble.g + 0.03, bubble.damage / 2 )
   bubbles.push(smallBubble1, smallBubble2)
 }
 
@@ -66,4 +66,19 @@ function randomLootFromBox(ctx, flamethrowers, healings, auras, x, y){
     const aura = new Aura(ctx, x, y)
     auras.push(aura)
   }
+}
+
+function flamethrowerItem(ctx, flamethrowers) {  
+  const flamethrower = new Flamethrower(ctx)
+  flamethrowers.push(flamethrower)
+}
+
+function healingItem(ctx, healings) {  
+  const healingItem = new Healing(ctx )
+  healings.push(healingItem)
+}
+
+function auraItem(ctx, auras) {  
+  const aura = new Aura(ctx)
+  auras.push(aura)
 }

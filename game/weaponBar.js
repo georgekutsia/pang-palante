@@ -13,6 +13,7 @@ class WeaponBar {
     this.h = this.ctx.canvas.height;
     this.tick = weaponBarSolidTick;
     this.fading = 0;
+    this.dispose = true;
     this.solidState = false;  //al pasar a true, empieza la cuenta atrás para que desaparezca;
     this.life = barLife //las veces que la barra puede chocar contra las burbujas antes de desaparecer
   }
@@ -20,7 +21,6 @@ class WeaponBar {
   draw() {
     if(this.fading >= 10 ) {
       this.ctx.globalAlpha = 0.3;
-
     }
     this.ctx.drawImage(
       this.img,
@@ -34,7 +34,9 @@ class WeaponBar {
       this.h
     );
     this.ctx.globalAlpha = 1;
-    // invertImage(this.ctx, this.x, this.y, this.w, this.h, this.img);
+    setInterval(() => {
+  this.img.removeAttribute(Math.PI)      
+    }, 10);
   }
   move() {
     this.x += this.vx;
@@ -49,7 +51,10 @@ class WeaponBar {
           this.fading = 0;
         }
       }
-      if(this.tick <=0) this.y = -300 
+      if(this.tick <=0) {
+        this.dispose = false;
+        this.tick = -1
+      }
     }
   }
   collides(objetivo) {
@@ -58,6 +63,6 @@ class WeaponBar {
     return colX && colY;
   }
   isVisible() {
-    return this.y >= 0 ;
+    return this.dispose ;
   }
 }

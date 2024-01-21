@@ -6,7 +6,7 @@ class Platform {
     this.h = h || this.ctx.canvas.width / 30;
     this.y = y || this.ctx.canvas.height - this.h - 20;
     this.img = new Image();
-    this.img.src = obstacleImg || "../public/Imagenes/obstacles/platformSolid2.png";
+    this.img.src = obstacleImg || "../../public/Imagenes/obstacles/platformSolid2.png";
     this.vx = 0;
     this.color = "#ff0000"; // Color predeterminado, puedes ajustarlo según tus necesidades
     this.red =  (this.w + this.h) * 4; // solo usamos como numero fijo a recoger el rojo, que dependerá de la anchura total de la plataforma
@@ -16,7 +16,7 @@ class Platform {
     this.isSolid = isSolid || false;
     this.isBrakable = isBrakable || false;
     this.goingToBreak = false;
-    this.braking = 200;
+    this.braking = 150;
     //la vida de la plataforma depende de su tamaño, lo que significa que depende de Red, que es la anchura más la altura multiplicada por 2. 
     this.divisibleWithLife = this.life / 12.5 //como le restamos vida de 25 en 25, obtenemos cuantas veces se le podrá restar antes de llegar a 0 o menos//! a veces hay que restar 12.5 por un fallo
     this.redLeft = (255 - this.red) / this.divisibleWithLife //restamos a 255 el numero/tamaño de red y se obtiene cuanto hay que sumar hasta llegar al máximo
@@ -40,7 +40,7 @@ class Platform {
     // Dibujar la imagen encima del color tintado
     if(this.goingToBreak){
         if(this.braking <= 100){
-          this.img.src = "../public/Imagenes/obstacles/platfomJump3.png"
+          this.img.src = "../public/Imagenes/obstacles/platformSolidBreaking1.png"
         }
         if(this.braking <= 0){
           this.y = -300

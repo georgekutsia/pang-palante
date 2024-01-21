@@ -17,7 +17,7 @@ class Player {
     this.auraImg.src = "/public/Imagenes/aura1.png";
     this.auraIsActive = false;
     this.auraTime = 0;
-    this.count = 1;
+    this.frameTick = 1;
     this.bulletArray = [];
     this.bulletFireArray = [];
     this.bulletBarArray = [];
@@ -37,7 +37,6 @@ class Player {
     if(this.amountOfFireShoots>=1){
       this.charger.draw(this.x + 5, this.y + 10, this.amountOfFireShoots)
     }
-    console.log('%cMyProject%cline:38%cthis.amountOfFireShoots', 'color:#fff;background:#ee6f57;padding:3px;border-radius:2px', 'color:#fff;background:#1f3c88;padding:3px;border-radius:2px', 'color:#fff;background:rgb(17, 63, 61);padding:3px;border-radius:2px', this.amountOfFireShoots)
     if(this.immune){
       this.fading++
       if(this.fading >= 20){
@@ -62,8 +61,6 @@ class Player {
     if(this.auraIsActive){
     this.ctx.drawImage(this.auraImg, this.x-7, this.y-5, this.w + 10, this.h+10);
     }
-    // console.log("x", this.x, "y", this.y)
-    // this.ctx.fillText(`Life ${this.life}`, this.ctx.canvas.width - 50, 15); // contador de vida 
   }
 
   move() {
@@ -71,9 +68,12 @@ class Player {
     this.x += this.vx;
     this.y += this.vy;
     this.moving = this.vx
-    if (this.count > 1 ) {
-      this.img.frame++;
-      this.count = 0;
+    if(this.vx){
+     this.frameTick++
+      if (this.frameTick > 10  ) {
+        this.img.frame++;
+        this.frameTick = 0;
+      }
     }
     if (this.img.frame > 4) {
       this.img.frame = 0;
@@ -107,13 +107,12 @@ class Player {
       this.vy = -2.5;
     }
     if (key === A) {
-      this.count++;
+      this.frameTick++;
     this.vx = -2.5;
     this.img.src = "../public/Imagenes/pangRunLeft.png";
     this.frameAmount = 5;
     }
     if (key === D) {
-    this.count++;
     this.vx = 2.5;
     this.img.src = "../public/Imagenes/pangRunRight.png";
     this.frameAmount = 5;
