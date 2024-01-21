@@ -27,8 +27,10 @@ class Game {
     this.platforms = []; // plataformas para saltar
     this.bouncers = []; // plataformas que rebotan
     this.stairs = []; // Array para almacenar instancias de la clase Stair
-    this.auras = []; // Array para almacenar instancias de la clase Stair
-    this.boxes = []; // Array para almacenar instancias de la clase Stair
+    this.auras = []; // Array para almacenar instancias de la clase auras
+    this.boxes = []; // Array para almacenar instancias de la clase boxes
+    this.blasters = []; // Array para almacenar instancias de la clase blasters
+    this.levelBalls = []; // Array para almacenar instancias de la clase blasters
     // sounds sounds sounds
     this.bubbleBounceSound = new Audio("../public/sounds/bubbleBounce.mp3") //todo -- paso 1 traer el sonido y almacenarlo en una variable
     this.bubbleBounceSound.volume = 0.1;  //todo -- paso 2, no obligatorio, determinarle volumen de 0 a 1, creo
@@ -48,10 +50,8 @@ class Game {
         this.addbubble(); // la función para añadir obstáculo
         this.bubbleTick = 0; //regresa el bubbleTick a 0 para reiniciar la cuenta
       }
-      if(GAMELEVEL === 0){
-        level1(this.gameTime, this.ctx, this.platforms, this.bouncers, this.stairs, this.flamethrowers, this.healings, this.auras, this.boxes)
-      }
     }, 1000 / 60);
+    level1(this.gameTime, this.ctx, this.platforms, this.bouncers, this.stairs, this.flamethrowers, this.healings, this.auras, this.boxes, this.blasters, this.levelBalls)
   }
 
   stop() {  //para pausar el juego
@@ -69,6 +69,8 @@ class Game {
     this.flamethrowers = this.flamethrowers.filter((e) => e.isVisible()); //elimina cada obstáculo que ya no es visible y vacía el array
     this.auras = this.auras.filter((e) => e.isVisible()); //elimina cada obstáculo que ya no es visible y vacía el array
     this.boxes = this.boxes.filter((e) => e.isVisible()); //elimina cada obstáculo que ya no es visible y vacía el array
+    this.blasters = this.blasters.filter((e) => e.isVisible()); //elimina cada obstáculo que ya no es visible y vacía el array
+    this.levelBalls = this.levelBalls.filter((e) => e.isVisible()); //elimina cada obstáculo que ya no es visible y vacía el array
     this.healings = this.healings.filter((e) => e.isVisible()); //elimina cada obstáculo que ya no es visible y vacía el array
     this.puffBubbles = this.puffBubbles.filter((e) => e.isVisible()); //elimina cada obstáculo que ya no es visible y vacía el array
   }
@@ -84,7 +86,9 @@ class Game {
     this.flamethrowers.forEach((e) => e.draw());  //dibuja cada obstáculo
     this.auras.forEach((e) => e.draw());  //dibuja cada obstáculo
     this.boxes.forEach((e) => e.draw());  //dibuja cada obstáculo
+    this.blasters.forEach((e) => e.draw());  //dibuja cada obstáculo
     this.healings.forEach((e) => e.draw());  //dibuja cada obstáculo
+    this.levelBalls.forEach((e) => e.draw());  //dibuja cada obstáculo
     if(this.player.life.total <= 0) this.gameOver(); // cuando el player muere se llama a la funcion gameOver()
   }
   move() {
@@ -95,6 +99,8 @@ class Game {
     this.flamethrowers.forEach((e) => e.move());  //mueve los obstáculos
     this.auras.forEach((e) => e.move());  //mueve los obstáculos
     this.boxes.forEach((e) => e.move());  //mueve los obstáculos
+    this.blasters.forEach((e) => e.move());  //mueve los obstáculos
+    this.levelBalls.forEach((e) => e.move());  //mueve los obstáculos
     this.healings.forEach((e) => e.move());  //mueve los obstáculos
     this.puffBubbles.forEach((e) => e.move());  //mueve los obstáculos
   }
@@ -236,18 +242,14 @@ addbubble() {  //función para añadir obstáculo
 // colisiones con Platform
     this.platforms.forEach((platform) => {  // platform con player
       if (platform.collides(this.player)) {
-        if(platform.isBrakable){
-          if (this.player.y <= platform.y && this.player.x <= platform.x + platform.w  && this.player.x + this.player.w > platform.x) {
-            this.player.y = platform.y - this.player.h ;
-            this.player.vy = 0;
+        if (this.player.y <= platform.y && this.player.x <= platform.x + platform.w  && this.player.x + this.player.w > platform.x) {
+          if(platform.isBrakable){
             platform.braking--;
-            ALT = 16;
             platform.goingToBreak = true;
           }
-        } else {
-          this.player.vy = 0;
-          if (this.player.y <= platform.y && this.player.x <= platform.x + platform.w  && this.player.x + this.player.w > platform.x) {
             this.player.y = platform.y - this.player.h ;
+            this.player.x += platform.vx// si le digo que es igual player.vx = platform.vx, se ve el jugador moviendose por cómo estan configurados los frames de movimiento
+            this.player.vy = platform.vy;
             ALT = 16;
           }
           if (this.player.y + this.player.h >= platform.y + platform.h) { //colisión por la parte inferior de la plataforma
@@ -257,22 +259,23 @@ addbubble() {  //función para añadir obstáculo
             this.player.vy = 0;
             this.player.g = 0.2
           }
-        }
       }
     })
 
     this.platforms.forEach((platform) => { //platform con bullets normales
       this.player.bulletArray.forEach((bullet) => {
         if(bullet.collides(platform)){
-          basicBulletBounce(bullet, platform)
-          if(platform.isSolid){
+          if(!platform.isSolid){
+            basicBulletBounce(bullet, platform)
+          } else{
             const newColor = platform.calculateNewColor();
             platform.color = newColor;
+            bullet.x = -200;
             if( platform.life <= 0){
               platform.x = -200;
             }
           }
-          return false;
+          return true;
         } else return true;
       })
     })
@@ -316,7 +319,7 @@ addbubble() {  //función para añadir obstáculo
     })
     
 // items que mejoran el personaje y box
-    this.flamethrowers.forEach((weapon) => {   // aditionalweapon  choca con el personaje
+    this.flamethrowers.forEach((weapon) => {   // flamethrowers  choca con el personaje
         if (weapon.collides(this.player)) {
           N = 78;
           this.player.amountOfFireShoots += 5; // sumamos 5 balas de fuego 
@@ -326,10 +329,16 @@ addbubble() {  //función para añadir obstáculo
           weapon.x = - 100; // situa fuera del canvas la burbuja que colisiona con el player y luego isVisible la elimina del array
         } else return true
       });
-    this.healings.forEach((healing) => {   // aditionalhealing  choca con el personaje
+    this.healings.forEach((healing) => {   // healings  choca con el personaje
         if (healing.collides(this.player)) {
           this.player.gainLife()
           healing.x = - 100; // situa fuera del canvas la burbuja que colisiona con el player y luego isVisible la elimina del array
+        } else return true
+      });
+    this.blasters.forEach((blaster) => {   // blasters  choca con el personaje
+        if (blaster.collides(this.player)) {
+          this.player.megaFireBlaster = true;
+          blaster.dispose = true;; // situa fuera del canvas la burbuja que colisiona con el player y luego isVisible la elimina del array
         } else return true
       });
     this.auras.forEach((aura) => {   // aditionalaura  choca con el personaje
@@ -356,6 +365,44 @@ addbubble() {  //función para añadir obstáculo
           } else return true;
         })
       })
+
+    this.levelBalls.forEach((levelBall) => { //levelBall con bullets normales
+      this.player.bulletArray.forEach((bullet) => {
+        if(bullet.collides(levelBall)){
+          this.levelChange()
+          return false;
+        } else return true;
+      })
+    })
+
+  }
+
+
+  levelChange(){
+    GAMELEVEL += 1;
+    setTimeout(() => {
+      if(GAMELEVEL === 1){
+        level1(this.gameTime, this.ctx, this.platforms, this.bouncers, this.stairs, this.flamethrowers, this.healings, this.auras, this.boxes, this.blasters, this.levelBalls)
+      } else if(GAMELEVEL === 2){
+        level1(this.gameTime, this.ctx, this.platforms, this.bouncers, this.stairs, this.flamethrowers, this.healings, this.auras, this.boxes, this.blasters, this.levelBalls)
+      } else if(GAMELEVEL === 3){
+        console.log("bla")
+      }
+  }, 3000);
+    this.bubbles = [];
+    this.flamethrowers = []
+    this.puffBubbles = [];
+    this.platforms = [];
+    this.bouncers = [];
+    this.stairs = [];
+    this.blasters = [];
+    this.heals = [];
+    this.auras = [];
+    this.boxes = [];
+    this.levelBalls = [];
+    this.player.bulletArray = [];
+    this.player.bulletBarArray = [];
+    this.player.bulletFireArray = [];
   }
 
   gameOver() {  //Función para terminar el juego y vaciar todos los arrays.
@@ -366,6 +413,11 @@ addbubble() {  //función para añadir obstáculo
     this.platforms = [];
     this.bouncers = [];
     this.stairs = [];
+    this.blasters = [];
+    this.heals = [];
+    this.auras = [];
+    this.boxes = [];
+    this.levelBalls = [];
     this.player.bulletArray = [];
     this.player.bulletBarArray = [];
     this.player.bulletFireArray = [];
