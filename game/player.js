@@ -127,12 +127,14 @@ class Player {
       this.vy = -2.5;
     }
     if (key === A) {
+      M = 77; // para que la bala especial se pueda lanzar solo despues de moverte
       this.frameTick++;
     this.vx = -2.5;
     this.img.src = "../public/Imagenes/pangRunLeft.png";
     this.frameAmount = 5;
     }
     if (key === D) {
+      M = 77; // para que la bala especial se pueda lanzar solo despues de moverte
     this.vx = 2.5;
     this.img.src = "../public/Imagenes/pangRunRight.png";
     this.frameAmount = 5;
@@ -164,6 +166,7 @@ class Player {
     }
     if(key === M){
       this.shootBar();
+      M = 0
     }
     if(key === ALT && this.vy === 0 ){
       this.vy = jumpHeight 

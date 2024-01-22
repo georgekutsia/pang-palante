@@ -2,17 +2,17 @@
 let levelTick = 2849;
 function level1(gameTime, ctx, platforms, bouncers,spikes, stairs, flamethrowers, healings, auras, boxes, blasters, levelBalls){
    levelTick++
-  addPlatforms(ctx, platforms)
-  addBouncer(ctx, bouncers)
-  addSpikes(ctx, spikes)
-  addStair(ctx, stairs)
-  flamethrowerItem(ctx, flamethrowers)
+  // addPlatforms(ctx, platforms)
+  // addBouncer(ctx, bouncers)
+  // addSpikes(ctx, spikes)
+  // addStair(ctx, stairs)
+  // flamethrowerItem(ctx, flamethrowers)
 
-  auraItem(ctx, auras)
-  boxItem(ctx, boxes)
-  blasterItem(ctx, blasters)
-  blasterItem(ctx, blasters)
-  blasterItem(ctx, blasters)
+  // auraItem(ctx, auras)
+  // boxItem(ctx, boxes)
+  // blasterItem(ctx, blasters)
+  // blasterItem(ctx, blasters)
+  // blasterItem(ctx, blasters)
   levelBallItem(ctx, levelBalls)
   levelTick = 0;
 }
@@ -33,7 +33,7 @@ function addBouncer(ctx, bouncers){
 }
 
 function addSpikes(ctx, stairs){
-  const stair1 = new Spikes(ctx, 100, 135)
+  const stair1 = new Spikes(ctx, 100, 136)
   stairs.push(stair1)
 }
 

@@ -4,8 +4,11 @@ class Game {
     this.ctx = ctx;
     this.player = new Player(ctx);   //traemos la clase Player para usarlo. Todo lo que esté en la clase player también aparecerá
     this.background = new Background(ctx);   // traemos la clase Background para usarlo
+    this.levelChengingImg = new Image(ctx); 
+    this.levelChengingImg.src = "/public/Imagenes/background/background0.jpeg"
     this.interval = null;  //sirve para pausar el juego
     this.bubbleTick = 0;
+    this.randomColor = null;
     this.gameTime = 0; //cuando el juego se inicia va sumando. Se usa para llevar cuenta del tiempo
     this.bubblePopSound1 = new Audio("../public/sounds/bubblePop1.mp3")//todo --  Sonido paso 1) guardar la ruta del sonido en una variable
     this.bubblePopSound1.volume = 0.3; // todo -- Sonido paso 2) ponerle volumen, auque no es obligatorio
@@ -15,7 +18,7 @@ class Game {
     this.gameOver2.volume = 0.2; //
     this.gameBackgroundMusic = new Audio("../public/sounds/backgroundMusic1.mp3");
     this.gameBackgroundMusic.volume = 0.1; //
-
+    this.changingLevel = false;
     this.bubbleSplash2 = new Audio("../public/sounds/bubbleSplash2.mp3")
     this.bubbleSplash2.volume = 0.1; 
     this.setListeners();  // para que se pueda usar el teclado 
@@ -31,6 +34,7 @@ class Game {
     this.boxes = []; // Array para almacenar instancias de la clase boxes
     this.blasters = []; // Array para almacenar instancias de la clase blasters
     this.levelBalls = []; // Array para almacenar instancias de la clase blasters
+    this.levelArray = [this.gameTime, this.ctx, this.platforms, this.bouncers, this.spikes, this.stairs, this.flamethrowers, this.healings, this.auras, this.boxes, this.blasters, this.levelBalls]
     // sounds sounds sounds
     this.bubbleBounceSound = new Audio("../public/sounds/bubbleBounce.mp3") //todo -- paso 1 traer el sonido y almacenarlo en una variable
     this.bubbleBounceSound.volume = 0.1;  //todo -- paso 2, no obligatorio, determinarle volumen de 0 a 1, creo
@@ -42,6 +46,21 @@ class Game {
       this.clear();  //   limpia el canvas. Sin esta función, nunca dejaría de dibujarse lo anterior y no aparentaría movimiento.
       this.move();  // mueve los objetos movibles
       this.draw();  // dibuja lo que haga falta
+      if(this.changingLevel){
+        this.ctx.save();
+        this.ctx.drawImage(this.levelChengingImg, 0 + this.ctx.canvas.width/8, 0 + this.ctx.canvas.height/8, this.ctx.canvas.width - this.ctx.canvas.width/4, this.ctx.canvas.height - this.ctx.canvas.height/4);
+        this.ctx.font = "14px Arial";
+        this.ctx.fillStyle = "blue"; 
+        this.ctx.fillText(`Bien hecho! Sigue así...`,this.ctx.canvas.width/4-1, this.ctx.canvas.height/3-1);
+        this.ctx.fillText(`Bien hecho! Sigue así...`,this.ctx.canvas.width/4+1, this.ctx.canvas.height/3+1);
+        this.ctx.fillText(`Nivel ${GAMELEVEL}`,this.ctx.canvas.width/3+29, this.ctx.canvas.height/2 + 39, 50, 50);
+        this.ctx.fillText(`Nivel ${GAMELEVEL}`,this.ctx.canvas.width/3+31, this.ctx.canvas.height/2 + 41, 50, 50);
+        this.ctx.fillStyle = this.randomColor; 
+        this.ctx.fillText(`Bien hecho! Sigue así...`,this.ctx.canvas.width/4, this.ctx.canvas.height/3 );
+        this.ctx.fillText(`Nivel ${GAMELEVEL}`,this.ctx.canvas.width/3+30, this.ctx.canvas.height/2 + 40, 50, 50);
+        this.ctx.fillStyle = "aqua"; 
+        this.ctx.restore();
+      }
       this.checkCollisions(); //Comprueba las colisiones constantemtente
       this.bubbleTick++
       this.gameTime++ //Cada 60 representan 1 segundo de tiempo en el juego
@@ -137,6 +156,7 @@ addbubble() {  //función para añadir obstáculo
     this.spikes.forEach((spike) => { //player con spikes
       if (spike.collides(this.player) && !this.player.immune) {
         if(!this.player.auraIsActive){
+          spike.active = true;
           this.player.loseLife(spike.damage, true); //el daño al jugador se le hace según lo que marca el daño de la burbuja. a burbuja más pequeña, menos daño
         }
       } else return true
@@ -391,13 +411,15 @@ addbubble() {  //función para añadir obstáculo
 
   levelChange(){
     GAMELEVEL += 1;
+    this.changingLevel = true;
+    this.randomColor = getRandomColor();
     setTimeout(() => {
-      if(GAMELEVEL === 1){
-        level1(this.gameTime, this.ctx, this.platforms, this.bouncers, this.spikes, this.stairs, this.flamethrowers, this.healings, this.auras, this.boxes, this.blasters, this.levelBalls)
-      } else if(GAMELEVEL === 2){
+    this.changingLevel = false;
+      if(GAMELEVEL === 2){
         level1(this.gameTime, this.ctx, this.platforms, this.bouncers, this.spikes, this.stairs, this.flamethrowers, this.healings, this.auras, this.boxes, this.blasters, this.levelBalls)
       } else if(GAMELEVEL === 3){
-        console.log("bla")
+        level1(this.gameTime, this.ctx, this.platforms, this.bouncers, this.spikes, this.stairs, this.flamethrowers, this.healings, this.auras, this.boxes, this.blasters, this.levelBalls)
+      } else if(GAMELEVEL === 4){
       }
   }, 3000);
     this.bubbles = [];
