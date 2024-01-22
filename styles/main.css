@@ -81,3 +81,40 @@
   transition: 1s ease-in-out;
 
 }
+
+#changing-level-img{
+  width: 70vw;
+  height: 35vw;
+  border: 10px solid rgb(0, 199, 70);
+  border-radius: 20px;
+  position: absolute;
+  top: 2vw;
+  left: 10vw;
+  min-width: 100px;
+  min-height: 100px;
+  display: none;
+}
+
+#level-change-text1{
+  position: absolute;
+  left: 32vw;
+  top: 28vw;
+  font-size: calc(20px + 2vw);
+  text-shadow: 2px 2px white;
+  background-color: rgba(255, 255, 255, 0.358);
+  border-radius: 20px;
+  padding: 5px 20px;
+  display: none;
+}
+#level-change-text2{
+  position: absolute;
+  left: 30vw;
+  top: 5vw;
+  font-size: calc(20px + 2vw);
+  text-shadow: 2px 2px white;
+  background-color: rgba(255, 255, 255, 0.358);
+  border-radius: 20px;
+  padding: 5px 20px;
+  display: none;
+
+}
