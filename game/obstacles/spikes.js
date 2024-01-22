@@ -3,40 +3,43 @@ class Spikes {
     this.ctx = ctx; // Contexto del canvas
     this.x = x || 100; // Posición horizontal (coordenada x), valor predeterminado o especificado
     this.w = w || this.ctx.canvas.width / 13; // Ancho de la escalera, valor predeterminado o especificado
-    this.h = h || this.ctx.canvas.width / 18; // Altura de la escalera, valor predeterminado o especificado
+    this.h = h || this.ctx.canvas.width / 22; // Altura de la escalera, valor predeterminado o especificado
     this.y = y || this.ctx.canvas.height - this.h - 20; // Posición vertical (coordenada y), valor predeterminado o especificado
     this.img = new Image(); // Imagen asociada a la escalera
-    this.img.src = obstacleImg || "../../public/Imagenes/obstacles/spikes1.png"; // Ruta de la imagen de la escalera
+    this.img.src = obstacleImg || "../../public/Imagenes/obstacles/spikes5.png"; // Ruta de la imagen de la escalera
     this.img.frame = 0;
     this.imgTick = 0;
     this.damage = 0.25;
+    this.active = false;
   }
 
   draw() {
     // Dibujar la escalera en el canvas utilizando el contexto y la imagen
-    this.ctx.drawImage(
-      this.img,
-      (this.img.frame * this.img.width) / 1,
-      0,
-      this.img.width / 1,
-      this.img.height ,
-      this.x,
-      this.y,
-      this.w,
-      this.h
-    );
+      this.ctx.drawImage(
+        this.img,
+        (this.img.frame * this.img.width) / 15,
+        0,
+        this.img.width / 15,
+        this.img.height ,
+        this.x,
+        this.y,
+        this.w,
+        this.h
+        );
   }
 
   move() {
-    // Método para actualizar la posición de la escalera en función de su velocidad
-    // this.imgTick++
-    // if(this.imgTick > 10){
-    //   this.img.frame++
-    //   this.imgTick = 0;
-    // }
-    // if(this.img.frame > 6){
-    //   this.img.frame = 0;
-    // }
+    if(this.active){
+
+    this.imgTick++
+    if(this.imgTick > 7){
+      this.img.frame++
+      this.imgTick = 0;
+    }
+    if(this.img.frame > 12){
+      this.img.frame = 5;
+    }
+  }
   }
 
   isVisible() {

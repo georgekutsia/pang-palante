@@ -37,4 +37,4 @@ let barLife = 3;
 let immuneTime = 2000;
 let bubbleSpeedY = 2.5;
 let bubbleSpeedX = 0.5;
-let GAMELEVEL = 0;
+let GAMELEVEL = 1;

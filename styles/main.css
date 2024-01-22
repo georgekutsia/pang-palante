@@ -5,3 +5,79 @@
   min-width: 100px;
   min-height: 100px;
 }
+#pang-restart{
+  display: none;
+}
+#start-background{
+  width: 90vw;
+  height: 40vw;
+  border: 10px solid red;
+  position: absolute;
+  top: 0;
+  left: 0;
+  min-width: 100px;
+  min-height: 100px;
+}
+
+#pang-start{
+  position: absolute;
+  font-size: calc(14px + 1vw);
+  color: red;
+  border: none;
+  border-radius: 15px;
+  background-color: rgba(255, 255, 255, 0.229);
+  top:30vw;
+  left:40vw;
+  transition: 1s ease-in-out;
+  opacity: 0.3;
+}
+#pang-start:hover{
+  opacity: 1;
+  letter-spacing: 1px;
+  background-color: rgba(36, 230, 255, 0.346);
+  padding: 5px 10px;
+}
+
+
+#instrucciones-btn{
+  position: absolute;
+  font-size: calc(14px + 1vw);
+  color: rgb(255, 215, 215);
+  border: none;
+  border-radius: 15px;
+  background-color: rgba(255, 255, 255, 0.229);
+  top:1vw;
+  left:40vw;
+  padding: 5px 10px;
+  transition: 1s ease-in-out;
+
+}
+#instrucciones-btn:hover{
+  opacity: 1;
+  letter-spacing: 1px;
+  background-color: rgba(36, 230, 255, 0.346);
+}
+
+
+#instrucciones-info-1{
+  display: none;
+  position: absolute;
+  width: 35vw;
+  min-width: 100px;
+  min-height: 100px;
+  top: 2vw;
+  left: 20vw;
+  transition: 1s ease-in-out;
+
+}
+#instrucciones-info-2{
+  display: none;
+  position: absolute;
+  width: 35vw;
+  min-width: 100px;
+  min-height: 100px;
+  top: 10vw;
+  left: 35vw;
+  transition: 1s ease-in-out;
+
+}

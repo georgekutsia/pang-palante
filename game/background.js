@@ -6,12 +6,14 @@ class Background {
     this.w = this.ctx.canvas.width;
     this.h = this.ctx.canvas.height;
     this.img = new Image();
-    this.img.src = "../public/Imagenes/pangBackgroundBeach.jpg";
+    this.img.src = "../public/Imagenes/background/background1.jpg";
   }
+
   draw() {
     this.ctx.drawImage(this.img, this.x, this.y, this.w, this.h);
   }
 }
+
 // class BackgroundMove {
 //   constructor(ctx) {
 //     this.ctx = ctx;
