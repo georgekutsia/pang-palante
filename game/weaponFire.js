@@ -33,7 +33,7 @@ class WeaponFire {
     this.w += fireSizing; //aumenta el ancho de la bala mientras sube
     this.h += fireSizing; //aumenta la altura de la bala mientra sube
     this.flameSpinTick++
-    if(this.flameSpinTick >= 2){
+    if(this.flameSpinTick >= 0.5){
       this.img.frame++;
     this.flameSpinTick = 0
     }
