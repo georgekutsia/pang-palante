@@ -1,9 +1,10 @@
 
 let levelTick = 2849;
-function level1(gameTime, ctx, platforms, bouncers, stairs, flamethrowers, healings, auras, boxes, blasters, levelBalls){
+function level1(gameTime, ctx, platforms, bouncers,spikes, stairs, flamethrowers, healings, auras, boxes, blasters, levelBalls){
    levelTick++
   addPlatforms(ctx, platforms)
   addBouncer(ctx, bouncers)
+  addSpikes(ctx, spikes)
   addStair(ctx, stairs)
   flamethrowerItem(ctx, flamethrowers)
 
@@ -31,12 +32,17 @@ function addBouncer(ctx, bouncers){
   bouncers.push(bouncer1)
 }
 
+function addSpikes(ctx, stairs){
+  const stair1 = new Spikes(ctx, 100, 135)
+  stairs.push(stair1)
+}
 
 function addStair(ctx, stairs) {                         // this.ctx, ubicacion en eje x, ubicacion en eje y, ancho y alto. la última sería la imágen
   //! la escalera no debería colgar sola en el aire, debería tener una parte de la plataforma debajo o pasan cosas raras con la gravedad
   const stair1 = new Stair(ctx, 81, 90,  30, 40);
   stairs.push(stair1,);
 }
+
 
 function boxItem(ctx, boxes) {  
   const box1 = new Box(ctx, 100, 20,  3)
