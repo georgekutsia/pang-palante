@@ -9,7 +9,8 @@ class Player {
     this.charger = new Charger(ctx)
     this.vx = 0;
     this.vy = 0;
-    this.g = 0.03;
+    this.g = 0.03; //gravedad
+    this.r = 0; //rozamiento
     this.img = new Image();
     this.img.src = "../public/Imagenes/pangRunRight.png";
     this.img.frame = 3;
@@ -85,7 +86,13 @@ class Player {
 
   move() {
     this.vy += this.g
-    this.x += this.vx;
+    this.velocidadX = this.vx += this.r;
+    if(this.velocidadX <= 0.5 && this.velocidadX >= -0.5 && this.r !==0){
+      this.r = 0;
+      this.vx = 0;
+      this.img.frame = 0;
+    }
+    this.x += this.velocidadX;
     this.y += this.vy;
     this.moving = this.vx
     if(this.vx){
@@ -143,6 +150,30 @@ class Player {
       this.vy = 2.5;
       this.y = this.y + 5;  // para que al estar encima de la escalera, hago un salto hacia abajo y deje de tener posición fija
     }
+
+    if(key === Q){
+      this.r = 0.4;
+      this.vx = -6;
+      this.img.frame = 0;
+      Q = 0;
+      E = 9;
+      setTimeout(() => {
+        Q = 81;
+        E = 69;
+      }, 5000);
+    }
+    if(key === E){
+      this.r = -0.4;
+      this.vx = 6;
+      this.img.frame = 0;
+      Q = 0;
+      E = 9;
+      setTimeout(() => {
+        Q = 81;
+        E = 69;
+      }, 5000);
+    }
+
     if(key === B){
       this.img.src = "../public/Imagenes/pangStandShoot.png";
       this.frameAmount = 2;

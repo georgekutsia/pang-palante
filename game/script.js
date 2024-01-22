@@ -9,6 +9,9 @@ let startBackground$$ = document.getElementById("start-background");
 let instruccionesBtn$$ = document.getElementById("instrucciones-btn");
 let instruccionesInfo1$$ = document.getElementById("instrucciones-info-1");
 let instruccionesInfo2$$ = document.getElementById("instrucciones-info-2");
+let changingLevelImg$$ = document.getElementById("changing-level-img");
+let levelChangeText1$$ = document.getElementById("level-change-text1");
+let levelChangeText2$$ = document.getElementById("level-change-text2");
 
 start$$.addEventListener("click", function () {
   canvas.style.display = "block";
@@ -76,3 +79,4 @@ instruccionesInfo1$$.addEventListener("dblclick", () => {
     instruccionesInfo2$$.style.zIndex = 1;
   }
 });
+
