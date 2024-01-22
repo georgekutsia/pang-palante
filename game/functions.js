@@ -54,8 +54,8 @@ function invertImage(ctx, x, y, w, h, img) {
 
 
 
-function randomLootFromBox(ctx, flamethrowers, healings, auras, x, y){
-  const randomItem = Math.floor(Math.random() *3) + 1;
+function randomLootFromBox(ctx, flamethrowers, healings, auras,machineguns, x, y){
+  const randomItem = Math.floor(Math.random() *4) + 1;
   if(randomItem === 1){
     const flamethrower = new Flamethrower(ctx, x, y  )
     flamethrowers.push(flamethrower)
@@ -65,12 +65,19 @@ function randomLootFromBox(ctx, flamethrowers, healings, auras, x, y){
   } else if(randomItem === 3){
     const aura = new Aura(ctx, x, y)
     auras.push(aura)
+  }else if(randomItem === 4){
+    const machinegun = new Machinegun(ctx, x, y)
+    machineguns.push(machinegun)
   }
 }
 
 function flamethrowerItem(ctx, flamethrowers) {  
   const flamethrower = new Flamethrower(ctx)
   flamethrowers.push(flamethrower)
+}
+function machinegunItem(ctx, machineguns) {  
+  const machinegun = new Machinegun(ctx)
+  machineguns.push(machinegun)
 }
 
 function healingItem(ctx, healings) {  

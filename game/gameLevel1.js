@@ -1,6 +1,6 @@
 
 let levelTick = 2849;
-function level1(gameTime, ctx, platforms, bouncers,spikes, stairs, flamethrowers, healings, auras, boxes, blasters, levelBalls){
+function level1(gameTime, ctx, platforms, bouncers,spikes, stairs, flamethrowers, machineguns, healings, auras, boxes, blasters, levelBalls){
    levelTick++
   // addPlatforms(ctx, platforms)
   // addBouncer(ctx, bouncers)
@@ -13,6 +13,7 @@ function level1(gameTime, ctx, platforms, bouncers,spikes, stairs, flamethrowers
   // blasterItem(ctx, blasters)
   // blasterItem(ctx, blasters)
   // blasterItem(ctx, blasters)
+  machinegunItem(ctx, machineguns)
   levelBallItem(ctx, levelBalls)
   levelTick = 0;
 }
