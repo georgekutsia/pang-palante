@@ -37,6 +37,8 @@ class Player {
     this.blasterExplosion.volume = 1; //
     this.blasterCharging = new Audio("../public/sounds/blasterChargindSound.mp3");
     this.blasterCharging.volume = 1; //
+    this.playerDamageSound1 = new Audio("../public/sounds/playerDamageSound1.mp3");
+    this.playerDamageSound1.volume = 0.1; //
   }
 
   draw() {
@@ -44,7 +46,6 @@ class Player {
     this.bulletFireArray.forEach((bullet) => {bullet.draw();}); // paso 3: dibujo cada bullet que se dispare
     this.bulletBarArray.forEach((bullet) => {bullet.draw();}); // paso 3: dibujo cada bullet que se dispare
     this.life.draw()
-    console.log(this.charging);
     for (let i = 0; i < this.charging /10 -1; i++) {
       if(this.charging >= 11)
       this.ctx.drawImage(this.weaponFire, this.x-20 + i*5, this.y-15, this.w , this.h);
@@ -242,14 +243,16 @@ class Player {
     const colY = this.y + this.h > objetivo.y && this.y < objetivo.y + objetivo.h;
     return colX && colY;
   }
-  loseLife(damage){
+  loseLife(damage, immuneState){
     this.life.total -= damage;
-    this.immune = true;
+    this.immune = immuneState;
+    this.playerDamageSound1.play();
     setTimeout(() => {  // para desactivar immune y que el personaje deje de parpadear
         this.immune = false;
         this.fading = 0;
     }, immuneTime);
   }
+  
   gainLife(){
     this.life.total += 1;
   }
