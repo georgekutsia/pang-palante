@@ -38,6 +38,9 @@ class Game {
     // sounds sounds sounds
     this.bubbleBounceSound = new Audio("../public/sounds/bubbleBounce.mp3") //todo -- paso 1 traer el sonido y almacenarlo en una variable
     this.bubbleBounceSound.volume = 0.1;  //todo -- paso 2, no obligatorio, determinarle volumen de 0 a 1, creo
+    this.palabras = ["Bien hecho! sigue así", "Cada vez mejor!", "No te rindas! Ya lo tienes!", "Imparable! Dale caña", "Das miedo! avanza más!"];
+    this.indiceAleatorio
+// Obtén un índice aleatorio
   }
   
   start() {
@@ -47,20 +50,13 @@ class Game {
       this.move();  // mueve los objetos movibles
       this.draw();  // dibuja lo que haga falta
       if(this.changingLevel){
-        this.ctx.save();
-        this.ctx.drawImage(this.levelChengingImg, 0 + this.ctx.canvas.width/8, 0 + this.ctx.canvas.height/8, this.ctx.canvas.width - this.ctx.canvas.width/4, this.ctx.canvas.height - this.ctx.canvas.height/4);
-        this.ctx.font = "14px Arial";
-        this.ctx.fillStyle = "blue"; 
-        this.ctx.fillText(`Bien hecho! Sigue así...`,this.ctx.canvas.width/4-1, this.ctx.canvas.height/3-1);
-        this.ctx.fillText(`Bien hecho! Sigue así...`,this.ctx.canvas.width/4+1, this.ctx.canvas.height/3+1);
-        this.ctx.fillText(`Nivel ${GAMELEVEL}`,this.ctx.canvas.width/3+29, this.ctx.canvas.height/2 + 39, 50, 50);
-        this.ctx.fillText(`Nivel ${GAMELEVEL}`,this.ctx.canvas.width/3+31, this.ctx.canvas.height/2 + 41, 50, 50);
-        this.ctx.fillStyle = this.randomColor; 
-        this.ctx.fillText(`Bien hecho! Sigue así...`,this.ctx.canvas.width/4, this.ctx.canvas.height/3 );
-        this.ctx.fillText(`Nivel ${GAMELEVEL}`,this.ctx.canvas.width/3+30, this.ctx.canvas.height/2 + 40, 50, 50);
-        this.ctx.fillStyle = "aqua"; 
-        this.ctx.restore();
+        changingLevelImg$$.style.display = "block"
+        levelChangeText2$$.style.display = "block"
+        levelChangeText1$$.style.display = "block"
+        levelChangeText2$$.innerText = `${this.palabras[this.indiceAleatorio]}`
+        levelChangeText1$$.innerText = `Siguiente nivel ${GAMELEVEL}`
       }
+
       this.checkCollisions(); //Comprueba las colisiones constantemtente
       this.bubbleTick++
       this.gameTime++ //Cada 60 representan 1 segundo de tiempo en el juego
@@ -413,8 +409,13 @@ addbubble() {  //función para añadir obstáculo
     GAMELEVEL += 1;
     this.changingLevel = true;
     this.randomColor = getRandomColor();
+    this.indiceAleatorio = Math.floor(Math.random() * this.palabras.length);
     setTimeout(() => {
     this.changingLevel = false;
+    changingLevelImg$$.style.display = "none"
+    levelChangeText1$$.style.display = "none"
+    levelChangeText2$$.style.display = "none"
+
       if(GAMELEVEL === 2){
         level1(this.gameTime, this.ctx, this.platforms, this.bouncers, this.spikes, this.stairs, this.flamethrowers, this.healings, this.auras, this.boxes, this.blasters, this.levelBalls)
       } else if(GAMELEVEL === 3){
