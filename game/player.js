@@ -11,13 +11,7 @@ class Player {
     this.vy = 0;
     this.g = 0.03; //gravedad
     this.r = 0; //rozamiento
-    this.img = new Image();
-    this.img.src = "../public/Imagenes/pangRunRight.png";
-    this.img.frame = 3;
-    this.auraImg = new Image();
-    this.auraImg.src = "/public/Imagenes/aura1.png";
-    this.weaponFire = new Image();
-    this.weaponFire.src = "/public/Imagenes/weaponFire.png";
+
     this.auraIsActive = false;
     this.auraTime = 0;
     this.frameTick = 1;
@@ -34,6 +28,21 @@ class Player {
     this.megaFireBlaster = false;
     this.megaFireBlasterAmount = 91;
 
+    this.img = new Image();
+    this.img.src = "../public/Imagenes/pangRunRight.png";
+    this.img.frame = 3;
+    this.auraImg = new Image();
+    this.auraImg.src = "/public/Imagenes/aura1.png";
+    this.weaponFire = new Image();
+    this.weaponFire.src = "/public/Imagenes/weaponFire.png";
+    this.dodgeQ = new Image();
+    this.dodgeQ.src = "/public/Imagenes/q.png";
+    this.dodgeE = new Image();
+    this.dodgeE.src = "/public/Imagenes/e.png";
+    this.machinegunPaint = new Image();
+    this.machinegunPaint.src = "/public/Imagenes/machinegunPaint.png";
+
+
     this.blasterExplosion = new Audio("../public/sounds/megablasterBlastSound.mp3");
     this.blasterExplosion.volume = 1; //
     this.blasterCharging = new Audio("../public/sounds/blasterChargindSound.mp3");
@@ -47,6 +56,10 @@ class Player {
     this.bulletFireArray.forEach((bullet) => {bullet.draw();}); // paso 3: dibujo cada bullet que se dispare
     this.bulletBarArray.forEach((bullet) => {bullet.draw();}); // paso 3: dibujo cada bullet que se dispare
     this.life.draw()
+    if(Q === 81){
+      this.ctx.drawImage(this.dodgeE, this.x + this.w , this.y + this.h/2, this.w/2, this.h/2);
+      this.ctx.drawImage(this.dodgeQ, this.x-this.w/1.6, this.y + this.h/2, this.w/2 , this.h/2);
+    }
     for (let i = 0; i < this.charging /10 -1; i++) {
       if(this.charging >= 11)
       this.ctx.drawImage(this.weaponFire, this.x-20 + i*5, this.y-15, this.w , this.h);
@@ -79,6 +92,9 @@ class Player {
       this.h
     );
     this.ctx.globalAlpha = 1;
+    if(recharge <= 200){
+      this.ctx.drawImage(this.machinegunPaint, this.x, this.y +5, this.ctx.canvas.width/30, this.ctx.canvas.width/26);
+    }
     if(this.auraIsActive){
     this.ctx.drawImage(this.auraImg, this.x-7, this.y-5, this.w + 10, this.h+10);
     }
