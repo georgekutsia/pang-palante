@@ -1,4 +1,32 @@
 class Player {
+  static preloadAssets() {
+    const images = [
+      "../public/Imagenes/pangRunRight.png",
+      "/public/Imagenes/aura1.png",
+      "/public/Imagenes/weaponFire.png",
+      "/public/Imagenes/q.png",
+      "/public/Imagenes/e.png",
+      "/public/Imagenes/machinegunPaint.png",
+    ];
+
+    const sounds = [
+      "../public/sounds/megablasterBlastSound.mp3",
+      "../public/sounds/blasterChargindSound.mp3",
+      "../public/sounds/playerDamageSound1.mp3",
+    ];
+
+    // Precargar imágenes
+    images.forEach((src) => {
+      const img = new Image();
+      img.src = src;
+    });
+
+    // Precargar sonidos
+    sounds.forEach((src) => {
+      const audio = new Audio(src);
+      audio.volume = 1; // Puedes ajustar el volumen según tus necesidades
+    });
+  }
   constructor(ctx, moving) {
     this.ctx = ctx;
     this.x = 60;
