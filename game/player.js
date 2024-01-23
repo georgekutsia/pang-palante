@@ -1,32 +1,5 @@
 class Player {
-  static preloadAssets() {
-    const images = [
-      "../public/Imagenes/pangRunRight.png",
-      "/public/Imagenes/aura1.png",
-      "/public/Imagenes/weaponFire.png",
-      "/public/Imagenes/q.png",
-      "/public/Imagenes/e.png",
-      "/public/Imagenes/machinegunPaint.png",
-    ];
 
-    const sounds = [
-      "../public/sounds/megablasterBlastSound.mp3",
-      "../public/sounds/blasterChargindSound.mp3",
-      "../public/sounds/playerDamageSound1.mp3",
-    ];
-
-    // Precargar imágenes
-    images.forEach((src) => {
-      const img = new Image();
-      img.src = src;
-    });
-
-    // Precargar sonidos
-    sounds.forEach((src) => {
-      const audio = new Audio(src);
-      audio.volume = 1; // Puedes ajustar el volumen según tus necesidades
-    });
-  }
   constructor(ctx, moving) {
     this.ctx = ctx;
     this.x = 60;
@@ -78,6 +51,10 @@ class Player {
     this.blasterCharging.volume = 1; //
     this.playerDamageSound1 = new Audio("../public/sounds/playerDamageSound1.mp3");
     this.playerDamageSound1.volume = 0.1; //
+    this.shootSound = new Audio("/public/sounds/shooting/weaponShootSound.mp3");
+    this.shootSound.volume = 0.3;
+    this.shootBarSound = new Audio("/public/sounds/shooting/shootBarSound2.mp3");
+    this.shootBarSound.volume = 0.3;
   }
 
   draw() {
@@ -179,14 +156,12 @@ class Player {
       this.vy = -2.5;
     }
     if (key === A) {
-      M = 77; // para que la bala especial se pueda lanzar solo despues de moverte
       this.frameTick++;
     this.vx = -2.5;
     this.img.src = "../public/Imagenes/pangRunLeft.png";
     this.frameAmount = 5;
     }
     if (key === D) {
-      M = 77; // para que la bala especial se pueda lanzar solo despues de moverte
     this.vx = 2.5;
     this.img.src = "../public/Imagenes/pangRunRight.png";
     this.frameAmount = 5;
@@ -243,6 +218,9 @@ class Player {
     if(key === M){
       this.shootBar();
       M = 0
+        setTimeout(() => {
+          M = 77
+        }, 1000);
     }
     if(key === ALT && this.vy === 0 || key === ALT && this.bulala === true){
       this.vy = jumpHeight 
@@ -337,6 +315,7 @@ class Player {
     this.life.total += 1;
   }
   shoot() {// paso 1: invoca el disparo desde la posicion del personaje o su cercanía
+    this.shootSound.play()
     const bullet = new BasicWeapon(this.ctx, this.x + 5, this.y, this.moving);
     this.bulletArray.push(bullet);//paso 2: crea un array vacío en el constructor y luego haz un push de cada bullet;
   }
@@ -346,6 +325,8 @@ class Player {
     this.bulletFireArray.push(bulletFire);
   }
   shootBar(){
+    this.shootBarSound.volume = 0.3;
+    this.shootBarSound.play();
     const bulletBar = new WeaponBar(this.ctx, this.x + 5, this.y)
     this.bulletBarArray.push(bulletBar);
   }

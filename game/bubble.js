@@ -7,7 +7,7 @@ class Bubble {
     this.h = h || this.ctx.canvas.width / 5;  //altura calculada respecto al canvas
     this.vy = vy || bubbleSpeedY;
     this.vx = vx || bubbleSpeedX;
-    this.g = g || 0.03;
+    this.g = g || 0.05;
     this.explodingSize = this.ctx.canvas.width/80
     this.damage = damage || 1; // daño especificado o 10
     this.img = new Image();   //crear nueva imágene ne canvas

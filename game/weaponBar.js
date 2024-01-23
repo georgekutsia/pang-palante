@@ -15,6 +15,9 @@ class WeaponBar {
     this.dispose = true;
     this.solidState = false;  //al pasar a true, empieza la cuenta atrás para que desaparezca;
     this.life = barLife //las veces que la barra puede chocar contra las burbujas antes de desaparecer
+    this.barHit = new Audio("/public/sounds/shooting/barHit.mp3")
+    this.barHit.volume = 0.1
+    this.hittingTop = true;
   }
 
   draw() {
@@ -52,6 +55,10 @@ class WeaponBar {
         this.dispose = false;
         this.tick = -1
       }
+    }
+    if(this.hittingTop &&this.vy === 0){
+  this.barHit.play();
+  this.hittingTop = false;
     }
   }
   collides(objetivo) {

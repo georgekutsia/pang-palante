@@ -5,7 +5,7 @@ class Platform {
     this.w = w || this.ctx.canvas.width / 13;
     this.h = h || this.ctx.canvas.width / 30;
     this.y = y || this.ctx.canvas.height - this.h - 20;
-    this.img = new Image();
+    this.img = new Image();F
     this.img.src = obstacleImg || "../../public/Imagenes/obstacles/platformSolid2.png";
     this.vx = vx || 0;
     this.vy = vy || 0;
