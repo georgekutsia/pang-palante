@@ -35,7 +35,7 @@ class Game {
     this.boxes = []; // Array para almacenar instancias de la clase boxes
     this.blasters = []; // Array para almacenar instancias de la clase blasters
     this.levelBalls = []; // Array para almacenar instancias de la clase blasters
-    this.levelArray = [this.gameTime, this.ctx, this.platforms, this.bouncers, this.spikes, this.stairs, this.flamethrowers,  this.machineguns, this.healings, this.auras, this.boxes, this.blasters, this.levelBalls]
+    this.levelArray = [this.gameTime, this.ctx, this.bubbles, this.platforms, this.bouncers, this.spikes, this.stairs, this.flamethrowers,  this.machineguns, this.healings, this.auras, this.boxes, this.blasters, this.levelBalls]
     // sounds sounds sounds
     this.bubbleBounceSound = new Audio("../public/sounds/bubbleBounce.mp3") //todo -- paso 1 traer el sonido y almacenarlo en una variable
     this.bubbleBounceSound.volume = 0.1;  //todo -- paso 2, no obligatorio, determinarle volumen de 0 a 1, creo
@@ -61,13 +61,8 @@ class Game {
       this.checkCollisions(); //Comprueba las colisiones constantemtente
       this.bubbleTick++
       this.gameTime++ //Cada 60 representan 1 segundo de tiempo en el juego
-      // Empiezan a aparecer obstáculos y criaturas a medida que pasa cierto tiempo
-      if(this.bubbleTick >= Math.floor(Math.random() * 10 + 100)){ //añade obtáculo en algún momento random 
-        this.addbubble(); // la función para añadir obstáculo
-        this.bubbleTick = 0; //regresa el bubbleTick a 0 para reiniciar la cuenta
-      }
     }, 1000 / 60);
-    level1(this.gameTime, this.ctx, this.platforms, this.bouncers, this.spikes, this.stairs, this.flamethrowers,  this.machineguns, this.healings, this.auras, this.boxes, this.blasters, this.levelBalls)
+    level2(this.gameTime, this.ctx,this.bubbles, this.platforms, this.bouncers, this.spikes, this.stairs, this.flamethrowers,  this.machineguns, this.healings, this.auras, this.boxes, this.blasters, this.levelBalls)
   }
 
   stop() {  //para pausar el juego
@@ -124,6 +119,10 @@ class Game {
     this.levelBalls.forEach((e) => e.move());  //mueve los obstáculos
     this.healings.forEach((e) => e.move());  //mueve los obstáculos
     this.puffBubbles.forEach((e) => e.move());  //mueve los obstáculos
+    if(this.bubbles.length <= 0){
+      this.levelBalls.forEach((e) => e.winCondition = true)
+    }
+
   }
   setListeners() { //permite hacer keyup y keydown para usar teclado para mover el personaje
     document.addEventListener("keydown", (ev) => {
@@ -135,15 +134,8 @@ class Game {
   }
   
 //funciones o metodos para crear obstaculos y criaturas
-addbubble() {  //función para añadir obstáculo
-  const bubble = new Bubble(this.ctx)
-  if(this.bubbles.length < 0){
-    this.bubbles.push(bubble);
-  }
-}
 
   checkCollisions() {  //función para comprobar las colisiones
-
     this.bubbles.forEach((bubble) => { //player con bubble
       if (bubble.collides(this.player) && !this.player.immune) {
         if(!this.player.auraIsActive){
@@ -213,7 +205,13 @@ addbubble() {  //función para añadir obstáculo
     this.bubbles.forEach((bubble) => {  //bubble con platform
       this.platforms.forEach((platform) => {
         if(platform.collides(bubble)){
-          bounceFromObstacles(bubble, platform)
+          if(platform.isBouncable){
+            bounceFromObstacles(bubble, platform)
+          } else if(!platform.isBouncable){
+            bubble.y = platform.y - bubble.h;
+            bubble.vy = platform.vy;
+            bubble.vx = platform.vx;
+          }
         } else return true;
       })
     })
@@ -233,7 +231,7 @@ addbubble() {  //función para añadir obstáculo
 
       this.player.bulletBarArray.forEach((bar =>{
           this.platforms.forEach((platform) => {
-            if(bar.collides(platform)){
+            if(bar.collidesTop(platform)){
                   bar.solidState = true;
                   bar.y = platform.y+ platform.h;
                   bar.vy = 0;
@@ -273,14 +271,15 @@ addbubble() {  //función para añadir obstáculo
 // colisiones con Platform
     this.platforms.forEach((platform) => {  // platform con player
       if (platform.collides(this.player)) {
-        if (this.player.y <= platform.y && this.player.x <= platform.x + platform.w  && this.player.x + this.player.w > platform.x) {
+        if (this.player.y <= platform.y - 10 && this.player.x <= platform.x + platform.w  && this.player.x + this.player.w > platform.x) {
           if(platform.isBrakable){
             platform.braking--;
             platform.goingToBreak = true;
           }
-            this.player.y = platform.y - this.player.h ;
+            this.player.y = platform.y - this.player.h;
             this.player.x += platform.vx// si le digo que es igual player.vx = platform.vx, se ve el jugador moviendose por cómo estan configurados los frames de movimiento
             this.player.vy = platform.vy;
+            this.player.bulala = true;
             ALT = 16;
           }
           if (this.player.y + this.player.h >= platform.y + platform.h) { //colisión por la parte inferior de la plataforma
@@ -288,6 +287,7 @@ addbubble() {  //función para añadir obstáculo
           }
           if (this.player.x >= platform.x + platform.w - 6 || this.player.x <= platform.x) { //colisión por los lados de la plataforma
             this.player.vy = 0;
+            this.player.vx = 0;
             this.player.g = 0.2
           }
       }
@@ -310,10 +310,7 @@ addbubble() {  //función para añadir obstáculo
         } else return true;
       })
     })
-
-
     //colisiones con bouncers
-
     this.bouncers.forEach((bouncer) => { 
       if (bouncer.collides(this.player)) {
         this.player.vy = 0;
@@ -396,8 +393,14 @@ addbubble() {  //función para añadir obstáculo
         this.player.bulletArray = this.player.bulletArray.filter((bullet) => {
           if(bullet.collides(box)){
             box.boxHit();
-            if(box.boxImg.frame >8){
-                randomLootFromBox(this.ctx, this.flamethrowers, this.healings, this.auras, this.machineguns, box.x, box.y)
+            
+            if(box.boxImg.frame > 8){
+              if(box.containsRandom){
+                randomLootFromBox(this.ctx,  this.flamethrowers, this.healings, this.auras, this.machineguns, box.x, box.y)
+              }else{
+                console.log("bulala")
+                specificLootFromBox(this.ctx, box.lootNumber, this.flamethrowers, this.healings, this.auras, this.machineguns, box.x, box.y)
+              }
             }
             const puffBubble = new BubblePuff(ctx, box.x, box.y + box.h/2, box.w, box.h)
             this.puffBubbles.push(puffBubble)
@@ -409,7 +412,18 @@ addbubble() {  //función para añadir obstáculo
     this.levelBalls.forEach((levelBall) => { //levelBall con bullets normales
       this.player.bulletArray.forEach((bullet) => {
         if(bullet.collides(levelBall)){
-          this.levelChange()
+          if(levelBall.isActive){
+            levelBall.ballBroke = true; 
+            this.levelChange() 
+          } else if(!levelBall.isActive && !levelBall.winCondition){
+            levelBall.ballShieldForceResist = true;
+            bullet.y = -30;
+          } else if(!levelBall.isActive && levelBall.winCondition){
+            levelBall.ballShieldBreaking = true;
+            setTimeout(() => {
+              levelBall.isActive = true
+            }, 300);
+          }
           return false;
         } else return true;
       })
@@ -419,23 +433,26 @@ addbubble() {  //función para añadir obstáculo
 
 
   levelChange(){
+    setTimeout(() => {
+    
     GAMELEVEL += 1;
     this.changingLevel = true;
     this.randomColor = getRandomColor();
     this.indiceAleatorio = Math.floor(Math.random() * this.palabras.length);
     setTimeout(() => {
-    this.changingLevel = false;
-    changingLevelImg$$.style.display = "none"
-    levelChangeText1$$.style.display = "none"
-    levelChangeText2$$.style.display = "none"
-
-      if(GAMELEVEL === 2){
-        level1(this.gameTime, this.ctx, this.platforms, this.bouncers, this.spikes, this.stairs, this.flamethrowers,this.machineguns, this.healings, this.auras, this.boxes, this.blasters, this.levelBalls)
-      } else if(GAMELEVEL === 3){
-        level1(this.gameTime, this.ctx, this.platforms, this.bouncers, this.spikes, this.stairs, this.flamethrowers,this.machineguns, this.healings, this.auras, this.boxes, this.blasters, this.levelBalls)
-      } else if(GAMELEVEL === 4){
-      }
-  }, 3000);
+          this.changingLevel = false;
+          changingLevelImg$$.style.display = "none"
+          levelChangeText1$$.style.display = "none"
+          levelChangeText2$$.style.display = "none"
+          this.levelBalls = [];
+            if(GAMELEVEL === 2){
+          level2(this.gameTime, this.ctx,this.bubbles, this.platforms, this.bouncers, this.spikes, this.stairs, this.flamethrowers,  this.machineguns, this.healings, this.auras, this.boxes, this.blasters, this.levelBalls)
+            } else if(GAMELEVEL === 3){
+          level1(this.gameTime, this.ctx,this.bubbles, this.platforms, this.bouncers, this.spikes, this.stairs, this.flamethrowers,  this.machineguns, this.healings, this.auras, this.boxes, this.blasters, this.levelBalls)
+            } else if(GAMELEVEL === 4){
+            }
+        }, 3000);
+      }, 1000);
     this.bubbles = [];
     this.flamethrowers = [];
     this.machineguns = [];
@@ -448,10 +465,10 @@ addbubble() {  //función para añadir obstáculo
     this.heals = [];
     this.auras = [];
     this.boxes = [];
-    this.levelBalls = [];
     this.player.bulletArray = [];
     this.player.bulletBarArray = [];
     this.player.bulletFireArray = [];
+    
   }
 
   gameOver() {  //Función para terminar el juego y vaciar todos los arrays.

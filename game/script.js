@@ -52,6 +52,7 @@ instruccionesInfo2$$.addEventListener("click",()=>{
     instruccionesInfo1$$.style.zIndex = 1;
     instruccionesInfo2$$.style.zIndex = 2;
 })
+
 instruccionesInfo1$$.addEventListener("click",()=>{
     instruccionesInfo1$$.style.zIndex = 2;
     instruccionesInfo2$$.style.zIndex = 1;

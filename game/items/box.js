@@ -1,5 +1,5 @@
 class Box {
-  constructor(ctx,x, y, boxLevel) {
+  constructor(ctx,x, y, boxLevel, lootNumber) {
     this.ctx = ctx;
     this.x = x || 100;
     this.y = y || 20;
@@ -23,6 +23,8 @@ class Box {
     this.boxImpactMetalic = new Audio("/public/sounds/box/boxImpactMetalic.mp3")
     this.boxImpactMetalic.volume = 0.08;
     this.boxLevel = boxLevel;// de 1 a 3 determina la resistenci de la caja
+    this.containsRandom = false;
+    this.lootNumber = lootNumber || 3
   }
 
   draw() {
