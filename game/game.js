@@ -39,9 +39,12 @@ class Game {
     // sounds sounds sounds
     this.bubbleBounceSound = new Audio("../public/sounds/bubbleBounce.mp3") //todo -- paso 1 traer el sonido y almacenarlo en una variable
     this.bubbleBounceSound.volume = 0.1;  //todo -- paso 2, no obligatorio, determinarle volumen de 0 a 1, creo
+    this.barHit = new Audio("/public/sounds/shooting/barHit.mp3")
+    this.barHit.volume = 0.1
+
+    // Obtén un índice aleatorio
     this.palabras = ["Bien hecho! sigue así", "Cada vez mejor!", "No te rindas! Ya lo tienes!", "Imparable! Dale caña", "Das miedo! avanza más!"];
     this.indiceAleatorio
-// Obtén un índice aleatorio
   }
   
   start() {
@@ -205,6 +208,7 @@ class Game {
     this.bubbles.forEach((bubble) => {  //bubble con platform
       this.platforms.forEach((platform) => {
         if(platform.collides(bubble)){
+    this.bubbleBounceSound.play();  
           if(platform.isBouncable){
             bounceFromObstacles(bubble, platform)
           } else if(!platform.isBouncable){
@@ -235,6 +239,8 @@ class Game {
                   bar.solidState = true;
                   bar.y = platform.y+ platform.h;
                   bar.vy = 0;
+                  this.barHit.play();
+                  this.player.shootBarSound.volume = 0;
                   bar.img.src =  "../public/Imagenes/weaponBarSolid.png";
             }
           })
