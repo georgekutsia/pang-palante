@@ -1,11 +1,10 @@
 class WeaponBar {
-  constructor(ctx, x, y, direction) {
+  constructor(ctx, x, y, ) {
     this.ctx = ctx;
     this.x = x;
     this.y = y;
     this.vy = -2;
     this.vx =  0;
-    this.direction = direction; // recoge la dirección en la que se está moviendo player cuando se dispara, para luego usarlo al impactar sobre algunos objetos, tipo al rebotar de plataformas
     this.img = new Image();
     this.img.src = "../public/Imagenes/weaponBarZigzag.png";
     this.img.frame = 0;
@@ -58,6 +57,11 @@ class WeaponBar {
   collides(objetivo) {
     const colX =this.x <= objetivo.x + objetivo.w && this.x + this.w > objetivo.x;
     const colY =this.y + this.h > objetivo.y && this.y < objetivo.y + objetivo.h;
+    return colX && colY;
+  }
+  collidesTop(objetivo) {
+    const colX = this.x <= objetivo.x + objetivo.w && this.x + this.w > objetivo.x;
+    const colY =this.y + 10 > objetivo.y && this.y < objetivo.y + objetivo.h;
     return colX && colY;
   }
   isVisible() {

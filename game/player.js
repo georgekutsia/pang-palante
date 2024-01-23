@@ -11,7 +11,7 @@ class Player {
     this.vy = 0;
     this.g = 0.03; //gravedad
     this.r = 0; //rozamiento
-
+    this.feet = this.y + this.h
     this.auraIsActive = false;
     this.auraTime = 0;
     this.frameTick = 1;
@@ -27,6 +27,7 @@ class Player {
     this.chargingFires = false; //   se pone en true mientras carga el disparo fuerte de fuego
     this.megaFireBlaster = false;
     this.megaFireBlasterAmount = 91;
+    this.bulala = false;
 
     this.img = new Image();
     this.img.src = "../public/Imagenes/pangRunRight.png";
@@ -176,7 +177,7 @@ class Player {
       setTimeout(() => {
         Q = 81;
         E = 69;
-      }, 5000);
+      }, 1000);
     }
     if(key === E){
       this.r = -0.4;
@@ -187,7 +188,7 @@ class Player {
       setTimeout(() => {
         Q = 81;
         E = 69;
-      }, 5000);
+      }, 1000);
     }
 
     if(key === B){
@@ -215,9 +216,10 @@ class Player {
       this.shootBar();
       M = 0
     }
-    if(key === ALT && this.vy === 0 ){
+    if(key === ALT && this.vy === 0 || key === ALT && this.bulala === true){
       this.vy = jumpHeight 
       this.g = 0.2
+      this.bulala = false;
       ALT = 0;
       setTimeout(() => {
         ALT = 16;
@@ -273,7 +275,7 @@ class Player {
         for (let i = 0; i < this.charging; i++) {
           this.blasterExplosion.play();
           this.blasterCharging.volume = 0;
-          if(i % 10 === 0 && i >= 10 && i % 20 !==0 ){
+          if(i % 10 === 0  && i % 20 !==0 ){
             const bulletFire = new WeaponFire(this.ctx, this.x + this.w-i, this.y, this.ctx.canvas.width/20, this.ctx.canvas.width/18)
             this.bulletFireArray.push(bulletFire);
           }

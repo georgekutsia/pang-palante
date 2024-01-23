@@ -3,8 +3,8 @@ class Bubble {
     this.ctx = ctx;
     this.x = x || Math.random() * this.ctx.canvas.width; //el obstáculo aparece desde arriba del canvas 
     this.y = y || obstacPlacing || -30; // el obstáculo sale de una altura específica o de alguna altura randóm
-    this.w = w || this.ctx.canvas.width / 10;  //anchura calculada respecto al canvas
-    this.h = h || this.ctx.canvas.width / 10;  //altura calculada respecto al canvas
+    this.w = w || this.ctx.canvas.width / 5;  //anchura calculada respecto al canvas
+    this.h = h || this.ctx.canvas.width / 5;  //altura calculada respecto al canvas
     this.vy = vy || bubbleSpeedY;
     this.vx = vx || bubbleSpeedX;
     this.g = g || 0.03;
@@ -12,11 +12,20 @@ class Bubble {
     this.damage = damage || 1; // daño especificado o 10
     this.img = new Image();   //crear nueva imágene ne canvas
     this.img.src = obstacleImg || "../public/Imagenes/bubble.png";  //definir cual es la nueva imagen
+    this.randomColor = getRandomColor();
 
     this.bubbleBounceSound = new Audio("../public/sounds/bubbleBounce.mp3") //todo -- paso 1 traer el sonido y almacenarlo en una variable
     this.bubbleBounceSound.volume = 0.3;  //todo -- paso 2, no obligatorio, determinarle volumen de 0 a 1, creo
   }
   draw() {
+
+
+    // Dibujar el círculo detrás de la burbuja
+    this.ctx.beginPath();
+    this.ctx.arc(this.x + this.w / 2, this.y + this.h / 2, this.w / 2, 0, 2 * Math.PI);
+    this.ctx.fillStyle = this.randomColor;
+    this.ctx.fill();
+    this.ctx.closePath();
     this.ctx.drawImage(this.img, this.x, this.y, this.w, this.h);  // dibuja el obstáculo
     if(this.w <= this.explodingSize) this.x = -100;
   }
@@ -38,6 +47,7 @@ class Bubble {
     }
 
   }
+  
   isVisible(){
     return  this.x > -2 && this.x <= this.ctx.canvas.width;  //determina cuándo es visible el obstáculo
   }

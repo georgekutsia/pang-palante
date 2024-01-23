@@ -70,6 +70,21 @@ function randomLootFromBox(ctx, flamethrowers, healings, auras,machineguns, x, y
     machineguns.push(machinegun)
   }
 }
+function specificLootFromBox(ctx, specificLoot, flamethrowers, healings, auras,machineguns, x, y){
+  if(specificLoot === 1){
+    const flamethrower = new Flamethrower(ctx, x, y  )
+    flamethrowers.push(flamethrower)
+  } else if(specificLoot === 2){
+    const healingItem = new Healing(ctx, x, y )
+    healings.push(healingItem)
+  } else if(specificLoot === 3){
+    const aura = new Aura(ctx, x, y)
+    auras.push(aura)
+  }else if(specificLoot === 4){
+    const machinegun = new Machinegun(ctx, x, y)
+    machineguns.push(machinegun)
+  }
+}
 
 function flamethrowerItem(ctx, flamethrowers) {  
   const flamethrower = new Flamethrower(ctx)
@@ -102,8 +117,6 @@ function getRandomColor() {
   const red = Math.floor(Math.random() * 256);
   const green = Math.floor(Math.random() * 256);
   const blue = Math.floor(Math.random() * 256);
-
   const rgbColor = `rgb(${red},${green},${blue})`;
-
   return rgbColor;
 }
