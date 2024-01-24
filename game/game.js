@@ -26,6 +26,7 @@ class Game {
     this.flamethrowers = []; // salen nuevas tipos de armas
     this.machineguns = []; // salen nuevas tipos de armas
     this.healings = []; // salen nuevas tipos de armas
+    this.bars = []; // salen nuevas tipos de armas
     this.puffBubbles = []; // para cuando estalla la burbuja
     this.platforms = []; // plataformas para saltar
     this.bouncers = []; // plataformas que rebotan
@@ -35,12 +36,14 @@ class Game {
     this.boxes = []; // Array para almacenar instancias de la clase boxes
     this.blasters = []; // Array para almacenar instancias de la clase blasters
     this.levelBalls = []; // Array para almacenar instancias de la clase blasters
-    this.levelArray = [this.gameTime, this.ctx, this.bubbles, this.platforms, this.bouncers, this.spikes, this.stairs, this.flamethrowers,  this.machineguns, this.healings, this.auras, this.boxes, this.blasters, this.levelBalls]
+    this.levelArray = [this.gameTime, this.ctx, this.bubbles, this.platforms, this.bouncers, this.spikes, this.stairs, this.flamethrowers,  this.machineguns, this.healings, this.bars,this.bars, this.auras, this.boxes, this.blasters, this.levelBalls]
+    this.levelArray = [this.gameTime, this.ctx, this.bubbles, this.platforms, this.bouncers, this.spikes, this.stairs, this.flamethrowers,  this.machineguns, this.healings, this.bars,this.bars, this.auras, this.boxes, this.blasters, this.levelBalls]
     // sounds sounds sounds
     this.bubbleBounceSound = new Audio("../public/sounds/bubbleBounce.mp3") //todo -- paso 1 traer el sonido y almacenarlo en una variable
     this.bubbleBounceSound.volume = 0.1;  //todo -- paso 2, no obligatorio, determinarle volumen de 0 a 1, creo
     this.barHit = new Audio("/public/sounds/shooting/barHit.mp3")
-    this.barHit.volume = 0.1
+    this.barHit.volume = 0.05
+    this.changeLevelSound1 = new Audio("/public/sounds/changeLevelSound1.mp3")
 
     // Obtén un índice aleatorio
     this.palabras = ["Bien hecho! sigue así", "Cada vez mejor!", "No te rindas! Ya lo tienes!", "Imparable! Dale caña", "Das miedo! avanza más!"];
@@ -65,7 +68,7 @@ class Game {
       this.bubbleTick++
       this.gameTime++ //Cada 60 representan 1 segundo de tiempo en el juego
     }, 1000 / 60);
-    level2(this.gameTime, this.ctx,this.bubbles, this.platforms, this.bouncers, this.spikes, this.stairs, this.flamethrowers,  this.machineguns, this.healings, this.auras, this.boxes, this.blasters, this.levelBalls)
+    level2(this.gameTime, this.ctx,this.bubbles, this.platforms, this.bouncers, this.spikes, this.stairs, this.flamethrowers,  this.machineguns, this.healings, this.bars, this.auras, this.boxes, this.blasters, this.levelBalls)
   }
 
   stop() {  //para pausar el juego
@@ -87,6 +90,7 @@ class Game {
     this.blasters = this.blasters.filter((e) => e.isVisible()); //elimina cada obstáculo que ya no es visible y vacía el array
     this.levelBalls = this.levelBalls.filter((e) => e.isVisible()); //elimina cada obstáculo que ya no es visible y vacía el array
     this.healings = this.healings.filter((e) => e.isVisible()); //elimina cada obstáculo que ya no es visible y vacía el array
+    this.bars = this.bars.filter((e) => e.isVisible()); //elimina cada obstáculo que ya no es visible y vacía el array
     this.puffBubbles = this.puffBubbles.filter((e) => e.isVisible()); //elimina cada obstáculo que ya no es visible y vacía el array
   }
 
@@ -105,6 +109,7 @@ class Game {
     this.boxes.forEach((e) => e.draw());  //dibuja cada obstáculo
     this.blasters.forEach((e) => e.draw());  //dibuja cada obstáculo
     this.healings.forEach((e) => e.draw());  //dibuja cada obstáculo
+    this.bars.forEach((e) => e.draw());  //dibuja cada obstáculo
     this.levelBalls.forEach((e) => e.draw());  //dibuja cada obstáculo
     if(this.player.life.total <= 0) this.gameOver(); // cuando el player muere se llama a la funcion gameOver()
   }
@@ -121,6 +126,7 @@ class Game {
     this.blasters.forEach((e) => e.move());  //mueve los obstáculos
     this.levelBalls.forEach((e) => e.move());  //mueve los obstáculos
     this.healings.forEach((e) => e.move());  //mueve los obstáculos
+    this.bars.forEach((e) => e.move());  //mueve los obstáculos
     this.puffBubbles.forEach((e) => e.move());  //mueve los obstáculos
     if(this.bubbles.length <= 0){
       this.levelBalls.forEach((e) => e.winCondition = true)
@@ -374,8 +380,14 @@ class Game {
       });
     this.healings.forEach((healing) => {   // healings  choca con el personaje
         if (healing.collides(this.player)) {
-          this.player.gainLife()
+          this.player.weaponBarAmount += 3;
           healing.x = - 100; // situa fuera del canvas la burbuja que colisiona con el player y luego isVisible la elimina del array
+        } else return true
+      });
+    this.bars.forEach((bar) => {   // bars  choca con el personaje
+        if (bar.collides(this.player)) {
+          this.player.barAmount+=2
+          bar.x = - 100; // situa fuera del canvas la burbuja que colisiona con el player y luego isVisible la elimina del array
         } else return true
       });
     this.blasters.forEach((blaster) => {   // blasters  choca con el personaje
@@ -402,10 +414,9 @@ class Game {
             
             if(box.boxImg.frame > 8){
               if(box.containsRandom){
-                randomLootFromBox(this.ctx,  this.flamethrowers, this.healings, this.auras, this.machineguns, box.x, box.y)
+                randomLootFromBox(this.ctx,  this.flamethrowers, this.healings,this.bars, this.auras, this.machineguns, box.x, box.y)
               }else{
-                console.log("bulala")
-                specificLootFromBox(this.ctx, box.lootNumber, this.flamethrowers, this.healings, this.auras, this.machineguns, box.x, box.y)
+                specificLootFromBox(this.ctx, box.lootNumber, this.flamethrowers, this.healings, this.bars, this.auras, this.machineguns, box.x, box.y)
               }
             }
             const puffBubble = new BubblePuff(ctx, box.x, box.y + box.h/2, box.w, box.h)
@@ -419,13 +430,15 @@ class Game {
       this.player.bulletArray.forEach((bullet) => {
         if(bullet.collides(levelBall)){
           if(levelBall.isActive){
-            levelBall.ballBroke = true; 
+            levelBall.ballBroke = true;
+            levelBall.breakingLevelBallSound.play()
             this.levelChange() 
           } else if(!levelBall.isActive && !levelBall.winCondition){
             levelBall.ballShieldForceResist = true;
             bullet.y = -30;
           } else if(!levelBall.isActive && levelBall.winCondition){
             levelBall.ballShieldBreaking = true;
+            levelBall.forceFieldFailSound.play();
             setTimeout(() => {
               levelBall.isActive = true
             }, 300);
@@ -440,7 +453,7 @@ class Game {
 
   levelChange(){
     setTimeout(() => {
-    
+    this.changeLevelSound1.play()
     GAMELEVEL += 1;
     this.changingLevel = true;
     this.randomColor = getRandomColor();
@@ -452,9 +465,9 @@ class Game {
           levelChangeText2$$.style.display = "none"
           this.levelBalls = [];
             if(GAMELEVEL === 2){
-          level2(this.gameTime, this.ctx,this.bubbles, this.platforms, this.bouncers, this.spikes, this.stairs, this.flamethrowers,  this.machineguns, this.healings, this.auras, this.boxes, this.blasters, this.levelBalls)
+          level2(this.gameTime, this.ctx,this.bubbles, this.platforms, this.bouncers, this.spikes, this.stairs, this.flamethrowers,  this.machineguns, this.healings, this.bars, this.auras, this.boxes, this.blasters, this.levelBalls)
             } else if(GAMELEVEL === 3){
-          level1(this.gameTime, this.ctx,this.bubbles, this.platforms, this.bouncers, this.spikes, this.stairs, this.flamethrowers,  this.machineguns, this.healings, this.auras, this.boxes, this.blasters, this.levelBalls)
+          level1(this.gameTime, this.ctx,this.bubbles, this.platforms, this.bouncers, this.spikes, this.stairs, this.flamethrowers,  this.machineguns, this.healings, this.bars, this.auras, this.boxes, this.blasters, this.levelBalls)
             } else if(GAMELEVEL === 4){
             }
         }, 3000);
@@ -468,7 +481,7 @@ class Game {
     this.stairs = [];
     this.blasters = [];
     this.spikes = []; // plataformas que rebotan
-    this.heals = [];
+    this.healings = [];
     this.auras = [];
     this.boxes = [];
     this.player.bulletArray = [];
@@ -487,7 +500,7 @@ class Game {
     this.stairs = [];
     this.blasters = [];
     this.spikes = []; // plataformas que rebotan
-    this.heals = [];
+    this.healings = [];
     this.auras = [];
     this.boxes = [];
     this.levelBalls = [];

@@ -12,8 +12,7 @@ constructor(ctx, x, y) {
     this.imgBallShield = new Image();   //crear nueva imágene ne canvas
     this.imgBallShield.src = "../../public/Imagenes/ballShield.png";  //definir cual es la nueva imagen
     this.isActive = false;
-    this.winCondition = false;;
-
+    this.winCondition = false;
 
   //cuando se rompe la bola
     this.ballBreaks = new Image();
@@ -21,7 +20,8 @@ constructor(ctx, x, y) {
     this.ballBreaks.frame = 0;
     this.ballBreaksTick = 0;
     this.ballBroke = false;
-
+    this.breakingLevelBallSound = new Audio("/public/sounds/breakingLevelBallSound1.mp3");
+    this.breakingLevelBallSound.volume = 0.1
   //cuando resiste el daño de las balas y sale el escudo de plasma
     this.ballShieldForce = new Image(); 
     this.ballShieldForce.src = "../../public/Imagenes/ballShieldForce.png"; 
@@ -29,6 +29,9 @@ constructor(ctx, x, y) {
     this.ballShieldForceTick = 0;
     this.ballShieldForceTickTimer = 0;
     this.ballShieldForceResist = false;;
+    this.forceFieldSound = new Audio("/public/sounds/forceField.mp3")
+    this.forceFieldSound.volume = 0.1
+
 
     //el efecto de romperse cuando ya no tiene ball shield
     this.ballShieldBreak = new Image(); 
@@ -36,17 +39,19 @@ constructor(ctx, x, y) {
     this.ballShieldBreak.frame = 0;
     this.ballShieldBreakTick = 0;
     this.ballShieldBreaking = false;
+    this.forceFieldFailSound = new Audio("/public/sounds/forceFieldFailSound.mp3")
   }
   draw() {
     if(!this.ballBroke) {
     this.ctx.drawImage(this.img, this.x, this.y, this.w, this.h);  // dibuja el obstáculo
     }
     if(!this.isActive) {
-      this.ctx.drawImage(this.imgBallShield, this.x-3, this.y+4, this.w+5, this.w + 5);  // dibuja el obstáculo
+      this.ctx.drawImage(this.imgBallShield, this.x-3, this.y+4, this.w+5, this.w + 5);  // dibuja el escudo protector
     }
 
     if(this.ballShieldForceResist){
       this.ballShieldForceTickTimer++;
+      this.forceFieldSound.play()
       if(this.ballShieldForceTickTimer >= 100) {
         this.ballShieldForceResist = false;
       this.ballShieldForceTickTimer = 0;

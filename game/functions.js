@@ -54,8 +54,8 @@ function invertImage(ctx, x, y, w, h, img) {
 
 
 
-function randomLootFromBox(ctx, flamethrowers, healings, auras,machineguns, x, y){
-  const randomItem = Math.floor(Math.random() *4) + 1;
+function randomLootFromBox(ctx, flamethrowers, healings, bars, auras,machineguns, x, y){
+  const randomItem = Math.floor(Math.random() *5) + 1;
   if(randomItem === 1){
     const flamethrower = new Flamethrower(ctx, x, y  )
     flamethrowers.push(flamethrower)
@@ -68,9 +68,12 @@ function randomLootFromBox(ctx, flamethrowers, healings, auras,machineguns, x, y
   }else if(randomItem === 4){
     const machinegun = new Machinegun(ctx, x, y)
     machineguns.push(machinegun)
+  } else if(randomItem === 5){
+    const bar = new Bar(ctx, x, y)
+    bars.push(bar)
   }
 }
-function specificLootFromBox(ctx, specificLoot, flamethrowers, healings, auras,machineguns, x, y){
+function specificLootFromBox(ctx, specificLoot, flamethrowers, healings, bars, auras,machineguns, x, y){
   if(specificLoot === 1){
     const flamethrower = new Flamethrower(ctx, x, y  )
     flamethrowers.push(flamethrower)
@@ -83,6 +86,9 @@ function specificLootFromBox(ctx, specificLoot, flamethrowers, healings, auras,m
   }else if(specificLoot === 4){
     const machinegun = new Machinegun(ctx, x, y)
     machineguns.push(machinegun)
+  }else if(specificLoot === 5){
+    const bar = new Bars(ctx, x, y)
+    bars.push(bar)
   }
 }
 
@@ -99,6 +105,10 @@ function healingItem(ctx, healings) {
   const healingItem = new Healing(ctx )
   healings.push(healingItem)
 }
+function barItem(ctx, bars){
+  const bar = new Bars(ctx);
+  bars.push(bar)
+}
 
 function auraItem(ctx, auras) {  
   const aura = new Aura(ctx)
@@ -114,9 +124,9 @@ function levelBallItem(ctx, levelBalls) {
 }
 
 function getRandomColor() {
-  const red = Math.floor(Math.random() * 256);
-  const green = Math.floor(Math.random() * 256);
-  const blue = Math.floor(Math.random() * 256);
+  const red = Math.floor(Math.random() * 160);
+  const green = Math.floor(Math.random() * 160);
+  const blue = Math.floor(Math.random() * 160);
   const rgbColor = `rgb(${red},${green},${blue})`;
   return rgbColor;
 }
