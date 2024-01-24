@@ -28,7 +28,7 @@ class Player {
     this.chargingFires = false; //   se pone en true mientras carga el disparo fuerte de fuego
     this.megaFireBlaster = false;
     this.megaFireBlasterAmount = 91;
-    this.barAmount = 3;
+    this.barAmount = 40;
 
     this.bulala = false;
 
@@ -228,6 +228,7 @@ class Player {
     if(key === M){
       this.shootBar();
       this.barAmount--;
+      if(this.barAmount <= 0)this.barAmount = 0;
       M = 0
         setTimeout(() => {
           M = 77

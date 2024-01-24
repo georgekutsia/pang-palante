@@ -1,8 +1,8 @@
 class Bubble {  
-  constructor(ctx, vx, vy, x , y, w, h, g, damage, obstacleImg, obstacPlacing ) {
+  constructor(ctx, x , y, w, h, vx, vy, g, damage, obstacleImg ) {
     this.ctx = ctx;
     this.x = x || Math.random() * this.ctx.canvas.width; //el obstáculo aparece desde arriba del canvas 
-    this.y = y || obstacPlacing || -30; // el obstáculo sale de una altura específica o de alguna altura randóm
+    this.y = y  || -30; // el obstáculo sale de una altura específica o de alguna altura randóm
     this.w = w || this.ctx.canvas.width / 14;  //anchura calculada respecto al canvas
     this.h = h || this.ctx.canvas.width / 14;  //altura calculada respecto al canvas
     this.vy = vy || bubbleSpeedY;

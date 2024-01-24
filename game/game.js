@@ -36,17 +36,24 @@ class Game {
     this.boxes = []; // Array para almacenar instancias de la clase boxes
     this.blasters = []; // Array para almacenar instancias de la clase blasters
     this.levelBalls = []; // Array para almacenar instancias de la clase blasters
-    this.levelArray = [this.gameTime, this.ctx, this.bubbles, this.platforms, this.bouncers, this.spikes, this.stairs, this.flamethrowers,  this.machineguns, this.healings, this.bars,this.bars, this.auras, this.boxes, this.blasters, this.levelBalls]
-    this.levelArray = [this.gameTime, this.ctx, this.bubbles, this.platforms, this.bouncers, this.spikes, this.stairs, this.flamethrowers,  this.machineguns, this.healings, this.bars,this.bars, this.auras, this.boxes, this.blasters, this.levelBalls]
     // sounds sounds sounds
     this.bubbleBounceSound = new Audio("../public/sounds/bubbleBounce.mp3") //todo -- paso 1 traer el sonido y almacenarlo en una variable
     this.bubbleBounceSound.volume = 0.1;  //todo -- paso 2, no obligatorio, determinarle volumen de 0 a 1, creo
     this.barHit = new Audio("/public/sounds/shooting/barHit.mp3")
     this.barHit.volume = 0.05
     this.changeLevelSound1 = new Audio("/public/sounds/changeLevelSound1.mp3")
+    this.playerHeals = new Audio("/public/sounds/heal1.mp3")
+    this.playerBar = new Audio("/public/sounds/barItemRechargeSound.mp3")
 
     // Obtén un índice aleatorio
-    this.palabras = ["Bien hecho! sigue así", "Cada vez mejor!", "No te rindas! Ya lo tienes!", "Imparable! Dale caña", "Das miedo! avanza más!"];
+    this.frases = [
+      "Bien hecho! sigue así", 
+      "Cada vez lo haces mejor!", 
+      "No te rindas! Ya lo tienes!", 
+      "Eres Imparable! Dale caña", 
+      "Das miedo! avanza más!",
+      "Cuidado donde apuntas!",
+      "Esto se pondrá dificil!"];
     this.indiceAleatorio
   }
   
@@ -60,15 +67,21 @@ class Game {
         changingLevelImg$$.style.display = "block"
         levelChangeText2$$.style.display = "block"
         levelChangeText1$$.style.display = "block"
-        levelChangeText2$$.innerText = `${this.palabras[this.indiceAleatorio]}`
+        levelChangeText2$$.innerText = `${this.frases[this.indiceAleatorio]}`
         levelChangeText1$$.innerText = `Siguiente nivel ${GAMELEVEL}`
       }
-
       this.checkCollisions(); //Comprueba las colisiones constantemtente
       this.bubbleTick++
       this.gameTime++ //Cada 60 representan 1 segundo de tiempo en el juego
     }, 1000 / 60);
-    level2(this.gameTime, this.ctx,this.bubbles, this.platforms, this.bouncers, this.spikes, this.stairs, this.flamethrowers,  this.machineguns, this.healings, this.bars, this.auras, this.boxes, this.blasters, this.levelBalls)
+    //crear nivel 1 
+    if(GAMELEVEL === 1){
+      // level1(this.ctx, this.bubbles, this.platforms, this.levelBalls)
+      level3(this.ctx, this.bubbles, this.platforms,this.stairs, this.boxes, this.healings, this.levelBalls)
+      setTimeout(() => {
+        // addBubble1(this.ctx, this.bubbles)
+      }, 1000);
+    }
   }
 
   stop() {  //para pausar el juego
@@ -380,13 +393,15 @@ class Game {
       });
     this.healings.forEach((healing) => {   // healings  choca con el personaje
         if (healing.collides(this.player)) {
-          this.player.weaponBarAmount += 3;
+          this.player.gainLife()
+          this.playerHeals.play()
           healing.x = - 100; // situa fuera del canvas la burbuja que colisiona con el player y luego isVisible la elimina del array
         } else return true
       });
     this.bars.forEach((bar) => {   // bars  choca con el personaje
         if (bar.collides(this.player)) {
-          this.player.barAmount+=2
+          this.player.barAmount+=2;
+          this.playerBar.play()
           bar.x = - 100; // situa fuera del canvas la burbuja que colisiona con el player y luego isVisible la elimina del array
         } else return true
       });
@@ -457,19 +472,24 @@ class Game {
     GAMELEVEL += 1;
     this.changingLevel = true;
     this.randomColor = getRandomColor();
-    this.indiceAleatorio = Math.floor(Math.random() * this.palabras.length);
+    this.indiceAleatorio = Math.floor(Math.random() * this.frases.length);
     setTimeout(() => {
-          this.changingLevel = false;
-          changingLevelImg$$.style.display = "none"
-          levelChangeText1$$.style.display = "none"
-          levelChangeText2$$.style.display = "none"
-          this.levelBalls = [];
-            if(GAMELEVEL === 2){
-          level2(this.gameTime, this.ctx,this.bubbles, this.platforms, this.bouncers, this.spikes, this.stairs, this.flamethrowers,  this.machineguns, this.healings, this.bars, this.auras, this.boxes, this.blasters, this.levelBalls)
+      this.changingLevel = false;
+      changingLevelImg$$.style.display = "none"
+      levelChangeText1$$.style.display = "none"
+      levelChangeText2$$.style.display = "none"
+      this.levelBalls = [];
+        if(GAMELEVEL === 2){
+          this.background.img.src = "/public/Imagenes/background/background8.jpeg"
+          level2( this.ctx,this.bubbles, this.platforms, this.boxes,this.levelBalls)
             } else if(GAMELEVEL === 3){
-          level1(this.gameTime, this.ctx,this.bubbles, this.platforms, this.bouncers, this.spikes, this.stairs, this.flamethrowers,  this.machineguns, this.healings, this.bars, this.auras, this.boxes, this.blasters, this.levelBalls)
+              this.background.img.src = "/public/Imagenes/background/background9.avif"
+              setTimeout(() => {
+                addBubble3(this.ctx, this.bubbles)
+                  }, 13000);
+              level3(this.ctx, this.bubbles, this.platforms,this.stairs, this.boxes, this.healings, this.levelBalls)
             } else if(GAMELEVEL === 4){
-            }
+        }
         }, 3000);
       }, 1000);
     this.bubbles = [];
