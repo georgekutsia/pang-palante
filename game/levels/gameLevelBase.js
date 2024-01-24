@@ -44,11 +44,10 @@ function addStair1(ctx, stairs) {                         // this.ctx, ubicacion
 }
 
 
-function boxItem1(ctx, boxes) {  
-  const box1 = new Box(ctx, 100, 20,  3)
-  const box2 = new Box(ctx, 130, 20,  2)
-  const box3 = new Box(ctx, 160, 20,  1)
-  boxes.push(box1, box2, box3)
+function boxItem1(ctx, boxes) {   
+  //ctx, x, y, tipo de caja,si es random=true o si es especifico= false,  loot específico
+  const box1 = new Box(ctx, 20, 20,  3, false, 5)
+  boxes.push(box1,)
 }
 
 
@@ -70,6 +69,10 @@ function machinegunItem1(ctx, machineguns) {
 function healingItem1(ctx, healings) {  
   const healingItem = new Healing(ctx )
   healings.push(healingItem)
+}
+function barItem1(ctx, bars){
+  const bar = new Bars(ctx);
+  bars.push(bar)
 }
 
 function auraItem1(ctx, auras) {  

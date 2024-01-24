@@ -20,7 +20,7 @@ class Player {
     this.bulletFireArray = [];
     this.bulletBarArray = [];
     this.frameAmount = 5;
-    this.amountOfFireShoots = 0;
+    this.amountOfFireShoots = 3;
     this.moving = moving;
     this.immune = false; // al recibir daño se vuelve inmune durante unos segundos
     this.fading = 0; //necesario para el parpadeo del personaje cuando es inmune
@@ -28,6 +28,8 @@ class Player {
     this.chargingFires = false; //   se pone en true mientras carga el disparo fuerte de fuego
     this.megaFireBlaster = false;
     this.megaFireBlasterAmount = 91;
+    this.barAmount = 3;
+
     this.bulala = false;
 
     this.img = new Image();
@@ -43,6 +45,8 @@ class Player {
     this.dodgeE.src = "/public/Imagenes/e.png";
     this.machinegunPaint = new Image();
     this.machinegunPaint.src = "/public/Imagenes/machinegunPaint.png";
+    this.barItem = new Image();
+    this.barItem.src = "/public/Imagenes/barItem.png";
 
 
     this.blasterExplosion = new Audio("../public/sounds/megablasterBlastSound.mp3");
@@ -52,9 +56,8 @@ class Player {
     this.playerDamageSound1 = new Audio("../public/sounds/playerDamageSound1.mp3");
     this.playerDamageSound1.volume = 0.1; //
     this.shootSound = new Audio("/public/sounds/shooting/weaponShootSound.mp3");
-    this.shootSound.volume = 0.3;
+    this.shootSound.volume = 0.1;
     this.shootBarSound = new Audio("/public/sounds/shooting/shootBarSound2.mp3");
-    this.shootBarSound.volume = 0.3;
   }
 
   draw() {
@@ -69,6 +72,13 @@ class Player {
     for (let i = 0; i < this.charging /10 -1; i++) {
       if(this.charging >= 11)
       this.ctx.drawImage(this.weaponFire, this.x-20 + i*5, this.y-15, this.w , this.h);
+    }
+    if (this.barAmount > 0) {
+      this.ctx.save()
+      this.ctx.font = "10px Arial"
+      this.ctx.fillText(`x ${this.barAmount}`, this.ctx.canvas.width  - 15, 10);
+      this.ctx.drawImage(this.barItem, this.ctx.canvas.width  - 25, 1, this.w/1.8 , this.h/1.3);
+      this.ctx.restore()
     }
     if(this.amountOfFireShoots>=1){    
                    //x, y, la cantidad por la que se dibuja, radio exterior, radio interior, color de inicio, color de medio, color de final es negro
@@ -217,6 +227,7 @@ class Player {
     }
     if(key === M){
       this.shootBar();
+      this.barAmount--;
       M = 0
         setTimeout(() => {
           M = 77
@@ -325,9 +336,11 @@ class Player {
     this.bulletFireArray.push(bulletFire);
   }
   shootBar(){
-    this.shootBarSound.volume = 0.3;
+    if(this.barAmount > 0){
+    this.shootBarSound.volume = 0.09;
     this.shootBarSound.play();
     const bulletBar = new WeaponBar(this.ctx, this.x + 5, this.y)
     this.bulletBarArray.push(bulletBar);
+  }
   }
 }

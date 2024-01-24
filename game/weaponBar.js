@@ -16,7 +16,7 @@ class WeaponBar {
     this.solidState = false;  //al pasar a true, empieza la cuenta atrás para que desaparezca;
     this.life = barLife //las veces que la barra puede chocar contra las burbujas antes de desaparecer
     this.barHit = new Audio("/public/sounds/shooting/barHit.mp3")
-    this.barHit.volume = 0.1
+    this.barHit.volume = 0.05
     this.hittingTop = true;
   }
 

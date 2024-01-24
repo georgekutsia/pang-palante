@@ -3,8 +3,8 @@ class Bubble {
     this.ctx = ctx;
     this.x = x || Math.random() * this.ctx.canvas.width; //el obstáculo aparece desde arriba del canvas 
     this.y = y || obstacPlacing || -30; // el obstáculo sale de una altura específica o de alguna altura randóm
-    this.w = w || this.ctx.canvas.width / 5;  //anchura calculada respecto al canvas
-    this.h = h || this.ctx.canvas.width / 5;  //altura calculada respecto al canvas
+    this.w = w || this.ctx.canvas.width / 14;  //anchura calculada respecto al canvas
+    this.h = h || this.ctx.canvas.width / 14;  //altura calculada respecto al canvas
     this.vy = vy || bubbleSpeedY;
     this.vx = vx || bubbleSpeedX;
     this.g = g || 0.05;
@@ -18,8 +18,6 @@ class Bubble {
     this.bubbleBounceSound.volume = 0.3;  //todo -- paso 2, no obligatorio, determinarle volumen de 0 a 1, creo
   }
   draw() {
-
-
     // Dibujar el círculo detrás de la burbuja
     this.ctx.beginPath();
     this.ctx.arc(this.x + this.w / 2, this.y + this.h / 2, this.w / 2, 0, 2 * Math.PI);

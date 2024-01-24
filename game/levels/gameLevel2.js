@@ -1,5 +1,5 @@
 
-function level2(gameTime, ctx, bubbles, platforms, bouncers,spikes, stairs, flamethrowers, machineguns, healings, auras, boxes, blasters, levelBalls){
+function level2(gameTime, ctx, bubbles, platforms, bouncers,spikes, stairs, flamethrowers, machineguns, healings,bars, auras, boxes, blasters, levelBalls){
   addPlatforms2(ctx, platforms)
   // addBouncer2(ctx, bouncers)
   // addSpikes2(ctx, spikes)
@@ -13,7 +13,7 @@ function level2(gameTime, ctx, bubbles, platforms, bouncers,spikes, stairs, flam
   // blasterItem2(ctx, blasters)
   // machinegunItem(ctx, machineguns)
   levelBallItem2(ctx, levelBalls)
-  addBubble2(ctx, bubbles)
+  // addBubble2(ctx, bubbles)
 }
 
 function addPlatforms2(ctx, platforms){
@@ -46,8 +46,9 @@ function addStair2(ctx, stairs) {                         // this.ctx, ubicacion
 }
 
 
-function boxItem2(ctx, boxes) {  
-  const box1 = new Box(ctx, 20, 20,  3, 3)
+function boxItem2(ctx, boxes) {   
+  //ctx, x, y, tipo de caja,si es random=true o si es especifico= false,  loot específico
+  const box1 = new Box(ctx, 20, 20,  3, false, 5)
   boxes.push(box1,)
 }
 
@@ -71,7 +72,10 @@ function healingItem2(ctx, healings) {
   const healingItem = new Healing(ctx )
   healings.push(healingItem)
 }
-
+function barItem1(ctx, bars){
+  const bar = new Bars(ctx);
+  bars.push(bar)
+}
 function auraItem2(ctx, auras) {  
   const aura = new Aura(ctx)
   auras.push(aura)
