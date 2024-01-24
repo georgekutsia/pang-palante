@@ -1,19 +1,19 @@
 
-function level2(gameTime, ctx, bubbles, platforms, bouncers,spikes, stairs, flamethrowers, machineguns, healings,bars, auras, boxes, blasters, levelBalls){
-  addPlatforms2(ctx, platforms)
-  // addBouncer2(ctx, bouncers)
-  // addSpikes2(ctx, spikes)
-  // addStair2(ctx, stairs)
-  // flamethrowerItem2(ctx, flamethrowers)
+function level2(ctx, bubbles, platforms, boxes,  levelBalls){
 
-  // auraItem2(ctx, auras)
+  addPlatforms2(ctx, platforms)
   boxItem2(ctx, boxes)
-  // blasterItem2(ctx, blasters)
-  // blasterItem2(ctx, blasters)
-  // blasterItem2(ctx, blasters)
-  // machinegunItem(ctx, machineguns)
   levelBallItem2(ctx, levelBalls)
-  // addBubble2(ctx, bubbles)
+  addBubble2(ctx, bubbles)
+}
+
+function levelBallItem2(ctx, levelBalls) {  
+  const levelBall = new LevelBall(ctx, ctx.canvas.width/2 -ctx.canvas.width / 33, 0)
+  levelBalls.push(levelBall)
+}
+function addBubble2(ctx, bubbles){ 
+  const bubble1 = new Bubble(ctx, 90, -350, ctx.canvas.width / 10, ctx.canvas.width / 10)
+  bubbles.push(bubble1);
 }
 
 function addPlatforms2(ctx, platforms){
@@ -29,62 +29,8 @@ function addPlatforms2(ctx, platforms){
       //!  la anchura más la altura de la plataforma nunca debe superar 60, para que el total de red sea como máximo 240;
       //opciones de anchura y altura  son 25, 5 la estándar y mínima. Las siguiente suben de 10 en 10 en anchura
 
-function addBouncer2(ctx, bouncers){
-  const bouncer1 = new Bouncer(ctx, 30, 70, 20, 30)
-  bouncers.push(bouncer1)
-}
-
-function addSpikes2(ctx, stairs){
-  const stair1 = new Spikes(ctx, 100, 136)
-  stairs.push(stair1)
-}
-
-function addStair2(ctx, stairs) {                         // this.ctx, ubicacion en eje x, ubicacion en eje y, ancho y alto. la última sería la imágen
-  //! la escalera no debería colgar sola en el aire, debería tener una parte de la plataforma debajo o pasan cosas raras con la gravedad
-  const stair1 = new Stair(ctx, 81, 90,  30, 40);
-  stairs.push(stair1,);
-}
-
-
 function boxItem2(ctx, boxes) {   
   //ctx, x, y, tipo de caja,si es random=true o si es especifico= false,  loot específico
   const box1 = new Box(ctx, 20, 20,  3, false, 5)
   boxes.push(box1,)
-}
-
-
-function addBubble2(ctx, bubbles){ 
-  const bubble = new Bubble(ctx)
-  bubbles.push(bubble);
-}
-
-
-function flamethrowerItem2(ctx, flamethrowers) {  
-  const flamethrower = new Flamethrower(ctx)
-  flamethrowers.push(flamethrower)
-}
-function machinegunItem2(ctx, machineguns) {  
-  const machinegun = new Machinegun(ctx)
-  machineguns.push(machinegun)
-}
-
-function healingItem2(ctx, healings) {  
-  const healingItem = new Healing(ctx )
-  healings.push(healingItem)
-}
-function barItem1(ctx, bars){
-  const bar = new Bars(ctx);
-  bars.push(bar)
-}
-function auraItem2(ctx, auras) {  
-  const aura = new Aura(ctx)
-  auras.push(aura)
-}
-function blasterItem2(ctx, blasters) {  
-  const blaster = new MegaFireBlaster(ctx)
-  blasters.push(blaster)
-}
-function levelBallItem2(ctx, levelBalls) {  
-  const levelBall = new LevelBall(ctx, ctx.canvas.width/2 -ctx.canvas.width / 33, 0)
-  levelBalls.push(levelBall)
 }
