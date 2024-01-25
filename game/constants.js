@@ -37,6 +37,7 @@ let weaponBarSolidTick = 350;//el tiempo que se pasa la barra en estado sólido
 let fireSizing = 0.1 //el aumento de ancho y alto de la bala de fuego a medida que sube
 let barLife = 20; // las veces que puede la bola chocar con la barra antes de desaparecer
 let immuneTime = 2000;
+let jumpDownDistance = 0;
 let bubbleSpeedY = 2.5;
 let bubbleSpeedX = 0.5;
 let GAMELEVEL = 6;

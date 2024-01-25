@@ -161,28 +161,23 @@ function  itemDropOnStairs (items, platforms){
 
 function bouncerPlayerCollision(player, bouncer){
   player.vy = 0;
-  if (
-    player.y <= bouncer.y &&
-    player.x <= bouncer.x + bouncer.w &&
-    player.x + player.w > bouncer.x - 30
-  ) {
+  if ( player.y <= bouncer.y && player.x <= bouncer.x + bouncer.w && player.x + player.w > bouncer.x - 30) {
     player.vy = -3;
     player.y = bouncer.y - player.h;
   }
   if (player.y + player.h >= bouncer.y + bouncer.h) {//colisión por la parte inferior de la plataforma
     player.vy = 0;
   }
-  if (player.x >= bouncer.x + bouncer.w - 6) {
-    //colisión por la derecha
+  if (player.x >= bouncer.x + bouncer.w - 6) {//colisión por la derecha
     player.g = 0.2;
-    player.vx = 2;
+    player.vx = 1.5;
     setTimeout(() => {
       player.vx = 0;
     }, 500);
   }
   if (player.x - 1 <= bouncer.x) {//colisión por la izquierda
     player.g = 0.2;
-    player.vx = -2;
+    player.vx = -1.5
     setTimeout(() => {
       player.vx = 0;
     }, 500);
@@ -190,30 +185,24 @@ function bouncerPlayerCollision(player, bouncer){
 }
 
 function platformPlayerCollision(player, platform){
-  if (
-    player.y <= platform.y - 10 &&
-    player.x <= platform.x + platform.w &&
-    player.x + player.w > platform.x
-  ) {
-    if (platform.isBrakable) {
-      platform.braking--;
-      platform.goingToBreak = true;
-    }
+  if (player.y <= platform.y - 10 &&player.x <= platform.x + platform.w &&player.x + player.w > platform.x) {
+    if (platform.isBrakable) {platform.braking--;platform.goingToBreak = true;}
     player.y = platform.y - player.h;
+    jumpDownDistance = 0;
     player.x += platform.vx; // si le digo que es igual player.vx = platform.vx, se ve el jugador moviendose por cómo estan configurados los frames de movimiento
     player.vy = platform.vy;
-    player.bulala = true;
+    player.ableToJump = true;
     ALT = 16;
   }
-  if (player.y + player.h >= platform.y + platform.h) {
-    //colisión por la parte inferior de la plataforma
+  if (player.y + player.h >= platform.y + platform.h) {//colisión por la parte inferior de la plataforma
     player.vy = 0;
+    jumpDownDistance = 0;
+
   }
-  if (
-    player.x >= platform.x + platform.w - 6 ||
-    player.x <= platform.x
+  if (player.x >= platform.x + platform.w ||player.x <= platform.x
   ) {
     //colisión por los lados de la plataforma
+    jumpDownDistance = 0;
     player.vy = 0;
     player.vx = 0;
     player.g = 0.2;

@@ -135,11 +135,11 @@ class Game {
     this.bouncers.forEach((e) => e.draw());
     this.player.draw(); //dibuja al personaje y todo lo que se dibuja en la clase de personaje
     this.puffBubbles.forEach((e) => e.draw()); //dibuja cada obstáculo
+    this.boxes.forEach((e) => e.draw()); //dibuja cada obstáculo
     this.bubbles.forEach((e) => e.draw()); //dibuja cada obstáculo
     this.flamethrowers.forEach((e) => e.draw()); //dibuja cada obstáculo
     this.machineguns.forEach((e) => e.draw()); //dibuja cada obstáculo
     this.auras.forEach((e) => e.draw()); //dibuja cada obstáculo
-    this.boxes.forEach((e) => e.draw()); //dibuja cada obstáculo
     this.blasters.forEach((e) => e.draw()); //dibuja cada obstáculo
     this.healings.forEach((e) => e.draw()); //dibuja cada obstáculo
     this.bars.forEach((e) => e.draw()); //dibuja cada obstáculo
@@ -205,6 +205,7 @@ class Game {
       if (stair.collidesTop(this.player)) {
         this.player.vy = 0;
         this.player.y = stair.y - this.player.h;
+          jumpDownDistance = 3;
         W = 0;
         this.player.g = 0.2;
       }
@@ -216,6 +217,7 @@ class Game {
         }, 200);
       }
       if (stair.collides(this.player)) {
+        jumpDownDistance = 0;
         W = 87;
       } else {
         return true;
