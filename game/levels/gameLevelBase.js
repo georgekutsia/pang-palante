@@ -43,8 +43,8 @@ function addBouncerx(ctx, bouncers){
 }
 
 function addSpikesx(ctx, stairs){
-  const stair1 = new Spikes(ctx, 100, 136)
-  stairs.push(stair1)
+  const spike1 = new Spikes(ctx, 100, 136)
+  stairs.push(spike1)
 }
 
 function addStairx(ctx, stairs) {                         // this.ctx, ubicacion en eje x, ubicacion en eje y, ancho y alto. la última sería la imágen

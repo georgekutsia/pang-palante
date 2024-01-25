@@ -2,7 +2,7 @@ class Player {
 
   constructor(ctx, moving) {
     this.ctx = ctx;
-    this.x = 60;
+    this.x = 120;
     this.h = this.ctx.canvas.width / 19;
     this.y = this.ctx.canvas.height - this.h;
     this.w = this.ctx.canvas.width / 23;
@@ -20,7 +20,7 @@ class Player {
     this.bulletFireArray = [];
     this.bulletBarArray = [];
     this.frameAmount = 5;
-    this.amountOfFireShoots = 3;
+    this.amountOfFireShoots = 0;
     this.moving = moving;
     this.immune = false; // al recibir daño se vuelve inmune durante unos segundos
     this.fading = 0; //necesario para el parpadeo del personaje cuando es inmune
@@ -29,7 +29,7 @@ class Player {
     this.megaFireBlaster = false;
     this.megaFireBlasterAmount = 91;
     this.barAmount = 40;
-    this.bulala = false;
+    this.ableToJump = false;
 
     this.img = new Image();
     this.img.src = "../public/Imagenes/pangRunRight.png";
@@ -177,7 +177,7 @@ class Player {
     }
     if (key === S /*&& this.y + this.h < this.ctx.canvas.height - this.h*/) {//todo: bloqueo para el limite inferior
       this.vy = playerSpeed;
-      this.y = this.y + 5;  // para que al estar encima de la escalera, hago un salto hacia abajo y deje de tener posición fija
+      this.y = this.y + jumpDownDistance;  // para que al estar encima de la escalera, hago un salto hacia abajo y deje de tener posición fija
     }
 
     if(key === Q){
@@ -233,10 +233,10 @@ class Player {
           M = 77
         }, 1000);
     }
-    if(key === ALT && this.vy === 0 || key === ALT && this.bulala === true){
+    if(key === ALT && this.vy === 0 || key === ALT && this.ableToJump === true){
       this.vy = jumpHeight 
       this.g = 0.2
-      this.bulala = false;
+      this.ableToJump = false;
       ALT = 0;
       setTimeout(() => {
         ALT = 16;
