@@ -82,10 +82,10 @@ class Game {
     }, 1000 / 60);
     //crear nivel 1
     if (!this.gameStarted) {
-      if (GAMELEVEL === 1) {
-        // level6( this.ctx, this.bubbles, this.platforms,this.bouncers, this.stairs,  this.healings, this.bars, this.boxes,this.levelBalls, this.spikes, this.boxes);
-        level1(this.ctx, this.bubbles, this.platforms, this.levelBalls,)
-        auraItem(this.ctx, this.auras)
+      if (GAMELEVEL === 6) {
+        level6( this.ctx, this.bubbles, this.platforms,this.bouncers, this.stairs,  this.healings, this.bars, this.boxes, this.spikes,this.levelBalls, this.stairs);
+        // level1(this.ctx, this.bubbles, this.platforms, this.levelBalls,)
+        // auraItem(this.ctx, this.auras)
         // setTimeout(() => {
         //   addBubble1(this.ctx, this.bubbles)
         // }, 10000);
@@ -241,13 +241,7 @@ class Game {
           if (bubble.w <= bubble.explodingSize * 2) {
             const elx = bubble.x;
             const ely = bubble.y;
-            const puffBubble = new BubblePuff(
-              this.ctx,
-              elx,
-              ely,
-              bubble.w,
-              bubble.h
-            );
+            const puffBubble = new BubblePuff( this.ctx, elx, ely, bubble.w, bubble.h);
             this.puffBubbles.push(puffBubble);
             bubble.x = -100;
           }
@@ -280,28 +274,10 @@ class Game {
     //weaponBar..weaponBar..weaponBar..weaponBar..
     //weaponBar..weaponBar..weaponBar..weaponBar..
 
-    this.player.bulletBarArray.forEach((bar) => {
-      this.platforms.forEach((platform) => {
-        if (bar.collidesTop(platform)) {
-          bar.solidState = true;
-          bar.y = platform.y + platform.h;
-          bar.vy = 0;
-          this.barHit.play();
-          this.player.shootBarSound.volume = 0;
-          bar.img.src = "../public/Imagenes/weaponBarSolid.png";
-        }
-      });
-    });
-    this.player.bulletBarArray.forEach((bar) => {
-      this.bouncers.forEach((bouncer) => {
-        if (bar.collides(bouncer)) {
-          bar.solidState = true;
-          bar.y = bouncer.y + bouncer.h;
-          bar.vy = 0;
-          bar.img.src = "../public/Imagenes/weaponBarSolid.png";
-        }
-      });
-    });
+    checkBarCollisions(this.player.bulletBarArray, this.platforms, this.barHit, this.player);
+    checkBarCollisions(this.player.bulletBarArray, this.bouncers, this.barHit, this.player);
+    checkBarCollisions(this.player.bulletBarArray, this.boxes, this.barHit, this.player);
+    
 
     this.bubbles.forEach((bubble) => {
       //  bulletBar con Bubble
@@ -318,50 +294,12 @@ class Game {
       });
     });
 
-//dljandlsandalnasd
-//dljandlsandalnasd
-      this.explosions.forEach((expl) => {
-        if(expl.collides(this.player)){
-          expl.exploding = true;
-        }
-      })
-
-//dljandlsandalnasd
-//dljandlsandalnasd
-
 
     // colisiones con Platform
     // colisiones con Platform
     this.platforms.forEach((platform) => {// platform con player
       if (platform.collides(this.player)) {
-        if (
-          this.player.y <= platform.y - 10 &&
-          this.player.x <= platform.x + platform.w &&
-          this.player.x + this.player.w > platform.x
-        ) {
-          if (platform.isBrakable) {
-            platform.braking--;
-            platform.goingToBreak = true;
-          }
-          this.player.y = platform.y - this.player.h;
-          this.player.x += platform.vx; // si le digo que es igual player.vx = platform.vx, se ve el jugador moviendose por cómo estan configurados los frames de movimiento
-          this.player.vy = platform.vy;
-          this.player.bulala = true;
-          ALT = 16;
-        }
-        if (this.player.y + this.player.h >= platform.y + platform.h) {
-          //colisión por la parte inferior de la plataforma
-          this.player.vy = 0;
-        }
-        if (
-          this.player.x >= platform.x + platform.w - 6 ||
-          this.player.x <= platform.x
-        ) {
-          //colisión por los lados de la plataforma
-          this.player.vy = 0;
-          this.player.vx = 0;
-          this.player.g = 0.2;
-        }
+          platformPlayerCollision(this.player, platform)
       }
     });
 
@@ -386,34 +324,7 @@ class Game {
     //colisiones con bouncers
     this.bouncers.forEach((bouncer) => {
       if (bouncer.collides(this.player)) {
-        this.player.vy = 0;
-        if (
-          this.player.y <= bouncer.y &&
-          this.player.x <= bouncer.x + bouncer.w &&
-          this.player.x + this.player.w > bouncer.x - 30
-        ) {
-          this.player.vy = -3;
-          this.player.y = bouncer.y - this.player.h;
-        }
-        if (this.player.y + this.player.h >= bouncer.y + bouncer.h) {
-          //colisión por la parte inferior de la plataforma
-          this.player.vy = 0;
-        }
-        if (this.player.x >= bouncer.x + bouncer.w - 6) {
-          //colisión por la derecha
-          this.player.g = 0.2;
-          this.player.vx = 2;
-          setTimeout(() => {
-            this.player.vx = 0;
-          }, 500);
-        }
-        if (this.player.x - 1 <= bouncer.x) {//colisión por la izquierda
-          this.player.g = 0.2;
-          this.player.vx = -2;
-          setTimeout(() => {
-            this.player.vx = 0;
-          }, 500);
-        }
+        bouncerPlayerCollision(this.player, bouncer)
       }
     });
     this.bouncers.forEach((bouncer) => {//bouncer con bullets normales
@@ -429,10 +340,7 @@ class Game {
     this.flamethrowers.forEach((weapon) => {// flamethrowers  choca con el personaje
       if (weapon.collides(this.player)) {
         N = 78;
-        munLanzallamas$$.style.display = "block"
-        setTimeout(() => {
-        munLanzallamas$$.style.display = "none"
-        }, 5500);
+        eventInfo(munLanzallamas$$)
         this.player.amountOfFireShoots += 5; // sumamos 5 balas de fuego
         if (this.player.amountOfFireShoots >= 90) {
           //para que el charger que se dibuja haga el semicírculo
@@ -444,10 +352,7 @@ class Game {
     this.machineguns.forEach((machinegun) => {// machineguns  choca con el personaje
       if (machinegun.collides(this.player)) {
         recharge = 50;
-        munAmetralladora$$.style.display = "block"
-        setTimeout(() => {
-        munAmetralladora$$.style.display = "none"
-        }, 5500);
+        eventInfo(munAmetralladora$$)
         setTimeout(() => {
           recharge = 500;
         }, 10000);
@@ -457,10 +362,7 @@ class Game {
     this.healings.forEach((healing) => {
       // healings  choca con el personaje
       if (healing.collides(this.player)) {
-        munSalud$$.style.display = "block"
-        setTimeout(() => {
-        munSalud$$.style.display = "none"
-        }, 5500);
+        eventInfo(munSalud$$)
         this.player.gainLife();
         this.playerHeals.play();
         healing.x = -100; // situa fuera del canvas la burbuja que colisiona con el player y luego isVisible la elimina del array
@@ -472,10 +374,7 @@ class Game {
       if (bar.collides(this.player)) {
         this.player.barAmount += 2;
         this.playerBar.play();
-        munCadena$$.style.display = "block"
-        setTimeout(() => {
-        munCadena$$.style.display = "none"
-        }, 5500);
+        eventInfo(munCadena$$)
         bar.x = -100; // situa fuera del canvas la burbuja que colisiona con el player y luego isVisible la elimina del array
       } else return true;
     });
@@ -483,10 +382,7 @@ class Game {
       // blasters  choca con el personaje
       if (blaster.collides(this.player)) {
         this.player.megaFireBlaster = true;
-        munMegablaster$$.style.display = "block"
-        setTimeout(() => {
-        munMegablaster$$.style.display = "none"
-        }, 5500);
+        eventInfo(munMegablaster$$)
         blaster.dispose = true; // situa fuera del canvas la burbuja que colisiona con el player y luego isVisible la elimina del array
       } else return true;
     });
@@ -495,10 +391,7 @@ class Game {
       if (aura.collides(this.player)) {
         this.player.auraIsActive = true;
         this.player.auraTime += aura.duration;
-        munEscudo$$.style.display = "block"
-        setTimeout(() => {
-          munEscudo$$.style.display = "none"
-        }, this.player.auraTime);
+        eventInfo(munEscudo$$)
         setTimeout(() => {
           this.player.auraIsActive = false;
         }, this.player.auraTime);
@@ -513,38 +406,39 @@ class Game {
     itemDropOnPlatform(this.blasters, this.platforms);
     itemDropOnPlatform(this.auras, this.platforms);
 
+    //para que caiga lentamente por los escalenos antes de llegar al suelo
+    itemDropOnStairs(this.flamethrowers, this.stairs);
+    itemDropOnStairs(this.machineguns, this.stairs);
+    itemDropOnStairs(this.healings, this.stairs);
+    itemDropOnStairs(this.bars, this.stairs);
+    itemDropOnStairs(this.blasters, this.stairs);
+    itemDropOnStairs(this.auras, this.stairs);
+
+
+
     // boxes...
     // boxes...
+
+    this.boxes.forEach((box) => {// box con player
+      if (box.collides(this.player)) {
+          platformPlayerCollision(this.player, box)
+      }
+    });
+
+
     this.boxes.forEach((box) => {
       //  bubble con bullet
       this.player.bulletArray = this.player.bulletArray.filter((bullet) => {
         if (bullet.collides(box)) {
           box.boxHit();
-
           if (box.boxImg.frame > 8) {
+            if(box.bubblePopup){
+              addBubble1(this.ctx, this.bubbles)
+            }
             if (box.containsRandom) {
-              randomLootFromBox(
-                this.ctx,
-                this.flamethrowers,
-                this.healings,
-                this.bars,
-                this.auras,
-                this.machineguns,
-                box.x,
-                box.y
-              );
+              randomLootFromBox(this.ctx,this.flamethrowers,this.healings,this.bars,this.auras,this.machineguns,box.x,box.y);
             } else {
-              specificLootFromBox(
-                this.ctx,
-                box.lootNumber,
-                this.flamethrowers,
-                this.healings,
-                this.bars,
-                this.auras,
-                this.machineguns,
-                box.x,
-                box.y
-              );
+              specificLootFromBox(this.ctx,box.lootNumber,this.flamethrowers,this.healings,this.bars,this.auras,this.machineguns,box.x,box.y);
             }
           }
           const puffBubble = new BubblePuff(
@@ -598,69 +492,49 @@ class Game {
         levelChangeText2$$.style.display = "none";
         this.levelBalls = [];
         if (GAMELEVEL === 2) {
-          this.background.img.src =
-            "/public/Imagenes/background/background8.jpeg";
+          this.background.img.src ="/public/Imagenes/background/background8.jpeg";
           level2(this.ctx,this.bubbles,this.platforms,this.boxes,this.levelBalls);
         } else if (GAMELEVEL === 3) {
-          this.background.img.src =
-            "/public/Imagenes/background/background9.avif";
+          this.background.img.src ="/public/Imagenes/background/background9.avif";
           level3(this.ctx,this.bubbles,this.platforms,this.stairs,this.boxes,this.healings,this.levelBalls);
           setTimeout(() => {
             addBubble3(this.ctx, this.bubbles);
           }, 10000);
         } else if (GAMELEVEL === 4) {
-          this.background.img.src =
-            "/public/Imagenes/background/background10.avif";
+          this.background.img.src ="/public/Imagenes/background/background10.avif";
           level4( this.ctx, this.bubbles, this.platforms, this.stairs,  this.healings, this.bars, this.boxes,this.levelBalls);
           setTimeout(() => {
             addBubble4(this.ctx, this.bubbles)
           }, 10000);
         } else if (GAMELEVEL === 5) {
-          this.background.img.src =
-            "/public/Imagenes/background/background2.png";
+          this.background.img.src ="/public/Imagenes/background/background2.png";
           level5( this.ctx, this.bubbles, this.platforms, this.stairs,  this.healings, this.bars, this.boxes,this.levelBalls);
         } else if (GAMELEVEL === 6) {
-          level6( this.ctx, this.bubbles, this.platforms,this.bouncers, this.stairs,  this.healings, this.bars, this.boxes, this.spikes,this.levelBalls);
 
         } else if (GAMELEVEL === 7) {
+          this.background.img.src ="/public/Imagenes/background/background2.png";
+          level7( this.ctx, this.bubbles, this.platforms,this.bouncers, this.stairs,  this.healings, this.bars, this.boxes, this.spikes,this.levelBalls, this.stairs);
+        } else if (GAMELEVEL === 8) {
+        
+        } else if (GAMELEVEL === 9) {
+          level9( this.ctx, this.bubbles, this.platforms,this.bouncers, this.stairs,  this.healings, this.bars, this.boxes, this.spikes,this.levelBalls);
+
+        }else if (GAMELEVEL === 10) {
+
+        }else if (GAMELEVEL === 11) {
         }
       }, 3000);
     }, 1000);
-    this.bubbles = [];
-    this.flamethrowers = [];
-    this.machineguns = [];
-    this.puffBubbles = [];
-    this.platforms = [];
-    this.bouncers = [];
-    this.stairs = [];
-    this.blasters = [];
-    this.spikes = []; // plataformas que rebotan
-    this.healings = [];
-    this.auras = [];
-    this.boxes = [];
-    this.player.bulletArray = [];
-    this.player.bulletBarArray = [];
-    this.player.bulletFireArray = [];
+    this.bubbles = this.flamethrowers = this.machineguns = this.puffBubbles = this.platforms = this.bouncers = this.stairs = this.blasters = this.spikes =this.explosions = this.boxes= []; 
   }
 
   gameOver() {
     //Función para terminar el juego y vaciar todos los arrays.
     this.stop();
-    this.bubbles = [];
-    this.flamethrowers = [];
-    this.puffBubbles = [];
-    this.platforms = [];
-    this.bouncers = [];
-    this.stairs = [];
-    this.blasters = [];
-    this.spikes = []; // plataformas que rebotan
-    this.healings = [];
-    this.auras = [];
-    this.boxes = [];
-    this.levelBalls = [];
-    this.player.bulletArray = [];
-    this.player.bulletBarArray = [];
-    this.player.bulletFireArray = [];
+    this.bubbles = this.flamethrowers =this.machineguns =  this.puffBubbles = this.platforms = this.bouncers = this.stairs = this.blasters = this.spikes =  this.explosions = [];
+    this.player.bulletArray = this.player.bulletBarArray = this.player.bulletFireArray = [];
+    this.player.amountOfFireShoots = this.player.barAmount =0;
+    GAMELEVEL = 1;
     this.gameBackgroundMusic.pause();
     this.gameOver1.play();
     this.gameOver2.play();

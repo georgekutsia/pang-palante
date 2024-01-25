@@ -2,7 +2,7 @@ class Player {
 
   constructor(ctx, moving) {
     this.ctx = ctx;
-    this.x = 60;
+    this.x = 20;
     this.h = this.ctx.canvas.width / 19;
     this.y = this.ctx.canvas.height - this.h;
     this.w = this.ctx.canvas.width / 23;
@@ -20,7 +20,7 @@ class Player {
     this.bulletFireArray = [];
     this.bulletBarArray = [];
     this.frameAmount = 5;
-    this.amountOfFireShoots = 3;
+    this.amountOfFireShoots = 0;
     this.moving = moving;
     this.immune = false; // al recibir daño se vuelve inmune durante unos segundos
     this.fading = 0; //necesario para el parpadeo del personaje cuando es inmune

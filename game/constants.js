@@ -39,6 +39,6 @@ let barLife = 20; // las veces que puede la bola chocar con la barra antes de de
 let immuneTime = 2000;
 let bubbleSpeedY = 2.5;
 let bubbleSpeedX = 0.5;
-let GAMELEVEL = 1;
+let GAMELEVEL = 6;
 const CTXW = ctx.canvas.width
 const CTXH = ctx.canvas.height

@@ -1,5 +1,5 @@
 class Box {
-  constructor(ctx,x, y, boxLevel, containsRandom, lootNumber) {
+  constructor(ctx,x, y, boxLevel, containsRandom, lootNumber, bubblePopup) {
     this.ctx = ctx;
     this.x = x || 100;
     this.y = y || 20;
@@ -25,6 +25,7 @@ class Box {
     this.boxLevel = boxLevel;// de 1 a 3 determina la resistenci de la caja
     this.containsRandom = containsRandom || false; //determina si el loot será random o no. mirar en funciones
     this.lootNumber = lootNumber || 5
+    this.bubblePopup = bubblePopup || false;
   }
 
   draw() {
