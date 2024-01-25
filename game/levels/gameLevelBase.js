@@ -1,3 +1,4 @@
+// level(this.ctx, this.bubbles, this.platforms, this.bouncers,this.spikes, this.stairs, this.flamethrowers, this.machineguns, this.healings, this.bars, this.auras, this.boxes, this.blasters, this.levelBalls)
 
 function levelx( ctx, bubbles, platforms, bouncers,spikes, stairs, flamethrowers, machineguns, healings, auras, boxes, blasters, levelBalls){
   addPlatformsx(ctx, platforms)
@@ -84,4 +85,9 @@ function auraItemx(ctx, auras) {
 function blasterItemx(ctx, blasters) {  
   const blaster = new MegaFireBlaster(ctx)
   blasters.push(blaster)
+}
+
+function addExplosionx(ctx,explosions){
+  let explo = new Explosion(ctx)
+  explosions.push(explo)
 }

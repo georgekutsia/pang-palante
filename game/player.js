@@ -29,7 +29,6 @@ class Player {
     this.megaFireBlaster = false;
     this.megaFireBlasterAmount = 91;
     this.barAmount = 40;
-
     this.bulala = false;
 
     this.img = new Image();
@@ -76,8 +75,8 @@ class Player {
     if (this.barAmount > 0) {
       this.ctx.save()
       this.ctx.font = "10px Arial"
-      this.ctx.fillText(`x ${this.barAmount}`, this.ctx.canvas.width  - 15, 10);
-      this.ctx.drawImage(this.barItem, this.ctx.canvas.width  - 25, 1, this.w/1.8 , this.h/1.3);
+      this.ctx.fillText(`x ${this.barAmount}`, this.ctx.canvas.width  - 20, 10);
+      this.ctx.drawImage(this.barItem, this.ctx.canvas.width  - 28, 1, this.w/1.8 , this.h/1.3);
       this.ctx.restore()
     }
     if(this.amountOfFireShoots>=1){    
@@ -163,21 +162,21 @@ class Player {
 //consultar constantes para el código de cada tecla
   keyDown(key) {
     if (key === W ) {
-      this.vy = -2.5;
+      this.vy = -playerSpeed;
     }
     if (key === A) {
       this.frameTick++;
-    this.vx = -2.5;
+    this.vx = -playerSpeed;
     this.img.src = "../public/Imagenes/pangRunLeft.png";
     this.frameAmount = 5;
     }
     if (key === D) {
-    this.vx = 2.5;
+    this.vx = playerSpeed;
     this.img.src = "../public/Imagenes/pangRunRight.png";
     this.frameAmount = 5;
     }
     if (key === S /*&& this.y + this.h < this.ctx.canvas.height - this.h*/) {//todo: bloqueo para el limite inferior
-      this.vy = 2.5;
+      this.vy = playerSpeed;
       this.y = this.y + 5;  // para que al estar encima de la escalera, hago un salto hacia abajo y deje de tener posición fija
     }
 
@@ -344,4 +343,6 @@ class Player {
     this.bulletBarArray.push(bulletBar);
   }
   }
+
+
 }

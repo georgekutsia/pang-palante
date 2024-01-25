@@ -8,12 +8,13 @@ class Aura {
     this.tick = 0
     this.vx = 0;
     this.vy = 0;
-    this.g = 0.01
+    this.g = 0.05;
     this.dispose = false;
     this.auraImg = new Image();
     this.auraImg.src = "/public/Imagenes/auraItem.png";
     this.auraImg.frame = 0;
     this.imgTick = 0;
+    this.duration = 7000 + auraDurationPlus;
   }
 
   draw() {

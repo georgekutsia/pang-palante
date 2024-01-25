@@ -13,12 +13,23 @@ let changingLevelImg$$ = document.getElementById("changing-level-img");
 let levelChangeText1$$ = document.getElementById("level-change-text1");
 let levelChangeText2$$ = document.getElementById("level-change-text2");
 
+let infoPlayerBtn1$$ = document.querySelector(".ayudas-btn")
+let infoPlayer1$$ = document.querySelector(".introAyuda1")
+let infoPlayer2$$ = document.querySelector(".introAyuda2")
+let munAmetralladora$$ = document.querySelector(".munAmetralladora")
+let munCadena$$ = document.querySelector(".munCadena")
+let munEscudo$$ = document.querySelector(".munEscudo")
+let munLanzallamas$$ = document.querySelector(".munLanzallamas")
+let munMegablaster$$ = document.querySelector(".munMegablaster")
+let munSalud$$ = document.querySelector(".munSalud")
+
 start$$.addEventListener("click", function () {
   canvas.style.display = "block";
   restart$$.style.display = "block";
   startBackground$$.style.display = "none";
   instruccionesInfo1$$.style.display = "none";
   instruccionesInfo2$$.style.display = "none";
+  infoIntro1()
     if (game.interval) {
       game.stop();
       start$$.innerText = "Start";
@@ -33,6 +44,7 @@ start$$.addEventListener("click", function () {
     }
   }
 );
+
 instruccionesBtn$$.addEventListener("click", function () {
     if(instruccionesInfo1$$.style.display === "block"){
       instruccionesInfo1$$.style.display = "none";

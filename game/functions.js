@@ -68,8 +68,8 @@ function randomLootFromBox(ctx, flamethrowers, healings, bars, auras,machineguns
   }else if(randomItem === 4){
     const machinegun = new Machinegun(ctx, x, y)
     machineguns.push(machinegun)
-  } else if(randomItem === 5){
-    const bar = new Bar(ctx, x, y)
+  } else if(randomItem === 5 ){
+    const bar = new Bars(ctx, x, y)
     bars.push(bar)
   }
 }
@@ -130,3 +130,19 @@ function getRandomColor() {
   const rgbColor = `rgb(${red},${green},${blue})`;
   return rgbColor;
 }
+
+ function getRandomNumber(number) {
+   return Math.floor(Math.random() * number) + 1;
+}
+
+
+function  itemDropOnPlatform (items, platforms){
+  items.forEach((weapon) => {  
+    platforms.forEach((platform) => {
+      if(weapon.collides(platform)){
+        weapon.y =  platform.y - weapon.h
+        weapon.vy = 0;
+      }
+    })
+  })
+}   

@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="./styles/main.css" />
+  <link rel="stylesheet" href="./styles/info.css" />
   <script src="./game/game.js" defer></script>
   <script src="./game/functions.js" defer></script>
   <script src="./game/levels/gameLevel1.js" defer></script>
@@ -12,6 +13,10 @@
   <script src="./game/levels/gameLevel4.js" defer></script>
   <script src="./game/levels/gameLevel5.js" defer></script>
   <script src="./game/levels/gameLevel6.js" defer></script>
+  <script src="./game/levels/gameLevel7.js" defer></script>
+  <script src="./game/levels/gameLevel8.js" defer></script>
+  <script src="./game/levels/gameLevel9.js" defer></script>
+  <script src="./game/levels/gameLevel10.js" defer></script>
   <script src="./game/background.js" defer></script>
   <script src="./game/bubble.js" defer></script>
   <script src="./game/player.js" defer></script>
@@ -19,6 +24,7 @@
   <script src="./game/obstacles/platform.js" defer></script>
   <script src="./game/obstacles/bouncer.js" defer></script>
   <script src="./game/obstacles/spikes.js" defer></script>
+  <script src="./game/obstacles/explosion.js" defer></script>
   <script src="./game/life.js" defer></script>
   <script src="./game/weapon.js" defer></script>
   <script src="./game/weaponFire.js" defer></script>
@@ -34,6 +40,7 @@
   <script src="./game/items/box.js" defer></script>
   <script src="./game/bubblePuff.js" defer></script>
   <script src="./game/script.js" defer></script>
+  <script src="./game/helper.js" defer></script>
   <script src="./game/constants.js" defer></script>
   <title>Document</title>
 </head>
@@ -51,6 +58,17 @@
   <img id="changing-level-img" src="/public/Imagenes/background/background0.jpeg" alt="instrucciones">
   <h2 id="level-change-text1">Nivel 1</h2>
   <h2 id="level-change-text2">Buena!</h2>
+  <div>
+    <img class="ayudas introAyuda1" src="/public/Imagenes/stats/playerTalkIntroAyuda1.png" alt="Player Ayuda 1">
+    <img class="ayudas introAyuda2" src="/public/Imagenes/stats/playerTalkIntroAyuda2.png" alt="Player Ayuda 2">
+    <img class="ayudas munAmetralladora" src="/public/Imagenes/stats/playerTalkMunAmetralladora.jpg" alt="Player Ayuda 2">
+    <img class="ayudas munCadena" src="/public/Imagenes/stats/playerTalkMunCadena.png" alt="Player Ayuda 2">
+    <img class="ayudas munEscudo" src="/public/Imagenes/stats/playerTalkMunEscudo.png" alt="Player Ayuda 2">
+    <img class="ayudas munLanzallamas" src="/public/Imagenes/stats/playerTalkMunLanzallamas.png" alt="Player Ayuda 2">
+    <img class="ayudas munMegablaster" src="/public/Imagenes/stats/playerTalkMunMegablaster.png" alt="Player Ayuda 2">
+    <img class="ayudas munSalud" src="/public/Imagenes/stats/playerTalkMunSalud.png" alt="Player Ayuda 2">
+    <button  class="ayudas-btn">Mensaje</button>
+  </div>
 </div>
 </body>
 </html>
