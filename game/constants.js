@@ -23,13 +23,15 @@ let H = 72 //72
 let K = 75 // 75
 
 let A = 65;
-let W = 0; //87
+let W = 87; //87
 let S = 83;
 let D = 68;
 
 
 let recharge = 500;
-let jumpHeight = -4;
+let auraDurationPlus = 0;
+let jumpHeight = -3.5;
+let playerSpeed = 2;
 let jumpCooldown = 400;
 let weaponBarSolidTick = 350;//el tiempo que se pasa la barra en estado sólido
 let fireSizing = 0.1 //el aumento de ancho y alto de la bala de fuego a medida que sube
@@ -38,3 +40,5 @@ let immuneTime = 2000;
 let bubbleSpeedY = 2.5;
 let bubbleSpeedX = 0.5;
 let GAMELEVEL = 1;
+const CTXW = ctx.canvas.width
+const CTXH = ctx.canvas.height

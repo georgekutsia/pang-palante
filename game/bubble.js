@@ -5,8 +5,8 @@ class Bubble {
     this.y = y  || -30; // el obstáculo sale de una altura específica o de alguna altura randóm
     this.w = w || this.ctx.canvas.width / 14;  //anchura calculada respecto al canvas
     this.h = h || this.ctx.canvas.width / 14;  //altura calculada respecto al canvas
-    this.vy = vy || bubbleSpeedY;
     this.vx = vx || bubbleSpeedX;
+    this.vy = vy || bubbleSpeedY;
     this.g = g || 0.05;
     this.explodingSize = this.ctx.canvas.width/80
     this.damage = damage || 1; // daño especificado o 10
@@ -15,7 +15,7 @@ class Bubble {
     this.randomColor = getRandomColor();
 
     this.bubbleBounceSound = new Audio("../public/sounds/bubbleBounce.mp3") //todo -- paso 1 traer el sonido y almacenarlo en una variable
-    this.bubbleBounceSound.volume = 0.3;  //todo -- paso 2, no obligatorio, determinarle volumen de 0 a 1, creo
+    this.bubbleBounceSound.volume = 0.1;  //todo -- paso 2, no obligatorio, determinarle volumen de 0 a 1, creo
   }
   draw() {
     // Dibujar el círculo detrás de la burbuja

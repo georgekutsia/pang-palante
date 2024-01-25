@@ -2,7 +2,7 @@
 function level3( ctx, bubbles, platforms, stairs, boxes,healings, levelBalls){
   addPlatforms3(ctx, platforms)
   addStair3(ctx, stairs)
-  healingItem3(ctx, healings)
+  healingItem3(ctx, healings, bubbles)
   boxItem3(ctx, boxes)
   levelBallItem3(ctx, levelBalls)
   addBubble3(ctx, bubbles)
@@ -12,9 +12,8 @@ function levelBallItem3(ctx, levelBalls) {
   levelBalls.push(levelBall)
 }
 
-
 function addBubble3(ctx, bubbles){ 
-  const bubble1 = new Bubble(ctx, 130, -50, ctx.canvas.width / 4, ctx.canvas.width / 4, -1)
+  const bubble1 = new Bubble(ctx, 130, -50, ctx.canvas.width / 7, ctx.canvas.width / 7, -1)
   bubbles.push(bubble1);
 }
 
@@ -36,13 +35,46 @@ function addStair3(ctx, stairs) {                         // this.ctx, ubicacion
 
 
 function boxItem3(ctx, boxes) {   
-  //ctx, x, y, tipo de caja,si es random=true o si es especifico= false,  loot específico
-  const box1 = new Box(ctx, 260, 80,  3, false, 5)
-  boxes.push(box1,)
+  let randomNumber =  getRandomNumber(3)
+switch (randomNumber) {
+  case 1:
+    const box1 = new Box(ctx, 60, 20,  3, false, 5)
+    boxes.push(box1,)
+    break;
+  case 2:
+    const box2 = new Box(ctx, 160, 40,  3, false, 3)
+    boxes.push(box2)
+    break;
+  case 3:
+    const box3 = new Box(ctx, 260, 80,  3, false, 5)
+    boxes.push(box3)
+    break;
+  default:
+    break;
+}
 }
 
 
-function healingItem3(ctx, healings) {  
-  const healingItem = new Healing(ctx, 1, 27, 0)
-  healings.push(healingItem)
+function healingItem3(ctx, healings, bubbles) {  
+  let randomNumber =  getRandomNumber(3)
+ switch (randomNumber) {
+  case 1:
+    const healingItem1 = new Healing(ctx, 1, 27, 0)
+    healings.push(healingItem1)
+    break;
+  case 2:
+    const healingItem2 = new Healing(ctx, CTXW/2, 27, 0)
+    healings.push(healingItem2)
+    break;
+  case 3:
+    const healingItem3 = new Healing(ctx, 1, 27, 0)
+    const healingItem4 = new Healing(ctx, 275, 57, 0)
+    healings.push(healingItem3, healingItem4)
+    const bubble1 = new Bubble(ctx, 130, -450, ctx.canvas.width / 7, ctx.canvas.width / 7, -1)
+    bubbles.push(bubble1);
+    break;
+ 
+  default:
+    break;
+ }
 }
