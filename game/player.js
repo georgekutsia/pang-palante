@@ -30,6 +30,7 @@ class Player {
     this.megaFireBlasterAmount = 0;
     this.barAmount = 430;
     this.ableToJump = false;
+    this.wasNotDamaged = true;
 
     this.img = new Image();
     this.img.src = "../public/Imagenes/pangRunRight.png";

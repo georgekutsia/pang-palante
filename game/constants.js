@@ -40,7 +40,10 @@ let jumpDownDistance = 0;
 let bubbleSpeedY = 2.5;
 let bubbleSpeedX = 0.5;
 let GAMELEVEL = 1;
-let totalCoins = 332;
+let coins = 332;
 
 const CTXW = ctx.canvas.width
 const CTXH = ctx.canvas.height
+
+
+

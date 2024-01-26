@@ -1,14 +1,14 @@
 class BubbleGatling {
   constructor(ctx,x, y, boxLevel, containsRandom, lootNumber, bubblePopup) {
     this.ctx = ctx;
-    this.x = x || 10;
+    this.x = x || 80;
     this.y = y || -4;
     this.w = this.ctx.canvas.width / 25;
-    this.h = this.ctx.canvas.width / 10;
+    this.h = this.ctx.canvas.width / 13;
     this.tick = 0
     this.vx = 0;
     this.vy = 0;
-    this.g = 0
+    this.g = 0.2
     this.dispose = true;
     this.boxImg = new Image();
     this.boxImg.src = "/public/Imagenes/bubbleGatling.png";
@@ -35,7 +35,10 @@ class BubbleGatling {
     this.bubbleArray.forEach((e)=>e.draw());
   }
   move() {
-    this.x += this.vx
+    this.vy += this.g;
+    this.x += this.vx;
+    this.y += this.vy;
+    if(this.y + this.h >= 18) {this.g = 0; this.vy =0;};
     this.bubbleArray.forEach((e)=>e.move());
   }
 
@@ -49,9 +52,12 @@ class BubbleGatling {
     }
     shootingBubble(){
       if(this.playerDetected){
-        let bubble = new Bubble(ctx, this.x, this.y + 10, 20, 20, 0, 0,)
-        this.bubbleArray.push( bubble)
-        this.playerDetected = false;
+          let bubble = new Bubble(ctx, this.x, this.y +this.h, 10, 10, -0.1)
+          this.bubbleArray.push( bubble)
+          this.x -= 3;
+          this.vy = -3;
+          this.g = 1;
+          this.playerDetected = false;
       }
     }
   isVisible() {

@@ -27,7 +27,7 @@ class Bubble {
     this.ctx.drawImage(this.img, this.x, this.y, this.w, this.h);  // dibuja el obstáculo
     if(this.w <= this.explodingSize) {
       this.x = -100;
-      totalCoins++
+      coins++
     }
   }
   move() {

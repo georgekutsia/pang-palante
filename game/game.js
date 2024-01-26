@@ -49,6 +49,7 @@ class Game {
     this.changeLevelSound1 = new Audio("/public/sounds/changeLevelSound1.mp3");
     this.playerHeals = new Audio("/public/sounds/heal1.mp3");
     this.playerBar = new Audio("/public/sounds/barItemRechargeSound.mp3");
+    
     // Obtén un índice aleatorio
     this.frases = [
       "Bien hecho! sigue así",
@@ -484,18 +485,7 @@ class Game {
   }
 
   levelChange() {
-    this.bubbles = [];
-     this.healings= [];
-     this.flamethrowers = [];
-     this.machineguns = [];
-     this.puffBubbles = [];
-     this.platforms = [];
-     this.bouncers = [];
-     this.stairs = [];
-     this.blasters = [];
-     this.spikes = [];
-    this.explosions = [];
-     this.boxes= []; 
+if(this.player.wasNotDamaged) coins+=20
     setTimeout(() => {
       this.changeLevelSound1.play();
       GAMELEVEL += 1;
@@ -536,6 +526,18 @@ class Game {
         }
       }, 3000);
     }, 1000);
+    this.bubbles = [];
+    this.healings= [];
+    this.flamethrowers = [];
+    this.machineguns = [];
+    this.puffBubbles = [];
+    this.platforms = [];
+    this.bouncers = [];
+    this.stairs = [];
+    this.blasters = [];
+    this.spikes = [];
+   this.explosions = [];
+    this.boxes= []; 
   }
 
   gameOver() {
