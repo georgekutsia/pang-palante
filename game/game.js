@@ -108,6 +108,7 @@ class Game {
     this.player.bulletArray = this.player.bulletArray.filter((e) =>e.isVisible()); //elimina cada bullet que ya no es visible y vacía el array
     this.player.bulletFireArray = this.player.bulletFireArray.filter((e) =>e.isVisible()); //elimina cada bullet de fuego que ya no es visible y vacía el array
     this.player.bulletBarArray = this.player.bulletBarArray.filter((e) =>e.isVisible()); //elimina cada bullet de cadena que ya no es visible y vacía el array
+    this.bubbleGatling.bubbleArray = this.bubbleGatling.bubbleArray.filter((e) =>e.isVisible())
     this.bubbles = this.bubbles.filter((e) => e.isVisible()); //elimina cada obstáculo que ya no es visible y vacía el array
     this.platforms = this.platforms.filter((e) => e.isVisible()); //elimina cada obstáculo que ya no es visible y vacía el array
     this.flamethrowers = this.flamethrowers.filter((e) => e.isVisible()); //elimina cada obstáculo que ya no es visible y vacía el array
@@ -164,7 +165,7 @@ class Game {
     this.healings.forEach((e) => e.move()); //mueve los obstáculos
     this.bars.forEach((e) => e.move()); //mueve los obstáculos
     this.puffBubbles.forEach((e) => e.move()); //mueve los obstáculos
-    if (this.bubbles.length <= 0) {
+    if (this.bubbles.length <= 0&& this.bubbleGatling.bubbleArray.length <= 0) {
       this.levelBalls.forEach((e) => (e.winCondition = true));
     }
       this.bubbleGatling.checkPosition(this.player); //mueve los obstáculos
@@ -186,14 +187,22 @@ class Game {
     this.bubbles.forEach((bubble) => {//player con bubble
       if (bubble.collides(this.player) && !this.player.immune) {
         if (!this.player.auraIsActive) {
-        bubble.vy = -30; // rebota encima del jugador haciéndole daño
-
           this.player.loseLife(bubble.damage, true); //el daño al jugador se le hace según lo que marca el daño de la burbuja. a burbuja más pequeña, menos daño
         }
         this.bubbleSplash2.play();
         bubble.vy = -bubbleSpeedY; // rebota encima del jugador haciéndole daño
       } else return true;
     });
+    this.bubbleGatling.bubbleArray.forEach((bubble) => {//player con bubble
+      if (bubble.collides(this.player) && !this.player.immune) {
+        if (!this.player.auraIsActive) {
+          this.player.loseLife(0.5, true); //el daño al jugador se le hace según lo que marca el daño de la burbuja. a burbuja más pequeña, menos daño
+        }
+        this.bubbleSplash2.play();
+        bubble.vy = -bubbleSpeedY; // rebota encima del jugador haciéndole daño
+      } else return true;
+    });
+
     this.spikes.forEach((spike) => {//player con spikes
       if (spike.collides(this.player) && !this.player.immune) {
         if (!this.player.auraIsActive) {
@@ -275,7 +284,68 @@ class Game {
         } else return true;
       });
     });
+    //bubblesGatling...bubblesGatling...bubblesGatling...bubblesGatling...bubblesGatling...
+    //bubblesGatling...bubblesGatling...bubbles...bubbles...bubbles...
+    this.bubbleGatling.bubbleArray.forEach((bubble) => {//weapon con bubbleGatling
+      this.player.bulletArray = this.player.bulletArray.filter((bullet) => {
+        if (bullet.collides(bubble)) {
+          bubblePuff(bubble, this.puffBubbles, this.bubbles, this.ctx);
+          this.bubblePopSound1.play(); //todo -- Sonido paso 3) invocar el sonido
+          return false;
+        } else return true;
+      });
+    });
+    this.bubbleGatling.bubbleArray.forEach((bubble) => {//bubble con fire
+      this.player.bulletFireArray.forEach((bullet) => {
+        if (bullet.collides(bubble)) {
+          bubble.w -= bullet.damage;
+          bubble.h -= bullet.damage;
+          if (bubble.w <= bubble.explodingSize * 2) {
+            const elx = bubble.x;
+            const ely = bubble.y;
+            const puffBubble = new BubblePuff( this.ctx, elx, ely, bubble.w, bubble.h);
+            this.puffBubbles.push(puffBubble);
+            bubble.x = -100;
+          }
+        } else return true;
+      });
+    });
+    this.bubbleGatling.bubbleArray.forEach((bubble) => {//bubble con platform
+      this.platforms.forEach((platform) => {
+        if (platform.collides(bubble)) {
+          if (platform.isBouncable) {
+          this.bubbleBounceSound.play();
+            bounceFromObstacles(bubble, platform);
+          } else if (!platform.isBouncable) {
+            bubble.y = platform.y - bubble.h;
+            bubble.vy = platform.vy;
+            bubble.vx = platform.vx;
+          }
+        } else return true;
+      });
+    });
+    this.bubbleGatling.bubbleArray.forEach((bubble) => {//bubble con bouncer
+      this.bouncers.forEach((bouncer) => {
+        if (bouncer.collides(bubble)) {
+          this.bubbleBounceSound.play();
+          bounceFromObstacles(bubble, bouncer);
+        } else return true;
+      });
+    });
 
+    this.bubbleGatling.bubbleArray.forEach((bubble) => {//  bulletBar con Bubble
+      this.player.bulletBarArray.forEach((bullet) => {
+        if (bullet.collides(bubble)) {
+          bullet.life -= 1;
+          if (bullet.life <= 0) {
+            bullet.dispose = false;
+          }
+          bubblePuff(bubble, this.puffBubbles, this.bubbles, this.ctx);
+          this.bubblePopSound1.play(); //todo -- Sonido paso 3) invocar el sonido
+          return false;
+        } else return true;
+      });
+    });
     //weaponBar..weaponBar..weaponBar..weaponBar..
     //weaponBar..weaponBar..weaponBar..weaponBar..
 
@@ -284,8 +354,7 @@ class Game {
     checkBarCollisions(this.player.bulletBarArray, this.boxes, this.barHit, this.player);
     
 
-    this.bubbles.forEach((bubble) => {
-      //  bulletBar con Bubble
+    this.bubbles.forEach((bubble) => {//  bulletBar con Bubble
       this.player.bulletBarArray.forEach((bullet) => {
         if (bullet.collides(bubble)) {
           bullet.life -= 1;
@@ -431,8 +500,7 @@ class Game {
     });
 
 
-    this.boxes.forEach((box) => {
-      //  bubble con bullet
+    this.boxes.forEach((box) => {//  box con bullet
       this.player.bulletArray = this.player.bulletArray.filter((bullet) => {
         if (bullet.collides(box)) {
           box.boxHit();
@@ -446,21 +514,14 @@ class Game {
               specificLootFromBox(this.ctx,box.lootNumber,this.flamethrowers,this.healings,this.bars,this.auras,this.machineguns,this.blasters, box.x,box.y);
             }
           }
-          const puffBubble = new BubblePuff(
-            ctx,
-            box.x,
-            box.y + box.h / 2,
-            box.w,
-            box.h
-          );
+          const puffBubble = new BubblePuff(ctx,box.x,box.y + box.h / 2,box.w,box.h);
           this.puffBubbles.push(puffBubble);
           return false;
         } else return true;
       });
     });
 
-    this.levelBalls.forEach((levelBall) => {
-      //levelBall con bullets normales
+    this.levelBalls.forEach((levelBall) => {//levelBall con bullets normales
       this.player.bulletArray.forEach((bullet) => {
         if (bullet.collides(levelBall)) {
           if (levelBall.isActive) {
