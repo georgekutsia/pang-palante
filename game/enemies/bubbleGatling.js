@@ -20,6 +20,9 @@ class BubbleGatling {
     this.bubblePopup = bubblePopup || false;
     this.bubbleArray = []
     this.playerDetected = false;
+    this.damage = 0.001
+    this.bubbleGatlingSound = new Audio("/public/sounds/shooting/bubbleGatling.mp3")
+    this.bubbleGatlingSound.volume = 0.1;
   }
 
   draw() {
@@ -54,6 +57,7 @@ class BubbleGatling {
       if(this.playerDetected){
           let bubble = new Bubble(ctx, this.x, this.y +this.h, 10, 10, -0.1)
           this.bubbleArray.push( bubble)
+          this.bubbleGatlingSound.play()
           this.x -= 3;
           this.vy = -3;
           this.g = 1;

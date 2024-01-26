@@ -26,8 +26,8 @@ class Player {
     this.fading = 0; //necesario para el parpadeo del personaje cuando es inmune
     this.charging = 0;  // acumula la carga, lo que dibuja el semicírculo
     this.chargingFires = false; //   se pone en true mientras carga el disparo fuerte de fuego
-    this.megaFireBlaster = false;
-    this.megaFireBlasterAmount = 0;
+    this.megaFireBlaster = true;
+    this.megaFireBlasterAmount = 51;
     this.barAmount = 430;
     this.ableToJump = false;
     this.wasNotDamaged = true;
