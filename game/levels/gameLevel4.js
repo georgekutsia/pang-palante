@@ -28,7 +28,7 @@ function addBubble4(ctx, bubbles){
   const bubble1 = new Bubble(ctx, 10, -10)
   const bubble2 = new Bubble(ctx, 50, -100)
   const bubble3 = new Bubble(ctx, 100, -200)
-  bubbles.push(bubble1,bubble2,bubble3,bubble4,bubble5);
+  bubbles.push(bubble1,bubble2,bubble3);
 }
 
 function addPlatforms4(ctx, platforms, healings, boxes, stairs,bars){

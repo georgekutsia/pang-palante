@@ -54,8 +54,8 @@ function invertImage(ctx, x, y, w, h, img) {
 
 
 
-function randomLootFromBox(ctx, flamethrowers, healings, bars, auras,machineguns, x, y){
-  const randomItem = Math.floor(Math.random() *5) + 1;
+function randomLootFromBox(ctx, flamethrowers, healings, bars, auras,machineguns,blasters, x, y){
+  const randomItem = Math.floor(Math.random() *6) + 1;
   if(randomItem === 1){
     const flamethrower = new Flamethrower(ctx, x, y  )
     flamethrowers.push(flamethrower)
@@ -71,9 +71,12 @@ function randomLootFromBox(ctx, flamethrowers, healings, bars, auras,machineguns
   } else if(randomItem === 5 ){
     const bar = new Bars(ctx, x, y)
     bars.push(bar)
-  }
+  }else if(randomItem === 6){
+    const blaster = new MegaFireBlaster(ctx, x, y)
+    blasters.push(blaster)
 }
-function specificLootFromBox(ctx, specificLoot, flamethrowers, healings, bars, auras,machineguns, x, y){
+}
+function specificLootFromBox(ctx, specificLoot, flamethrowers, healings, bars, auras,machineguns,blasters, x, y){
   if(specificLoot === 1){
     const flamethrower = new Flamethrower(ctx, x, y  )
     flamethrowers.push(flamethrower)
@@ -89,6 +92,9 @@ function specificLootFromBox(ctx, specificLoot, flamethrowers, healings, bars, a
   }else if(specificLoot === 5){
     const bar = new Bars(ctx, x, y)
     bars.push(bar)
+  }else if(specificLoot === 6){
+      const blaster = new MegaFireBlaster(ctx, x, y)
+      blasters.push(blaster)
   }
 }
 

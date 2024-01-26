@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="./styles/main.css" />
   <link rel="stylesheet" href="./styles/info.css" />
+  <link rel="stylesheet" href="./styles/shop.css" />
   <script src="./game/game.js" defer></script>
   <script src="./game/functions.js" defer></script>
   <script src="./game/levels/gameLevel1.js" defer></script>
@@ -26,6 +27,7 @@
   <script src="./game/obstacles/spikes.js" defer></script>
   <script src="./game/obstacles/explosion.js" defer></script>
   <script src="./game/life.js" defer></script>
+  <script src="./game/points.js" defer></script>
   <script src="./game/weapon.js" defer></script>
   <script src="./game/weaponFire.js" defer></script>
   <script src="./game/weaponBar.js" defer></script>
@@ -39,9 +41,11 @@
   <script src="./game/items/aura.js" defer></script>
   <script src="./game/items/box.js" defer></script>
   <script src="./game/bubblePuff.js" defer></script>
+  <script src="./game/enemies/bubbleGatling.js" defer></script>
   <script src="./game/script.js" defer></script>
   <script src="./game/helper.js" defer></script>
   <script src="./game/constants.js" defer></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"/>
   <title>Document</title>
 </head>
 <body>
@@ -68,6 +72,10 @@
     <img class="ayudas munMegablaster" src="/public/Imagenes/stats/playerTalkMunMegablaster.png" alt="Player Ayuda 2">
     <img class="ayudas munSalud" src="/public/Imagenes/stats/playerTalkMunSalud.png" alt="Player Ayuda 2">
     <button  class="ayudas-btn">Mensaje</button>
+  </div>
+  <div id="shop-btn">
+    <button id="shop-shield">50 <i class="fa-solid fa-coins"></i><i class="fa-solid fa-angles-right"></i> Shield</button>
+    <button id="shop-fire">20 <i class="fa-solid fa-coins"></i><i class="fa-solid fa-angles-right"></i> Flamethrower</button>
   </div>
 </div>
 </body>

@@ -1,4 +1,6 @@
-
+button{
+  cursor: pointer;
+}
 #canvas{
   width: 90vw;
   height: 40vw;

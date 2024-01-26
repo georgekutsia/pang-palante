@@ -7,8 +7,9 @@ function level3( ctx, bubbles, platforms, stairs, boxes,healings, levelBalls){
   levelBallItem3(ctx, levelBalls)
   addBubble3(ctx, bubbles)
 }
+
 function levelBallItem3(ctx, levelBalls) {  
-  const levelBall = new LevelBall(ctx, ctx.canvas.width - 40, 0)
+  const levelBall = new LevelBall(ctx, ctx.canvas.width - 80, 0)
   levelBalls.push(levelBall)
 }
 
@@ -30,7 +31,7 @@ function addPlatforms3(ctx, platforms){
 function addStair3(ctx, stairs) {                         // this.ctx, ubicacion en eje x, ubicacion en eje y, ancho y alto. la última sería la imágen
   const stair1 = new Stair(ctx, 10, ctx.canvas.height - 50,  20, 50);
   const stair2 = new Stair(ctx, 230, 73,  20, 50);
-  stairs.push(stair1, stair2,);
+  stairs.push(stair1, stair2);
 }
 
 
@@ -73,7 +74,6 @@ function healingItem3(ctx, healings, bubbles) {
     const bubble1 = new Bubble(ctx, 130, -450, ctx.canvas.width / 7, ctx.canvas.width / 7, -1)
     bubbles.push(bubble1);
     break;
- 
   default:
     break;
  }

@@ -11,7 +11,7 @@ class WeaponFire {
     this.w = w  || this.ctx.canvas.width/ 29;
     this.h = h || this.ctx.canvas.width/ 29;
     this.flameSpinTick = 0;
-    this.damage = 0.2;
+    this.damage = 0.05;
   }
 
   draw() {

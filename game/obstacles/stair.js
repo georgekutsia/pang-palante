@@ -8,9 +8,6 @@ class Stair {
     this.img = new Image(); // Imagen asociada a la escalera
     this.img.src = obstacleImg || "../../public/Imagenes/obstacles/stair1.png"; // Ruta de la imagen de la escalera
 
-    // ** Se ha comentado la parte relacionada con el sonido
-    // this.bubbleBounceSound = new Audio("../public/sounds/bubbleBounce.mp3");
-    // this.bubbleBounceSound.volume = 0.3;
   }
 
   draw() {
@@ -20,8 +17,7 @@ class Stair {
 
   move() {
     // Método para actualizar la posición de la escalera en función de su velocidad
-    this.x += this.vx;
-    this.y += this.vy;
+
   }
 
   isVisible() {

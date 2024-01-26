@@ -8,7 +8,7 @@ class MegaFireBlaster {
     this.tick = 0
     this.vx = 0;
     this.vy = 0;
-    this.g = 0.01
+    this.g = 0.03;
     this.dispose = false;
     this.blasterImg = new Image();
     this.blasterImg.src = "/public/Imagenes/fireMegaBlasterItem1.png";

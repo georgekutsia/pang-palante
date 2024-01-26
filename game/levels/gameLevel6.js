@@ -21,7 +21,9 @@ function addBubble6(ctx, bubbles){
   const bubble5 = new Bubble(ctx, 270, 60)
   const bubble6 = new Bubble(ctx, 270, 60)
   const bubble7 = new Bubble(ctx, 270, 60)
-  bubbles.push(bubble1,bubble2,bubble3,bubble4,bubble5, bubble6,bubble7);
+  const bubble8 = new Bubble(ctx, 230, 100, 10, 10, -1.5)
+  const bubble9 = new Bubble(ctx, 250, 100, 10, 10, -1.5)
+  bubbles.push(bubble1,bubble2,bubble3,bubble4,bubble5, bubble6,bubble7,bubble8,bubble9);
 }
 
 function addPlatforms6(ctx, platforms){
