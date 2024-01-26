@@ -58,7 +58,54 @@ class Player {
     this.shootSound = new Audio("/public/sounds/shooting/weaponShootSound.mp3");
     this.shootSound.volume = 0.1;
     this.shootBarSound = new Audio("/public/sounds/shooting/shootBarSound2.mp3");
+
+    this.upBtn$$ = document.getElementById("upBtn");
+    this.rightBtn$$ = document.getElementById("rightBtn");
+    this.downBtn$$ = document.getElementById("downBtn");
+    this.leftBtn$$ = document.getElementById("leftBtn");
+    this.jumpBtn$$ = document.getElementById("jumpBtn");
+
+
+    this.upBtn$$.addEventListener("touchstart", this.handleUp);
+    this.rightBtn$$.addEventListener("touchstart", this.handleRight);
+    this.downBtn$$.addEventListener("touchstart", this.handleDown);
+    this.leftBtn$$.addEventListener("touchstart", this.handleLeft);
+    this.jumpBtn$$.addEventListener("touchstart", this.handleJump);
+    // this.jumpBtn.addEventListener("touchend", );
   }
+  handleJump = (event) => {
+    event.preventDefault(); // Prevent default behavior of touch event
+    if (this.vy === 0 || this.ableToJump === true) {
+      this.vy = jumpHeight;
+      this.g = 0.2;
+      this.ableToJump = false;
+      setTimeout(() => {
+        this.jumpBtn$$.addEventListener("touchstart", this.handleJumpTouchStart);
+      }, jumpCooldown);
+    }
+  };
+  handleUp = (event) => {
+    event.preventDefault(); 
+     this.vy = -playerSpeed;
+     }
+     handleRight = (event) => {
+       event.preventDefault(); 
+       this.vx = playerSpeed;
+       this.img.src = "../public/Imagenes/pangRunRight.png";
+       this.frameAmount = 5;
+     }
+     handleLeft = (event) => {
+   event.preventDefault(); 
+       this.frameTick++;
+       this.vx = -playerSpeed;
+       this.img.src = "../public/Imagenes/pangRunLeft.png";
+       this.frameAmount = 5;
+     }
+     handleDown = (event) => {
+   event.preventDefault(); 
+       this.vy = playerSpeed;
+       this.y = this.y + jumpDownDistance;  // para que al estar encima de la escalera, hago un salto hacia abajo y deje de tener posición fija
+     }
 
   draw() {
     this.bulletArray.forEach((bullet) => {bullet.draw();}); // paso 3: dibujo cada bullet que se dispare
@@ -165,18 +212,18 @@ class Player {
     if (key === W ) {
       this.vy = -playerSpeed;
     }
-    if (key === A) {
+    if (key === A || this.touchControls.left) {
       this.frameTick++;
     this.vx = -playerSpeed;
     this.img.src = "../public/Imagenes/pangRunLeft.png";
     this.frameAmount = 5;
     }
-    if (key === D) {
+    if (key === D || this.touchControls.right) {
     this.vx = playerSpeed;
     this.img.src = "../public/Imagenes/pangRunRight.png";
     this.frameAmount = 5;
     }
-    if (key === S /*&& this.y + this.h < this.ctx.canvas.height - this.h*/) {//todo: bloqueo para el limite inferior
+    if (key === S && this.touchControls.jump/*&& this.y + this.h < this.ctx.canvas.height - this.h*/) {//todo: bloqueo para el limite inferior
       this.vy = playerSpeed;
       this.y = this.y + jumpDownDistance;  // para que al estar encima de la escalera, hago un salto hacia abajo y deje de tener posición fija
     }
@@ -204,7 +251,7 @@ class Player {
       }, 1000);
     }
 
-    if(key === B){
+    if(key === B && this.touchControls.fire){
       this.img.src = "../public/Imagenes/pangStandShoot.png";
       this.frameAmount = 2;
       this.img.frame = 1;
@@ -313,6 +360,8 @@ class Player {
     const colY = this.y + this.h > objetivo.y && this.y < objetivo.y + objetivo.h;
     return colX && colY;
   }
+
+  
   loseLife(damage, immuneState){
     this.life.total -= damage;
     this.immune = immuneState;
