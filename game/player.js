@@ -14,21 +14,21 @@ class Player {
     this.r = 0; //rozamiento
     this.feet = this.y + this.h
     this.auraIsActive = false;
-    this.auraTime = 0;
+    this.auraTime = 5000;
     this.frameTick = 1;
     this.bulletArray = [];
     this.bulletFireArray = [];
     this.bulletBarArray = [];
     this.frameAmount = 5;
-    this.amountOfFireShoots = 0;
+    this.fireAmount = 30;
     this.moving = moving;
     this.immune = false; // al recibir daño se vuelve inmune durante unos segundos
     this.fading = 0; //necesario para el parpadeo del personaje cuando es inmune
     this.charging = 0;  // acumula la carga, lo que dibuja el semicírculo
     this.chargingFires = false; //   se pone en true mientras carga el disparo fuerte de fuego
     this.megaFireBlaster = false;
-    this.megaFireBlasterAmount = 91;
-    this.barAmount = 40;
+    this.megaFireBlasterAmount = 0;
+    this.barAmount = 430;
     this.ableToJump = false;
 
     this.img = new Image();
@@ -79,9 +79,9 @@ class Player {
       this.ctx.drawImage(this.barItem, this.ctx.canvas.width  - 28, 1, this.w/1.8 , this.h/1.3);
       this.ctx.restore()
     }
-    if(this.amountOfFireShoots>=1){    
+    if(this.fireAmount>=1){    
                    //x, y, la cantidad por la que se dibuja, radio exterior, radio interior, color de inicio, color de medio, color de final es negro
-      this.charger.draw(this.x + 5, this.y + 10, this.amountOfFireShoots, 20, 19, "aqua", "blue")
+      this.charger.draw(this.x + 5, this.y + 10, this.fireAmount, 20, 19, "aqua", "blue")
     }
     if(this.charging >=1){
       this.charger.draw(this.x + 5, this.y + 10, this.charging, 16, 15, "yellow", "red")
@@ -159,7 +159,7 @@ class Player {
     this.bulletFireArray.forEach((bullet) => {bullet.move();}); //paso 4: mueve cada bullet que se dispare
     this.bulletBarArray.forEach((bullet) => {bullet.move();}); //paso 4: mueve cada bullet que se dispare
   }
-//consultar constantes para el código de cada tecla
+//consultar constantes para el código de cada teclahjkl-
   keyDown(key) {
     if (key === W ) {
       this.vy = -playerSpeed;
@@ -217,10 +217,10 @@ class Player {
       }, recharge);
     }
 
-    if(key === N && this.amountOfFireShoots > 0){ 
-      this.amountOfFireShoots -= 1;
+    if(key === N && this.fireAmount > 0){ 
+      this.fireAmount -= 1;
       this.shootFire();
-      if(this.amountOfFireShoots <= 0){
+      if(this.fireAmount <= 0){
         N = 0;
       }
     }
@@ -231,7 +231,7 @@ class Player {
       M = 0
         setTimeout(() => {
           M = 77
-        }, 1000);
+        }, 100);
     }
     if(key === ALT && this.vy === 0 || key === ALT && this.ableToJump === true){
       this.vy = jumpHeight 

@@ -1,0 +1,30 @@
+#shop-shield{
+  font-size: calc(10px + 0.8vw);
+  background: none;
+border: none;
+}
+#shop-fire{
+  font-size: calc(10px + 0.8vw);
+}
+
+#shop-btn{
+  position: absolute;
+  right: 9vw;
+}
+#shop-btn>button{
+  background: none;
+  border: none;
+  background-color: rgba(255, 196, 255, 0.444);
+  padding: 8px 15px;
+  margin-right: 5px;
+  border-radius: 15px;
+  transition: 0.5s ease-in-out;
+}
+#shop-btn>button:hover{
+  background-color: rgb(252, 118, 252);
+
+}
+
+#shop-btn, i{
+  font-size: calc(8px + 0.6vw);
+}

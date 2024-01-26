@@ -29,7 +29,6 @@ let D = 68;
 
 
 let recharge = 500;
-let auraDurationPlus = 0;
 let jumpHeight = -3.5;
 let playerSpeed = 2;
 let jumpCooldown = 400;
@@ -40,6 +39,8 @@ let immuneTime = 2000;
 let jumpDownDistance = 0;
 let bubbleSpeedY = 2.5;
 let bubbleSpeedX = 0.5;
-let GAMELEVEL = 6;
+let GAMELEVEL = 1;
+let totalCoins = 332;
+
 const CTXW = ctx.canvas.width
 const CTXH = ctx.canvas.height

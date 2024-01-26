@@ -15,3 +15,8 @@ las burbujas consiguientes pequeñas deberian rebotar según su velocidad vx e v
 ahora solo salta cuando su vy es 0, pero si se mueve junto a una plataforma, no puede saltar
 
 los disparos no rebotan contra la plataforma según como se mueve el jugador 
+
+
+se llenan los arrays que no deben al iniciar los niveles
+observaciones: si empezamos el juego con cualuqier nivel, no ocurre. solo ocurre cuando desde el nivel 1 o el nivel 2 cambiamos a nivel 3 o superior.
+si cambiamos todo el rato entre los niveles 1 y 2, no ocurre

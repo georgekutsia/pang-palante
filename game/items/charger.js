@@ -17,8 +17,8 @@ class Charger {
       this.ctx.strokeStyle = gradient;
       this.ctx.lineWidth = 1;
       this.ctx.beginPath();
-      this.ctx.arc(x, y, outerRadius, (Math.PI / 180) * (360-recharging*2), this.aFinal, false);
-      this.ctx.arc(x, y, innerRadius, this.aFinal, (Math.PI / 180) * (360-recharging*2), true);
+      this.ctx.arc(x, y, outerRadius, (Math.PI / 180) * (360-recharging*6), this.aFinal, false);
+      this.ctx.arc(x, y, innerRadius, this.aFinal, (Math.PI / 180) * (360-recharging*6), true);
       this.ctx.closePath();
       this.ctx.fill();
       this.ctx.stroke();

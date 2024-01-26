@@ -14,7 +14,6 @@ class Aura {
     this.auraImg.src = "/public/Imagenes/auraItem.png";
     this.auraImg.frame = 0;
     this.imgTick = 0;
-    this.duration = 7000 + auraDurationPlus;
   }
 
   draw() {

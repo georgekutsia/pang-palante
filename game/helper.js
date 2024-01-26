@@ -27,3 +27,23 @@ function eventInfo(event$$){
   event$$.style.display = "none"
   }, 5500);
 }
+
+
+//shop bts
+
+shopShield$$.addEventListener("click", function(){
+  if(totalCoins >= 50){
+    game.player.auraIsActive = true;
+    totalCoins -= 50;
+    setTimeout(() => {
+      game.player.auraIsActive = false;
+    }, 7000);
+  }
+})
+shopFire$$.addEventListener("click", function(){
+  if(totalCoins >= 20 && game.player.fireAmount <=29){
+    game.player.life.total += 1;
+    totalCoins -= 20; 
+    N = 78;
+  }
+})

@@ -46,7 +46,6 @@ function addPlatforms1(ctx, platforms){
       break
       default:
         break;
-
     }
 
 }

@@ -25,7 +25,10 @@ class Bubble {
     this.ctx.fill();
     this.ctx.closePath();
     this.ctx.drawImage(this.img, this.x, this.y, this.w, this.h);  // dibuja el obstáculo
-    if(this.w <= this.explodingSize) this.x = -100;
+    if(this.w <= this.explodingSize) {
+      this.x = -100;
+      totalCoins++
+    }
   }
   move() {
     this.vy += this.g;  //efecto gravedad, aumenta la velocidad a medida que baja
