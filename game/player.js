@@ -66,12 +66,16 @@ class Player {
     this.jumpBtn$$ = document.getElementById("jumpBtn");
 
 
+    this.jumpBtn$$.addEventListener("touchstart", this.handleJump);
     this.upBtn$$.addEventListener("touchstart", this.handleUp);
     this.rightBtn$$.addEventListener("touchstart", this.handleRight);
     this.downBtn$$.addEventListener("touchstart", this.handleDown);
     this.leftBtn$$.addEventListener("touchstart", this.handleLeft);
-    this.jumpBtn$$.addEventListener("touchstart", this.handleJump);
-    // this.jumpBtn.addEventListener("touchend", );
+
+    this.upBtn$$.addEventListener("touchend", this.handleUpU);
+    this.rightBtn$$.addEventListener("touchend", this.handleRightU);
+    this.downBtn$$.addEventListener("touchend", this.handleDownU);
+    this.leftBtn$$.addEventListener("touchend", this.handleLeftU);
   }
   handleJump = (event) => {
     event.preventDefault(); // Prevent default behavior of touch event
@@ -85,27 +89,55 @@ class Player {
     }
   };
   handleUp = (event) => {
+  if(W === 87){
     event.preventDefault(); 
-     this.vy = -playerSpeed;
-     }
-     handleRight = (event) => {
-       event.preventDefault(); 
-       this.vx = playerSpeed;
-       this.img.src = "../public/Imagenes/pangRunRight.png";
-       this.frameAmount = 5;
-     }
-     handleLeft = (event) => {
-   event.preventDefault(); 
-       this.frameTick++;
-       this.vx = -playerSpeed;
-       this.img.src = "../public/Imagenes/pangRunLeft.png";
-       this.frameAmount = 5;
-     }
-     handleDown = (event) => {
+    this.vy = -playerSpeed;
+  }
+    }
+    handleRight = (event) => {
+      event.preventDefault(); 
+      this.vx = playerSpeed;
+      this.img.src = "../public/Imagenes/pangRunRight.png";
+      this.frameAmount = 5;
+    }
+    handleLeft = (event) => {
+  event.preventDefault(); 
+      this.frameTick++;
+      this.vx = -playerSpeed;
+      this.img.src = "../public/Imagenes/pangRunLeft.png";
+      this.frameAmount = 5;
+    }
+    handleDown = (event) => {
    event.preventDefault(); 
        this.vy = playerSpeed;
        this.y = this.y + jumpDownDistance;  // para que al estar encima de la escalera, hago un salto hacia abajo y deje de tener posición fija
-     }
+}
+handleUpU = (event) => {
+  event.preventDefault(); 
+    this.vy = 0;
+    W = 0;
+}
+handleDownU = (event) => {
+  event.preventDefault(); 
+  this.vx = 0;
+  this.img.src = "../public/Imagenes/pangStandShoot.png";
+  this.frameAmount = 2;
+  this.img.frame = 0;
+}
+handleLeftU = (event) =>{
+  event.preventDefault(); 
+  this.vx = 0;
+  this.img.src = "../public/Imagenes/pangStandShoot.png";
+  this.frameAmount = 2;
+  this.img.frame = 0;
+}
+handleRightU = (event) =>{
+  event.preventDefault(); 
+  this.vx = 0;
+  this.img.src = "../public/Imagenes/pangStandShoot.png";
+  this.frameAmount = 2;
+  this.img.frame = 0;
+}
 
   draw() {
     this.bulletArray.forEach((bullet) => {bullet.draw();}); // paso 3: dibujo cada bullet que se dispare
@@ -212,18 +244,18 @@ class Player {
     if (key === W ) {
       this.vy = -playerSpeed;
     }
-    if (key === A || this.touchControls.left) {
+    if (key === A ) {
       this.frameTick++;
     this.vx = -playerSpeed;
     this.img.src = "../public/Imagenes/pangRunLeft.png";
     this.frameAmount = 5;
     }
-    if (key === D || this.touchControls.right) {
+    if (key === D ) {
     this.vx = playerSpeed;
     this.img.src = "../public/Imagenes/pangRunRight.png";
     this.frameAmount = 5;
     }
-    if (key === S && this.touchControls.jump/*&& this.y + this.h < this.ctx.canvas.height - this.h*/) {//todo: bloqueo para el limite inferior
+    if (key === S /*&& this.y + this.h < this.ctx.canvas.height - this.h*/) {//todo: bloqueo para el limite inferior
       this.vy = playerSpeed;
       this.y = this.y + jumpDownDistance;  // para que al estar encima de la escalera, hago un salto hacia abajo y deje de tener posición fija
     }
@@ -313,7 +345,6 @@ class Player {
     this.img.src = "../public/Imagenes/pangStandShoot.png";
     this.frameAmount = 2;
     this.img.frame = 0;
-
     }
     if (key === D) {
       this.vx = 0;
