@@ -1,9 +1,16 @@
 button{
   cursor: pointer;
 }
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2vw;
+}
 #canvas{
-  width: 90vw;
-  height: 40vw;
+  width: 88vw;
+  height: 38vw;
   border: 3px solid red;
   min-width: 100px;
   min-height: 100px;
@@ -14,12 +21,12 @@ button{
 }
 
 #start-background{
-  width: 90vw;
-  height: 40vw;
-  border: 10px solid red;
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 3vw;
+  left: 50%;
+  transform: translate(-50%, 0%);
+  width: 86vw;
+  height: 36vw;
   min-width: 100px;
   min-height: 100px;
 }
@@ -54,7 +61,7 @@ button{
   border: none;
   border-radius: 15px;
   background-color: rgba(255, 255, 255, 0.229);
-  top:1vw;
+  top:8vw;
   left:40vw;
   padding: 5px 10px;
   transition: 1s ease-in-out;

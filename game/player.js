@@ -283,7 +283,7 @@ handleRightU = (event) =>{
       }, 1000);
     }
 
-    if(key === B && this.touchControls.fire){
+    if(key === B ){
       this.img.src = "../public/Imagenes/pangStandShoot.png";
       this.frameAmount = 2;
       this.img.frame = 1;
