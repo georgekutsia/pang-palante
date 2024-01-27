@@ -1,16 +1,20 @@
 
-#moves-div{
-  display: block;
-}
-#moves-div{
-  display: block;
+section{
+  display: none;
 }
 /* moves */
-
+@media only screen and (max-height: 768px) {
+  section{
+    display: block;
+  }
 #moves-div{
   position: absolute;
   left: 1vw;
   top: 50vh;
+  background-color: blue;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 #moves-div button{
   background-color: rgba(0, 0, 255, 0.107);
@@ -19,20 +23,19 @@
   background-color: rgb(77, 77, 232);
 }
 .btn-block{
-  width: 10vw;
+  width: calc(80px + 5vw);
   height: 8vh;
   font-size: calc(12px + 1vw);
   border-radius: 20px;
 }
 .btn-sides{
-  width: 5vw;
-  height: 12vh;
+  width: calc(20px + 5vw);
+  height: calc(20px + 5vw);;
   border-radius: 20px;
 }
 .fonts-i{
   font-size: calc(20px + 0.5vw);
 }
-
 
 
 /* actions */
@@ -74,7 +77,9 @@
 #shootBtn{
   margin-top: 30%;
   height: calc(70px + 5vw);
+  width: calc(20px + 5vw);
   margin-left: -30px;
   border-radius: 20px;
   background-color: rgba(255, 255, 255, 0.339);
+}
 }
