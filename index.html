@@ -6,6 +6,7 @@
   <link rel="stylesheet" href="./styles/main.css" />
   <link rel="stylesheet" href="./styles/info.css" />
   <link rel="stylesheet" href="./styles/shop.css" />
+  <link rel="stylesheet" href="./styles/gameBtns.css" />
   <script src="./game/game.js" defer></script>
   <script src="./game/functions.js" defer></script>
   <script src="./game/levels/gameLevel1.js" defer></script>
@@ -49,6 +50,8 @@
   <title>Document</title>
 </head>
 <body>
+  <div>
+
 <canvas id="canvas"></canvas>
 <div>
   <img  id="start-background" src="/public//Imagenes/background/backgroundStart.jpeg" alt="">
@@ -60,8 +63,6 @@
   <img id="instrucciones-info-1" src="/public/Imagenes/stats/instructionsShoots.png" alt="instrucciones">
   <img id="instrucciones-info-2" src="/public/Imagenes/stats/instructionsMoves1.png" alt="instrucciones">
   <img id="changing-level-img" src="/public/Imagenes/background/background0.jpeg" alt="instrucciones">
-  <h2 id="level-change-text1">Nivel 1</h2>
-  <h2 id="level-change-text2">Buena!</h2>
   <div>
     <img class="ayudas introAyuda1" src="/public/Imagenes/stats/playerTalkIntroAyuda1.png" alt="Player Ayuda 1">
     <img class="ayudas introAyuda2" src="/public/Imagenes/stats/playerTalkIntroAyuda2.png" alt="Player Ayuda 2">
@@ -73,17 +74,37 @@
     <img class="ayudas munSalud" src="/public/Imagenes/stats/playerTalkMunSalud.png" alt="Player Ayuda 2">
     <button  class="ayudas-btn">Mensaje</button>
   </div>
+</div>
   <div id="shop-btn">
     <button id="shop-shield">50 <i class="fa-solid fa-coins"></i><i class="fa-solid fa-angles-right"></i> Shield</button>
     <button id="shop-fire">20 <i class="fa-solid fa-coins"></i><i class="fa-solid fa-angles-right"></i> Flamethrower</button>
   </div>
-  <div style="margin-top: 50px; position: absolute;">
-    <button id="upBtn">UP</button>
-    <button id="rightBtn">Ritght</button>
-    <button id="downBtn">down</button>
-    <button id="leftBtn">left</button>
-    <button id="jumpBtn">Jump</button>
-  </div>
+  <section id="moves-div">
+    <div>
+      <button class="btn-block"  id="jumpBtn"><i class="fa-solid fa-angles-up fonts-i"></i></button>
+    </div>
+    <div >
+      <button class="btn-block"  id="upBtn"><i class="fa-solid fa-chevron-up fonts-i"></i></button>
+    </div>
+    <div>
+      <button class="btn-sides" id="leftBtn"><i class="fa-solid fa-chevron-left fonts-i"></i></button>
+      <button class="btn-sides" id="rightBtn"><i class="fa-solid fa-chevron-right fonts-i"></i></button>
+    </div>
+    <div>
+      <button class="btn-block"  id="downBtn"><i class="fa-solid fa-chevron-down fonts-i"></i></button>
+    </div>
+  </section>
+  <section id="actions-div">
+    <div id="special-shooting-btns" >
+      <button class="special-shooting-btn" id="fireBtn"><img src="/public/Imagenes/gameBtns/fireGunImg.png" alt="fireGun"></button>
+      <div>
+        <button class="special-shooting-btn" id="cadenaBtn"><img src="/public/Imagenes/gameBtns/cadenaGunIMg.png" alt="cadenaGun"></button>
+      </div>
+      <button class="special-shooting-btn" id="blasterBtn"><img src="/public/Imagenes/gameBtns/blasterGunImg.png" alt="blasterGun"></button>
+    </div>
+    <button id="shootBtn"><img src="/public/Imagenes/gameBtns/bubbleGunImg.png" alt="bubbleGun"></button>
+
+  </section>
 </div>
 </body>
 </html>
