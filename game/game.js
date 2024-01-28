@@ -80,15 +80,12 @@ class Game {
       this.bubbleTick++;
       this.gameTime++; //Cada 60 representan 1 segundo de tiempo en el juego
 
-       console.log("spikes", this.spikes)
-       console.log("game", GAMELEVEL)
     }, 1000 / 60);
     //crear nivel 1
     if (!this.gameStarted) {
       if (GAMELEVEL === 1) {
         // level3(this.ctx,this.bubbles,this.platforms,this.stairs,this.boxes,this.healings,this.levelBalls);
         level1(this.ctx, this.bubbles, this.platforms, this.levelBalls,)
-        
         // setTimeout(() => {
         //   addBubble1(this.ctx, this.bubbles)
         // }, 10000);
@@ -108,7 +105,7 @@ class Game {
     this.player.bulletArray = this.player.bulletArray.filter((e) =>e.isVisible()); //elimina cada bullet que ya no es visible y vacía el array
     this.player.bulletFireArray = this.player.bulletFireArray.filter((e) =>e.isVisible()); //elimina cada bullet de fuego que ya no es visible y vacía el array
     this.player.bulletBarArray = this.player.bulletBarArray.filter((e) =>e.isVisible()); //elimina cada bullet de cadena que ya no es visible y vacía el array
-    this.bubbleGatling.bubbleArray = this.bubbleGatling.bubbleArray.filter((e) =>e.isVisible())
+    // this.bubbleGatling.bubbleArray = this.bubbleGatling.bubbleArray.filter((e) =>e.isVisible())
     this.bubbles = this.bubbles.filter((e) => e.isVisible()); //elimina cada obstáculo que ya no es visible y vacía el array
     this.platforms = this.platforms.filter((e) => e.isVisible()); //elimina cada obstáculo que ya no es visible y vacía el array
     this.flamethrowers = this.flamethrowers.filter((e) => e.isVisible()); //elimina cada obstáculo que ya no es visible y vacía el array
@@ -132,7 +129,7 @@ class Game {
     this.platforms.forEach((e) => e.draw());
     this.bouncers.forEach((e) => e.draw());
     this.player.draw(); //dibuja al personaje y todo lo que se dibuja en la clase de personaje
-    this.bubbleGatling.draw(); //dibuja cada obstáculo
+    // this.bubbleGatling.draw(); //dibuja cada obstáculo
     this.points.draw(); //dibuja al personaje y todo lo que se dibuja en la clase de personaje
     this.puffBubbles.forEach((e) => e.draw()); //dibuja cada obstáculo
     this.boxes.forEach((e) => e.draw()); //dibuja cada obstáculo
@@ -149,7 +146,7 @@ class Game {
   }
   move() {
     this.player.move(); //muve al personaje y todo lo que se mueve en la clase de personaje
-    this.bubbleGatling.move(); //dibuja cada obstáculo
+    // this.bubbleGatling.move(); //dibuja cada obstáculo
     this.points.move(); //muve al personaje y todo lo que se mueve en la clase de personaje
     this.bubbles.forEach((e) => e.move()); //mueve los obstáculos
     this.platforms.forEach((e) => e.move()); //mueve los obstáculos
@@ -168,7 +165,7 @@ class Game {
     if (this.bubbles.length <= 0&& this.bubbleGatling.bubbleArray.length <= 0) {
       this.levelBalls.forEach((e) => (e.winCondition = true));
     }
-      this.bubbleGatling.checkPosition(this.player); //mueve los obstáculos
+      // this.bubbleGatling.checkPosition(this.player); 
   }
   setListeners() {
     //permite hacer keyup y keydown para usar teclado para mover el personaje

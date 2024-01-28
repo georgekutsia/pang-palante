@@ -1,22 +1,8 @@
-/////todo - 1) el personaje que se mantenga dentro del area del canvas y que no se vean partes del cuerpo cortadas cuando va hacia abajo
-/////todo - 2) que las burbujas reboten entre las paredes. el truco es manipular vx   y tener en cuenta que a veces hay que comprobar si el eje x de la burbujas
-/////todo - choca contra la pared o es el eje x más la anchura de la burbuja lo que choca contra la pared.
-//todo - 3) que las burbujas salgan en direcciones random cuando aparecen. o incluso cambiarles la dirección cuando les disparas. Bueno para practirar randoms y como funciona impactos
-//todo - 4) dificultad alta: que la bubuja rebote cada vez menos. el primer rebote sube a 10 metros por ejemplo, el segundo rebote a 6 metros, el tercero al 3 y así hasta que se queda quieto
-//todo - 5) crear una nueva clase "Escalera", que se dibuje en la pantalla en  vertical y que cuando el pesonaje choque con ella salga un mensaje console.log("Ha chocado")
-
-
-
-
-la plataforma no mueve al player mientras se desplaza
-
-las burbujas consiguientes pequeñas deberian rebotar según su velocidad vx e vy pero lo hacen con la original
 
 ahora solo salta cuando su vy es 0, pero si se mueve junto a una plataforma, no puede saltar
 
 los disparos no rebotan contra la plataforma según como se mueve el jugador 
 
 
-se llenan los arrays que no deben al iniciar los niveles
-observaciones: si empezamos el juego con cualuqier nivel, no ocurre. solo ocurre cuando desde el nivel 1 o el nivel 2 cambiamos a nivel 3 o superior.
-si cambiamos todo el rato entre los niveles 1 y 2, no ocurre
+
+cambio de nivel no ocurre

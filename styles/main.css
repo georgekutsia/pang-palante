@@ -121,8 +121,6 @@ body {
 
 #level-change-text2{
   position: absolute;
-  left: 30vw;
-  top: 5vw;
   font-size: calc(20px + 2vw);
   text-shadow: 2px 2px white;
   background-color: rgba(255, 255, 255, 0.358);
