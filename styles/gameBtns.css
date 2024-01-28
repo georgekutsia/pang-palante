@@ -28,14 +28,26 @@ section{
   border-radius: 20px;
 }
 .btn-sides{
-  width: calc(20px + 5vw);
-  height: calc(20px + 5vw);;
+  width: calc(20px + 4vw);
+  height: calc(20px + 4vw);;
   border-radius: 20px;
+}
+#leftBtnDodge, #rightBtnDodge{
+  width: calc(10px + 3vw);
 }
 .fonts-i{
   font-size: calc(20px + 0.5vw);
 }
 
+#jumpBtnRight{
+  position: absolute;
+  top: 0px;
+  right:0px;
+  width: calc(20px + 5vw);
+  height: 10vh;
+  font-size: calc(12px + 1vw);
+  border-radius: 20px;
+}
 
 /* actions */
 #actions-div{

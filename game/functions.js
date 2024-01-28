@@ -13,9 +13,8 @@ function bounceFromObstacles(elem1, elem2){
   }
 }
 function basicBulletBounce(elem1, elem2){
-  if(elem1.bulletDirection){
+  if(elem1.direction){
     elem1.vx = elem1.direction;
-    elem1.bulletDirection = false;
   }
   if (elem1.y <= elem2.y) {
     elem1.vy = bubbleSpeedY;

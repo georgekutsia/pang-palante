@@ -49,8 +49,10 @@ body {
   border-radius: 15px;
   background-color: rgba(255, 255, 255, 0.549);
   top:31vw;
-  left:40vw;
+  left:50%;
   transition: 0.5s ease-in-out;
+  transform: translate(-50%, -50%);
+
 }
 
 #instrucciones-btn{
@@ -62,9 +64,11 @@ body {
   border: none;
   border-radius: 15px;
   background-color: rgba(255, 255, 255, 0.73);
-  top:8vw;
-  left:40vw;
+  top:5vw;
+  left:50%;
   transition: 0.5s ease-in-out;
+  transform: translate(-50%, -50%);
+
 }
 
 #instrucciones-btn:hover{
@@ -109,8 +113,9 @@ body {
 
 #level-change-text1{
   position: absolute;
-  left: 32vw;
-  top: 28vw;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   font-size: calc(20px + 2vw);
   text-shadow: 2px 2px white;
   background-color: rgba(255, 255, 255, 0.358);
@@ -121,10 +126,14 @@ body {
 
 #level-change-text2{
   position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   font-size: calc(20px + 2vw);
   text-shadow: 2px 2px white;
   background-color: rgba(255, 255, 255, 0.358);
   border-radius: 20px;
   padding: 5px 20px;
   display: none;
+
 }

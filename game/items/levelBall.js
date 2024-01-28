@@ -13,6 +13,7 @@ constructor(ctx, x, y) {
     this.imgBallShield.src = "../../public/Imagenes/ballShield.png";  //definir cual es la nueva imagen
     this.isActive = false;
     this.winCondition = false;
+    this.bulala = false;
 
   //cuando se rompe la bola
     this.ballBreaks = new Image();
@@ -130,9 +131,9 @@ constructor(ctx, x, y) {
     return  this.x > -2 && this.x <= this.ctx.canvas.width;  //determina cuándo es visible el obstáculo
   }
   collides(objetivo) {  //chequéa la colisión. 
-    const colX = this.x <= objetivo.x + objetivo.w  && this.x + this.w > objetivo.x;   
-    const colY = this.y + this.h > objetivo.y && this.y < objetivo.y + objetivo.h;
-    return colX && colY;
+      const colX = this.x <= objetivo.x + objetivo.w  && this.x + this.w > objetivo.x;   
+      const colY = this.y + this.h > objetivo.y && this.y < objetivo.y + objetivo.h;
+      return colX && colY;
   }
 }
 

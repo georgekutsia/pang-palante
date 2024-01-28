@@ -80,7 +80,7 @@ class Game {
       this.bubbleTick++;
       this.gameTime++; //Cada 60 representan 1 segundo de tiempo en el juego
 
-    }, 1000 / 60);
+    }, 1000 / gameSpeed);
     //crear nivel 1
     if (!this.gameStarted) {
       if (GAMELEVEL === 1) {
@@ -120,8 +120,6 @@ class Game {
   }
 
   draw() {
-
-
     this.background.draw(); //dibuja el background
     this.stairs.forEach((e) => e.draw());
     this.spikes.forEach((e) => e.draw());
@@ -204,7 +202,6 @@ class Game {
       if (spike.collides(this.player) && !this.player.immune) {
         if (!this.player.auraIsActive) {
           spike.active = true;
-          console.log("blablaa")
           this.player.loseLife(spike.damage, true); //el daño al jugador se le hace según lo que marca el daño de la burbuja. a burbuja más pequeña, menos daño
         }
       } else return true;
@@ -522,6 +519,7 @@ class Game {
       this.player.bulletArray.forEach((bullet) => {
         if (bullet.collides(levelBall)) {
           if (levelBall.isActive) {
+            ballBroke = false;
             levelBall.ballBroke = true;
             levelBall.breakingLevelBallSound.play();
             this.levelChange();
@@ -543,7 +541,7 @@ class Game {
   }
 
   levelChange() {
-if(this.player.wasNotDamaged) coins+=20
+    if(this.player.wasNotDamaged) coins+=20
     setTimeout(() => {
       this.changeLevelSound1.play();
       GAMELEVEL += 1;
@@ -551,6 +549,7 @@ if(this.player.wasNotDamaged) coins+=20
       this.randomColor = getRandomColor();
       this.indiceAleatorio = Math.floor(Math.random() * this.frases.length);
       setTimeout(() => {
+        ballBroke = true;
         this.changingLevel = false;
         changingLevelImg$$.style.display = "none";
         levelChangeText1$$.style.display = "none";
@@ -594,7 +593,7 @@ if(this.player.wasNotDamaged) coins+=20
     this.stairs = [];
     this.blasters = [];
     this.spikes = [];
-   this.explosions = [];
+    this.explosions = [];
     this.boxes= []; 
   }
 
