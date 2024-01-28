@@ -1,6 +1,5 @@
 class Player {
-
-  constructor(ctx, moving) {
+  constructor(ctx) {
     this.ctx = ctx;
     this.x = 120;
     this.h = this.ctx.canvas.width / 19;
@@ -21,7 +20,6 @@ class Player {
     this.bulletBarArray = [];
     this.frameAmount = 5;
     this.fireAmount = 30;
-    this.moving = moving;
     this.immune = false; // al recibir daño se vuelve inmune durante unos segundos
     this.fading = 0; //necesario para el parpadeo del personaje cuando es inmune
     this.charging = 0;  // acumula la carga, lo que dibuja el semicírculo
@@ -64,15 +62,23 @@ class Player {
     this.rightBtn$$ = document.getElementById("rightBtn");
     this.downBtn$$ = document.getElementById("downBtn");
     this.leftBtn$$ = document.getElementById("leftBtn");
+    this.leftBtnDodge$$ = document.getElementById("leftBtnDodge");
+    this.rightBtnDodge$$ = document.getElementById("rightBtnDodge");
+
     this.jumpBtn$$ = document.getElementById("jumpBtn");
+    this.jumpBtnRight$$ = document.getElementById("jumpBtnRight");
 
 
     this.jumpBtn$$.addEventListener("touchstart", this.handleJump);
+    this.jumpBtnRight$$.addEventListener("touchstart", this.handleJump);
 
     this.upBtn$$.addEventListener("touchstart", this.handleUp);
     this.rightBtn$$.addEventListener("touchstart", this.handleRight);
     this.downBtn$$.addEventListener("touchstart", this.handleDown);
     this.leftBtn$$.addEventListener("touchstart", this.handleLeft);
+    this.rightBtnDodge$$.addEventListener("touchstart", this.handleRightDodge);
+    this.leftBtnDodge$$.addEventListener("touchstart", this.handleLeftDodge);
+
 
     this.upBtn$$.addEventListener("touchend", this.handleUpU);
     this.rightBtn$$.addEventListener("touchend", this.handleRightU);
@@ -234,6 +240,34 @@ handleRightU = (event) =>{
   this.img.frame = 0;
 }
 
+handleLeftDodge = (event) =>{
+  event.preventDefault(); 
+  if(Q === 81){
+    this.r = 0.4;
+    this.vx = -6;
+    this.img.frame = 0;
+    Q = 0;
+    E = 9;
+    setTimeout(() => {
+      Q = 81;
+      E = 69;
+    }, 1000);
+  }
+}
+handleRightDodge = (event) =>{
+  event.preventDefault(); 
+  if(Q === 81){
+  this.r = -0.4;
+  this.vx = 6;
+  this.img.frame = 0;
+  Q = 0;
+  E = 9;
+  setTimeout(() => {
+    Q = 81;
+    E = 69;
+  }, 1000);
+ }
+}
   draw() {
     this.bulletArray.forEach((bullet) => {bullet.draw();}); // paso 3: dibujo cada bullet que se dispare
     this.bulletFireArray.forEach((bullet) => {bullet.draw();}); // paso 3: dibujo cada bullet que se dispare
@@ -300,7 +334,7 @@ handleRightU = (event) =>{
     }
     this.x += this.velocidadX;
     this.y += this.vy;
-    this.moving = this.vx
+    bulletDirection = this.vx/2
     if(this.vx){
       this.frameTick++
       if (this.frameTick > 10  ) {
@@ -356,25 +390,28 @@ handleRightU = (event) =>{
     }
 
     if(key === Q){
+      this.shootDodgeQ()
       this.r = 0.4;
       this.vx = -6;
       this.img.frame = 0;
       Q = 0;
-      E = 9;
+      E = 0;
       setTimeout(() => {
         Q = 81;
         E = 69;
       }, 1000);
     }
     if(key === E){
+      this.shootDodgeE()
       this.r = -0.4;
       this.vx = 6;
       this.img.frame = 0;
       Q = 0;
-      E = 9;
+      E = 0;
       setTimeout(() => {
         Q = 81;
         E = 69;
+
       }, 1000);
     }
 
@@ -503,7 +540,17 @@ handleRightU = (event) =>{
   }
   shoot() {// paso 1: invoca el disparo desde la posicion del personaje o su cercanía
     this.shootSound.play()
-    const bullet = new BasicWeapon(this.ctx, this.x + 5, this.y, this.moving);
+    const bullet = new BasicWeapon(this.ctx, this.x + 5, this.y, bulletDirection);
+    this.bulletArray.push(bullet);//paso 2: crea un array vacío en el constructor y luego haz un push de cada bullet;
+  }
+  shootDodgeQ() {// paso 1: invoca el disparo desde la posicion del personaje o su cercanía
+    this.shootSound.play()
+    const bullet = new BasicWeapon(this.ctx, this.x + 5, this.y, 0, -3, 0.001);
+    this.bulletArray.push(bullet);//paso 2: crea un array vacío en el constructor y luego haz un push de cada bullet;
+  }
+  shootDodgeE() {// paso 1: invoca el disparo desde la posicion del personaje o su cercanía
+    this.shootSound.play()
+    const bullet = new BasicWeapon(this.ctx, this.x + 5, this.y, 0, 3, 0.001);
     this.bulletArray.push(bullet);//paso 2: crea un array vacío en el constructor y luego haz un push de cada bullet;
   }
 

@@ -1,10 +1,10 @@
 class BasicWeapon {
-  constructor(ctx, x, y, direction) {
+  constructor(ctx, x, y, direction, vx, vy) {
     this.ctx = ctx;
     this.x = x;
     this.y = y;
-    this.vy = -3;
-    this.vx = 0;
+    this.vx = vx || 0;
+    this.vy = vy || -3;
     this.direction = direction;
     this.radius = this.ctx.canvas.width / 90; // radio del círculo
     this.color = getRandomColor(); // función para obtener un color aleatorio
@@ -32,13 +32,15 @@ class BasicWeapon {
   }
 
   collides(objetivo) {
-    const colX = this.x <= objetivo.x + objetivo.w && this.x + 2 * this.radius > objetivo.x;
-    const colY = this.y + 2 * this.radius > objetivo.y && this.y < objetivo.y + objetivo.h;
-    return colX && colY;
+    if(ballBroke){  //importante para no impactar muchas vecs sobre la bola mientras esté rota y cambiar de nivel 1 en 1 
+      const colX = this.x <= objetivo.x + objetivo.w && this.x + 2 * this.radius > objetivo.x;
+      const colY = this.y + 2 * this.radius > objetivo.y && this.y < objetivo.y + objetivo.h;
+      return colX && colY;
+    }
   }
 
   isVisible() {
-    return this.y >= -2 * this.radius;
+    return this.y >= -2  && this.y < CTXH && this.x >= 0 && this.x < CTXW;
   }
 }
 
