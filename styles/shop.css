@@ -9,13 +9,15 @@ border: none;
 
 #shop-btn{
   position: absolute;
-  right: 9vw;
+  right: 5vw;
+  top: 1vh;
+  display: flex;
+  flex-direction: column;
 }
 #shop-btn>button{
   background: none;
   border: none;
   background-color: rgba(255, 196, 255, 0.444);
-  padding: 8px 15px;
   margin-right: 5px;
   border-radius: 15px;
   transition: 0.5s ease-in-out;

@@ -6,7 +6,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 2vw;
+  margin-top: 0;
 }
 #canvas{
   width: 88vw;
@@ -18,11 +18,20 @@ body {
 
 #pang-restart{
   display: none;
+  position: absolute;
+  top: 1vw;
+  left: 1vw;
+  background-color: transparent ;
+  border: none;
+  color: rgb(255, 0, 0);
+  font-size: calc(14px + 1vw);
+  text-shadow: 1px 1px black;
+  transition: 0.5s ease-in-out;
 }
 
 #start-background{
   position: absolute;
-  top: 3vw;
+  top: 3vh;
   left: 50%;
   transform: translate(-50%, 0%);
   width: 86vw;
@@ -34,41 +43,31 @@ body {
 #pang-start{
   position: absolute;
   font-size: calc(14px + 1vw);
+  text-shadow: 1px 1px black;
   color: red;
   border: none;
   border-radius: 15px;
-  text-shadow: 1px 1px black;
-  background-color: rgba(255, 255, 255, 0.229);
+  background-color: rgba(255, 255, 255, 0.549);
   top:31vw;
   left:40vw;
-  transition: 1s ease-in-out;
-  opacity: 0.6 ;
+  transition: 0.5s ease-in-out;
 }
-
-#pang-start:hover{
-  opacity: 1;
-  letter-spacing: 1px;
-  font-weight: 900;
-  background-color: rgba(36, 230, 255, 0.346);
-  padding: 5px 10px;
-}
-
 
 #instrucciones-btn{
+  opacity: 1;
   position: absolute;
   font-size: calc(14px + 1vw);
-  color: rgb(255, 215, 215);
+  text-shadow: 1px 1px black;
+  color: rgb(255, 0, 0);
   border: none;
   border-radius: 15px;
-  background-color: rgba(255, 255, 255, 0.229);
+  background-color: rgba(255, 255, 255, 0.73);
   top:8vw;
   left:40vw;
-  padding: 5px 10px;
-  transition: 1s ease-in-out;
+  transition: 0.5s ease-in-out;
 }
 
 #instrucciones-btn:hover{
-  opacity: 1;
   letter-spacing: 1px;
   background-color: rgba(36, 230, 255, 0.346);
 }
@@ -76,23 +75,23 @@ body {
 #instrucciones-info-1{
   display: none;
   position: absolute;
-  width: 35vw;
+  width: 40vw;
   min-width: 100px;
   min-height: 100px;
   top: 5vw;
-  left: 20vw;
-  transition: 1s ease-in-out;
+  left: 15vw;
+  transition: 0.5s ease-in-out;
 }
 
 #instrucciones-info-2{
   display: none;
   position: absolute;
-  width: 35vw;
+  width: 40vw;
   min-width: 100px;
   min-height: 100px;
   top: 10vw;
-  left: 35vw;
-  transition: 1s ease-in-out;
+  left: 45vw;
+  transition: 0.5s ease-in-out;
 }
 
 #changing-level-img{

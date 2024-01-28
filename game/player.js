@@ -59,6 +59,7 @@ class Player {
     this.shootSound.volume = 0.1;
     this.shootBarSound = new Audio("/public/sounds/shooting/shootBarSound2.mp3");
 
+    // move btns
     this.upBtn$$ = document.getElementById("upBtn");
     this.rightBtn$$ = document.getElementById("rightBtn");
     this.downBtn$$ = document.getElementById("downBtn");
@@ -67,6 +68,7 @@ class Player {
 
 
     this.jumpBtn$$.addEventListener("touchstart", this.handleJump);
+
     this.upBtn$$.addEventListener("touchstart", this.handleUp);
     this.rightBtn$$.addEventListener("touchstart", this.handleRight);
     this.downBtn$$.addEventListener("touchstart", this.handleDown);
@@ -76,9 +78,102 @@ class Player {
     this.rightBtn$$.addEventListener("touchend", this.handleRightU);
     this.downBtn$$.addEventListener("touchend", this.handleDownU);
     this.leftBtn$$.addEventListener("touchend", this.handleLeftU);
+    // shoot btns
+    this.shootBtn$$ = document.getElementById("shootBtn")
+    this.fireBtn$$ = document.getElementById("fireBtn")
+    this.cadenaBtn$$ = document.getElementById("cadenaBtn")
+    this.blasterBtn$$ = document.getElementById("blasterBtn")
+
+    this.shootBtn$$.addEventListener("touchstart", this.handleShoot);
+    this.shootBtn$$.addEventListener("touchend", this.handleShootU);
+
+    this.fireBtn$$.addEventListener("touchstart", this.handleFIre);
+    this.cadenaBtn$$.addEventListener("touchstart", this.handleCadena);
+    
+    this.blasterBtn$$.addEventListener("touchstart", this.handleMegablasterU);
+    this.blasterBtn$$.addEventListener("touchend", this.handleMegablaster);
+
+  }
+  handleShoot = (event) => {
+    event.preventDefault(); 
+      this.img.src = "../public/Imagenes/pangStandShoot.png";
+      this.frameAmount = 2;
+      this.img.frame = 1;
+      this.shoot();
+      B = 0;
+      setTimeout(() => {
+        this.img.frame = 0;
+      }, 50); 
+      setTimeout(() => {
+        B = 66;
+      }, recharge);
+    }
+  handleShootU = () =>{
+    this.img.src = "../public/Imagenes/pangStandShoot.png";
+    this.frameAmount = 2;
+    this.img.frame = 0;
+  }
+  handleFIre = (event) => {
+    event.preventDefault(); 
+    if(this.fireAmount > 0){ 
+      this.fireAmount -= 1;
+      this.shootFire();
+      if(this.fireAmount <= 0){
+        N = 0;
+      }
+    }
+  }
+  handleCadena = (event) => {
+    event.preventDefault(); 
+    this.shootBar();
+    this.barAmount--;
+    if(this.barAmount <= 0)this.barAmount = 0;
+    M = 0
+      setTimeout(() => {
+        M = 77
+      }, 100);
+  }
+  handleMegablaster = (event) => {
+    event.preventDefault(); 
+      if(this.megaFireBlaster){
+      A = 65;
+      D = 68;
+      this.chargingFires = false;
+      this.megaFireBlaster = false;
+      if(this.charging >= 3){
+        for (let i = 0; i < this.charging; i++) {
+          this.blasterExplosion.play();
+          this.blasterCharging.volume = 0;
+          if(i % 10 === 0  && i % 20 !==0 ){
+            const bulletFire = new WeaponFire(this.ctx, this.x + this.w-i, this.y, this.ctx.canvas.width/20, this.ctx.canvas.width/18)
+            this.bulletFireArray.push(bulletFire);
+          }
+          if(i % 20 === 0 && i >= 10){
+            const bulletFire = new WeaponFire(this.ctx, this.x +i, this.y, this.ctx.canvas.width/20, this.ctx.canvas.width/18)
+            this.bulletFireArray.push(bulletFire);
+          }
+        }
+        this.charging -= this.charging;
+      }
+    }
+  }
+  handleMegablasterU = (event) => {
+    event.preventDefault(); 
+    if( this.megaFireBlaster ){
+      A = 0;
+      D = 0;
+      this.chargingFires = true;
+      this.charging++;
+      this.blasterCharging.volume = 1;
+      this.blasterCharging.play()
+      if(this.charging >= this.megaFireBlasterAmount){
+        this.charging = this.megaFireBlasterAmount;
+      this.blasterCharging.volume = 0;
+      }
+    }
   }
   handleJump = (event) => {
-    event.preventDefault(); // Prevent default behavior of touch event
+    event.preventDefault(); 
     if (this.vy === 0 || this.ableToJump === true) {
       this.vy = jumpHeight;
       this.g = 0.2;

@@ -10,8 +10,7 @@ section{
 #moves-div{
   position: absolute;
   left: 1vw;
-  top: 50vh;
-  background-color: blue;
+  top: 45vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -42,7 +41,7 @@ section{
 #actions-div{
   position: absolute;
   right: 3vw;
-  top:45vh;
+  top:35vh;
   display: flex;
 }
 #actions-div button{

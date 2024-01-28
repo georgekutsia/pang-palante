@@ -33,18 +33,20 @@ start$$.addEventListener("click", function () {
   startBackground$$.style.display = "none";
   instruccionesInfo1$$.style.display = "none";
   instruccionesInfo2$$.style.display = "none";
+  infoPlayerBtn1$$.style.display = "block";
   infoIntro1()
     if (game.interval) {
       game.stop();
       start$$.innerText = "Start";
-      start$$.style.opacity = "1";
+      start$$.innerHTML = '<i class="fa-solid fa-play"></i>';  
     } else {
       game.start();
-      start$$.style.top = "42vw"
-      instruccionesBtn$$.style.top = "42vw"
-      instruccionesBtn$$.style.left = "22vw"
-      start$$.innerText = "Stop";
-      
+      start$$.style.left = "1vw";
+      start$$.style.top = "25vh";
+      instruccionesBtn$$.style.left = "1vw";
+      instruccionesBtn$$.innerHTML = '<i class="fa-solid fa-info"></i>';  
+      start$$.innerHTML = '<i class="fa-solid fa-pause"></i>';  
+
     }
   }
 );
