@@ -17,20 +17,20 @@ transition: 1s ease-in-out;
 }
 
 .ayudas-btn{
-  padding: 5px 10px;
+  display: none;
   position: absolute; 
-  right: 5vw;
-  top: 0.1vw;
+  left: 1vw;
+  top: 12vh;
   color: red;
-  font-size: calc(14px + 0.5vw);
+  font-size: calc(14px + 1vw);
+  text-shadow: 1px 1px black;
   font-weight: 800;
-  border-radius: 30px;
   border: none;
-  opacity: 0.3;
+  background-color: transparent;
   transition: 0.5s ease-in-out;
 }
 .ayudas-btn:hover{
-  opacity: 1;
+  color: rgb(0, 242, 255);
 }
 .munAmetralladora,
 .munCadena,
