@@ -30,6 +30,13 @@ let munSalud$$ = document.querySelector(".munSalud")
 let shopShield$$ = document.getElementById("shop-shield")
 let shopFire$$ = document.getElementById("shop-fire")
 let shopSuperGun$$ = document.getElementById("shop-superGun")
+let shopSuperGun1$$ = document.getElementById("shop-superGun1")
+let shopSuperGun2$$ = document.getElementById("shop-superGun2")
+let shopSuperGun3$$ = document.getElementById("shop-superGun3")
+let shopSuperGun4$$ = document.getElementById("shop-superGun4")
+
+
+let shopSpeedGun$$ = document.getElementById("shop-speedGun")
 
 
 start$$.addEventListener("click", function () {

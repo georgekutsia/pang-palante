@@ -29,6 +29,8 @@ class Player {
     this.barAmount = 430;
     this.ableToJump = false;
     this.wasNotDamaged = true;
+    this.bigWeaponBubblesMaxAmount = 0;
+
 
     this.img = new Image();
     this.img.src = "../public/Imagenes/pangRunRight.png";
@@ -416,9 +418,11 @@ handleRightDodge = (event) =>{
     }
 
     if(key === B ){
-      if(basicWeaponLevel >= 1)this.shoot();
-      if(basicWeaponLevel >= 2)this.shootDouble()
-      if(basicWeaponLevel >= 3)this.shootTriple()
+      if(basicWeaponLevel >= 0)this.shoot();
+      if(basicWeaponLevel >= 1)this.shootDouble()
+      if(basicWeaponLevel >= 2)this.shootTriple()
+      if(basicWeaponLevel >= 3)this.shootCuatruple()
+      if(basicWeaponLevel >= 4)this.shootQuintuple()
       this.img.src = "../public/Imagenes/pangStandShoot.png";
       this.frameAmount = 2;
       this.img.frame = 1;
@@ -552,10 +556,26 @@ handleRightDodge = (event) =>{
   }
   shootTriple() {// paso 1: invoca el disparo desde la posicion del personaje o su cercanía
     this.shootSound.play()
-    const bullet1 = new BasicWeapon(this.ctx, this.x - 3, this.y, bulletDirection, -0.3);
-    const bullet2 = new BasicWeapon(this.ctx, this.x + 5, this.y, bulletDirection, 0.3);
+    const bullet1 = new BasicWeapon(this.ctx, this.x - 6, this.y, bulletDirection, -0.3 - basicWeaponSpeed/2);
+    const bullet2 = new BasicWeapon(this.ctx, this.x + 8, this.y, bulletDirection, 0.3+ basicWeaponSpeed/2);
     this.bulletArray.push(bullet1, bullet2);//paso 2: crea un array vacío en el constructor y luego haz un push de cada bullet;
   }
+  shootCuatruple() {// paso 1: invoca el disparo desde la posicion del personaje o su cercanía
+    this.shootSound.play()
+    const bullet6 = new BasicWeapon(this.ctx, this.x-2, this.y +5, bulletDirection, 0, -1, true);
+    this.bigWeaponBubblesMaxAmount  += 1
+    this.bulletArray.push(bullet6);//paso 2: crea un array vacío en el constructor y luego haz un push de cada bullet;
+  }
+  shootQuintuple(){
+    this.shootSound.play()
+    if(this.bigWeaponBubblesMaxAmount <= 4){
+      this.bigWeaponBubblesMaxAmount  += 1
+      const bullet7 = new BasicWeapon(this.ctx, this.x - 10, this.y - 10, bulletDirection, -0.01, -0.09, true, 450);
+      const bullet8 = new BasicWeapon(this.ctx, this.x + 14, this.y - 10, bulletDirection, 0.01, -0.09, true, 450);
+      this.bulletArray.push(bullet7, bullet8);//paso 2: crea un array vacío en el constructor y luego haz 
+    }
+  }
+
   shootDodgeQ() {// paso 1: invoca el disparo desde la posicion del personaje o su cercanía
     this.shootSound.play()
     const bullet = new BasicWeapon(this.ctx, this.x + 5, this.y, 0, -3, 0.001);

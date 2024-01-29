@@ -41,10 +41,11 @@ let jumpDownDistance = 0;
 let bubbleSpeedY = 2.5;
 let bubbleSpeedX = 0.5;
 let GAMELEVEL = 10;
-let coins = 332;
+let coins = 3000;
 let ballBroke = true;
 let retry = 2;
-let basicWeaponLevel  = 3; //para mejorar cuantas balas dispara
+let basicWeaponLevel  = 0; //para mejorar cuantas balas dispara
+let basicWeaponSpeed = 0;
 
 const CTXW = ctx.canvas.width
 const CTXH = ctx.canvas.height

@@ -1,14 +1,16 @@
 class BasicWeapon {
-  constructor(ctx, x, y, direction, vx, vy) {
+  constructor(ctx, x, y, direction, vx, vy, isBig, basicBulletDuration) {
     this.ctx = ctx;
     this.x = x;
     this.y = y;
     this.vx = vx || 0;
     this.vy = vy || -3;
     this.direction = direction;
-    this.radius = this.ctx.canvas.width / 90; // radio del círculo
+    this.radius =  CTXW / 90; // radio del círculo
     this.color = getRandomColor(); // función para obtener un color aleatorio
     this.tick = 0;
+    this.isBig = isBig || false;
+    this.basicBulletDuration =  basicBulletDuration || 250;
   }
 
   draw() {
@@ -17,18 +19,35 @@ class BasicWeapon {
     this.ctx.fillStyle = this.color;
     this.ctx.fill();
     this.ctx.closePath();
+    
+    const outerRadius = this.radius; // Puedes ajustar el tamaño del borde aquí
+    this.ctx.beginPath();
+    this.ctx.arc(this.x + this.radius, this.y + this.radius, outerRadius, 0, 2 * Math.PI);
+    this.ctx.strokeStyle = "white";
+    this.ctx.lineWidth = 1; // Puedes ajustar el grosor del borde aquí
+    if(this.isBig) {
+      this.radius = CTXW / 47
+    this.ctx.lineWidth = 3;
+    }
+    this.ctx.stroke();
+    this.ctx.closePath();
+
   }
 
   move() {
     this.x += this.vx;
-    this.y += this.vy;
+    this.y += this.vy
+    if(!this.isBig) {
+      this.y -= basicWeaponSpeed;
+    }
     if (this.y + 2 * this.radius >= this.ctx.canvas.height) {
       this.vy = -3;
     }
     this.tick++;
-    if (this.tick >= 250) {
+    if (this.tick >= this.basicBulletDuration) {
       this.y = -200;
     }
+
   }
 
   collides(objetivo) {
