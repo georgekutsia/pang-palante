@@ -232,3 +232,11 @@ function checkBarCollisions(bulletBarArray, obstacles, collisionHandler, player)
     });
   });
 }
+
+function bigWeaponBubble (ctx, bullet, player){
+  const bullet1 = new BasicWeapon(ctx, bullet.x, bullet.y, 0, -2, 2);
+  const bullet2 = new BasicWeapon(ctx, bullet.x, bullet.y, 0, 2, -2);
+  const bullet3 = new BasicWeapon(ctx, bullet.x, bullet.y, 0, 2, 2);
+  const bullet4 = new BasicWeapon(ctx, bullet.x, bullet.y, 0, -2, -2);
+  player.bulletArray.push(bullet1, bullet2,bullet3,bullet4)
+}

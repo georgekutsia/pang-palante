@@ -11,24 +11,40 @@
   display: flex;
   flex-direction: column;
 }
-#shop-btn>button{
+#shop-btn button{
   background: none;
   border: none;
-  background-color: rgba(255, 196, 255, 0.444);
+  background-color: hwb(175 74% 2%);
   margin-right: 5px;
-  border-radius: 15px;
+  border-radius: 5px;
   transition: 0.5s ease-in-out;
   font-size: calc(10px + 0.8vw);
-
+  padding: 6px 10px;
+  margin-bottom: 5px;
 }
-#shop-btn>button:hover{
-  background-color: rgb(252, 118, 252);
 
+#shop-btn button:hover{
+  background-color: rgb(246, 199, 246);
 }
 
 #shop-btn, i{
-  font-size: calc(8px + 0.6vw);
+  font-size: calc(8px + 0.3vw);
 }
 #shop-superGun{
   margin-top: 40px;
+  color: rgb(254, 0, 224);
+}
+
+#shop-superGun2, 
+#shop-superGun3,
+#shop-superGun4{
+  display: none;
+}
+
+
+#shop-speedGun{
+  margin-top: 40px;
+}
+#shop-speedGun>span{
+  color: rgb(254, 0, 224);
 }

@@ -74,7 +74,6 @@ class Game {
       this.clear(); //   limpia el canvas. Sin esta función, nunca dejaría de dibujarse lo anterior y no aparentaría movimiento.
       this.move(); // mueve los objetos movibles
       this.draw(); // dibuja lo que haga falta
-      console.log(this.player.wasNotDamaged)
       if (this.changingLevel) {
         changingLevelImg$$.style.display = "block";
         levelChangeText1$$.style.display = "block";
@@ -251,13 +250,24 @@ class Game {
     //bubbles...bubbles...bubbles...bubbles...bubbles...
     this.bubbles.forEach((bubble) => {//  bubble con bullet
       this.player.bulletArray = this.player.bulletArray.filter((bullet) => {
-        if (bullet.collides(bubble)) {
+        if (bullet.collides(bubble) && !bullet.isBig) {
           bubblePuff(bubble, this.puffBubbles, this.bubbles, this.ctx);
           this.bubblePopSound1.play(); //todo -- Sonido paso 3) invocar el sonido
           return false;
         } else return true;
       });
     });
+    this.bubbles.forEach((bubble) => {//  bubble con bullet
+    this.player.bulletArray.forEach((bullet) => {
+        if (bullet.collides(bubble) && bullet.isBig) {
+          bigWeaponBubble(this.ctx, bullet,  this.player)
+          bullet.y = -300;
+        } else return true;
+      });
+    });
+
+
+
     this.bubbles.forEach((bubble) => {//bubble con fire
       this.player.bulletFireArray.forEach((bullet) => {
         if (bullet.collides(bubble)) {
@@ -297,7 +307,7 @@ class Game {
     });
     //bubblesGatling...bubblesGatling...bubblesGatling...bubblesGatling...bubblesGatling...
     //bubblesGatling...bubblesGatling...bubbles...bubbles...bubbles...
-    this.bubbleGatling.bubbleArray.forEach((bubble) => {//weapon con bubbleGatling
+    this.bubbleGatling.bubbleArray.forEach((bubble) => {//weapon con bubbleGatling bubble
       this.player.bulletArray = this.player.bulletArray.filter((bullet) => {
         if (bullet.collides(bubble)) {
           bubblePuff(bubble, this.puffBubbles, this.bubbles, this.ctx);
@@ -388,8 +398,7 @@ class Game {
       }
     });
 
-    this.platforms.forEach((platform) => {
-      //platform con bullets normales
+    this.platforms.forEach((platform) => {//platform con bullets normales
       this.player.bulletArray.forEach((bullet) => {
         if (bullet.collides(platform)) {
           if (!platform.isSolid) {

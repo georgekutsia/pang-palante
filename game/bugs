@@ -1,4 +1,5 @@
 
 ahora solo salta cuando su vy es 0, pero si se mueve junto a una plataforma, no puede saltar
 
-actualizar las compras en la tienda de la bala básica
+
+la bala grande de burbuja a partir de cierto tamaño cambia su velocidad 
