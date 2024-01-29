@@ -40,9 +40,11 @@ let immuneTime = 2000;
 let jumpDownDistance = 0;
 let bubbleSpeedY = 2.5;
 let bubbleSpeedX = 0.5;
-let GAMELEVEL = 1;
+let GAMELEVEL = 10;
 let coins = 332;
 let ballBroke = true;
+let retry = 2;
+let basicWeaponLevel  = 3; //para mejorar cuantas balas dispara
 
 const CTXW = ctx.canvas.width
 const CTXH = ctx.canvas.height

@@ -1,8 +1,4 @@
 
 ahora solo salta cuando su vy es 0, pero si se mueve junto a una plataforma, no puede saltar
 
-los disparos no rebotan contra la plataforma según como se mueve el jugador 
-
-
-
-cambio de nivel no ocurre
+actualizar las compras en la tienda de la bala básica

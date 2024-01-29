@@ -66,15 +66,30 @@ class Game {
   start() {
     // this.gameBackgroundMusic.play();
     this.interval = setInterval(() => {
+      retryAmount$$.innerText = `${retry}`
+      if(!retry){
+        retryAmount$$.style.display = "none"
+        retry$$.style.display = "none";
+      }
       this.clear(); //   limpia el canvas. Sin esta función, nunca dejaría de dibujarse lo anterior y no aparentaría movimiento.
       this.move(); // mueve los objetos movibles
       this.draw(); // dibuja lo que haga falta
+      console.log(this.player.wasNotDamaged)
       if (this.changingLevel) {
         changingLevelImg$$.style.display = "block";
-        levelChangeText2$$.style.display = "block";
         levelChangeText1$$.style.display = "block";
-        levelChangeText2$$.innerText = `${this.frases[this.indiceAleatorio]}`;
+        levelChangeText2$$.style.display = "block";
+        levelChangeText3$$.style.display = "block";
+        levelChangeText4$$.style.display = "block";
         levelChangeText1$$.innerText = `Siguiente nivel ${GAMELEVEL}`;
+        levelChangeText2$$.innerText = `${this.frases[this.indiceAleatorio]}`;
+    if(this.player.wasNotDamaged) {
+      levelChangeText3$$.innerText = `+20 monedas por no recibir daño`;
+    } else {
+      levelChangeText3$$.innerText = ``;
+      
+    }
+        levelChangeText4$$.innerText = ``;
       }
       this.checkCollisions(); //Comprueba las colisiones constantemtente
       this.bubbleTick++;
@@ -83,9 +98,10 @@ class Game {
     }, 1000 / gameSpeed);
     //crear nivel 1
     if (!this.gameStarted) {
-      if (GAMELEVEL === 1) {
+      if (GAMELEVEL === 10) {
         // level3(this.ctx,this.bubbles,this.platforms,this.stairs,this.boxes,this.healings,this.levelBalls);
-        level1(this.ctx, this.bubbles, this.platforms, this.levelBalls,)
+        // level1(this.ctx, this.bubbles, this.platforms, this.levelBalls,)
+        level10( this.ctx, this.bubbles, this.platforms, this.stairs,  this.healings, this.bars, this.boxes,this.levelBalls);
         // setTimeout(() => {
         //   addBubble1(this.ctx, this.bubbles)
         // }, 10000);
@@ -184,6 +200,7 @@ class Game {
         if (!this.player.auraIsActive) {
           this.player.loseLife(bubble.damage, true); //el daño al jugador se le hace según lo que marca el daño de la burbuja. a burbuja más pequeña, menos daño
         }
+        this.player.wasNotDamaged = false;
         this.bubbleSplash2.play();
         bubble.vy = -bubbleSpeedY; // rebota encima del jugador haciéndole daño
       } else return true;
@@ -554,6 +571,8 @@ class Game {
         changingLevelImg$$.style.display = "none";
         levelChangeText1$$.style.display = "none";
         levelChangeText2$$.style.display = "none";
+        levelChangeText3$$.style.display = "none";
+        levelChangeText4$$.style.display = "none";
         this.levelBalls = [];
         if (GAMELEVEL === 2) {
           this.background.img.src ="/public/Imagenes/background/background8.jpeg";
@@ -578,6 +597,7 @@ class Game {
           level9( this.ctx, this.bubbles, this.platforms,this.bouncers, this.stairs,  this.healings, this.bars, this.boxes, this.spikes,this.levelBalls);
 
         }else if (GAMELEVEL === 10) {
+          level10( this.ctx, this.bubbles, this.platforms, this.stairs,  this.healings, this.bars, this.boxes,this.levelBalls);
 
         }else if (GAMELEVEL === 11) {
         }
@@ -595,6 +615,7 @@ class Game {
     this.spikes = [];
     this.explosions = [];
     this.boxes= []; 
+    this.bars = [];
   }
 
   gameOver() {

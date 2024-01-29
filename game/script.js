@@ -4,6 +4,8 @@ const game = new Game(ctx);
 //gamOn es para indicar que se ha acabado el juego, que otras formas me han fallado
 let start$$ = document.getElementById("pang-start");
 let restart$$ = document.getElementById("pang-restart");
+let retry$$ = document.getElementById("pang-retry");
+let retryAmount$$ = document.getElementById("retry-amount");
 let startBackground$$ = document.getElementById("start-background");
 let instruccionesBtn$$ = document.getElementById("instrucciones-btn");
 let instruccionesInfo1$$ = document.getElementById("instrucciones-info-1");
@@ -11,6 +13,8 @@ let instruccionesInfo2$$ = document.getElementById("instrucciones-info-2");
 let changingLevelImg$$ = document.getElementById("changing-level-img");
 let levelChangeText1$$ = document.getElementById("level-change-text1");
 let levelChangeText2$$ = document.getElementById("level-change-text2");
+let levelChangeText3$$ = document.getElementById("level-change-text3");
+let levelChangeText4$$ = document.getElementById("level-change-text4");
 
 let infoPlayerBtn1$$ = document.querySelector(".ayudas-btn")
 let infoPlayer1$$ = document.querySelector(".introAyuda1")
@@ -25,11 +29,13 @@ let munSalud$$ = document.querySelector(".munSalud")
 // shop btns
 let shopShield$$ = document.getElementById("shop-shield")
 let shopFire$$ = document.getElementById("shop-fire")
+let shopSuperGun$$ = document.getElementById("shop-superGun")
 
 
 start$$.addEventListener("click", function () {
   canvas.style.display = "block";
   restart$$.style.display = "block";
+  retry$$.style.display = "block";
   startBackground$$.style.display = "none";
   instruccionesInfo1$$.style.display = "none";
   instruccionesInfo2$$.style.display = "none";
@@ -37,13 +43,16 @@ start$$.addEventListener("click", function () {
   infoIntro1()
     if (game.interval) {
       game.stop();
-      start$$.innerText = "Start";
       start$$.innerHTML = '<i class="fa-solid fa-play"></i>';  
     } else {
       game.start();
       start$$.style.left = "1vw";
-      start$$.style.top = "25vh";
+      start$$.style.top = "35vh";
+      start$$.style.transform = "translate(0)";
+
+      instruccionesBtn$$.style.top = "25vh";
       instruccionesBtn$$.style.left = "1vw";
+      instruccionesBtn$$.style.transform = "translate(0)";
       instruccionesBtn$$.innerHTML = '<i class="fa-solid fa-info"></i>';  
       start$$.innerHTML = '<i class="fa-solid fa-pause"></i>';  
 
@@ -64,7 +73,14 @@ instruccionesBtn$$.addEventListener("click", function () {
 restart$$.addEventListener("click", ()=>{
     window.location.reload();
 })
-
+retry$$.addEventListener("click", ()=>{
+  if(retry >=1){
+    retry -= 1; //hay 2 retries
+    game.player.wasNotDamaged = false; //para que no se sumen 20 monedas
+    GAMELEVEL = GAMELEVEL -1; //para que reinicie en el mismo nivel en el que está
+    game.levelChange();
+  }
+})
 
 instruccionesInfo2$$.addEventListener("click",()=>{
     instruccionesInfo1$$.style.zIndex = 1;

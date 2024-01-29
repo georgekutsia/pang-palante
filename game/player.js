@@ -416,10 +416,12 @@ handleRightDodge = (event) =>{
     }
 
     if(key === B ){
+      if(basicWeaponLevel >= 1)this.shoot();
+      if(basicWeaponLevel >= 2)this.shootDouble()
+      if(basicWeaponLevel >= 3)this.shootTriple()
       this.img.src = "../public/Imagenes/pangStandShoot.png";
       this.frameAmount = 2;
       this.img.frame = 1;
-      this.shoot();
       B = 0;
       setTimeout(() => {
         this.img.frame = 0;
@@ -542,6 +544,17 @@ handleRightDodge = (event) =>{
     this.shootSound.play()
     const bullet = new BasicWeapon(this.ctx, this.x + 5, this.y, bulletDirection);
     this.bulletArray.push(bullet);//paso 2: crea un array vacío en el constructor y luego haz un push de cada bullet;
+  }
+  shootDouble() {// paso 1: invoca el disparo desde la posicion del personaje o su cercanía
+    this.shootSound.play()
+    const bullet1 = new BasicWeapon(this.ctx, this.x - 3, this.y, bulletDirection);
+    this.bulletArray.push(bullet1);//paso 2: crea un array vacío en el constructor y luego haz un push de cada bullet;
+  }
+  shootTriple() {// paso 1: invoca el disparo desde la posicion del personaje o su cercanía
+    this.shootSound.play()
+    const bullet1 = new BasicWeapon(this.ctx, this.x - 3, this.y, bulletDirection, -0.3);
+    const bullet2 = new BasicWeapon(this.ctx, this.x + 5, this.y, bulletDirection, 0.3);
+    this.bulletArray.push(bullet1, bullet2);//paso 2: crea un array vacío en el constructor y luego haz un push de cada bullet;
   }
   shootDodgeQ() {// paso 1: invoca el disparo desde la posicion del personaje o su cercanía
     this.shootSound.play()

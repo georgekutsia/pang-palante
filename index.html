@@ -53,31 +53,33 @@
   <div>
 
 <canvas id="canvas"></canvas>
-<div>
+<div class="icons-btn">
   <img  id="start-background" src="/public//Imagenes/background/backgroundStart.jpeg" alt="">
   <button id="pang-start">Empezar Nivel 1</button>
-  <button id="pang-restart"><i class="fa-solid fa-arrow-rotate-left"></i></button>
+  <button id="pang-restart"><i class="fa-solid fa-power-off"></i></button>
+  <button id="pang-retry"><i class="fa-solid fa-arrow-rotate-left"></i> <h3 id="retry-amount"></h3></button>
 </div>
 <div>
-  <button id="instrucciones-btn">Instrucciones</button>
-  <img id="instrucciones-info-1" src="/public/Imagenes/stats/instructionsShoots.png" alt="instrucciones">
+  <button   class="icons-btn" id="instrucciones-btn">Instrucciones</button>
+  <img id="instrucciones-info-1" src="/public/Imagenes/stats/instructionsShoots1.png" alt="instrucciones">
   <img id="instrucciones-info-2" src="/public/Imagenes/stats/instructionsMoves1.png" alt="instrucciones">
   <img id="changing-level-img" src="/public/Imagenes/background/background0.jpeg" alt="instrucciones">
   <div>
     <img class="ayudas introAyuda1" src="/public/Imagenes/stats/playerTalkIntroAyuda1.png" alt="Player Ayuda 1">
-    <img class="ayudas introAyuda2" src="/public/Imagenes/stats/playerTalkIntroAyuda2.png" alt="Player Ayuda 2">
+    <img class="ayudas introAyuda2" src="/public/Imagenes/stats/playerTalkIntroAyuda2.png" alt="Pzlayer Ayuda 2">
     <img class="ayudas munAmetralladora" src="/public/Imagenes/stats/playerTalkMunAmetralladora.png" alt="Player Ayuda 2">
     <img class="ayudas munCadena" src="/public/Imagenes/stats/playerTalkMunCadena.png" alt="Player Ayuda 2">
     <img class="ayudas munEscudo" src="/public/Imagenes/stats/playerTalkMunEscudo.png" alt="Player Ayuda 2">
     <img class="ayudas munLanzallamas" src="/public/Imagenes/stats/playerTalkMunLanzallamas.png" alt="Player Ayuda 2">
     <img class="ayudas munMegablaster" src="/public/Imagenes/stats/playerTalkMunMegablaster.png" alt="Player Ayuda 2">
     <img class="ayudas munSalud" src="/public/Imagenes/stats/playerTalkMunSalud.png" alt="Player Ayuda 2">
-    <button  class="ayudas-btn"><i class="fa-regular fa-comment"></i></button>
+    <button  class="ayudas-btn icons-btn"><i class="fa-regular fa-comment"></i></button>
   </div>
 </div>
   <div id="shop-btn">
-    <button id="shop-shield">50 <i class="fa-solid fa-coins"></i><i class="fa-solid fa-angles-right"></i> Shield</button>
-    <button id="shop-fire">20 <i class="fa-solid fa-coins"></i><i class="fa-solid fa-angles-right"></i> Flamethrower</button>
+    <button id="shop-shield">50<i class="fa-solid fa-coins"></i> <i style="font-size: calc(14px + 0.5vw)" class="fa-solid fa-globe"></i></button>
+    <button id="shop-fire">20<i class="fa-solid fa-coins"></i> <i style="font-size: calc(14px + 0.5vw)" class="fa-solid fa-fire-flame-simple"></i></button>
+    <button id="shop-superGun">200<i class="fa-solid fa-coins"></i> <i style="font-size: calc(14px + 0.5vw)" class="fa-solid fa-bullseye"></i> <br>Lvl 1 </button>
   </div>
   <section id="moves-div">
     <div>
@@ -109,8 +111,10 @@
   </section>
 </div>
 <div>
-  <h2 id="level-change-text1">Bulala</h2>
-  <h2 id="level-change-text2">Next level</h2>
+  <h2 class="level-change-text" id="level-change-text1"></h2>
+  <h2 class="level-change-text" id="level-change-text2"></h2>
+  <h2 class="level-change-text" id="level-change-text3">Hey</h2>
+  <h2 class="level-change-text" id="level-change-text4"></h2>
 </div>
 </body>
 </html>

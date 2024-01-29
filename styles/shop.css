@@ -1,15 +1,12 @@
 #shop-shield{
   font-size: calc(10px + 0.8vw);
   background: none;
-border: none;
-}
-#shop-fire{
-  font-size: calc(10px + 0.8vw);
+  border: none;
 }
 
 #shop-btn{
   position: absolute;
-  right: 5vw;
+  right: 1vw;
   top: 1vh;
   display: flex;
   flex-direction: column;
@@ -21,6 +18,8 @@ border: none;
   margin-right: 5px;
   border-radius: 15px;
   transition: 0.5s ease-in-out;
+  font-size: calc(10px + 0.8vw);
+
 }
 #shop-btn>button:hover{
   background-color: rgb(252, 118, 252);
@@ -29,4 +28,7 @@ border: none;
 
 #shop-btn, i{
   font-size: calc(8px + 0.6vw);
+}
+#shop-superGun{
+  margin-top: 40px;
 }

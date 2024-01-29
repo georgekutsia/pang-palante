@@ -42,7 +42,7 @@ shopShield$$.addEventListener("click", function(){
 })
 shopFire$$.addEventListener("click", function(){
   if(coins >= 20 && game.player.fireAmount <=29){
-    game.player.life.total += 1;
+    game.player.fireAmount += 3;
     coins -= 20; 
     N = 78;
   }
