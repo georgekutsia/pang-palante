@@ -46,7 +46,7 @@ constructor(ctx, x, y) {
     if(!this.ballBroke) {
     this.ctx.drawImage(this.img, this.x, this.y, this.w, this.h);  // dibuja el obstáculo
     }
-    if(!this.isActive) {
+    if(!this.isActive && !this.ballBroke) {
       this.ctx.drawImage(this.imgBallShield, this.x-3, this.y+4, this.w+5, this.w + 5);  // dibuja el escudo protector
     }
 

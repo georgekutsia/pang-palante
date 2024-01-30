@@ -406,7 +406,10 @@ class Game {
           } else {
             const newColor = platform.calculateNewColor();
             platform.color = newColor;
-            bullet.x = -200;
+            if(bullet.isBig){
+              bigWeaponBubble(this.ctx, bullet,  this.player)
+            }
+            bullet.x = -200
             if (platform.life <= 0) {
               platform.x = -200;
             }
@@ -415,6 +418,17 @@ class Game {
         } else return true;
       });
     });
+
+    this.platforms.forEach((bubble) => {//  bubble con bullet
+      this.player.bulletArray.forEach((bullet) => {
+          if (bullet.collides(bubble) && bullet.isBig) {
+            bigWeaponBubble(this.ctx, bullet,  this.player)
+            bullet.y = -300;
+          } else return true;
+        });
+      });
+  
+
     //colisiones con bouncers
     this.bouncers.forEach((bouncer) => {
       if (bouncer.collides(this.player)) {
@@ -522,7 +536,7 @@ class Game {
 
     this.boxes.forEach((box) => {//  box con bullet
       this.player.bulletArray = this.player.bulletArray.filter((bullet) => {
-        if (bullet.collides(box)) {
+        if (bullet.collides(box) && !bullet.isBig) {
           box.boxHit();
           if (box.boxImg.frame > 8) {
             if(box.bubblePopup){
@@ -540,6 +554,16 @@ class Game {
         } else return true;
       });
     });
+
+    this.boxes.forEach((box) => {
+      this.player.bulletArray.forEach((bullet) => {
+        if(bullet.collides(box) && bullet.isBig){
+          bigWeaponBubble(this.ctx, bullet, this.player)
+          return false
+        }else return true;  
+      })
+    })
+
 
     this.levelBalls.forEach((levelBall) => {//levelBall con bullets normales
       this.player.bulletArray.forEach((bullet) => {
