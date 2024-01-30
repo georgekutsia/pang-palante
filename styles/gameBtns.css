@@ -3,7 +3,7 @@ section{
   display: none;
 }
 /* moves */
-@media only screen and (max-height: 768px) {
+@media only screen and (max-height: 400px) {
   section{
     display: block;
   }

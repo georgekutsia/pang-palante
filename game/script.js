@@ -27,6 +27,7 @@ let munMegablaster$$ = document.querySelector(".munMegablaster")
 let munSalud$$ = document.querySelector(".munSalud")
 
 // shop btns
+let shopBtnsAll$$ = document.getElementById("shop-btn")
 let shopShield$$ = document.getElementById("shop-shield")
 let shopFire$$ = document.getElementById("shop-fire")
 let shopSuperGun$$ = document.getElementById("shop-superGun")
@@ -53,10 +54,12 @@ start$$.addEventListener("click", function () {
       start$$.innerHTML = '<i class="fa-solid fa-play"></i>';  
     } else {
       game.start();
+      if(window.innerWidth > 400){
+        shopBtnsAll$$.style.display = "flex";
+      }
       start$$.style.left = "1vw";
       start$$.style.top = "35vh";
       start$$.style.transform = "translate(0)";
-
       instruccionesBtn$$.style.top = "25vh";
       instruccionesBtn$$.style.left = "1vw";
       instruccionesBtn$$.style.transform = "translate(0)";

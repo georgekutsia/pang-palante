@@ -119,15 +119,15 @@ shopSpeedGun$$.addEventListener("click", function(){
   if(basicWeaponSpeed === 0 && coins >= 50){
     coins -=50;
     basicWeaponSpeed = 1
-    shopSpeedGun$$.innerHTML = ` <span><i style="font-size: calc(14px + 0.53vw)" class="fa-solid fa-gauge-simple-high"></i> x 3</span>   <br> <i class="fa-solid fa-angles-up fonts-i"></i>Speed  <br> 60<i class="fa-solid fa-coins"></i>`
+    shopSpeedGun$$.innerHTML = ` <span><i style="font-size: calc(14px + 0.53vw)" class="fa-solid fa-gauge-simple-high"></i> x 3</span>   <br> <i class="fa-solid fa-angles-up fonts-i"></i><span id="velocidad-text">Velocidad</span>   <br> 60<i class="fa-solid fa-coins"></i>`
   } else if(basicWeaponSpeed === 1 && coins >= 60){
     basicWeaponSpeed = 2
-    shopSpeedGun$$.innerHTML = ` <span><i style="font-size: calc(14px + 0.53vw)" class="fa-solid fa-gauge-simple-high"></i> x 4</span>  <br> <i class="fa-solid fa-angles-up fonts-i"></i>Speed  <br> 70<i class="fa-solid fa-coins"></i>`
+    shopSpeedGun$$.innerHTML = ` <span><i style="font-size: calc(14px + 0.53vw)" class="fa-solid fa-gauge-simple-high"></i> x 4</span>  <br> <i class="fa-solid fa-angles-up fonts-i"></i><span id="velocidad-text">Velocidad</span>   <br> 70<i class="fa-solid fa-coins"></i>`
   } else if(basicWeaponSpeed === 2 && coins >= 70){
     basicWeaponSpeed = 3
-    shopSpeedGun$$.innerHTML = ` <span><i style="font-size: calc(14px + 0.53vw)" class="fa-solid fa-gauge-simple-high"></i> x 5</span>  <br> <i class="fa-solid fa-angles-up fonts-i"></i>Speed  <br> 80<i class="fa-solid fa-coins"></i>`
+    shopSpeedGun$$.innerHTML = ` <span><i style="font-size: calc(14px + 0.53vw)" class="fa-solid fa-gauge-simple-high"></i> x 5</span>  <br> <i class="fa-solid fa-angles-up fonts-i"></i><span id="velocidad-text">Velocidad</span>   <br> 80<i class="fa-solid fa-coins"></i>`
   } else if(basicWeaponSpeed === 3 && coins >= 80){
     basicWeaponSpeed = 4
-    shopSpeedGun$$.innerHTML = ` <span><i style="font-size: calc(14px + 0.53vw)" class="fa-solid fa-gauge-simple-high"></i> x 6  <br> <i class="fa-solid fa-angles-up fonts-i"></i>Speed  </span>`
+    shopSpeedGun$$.innerHTML = ` <span><i style="font-size: calc(14px + 0.53vw)" class="fa-solid fa-gauge-simple-high"></i> x 6  <br> <span id="velocidad-text">Velocidad</span>   </span>`
   } 
 })
