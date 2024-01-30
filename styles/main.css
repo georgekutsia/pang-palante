@@ -157,7 +157,6 @@ body {
 .level-change-text{
   position: absolute;
   transform: translate(-50%, -50%);
-  font-size: calc(20px + 2vw);
   text-shadow: 2px 2px white;
   background-color: rgba(255, 255, 255, 0.358);
   border-radius: 20px;
@@ -167,17 +166,20 @@ body {
 #level-change-text1{
   top: 50%;
   left: 50%;
+  font-size: calc(20px + 1.3vw);
+
 }
 
 #level-change-text2{
   top: 10%;
   left: 50%;
+  font-size: calc(20px + 1.3vw);
 }
 #level-change-text3{
   top: 30%;
-  left: 25%;
+  left: 30%;
 }
-#level-change-text3{
+#level-change-text4{
   top: 40%;
   left: 20%;
 }

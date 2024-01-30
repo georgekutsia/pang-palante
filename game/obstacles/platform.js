@@ -69,7 +69,7 @@ class Platform {
   }
 
   isVisible() {
-    return this.x > -2 && this.x <= this.ctx.canvas.width;
+    return this.x > -40 && this.x <= this.ctx.canvas.width + 40;
   }
 
   collides(objetivo) {

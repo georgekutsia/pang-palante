@@ -42,9 +42,9 @@ function addBouncerx(ctx, bouncers){
   bouncers.push(bouncer1)
 }
 
-function addSpikesx(ctx, stairs){
+function addSpikesx(ctx, spikes){
   const spike1 = new Spikes(ctx, 100, 136)
-  stairs.push(spike1)
+  spikes.push(spike1)
 }
 
 function addStairx(ctx, stairs) {                         // this.ctx, ubicacion en eje x, ubicacion en eje y, ancho y alto. la última sería la imágen
@@ -90,4 +90,13 @@ function blasterItemx(ctx, blasters) {
 function addExplosionx(ctx,explosions){
   let explo = new Explosion(ctx)
   explosions.push(explo)
+}
+
+function addGatling(ctx, gatlings){
+let gat = new BubbleGatling(ctx)
+gatlings.push(gat)
+}
+function addDarkBubble(ctx, darkBubbles){
+  let bu = new DarkBubble(ctx)
+  darkBubbles.push(bu)
 }
