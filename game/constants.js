@@ -28,22 +28,24 @@ let S = 83;
 let D = 68;
 
 
-let recharge = 500;
+let recharge = 400;
 let jumpHeight = -3.5;
 let playerSpeed = 2;
 let jumpCooldown = 400;
+let dodgeCooldown = 2400;
 let bulletDirection = 0;
 let weaponBarSolidTick = 350;//el tiempo que se pasa la barra en estado sólido
 let fireSizing = 0.1 //el aumento de ancho y alto de la bala de fuego a medida que sube
-let barLife = 20; // las veces que puede la bola chocar con la barra antes de desaparecer
+let barLife = 2; // las veces que puede la bola chocar con la barra antes de desaparecer
 let immuneTime = 2000;
 let jumpDownDistance = 0;
 let bubbleSpeedY = 2.5;
 let bubbleSpeedX = 0.5;
-let GAMELEVEL = 10;
-let coins = 3000;
+let GAMELEVEL = 100;
+let infiniteLeveling = 0;
+let coins = 2000;
 let ballBroke = true;
-let retry = 2;
+let retry = 2;  // cuantas vecs se puede reinentar el juego
 let basicWeaponLevel  = 0; //para mejorar cuantas balas dispara
 let basicWeaponSpeed = 0;
 

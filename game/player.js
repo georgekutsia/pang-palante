@@ -19,14 +19,14 @@ class Player {
     this.bulletFireArray = [];
     this.bulletBarArray = [];
     this.frameAmount = 5;
-    this.fireAmount = 30;
+    this.fireAmount = 0;
     this.immune = false; // al recibir daño se vuelve inmune durante unos segundos
     this.fading = 0; //necesario para el parpadeo del personaje cuando es inmune
     this.charging = 0;  // acumula la carga, lo que dibuja el semicírculo
     this.chargingFires = false; //   se pone en true mientras carga el disparo fuerte de fuego
-    this.megaFireBlaster = true;
-    this.megaFireBlasterAmount = 51;
-    this.barAmount = 430;
+    this.megaFireBlaster = false; //al ponerse en true, se puede activar la K
+    this.megaFireBlasterAmount = 31; //la carga del blaster. cada 10, es una bola
+    this.barAmount = 0; //la cantidad de barras disponibles
     this.ableToJump = false;
     this.wasNotDamaged = true;
     this.bigWeaponBubblesMaxAmount = 0;
@@ -401,7 +401,7 @@ handleRightDodge = (event) =>{
       setTimeout(() => {
         Q = 81;
         E = 69;
-      }, 1000);
+      }, dodgeCooldown);
     }
     if(key === E){
       this.shootDodgeE()
@@ -414,7 +414,7 @@ handleRightDodge = (event) =>{
         Q = 81;
         E = 69;
 
-      }, 1000);
+      }, dodgeCooldown);
     }
 
     if(key === B ){
@@ -564,6 +564,10 @@ handleRightDodge = (event) =>{
     this.shootSound.play()
     const bullet6 = new BasicWeapon(this.ctx, this.x-2, this.y +5, bulletDirection, 0, -1, true);
     this.bigWeaponBubblesMaxAmount  += 1
+    setTimeout(() => {
+      this.bigWeaponBubblesMaxAmount -= 1; 
+    }, 5000);
+    if(this.bigWeaponBubblesMaxAmount < 0) this.bigWeaponBubblesMaxAmount = 0;
     this.bulletArray.push(bullet6);//paso 2: crea un array vacío en el constructor y luego haz un push de cada bullet;
   }
   shootQuintuple(){
@@ -573,6 +577,9 @@ handleRightDodge = (event) =>{
       const bullet7 = new BasicWeapon(this.ctx, this.x - 10, this.y - 10, bulletDirection, -0.01, -0.09, true, 450);
       const bullet8 = new BasicWeapon(this.ctx, this.x + 14, this.y - 10, bulletDirection, 0.01, -0.09, true, 450);
       this.bulletArray.push(bullet7, bullet8);//paso 2: crea un array vacío en el constructor y luego haz 
+      setTimeout(() => {
+        this.bigWeaponBubblesMaxAmount -= 1; 
+      }, 5000);
     }
   }
 

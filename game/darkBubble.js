@@ -1,4 +1,4 @@
-class Bubble {  
+class DarkBubble {  
   constructor(ctx, x , y, w, h, vx, vy, g, damage, bubbleImg ) {
     this.ctx = ctx;
     this.x = x || Math.random() * this.ctx.canvas.width; //el obstáculo aparece desde arriba del canvas 
@@ -8,11 +8,9 @@ class Bubble {
     this.vx = vx || bubbleSpeedX;
     this.vy = vy || bubbleSpeedY;
     this.g = g || 0.05;
-    this.explodingSize = this.ctx.canvas.width/80
     this.damage = damage || 1; // daño especificado o 1
     this.img = new Image();   //crear nueva imágene ne canvas
-    this.img.src = bubbleImg || "../public/Imagenes/bubble.png";  //definir cual es la nueva imagen
-    this.randomColor = getRandomColor();
+    this.img.src = bubbleImg || "../public/Imagenes/darkBubble.png";  //definir cual es la nueva imagen
 
     this.bubbleBounceSound = new Audio("../public/sounds/bubbleBounce.mp3") //todo -- paso 1 traer el sonido y almacenarlo en una variable
     this.bubbleBounceSound.volume = 0.1;  //todo -- paso 2, no obligatorio, determinarle volumen de 0 a 1, creo
@@ -21,14 +19,9 @@ class Bubble {
     // Dibujar el círculo detrás de la burbuja
     this.ctx.beginPath();
     this.ctx.arc(this.x + this.w / 2, this.y + this.h / 2, this.w / 2, 0, 2 * Math.PI);
-    this.ctx.fillStyle = this.randomColor;
     this.ctx.fill();
     this.ctx.closePath();
     this.ctx.drawImage(this.img, this.x, this.y, this.w, this.h);  // dibuja el obstáculo
-    if(this.w <= this.explodingSize) {
-      this.x = -100;
-      coins++
-    }
   }
   move() {
     this.vy += this.g;  //efecto gravedad, aumenta la velocidad a medida que baja
