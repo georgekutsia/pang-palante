@@ -24,7 +24,7 @@ class Player {
     this.fading = 0; //necesario para el parpadeo del personaje cuando es inmune
     this.charging = 0;  // acumula la carga, lo que dibuja el semicírculo
     this.chargingFires = false; //   se pone en true mientras carga el disparo fuerte de fuego
-    this.megaFireBlaster = true; //al ponerse en true, se puede activar la K
+    this.megaFireBlaster = false; //al ponerse en true, se puede activar la K
     this.megaFireBlasterAmount = 31; //la carga del blaster. cada 10, es una bola
     this.barAmount = 0; //la cantidad de barras disponibles
     this.ableToJump = false;
@@ -289,6 +289,12 @@ handleRightDodge = (event) =>{ //*
     this.bulletFireArray.forEach((bullet) => {bullet.draw();}); // paso 3: dibujo cada bullet que se dispare
     this.bulletBarArray.forEach((bullet) => {bullet.draw();}); // paso 3: dibujo cada bullet que se dispare
     this.life.draw()
+
+    this.blasterBtn$$.style.display = !this.megaFireBlaster ? 'none' : 'block';
+    this.cadenaBtn$$.style.display = this.barAmount <= 0 ? 'none' : 'block';
+    this.fireBtn$$.style.display = this.fireAmount <= 0 ? 'none' : 'block';
+    
+
     if(Q === 81){
       this.ctx.drawImage(this.dodgeE, this.x + this.w , this.y + this.h/2, this.w/2, this.h/2);
       this.ctx.drawImage(this.dodgeQ, this.x-this.w/1.6, this.y + this.h/2, this.w/2 , this.h/2);
