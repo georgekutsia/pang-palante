@@ -60,8 +60,8 @@ shopSuperGun$$.addEventListener("click", function(){
   shopSuperGun4$$.style.border = "none"
 })
 shopSuperGun1$$.addEventListener("click", function(){
-  if(coins >=150 && basicWeaponLevel < 1){
-    coins -=150;
+  if(coins >=90 && basicWeaponLevel < 1){
+    coins -=90;
     basicWeaponLevel = 1;
     shopSuperGun1$$.innerText = "Nivel 1"
     shopSuperGun1$$.style.color = "rgb(254, 0, 224)"
@@ -76,8 +76,8 @@ shopSuperGun1$$.addEventListener("click", function(){
   }
 })
 shopSuperGun2$$.addEventListener("click", function(){
-  if(coins >=160 && basicWeaponLevel < 2){
-    coins -=160;
+  if(coins >=100 && basicWeaponLevel < 2){
+    coins -=100;
     basicWeaponLevel = 2;
     shopSuperGun2$$.innerText = "Nivel 2"
     shopSuperGun2$$.style.color = "rgb(254, 0, 224)"
@@ -92,8 +92,8 @@ shopSuperGun2$$.addEventListener("click", function(){
   }
 })
 shopSuperGun3$$.addEventListener("click", function(){
-  if(coins >=170 && basicWeaponLevel < 3){
-    coins -=170;
+  if(coins >=110 && basicWeaponLevel < 3){
+    coins -=110;
     basicWeaponLevel  = 3;
     shopSuperGun3$$.innerText = "Nivel 3"
     shopSuperGun3$$.style.color = "rgb(254, 0, 224)"
@@ -105,13 +105,12 @@ shopSuperGun3$$.addEventListener("click", function(){
     shopSuperGun2$$.style.border = "none"
     shopSuperGun3$$.style.border = "3px solid rgb(154, 130, 184)"
     shopSuperGun4$$.style.border = "none"
-
-
   }
 })
+
 shopSuperGun4$$.addEventListener("click", function(){
-  if(coins >=180 && basicWeaponLevel < 4){
-    coins -=180;
+  if(coins >=120 && basicWeaponLevel < 4){
+    coins -=120;
     basicWeaponLevel  = 4 ;
     shopSuperGun4$$.innerText = "Nivel 4"
     shopSuperGun4$$.style.color = "rgb(254, 0, 224)"

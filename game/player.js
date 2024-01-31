@@ -145,7 +145,8 @@ class Player {
         M = 77
       }, 100);
   }
-  handleMegablaster = () => {
+  handleMegablaster = (event) => {
+    event.preventDefault(); 
     if (this.megaFireBlaster) {
       A = 65;
       D = 68;
@@ -163,7 +164,8 @@ class Player {
     }
   }
 
-  handleMegablasterU = () => {
+  handleMegablasterU = (event) => {
+    event.preventDefault(); 
     if (this.megaFireBlaster) {
       A = 0;
       D = 0;
