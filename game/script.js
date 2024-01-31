@@ -2,6 +2,7 @@ const ctx = canvas.getContext("2d");
 
 const game = new Game(ctx);
 //gamOn es para indicar que se ha acabado el juego, que otras formas me han fallado
+let startInfinite$$ = document.getElementById("pang-startInfinite");
 let start$$ = document.getElementById("pang-start");
 let restart$$ = document.getElementById("pang-restart");
 let retry$$ = document.getElementById("pang-retry");
@@ -38,16 +39,23 @@ let shopSuperGun4$$ = document.getElementById("shop-superGun4")
 
 
 let shopSpeedGun$$ = document.getElementById("shop-speedGun")
+let actionsDiv$$ = document.getElementById("actions-div")
+let movesDiv$$ = document.getElementById("moves-div")
+
 
 
 start$$.addEventListener("click", function () {
+  GAMELEVEL = 1
   canvas.style.display = "block";
   restart$$.style.display = "block";
   retry$$.style.display = "block";
+  startInfinite$$.style.display = "none";
   startBackground$$.style.display = "none";
   instruccionesInfo1$$.style.display = "none";
   instruccionesInfo2$$.style.display = "none";
   infoPlayerBtn1$$.style.display = "block";
+  actionsDiv$$.style.display = "flex"
+  movesDiv$$.style.display = "flex"
   infoIntro1()
     if (game.interval) {
       game.stop();
@@ -65,7 +73,39 @@ start$$.addEventListener("click", function () {
       instruccionesBtn$$.style.transform = "translate(0)";
       instruccionesBtn$$.innerHTML = '<i class="fa-solid fa-info"></i>';  
       start$$.innerHTML = '<i class="fa-solid fa-pause"></i>';  
+    }
+  }
+);
 
+startInfinite$$.addEventListener("click", function () {
+  GAMELEVEL = 100
+  canvas.style.display = "block";
+  restart$$.style.display = "block";
+  retry$$.style.display = "block";
+  start$$.style.display = "none";
+  startBackground$$.style.display = "none";
+  instruccionesInfo1$$.style.display = "none";
+  instruccionesInfo2$$.style.display = "none";
+  infoPlayerBtn1$$.style.display = "block";
+  actionsDiv$$.style.display = "flex"
+  movesDiv$$.style.display = "flex"
+  infoIntro1()
+    if (game.interval) {
+      game.stop();
+      start$$.innerHTML = '<i class="fa-solid fa-play"></i>';  
+    } else {
+      game.start();
+      if(window.innerWidth > 400){
+        shopBtnsAll$$.style.display = "flex";
+      }
+      startInfinite$$.style.left = "1vw";
+      startInfinite$$.style.top = "35vh";
+      startInfinite$$.style.transform = "translate(0)";
+      instruccionesBtn$$.style.top = "25vh";
+      instruccionesBtn$$.style.left = "1vw";
+      instruccionesBtn$$.style.transform = "translate(0)";
+      instruccionesBtn$$.innerHTML = '<i class="fa-solid fa-info"></i>';  
+      startInfinite$$.innerHTML = '<i class="fa-solid fa-pause"></i>';  
     }
   }
 );

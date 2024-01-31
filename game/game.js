@@ -103,7 +103,9 @@ class Game {
     //crear nivel 1
     if (!this.gameStarted) {
       if (GAMELEVEL === 1) {
-        // level3(this.ctx,this.bubbles,this.platforms,this.stairs,this.boxes,this.healings,this.levelBalls);
+        const box1 = new Box(ctx, 20, 20,  3, false, 5)
+        this.boxes.push(box1,)
+
         level1(this.ctx, this.bubbles, this.platforms, this.levelBalls,)
         setTimeout(() => {
           addBubble1(this.ctx, this.bubbles)
@@ -442,6 +444,7 @@ class Game {
             }
             bullet.x = -200
             if (platform.life <= 0) {
+              coins+=2;
               platform.x = -200;
             }
           }

@@ -40,14 +40,13 @@ function addPlatforms1(ctx, platforms){
     case 4:
       const platform9 = new Platform(ctx, 1, 120, 35, 5, "../public/Imagenes/obstacles/platformSolid1.png", false, false, true);
       const platform10 = new Platform(ctx, 100, 80, 35, 5, "../public/Imagenes/obstacles/platformSolid3.png", false, false, true);
-      const platform11 = new Platform(ctx, 10, 80, 35, 5, "../public/Imagenes/obstacles/platformSolid3.png", false, false, true);
-      const platform12 = new Platform(ctx, ctx.canvas.width - 35, 120, 35, 5, "../public/Imagenes/obstacles/platformSolid3.png", false, false, true);
+      const platform11 = new Platform(ctx, 160, 80, 35, 5, "../public/Imagenes/obstacles/platformSolid2.png", false, false, true);
+      const platform12 = new Platform(ctx, ctx.canvas.width - 35, 120, 35, 5, "../public/Imagenes/obstacles/platformSolid4.png", false, false, true);
       platforms.push(platform9,platform10,platform11,platform12);
       break
       default:
         break;
     }
-
 }
 
 function addExplosion(ctx,explosions){

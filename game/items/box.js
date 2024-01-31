@@ -59,6 +59,7 @@ class Box {
     if(this.boxImg.frame >=5 && this.boxImg.frame <=8) this.boxHitBreakSound.play()
     if(this.boxImg.frame >8) this.boxHitBreakingLongSound.play();
     if(this.boxImg.frame > 8){ 
+      coins+=2;
       this.dispose = false; 
     }
   }
