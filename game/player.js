@@ -24,7 +24,7 @@ class Player {
     this.fading = 0; //necesario para el parpadeo del personaje cuando es inmune
     this.charging = 0;  // acumula la carga, lo que dibuja el semicírculo
     this.chargingFires = false; //   se pone en true mientras carga el disparo fuerte de fuego
-    this.megaFireBlaster = false; //al ponerse en true, se puede activar la K
+    this.megaFireBlaster = true; //al ponerse en true, se puede activar la K
     this.megaFireBlasterAmount = 31; //la carga del blaster. cada 10, es una bola
     this.barAmount = 0; //la cantidad de barras disponibles
     this.ableToJump = false;
@@ -98,30 +98,34 @@ class Player {
     this.fireBtn$$.addEventListener("touchstart", this.handleFIre);
     this.cadenaBtn$$.addEventListener("touchstart", this.handleCadena);
     
-    this.blasterBtn$$.addEventListener("touchstart", this.handleMegablasterU);
-    this.blasterBtn$$.addEventListener("touchend", this.handleMegablaster);
-
+    this.blasterBtn$$.addEventListener('touchstart', this.handleMegablaster);
+    this.blasterBtn$$.addEventListener('touchend', this.handleMegablasterU);
+    this.blasterBtn$$.addEventListener('touchcancel', this.handleMegablasterU);
   }
-  handleShoot = (event) => {
+  handleShoot = (event) => {//*
     event.preventDefault(); 
-      this.img.src = "../public/Imagenes/pangStandShoot.png";
-      this.frameAmount = 2;
-      this.img.frame = 1;
-      this.shoot();
-      B = 0;
-      setTimeout(() => {
-        this.img.frame = 0;
-      }, 50); 
-      setTimeout(() => {
-        B = 66;
-      }, recharge);
+    if(basicWeaponLevel >= 0)this.shoot();
+    if(basicWeaponLevel >= 1)this.shootDouble()
+    if(basicWeaponLevel >= 2)this.shootTriple()
+    if(basicWeaponLevel >= 3)this.shootCuatruple()
+    if(basicWeaponLevel >= 4)this.shootQuintuple()
+    this.img.src = "../public/Imagenes/pangStandShoot.png";
+    this.frameAmount = 2;
+    this.img.frame = 1;
+    B = 0;
+    setTimeout(() => {
+      this.img.frame = 0;
+    }, 50); // para que parezca que dispara y se levanta al poco tiempo
+    setTimeout(() => {
+      B = 66;
+    }, recharge);
     }
-  handleShootU = () =>{
+  handleShootU = () =>{ //*
     this.img.src = "../public/Imagenes/pangStandShoot.png";
     this.frameAmount = 2;
     this.img.frame = 0;
   }
-  handleFIre = (event) => {
+  handleFIre = (event) => {//*
     event.preventDefault(); 
     if(this.fireAmount > 0){ 
       this.fireAmount -= 1;
@@ -141,23 +145,42 @@ class Player {
         M = 77
       }, 100);
   }
-  handleMegablaster = (event) => {
-    event.preventDefault(); 
-      if(this.megaFireBlaster){
+  handleMegablaster = () => {
+    if (this.megaFireBlaster) {
       A = 65;
       D = 68;
       this.chargingFires = false;
+      this.megaFireBlaster = true; // No estoy seguro de tu lógica, pero asegúrate de que se active correctamente
+      this.chargingFires = true;
+      this.charging++;
+      this.blasterCharging.volume = 1;
+      this.blasterCharging.play();
+
+      if (this.charging >= this.megaFireBlasterAmount) {
+        this.charging = this.megaFireBlasterAmount;
+        this.blasterCharging.volume = 0;
+      }
+    }
+  }
+
+  handleMegablasterU = () => {
+    if (this.megaFireBlaster) {
+      A = 0;
+      D = 0;
+      this.chargingFires = false;
       this.megaFireBlaster = false;
-      if(this.charging >= 3){
+      if (this.charging >= 3) {
         for (let i = 0; i < this.charging; i++) {
           this.blasterExplosion.play();
           this.blasterCharging.volume = 0;
-          if(i % 10 === 0  && i % 20 !==0 ){
-            const bulletFire = new WeaponFire(this.ctx, this.x + this.w-i, this.y, this.ctx.canvas.width/20, this.ctx.canvas.width/18)
+
+          if (i % 10 === 0 && i % 20 !== 0) {
+            const bulletFire = new WeaponFire(this.ctx, this.x + this.w - i, this.y, this.ctx.canvas.width / 20, this.ctx.canvas.width / 18)
             this.bulletFireArray.push(bulletFire);
           }
-          if(i % 20 === 0 && i >= 10){
-            const bulletFire = new WeaponFire(this.ctx, this.x +i, this.y, this.ctx.canvas.width/20, this.ctx.canvas.width/18)
+
+          if (i % 20 === 0 && i >= 10) {
+            const bulletFire = new WeaponFire(this.ctx, this.x + i, this.y, this.ctx.canvas.width / 20, this.ctx.canvas.width / 18)
             this.bulletFireArray.push(bulletFire);
           }
         }
@@ -165,21 +188,7 @@ class Player {
       }
     }
   }
-  handleMegablasterU = (event) => {
-    event.preventDefault(); 
-    if( this.megaFireBlaster ){
-      A = 0;
-      D = 0;
-      this.chargingFires = true;
-      this.charging++;
-      this.blasterCharging.volume = 1;
-      this.blasterCharging.play()
-      if(this.charging >= this.megaFireBlasterAmount){
-        this.charging = this.megaFireBlasterAmount;
-      this.blasterCharging.volume = 0;
-      }
-    }
-  }
+
   handleJump = (event) => {
     event.preventDefault(); 
     if (this.vy === 0 || this.ableToJump === true) {
@@ -215,26 +224,27 @@ class Player {
        this.vy = playerSpeed;
        this.y = this.y + jumpDownDistance;  // para que al estar encima de la escalera, hago un salto hacia abajo y deje de tener posición fija
 }
-handleUpU = (event) => {
+handleUpU = (event) => { //*
   event.preventDefault(); 
     this.vy = 0;
     W = 0;
 }
-handleDownU = (event) => {
+handleDownU = (event) => {//*
+  event.preventDefault(); 
+  this.vx = 0;
+  this.vy = 0;
+  this.img.src = "../public/Imagenes/pangStandShoot.png";
+  this.frameAmount = 2;
+  this.img.frame = 0;
+}
+handleLeftU = (event) =>{//*
   event.preventDefault(); 
   this.vx = 0;
   this.img.src = "../public/Imagenes/pangStandShoot.png";
   this.frameAmount = 2;
   this.img.frame = 0;
 }
-handleLeftU = (event) =>{
-  event.preventDefault(); 
-  this.vx = 0;
-  this.img.src = "../public/Imagenes/pangStandShoot.png";
-  this.frameAmount = 2;
-  this.img.frame = 0;
-}
-handleRightU = (event) =>{
+handleRightU = (event) =>{//*
   event.preventDefault(); 
   this.vx = 0;
   this.img.src = "../public/Imagenes/pangStandShoot.png";
@@ -242,32 +252,34 @@ handleRightU = (event) =>{
   this.img.frame = 0;
 }
 
-handleLeftDodge = (event) =>{
+handleLeftDodge = (event) =>{//*
   event.preventDefault(); 
   if(Q === 81){
+    this.shootDodgeQ()
     this.r = 0.4;
     this.vx = -6;
     this.img.frame = 0;
     Q = 0;
-    E = 9;
+    E = 0;
     setTimeout(() => {
       Q = 81;
       E = 69;
-    }, 1000);
+    }, dodgeCooldown);
   }
 }
-handleRightDodge = (event) =>{
+handleRightDodge = (event) =>{ //*
   event.preventDefault(); 
   if(Q === 81){
-  this.r = -0.4;
-  this.vx = 6;
-  this.img.frame = 0;
-  Q = 0;
-  E = 9;
-  setTimeout(() => {
-    Q = 81;
-    E = 69;
-  }, 1000);
+    this.shootDodgeE()
+    this.r = -0.4;
+    this.vx = 6;
+    this.img.frame = 0;
+    Q = 0;
+    E = 0;
+    setTimeout(() => {
+      Q = 81;
+      E = 69;
+    }, dodgeCooldown);
  }
 }
   draw() {
@@ -377,16 +389,16 @@ handleRightDodge = (event) =>{
     }
     if (key === A ) {
       this.frameTick++;
-    this.vx = -playerSpeed;
-    this.img.src = "../public/Imagenes/pangRunLeft.png";
-    this.frameAmount = 5;
+      this.vx = -playerSpeed;
+      this.img.src = "../public/Imagenes/pangRunLeft.png";
+      this.frameAmount = 5;
     }
     if (key === D ) {
     this.vx = playerSpeed;
     this.img.src = "../public/Imagenes/pangRunRight.png";
     this.frameAmount = 5;
     }
-    if (key === S /*&& this.y + this.h < this.ctx.canvas.height - this.h*/) {//todo: bloqueo para el limite inferior
+    if (key === S ) {//todo: bloqueo para el limite inferior
       this.vy = playerSpeed;
       this.y = this.y + jumpDownDistance;  // para que al estar encima de la escalera, hago un salto hacia abajo y deje de tener posición fija
     }
@@ -480,17 +492,16 @@ handleRightDodge = (event) =>{
     }
     if (key === A) {
       this.vx = 0;
-    this.img.src = "../public/Imagenes/pangStandShoot.png";
-    this.frameAmount = 2;
-    this.img.frame = 0;
-    }
+      this.img.src = "../public/Imagenes/pangStandShoot.png";
+      this.frameAmount = 2;
+      this.img.frame = 0;
+      }
     if (key === D) {
       this.vx = 0;
-    this.img.src = "../public/Imagenes/pangStandShoot.png";
-    this.frameAmount = 2;
-    this.img.frame = 0;
-
-    }
+      this.img.src = "../public/Imagenes/pangStandShoot.png";
+      this.frameAmount = 2;
+      this.img.frame = 0;
+      }
     if (key === S) {
       this.vy = 0;
     }

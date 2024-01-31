@@ -23,7 +23,7 @@ let H = 72 //72
 let K = 75 // 75
 
 let A = 65;
-let W = 87; //87
+let W = 0; //87
 let S = 83;
 let D = 68;
 
@@ -43,7 +43,7 @@ let bubbleSpeedY = 2.5;
 let bubbleSpeedX = 0.5;
 let GAMELEVEL = 100;
 let infiniteLeveling = 0;
-let coins = 2000;
+let coins = 20;
 let ballBroke = true;
 let retry = 2;  // cuantas vecs se puede reinentar el juego
 let basicWeaponLevel  = 0; //para mejorar cuantas balas dispara

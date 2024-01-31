@@ -2,11 +2,46 @@
 section{
   display: none;
 }
+#turn-img{
+  display: none;
+}
 /* moves */
+@media only screen and (min-height: 400px) and (max-width: 450px) {
+  #turn-img {
+    width: 100px;
+    height: 200px;
+    top: 20%; 
+    left: 40%; 
+    transform: translate(-50%, -50%);
+    position: absolute;
+    display: flex;
+  }
+}
 @media only screen and (max-height: 400px) {
   section{
     display: block;
   }
+
+#shop-superGun2, 
+#shop-superGun3,
+#shop-superGun4{
+  display: none;
+}
+  #shop-btn button{
+  background: none;
+  border: none;
+  background-color: hwb(175 74% 2%);
+  margin-right: 5px;
+  border-radius: 5px;
+  transition: 0.5s ease-in-out;
+  font-size: calc(10px + 0.8vw);
+  padding: 0.5vw 0.5vw;
+  margin-bottom: 5px;
+}
+
+#shop-btn button:hover{
+  background-color: rgb(246, 199, 246);
+}
 #moves-div{
   position: absolute;
   left: 1vw;
