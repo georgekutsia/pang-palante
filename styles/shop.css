@@ -1,18 +1,20 @@
-@media only screen and (min-height: 400px) {
+@media only screen and (min-height: 420px) {
 
+  #shop-btn{
+    position: absolute;
+    right: 1vw;
+    top: 1vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  
 #shop-shield{
   font-size: calc(10px + 0.8vw);
   background: none;
   border: none;
 }
 
-#shop-btn{
-  position: absolute;
-  right: 1vw;
-  top: 1vh;
-  display: flex;
-  flex-direction: column;
-}
 #shop-btn button{
   background: none;
   border: none;

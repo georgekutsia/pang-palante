@@ -51,6 +51,14 @@ shopFire$$.addEventListener("click", function(){
 
 //basic gun 
 
+shopSuperGun$$.addEventListener("click", function(){
+  basicWeaponLevel=0;
+  shopSuperGun$$.style.border = "3px solid rgb(154, 130, 184)"
+  shopSuperGun1$$.style.border = "none"
+  shopSuperGun2$$.style.border = "none"
+  shopSuperGun3$$.style.border = "none"
+  shopSuperGun4$$.style.border = "none"
+})
 shopSuperGun1$$.addEventListener("click", function(){
   if(coins >=150 && basicWeaponLevel < 1){
     coins -=150;
@@ -60,6 +68,7 @@ shopSuperGun1$$.addEventListener("click", function(){
     shopSuperGun2$$.style.display = "block"
   } else if(basicWeaponLevel >= 1){
     basicWeaponLevel  = 1;    
+    shopSuperGun$$.style.border = "none"
     shopSuperGun1$$.style.border = "3px solid rgb(154, 130, 184)"
     shopSuperGun2$$.style.border = "none"
     shopSuperGun3$$.style.border = "none"
@@ -75,6 +84,7 @@ shopSuperGun2$$.addEventListener("click", function(){
     shopSuperGun3$$.style.display = "block"
   } else if(basicWeaponLevel >= 2){
     basicWeaponLevel  = 2;
+    shopSuperGun$$.style.border = "none"
     shopSuperGun1$$.style.border = "none"
     shopSuperGun2$$.style.border = "3px solid rgb(154, 130, 184)"
     shopSuperGun3$$.style.border = "none"
@@ -90,6 +100,7 @@ shopSuperGun3$$.addEventListener("click", function(){
     shopSuperGun4$$.style.display = "block"
   } else if(basicWeaponLevel >= 3){
     basicWeaponLevel  = 3;
+    shopSuperGun$$.style.border = "none"
     shopSuperGun1$$.style.border = "none"
     shopSuperGun2$$.style.border = "none"
     shopSuperGun3$$.style.border = "3px solid rgb(154, 130, 184)"
@@ -106,6 +117,7 @@ shopSuperGun4$$.addEventListener("click", function(){
     shopSuperGun4$$.style.color = "rgb(254, 0, 224)"
   } else if(basicWeaponLevel >= 4){
     basicWeaponLevel  = 4;
+    shopSuperGun$$.style.border = "none"
     shopSuperGun1$$.style.border = "none"
     shopSuperGun2$$.style.border = "none"
     shopSuperGun3$$.style.border = "none"
