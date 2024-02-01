@@ -54,8 +54,13 @@ start$$.addEventListener("click", function () {
   instruccionesInfo1$$.style.display = "none";
   instruccionesInfo2$$.style.display = "none";
   infoPlayerBtn1$$.style.display = "block";
-  actionsDiv$$.style.display = "flex"
-  movesDiv$$.style.display = "flex"
+  game.isInfiniteChanging = false;
+  game.isInfiniteChanging = false;
+
+  if (window.innerWidth < 880 && window.innerHeight < 400) {
+    actionsDiv$$.style.display = "flex"
+    movesDiv$$.style.display = "flex"
+  }
   infoIntro1()
     if (game.interval) {
       game.stop();
@@ -87,8 +92,10 @@ startInfinite$$.addEventListener("click", function () {
   instruccionesInfo1$$.style.display = "none";
   instruccionesInfo2$$.style.display = "none";
   infoPlayerBtn1$$.style.display = "block";
-  actionsDiv$$.style.display = "flex"
-  movesDiv$$.style.display = "flex"
+  if (window.innerWidth < 880 && window.innerHeight < 400) {
+    actionsDiv$$.style.display = "flex"
+    movesDiv$$.style.display = "flex"
+  }
   infoIntro1()
     if (game.interval) {
       game.stop();

@@ -11,7 +11,7 @@ class Game {
     this.interval = null; //sirve para pausar el juego
     this.bubbleTick = 0;
     this.randomColor = null;
-    this.isInfiniteChanging = true;
+    this.isInfiniteChanging;
     this.gameTime = 0; //cuando el juego se inicia va sumando. Se usa para llevar cuenta del tiempo
     this.bubblePopSound1 = new Audio("../public/sounds/bubblePop1.mp3"); //todo --  Sonido paso 1) guardar la ruta del sonido en una variable
     this.bubblePopSound1.volume = 0.3; // todo -- Sonido paso 2) ponerle volumen, auque no es obligatorio
@@ -105,10 +105,10 @@ class Game {
       if (GAMELEVEL === 1) {
         const box1 = new Box(ctx, 20, 20,  3, false, 5)
         this.boxes.push(box1,)
-
         level1(this.ctx, this.bubbles, this.platforms, this.levelBalls,)
         setTimeout(() => {
           addBubble1(this.ctx, this.bubbles)
+      this.levelBalls.forEach((e) => (e.winCondition = false));
         }, 10000);
       }
       if(GAMELEVEL === 100) {
@@ -191,6 +191,9 @@ class Game {
     if (this.bubbles.length <= 0&& this.bubbleGatling.bubbleArray.length <= 0) {
       this.levelBalls.forEach((e) => (e.winCondition = true));
     }
+    this.levelBalls.forEach((e) => 
+    console.log(e.winCondition));
+
       this.gatlings.forEach((e) =>e.checkPosition(this.player))
   }
   setListeners() {
@@ -678,7 +681,6 @@ class Game {
     this.changingLevel = true;
     this.indiceAleatorio = Math.floor(Math.random() * this.frases.length);
     GAMELEVEL += 1;
-
     setTimeout(() => {
         this.player.wasNotDamaged = true;
         ballBroke = true;
