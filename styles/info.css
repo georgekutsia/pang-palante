@@ -1,5 +1,5 @@
 .ayudas{
-  width: 28vw;
+  width: calc(14px +18vw);
   height: 15vw;
   min-width: 150px;
   min-height: 110px;

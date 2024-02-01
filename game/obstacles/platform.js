@@ -56,12 +56,15 @@ class Platform {
     // Método para actualizar la posición de la plataforma y cambiar su color
     this.x += this.vx;
     this.y += this.vy;
-    // Cambiar el color de forma gradual mientras se mueve
+    if(this.vx && this.x + this.w >= CTXW){
+        this.vx = -0.3;
+    } else if (this.vx && this.x <= 1){
+      this.vx = 0.3;
+    }
   }
   
   calculateNewColor() {
     // Calcular un nuevo color basado en la posición de la plataforma
-      // this.life -= 25;      //! por alguna razón choca 3 veces contra la plataforma, cuando se arregle usamos 25, por ahora usamos la otra
       this.life -= 25;
       this.red += Math.floor(this.redLeft)    //Math.floor no lo lleva exacta exactamente hasta 255, pero no importa mucho
       this.green += Math.floor(this.greenLeft);
