@@ -1,5 +1,5 @@
 class Spikes { 
-  constructor(ctx, x,  y, w, h, obstacleImg) {
+  constructor(ctx, x,  y, w, h, isMoving, vx,  obstacleImg) {
     this.ctx = ctx; // Contexto del canvas
     this.x = x || 100; // Posición horizontal (coordenada x), valor predeterminado o especificado
     this.w = w || this.ctx.canvas.width / 13; // Ancho de la escalera, valor predeterminado o especificado
@@ -11,6 +11,9 @@ class Spikes {
     this.imgTick = 0;
     this.damage = 0.25;
     this.active = false;
+    this.isMoving = isMoving || true;
+    this.vx = vx || 0.01
+    this.vxx = vx
   }
 
   draw() {
@@ -29,8 +32,15 @@ class Spikes {
   }
 
   move() {
+    if(this.isMoving){
+      this.x += this.vx;
+      if(this.x + this.w >= CTXW){
+        this.vx = -this.vxx;
+      } else if(this.x <= 3){
+        this.vx = this.vxx;
+      }
+    }
     if(this.active){
-
     this.imgTick++
     if(this.imgTick > 7){
       this.img.frame++

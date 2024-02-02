@@ -1,5 +1,5 @@
 class DarkBubble {  
-  constructor(ctx, x , y, w, h, vx, vy, g, damage, bubbleImg ) {
+  constructor(ctx, x , y, w, h, vx, vy, g, damage,  sizeChange, willShrink) {
     this.ctx = ctx;
     this.x = x || Math.random() * this.ctx.canvas.width; //el obstáculo aparece desde arriba del canvas 
     this.y = y  || -30; // el obstáculo sale de una altura específica o de alguna altura randóm
@@ -8,12 +8,15 @@ class DarkBubble {
     this.vx = vx || bubbleSpeedX;
     this.vy = vy || bubbleSpeedY;
     this.g = g || 0.05;
+    this.sizing = 0.01;
+    this.sizeChange = sizeChange || false;
+    this.willShrink = willShrink || false;
     this.damage = damage || 1; // daño especificado o 1
     this.img = new Image();   //crear nueva imágene ne canvas
-    this.img.src = bubbleImg || "../public/Imagenes/darkBubble.png";  //definir cual es la nueva imagen
+    this.img.src =  "../public/Imagenes/darkBubble.png";  //definir cual es la nueva imagen
 
-    this.bubbleBounceSound = new Audio("../public/sounds/bubbleBounce.mp3") //todo -- paso 1 traer el sonido y almacenarlo en una variable
-    this.bubbleBounceSound.volume = 0.1;  //todo -- paso 2, no obligatorio, determinarle volumen de 0 a 1, creo
+    this.bubbleBounceSound = new Audio("../public/sounds/darkBallBounce.mp3") //todo -- paso 1 traer el sonido y almacenarlo en una variable
+    this.bubbleBounceSound.volume = 0.05;  //todo -- paso 2, no obligatorio, determinarle volumen de 0 a 1, creo
   }
   draw() {
     // Dibujar el círculo detrás de la burbuja
@@ -27,6 +30,16 @@ class DarkBubble {
     this.vy += this.g;  //efecto gravedad, aumenta la velocidad a medida que baja
     this.y += this.vy;
     this.x += this.vx;
+    if(this.sizeChange){
+      this.w += this.sizing
+      this.h += this.sizing
+      if(this.w <= 20){
+        this.sizing = 0.01
+      } else if(this.w >= 70 && this.willShrink){
+        this.sizing = -0.01
+      }
+    }
+
     if (this.y + this.h >= this.ctx.canvas.height ){
       this.bubbleBounceSound.play()//todo --paso 3 llamar a .play() para invocar el sonido donde sea necesario
       this.vy = -bubbleSpeedY; 

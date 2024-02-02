@@ -13,8 +13,7 @@ if(infiniteLeveling >= 16){addDarkBubble(ctx, darkBubbles); randomAcordingToLeve
 if(infiniteLeveling >= 19){addStairAndPlatformsInfinite1(ctx, stairs, platforms)}
 if(infiniteLeveling >= 21){addStairAndPlatformsInfinite2(ctx, stairs, platforms)}
   // addBouncerInfinite(ctx, bouncers)
-  console.log("randomlevel", randomAcordingToLevel)
-  console.log("boxes", amountOfBoxes)
+
 }
 function levelBallItemInfinite(ctx, levelBalls) {  
 let randomNumber =  getRandomNumber(9)

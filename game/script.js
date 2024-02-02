@@ -45,7 +45,7 @@ let movesDiv$$ = document.getElementById("moves-div")
 
 
 start$$.addEventListener("click", function () {
-  GAMELEVEL = 1
+  GAMELEVEL = 11
   canvas.style.display = "block";
   restart$$.style.display = "block";
   retry$$.style.display = "block";

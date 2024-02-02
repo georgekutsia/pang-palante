@@ -240,3 +240,18 @@ function bigWeaponBubble (ctx, bullet, player){
   const bullet4 = new BasicWeapon(ctx, bullet.x, bullet.y, 0, -2, -2);
   player.bulletArray.push(bullet1, bullet2,bullet3,bullet4)
 }
+
+function darkBubbleExplosion(darkBubbleExplosion, bubble, bubbles, puffBubbles){
+  darkBubbleExplosion.play()
+  const bub1 = new Bubble(ctx, bubble.x, bubble.y, 15, 15, -1.5, -0.5)
+  const bub2 = new Bubble(ctx, bubble.x + 5, bubble.y, 15, 15, -1, -0.5)
+  const bub3 = new Bubble(ctx, bubble.x + 10, bubble.y, 15, 15, -0.5, -0.5)
+  const bub4 = new Bubble(ctx, bubble.x + 15, bubble.y, 15, 15, 0.01, -0.5)
+  const bub5 = new Bubble(ctx, bubble.x + 20, bubble.y, 15, 15, 0.5, -0.5)
+  const bub6 = new Bubble(ctx, bubble.x + 30, bubble.y, 15, 15, 1, -0.5)
+  const bub7 = new Bubble(ctx, bubble.x + 35, bubble.y, 15, 15, 1.5, -0.5)
+  bubbles.push(bub1, bub2, bub3, bub4, bub5, bub6, bub7)
+  const puffBubble = new BubblePuff(ctx, bubble.x ,bubble.y, bubble.w, bubble.h );
+  puffBubbles.push(puffBubble);
+  bubble.x = -300
+}

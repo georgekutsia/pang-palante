@@ -7,6 +7,7 @@ function level9( ctx, bubbles, platforms,bouncers, stairs,healings, bars, boxes,
   addSpikes9(ctx, spikes)
   boxItem9(ctx, boxes)
 }
+
 function levelBallItem9(ctx, levelBalls) {  
       const levelBall2 = new LevelBall(ctx, 150, 0)
       levelBalls.push(levelBall2)
@@ -41,7 +42,7 @@ function addPlatforms9(ctx, platforms){
       //opciones de anchura y altura  son 25, 5 la estándar y mínima. Las siguiente suben de 10 en 10 en anchura
 
 function addBouncer9(ctx, bouncers){
-  const bouncer1 = new Bouncer(ctx, 20, 75, 10, 10)
+  const bouncer1 = new Bouncer(ctx, 20, 75, 15, 10)
   const bouncer2 = new Bouncer(ctx, CTXW - 230, 90, 30, 10)
   const bouncer3 = new Bouncer(ctx, CTXW - 170, 70, 10, 10)
   const bouncer4 = new Bouncer(ctx,  CTXW - 140, 90, 10, 10)
