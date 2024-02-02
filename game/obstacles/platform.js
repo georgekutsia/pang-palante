@@ -9,12 +9,13 @@ class Platform {
     this.img.src = obstacleImg || "../../public/Imagenes/obstacles/platformSolid2.png";
     this.vx = vx || 0;
     this.vy = vy || 0;
+    this.speedX = vx || 0 
     this.color = "#ff0000"; // Color predeterminado, puedes ajustarlo según tus necesidades
     this.red =  (this.w + this.h) * 4; // solo usamos como numero fijo a recoger el rojo, que dependerá de la anchura total de la plataforma
     this.green = Math.random() * 140;
     this.blue = Math.random() * 140;
     this.life =  this.red /2;   
-    this.isSolid = isSolid || false;
+    this.isSolid = isSolid || true;
     this.isBrakable = isBrakable || false;
     this.isBouncable = isBouncable || false;
     this.goingToBreak = false;
@@ -57,9 +58,9 @@ class Platform {
     this.x += this.vx;
     this.y += this.vy;
     if(this.vx && this.x + this.w >= CTXW){
-        this.vx = -0.3;
+        this.vx = -this.speedX;
     } else if (this.vx && this.x <= 1){
-      this.vx = 0.3;
+      this.vx = this.speedX;
     }
   }
   

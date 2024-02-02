@@ -1,7 +1,7 @@
 class Stair {
   constructor(ctx, x,  y, w, h, obstacleImg) {
     this.ctx = ctx; // Contexto del canvas
-    this.x = x || 100; // Posición horizontal (coordenada x), valor predeterminado o especificado
+    this.x = x || 0; // Posición horizontal (coordenada x), valor predeterminado o especificado
     this.w = w || this.ctx.canvas.width / 13; // Ancho de la escalera, valor predeterminado o especificado
     this.h = h || this.ctx.canvas.width / 7; // Altura de la escalera, valor predeterminado o especificado
     this.y = y || this.ctx.canvas.height - this.h; // Posición vertical (coordenada y), valor predeterminado o especificado

@@ -26,7 +26,7 @@ class Player {
     this.chargingFires = false; //   se pone en true mientras carga el disparo fuerte de fuego
     this.megaFireBlaster = false; //al ponerse en true, se puede activar la K
     this.megaFireBlasterAmount = 31; //la carga del blaster. cada 10, es una bola
-    this.barAmount = 0; //la cantidad de barras disponibles
+    this.barAmount = 3; //la cantidad de barras disponibles
     this.ableToJump = false;
     this.wasNotDamaged = true;
     this.bigWeaponBubblesMaxAmount = 0;
@@ -50,11 +50,11 @@ class Player {
 
 
     this.blasterExplosion = new Audio("../public/sounds/megablasterBlastSound.mp3");
-    this.blasterExplosion.volume = 1; //
+    this.blasterExplosion.volume = 0.5; //
     this.blasterCharging = new Audio("../public/sounds/blasterChargindSound.mp3");
-    this.blasterCharging.volume = 1; //
+    this.blasterCharging.volume = 0.5; //
     this.playerDamageSound1 = new Audio("../public/sounds/playerDamageSound1.mp3");
-    this.playerDamageSound1.volume = 0.1; //
+    this.playerDamageSound1.volume = 0.05; //
     this.shootSound = new Audio("/public/sounds/shooting/weaponShootSound.mp3");
     this.shootSound.volume = 0.1;
     this.shootBarSound = new Audio("/public/sounds/shooting/shootBarSound2.mp3");
@@ -306,8 +306,8 @@ handleRightDodge = (event) =>{ //*
     if (this.barAmount > 0) {
       this.ctx.save()
       this.ctx.font = "10px Arial"
-      this.ctx.fillText(`x ${this.barAmount}`, this.ctx.canvas.width  - 20, 10);
-      this.ctx.drawImage(this.barItem, this.ctx.canvas.width  - 28, 1, this.w/1.8 , this.h/1.3);
+      this.ctx.fillText(`x ${this.barAmount}`, CTXW  - 17, CTXH -4);
+      this.ctx.drawImage(this.barItem, CTXW  - 28, CTXH-14, 8 , 28);
       this.ctx.restore()
     }
     if(this.fireAmount>=1){    

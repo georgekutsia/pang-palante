@@ -1,7 +1,7 @@
 class BubbleGatling {
-  constructor(ctx, gatlingMoveSpeed) {
+  constructor(ctx, gatlingMoveSpeed, x) {
     this.ctx = ctx;
-    this.x = Math.random() * this.ctx.canvas.width;
+    this.x = x || Math.random() * this.ctx.canvas.width;
     this.y =  -4;
     this.w = this.ctx.canvas.width / 21;
     this.h = this.ctx.canvas.width / 13;

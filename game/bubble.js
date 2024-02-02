@@ -1,5 +1,5 @@
-class Bubble {  
-  constructor(ctx, x , y, w, h, vx, vy, g, damage, bubbleImg ) {
+class Bubble { //posX posY, ancho, alto, velX, velY, gravedad, buleano si hay gravedad, cuanto tarda la gravedad, el daño y la imagen
+  constructor(ctx, x , y, w, h, vx, vy, g, isSlowGravity, slowGrvityDuration, damage, bubbleImg ) {
     this.ctx = ctx;
     this.x = x || Math.random() * this.ctx.canvas.width; //el obstáculo aparece desde arriba del canvas 
     this.y = y  || -30; // el obstáculo sale de una altura específica o de alguna altura randóm
@@ -8,6 +8,9 @@ class Bubble {
     this.vx = vx || bubbleSpeedX;
     this.vy = vy || bubbleSpeedY;
     this.g = g || 0.05;
+    this.gTick = 0;
+    this.isSlowGravity = isSlowGravity || false;
+    this.slowGrvityDuration = slowGrvityDuration || 3000; 
     this.explodingSize = this.ctx.canvas.width/80
     this.damage = damage || 1; // daño especificado o 1
     this.img = new Image();   //crear nueva imágene ne canvas
@@ -34,9 +37,11 @@ class Bubble {
     this.vy += this.g;  //efecto gravedad, aumenta la velocidad a medida que baja
     this.y += this.vy;
     this.x += this.vx;
+    this.gTick++
     if (this.y + this.h >= this.ctx.canvas.height ){
       this.bubbleBounceSound.play()//todo --paso 3 llamar a .play() para invocar el sonido donde sea necesario
       this.vy = -bubbleSpeedY; 
+
     }
     if(this.x + this.w >= this.ctx.canvas.width){
       this.bubbleBounceSound.play()//todo --paso 3 llamar a .play() para invocar el sonido donde sea necesario
@@ -45,8 +50,16 @@ class Bubble {
     if(this.x <= 0){
       this.bubbleBounceSound.play()//todo --paso 3 llamar a .play() para invocar el sonido donde sea necesario
       this.vx = bubbleSpeedX;
+
     }
 
+    if(this.isSlowGravity){
+      setTimeout(() => {
+        this.g = 0.05;
+        clearTimeout(this.setTimeout)
+        this.isSlowGravity = false;
+      }, this.slowGrvityDuration);
+    }
   }
   
   isVisible(){
@@ -57,5 +70,6 @@ class Bubble {
     const colY = this.y + this.h > objetivo.y && this.y < objetivo.y + objetivo.h;
     return colX && colY;
   }
+
 }
 

@@ -42,12 +42,16 @@ class Game {
     this.blasters = []; // Array para almacenar instancias de la clase blasters
     this.levelBalls = []; // Array para almacenar instancias de la clase blasters
     this.gatlings = []; // Array para almacenar instancias de bubble gatlings
+
     // sounds sounds sounds
-    this.bubbleBounceSound = new Audio("../public/sounds/bubbleBounce.mp3"); //todo -- paso 1 traer el sonido y almacenarlo en una variable
-    this.bubbleBounceSound.volume = 0.1; //todo -- paso 2, no obligatorio, determinarle volumen de 0 a 1, creo
+    this.darkBubbbleHit = new Audio("../public/sounds/darkBubbleHit2.mp3")
+    this.darkBubbbleHit.volume = 0.1; 
+    this.darkBubbleExplosion = new Audio("../public/sounds/darkBubbleExplosion.mp3")
+    this.darkBubbleExplosion.volume = 0.1; 
     this.barHit = new Audio("/public/sounds/shooting/barHit.mp3");
     this.barHit.volume = 0.05;
     this.changeLevelSound1 = new Audio("/public/sounds/changeLevelSound1.mp3");
+    this.changeLevelSound1.volume = 0.1;
     this.playerHeals = new Audio("/public/sounds/heal1.mp3");
     this.playerBar = new Audio("/public/sounds/barItemRechargeSound.mp3");
     
@@ -79,6 +83,7 @@ class Game {
       this.clear(); //   limpia el canvas. Sin esta función, nunca dejaría de dibujarse lo anterior y no aparentaría movimiento.
       this.move(); // mueve los objetos movibles
       this.draw(); // dibuja lo que haga falta
+      this.checkLevelsState();
       if (this.changingLevel) {
         changingLevelImg$$.style.display = "block";
         levelChangeText1$$.style.display = "block";
@@ -100,12 +105,12 @@ class Game {
       this.gameTime++; //Cada 60 representan 1 segundo de tiempo en el juego
 
     }, 1000 / gameSpeed);
-    //crear nivel 1
+    //crear nivel 1 here
     if (!this.gameStarted) {
-      if (GAMELEVEL === 1) {
-        const box1 = new Box(ctx, 20, 20,  3, false, 5)
-        this.boxes.push(box1,)
-        level1(this.ctx, this.bubbles, this.platforms, this.levelBalls,)
+      if (GAMELEVEL === 11) {
+         level14( this.ctx, this.bubbles, this.platforms, this.healings,  this.boxes,  this.levelBalls, this.gatlings, this.darkBubbles, this.spikes)
+        // level1(this.ctx, this.bubbles, this.platforms, this.levelBalls,)
+
         setTimeout(() => {
           addBubble1(this.ctx, this.bubbles)
       this.levelBalls.forEach((e) => (e.winCondition = false));
@@ -125,6 +130,7 @@ class Game {
   }
 
   clear() {
+
     this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
     this.player.bulletArray = this.player.bulletArray.filter((e) =>e.isVisible()); //elimina cada bullet que ya no es visible y vacía el array
     this.player.bulletFireArray = this.player.bulletFireArray.filter((e) =>e.isVisible()); //elimina cada bullet de fuego que ya no es visible y vacía el array
@@ -145,7 +151,6 @@ class Game {
   }
 
   draw() {
-    console.log(infiniteLeveling)
     this.background.draw(); //dibuja el background
     this.stairs.forEach((e) => e.draw());
     this.spikes.forEach((e) => e.draw());
@@ -191,9 +196,6 @@ class Game {
     if (this.bubbles.length <= 0&& this.bubbleGatling.bubbleArray.length <= 0) {
       this.levelBalls.forEach((e) => (e.winCondition = true));
     }
-    this.levelBalls.forEach((e) => 
-    console.log(e.winCondition));
-
       this.gatlings.forEach((e) =>e.checkPosition(this.player))
   }
   setListeners() {
@@ -224,7 +226,8 @@ class Game {
         this.bubbleSplash2.play();
       } else return true;
     });
-    this.darkBubbles.forEach((bubble) => {//player con bubble
+
+    this.darkBubbles.forEach((bubble) => {//player darkbubble
       if (bubble.collides(this.player) && !this.player.immune) {
         if(this.player.y + this.player.h <= bubble.y +30 ){
           this.player.vy = -3;
@@ -322,7 +325,7 @@ class Game {
       this.platforms.forEach((platform) => {
         if (platform.collides(bubble)) {
           if (platform.isBouncable) {
-          this.bubbleBounceSound.play();
+          bubble.bubbleBounceSound.play()
             bounceFromObstacles(bubble, platform);
           } else if (!platform.isBouncable) {
             bubble.y = platform.y - bubble.h;
@@ -332,10 +335,41 @@ class Game {
         } else return true;
       });
     });
+
+    this.darkBubbles.forEach((bubble) => {//bubble con platform
+      this.platforms.forEach((platform) => {
+        if (platform.collides(bubble)) {
+          if(platform.isSolid){
+            const newColor = platform.calculateNewColor();
+            platform.color = newColor;
+            if(bubble.w >= CTXW/4){
+              darkBubbleExplosion(this.darkBubbleExplosion, bubble, this.bubbles, this.puffBubbles)//explota y genera bubbles pequeños
+            }
+          }
+          if (platform.isBouncable) {
+            bubble.bubbleBounceSound.play();
+            bounceFromObstacles(bubble, platform);
+          } else if (!platform.isBouncable) {
+            bubble.y = platform.y - bubble.h;
+            bubble.vy = platform.vy;
+            bubble.vx = platform.vx;
+          }
+        } else return true;
+      });
+    });
+
     this.bubbles.forEach((bubble) => {//bubble con bouncer
       this.bouncers.forEach((bouncer) => {
         if (bouncer.collides(bubble)) {
-          this.bubbleBounceSound.play();
+          bubble.bubbleBounceSound.play()
+          bounceFromObstacles(bubble, bouncer);
+        } else return true;
+      });
+    });
+    this.darkBubbles.forEach((bubble) => {//bubble con bouncer
+      this.bouncers.forEach((bouncer) => {
+        if (bouncer.collides(bubble)) {
+          bubble.bubbleBounceSound.play();
           bounceFromObstacles(bubble, bouncer);
         } else return true;
       });
@@ -352,7 +386,7 @@ class Game {
       });
     }));
 
-    this.gatlings.forEach((e) =>e.bubbleArray.forEach((bubble) => {///bubble con fire
+    this.gatlings.forEach((e) =>e.bubbleArray.forEach((bubble) => {///gatling con fire
       this.player.bulletFireArray.forEach((bullet) => {
         if (bullet.collides(bubble)) {
           bubble.w -= bullet.damage;
@@ -367,11 +401,11 @@ class Game {
         } else return true;
       });
     }));
-    this.gatlings.forEach((e) =>e.bubbleArray.forEach((bubble) => {//bubble con platform
+    this.gatlings.forEach((e) =>e.bubbleArray.forEach((bubble) => {//gatling con platform
       this.platforms.forEach((platform) => {
         if (platform.collides(bubble)) {
           if (platform.isBouncable) {
-          this.bubbleBounceSound.play();
+          bubble.bubbleBounceSound.play()
             bounceFromObstacles(bubble, platform);
           } else if (!platform.isBouncable) {
             bubble.y = platform.y - bubble.h;
@@ -381,10 +415,10 @@ class Game {
         } else return true;
       });
     }));
-    this.gatlings.forEach((e) =>e.bubbleArray.forEach((bubble) => {///bubble con bouncer
+    this.gatlings.forEach((e) =>e.bubbleArray.forEach((bubble) => {///gatling con bouncer
       this.bouncers.forEach((bouncer) => {
         if (bouncer.collides(bubble)) {
-          this.bubbleBounceSound.play();
+          bubble.bubbleBounceSound.play()
           bounceFromObstacles(bubble, bouncer);
         } else return true;
       });
@@ -424,7 +458,31 @@ class Game {
         } else return true;
       });
     });
-
+    this.darkBubbles.forEach((bubble) => {//  bulletBar con Bubble
+      this.player.bulletBarArray.forEach((bullet) => {
+        if (bullet.collides(bubble)) {
+          if(bubble.x <= bullet.x){
+            bubble.vx = -1
+          } else {
+            bubble.vx = 1
+          }
+          return false;
+        } else return true;
+      });
+    });
+    this.darkBubbles.forEach((bubble) => {//  darkbubble con bullet
+      this.player.bulletArray = this.player.bulletArray.filter((bullet) => {
+        if (bullet.collides(bubble)) {
+          bubble.w += 2;
+          bubble.h += 2;
+          this.darkBubbbleHit.play()
+          if(bubble.w >= CTXW/4){
+            darkBubbleExplosion(this.darkBubbleExplosion, bubble, this.bubbles, this.puffBubbles)//explota y genera bubbles pequeños
+          }
+          return false;
+        } else return true;
+      });
+    });
 
     // colisiones con Platform
     // colisiones con Platform
@@ -664,16 +722,25 @@ class Game {
           this.background.img.src ="/public/Imagenes/background/background3.png";
           level7( this.ctx, this.bubbles, this.platforms,this.bouncers, this.stairs,  this.healings, this.bars, this.boxes, this.spikes,this.levelBalls, this.stairs);
         } else if (GAMELEVEL === 8) {
-        
+          level8(this.ctx, this.bubbles, this.platforms,this.bouncers, this.stairs,this.healings, this.bars, this.boxes,  this.spikes, this.levelBalls, this.stairs)
         } else if (GAMELEVEL === 9) {
-          level9( this.ctx, this.bubbles, this.platforms,this.bouncers, this.stairs,  this.healings, this.bars, this.boxes, this.spikes,this.levelBalls);
+          level9( this.ctx, this.bubbles, this.platforms,this.bouncers, this.stairs,  this.healings, this.bars, this.boxes,  this.levelBalls,this.spikes);
           this.background.img.src ="/public/Imagenes/background/background4.png";
-
         }else if (GAMELEVEL === 10) {
           level10( this.ctx, this.bubbles, this.platforms, this.stairs,  this.healings, this.bars, this.boxes,this.levelBalls);
           this.background.img.src ="/public/Imagenes/background/background5.png";
-
-        }else if (GAMELEVEL === 11) {
+        } else if (GAMELEVEL === 11) {
+        level11( this.ctx, this.bubbles, this.platforms, this.stairs,  this.healings, this.bars, this.boxes,this.levelBalls);
+          this.background.img.src ="/public/Imagenes/background/background6.png";
+        } else if (GAMELEVEL === 12) {
+        level12( this.ctx, this.bubbles, this.platforms, this.stairs,  this.healings, this.bars, this.boxes,this.levelBalls, this.gatlings);
+          this.background.img.src ="/public/Imagenes/background/background7.png";
+        } else if (GAMELEVEL === 13) {//there
+        level13( this.ctx, this.bubbles, this.platforms, this.stairs,  this.healings, this.bars, this.boxes,this.levelBalls,  this.darkBubbles);
+          this.background.img.src ="/public/Imagenes/background/background5.png";
+        } else if (GAMELEVEL === 14) {
+          level14( this.ctx, this.bubbles, this.platforms, this.stairs,  this.healings, this.bars, this.boxes,this.levelBalls);
+          this.background.img.src ="/public/Imagenes/background/background5.png";
         }
       }, 3000);
     }, 1000);
@@ -696,9 +763,15 @@ class Game {
     }, 3000)
   }
   this.emptyAllGameArrays();
-
   }
-
+    checkLevelsState(){
+      if(GAMELEVEL===11){
+        if(this.bubbles.length<=1){
+          this.platforms.forEach(element => {
+            element.isSolid = true;
+          })}
+        }
+    }
   gameOver() {
     //Función para terminar el juego y vaciar todos los arrays.
     this.stop();
