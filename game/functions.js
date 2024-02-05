@@ -12,6 +12,20 @@ function bounceFromObstacles(elem1, elem2){
     elem1.vx = 0.5;
   }
 }
+function bounceFromBox(elem1, elem2){
+  if (elem1.y <= elem2.y + 5 ) {
+    elem1.vy = -1;
+  }
+  if(elem1.y >= elem2.y + elem2.h -5){
+    elem1.vy = 1;
+  }
+  if(elem1.x <= elem2.x +5){
+    elem1.vx = -0.3;
+  } 
+  if(elem1.x >= elem2.x +elem2.w - 5){
+    elem1.vx = 0.3;
+  }
+}
 function basicBulletBounce(elem1, elem2){
   if(elem1.direction){
     elem1.vx = elem1.direction;
@@ -53,50 +67,6 @@ function invertImage(ctx, x, y, w, h, img) {
 
 
 
-function randomLootFromBox(ctx, flamethrowers, healings, bars, auras,machineguns,blasters, x, y){
-  const randomItem = Math.floor(Math.random() *6) + 1;
-  if(randomItem === 1){
-    const flamethrower = new Flamethrower(ctx, x, y  )
-    flamethrowers.push(flamethrower)
-  } else if(randomItem === 2){
-    const healingItem = new Healing(ctx, x, y )
-    healings.push(healingItem)
-  } else if(randomItem === 3){
-    const aura = new Aura(ctx, x, y)
-    auras.push(aura)
-  }else if(randomItem === 4){
-    const machinegun = new Machinegun(ctx, x, y)
-    machineguns.push(machinegun)
-  } else if(randomItem === 5 ){
-    const bar = new Bars(ctx, x, y)
-    bars.push(bar)
-  }else if(randomItem === 6){
-    const blaster = new MegaFireBlaster(ctx, x, y)
-    blasters.push(blaster)
-}
-}
-function specificLootFromBox(ctx, specificLoot, flamethrowers, healings, bars, auras,machineguns,blasters, x, y){
-  if(specificLoot === 1){
-    const flamethrower = new Flamethrower(ctx, x, y  )
-    flamethrowers.push(flamethrower)
-  } else if(specificLoot === 2){
-    const healingItem = new Healing(ctx, x, y )
-    healings.push(healingItem)
-  } else if(specificLoot === 3){
-    const aura = new Aura(ctx, x, y)
-    auras.push(aura)
-  }else if(specificLoot === 4){
-    const machinegun = new Machinegun(ctx, x, y)
-    machineguns.push(machinegun)
-  }else if(specificLoot === 5){
-    const bar = new Bars(ctx, x, y)
-    bars.push(bar)
-  }else if(specificLoot === 6){
-      const blaster = new MegaFireBlaster(ctx, x, y)
-      blasters.push(blaster)
-  }
-}
-
 function flamethrowerItem(ctx, flamethrowers) {  
   const flamethrower = new Flamethrower(ctx)
   flamethrowers.push(flamethrower)
@@ -104,28 +74,6 @@ function flamethrowerItem(ctx, flamethrowers) {
 function machinegunItem(ctx, machineguns) {  
   const machinegun = new Machinegun(ctx)
   machineguns.push(machinegun)
-}
-
-function healingItem(ctx, healings) {  
-  const healingItem = new Healing(ctx )
-  healings.push(healingItem)
-}
-function barItem(ctx, bars){
-  const bar = new Bars(ctx);
-  bars.push(bar)
-}
-
-function auraItem(ctx, auras) {  
-  const aura = new Aura(ctx)
-  auras.push(aura)
-}
-function blasterItem(ctx, blasters) {  
-  const blaster = new MegaFireBlaster(ctx)
-  blasters.push(blaster)
-}
-function levelBallItem(ctx, levelBalls) {  
-  const levelBall = new LevelBall(ctx)
-  levelBalls.push(levelBall)
 }
 
 function getRandomColor() {
@@ -233,7 +181,26 @@ function checkBarCollisions(bulletBarArray, obstacles, collisionHandler, player)
   });
 }
 
-function bigWeaponBubble (ctx, bullet, player){
+
+
+function checkHookCollisions(hookArray, obstacles, barHit, player) {
+  hookArray.forEach((hook) => {
+    obstacles.forEach((obstacle) => {
+      if (hook.collidesTop(obstacle)) {
+          ALT = 16;
+          jumpHeight = -18;
+          player.vy = -6;
+          hook.solidState = true;
+          hook.y = obstacle.y + obstacle.h;
+          hook.vy = 0;
+        barHit.play();
+          hook.img.src = "../public/Imagenes/weaponBarSolid.png";
+      }
+    });
+  });
+}
+
+function bigWeaponBubble (ctx, bullet, player){ //la burbuja gigante que dispara player
   const bullet1 = new BasicWeapon(ctx, bullet.x, bullet.y, 0, -2, 2);
   const bullet2 = new BasicWeapon(ctx, bullet.x, bullet.y, 0, 2, -2);
   const bullet3 = new BasicWeapon(ctx, bullet.x, bullet.y, 0, 2, 2);
@@ -255,3 +222,8 @@ function darkBubbleExplosion(darkBubbleExplosion, bubble, bubbles, puffBubbles){
   puffBubbles.push(puffBubble);
   bubble.x = -300
 }
+
+
+
+
+

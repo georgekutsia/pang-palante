@@ -96,7 +96,13 @@ function addGatling(ctx, gatlings){
 let gat = new BubbleGatling(ctx)
 gatlings.push(gat)
 }
+
 function addDarkBubble(ctx, darkBubbles){
   let bu = new DarkBubble(ctx)
   darkBubbles.push(bu)
+}
+
+function addSteps(ctx, steps){
+  let step = new Steps(ctx);
+  this.steps.push(step);
 }

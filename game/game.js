@@ -13,17 +13,8 @@ class Game {
     this.randomColor = null;
     this.isInfiniteChanging;
     this.gameTime = 0; //cuando el juego se inicia va sumando. Se usa para llevar cuenta del tiempo
-    this.bubblePopSound1 = new Audio("../public/sounds/bubblePop1.mp3"); //todo --  Sonido paso 1) guardar la ruta del sonido en una variable
-    this.bubblePopSound1.volume = 0.3; // todo -- Sonido paso 2) ponerle volumen, auque no es obligatorio
-    this.gameOver1 = new Audio("../public/sounds/gameOver1.mp3");
-    this.gameOver1.volume = 0.05; //
-    this.gameOver2 = new Audio("../public/sounds/gameOverSound.mp3");
-    this.gameOver2.volume = 0.2; //
-    this.gameBackgroundMusic = new Audio("../public/sounds/backgroundMusic1.mp3");
-    this.gameBackgroundMusic.volume = 0.1; //
-    this.changingLevel = false;
-    this.bubbleSplash2 = new Audio("../public/sounds/bubbleSplash2.mp3");
-    this.bubbleSplash2.volume = 0.1;
+    this.otherBubbles = 0;
+
     this.setListeners(); // para que se pueda usar el teclado
     this.bubbles = []; // un array que almacena todos los obstáculos que aparecen en la pantalla
     this.darkBubbles = []; // un array que almacena todos los obstáculos que aparecen en la pantalla
@@ -31,6 +22,7 @@ class Game {
     this.machineguns = []; // salen nuevas tipos de armas
     this.healings = []; // salen nuevas tipos de armas
     this.bars = []; // salen nuevas tipos de armas
+    this.steps = []; // salen nuevas tipos de armas
     this.puffBubbles = []; // para cuando estalla la burbuja
     this.platforms = []; // plataformas para saltar
     this.bouncers = []; // plataformas que rebotan
@@ -42,8 +34,28 @@ class Game {
     this.blasters = []; // Array para almacenar instancias de la clase blasters
     this.levelBalls = []; // Array para almacenar instancias de la clase blasters
     this.gatlings = []; // Array para almacenar instancias de bubble gatlings
+    this.cannons = []; // Array para almacenar instancias de bubble cannons
 
     // sounds sounds sounds
+    this.bubblePopSound1 = new Audio("../public/sounds/bubblePop1.mp3"); //todo --  Sonido paso 1) guardar la ruta del sonido en una variable
+    this.bubblePopSound1.volume = 0.3; // todo -- Sonido paso 2) ponerle volumen, auque no es obligatorio
+    this.gameOver1 = new Audio("../public/sounds/gameOver1.mp3");
+    this.gameOver1.volume = 0.05; //
+    this.gameOver2 = new Audio("../public/sounds/gameOverSound.mp3");
+    this.gameOver2.volume = 0.2; //
+    this.gameBackgroundMusic = new Audio("../public/sounds/backgroundMusic1.mp3");
+    this.gameBackgroundMusic.volume = 0.1; //
+    this.changingLevel = false;
+    this.bubbleSplash2 = new Audio("../public/sounds/bubbleSplash2.mp3");
+    this.bubbleSplash2.volume = 0.1;
+    this.platformHitSolid = new Audio("../public/sounds/platformHitSolid.mp3")
+    this.platformHitSolid.volume = 0.1; 
+    this.platformHitBreak = new Audio("../public/sounds/platformHitBreak.mp3")
+    this.platformHitBreak.volume = 0.1; 
+    this.coinsSound1 = new Audio("../public/sounds/coinsSound1.mp3")
+    this.coinsSound1.volume = 0.1; 
+    this.coinsSound2 = new Audio("../public/sounds/coinsSound2.mp3")
+    this.coinsSound2.volume = 0.1; 
     this.darkBubbbleHit = new Audio("../public/sounds/darkBubbleHit2.mp3")
     this.darkBubbbleHit.volume = 0.1; 
     this.darkBubbleExplosion = new Audio("../public/sounds/darkBubbleExplosion.mp3")
@@ -53,7 +65,10 @@ class Game {
     this.changeLevelSound1 = new Audio("/public/sounds/changeLevelSound1.mp3");
     this.changeLevelSound1.volume = 0.1;
     this.playerHeals = new Audio("/public/sounds/heal1.mp3");
+    this.playerHeals.volume = 0.1;
     this.playerBar = new Audio("/public/sounds/barItemRechargeSound.mp3");
+    this.playerBar.volume = 0.1;
+
     
     // Obtén un índice aleatorio
     this.frases = [
@@ -73,7 +88,7 @@ class Game {
   }
 
   start() {
-    // this.gameBackgroundMusic.play();
+    this.gameBackgroundMusic.play();
     this.interval = setInterval(() => {
       retryAmount$$.innerText = `${retry}`
       if(!retry){
@@ -96,45 +111,51 @@ class Game {
       levelChangeText3$$.innerText = `+20 monedas por no recibir daño`;
     } else {
       levelChangeText3$$.innerText = ``;
-      
     }
-        levelChangeText4$$.innerText = ``;
+      levelChangeText4$$.innerText = ``;
       }
       this.checkCollisions(); //Comprueba las colisiones constantemtente
       this.bubbleTick++;
       this.gameTime++; //Cada 60 representan 1 segundo de tiempo en el juego
-
     }, 1000 / gameSpeed);
     //crear nivel 1 here
     if (!this.gameStarted) {
-      if (GAMELEVEL === 11) {
-         level14( this.ctx, this.bubbles, this.platforms, this.healings,  this.boxes,  this.levelBalls, this.gatlings, this.darkBubbles, this.spikes)
-        // level1(this.ctx, this.bubbles, this.platforms, this.levelBalls,)
-
-        setTimeout(() => {
-          addBubble1(this.ctx, this.bubbles)
-      this.levelBalls.forEach((e) => (e.winCondition = false));
-        }, 10000);
+      if (GAMELEVEL === 15) {
+        level15( this.ctx,this.bubbles, this.levelBalls, this.darkBubbles, this.cannons, this.boxes);
+        setInterval(() => {
+          this.otherBubbles++
+          this.cannons.forEach(c =>c.shooting = true)
+          this.cannons.forEach(c =>console.log(c.bubbleArray.length))
+          if(this.otherBubbles >=5){
+            console.log("dadsadads")
+          this.cannons.forEach((c) =>(c.vx = -0.05))
+          }
+        }, 3000);
+      //   level1(this.ctx, this.bubbles, this.platforms, this.levelBalls,)
+      //   setTimeout(() => {
+      //     addBubble1(this.ctx, this.bubbles)
+      // this.levelBalls.forEach((e) => (e.winCondition = false));
+      //   }, 10000);
       }
       if(GAMELEVEL === 100) {
         levelInfinite( this.ctx, this.bubbles, this.platforms, this.bouncers, this.spikes, this.stairs, this.flamethrowers, this.machineguns, this.healings, this.auras, this.boxes, this.blasters, this.levelBalls, this.gatlings, this.darkBubbles)
+  
       }
       this.gameStarted = true;
     }
   }
 
-  stop() {
-    //para pausar el juego
+  stop() { //para pausar el juego
     clearInterval(this.interval);
     this.interval = null;
   }
 
   clear() {
-
     this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
     this.player.bulletArray = this.player.bulletArray.filter((e) =>e.isVisible()); //elimina cada bullet que ya no es visible y vacía el array
     this.player.bulletFireArray = this.player.bulletFireArray.filter((e) =>e.isVisible()); //elimina cada bullet de fuego que ya no es visible y vacía el array
     this.player.bulletBarArray = this.player.bulletBarArray.filter((e) =>e.isVisible()); //elimina cada bullet de cadena que ya no es visible y vacía el array
+    this.player.hooksArray = this.player.hooksArray.filter((e) =>e.isVisible()); //elimina cada bullet de cadena que ya no es visible y vacía el array
     this.bubbles = this.bubbles.filter((e) => e.isVisible()); //elimina cada obstáculo que ya no es visible y vacía el array
     this.darkBubbles = this.darkBubbles.filter((e) => e.isVisible()); //elimina cada obstáculo que ya no es visible y vacía el array
     this.platforms = this.platforms.filter((e) => e.isVisible()); //elimina cada obstáculo que ya no es visible y vacía el array
@@ -145,8 +166,10 @@ class Game {
     this.blasters = this.blasters.filter((e) => e.isVisible()); //elimina cada obstáculo que ya no es visible y vacía el array
     this.levelBalls = this.levelBalls.filter((e) => e.isVisible()); //elimina cada obstáculo que ya no es visible y vacía el array
     this.gatlings = this.gatlings.filter((e) => e.isVisible()); //elimina cada obstáculo que ya no es visible y vacía el array
+    this.cannons = this.cannons.filter((e) => e.isVisible()); //elimina cada obstáculo que ya no es visible y vacía el array
     this.healings = this.healings.filter((e) => e.isVisible()); //elimina cada obstáculo que ya no es visible y vacía el array
     this.bars = this.bars.filter((e) => e.isVisible()); //elimina cada obstáculo que ya no es visible y vacía el array
+    this.steps = this.steps.filter((e) => e.isVisible()); //elimina cada obstáculo que ya no es visible y vacía el array
     this.puffBubbles = this.puffBubbles.filter((e) => e.isVisible()); //elimina cada obstáculo que ya no es visible y vacía el array
   }
 
@@ -169,7 +192,9 @@ class Game {
     this.blasters.forEach((e) => e.draw()); //dibuja cada obstáculo
     this.healings.forEach((e) => e.draw()); //dibuja cada obstáculo
     this.gatlings.forEach((e) => e.draw()); //dibuja cada obstáculo
+    this.cannons.forEach((e) => e.draw()); //dibuja cada obstáculo
     this.bars.forEach((e) => e.draw()); //dibuja cada obstáculo
+    this.steps.forEach((e) => e.draw()); //dibuja cada obstáculo
     this.levelBalls.forEach((e) => e.draw()); //dibuja cada obstáculo
     if (this.player.life.total <= 0) this.gameOver(); // cuando el player muere se llama a la funcion gameOver()
 
@@ -191,9 +216,11 @@ class Game {
     this.levelBalls.forEach((e) => e.move()); //mueve los obstáculos
     this.healings.forEach((e) => e.move()); //mueve los obstáculos
     this.gatlings.forEach((e) => e.move()); //mueve los obstáculos
+    this.cannons.forEach((e) => e.move()); //mueve los obstáculos
     this.bars.forEach((e) => e.move()); //mueve los obstáculos
+    this.steps.forEach((e) => e.move()); //mueve los obstáculos
     this.puffBubbles.forEach((e) => e.move()); //mueve los obstáculos
-    if (this.bubbles.length <= 0&& this.bubbleGatling.bubbleArray.length <= 0) {
+    if (this.bubbles.length <= 0 && this.bubbleGatling.bubbleArray.length <= 0) {
       this.levelBalls.forEach((e) => (e.winCondition = true));
     }
       this.gatlings.forEach((e) =>e.checkPosition(this.player))
@@ -202,9 +229,11 @@ class Game {
     //permite hacer keyup y keydown para usar teclado para mover el personaje
     document.addEventListener("keydown", (ev) => {
       this.player.keyDown(ev.keyCode);
+      // this.keyDown(ev.keyCode)
     });
     document.addEventListener("keyup", (ev) => {
       this.player.keyUp(ev.keyCode);
+      this.keyUp(ev.keyCode)
     });
   }
 
@@ -212,45 +241,7 @@ class Game {
 
   checkCollisions() {
     //función para comprobar las colisiones
-    this.bubbles.forEach((bubble) => {//player con bubble
-      if (bubble.collides(this.player) && !this.player.immune) {
-        if(this.player.y + this.player.h <= bubble.y +30 && bubble.w>=20){
-          this.player.vy = -3;
-        } else {
-          if (!this.player.auraIsActive) {
-            this.player.loseLife(bubble.damage, true); //el daño al jugador se le hace según lo que marca el daño de la burbuja. a burbuja más pequeña, menos daño
-            bubble.vy = -bubbleSpeedY; // rebota encima del jugador haciéndole daño
-          }
-        }
-        this.player.wasNotDamaged = false;
-        this.bubbleSplash2.play();
-      } else return true;
-    });
 
-    this.darkBubbles.forEach((bubble) => {//player darkbubble
-      if (bubble.collides(this.player) && !this.player.immune) {
-        if(this.player.y + this.player.h <= bubble.y +30 ){
-          this.player.vy = -3;
-        } else {
-          if (!this.player.auraIsActive) {
-            this.player.loseLife(bubble.damage, true); //el daño al jugador se le hace según lo que marca el daño de la burbuja. a burbuja más pequeña, menos daño
-            bubble.vy = -bubbleSpeedY; // rebota encima del jugador haciéndole daño
-          }
-        }
-        this.player.wasNotDamaged = false;
-        this.bubbleSplash2.play();
-      } else return true;
-    });
-
-    this.gatlings.forEach((e) =>e.bubbleArray.forEach((bubble) => {//player con bubblegatling
-      if (bubble.collides(this.player) && !this.player.immune) {
-        if (!this.player.auraIsActive) {
-          this.player.loseLife(0.5, true); //el daño al jugador se le hace según lo que marca el daño de la burbuja. a burbuja más pequeña, menos daño
-        }
-        this.bubbleSplash2.play();
-        bubble.vy = -bubbleSpeedY; // rebota encima del jugador haciéndole daño
-      } else return true;
-    }));
 
     this.spikes.forEach((spike) => {//player con spikes
       if (spike.collides(this.player) && !this.player.immune) {
@@ -286,57 +277,31 @@ class Game {
     });
     //bubbles...bubbles...bubbles...bubbles...bubbles...
     //bubbles...bubbles...bubbles...bubbles...bubbles...
-    this.bubbles.forEach((bubble) => {//  bubble con bullet
-      this.player.bulletArray = this.player.bulletArray.filter((bullet) => {
-        if (bullet.collides(bubble) && !bullet.isBig) {
-          bubblePuff(bubble, this.puffBubbles, this.bubbles, this.ctx);
-          this.bubblePopSound1.play(); //todo -- Sonido paso 3) invocar el sonido
-          return false;
-        } else return true;
-      });
-    });
-    this.bubbles.forEach((bubble) => {//  bubble con bullet
-    this.player.bulletArray.forEach((bullet) => {
-        if (bullet.collides(bubble) && bullet.isBig) {
-          bigWeaponBubble(this.ctx, bullet,  this.player)
-          bullet.y = -300;
-        } else return true;
-      });
-    });
+      checkBubbleCollision(this.bubbles, this.player, this.bubbleSplash2, this.bubblePopSound1, this.puffBubbles, this.ctx, this.platforms, this.bouncers, this.boxes)
+    this.gatlings.forEach((e) => {  
+      checkBubbleCollision(e.bubbleArray, this.player, this.bubbleSplash2, this.bubblePopSound1, this.puffBubbles, this.ctx, this.platforms, this.bouncers, this.boxes)
+    })
+    this.cannons.forEach((e) => {
+      checkBubbleCollision(e.bubbleArray, this.player, this.bubbleSplash2, this.bubblePopSound1, this.puffBubbles, this.ctx, this.platforms, this.bouncers, this.boxes)
+    })
 
-
-
-    this.bubbles.forEach((bubble) => {//bubble con fire
-      this.player.bulletFireArray.forEach((bullet) => {
-        if (bullet.collides(bubble)) {
-          bubble.w -= bullet.damage;
-          bubble.h -= bullet.damage;
-          if (bubble.w <= bubble.explodingSize * 2) {
-            const elx = bubble.x;
-            const ely = bubble.y;
-            const puffBubble = new BubblePuff( this.ctx, elx, ely, bubble.w, bubble.h);
-            this.puffBubbles.push(puffBubble);
-            bubble.x = -100;
+    //darkBubbles
+    //darkBubbles
+    this.darkBubbles.forEach((bubble) => {//player darkbubble
+      if (bubble.collides(this.player) && !this.player.immune) {
+        if(this.player.y + this.player.h <= bubble.y +30 ){
+          this.player.vy = -3;
+        } else {
+          if (!this.player.auraIsActive) {
+            this.player.loseLife(bubble.damage, true); //el daño al jugador se le hace según lo que marca el daño de la burbuja. a burbuja más pequeña, menos daño
+            bubble.vy = -bubbleSpeedY; // rebota encima del jugador haciéndole daño
           }
-        } else return true;
-      });
+        }
+        this.player.wasNotDamaged = false;
+        this.bubbleSplash2.play();
+      } else return true;
     });
-    this.bubbles.forEach((bubble) => {//bubble con platform
-      this.platforms.forEach((platform) => {
-        if (platform.collides(bubble)) {
-          if (platform.isBouncable) {
-          bubble.bubbleBounceSound.play()
-            bounceFromObstacles(bubble, platform);
-          } else if (!platform.isBouncable) {
-            bubble.y = platform.y - bubble.h;
-            bubble.vy = platform.vy;
-            bubble.vx = platform.vx;
-          }
-        } else return true;
-      });
-    });
-
-    this.darkBubbles.forEach((bubble) => {//bubble con platform
+    this.darkBubbles.forEach((bubble) => {//darkbubble con platform
       this.platforms.forEach((platform) => {
         if (platform.collides(bubble)) {
           if(platform.isSolid){
@@ -358,14 +323,6 @@ class Game {
       });
     });
 
-    this.bubbles.forEach((bubble) => {//bubble con bouncer
-      this.bouncers.forEach((bouncer) => {
-        if (bouncer.collides(bubble)) {
-          bubble.bubbleBounceSound.play()
-          bounceFromObstacles(bubble, bouncer);
-        } else return true;
-      });
-    });
     this.darkBubbles.forEach((bubble) => {//bubble con bouncer
       this.bouncers.forEach((bouncer) => {
         if (bouncer.collides(bubble)) {
@@ -374,115 +331,43 @@ class Game {
         } else return true;
       });
     });
-    //bubblesGatling...bubblesGatling...bubblesGatling...bubblesGatling...bubblesGatling...
-    //bubblesGatling...bubblesGatling...bubbles...bubbles...bubbles...
-    this.gatlings.forEach((e) =>e.bubbleArray.forEach((bubble) => {  //weapon con bubbleGatling bubble
-      this.player.bulletArray = this.player.bulletArray.filter((bullet) => {
-        if (bullet.collides(bubble)) {
-          bubblePuff(bubble, this.puffBubbles, this.bubbles, this.ctx);
-          this.bubblePopSound1.play(); //todo -- Sonido paso 3) invocar el sonido
-          return false;
-        } else return true;
-      });
-    }));
-
-    this.gatlings.forEach((e) =>e.bubbleArray.forEach((bubble) => {///gatling con fire
-      this.player.bulletFireArray.forEach((bullet) => {
-        if (bullet.collides(bubble)) {
-          bubble.w -= bullet.damage;
-          bubble.h -= bullet.damage;
-          if (bubble.w <= bubble.explodingSize * 2) {
-            const elx = bubble.x;
-            const ely = bubble.y;
-            const puffBubble = new BubblePuff( this.ctx, elx, ely, bubble.w, bubble.h);
-            this.puffBubbles.push(puffBubble);
-            bubble.x = -100;
-          }
-        } else return true;
-      });
-    }));
-    this.gatlings.forEach((e) =>e.bubbleArray.forEach((bubble) => {//gatling con platform
-      this.platforms.forEach((platform) => {
-        if (platform.collides(bubble)) {
-          if (platform.isBouncable) {
-          bubble.bubbleBounceSound.play()
-            bounceFromObstacles(bubble, platform);
-          } else if (!platform.isBouncable) {
-            bubble.y = platform.y - bubble.h;
-            bubble.vy = platform.vy;
-            bubble.vx = platform.vx;
-          }
-        } else return true;
-      });
-    }));
-    this.gatlings.forEach((e) =>e.bubbleArray.forEach((bubble) => {///gatling con bouncer
-      this.bouncers.forEach((bouncer) => {
-        if (bouncer.collides(bubble)) {
-          bubble.bubbleBounceSound.play()
-          bounceFromObstacles(bubble, bouncer);
-        } else return true;
-      });
-    }));
-
-    this.gatlings.forEach((e) =>e.bubbleArray.forEach((bubble) => {//  bulletBar con Bubble
-      this.player.bulletBarArray.forEach((bullet) => {
-        if (bullet.collides(bubble)) {
-          bullet.life -= 1;
-          if (bullet.life <= 0) {
-            bullet.dispose = false;
-          }
-          bubblePuff(bubble, this.puffBubbles, this.bubbles, this.ctx);
-          this.bubblePopSound1.play(); //todo -- Sonido paso 3) invocar el sonido
-          return false;
-        } else return true;
-      });
-    }));
+    
+        this.darkBubbles.forEach((bubble) => {//  bulletBar con dark bubble
+          this.player.bulletBarArray.forEach((bullet) => {
+            if (bullet.collides(bubble)) {
+              if(bubble.x <= bullet.x){
+                bubble.vx = -1
+              } else {
+                bubble.vx = 1
+              }
+              return false;
+            } else return true;
+          });
+        });
+        this.darkBubbles.forEach((bubble) => {//  darkbubble con bullet
+          this.player.bulletArray = this.player.bulletArray.filter((bullet) => {
+            if (bullet.collides(bubble)) {
+              bubble.w += 2;
+              bubble.h += 2;
+              this.darkBubbbleHit.play()
+              if(bubble.w >= CTXW/4){
+                darkBubbleExplosion(this.darkBubbleExplosion, bubble, this.bubbles, this.puffBubbles)//explota y genera bubbles pequeños
+              }
+              return false;
+            } else return true;
+          });
+        });
     //weaponBar..weaponBar..weaponBar..weaponBar..
     //weaponBar..weaponBar..weaponBar..weaponBar..
 
     checkBarCollisions(this.player.bulletBarArray, this.platforms, this.barHit, this.player);
     checkBarCollisions(this.player.bulletBarArray, this.bouncers, this.barHit, this.player);
     checkBarCollisions(this.player.bulletBarArray, this.boxes, this.barHit, this.player);
-    
 
-    this.bubbles.forEach((bubble) => {//  bulletBar con Bubble
-      this.player.bulletBarArray.forEach((bullet) => {
-        if (bullet.collides(bubble)) {
-          bullet.life -= 1;
-          if (bullet.life <= 0) {
-            bullet.dispose = false;
-          }
-          bubblePuff(bubble, this.puffBubbles, this.bubbles, this.ctx);
-          this.bubblePopSound1.play(); //todo -- Sonido paso 3) invocar el sonido
-          return false;
-        } else return true;
-      });
-    });
-    this.darkBubbles.forEach((bubble) => {//  bulletBar con Bubble
-      this.player.bulletBarArray.forEach((bullet) => {
-        if (bullet.collides(bubble)) {
-          if(bubble.x <= bullet.x){
-            bubble.vx = -1
-          } else {
-            bubble.vx = 1
-          }
-          return false;
-        } else return true;
-      });
-    });
-    this.darkBubbles.forEach((bubble) => {//  darkbubble con bullet
-      this.player.bulletArray = this.player.bulletArray.filter((bullet) => {
-        if (bullet.collides(bubble)) {
-          bubble.w += 2;
-          bubble.h += 2;
-          this.darkBubbbleHit.play()
-          if(bubble.w >= CTXW/4){
-            darkBubbleExplosion(this.darkBubbleExplosion, bubble, this.bubbles, this.puffBubbles)//explota y genera bubbles pequeños
-          }
-          return false;
-        } else return true;
-      });
-    });
+    checkHookCollisions(this.player.hooksArray, this.platforms, this.barHit, this.player);
+    checkHookCollisions(this.player.hooksArray, this.bouncers, this.barHit, this.player);
+    checkHookCollisions(this.player.hooksArray, this.boxes, this.barHit, this.player);
+    
 
     // colisiones con Platform
     // colisiones con Platform
@@ -496,8 +381,10 @@ class Game {
       this.player.bulletArray.forEach((bullet) => {
         if (bullet.collides(platform)) {
           if (!platform.isSolid) {
+            this.platformHitSolid.play()
             basicBulletBounce(bullet, platform);
           } else {
+            this.platformHitBreak.play()
             const newColor = platform.calculateNewColor();
             platform.color = newColor;
             if(bullet.isBig){
@@ -506,6 +393,7 @@ class Game {
             bullet.x = -200
             if (platform.life <= 0) {
               coins+=2;
+              this.coinsSound1.play()
               platform.x = -200;
             }
           }
@@ -522,6 +410,7 @@ class Game {
           } else return true;
         });
       });
+
   
 
     //colisiones con bouncers
@@ -571,8 +460,7 @@ class Game {
       } else return true;
     });
 
-    this.bars.forEach((bar) => {
-      // bars  choca con el personaje
+    this.bars.forEach((bar) => {// bars  choca con el personaje
       if (bar.collides(this.player)) {
         this.player.barAmount += 2;
         this.playerBar.play();
@@ -580,8 +468,16 @@ class Game {
         bar.x = -100; // situa fuera del canvas la burbuja que colisiona con el player y luego isVisible la elimina del array
       } else return true;
     });
-    this.blasters.forEach((blaster) => {
-      // blasters  choca con el personaje
+
+    this.steps.forEach((step) => {// steps  choca con el personaje
+      if (step.collides(this.player)) {
+        this.player.amountOfSteps += 5;
+        this.playerBar.play();
+        // eventInfo(munSteps$$)
+        step.x = -100; // situa fuera del canvas la burbuja que colisiona con el player y luego isVisible la elimina del array
+      } else return true;
+    });
+    this.blasters.forEach((blaster) => {// blasters  choca con el personaje
       if (blaster.collides(this.player)) {
         this.player.megaFireBlaster = true;
         this.player.megaFireBlasterAmount += 31;
@@ -685,24 +581,19 @@ class Game {
     });
   }
 
-  levelChange() {
-    if(this.player.wasNotDamaged) coins+=20
+  levelChange() {      
+    if(this.player.wasNotDamaged) {coins+=20; this.coinsSound2.play();}
     if(!this.isInfiniteChanging){
     setTimeout(() => {
       this.changeLevelSound1.play();
       GAMELEVEL += 1;
       this.changingLevel = true;
-      // this.randomColor = getRandomColor();
       this.indiceAleatorio = Math.floor(Math.random() * this.frases.length);
       setTimeout(() => {
-      this.player.wasNotDamaged = true;
+        levelChangeMessagesDisplay()
+        this.player.wasNotDamaged = true;
         ballBroke = true;
         this.changingLevel = false;
-        changingLevelImg$$.style.display = "none";
-        levelChangeText1$$.style.display = "none";
-        levelChangeText2$$.style.display = "none";
-        levelChangeText3$$.style.display = "none";
-        levelChangeText4$$.style.display = "none";
         this.levelBalls = [];
         if (GAMELEVEL === 2) {
           this.background.img.src ="/public/Imagenes/background/background8.jpeg";
@@ -739,12 +630,19 @@ class Game {
         level13( this.ctx, this.bubbles, this.platforms, this.stairs,  this.healings, this.bars, this.boxes,this.levelBalls,  this.darkBubbles);
           this.background.img.src ="/public/Imagenes/background/background5.png";
         } else if (GAMELEVEL === 14) {
-          level14( this.ctx, this.bubbles, this.platforms, this.stairs,  this.healings, this.bars, this.boxes,this.levelBalls);
+        level14( this.ctx, this.bubbles, this.platforms,  this.healings, this.boxes, this.levelBalls, this.darkBubbles, this.spikes, this.bars);
           this.background.img.src ="/public/Imagenes/background/background5.png";
+        } else if (GAMELEVEL === 15) {
+          setInterval(() => {
+            this.cannons.forEach(c => c.shooting = true)
+          }, 3000);
+          level15( this.ctx, this.levelBalls, this.darkBubbles, this.cannons);
+          this.background.img.src ="/public/Imagenes/background/background5.png";
+
         }
       }, 3000);
     }, 1000);
-  } else if(this.isInfiniteChanging){
+  } else{
     this.changingLevel = true;
     this.indiceAleatorio = Math.floor(Math.random() * this.frases.length);
     GAMELEVEL += 1;
@@ -752,25 +650,33 @@ class Game {
         this.player.wasNotDamaged = true;
         ballBroke = true;
         this.changingLevel = false;
-        changingLevelImg$$.style.display = "none";
-        levelChangeText1$$.style.display = "none";
-        levelChangeText2$$.style.display = "none";
-        levelChangeText3$$.style.display = "none";
-        levelChangeText4$$.style.display = "none";
+        levelChangeMessagesDisplay()
         this.levelBalls = [];
-        levelInfinite( this.ctx, this.bubbles, this.platforms, this.bouncers, this.spikes, this.stairs, this.flamethrowers, this.machineguns, this.healings, this.auras, this.boxes, this.blasters, this.levelBalls, this.gatlings, this.darkBubbles);
+        levelInfinite( this.ctx, this.bubbles, this.platforms, this.bouncers, this.spikes, this.stairs, this.flamethrowers, this.machineguns, this.healings, this.auras, this.boxes, this.blasters, this.levelBalls, this.gatlings, this.darkBubbles, this.cannons);
         infiniteLeveling++
     }, 3000)
   }
   this.emptyAllGameArrays();
   }
-    checkLevelsState(){
-      if(GAMELEVEL===11){
-        if(this.bubbles.length<=1){
-          this.platforms.forEach(element => {
-            element.isSolid = true;
-          })}
+  checkLevelsState(){
+    if(GAMELEVEL===11){
+      if(this.bubbles.length<=1){
+        this.platforms.forEach(element => {
+          element.isSolid = true;
+        })}
+      }
+      if(GAMELEVEL===14){
+        if(this.platforms.length === 1){
+          this.platforms = [];
+          coins -= 6
+          setTimeout(() => {
+            addPlatforms14(this.ctx, this.platforms)
+          }, 3000);
         }
+      }
+      if(GAMELEVEL === 15){
+
+      }
     }
   gameOver() {
     //Función para terminar el juego y vaciar todos los arrays.
@@ -803,7 +709,7 @@ class Game {
     this.explosions = [];
     this.boxes= [];
     this.gatlings = [];
-    this.gatlings.forEach((e) => e.bubbleArray = [])
+    this.cannons = [];
   }
   emptyAllPlayerArrays(){
     this.player.bulletArray = [];
@@ -812,4 +718,26 @@ class Game {
     this.player.fireAmount =0; 
     this.player.barAmount = 0;
   }
+
+  keyUp(key){
+    if(key === P){
+      this.shootStep(15);
+    }
+    if(key === O){
+      this.shootStep(-18);
+    }
+  }
+  shootStep(stepPlace) {
+    if(this.player.platformCreator && this.player.amountOfSteps >0){
+      this.player.amountOfSteps--;
+      const plat = new Platform(ctx, this.player.x + stepPlace, this.player.y - 10, 15, 5, "/public/Imagenes/obstacles/stepsSolid2.png", true, true, true);
+      this.platforms.push(plat);
+      setTimeout(() => {
+        const index = this.platforms.indexOf(plat);
+        if (index !== -1) {
+          this.platforms.splice(index, 1);
+        }
+      }, 10000);
+    }
+  }  
 }

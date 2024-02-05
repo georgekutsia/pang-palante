@@ -47,6 +47,13 @@ shopFire$$.addEventListener("click", function(){
     N = 78;
   }
 })
+shopBar$$.addEventListener("click", function(){
+  if(coins >= 25){
+    game.player.barAmount += 2;
+    coins -= 25; 
+    M = 77;
+  }
+})
 
 
 //basic gun 
@@ -141,4 +148,35 @@ shopSpeedGun$$.addEventListener("click", function(){
     basicWeaponSpeed = 4
     shopSpeedGun$$.innerHTML = ` <span><i style="font-size: calc(14px + 0.53vw)" class="fa-solid fa-gauge-simple-high"></i> x 6  <br> <span id="velocidad-text">Velocidad</span>   </span>`
   } 
+})
+shopBarResistance$$.addEventListener("click", function(){
+  if( coins >= 50 && barResistanceLevel === 0){
+    barResistanceLevel = 1;
+    coins -=50;
+    shopBarResistance$$.innerHTML = `  <span><i style="font-size: calc(14px + 0.53vw)" class="fa-solid fa-anchor"></i> x 3</span> <br> <i style="font-size: calc(8px + 0.3vw)" class="fa-solid fa-angles-up fonts-i"></i><span id="velocidad-text">Resistance</span>  <br> 55<i class="fa-solid fa-coins"></i> `
+  } else if( coins >= 60 && barResistanceLevel === 1){
+    barResistanceLevel = 2;
+    coins -=60;
+    barLife = 3;
+    shopBarResistance$$.innerHTML = `<span><i style="font-size: calc(14px + 0.53vw)" class="fa-solid fa-anchor"></i> x 4</span> <br> <i style="font-size: calc(8px + 0.3vw)" class="fa-solid fa-angles-up fonts-i"></i><span id="velocidad-text">Resistance</span>  <br> 60<i class="fa-solid fa-coins"></i> `
+  } else if( coins >= 70 && barResistanceLevel === 2){
+    barResistanceLevel = 3;
+    coins -=70;
+    barLife = 5;
+    shopBarResistance$$.innerHTML = ` <span><i style="font-size: calc(14px + 0.53vw)" class="fa-solid fa-anchor"></i> x 5</span> <br> <i style="font-size: calc(8px + 0.3vw)" class="fa-solid fa-angles-up fonts-i"></i><span id="velocidad-text">Resistance</span>  <br> 65<i class="fa-solid fa-coins"></i> `
+  } else if( coins >= 80 && barResistanceLevel === 3){
+    barResistanceLevel = 4;
+    coins -=80;
+    barLife = 7;
+    shopBarResistance$$.innerHTML = ` <span><i style="font-size: calc(14px + 0.53vw)" class="fa-solid fa-anchor"></i> x 6</span> <br> 70<i class="fa-solid fa-coins"></i> `
+  } 
+})
+
+
+toggleShop$$.addEventListener("click", ()=>{
+  if(shopBtnsAll$$.style.display === "flex"){
+    shopBtnsAll$$.style.display = "none";
+  } else {
+    shopBtnsAll$$.style.display = "flex";
+  }
 })

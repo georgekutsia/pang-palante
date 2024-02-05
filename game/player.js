@@ -18,18 +18,22 @@ class Player {
     this.bulletArray = [];
     this.bulletFireArray = [];
     this.bulletBarArray = [];
+    this.bulletPlatformArray = [];
+    this.hooksArray = [];
     this.frameAmount = 5;
-    this.fireAmount = 0;
     this.immune = false; // al recibir daño se vuelve inmune durante unos segundos
     this.fading = 0; //necesario para el parpadeo del personaje cuando es inmune
     this.charging = 0;  // acumula la carga, lo que dibuja el semicírculo
     this.chargingFires = false; //   se pone en true mientras carga el disparo fuerte de fuego
     this.megaFireBlaster = false; //al ponerse en true, se puede activar la K
     this.megaFireBlasterAmount = 31; //la carga del blaster. cada 10, es una bola
+    this.fireAmount = 20;
     this.barAmount = 3; //la cantidad de barras disponibles
     this.ableToJump = false;
     this.wasNotDamaged = true;
     this.bigWeaponBubblesMaxAmount = 0;
+    this.amountOfSteps = 1;
+    this.platformCreator = true;
 
 
     this.img = new Image();
@@ -58,7 +62,13 @@ class Player {
     this.shootSound = new Audio("/public/sounds/shooting/weaponShootSound.mp3");
     this.shootSound.volume = 0.1;
     this.shootBarSound = new Audio("/public/sounds/shooting/shootBarSound2.mp3");
+    this.hookShoot = new Audio("/public/sounds/shooting/hookShort.m4a")
+    this.hookShoot.volume = 0.05
 
+    this.barInfo$$ = document.getElementById("bar-info")
+    this.fireInfo$$ = document.getElementById("fire-info")
+    this.barmg$$ = document.getElementById("bar-img")
+    this.fireImg$$ = document.getElementById("fire-img")
     // move btns
     this.upBtn$$ = document.getElementById("upBtn");
     this.rightBtn$$ = document.getElementById("rightBtn");
@@ -288,6 +298,8 @@ handleRightDodge = (event) =>{ //*
     this.bulletArray.forEach((bullet) => {bullet.draw();}); // paso 3: dibujo cada bullet que se dispare
     this.bulletFireArray.forEach((bullet) => {bullet.draw();}); // paso 3: dibujo cada bullet que se dispare
     this.bulletBarArray.forEach((bullet) => {bullet.draw();}); // paso 3: dibujo cada bullet que se dispare
+    this.bulletPlatformArray.forEach((bullet) => {bullet.draw();}); // paso 3: dibujo cada bullet que se dispare
+    this.hooksArray.forEach((bullet) => {bullet.draw();}); // paso 3: dibujo cada bullet que se dispare
     this.life.draw()
 
     this.blasterBtn$$.style.display = !this.megaFireBlaster ? 'none' : 'block';
@@ -304,15 +316,20 @@ handleRightDodge = (event) =>{ //*
       this.ctx.drawImage(this.weaponFire, this.x-20 + i*5, this.y-15, this.w , this.h);
     }
     if (this.barAmount > 0) {
-      this.ctx.save()
-      this.ctx.font = "10px Arial"
-      this.ctx.fillText(`x ${this.barAmount}`, CTXW  - 17, CTXH -4);
-      this.ctx.drawImage(this.barItem, CTXW  - 28, CTXH-14, 8 , 28);
-      this.ctx.restore()
+      this.barInfo$$.innerText = `x ${this.barAmount}`
+      this.barmg$$.style.display = "flex"
+    } else{
+      this.barInfo$$.innerText = ``
+      this.barmg$$.style.display = "none"
     }
     if(this.fireAmount>=1){    
+      this.fireInfo$$.innerText = `x ${this.fireAmount}`
+      this.fireImg$$.style.display = "flex"
                    //x, y, la cantidad por la que se dibuja, radio exterior, radio interior, color de inicio, color de medio, color de final es negro
       this.charger.draw(this.x + 5, this.y + 10, this.fireAmount, 20, 19, "aqua", "blue")
+    } else{
+      this.fireInfo$$.innerText = ``
+      this.fireImg$$.style.display = "none"
     }
     if(this.charging >=1){
       this.charger.draw(this.x + 5, this.y + 10, this.charging, 16, 15, "yellow", "red")
@@ -344,6 +361,8 @@ handleRightDodge = (event) =>{ //*
     if(this.auraIsActive){
     this.ctx.drawImage(this.auraImg, this.x-7, this.y-5, this.w + 10, this.h+10);
     }
+
+
   }
 
   move() {
@@ -389,6 +408,9 @@ handleRightDodge = (event) =>{ //*
     this.bulletArray.forEach((bullet) => {bullet.move();}); //paso 4: mueve cada bullet que se dispare
     this.bulletFireArray.forEach((bullet) => {bullet.move();}); //paso 4: mueve cada bullet que se dispare
     this.bulletBarArray.forEach((bullet) => {bullet.move();}); //paso 4: mueve cada bullet que se dispare
+    this.bulletPlatformArray.forEach((bullet) => {bullet.move();}); // paso 3: dibujo cada bullet que se dispare
+    this.hooksArray.forEach((bullet) => {bullet.move();}); // paso 3: dibujo cada bullet que se dispare
+
   }
 //consultar constantes para el código de cada teclahjkl-
   keyDown(key) {
@@ -433,7 +455,6 @@ handleRightDodge = (event) =>{ //*
       setTimeout(() => {
         Q = 81;
         E = 69;
-
       }, dodgeCooldown);
     }
 
@@ -473,6 +494,9 @@ handleRightDodge = (event) =>{ //*
     }
     if(key === ALT && this.vy === 0 || key === ALT && this.ableToJump === true){
       this.vy = jumpHeight 
+      if(jumpHeight < -12){
+        jumpHeight = -3.5
+      }
       this.g = 0.2
       this.ableToJump = false;
       ALT = 0;
@@ -492,6 +516,11 @@ handleRightDodge = (event) =>{ //*
       this.blasterCharging.volume = 0;
       }
     }
+    if(key === J){
+      this.shootHook();
+      this.hookShoot.play()
+    }
+
   }
   keyUp(key) {
     if (key === W) {
@@ -623,8 +652,15 @@ handleRightDodge = (event) =>{ //*
     this.shootBarSound.play();
     const bulletBar = new WeaponBar(this.ctx, this.x + 5, this.y)
     this.bulletBarArray.push(bulletBar);
+    }
   }
+  shootHook(){
+    let hook = new WeaponHook(this.ctx, this.x, this.y)
+    this.hooksArray.push(hook);
   }
-
+  // shootPlatform(){
+  // const plat =  new Platform(ctx, this.x + this.w/2, this.y - 20, 25, 5)
+  //   this.bulletPlatformArray.push(plat); 
+  // }
 
 }

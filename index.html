@@ -7,9 +7,11 @@
   <link rel="stylesheet" href="./styles/info.css" />
   <link rel="stylesheet" href="./styles/shop.css" />
   <link rel="stylesheet" href="./styles/gameBtns.css" />
+  <link rel="stylesheet" href="./styles/ammos.css" />
   <script src="./game/game.js" defer></script>
   <script src="./game/functions.js" defer></script>
-  <script src="./game/functionMovesPlayer.js" defer></script>
+  <script src="./game/functionsForLeveling.js" defer></script>
+  <script src="./game/functionsCollision.js" defer></script>
   <script src="./game/levels/gameLevel1.js" defer></script>
   <script src="./game/levels/gameLevel2.js" defer></script>
   <script src="./game/levels/gameLevel3.js" defer></script>
@@ -24,6 +26,13 @@
   <script src="./game/levels/gameLevel12.js" defer></script>
   <script src="./game/levels/gameLevel13.js" defer></script>
   <script src="./game/levels/gameLevel14.js" defer></script>
+  <script src="./game/levels/gameLevel15.js" defer></script>
+  <script src="./game/levels/gameLevel16.js" defer></script>
+  <script src="./game/levels/gameLevel17.js" defer></script>
+  <script src="./game/levels/gameLevel18.js" defer></script>
+  <script src="./game/levels/gameLevel19.js" defer></script>
+  <script src="./game/levels/gameLevel20.js" defer></script>
+  <script src="./game/levels/gameLevel21.js" defer></script>
   <script src="./game/levels/gameLevelInfinite.js" defer></script>
   <script src="./game/background.js" defer></script>
   <script src="./game/bubble.js" defer></script>
@@ -36,9 +45,10 @@
   <script src="./game/obstacles/explosion.js" defer></script>
   <script src="./game/life.js" defer></script>
   <script src="./game/points.js" defer></script>
-  <script src="./game/weapon.js" defer></script>
-  <script src="./game/weaponFire.js" defer></script>
-  <script src="./game/weaponBar.js" defer></script>
+  <script src="./game/weapons/weapon.js" defer></script>
+  <script src="./game/weapons/weaponFire.js" defer></script>
+  <script src="./game/weapons/weaponBar.js" defer></script>
+  <script src="./game/weapons/weaponHook.js" defer></script>
   <script src="./game/items/flamethrower.js" defer></script>
   <script src="./game/items/charger.js" defer></script>
   <script src="./game/items/machinegun.js" defer></script>
@@ -46,10 +56,12 @@
   <script src="./game/items/megaFireBlaster.js" defer></script>
   <script src="./game/items/levelBall.js" defer></script>
   <script src="./game/items/bars.js" defer></script>
+  <script src="./game/items/steps.js" defer></script>
   <script src="./game/items/aura.js" defer></script>
   <script src="./game/items/box.js" defer></script>
   <script src="./game/bubblePuff.js" defer></script>
   <script src="./game/enemies/bubbleGatling.js" defer></script>
+  <script src="./game/enemies/bubbleCannon.js" defer></script>
   <script src="./game/script.js" defer></script>
   <script src="./game/helper.js" defer></script>
   <script src="./game/constants.js" defer></script>
@@ -84,15 +96,18 @@
     <button  class="ayudas-btn icons-btn"><i class="fa-regular fa-comment"></i></button>
   </div>
 </div>
+  <button id="toggle-shop"><i class="fa-solid fa-shop"></i></button>
   <div id="shop-btn">
     <button id="shop-shield">50<i class="fa-solid fa-coins"></i> <i style="font-size: calc(14px + 0.53vw)" class="fa-solid fa-globe"></i></button>
     <button id="shop-fire">20<i class="fa-solid fa-coins"></i> <i style="font-size: calc(14px + 0.53vw)" class="fa-solid fa-fire-flame-simple"></i></button>
+    <button id="shop-bar">25<i class="fa-solid fa-coins"></i> <i style="font-size: calc(14px + 0.53vw)" class="fa-solid fa-anchor"></i></button>
     <button id="shop-superGun"><i style="font-size: calc(14px + 0.53vw)" class="fa-solid fa-bullseye"></i> <br>Nivel 0 </button>
     <button id="shop-superGun1">90<i class="fa-solid fa-coins"></i> <i style="font-size: calc(14px + 0.53vw)" class="fa-solid fa-angles-up"></i> <br>Nivel 1 </button>
     <button id="shop-superGun2">100<i class="fa-solid fa-coins"></i> <i style="font-size: calc(14px + 0.53vw)" class="fa-solid fa-angles-up"></i> <br>Nivel 2 </button>
     <button id="shop-superGun3">110<i class="fa-solid fa-coins"></i> <i style="font-size: calc(14px + 0.53vw)" class="fa-solid fa-angles-up"></i> <br>Nivel 3 </button>
     <button id="shop-superGun4">120<i class="fa-solid fa-coins"></i> <i style="font-size: calc(14px + 0.53vw)" class="fa-solid fa-angles-up"></i> <br>Nivel 4 </button>
     <button id="shop-speedGun"> <span><i style="font-size: calc(14px + 0.53vw)" class="fa-solid fa-gauge-simple-high"></i> x 2</span> <br> <i style="font-size: calc(8px + 0.3vw)" class="fa-solid fa-angles-up fonts-i"></i><span id="velocidad-text">Velocidad</span>  <br> 50<i class="fa-solid fa-coins"></i> </button>
+    <button id="shop-barResistane"> <span><i style="font-size: calc(14px + 0.53vw)" class="fa-solid fa-anchor"></i> x 2</span> <br> <i style="font-size: calc(8px + 0.3vw)" class="fa-solid fa-angles-up fonts-i"></i><span id="velocidad-text">Resistance</span>  <br> 50<i class="fa-solid fa-coins"></i> </button>
   </div>
   <section id="moves-div">
     <div>
@@ -126,11 +141,21 @@
 <div>
   <h1 class="level-change-text" id="level-change-text1"></1>
   <h1 class="level-change-text" id="level-change-text2"></12>
-  <h3 class="level-change-text" id="level-change-text3">He3</h3>
+  <h3 class="level-change-text" id="level-change-text3"></h3>
   <h2 class="level-change-text" id="level-change-text4"></h2>
 </div>
 <div id="turn-img">
   <img src="https://res.cloudinary.com/dxnzcewsy/image/upload/v1706690660/giphy_devide_left_evakeq.gif" alt="turn-phone">
+</div>
+<div id="ammos-count">
+  <div>
+    <img id="bar-img" src="/public/Imagenes/barItem1.png" alt="weapon-bar">
+    <h2 id="bar-info"></h2>
+  </div>
+  <div>
+    <img id="fire-img" src="/public/Imagenes/fireCounterImg.png" alt="weapon-bar">
+    <h2 id="fire-info"></h2>
+  </div>
 </div>
 </body>
 </html>
