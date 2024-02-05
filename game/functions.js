@@ -150,6 +150,11 @@ function platformPlayerCollision(player, platform){
   if (player.y + player.h >= platform.y + platform.h) {//colisión por la parte inferior de la plataforma
     player.vy = 0;
     jumpDownDistance = 0;
+    if(player.hookedOnPlatform){
+      player.y = player.y - 20;
+      player.hookedOnPlatform = false;
+      player.g = 0.03;
+    }
 
   }
   if (player.x >= platform.x + platform.w ||player.x <= platform.x
@@ -187,13 +192,12 @@ function checkHookCollisions(hookArray, obstacles, barHit, player) {
   hookArray.forEach((hook) => {
     obstacles.forEach((obstacle) => {
       if (hook.collidesTop(obstacle)) {
-          ALT = 16;
-          jumpHeight = -18;
+          player.hookedOnPlatform = true;;
           player.vy = -6;
           hook.solidState = true;
           hook.y = obstacle.y + obstacle.h;
           hook.vy = 0;
-        barHit.play();
+          barHit.play();
           hook.img.src = "../public/Imagenes/weaponBarSolid.png";
       }
     });

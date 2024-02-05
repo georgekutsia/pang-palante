@@ -88,7 +88,7 @@ class Game {
   }
 
   start() {
-    this.gameBackgroundMusic.play();
+    // this.gameBackgroundMusic.play();
     this.interval = setInterval(() => {
       retryAmount$$.innerText = `${retry}`
       if(!retry){
@@ -121,7 +121,7 @@ class Game {
     //crear nivel 1 here
     if (!this.gameStarted) {
       if (GAMELEVEL === 15) {
-        level15( this.ctx,this.bubbles, this.levelBalls, this.darkBubbles, this.cannons, this.boxes);
+        level15( this.ctx,this.platforms, this.bubbles, this.levelBalls, this.darkBubbles, this.cannons, this.boxes);
         setInterval(() => {
           this.otherBubbles++
           this.cannons.forEach(c =>c.shooting = true)
@@ -220,9 +220,6 @@ class Game {
     this.bars.forEach((e) => e.move()); //mueve los obstáculos
     this.steps.forEach((e) => e.move()); //mueve los obstáculos
     this.puffBubbles.forEach((e) => e.move()); //mueve los obstáculos
-    if (this.bubbles.length <= 0 && this.bubbleGatling.bubbleArray.length <= 0) {
-      this.levelBalls.forEach((e) => (e.winCondition = true));
-    }
       this.gatlings.forEach((e) =>e.checkPosition(this.player))
   }
   setListeners() {
@@ -659,6 +656,10 @@ class Game {
   this.emptyAllGameArrays();
   }
   checkLevelsState(){
+    if (this.bubbles.length <= 0 && this.gatlings.every(gat => gat.bubbleArray.length <= 0)&& this.cannons.every(can => can.bubbleArray.length <= 0) ) {
+      this.levelBalls.forEach(e => (e.winCondition = true));
+    } else {this.levelBalls.forEach(e => (e.winCondition = false))}
+    
     if(GAMELEVEL===11){
       if(this.bubbles.length<=1){
         this.platforms.forEach(element => {

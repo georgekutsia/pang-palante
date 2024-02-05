@@ -1,5 +1,5 @@
 class Platform {
-  constructor(ctx, x, y, w, h, obstacleImg, isSolid, isBrakable, isBouncable, vx, vy) {
+  constructor(ctx, x, y, w, h, obstacleImg, isSolid, isBrakable, isBouncable, vx, vy, xLimit1, xLimit2, yLimit1, yLimit2) {
     this.ctx = ctx;
     this.x = x || 100;
     this.w = w || this.ctx.canvas.width / 13;
@@ -9,6 +9,10 @@ class Platform {
     this.img.src = obstacleImg || "../../public/Imagenes/obstacles/platformSolid2.png";
     this.vx = vx || 0;
     this.vy = vy || 0;
+    this.xLimit1   = xLimit1   || CTXW
+    this.xLimit2 = xLimit2 || CTXW
+    this.yLimit1 = yLimit1 || CTXH
+    this.yLimit2 = yLimit2 || CTXH
     this.speedX = vx || 0 
     this.color = "#ff0000"; // Color predeterminado, puedes ajustarlo según tus necesidades
     this.red =  (this.w + this.h) * 4; // solo usamos como numero fijo a recoger el rojo, que dependerá de la anchura total de la plataforma
@@ -57,9 +61,9 @@ class Platform {
     // Método para actualizar la posición de la plataforma y cambiar su color
     this.x += this.vx;
     this.y += this.vy;
-    if(this.vx && this.x + this.w >= CTXW){
+    if(this.vx && this.x + this.w >= this.xLimit2){
         this.vx = -this.speedX;
-    } else if (this.vx && this.x <= 1){
+    } else if (this.vx && this.x <= this.xLimit1){
       this.vx = this.speedX;
     }
   }
