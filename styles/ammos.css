@@ -1,0 +1,26 @@
+#ammos-count{
+  position: absolute;
+  top: 24vw;
+  left: 1vw;
+}
+
+#bar-img{
+  margin-top: 20px;
+  width: calc(8px + 0.5vw);
+  height: calc(28px + 0.5vw);
+  display: none;
+}
+#fire-img{
+  margin-top: 20px;
+  width: calc(8px + 0.5vw);
+  height: calc(28px + 0.5vw);
+  display: none;
+
+}
+
+#bar-info{
+  font-size: calc(10px + 1vw);
+}
+#ammos-count div{
+  display: flex;
+}

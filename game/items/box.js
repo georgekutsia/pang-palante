@@ -22,6 +22,8 @@ class Box {
     this.boxHitBreakingLongSound.volume = 0.1
     this.boxImpactMetalic = new Audio("/public/sounds/box/boxImpactMetalic.mp3")
     this.boxImpactMetalic.volume = 0.08;
+    this.coinsSound1 = new Audio("../public/sounds/coinsSound1.mp3")
+    this.coinsSound1.volume = 1; 
     this.boxLevel = boxLevel;// de 1 a 3 determina la resistenci de la caja
     this.containsRandom = containsRandom || false; //determina si el loot será random o no. mirar en funciones
     this.lootNumber = lootNumber || 5
@@ -60,6 +62,7 @@ class Box {
     if(this.boxImg.frame >8) this.boxHitBreakingLongSound.play();
     if(this.boxImg.frame > 8){ 
       coins+=2;
+      this.coinsSound1.play()
       this.dispose = false; 
     }
   }

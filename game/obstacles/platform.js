@@ -15,9 +15,9 @@ class Platform {
     this.green = Math.random() * 140;
     this.blue = Math.random() * 140;
     this.life =  this.red /2;   
-    this.isSolid = isSolid || true;
+    this.isSolid = isSolid || false;
     this.isBrakable = isBrakable || false;
-    this.isBouncable = isBouncable || false;
+    this.isBouncable = isBouncable || true;
     this.goingToBreak = false;
     this.braking = 150;
     //la vida de la plataforma depende de su tamaño, lo que significa que depende de Red, que es la anchura más la altura multiplicada por 2. 

@@ -6,9 +6,8 @@ function level13( ctx, bubbles, platforms, stairs,healings,bars, boxes,  levelBa
   addDarkBubble13(ctx, darkBubbles)
   addHealings13(ctx, healings)
   setTimeout(() => {
-    console.log("bulala")
-    platforms.forEach(platform =>platform.isSolid = false)
-  }, 300);
+    platforms.forEach(platform =>platform.isSolid = true)
+  }, 30000);
 }
 function levelBallItem13(ctx, levelBalls) {  
       const levelBall2 = new LevelBall(ctx, 153, 0)

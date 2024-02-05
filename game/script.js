@@ -26,26 +26,30 @@ let munEscudo$$ = document.querySelector(".munEscudo")
 let munLanzallamas$$ = document.querySelector(".munLanzallamas")
 let munMegablaster$$ = document.querySelector(".munMegablaster")
 let munSalud$$ = document.querySelector(".munSalud")
+let toggleShop$$ = document.getElementById("toggle-shop")
 
 // shop btns
 let shopBtnsAll$$ = document.getElementById("shop-btn")
 let shopShield$$ = document.getElementById("shop-shield")
 let shopFire$$ = document.getElementById("shop-fire")
+let shopBar$$ = document.getElementById("shop-bar")
 let shopSuperGun$$ = document.getElementById("shop-superGun")
 let shopSuperGun1$$ = document.getElementById("shop-superGun1")
 let shopSuperGun2$$ = document.getElementById("shop-superGun2")
 let shopSuperGun3$$ = document.getElementById("shop-superGun3")
 let shopSuperGun4$$ = document.getElementById("shop-superGun4")
+let shopBarResistance$$ = document.getElementById("shop-barResistane")
 
 
 let shopSpeedGun$$ = document.getElementById("shop-speedGun")
 let actionsDiv$$ = document.getElementById("actions-div")
 let movesDiv$$ = document.getElementById("moves-div")
 
+let ammosCount$$ = document.getElementById("ammos-count")
 
 
 start$$.addEventListener("click", function () {
-  GAMELEVEL = 11
+  GAMELEVEL = 15;
   canvas.style.display = "block";
   restart$$.style.display = "block";
   retry$$.style.display = "block";
@@ -54,7 +58,8 @@ start$$.addEventListener("click", function () {
   instruccionesInfo1$$.style.display = "none";
   instruccionesInfo2$$.style.display = "none";
   infoPlayerBtn1$$.style.display = "block";
-  game.isInfiniteChanging = false;
+  ammosCount$$.style.display = "block";
+  toggleShop$$.style.display = "block";
   game.isInfiniteChanging = false;
 
   if (window.innerWidth < 880 && window.innerHeight < 400) {
@@ -67,9 +72,6 @@ start$$.addEventListener("click", function () {
       start$$.innerHTML = '<i class="fa-solid fa-play"></i>';  
     } else {
       game.start();
-      if(window.innerWidth > 400){
-        shopBtnsAll$$.style.display = "flex";
-      }
       start$$.style.left = "1vw";
       start$$.style.top = "35vh";
       start$$.style.transform = "translate(0)";
@@ -92,6 +94,9 @@ startInfinite$$.addEventListener("click", function () {
   instruccionesInfo1$$.style.display = "none";
   instruccionesInfo2$$.style.display = "none";
   infoPlayerBtn1$$.style.display = "block";
+  ammosCount$$.style.display = "block";
+  toggleShop$$.style.display = "block";
+  game.isInfiniteChanging = true;
   if (window.innerWidth < 880 && window.innerHeight < 400) {
     actionsDiv$$.style.display = "flex"
     movesDiv$$.style.display = "flex"
@@ -102,9 +107,7 @@ startInfinite$$.addEventListener("click", function () {
       start$$.innerHTML = '<i class="fa-solid fa-play"></i>';  
     } else {
       game.start();
-      if(window.innerWidth > 400){
-        shopBtnsAll$$.style.display = "flex";
-      }
+
       startInfinite$$.style.left = "1vw";
       startInfinite$$.style.top = "35vh";
       startInfinite$$.style.transform = "translate(0)";
@@ -171,4 +174,5 @@ instruccionesInfo1$$.addEventListener("dblclick", () => {
     instruccionesInfo2$$.style.zIndex = 1;
   }
 });
+
 

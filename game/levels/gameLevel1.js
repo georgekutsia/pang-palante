@@ -17,9 +17,9 @@ function addBubble1(ctx, bubbles){
 
 function addPlatforms1(ctx, platforms){
                                                           //! ctx, x, y , w, h, image de 1 a 4,  si se puede romper o no a disparos, si se romperá al ponerse encima, si rebotará la burbuja, velocida en x, velocidad en y 
-    let randomNumber =  getRandomNumber(5)
+    let randomNumber =  getRandomNumber(6)
     switch (randomNumber) {
-      case 5:
+      case 1:
         const platform1 = new Platform(ctx, 10, 120, 45, 5, "../public/Imagenes/obstacles/platformSolid1.png", false, false, true);
         const platform2 = new Platform(ctx, ctx.canvas.width/2 - 22, 120, 45, 5, "../public/Imagenes/obstacles/platformSolid2.png", false, false, true);
         const platform3 = new Platform(ctx, 240, 120, 45, 5, "../public/Imagenes/obstacles/platformSolid3.png", false, false, true);
@@ -44,7 +44,7 @@ function addPlatforms1(ctx, platforms){
       const platform12 = new Platform(ctx, ctx.canvas.width - 35, 120, 35, 5, "../public/Imagenes/obstacles/platformSolid4.png", false, false, true);
       platforms.push(platform9,platform10,platform11,platform12);
       break
-    case 1:
+    case 5:
       const platform13 = new Platform(ctx, 40, 120, 35, 5, "../public/Imagenes/obstacles/platformSolid1.png", false, false, true);
       const platform14 = new Platform(ctx, 70, 95, 35, 5, "../public/Imagenes/obstacles/platformSolid3.png", false, false, true);
       const platform15 = new Platform(ctx, 190, 95, 35, 5, "../public/Imagenes/obstacles/platformSolid2.png", false, false, true);
