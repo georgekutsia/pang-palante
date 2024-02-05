@@ -1,6 +1,6 @@
 
-function level15( ctx, bubbles, levelBalls,  darkBubbles, cannons, boxes){
-  // addPlatforms15(ctx, platforms)
+function level15( ctx, platforms, bubbles, levelBalls,  darkBubbles, cannons, boxes){
+  addPlatforms15(ctx, platforms)
   addBoxes15(ctx, boxes)
   // addHealings15(ctx, healings)
   levelBallItem15(ctx, levelBalls)
@@ -11,19 +11,23 @@ function level15( ctx, bubbles, levelBalls,  darkBubbles, cannons, boxes){
   addCannon15(ctx, cannons)
 }
 function levelBallItem15(ctx, levelBalls) {  
-      const levelBall2 = new LevelBall(ctx, CTXW-35, 0)
+      const levelBall2 = new LevelBall(ctx, CTXW-15, 0)
       levelBalls.push(levelBall2)
 }
 
 function addBubble15(ctx, bubbles){ 
-    const bubble1 = new Bubble(ctx, 230, 30, 50, 50, -0.04, -0.08, 0.0002, true, 20000)
+    const bubble1 = new Bubble(ctx, 230, 20, 50, 50, -0.04, -0.08, 0.00017, true, 20000)
     bubbles.push(bubble1);
 }
 
 function addPlatforms15(ctx, platforms){
-    const platform1 = new Platform(ctx, 1, 100, 25, 5, "../public/Imagenes/obstacles/platformSolid1.png", false, false, true);
-    const platform2 = new Platform(ctx, 35, 125, 25, 5, "../public/Imagenes/obstacles/platformSolid2.png", false, false, true, 1);
-    platforms.push( platform1, platform2);
+    const platform1 = new Platform(ctx, 45, CTXH-25, 25, 5, "../public/Imagenes/obstacles/platformSolid1.png", false, false, true);
+    const platform2 = new Platform(ctx, 75, CTXH-50, 25, 5, "../public/Imagenes/obstacles/platformSolid2.png", false, false, true);
+    const platform3 = new Platform(ctx, 25, CTXH-60, 25, 5, "../public/Imagenes/obstacles/platformSolid2.png", false, false, true);
+    const platform4 = new Platform(ctx, 5, CTXH-90, 25, 5, "../public/Imagenes/obstacles/platformSolid2.png", false, false, true, 0.5, 0, 1, 160);
+    const platform5 = new Platform(ctx, 140, 35, 45, 5, "../public/Imagenes/obstacles/platformSolid1.png", false, false, true);
+    const platform6 = new Platform(ctx, CTXW-30, 70, 30, 5, "../public/Imagenes/obstacles/platformSolid1.png", false, false, true);
+    platforms.push( platform1, platform2, platform3,platform4,platform5,platform6);
 }
 
 function addGatling15(ctx, gatlings){
@@ -51,8 +55,8 @@ function addHealings15(ctx, healings){
 }
 
   function addBoxes15(ctx, boxes){
-    const box2 = new Box(ctx, CTXW-70, CTXH-53,  3, false, 0, false)
-    const box3 = new Box(ctx, CTXW-70, CTXH-35,  3, false, 0, false)
+    const box2 = new Box(ctx, CTXW-70, CTXH-63,  3, false, 0, false)
+    const box3 = new Box(ctx, CTXW-70, CTXH-45,  3, false, 0, false)
     boxes.push(box2,box3)
   }
 
@@ -67,5 +71,6 @@ function addHealings15(ctx, healings){
 
   function addCannon15(ctx, cannons){
     let can = new BubbleCannon(ctx, 0, 60, 10, 0.00001)
-    cannons.push(can)
+    let can1 = new BubbleCannon(ctx, 0, 100, 6, 0.00001)
+    cannons.push(can, can1)
   }

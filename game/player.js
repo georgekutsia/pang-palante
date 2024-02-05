@@ -34,7 +34,7 @@ class Player {
     this.bigWeaponBubblesMaxAmount = 0;
     this.amountOfSteps = 1;
     this.platformCreator = true;
-
+    this.hookedOnPlatform = false;
 
     this.img = new Image();
     this.img.src = "../public/Imagenes/pangRunRight.png";
@@ -494,9 +494,6 @@ handleRightDodge = (event) =>{ //*
     }
     if(key === ALT && this.vy === 0 || key === ALT && this.ableToJump === true){
       this.vy = jumpHeight 
-      if(jumpHeight < -12){
-        jumpHeight = -3.5
-      }
       this.g = 0.2
       this.ableToJump = false;
       ALT = 0;
