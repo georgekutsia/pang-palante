@@ -11,7 +11,7 @@ class Spikes {
     this.imgTick = 0;
     this.damage = 0.25;
     this.active = false;
-    this.isMoving = isMoving || true;
+    this.isMoving = isMoving || false;
     this.vx = vx || 0.01
     this.vxx = vx
   }

@@ -55,9 +55,10 @@ function addHealings15(ctx, healings){
 }
 
   function addBoxes15(ctx, boxes){
-    const box2 = new Box(ctx, CTXW-70, CTXH-63,  3, false, 0, false)
-    const box3 = new Box(ctx, CTXW-70, CTXH-45,  3, false, 0, false)
-    boxes.push(box2,box3)
+    const box1 = new Box(ctx, CTXW-20, 20,  3, false, 0, false)
+    const box2 = new Box(ctx, CTXW-70, CTXH-63,  1, false, 0, false)
+    const box3 = new Box(ctx, CTXW-70, CTXH-45,  1, false, 0, false)
+    boxes.push( box1,box2,box3)
   }
 
   function barItem15(ctx, bars){

@@ -8,8 +8,8 @@ function invertImage(ctx, x, y, w, h, img) {
   ctx.setTransform(1, 0, 0, 1, 0, 0);
 }
 
-function randomLootFromBox(ctx, flamethrowers, healings, bars, auras,machineguns,blasters, x, y){
-  const randomItem = Math.floor(Math.random() *6) + 1;
+function randomLootFromBox(ctx, flamethrowers, healings, bars, auras, machineguns, blasters, coins,steps, hooks, x, y){
+  const randomItem = Math.floor(Math.random() *9) + 1;
   if(randomItem === 1){
     const flamethrower = new Flamethrower(ctx, x, y  )
     flamethrowers.push(flamethrower)
@@ -28,6 +28,15 @@ function randomLootFromBox(ctx, flamethrowers, healings, bars, auras,machineguns
   }else if(randomItem === 6){
     const blaster = new MegaFireBlaster(ctx, x, y)
     blasters.push(blaster)
+  }else if(randomItem === 7){
+    const coin = new Coins(ctx, x, y)
+    coins.push(coin)
+    }else if(randomItem === 8){
+      const step = new Steps(ctx, x, y)
+      steps.push(step)
+  }else if(randomItem === 9){
+    const hook = new Hook(ctx, x, y)
+    hooks.push(hook)
 }
 }
 
@@ -40,7 +49,7 @@ function levelChangeMessagesDisplay(){
   levelChangeText4$$.style.display = "none";
 }
 
-function specificLootFromBox(ctx, specificLoot, flamethrowers, healings, bars, auras,machineguns,blasters, x, y){
+function specificLootFromBox(ctx, specificLoot, flamethrowers, healings, bars, auras,machineguns,blasters, coins, steps, hooks,x, y){
   if(specificLoot === 1){
     const flamethrower = new Flamethrower(ctx, x, y  )
     flamethrowers.push(flamethrower)
@@ -59,5 +68,16 @@ function specificLootFromBox(ctx, specificLoot, flamethrowers, healings, bars, a
   }else if(specificLoot === 6){
       const blaster = new MegaFireBlaster(ctx, x, y)
       blasters.push(blaster)
-  }
+  }else if(specificLoot === 7){
+    const coin = new Coins(ctx, x, y)
+    coins.push(coin)
+  }else if(randomItem === 8){
+    const step = new Steps(ctx, x, y)
+    steps.push(step)
+  }else if(randomItem === 9){
+    const hook = new Hook(ctx, x, y)
+    hooks.push(hook)
 }
+}
+
+

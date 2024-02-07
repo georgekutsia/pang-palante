@@ -27,12 +27,13 @@ class Player {
     this.chargingFires = false; //   se pone en true mientras carga el disparo fuerte de fuego
     this.megaFireBlaster = false; //al ponerse en true, se puede activar la K
     this.megaFireBlasterAmount = 31; //la carga del blaster. cada 10, es una bola
-    this.fireAmount = 20;
-    this.barAmount = 3; //la cantidad de barras disponibles
+    this.fireAmount = 0; //cantidad de fuegos que puedes disparar con N
+    this.hookAmount = 0; // la cantidad de hooks con J
+    this.barAmount = 0; //la cantidad de barras disponibles con M
+    this.stepsAmount = 0; //cantidad de plataformas que puedes crear con O / P
     this.ableToJump = false;
     this.wasNotDamaged = true;
     this.bigWeaponBubblesMaxAmount = 0;
-    this.amountOfSteps = 1;
     this.platformCreator = true;
     this.hookedOnPlatform = false;
 
@@ -67,8 +68,12 @@ class Player {
 
     this.barInfo$$ = document.getElementById("bar-info")
     this.fireInfo$$ = document.getElementById("fire-info")
-    this.barmg$$ = document.getElementById("bar-img")
+    this.hookInfo$$ = document.getElementById("hook-info")
+    this.stepInfo$$ = document.getElementById("step-info")
+    this.barImg$$ = document.getElementById("bar-img")
     this.fireImg$$ = document.getElementById("fire-img")
+    this.hookImg$$ = document.getElementById("hook-img")
+    this.stepImg$$ = document.getElementById("step-img")
     // move btns
     this.upBtn$$ = document.getElementById("upBtn");
     this.rightBtn$$ = document.getElementById("rightBtn");
@@ -315,22 +320,36 @@ handleRightDodge = (event) =>{ //*
       if(this.charging >= 11)
       this.ctx.drawImage(this.weaponFire, this.x-20 + i*5, this.y-15, this.w , this.h);
     }
-    if (this.barAmount > 0) {
+    if (this.barAmount >= 1) {
       this.barInfo$$.innerText = `x ${this.barAmount}`
-      this.barmg$$.style.display = "flex"
+      this.barImg$$.style.display = "flex"
     } else{
       this.barInfo$$.innerText = ``
-      this.barmg$$.style.display = "none"
+      this.barImg$$.style.display = "none"
+    }
+    if (this.hookAmount >= 1) {
+      this.hookInfo$$.innerText = `x ${this.hookAmount}`
+      this.hookImg$$.style.display = "flex"
+    } else{
+      this.hookInfo$$.innerText = ``
+      this.hookImg$$.style.display = "none"
+    }
+    if (this.stepsAmount >= 1) {
+      this.stepInfo$$.innerText = `x ${this.stepsAmount}`
+      this.stepImg$$.style.display = "flex"
+    } else{
+      this.stepInfo$$.innerText = ``
+      this.stepImg$$.style.display = "none"
     }
     if(this.fireAmount>=1){    
       this.fireInfo$$.innerText = `x ${this.fireAmount}`
       this.fireImg$$.style.display = "flex"
-                   //x, y, la cantidad por la que se dibuja, radio exterior, radio interior, color de inicio, color de medio, color de final es negro
-      this.charger.draw(this.x + 5, this.y + 10, this.fireAmount, 20, 19, "aqua", "blue")
+      this.charger.draw(this.x + 5, this.y + 10, this.fireAmount, 20, 19, "orange", "orange")
     } else{
       this.fireInfo$$.innerText = ``
       this.fireImg$$.style.display = "none"
     }
+
     if(this.charging >=1){
       this.charger.draw(this.x + 5, this.y + 10, this.charging, 16, 15, "yellow", "red")
     }
@@ -430,7 +449,7 @@ handleRightDodge = (event) =>{ //*
     }
     if (key === S ) {//todo: bloqueo para el limite inferior
       this.vy = playerSpeed;
-      this.y = this.y + jumpDownDistance;  // para que al estar encima de la escalera, hago un salto hacia abajo y deje de tener posición fija
+      this.y = this.y + this.h;  // para que al estar encima de la escalera, hago un salto hacia abajo y deje de tener posición fija
     }
 
     if(key === Q){
@@ -514,10 +533,12 @@ handleRightDodge = (event) =>{ //*
       }
     }
     if(key === J){
+      if(this.hookAmount > 0){
       this.shootHook();
       this.hookShoot.play()
-    }
-
+          this.hookAmount--;
+        } 
+      }
   }
   keyUp(key) {
     if (key === W) {
@@ -655,9 +676,6 @@ handleRightDodge = (event) =>{ //*
     let hook = new WeaponHook(this.ctx, this.x, this.y)
     this.hooksArray.push(hook);
   }
-  // shootPlatform(){
-  // const plat =  new Platform(ctx, this.x + this.w/2, this.y - 20, 25, 5)
-  //   this.bulletPlatformArray.push(plat); 
-  // }
+
 
 }

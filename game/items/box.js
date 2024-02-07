@@ -1,5 +1,5 @@
 class Box {
-  constructor(ctx,x, y, boxLevel, containsRandom, lootNumber, bubblePopup) {
+  constructor(ctx, x, y, boxLevel, containsRandom, lootNumber, bubblePopup) {
     this.ctx = ctx;
     this.x = x || 100;
     this.y = y || 20;

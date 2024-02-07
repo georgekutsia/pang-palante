@@ -13,7 +13,7 @@ class DarkBubble {
     this.willShrink = willShrink || false;
     this.damage = damage || 1; // daño especificado o 1
     this.img = new Image();   //crear nueva imágene ne canvas
-    this.img.src =  "../public/Imagenes/darkBubble.png";  //definir cual es la nueva imagen
+    this.img.src =  "../public/Imagenes/darkBubble1.png";  //definir cual es la nueva imagen
 
     this.bubbleBounceSound = new Audio("../public/sounds/darkBallBounce.mp3") //todo -- paso 1 traer el sonido y almacenarlo en una variable
     this.bubbleBounceSound.volume = 0.05;  //todo -- paso 2, no obligatorio, determinarle volumen de 0 a 1, creo

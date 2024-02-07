@@ -22,6 +22,8 @@ transition: 1s ease-in-out;
 .munEscudo,
 .munLanzallamas,
 .munMegablaster,
-.munSalud {
+.munSalud,
+.munHook,
+.munStep {
   display: none;
 }

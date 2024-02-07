@@ -14,8 +14,8 @@ function levelBallItem7(ctx, levelBalls) {
 }
 
 function addBubble7(ctx, bubbles){ 
-  const bubble1 = new Bubble(ctx, 65, 40)
-  const bubble2 = new Bubble(ctx, 72, 40)
+  const bubble1 = new Bubble(ctx, 165, 40)
+  const bubble2 = new Bubble(ctx, 82, 40)
   bubbles.push(bubble1,bubble2);
 }
 
@@ -56,14 +56,13 @@ function addSpikes7(ctx, spikes){
 
 
 function boxItem7(ctx, boxes) {   
-  //ctx, x, y, tipo de caja,si es random=true o si es especifico= false,  loot específico
-  const box0 = new Box(ctx, 5, 20,  3, false, 1, false)
-  const box1 = new Box(ctx, 45, 29,  3, false, 1, false)
-  const box2 = new Box(ctx, 45, 50,  3, false, 1, false)
-  const box3 = new Box(ctx, 140, 29,  3, false, 1, false)
-  const box4 = new Box(ctx, 140, 50,  3, false, 1, false)
-  const box5 = new Box(ctx, 245, 29,  3, false, 1, false)
-  const box6 = new Box(ctx, 245, 50,  3, false, 1, false)
+  const box0 = new Box(ctx, 5, 20,  1, false, 1, false)
+  const box1 = new Box(ctx, 45, 38,  3, false, 1, false)
+  const box2 = new Box(ctx, 45, 56,  1, false, 7, false)
+  const box3 = new Box(ctx, 140, 38,  3, false, 1, false)
+  const box4 = new Box(ctx, 140, 56,  1, false, 7, false)
+  const box5 = new Box(ctx, 245, 38,  3, false, 1, false)
+  const box6 = new Box(ctx, 245, 56,  1, false, 7, false)
   boxes.push(box0,box1,box2,box3,box4,box5,box6)
 }
 

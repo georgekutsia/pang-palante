@@ -104,5 +104,10 @@ function addDarkBubble(ctx, darkBubbles){
 
 function addSteps(ctx, steps){
   let step = new Steps(ctx);
-  this.steps.push(step);
+  steps.push(step);
+}
+
+function addLever(ctx, levers){
+  let lev = new Lever(ctx)
+  levers.push(lev);
 }

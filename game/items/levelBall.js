@@ -8,7 +8,16 @@ constructor(ctx, x, y) {
     this.vy = 0;
     this.g = 0.1;
     this.img = new Image();   //crear nueva imágene ne canvas
-    this.img.src = "../../public/Imagenes/levelBall1.png";  //definir cual es la nueva imagen
+
+    const randomImgs = [
+      "../../public/Imagenes/levelBall1.png",
+      "../../public/Imagenes/levelBall2.png",
+      "../../public/Imagenes/levelBall3.png",
+      "../../public/Imagenes/levelBall4.png",
+    ];
+    const randomIndex = Math.floor(Math.random() * randomImgs.length);
+    this.img.newSrc = randomImgs[randomIndex];
+    this.img.src = "../../public/Imagenes/levelBall5.png";  //definir cual es la nueva imagen
     this.imgBallShield = new Image();   //crear nueva imágene ne canvas
     this.imgBallShield.src = "../../public/Imagenes/ballShield.png";  //definir cual es la nueva imagen
     this.isActive = false;
@@ -23,6 +32,7 @@ constructor(ctx, x, y) {
     this.ballBroke = false;
     this.breakingLevelBallSound = new Audio("/public/sounds/breakingLevelBallSound1.mp3");
     this.breakingLevelBallSound.volume = 0.1
+    
   //cuando resiste el daño de las balas y sale el escudo de plasma
     this.ballShieldForce = new Image(); 
     this.ballShieldForce.src = "../../public/Imagenes/ballShieldForce.png"; 
@@ -32,7 +42,6 @@ constructor(ctx, x, y) {
     this.ballShieldForceResist = false;;
     this.forceFieldSound = new Audio("/public/sounds/forceField.mp3")
     this.forceFieldSound.volume = 0.1
-
 
     //el efecto de romperse cuando ya no tiene ball shield
     this.ballShieldBreak = new Image(); 
@@ -47,7 +56,7 @@ constructor(ctx, x, y) {
     this.ctx.drawImage(this.img, this.x, this.y, this.w, this.h);  // dibuja el obstáculo
     }
     if(!this.isActive && !this.ballBroke) {
-      this.ctx.drawImage(this.imgBallShield, this.x-3, this.y+4, this.w+5, this.w + 5);  // dibuja el escudo protector
+      this.ctx.drawImage(this.imgBallShield, this.x-3, this.y+5, this.w+5, this.w + 5);  // dibuja el escudo protector
     }
 
     if(this.ballShieldForceResist){

@@ -2,7 +2,11 @@
 ahora solo salta cuando su vy es 0, pero si se mueve junto a una plataforma, no puede saltar
 
 
-la bala grande de burbuja a partir de cierto tamaño cambia su velocidad 
+las pelotas grandes de mejora de bullet se quedan al cambiar de nivel
 
 
-wincondition que no haya burbujas
+los globos rebotan en plataformas cuando no deberian
+
+
+
+Analiza la situación antes de lanzarte a hacer locuras, quizás ropas algo que necesitas para superar el nivel y tengas que reiniciarlo,

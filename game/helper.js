@@ -180,3 +180,14 @@ toggleShop$$.addEventListener("click", ()=>{
     shopBtnsAll$$.style.display = "flex";
   }
 })
+
+
+game.player.hookImg$$.addEventListener("click", ()=>{
+  eventInfo(munHook$$)
+})
+game.player.fireImg$$.addEventListener("click", ()=>{
+  eventInfo(munLanzallamas$$)
+})
+game.player.barImg$$.addEventListener("click", ()=>{
+  eventInfo(munCadena$$)
+})

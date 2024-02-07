@@ -1,11 +1,12 @@
 
-function level9( ctx, bubbles, platforms,bouncers, stairs,healings, bars, boxes,  levelBalls, spikes){
+function level9( ctx, bubbles, platforms,bouncers, stairs,healings, bars, boxes,  levelBalls, spikes, levers){
   addPlatforms9(ctx, platforms, healings, boxes, stairs, bars)
   levelBallItem9(ctx, levelBalls)
   addBubble9(ctx, bubbles)
   addBouncer9(ctx,bouncers)
   addSpikes9(ctx, spikes)
   boxItem9(ctx, boxes)
+  addLever9(ctx, levers)
 }
 
 function levelBallItem9(ctx, levelBalls) {  
@@ -36,7 +37,8 @@ function addPlatforms9(ctx, platforms){
   const platform12  = new Platform(ctx, 65, 40, 35, 5, "../public/Imagenes/obstacles/platformSolid2.png", true, false, false);
   const platform13  = new Platform(ctx, 100, 40, 35, 5, "../public/Imagenes/obstacles/platformSolid2.png", false, false, true);
   const platform14  = new Platform(ctx, 130, 40, 35, 5, "../public/Imagenes/obstacles/platformSolid2.png", false, false, true);
-  platforms.push( platform1,platform2,platform3,platform4, platform5,platform6,platform7,platform8,platform9,platform10,platform11,platform12,platform13,platform14);
+  const platform15  = new Platform(ctx, CTXW-20, 35, 20, 5, "../public/Imagenes/obstacles/platformSolid2.png", false, false, true);
+  platforms.push( platform1,platform2,platform3,platform4, platform5,platform6,platform7,platform8,platform9,platform10,platform11,platform12,platform13,platform14, platform15);
 }
       //!  la anchura más la altura de la plataforma nunca debe superar 60, para que el total de red sea como máximo 240;
       //opciones de anchura y altura  son 25, 5 la estándar y mínima. Las siguiente suben de 10 en 10 en anchura
@@ -66,4 +68,9 @@ function boxItem9(ctx, boxes) {
   const box1 = new Box(ctx, 230, 1,  3, false, 1)
   boxes.push(box1)
   }
+}
+
+function addLever9(ctx, levers){
+  let lever = new Lever(ctx, CTXW-15, 26)
+  levers.push(lever)
 }

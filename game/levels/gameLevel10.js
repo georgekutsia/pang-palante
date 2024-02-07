@@ -1,14 +1,15 @@
 
-function level10( ctx, bubbles, platforms, stairs,healings,bars, boxes,  levelBalls){
+function level10( ctx, bubbles, platforms, stairs,healings,bars, boxes,  levelBalls, coins){
   addPlatforms10(ctx, platforms, healings, boxes, stairs, bars)
   levelBallItem10(ctx, levelBalls)
   addBubble10(ctx, bubbles)
+  addCoin10(ctx, coins)
 }
 function levelBallItem10(ctx, levelBalls) {  
   let randomNumber =  getRandomNumber(3)
   switch (randomNumber) {
     case 1:
-      const levelBall1 = new LevelBall(ctx, 40, 0)
+      const levelBall1 = new LevelBall(ctx, 60, 0)
       levelBalls.push(levelBall1)
       break;
     case 2:
@@ -34,7 +35,7 @@ function addBubble10(ctx, bubbles){
 }
 
 function addPlatforms10(ctx, platforms, healings, boxes, stairs,bars){
-    const platform1 = new Platform(ctx, 10, 90, 35, 5, "../public/Imagenes/obstacles/platformSolid2.png", false, false, true);
+    const platform1 = new Platform(ctx, 10, 80, 35, 5, "../public/Imagenes/obstacles/platformSolid2.png", false, false, true);
     const platform2 = new Platform(ctx, 60, 95, 45, 5, "../public/Imagenes/obstacles/platformSolid3.png", true, false, true);
     const platform3 = new Platform(ctx, 70, 123, 35, 5, "../public/Imagenes/obstacles/platformSolid3.png", false, false, true);
     const platform4 = new Platform(ctx, 150, 50, 35, 5, "../public/Imagenes/obstacles/platformSolid3.png", true, false, true);
@@ -103,4 +104,11 @@ function auraItem10(ctx, auras) {
 function blasterItem10(ctx, blasters) {  
   const blaster = new MegaFireBlaster(ctx)
   blasters.push(blaster)
+}
+
+function addCoin10(ctx, coins){
+  let coin1 =  new Coins(ctx, 10, 20)
+  let coin2 =  new Coins(ctx, 30, 40)
+  let coin3 =  new Coins(ctx, 10, 40)
+  coins.push(coin1, coin2, coin3)
 }

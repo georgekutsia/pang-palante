@@ -14,15 +14,15 @@ function levelBallItem6(ctx, levelBalls) {
 }
 
 function addBubble6(ctx, bubbles){ 
-  const bubble1 = new Bubble(ctx, 65, 40)
+  const bubble1 = new Bubble(ctx, 65, 80)
   const bubble2 = new Bubble(ctx, 72, 40)
-  const bubble3 = new Bubble(ctx, 270, 60)
-  const bubble4 = new Bubble(ctx, 270, 60)
-  const bubble5 = new Bubble(ctx, 270, 60)
-  const bubble6 = new Bubble(ctx, 270, 60)
-  const bubble7 = new Bubble(ctx, 270, 60)
+  const bubble3 = new Bubble(ctx, 275, 60)
+  const bubble4 = new Bubble(ctx, 275, 60)
+  const bubble5 = new Bubble(ctx, 275, 60)
+  const bubble6 = new Bubble(ctx, 275, 60)
+  const bubble7 = new Bubble(ctx, 275, 60)
   const bubble8 = new Bubble(ctx, 230, 100, 10, 10, -1.5)
-  const bubble9 = new Bubble(ctx, 250, 100, 10, 10, -1.5)
+  const bubble9 = new Bubble(ctx, 250, 100 , 10, 10, -1.5)
   bubbles.push(bubble1,bubble2,bubble3,bubble4,bubble5, bubble6,bubble7,bubble8,bubble9);
 }
 
@@ -30,7 +30,7 @@ function addPlatforms6(ctx, platforms){
   const platform1 = new Platform( ctx, 200, 90,  65, 5, "../public/Imagenes/obstacles/platformSolid1.png", false, false, true);
   const platform2 = new Platform( ctx, 20, 110,  25, 5, "../public/Imagenes/obstacles/platformSolid2.png", false, false, true);
   const platform3 = new Platform( ctx, 260, 50,  35, 5, "../public/Imagenes/obstacles/platformSolid3.png", false, false, true);
-  const platform4 = new Platform( ctx, 265, 90,  35, 5, "../public/Imagenes/obstacles/platformSolid3.png", true, false, false);
+  const platform4 = new Platform( ctx, 265, 100,  35, 5, "../public/Imagenes/obstacles/platformSolid3.png", false, false, false);
   const platform5 = new Platform( ctx, 90, 110,  35, 5, "../public/Imagenes/obstacles/platformSolid6.png", false, false, true);
 
   platforms.push( platform1,platform2,platform3,platform4, platform5);

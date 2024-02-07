@@ -2,6 +2,8 @@ const ctx = canvas.getContext("2d");
 
 const game = new Game(ctx);
 //gamOn es para indicar que se ha acabado el juego, que otras formas me han fallado
+
+// let saltarNivel$$ = document.getElementById("saltar-nivel");
 let startInfinite$$ = document.getElementById("pang-startInfinite");
 let start$$ = document.getElementById("pang-start");
 let restart$$ = document.getElementById("pang-restart");
@@ -26,6 +28,8 @@ let munEscudo$$ = document.querySelector(".munEscudo")
 let munLanzallamas$$ = document.querySelector(".munLanzallamas")
 let munMegablaster$$ = document.querySelector(".munMegablaster")
 let munSalud$$ = document.querySelector(".munSalud")
+let munHook$$ = document.querySelector(".munHook")
+let munStep$$ = document.querySelector(".munStep")
 let toggleShop$$ = document.getElementById("toggle-shop")
 
 // shop btns
@@ -49,7 +53,7 @@ let ammosCount$$ = document.getElementById("ammos-count")
 
 
 start$$.addEventListener("click", function () {
-  GAMELEVEL = 15;
+  GAMELEVEL = 1;
   canvas.style.display = "block";
   restart$$.style.display = "block";
   retry$$.style.display = "block";
@@ -176,3 +180,7 @@ instruccionesInfo1$$.addEventListener("dblclick", () => {
 });
 
 
+
+// saltarNivel$$.addEventListener("click",()=>{
+//   game.levelChange()
+// })
