@@ -44,7 +44,7 @@ function addPlatforms2(ctx, platforms){
 function boxItem2(ctx, boxes, bubbles) {   
   let randomNumber =  getRandomNumber(4)
   switch (randomNumber) {
-    case 1:
+    case 4:
       const box1 = new Box(ctx, 20, 20,  3, false, 5)
       boxes.push(box1)
       break;
@@ -56,7 +56,7 @@ function boxItem2(ctx, boxes, bubbles) {
       const box3= new Box(ctx, 80, 20,  3, false, 5)
       boxes.push(box3)
       break;
-    case 4:
+    case 1:
       const box4 = new Box(ctx, 90, 20,  3, false, 5)
       const box5 = new Box(ctx, CTXW - 40, 20,  3, false, 2)
       boxes.push(box4, box5)

@@ -1,7 +1,8 @@
-function level1(ctx, bubbles, platforms, levelBalls){
+function level1(ctx, bubbles, platforms, levelBalls, boxes){
   addPlatforms1(ctx, platforms)
   levelBallItem1(ctx, levelBalls)
   addBubble1(ctx, bubbles)
+  addBox1(ctx, boxes)
 }
 
 function levelBallItem1(ctx, levelBalls) {  
@@ -17,7 +18,7 @@ function addBubble1(ctx, bubbles){
 
 function addPlatforms1(ctx, platforms){
                                                           //! ctx, x, y , w, h, image de 1 a 4,  si se puede romper o no a disparos, si se romperá al ponerse encima, si rebotará la burbuja, velocida en x, velocidad en y 
-    let randomNumber =  getRandomNumber(6)
+    let randomNumber =  getRandomNumber(5)
     switch (randomNumber) {
       case 1:
         const platform1 = new Platform(ctx, 10, 120, 45, 5, "../public/Imagenes/obstacles/platformSolid1.png", false, false, true);
@@ -66,4 +67,10 @@ function addPlatforms1(ctx, platforms){
 function addExplosion(ctx,explosions){
   let explo = new Explosion(ctx)
   explosions.push(explo)
+}
+
+function addBox1(ctx, boxes){
+  console.log("bla")
+  const box1 = new Box(ctx, 230, 6,  3, false, 7)
+  boxes.push(box1)
 }

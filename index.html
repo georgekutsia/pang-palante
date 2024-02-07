@@ -11,6 +11,7 @@
   <script src="./game/game.js" defer></script>
   <script src="./game/functions.js" defer></script>
   <script src="./game/functionsForLeveling.js" defer></script>
+  <script src="./game/repetitiveFunctions.js" defer></script>
   <script src="./game/functionsCollision.js" defer></script>
   <script src="./game/levels/gameLevel1.js" defer></script>
   <script src="./game/levels/gameLevel2.js" defer></script>
@@ -56,9 +57,12 @@
   <script src="./game/items/megaFireBlaster.js" defer></script>
   <script src="./game/items/levelBall.js" defer></script>
   <script src="./game/items/bars.js" defer></script>
+  <script src="./game/items/hook.js" defer></script>
   <script src="./game/items/steps.js" defer></script>
   <script src="./game/items/aura.js" defer></script>
   <script src="./game/items/box.js" defer></script>
+  <script src="./game/items/lever.js" defer></script>
+  <script src="./game/items/coins.js" defer></script>
   <script src="./game/bubblePuff.js" defer></script>
   <script src="./game/enemies/bubbleGatling.js" defer></script>
   <script src="./game/enemies/bubbleCannon.js" defer></script>
@@ -86,13 +90,15 @@
   <img id="changing-level-img" src="/public/Imagenes/background/background0.jpeg" alt="instrucciones">
   <div>
     <img class="ayudas introAyuda1" src="/public/Imagenes/stats/playerTalkIntroAyuda1.png" alt="Player Ayuda 1">
-    <img class="ayudas introAyuda2" src="/public/Imagenes/stats/playerTalkIntroAyuda2.png" alt="Pzlayer Ayuda 2">
-    <img class="ayudas munAmetralladora" src="/public/Imagenes/stats/playerTalkMunAmetralladora.png" alt="Player Ayuda 2">
-    <img class="ayudas munCadena" src="/public/Imagenes/stats/playerTalkMunCadena.png" alt="Player Ayuda 2">
-    <img class="ayudas munEscudo" src="/public/Imagenes/stats/playerTalkMunEscudo.png" alt="Player Ayuda 2">
-    <img class="ayudas munLanzallamas" src="/public/Imagenes/stats/playerTalkMunLanzallamas.png" alt="Player Ayuda 2">
-    <img class="ayudas munMegablaster" src="/public/Imagenes/stats/playerTalkMunMegablaster.png" alt="Player Ayuda 2">
-    <img class="ayudas munSalud" src="/public/Imagenes/stats/playerTalkMunSalud.png" alt="Player Ayuda 2">
+    <img class="ayudas introAyuda2" src="/public/Imagenes/stats/playerTalkIntroAyuda2.png" alt="Player Ayuda 2">
+    <img class="ayudas munAmetralladora" src="/public/Imagenes/stats/playerTalkMunAmetralladora.png" alt="Player Ayuda 3">
+    <img class="ayudas munCadena" src="/public/Imagenes/stats/playerTalkMunCadena.png" alt="Player Ayuda 4">
+    <img class="ayudas munEscudo" src="/public/Imagenes/stats/playerTalkMunEscudo.png" alt="Player Ayuda 5">
+    <img class="ayudas munLanzallamas" src="/public/Imagenes/stats/playerTalkMunLanzallamas.png" alt="Player Ayuda 6">
+    <img class="ayudas munMegablaster" src="/public/Imagenes/stats/playerTalkMunMegablaster.png" alt="Player Ayuda 7">
+    <img class="ayudas munSalud" src="/public/Imagenes/stats/playerTalkMunSalud.png" alt="Player Ayuda 8">
+    <img class="ayudas munHook" src="/public/Imagenes/stats/playerTalkMunHooks.png" alt="Player Ayuda 9">
+    <img class="ayudas munStep" src="/public/Imagenes/stats/playerTalkMunSteps.png" alt="Player Ayuda 9">
     <button  class="ayudas-btn icons-btn"><i class="fa-regular fa-comment"></i></button>
   </div>
 </div>
@@ -156,6 +162,17 @@
     <img id="fire-img" src="/public/Imagenes/fireCounterImg.png" alt="weapon-bar">
     <h2 id="fire-info"></h2>
   </div>
+  <div>
+    <img id="hook-img" src="/public/Imagenes/hookItem.png" alt="weapon-bar">
+    <h2 id="hook-info"></h2>
+  </div>
+  <div>
+    <img id="step-img" src="/public/Imagenes/stepImg.png" alt="weapon-bar">
+    <h2 id="step-info"></h2>
+  </div>
+</div>
+<div>
+  <!-- <button id="saltar-nivel"></button> -->
 </div>
 </body>
 </html>

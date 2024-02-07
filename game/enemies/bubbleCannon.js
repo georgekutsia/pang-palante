@@ -45,7 +45,6 @@ class BubbleCannon {
 
   }
   move() {
-    console.log("bulala")
     this.x += this.vx;
     this.y += this.vy;
     if(this.y + this.h >= 18) {this.g = 0; this.vy =0;};

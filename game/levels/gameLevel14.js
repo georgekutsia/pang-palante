@@ -21,11 +21,12 @@ function addBubble14(ctx, bubbles){
 }
 
 function addPlatforms14(ctx, platforms){
-    const platform1 = new Platform(ctx, 1, 100, 25, 5, "../public/Imagenes/obstacles/platformSolid1.png", false, false, true);
-    const platform2 = new Platform(ctx, 35, 125, 25, 5, "../public/Imagenes/obstacles/platformSolid2.png", false, false, true, 1);
-    const platform3 = new Platform(ctx, 230, 70, 25, 5, "../public/Imagenes/obstacles/platformSolid3.png", false, false, true, 1);
+    const platform0 = new Platform(ctx, 1, 70, 25, 5, "../public/Imagenes/obstacles/platformSolid4.png", false, false, true);
+    const platform1 = new Platform(ctx, 1, 100, 25, 5, "../public/Imagenes/obstacles/platformSolid1.png", false, false, true, 0.6, 0, 40, 160);
+    const platform2 = new Platform(ctx, 35, 125, 25, 5, "../public/Imagenes/obstacles/platformSolid2.png", false, false, true, 0.6, 0, 20, 100);
+    const platform3 = new Platform(ctx, 230, 70, 25, 5, "../public/Imagenes/obstacles/platformSolid3.png", false, false, true, 0.6, 0, 180, 260);
     const platform4 = new Platform(ctx, CTXW-55, 40, 45, 5, "../public/Imagenes/obstacles/platformSolid5.png", false, false, true);
-    platforms.push( platform1, platform2,platform3,platform4);
+    platforms.push(platform0, platform1, platform2,platform3,platform4);
 
 
 }
@@ -48,7 +49,7 @@ function addGatling14(ctx, gatlings){
   }
   
 function addHealings14(ctx, healings){
-  const healingItem = new Healing(ctx, 20, 70)
+  const healingItem = new Healing(ctx, 30, 10)
   healings.push(healingItem)
 }
 

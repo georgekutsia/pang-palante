@@ -6,7 +6,7 @@ class Background {
     this.w = this.ctx.canvas.width;
     this.h = this.ctx.canvas.height;
     this.img = new Image();
-    this.img.src = "../public/Imagenes/background/background1.webp";
+    this.img.src = "../public/Imagenes/background/background1.jpg";
   }
 
   draw() {

@@ -76,7 +76,8 @@ function checkBubbleCollision(bubbles, player, bubbleSplash2, bubblePopSound1, p
       } else return true;
     });
   });
-  bubbles.forEach((bubble) => {//bubble con platform
+
+  bubbles.forEach((bubble) => {//bubble con boxes
     boxes.forEach((box) => {
       if (box.collides(bubble)) {
         bubble.bubbleBounceSound.play()

@@ -1,12 +1,12 @@
 
-function level8( ctx, bubbles, platforms,bouncers, stairs,healings, bars, boxes,  spikes, levelBalls, stairs){
-  addPlatforms8(ctx, platforms, healings, boxes, stairs, bars)
+function level8( ctx, bubbles, platforms, stairs, boxes, levelBalls, stairs, hooks, levers){
+  addPlatforms8(ctx, platforms)
   levelBallItem8(ctx, levelBalls)
   addBubble8(ctx, bubbles)
-  addBouncer8(ctx,bouncers)
-  addSpikes8(ctx, spikes)
   boxItem8(ctx, boxes)
   addStair8(ctx, stairs)
+  addHook8(ctx, hooks)
+  addLever(ctx, levers)
 }
 function levelBallItem8(ctx, levelBalls) {  
       const levelBall2 = new LevelBall(ctx, CTXW-20, 0)
@@ -40,42 +40,22 @@ function addBubble8(ctx, bubbles){
 
 function addPlatforms8(ctx, platforms){
   const platform1 = new Platform( ctx, 30, 40,  35, 5, "../public/Imagenes/obstacles/platformSolid1.png", false, false, false);
-  const platform2 = new Platform( ctx, 30, 40,  35, 5, "../public/Imagenes/obstacles/platformSolid2.png", false, false, false);
-  const platform3 = new Platform( ctx, 120, 40,  65, 5, "../public/Imagenes/obstacles/platformSolid3.png", true, false, false);
-  const platform4 = new Platform( ctx, 120, 40,  65, 5, "../public/Imagenes/obstacles/platformSolid3.png", true, false, false);
-  const platform5 = new Platform( ctx, 250, 10,  35, 5, "../public/Imagenes/obstacles/platformSolid6.png", false, false, false);
-
-  platforms.push( platform1,platform2,platform4, platform5);
-}
-      //!  la anchura más la altura de la plataforma nunca debe superar 60, para que el total de red sea como máximo 240;
-      //opciones de anchura y altura  son 25, 5 la estándar y mínima. Las siguiente suben de 10 en 10 en anchura
-
-function addBouncer8(ctx, bouncers){
-  // const bouncer1 = new Bouncer(ctx, 5, 85, 20, 5)
-  // const bouncer2 = new Bouncer(ctx, 35, 60, 20, 5)
-  // const bouncer3 = new Bouncer(ctx, 65, 40, 20, 5)
-  // const bouncer4 = new Bouncer(ctx, 115, 70, 20, 5)
-  // const bouncer5 = new Bouncer(ctx, 175, 20, 3, 60)
-  // const bouncer6 = new Bouncer(ctx, 145, 90, 25, 5)
-  // const bouncer7 = new Bouncer( ctx, 90, 40,  3, 75);
-  // const bouncer8 = new Bouncer( ctx, 110, 1,  3, 85);
-  // const bouncer9 = new Bouncer(ctx, 145, 50, 25, 5)
-  // bouncers.push(bouncer1,bouncer2, bouncer3,bouncer4,bouncer5,bouncer6,bouncer7,bouncer8,bouncer9)
+  const platform3 = new Platform( ctx, 120, 40,  65, 5, "../public/Imagenes/obstacles/platformSolid3.png", false, false, false);
+  const platform2 = new Platform( ctx, 200, 120,  65, 5, "../public/Imagenes/obstacles/platformSolid2.png", false, false, false);
+  const platform4 = new Platform( ctx, 260, 80,  35, 5, "../public/Imagenes/obstacles/platformSolid6.png", false, false, false);
+  const platform5 = new Platform( ctx, CTXW/2 - 32, 90,  55, 5, "../public/Imagenes/obstacles/platformSolid6.png", true, false, false);
+  platforms.push( platform1,platform2, platform3, platform4, platform5);
 }
 
-function addSpikes8(ctx, spikes){
-  // const spike1 = new Spikes(ctx, 45, CTXH-10,  CTXW / 18)
-  // const spike2 = new Spikes(ctx, 140, CTXH-10, CTXW / 18)
-  // const spike3 = new Spikes(ctx, 245, CTXH-10, CTXW / 18)
-  // spikes.push(spike1,spike2,spike3)
-}
+
+
 
 
 function boxItem8(ctx, boxes) {   
   //ctx, x, y, tipo de caja,si es random=true o si es especifico= false,  loot específico
   const box1 = new Box(ctx, 5, 20,  1, false, 6, false)
   const box2 = new Box(ctx, 65, 50,  2, false, 1, false)
-  // const box3 = new Box(ctx, 120, 5,  3, false, 1, false)
+  const box3 = new Box(ctx, CTXW-30, 35,  2, false, 7, false)
   // const box4 = new Box(ctx, 275, 55,  3, false, 5, false)
   // const box5 = new Box(ctx, 275, 55,  3, false, 5, false)
   // const box6 = new Box(ctx, 275, 55,  3, false, 5, false)
@@ -83,12 +63,27 @@ function boxItem8(ctx, boxes) {
   boxes.push(
     box1,
     box2,
-    // box3,box4,box5,box6,box7
+    box3,
+    // box4,box5,box6,box7
     )
 }
 
 function addStair8(ctx, stairs) {                  
   const stair1 = new Stair(ctx, 1, CTXH-40,  20, 40);
-  const stair2 = new Stair(ctx, 240, 50,  20, 40);
+  const stair2 = new Stair(ctx, 240, 80,  20, 40);
   stairs.push(stair1,stair2,);
+}
+
+function addHook8(ctx, hooks){
+  let hook = new Hook(ctx, CTXW/2, 85)
+  let hook1 = new Hook(ctx, CTXW/2-10, 85)
+  let hook2 = new Hook(ctx, CTXW/2-20, 85)
+  let hook3 = new Hook(ctx, CTXW/2-30, 85)
+  let hook4 = new Hook(ctx, CTXW/2+10, 85)
+  hooks.push(hook, hook1, hook2, hook3, hook4)
+}
+
+function addLever(ctx, levers){
+  let leve = new Lever(ctx, 40, 25)
+  levers.push(leve)
 }

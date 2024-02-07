@@ -5,17 +5,28 @@
 }
 
 #bar-img{
-  margin-top: 20px;
+  margin-top: calc(5px + 0.5vw);
   width: calc(8px + 0.5vw);
   height: calc(28px + 0.5vw);
   display: none;
 }
 #fire-img{
-  margin-top: 20px;
+  margin-top: calc(5px + 0.5vw);
   width: calc(8px + 0.5vw);
   height: calc(28px + 0.5vw);
   display: none;
-
+}
+#hook-img{
+  margin-top: calc(5px + 0.5vw);
+  width: calc(8px + 0.5vw);
+  height: calc(28px + 0.5vw);
+  display: none;
+}
+#step-img{
+  margin-top: calc(5px + 0.5vw);
+  width: calc(15px + 0.5vw);
+  height: calc(28px + 0.5vw);
+  display: none;
 }
 
 #bar-info{
