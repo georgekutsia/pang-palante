@@ -70,7 +70,6 @@ function addExplosion(ctx,explosions){
 }
 
 function addBox1(ctx, boxes){
-  console.log("bla")
   const box1 = new Box(ctx, 230, 6,  3, false, 7)
   boxes.push(box1)
 }

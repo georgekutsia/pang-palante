@@ -3,8 +3,9 @@ const ctx = canvas.getContext("2d");
 const game = new Game(ctx);
 //gamOn es para indicar que se ha acabado el juego, que otras formas me han fallado
 
-// let saltarNivel$$ = document.getElementById("saltar-nivel");
+let saltarNivel$$ = document.getElementById("saltar-nivel");
 let startInfinite$$ = document.getElementById("pang-startInfinite");
+let startDemo$$ = document.getElementById("pang-demo");
 let start$$ = document.getElementById("pang-start");
 let restart$$ = document.getElementById("pang-restart");
 let retry$$ = document.getElementById("pang-retry");
@@ -58,6 +59,7 @@ start$$.addEventListener("click", function () {
   restart$$.style.display = "block";
   retry$$.style.display = "block";
   startInfinite$$.style.display = "none";
+  startDemo$$.style.display = "none";
   startBackground$$.style.display = "none";
   instruccionesInfo1$$.style.display = "none";
   instruccionesInfo2$$.style.display = "none";
@@ -65,12 +67,10 @@ start$$.addEventListener("click", function () {
   ammosCount$$.style.display = "block";
   toggleShop$$.style.display = "block";
   game.isInfiniteChanging = false;
-
   if (window.innerWidth < 880 && window.innerHeight < 400) {
     actionsDiv$$.style.display = "flex"
     movesDiv$$.style.display = "flex"
   }
-  infoIntro1()
     if (game.interval) {
       game.stop();
       start$$.innerHTML = '<i class="fa-solid fa-play"></i>';  
@@ -94,6 +94,7 @@ startInfinite$$.addEventListener("click", function () {
   restart$$.style.display = "block";
   retry$$.style.display = "block";
   start$$.style.display = "none";
+  startDemo$$.style.display = "none";
   startBackground$$.style.display = "none";
   instruccionesInfo1$$.style.display = "none";
   instruccionesInfo2$$.style.display = "none";
@@ -105,13 +106,11 @@ startInfinite$$.addEventListener("click", function () {
     actionsDiv$$.style.display = "flex"
     movesDiv$$.style.display = "flex"
   }
-  infoIntro1()
     if (game.interval) {
       game.stop();
       start$$.innerHTML = '<i class="fa-solid fa-play"></i>';  
     } else {
       game.start();
-
       startInfinite$$.style.left = "1vw";
       startInfinite$$.style.top = "35vh";
       startInfinite$$.style.transform = "translate(0)";
@@ -124,6 +123,40 @@ startInfinite$$.addEventListener("click", function () {
   }
 );
 
+startDemo$$.addEventListener("click", function () {
+  GAMELEVEL = 1987
+  canvas.style.display = "block";
+  restart$$.style.display = "block";
+  retry$$.style.display = "block";
+  start$$.style.display = "none";
+  startInfinite$$.style.display = "none";
+  startBackground$$.style.display = "none";
+  instruccionesInfo1$$.style.display = "none";
+  instruccionesInfo2$$.style.display = "none";
+  infoPlayerBtn1$$.style.display = "block";
+  ammosCount$$.style.display = "block";
+  toggleShop$$.style.display = "block";
+  game.isInfiniteChanging = false;
+  if (window.innerWidth < 880 && window.innerHeight < 400) {
+    actionsDiv$$.style.display = "flex"
+    movesDiv$$.style.display = "flex"
+  }
+    if (game.interval) {
+      game.stop();
+      startDemo$$.innerHTML = '<i class="fa-solid fa-play"></i>';  
+    } else {
+      game.start();
+      startDemo$$.style.left = "1vw";
+      startDemo$$.style.top = "35vh";
+      startDemo$$.style.transform = "translate(0)";
+      instruccionesBtn$$.style.top = "25vh";
+      instruccionesBtn$$.style.left = "1vw";
+      instruccionesBtn$$.style.transform = "translate(0)";
+      instruccionesBtn$$.innerHTML = '<i class="fa-solid fa-info"></i>';  
+      startDemo$$.innerHTML = '<i class="fa-solid fa-pause"></i>';  
+    }
+  }
+)
 instruccionesBtn$$.addEventListener("click", function () {
     if(instruccionesInfo1$$.style.display === "block"){
       instruccionesInfo1$$.style.display = "none";
@@ -181,6 +214,6 @@ instruccionesInfo1$$.addEventListener("dblclick", () => {
 
 
 
-// saltarNivel$$.addEventListener("click",()=>{
-//   game.levelChange()
-// })
+saltarNivel$$.addEventListener("click",()=>{
+  game.levelChange()
+})

@@ -28,7 +28,7 @@ class Player {
     this.megaFireBlaster = false; //al ponerse en true, se puede activar la K
     this.megaFireBlasterAmount = 31; //la carga del blaster. cada 10, es una bola
     this.fireAmount = 0; //cantidad de fuegos que puedes disparar con N
-    this.hookAmount = 0; // la cantidad de hooks con J
+    this.hookAmount = 10; // la cantidad de hooks con J
     this.barAmount = 0; //la cantidad de barras disponibles con M
     this.stepsAmount = 0; //cantidad de plataformas que puedes crear con O / P
     this.ableToJump = false;
