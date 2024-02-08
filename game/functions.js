@@ -139,7 +139,7 @@ function bouncerPlayerCollision(player, bouncer){
 
 function platformPlayerCollision(player, platform){
   if (player.y <= platform.y - 10 &&player.x <= platform.x + platform.w &&player.x + player.w > platform.x) {
-    if (platform.isBrakable) {platform.braking--;platform.goingToBreak = true;}
+    if (platform.isBrakable) {platform.braking--; platform.goingToBreak = true;}
     player.y = platform.y - player.h;
     jumpDownDistance = 0;
     player.x += platform.vx; // si le digo que es igual player.vx = platform.vx, se ve el jugador moviendose por cómo estan configurados los frames de movimiento

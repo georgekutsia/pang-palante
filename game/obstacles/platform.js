@@ -50,7 +50,7 @@ class Platform {
           this.img.src = "../public/Imagenes/obstacles/platformSolidBreaking1.png"
         }
         if(this.braking <= 0){
-          this.y = -300
+          this.x = -300
         }
     }
     this.ctx.drawImage(this.img, this.x, this.y, this.w, this.h);

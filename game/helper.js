@@ -10,7 +10,7 @@ function infoIntro1(){
       setTimeout(() => {
         infoPlayer2$$.style.display = "none"
       }, 5000);
-    }, 5000);
+    }, 7000);
   }
 }
 

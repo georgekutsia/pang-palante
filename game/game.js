@@ -91,51 +91,44 @@ class Game {
   }
 
   start() {
-    // this.gameBackgroundMusic.play();
-    if (!this.gameStarted) {//here
       if (GAMELEVEL === 1) {
-
         level1(this.ctx, this.bubbles, this.platforms, this.levelBalls, this.boxes)
         setTimeout(() => {
           addBubble1(this.ctx, this.bubbles)
       this.levelBalls.forEach((e) => (e.winCondition = false));
         }, 10000);
       }
+
       if(GAMELEVEL === 100) {
         levelInfinite( this.ctx, this.bubbles, this.platforms, this.bouncers, this.spikes, this.stairs, this.flamethrowers, this.machineguns, this.healings, this.auras, this.boxes, this.blasters, this.levelBalls, this.gatlings, this.darkBubbles)
       }
-      this.gameStarted = true;
+
+        if(GAMELEVEL === 1987) {
+
+            // addDemo2(this.ctx, this.platforms, this.bouncers, this.stairs, this.levers)
+            // mostrarVariosTextosPocoAPoco2()
+
+  infoIntro1()
+addDemo1(this.ctx, this.platforms)
+        }
+
     this.interval = setInterval(() => {
       retryAmount$$.innerText = `${retry}`
       if(!retry){
         retryAmount$$.style.display = "none"
         retry$$.style.display = "none";
       }
+
       this.clear(); //   limpia el canvas. Sin esta función, nunca dejaría de dibujarse lo anterior y no aparentaría movimiento.
       this.move(); // mueve los objetos movibles
       this.draw(); // dibuja lo que haga falta
-      this.checkLevelsState();
-      if (this.changingLevel) {
-        changingLevelImg$$.style.display = "block";
-        levelChangeText1$$.style.display = "block";
-        levelChangeText2$$.style.display = "block";
-        levelChangeText3$$.style.display = "block";
-        levelChangeText4$$.style.display = "block";
-        levelChangeText1$$.innerText = `Siguiente nivel ${GAMELEVEL}`;
-        levelChangeText2$$.innerText = `${this.frases[this.indiceAleatorio]}`;
-    if(this.player.wasNotDamaged) {
-      levelChangeText3$$.innerText = `+20 monedas por no recibir daño`;
-    } else {
-      levelChangeText3$$.innerText = ``;
-    }
-      levelChangeText4$$.innerText = ``;
-      }
+      this.checkLevelsState();// comprueba si algún nivel tiene una función especial, tipo setInterval que suelta burbujas
+      this.changingLevels(); // la función que hace que cambie de nivel, sus mensajes, borra arrays etc 
       this.checkCollisions(); //Comprueba las colisiones constantemtente
       this.bubbleTick++;
       this.gameTime++; //Cada 60 representan 1 segundo de tiempo en el juego
     }, 1000 / gameSpeed);
 
-    }
   }
 
   stop() { //para pausar el juego
@@ -235,8 +228,6 @@ class Game {
       this.keyUp(ev.keyCode)
     });
   }
-
-  //funciones o metodos para crear obstaculos y criaturas
 
   checkCollisions() {
     //función para comprobar las colisiones
@@ -614,7 +605,23 @@ class Game {
       });
     });
   }
-
+  changingLevels(){
+  if (this.changingLevel) {
+    changingLevelImg$$.style.display = "block";
+    levelChangeText1$$.style.display = "block";
+    levelChangeText2$$.style.display = "block";
+    levelChangeText3$$.style.display = "block";
+    levelChangeText4$$.style.display = "block";
+    levelChangeText1$$.innerText = `Siguiente nivel ${GAMELEVEL}`;
+    levelChangeText2$$.innerText = `${this.frases[this.indiceAleatorio]}`;
+if(this.player.wasNotDamaged) {
+  levelChangeText3$$.innerText = `+20 monedas por no recibir daño`;
+} else {
+  levelChangeText3$$.innerText = ``;
+}
+  levelChangeText4$$.innerText = ``;
+  }
+}
   levelChange() {      
     if(this.player.wasNotDamaged) {coins+=20; this.coinsSound2.play();}
     if(!this.isInfiniteChanging){
@@ -712,12 +719,32 @@ class Game {
   }
   this.emptyAllGameArrays();
   }
+
   checkLevelsState(){
     if (this.bubbles.length <= 0 && this.gatlings.every(gat => gat.bubbleArray.length <= 0) && this.cannons.every(can => can.bubbleArray.length <= 0) && this.levers.every(lev =>lev.activated)) {
       this.levelBalls.forEach(e => (e.img.src = e.img.newSrc));
       this.levelBalls.forEach(e => (e.winCondition = true));
     } else {this.levelBalls.forEach(e => (e.winCondition = false))}
-    
+    if(GAMELEVEL === 1987){
+      if(demoPhase === 1 && this.platforms.length<=1){
+        this.emptyAllGameArrays()
+        this.player.y = CTXH - 20;
+        this.player.x = 50
+          addDemo2(this.ctx, this.platforms, this.bouncers, this.stairs, this.levers)
+          mostrarVariosTextosPocoAPoco2()
+          demoPhase++
+      }
+      if(demoPhase === 2 ){
+        setTimeout(() => {
+          this.emptyAllGameArrays()
+          mostrarVariosTextosPocoAPoco3()
+          addDemo3(this.ctx, this.platforms)
+          demoPhase ++
+        }, 2000);
+      }
+
+    }
+
     if(GAMELEVEL===11 && this.levelBalls.every(e =>e.winCondition===true)){
         this.platforms.forEach(element => {
           element.isSolid = true;

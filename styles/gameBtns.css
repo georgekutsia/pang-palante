@@ -27,6 +27,10 @@ section{
     top:15%;
     left:50%;
   }
+  #pang-demo{
+    top:15%;
+    left:50%;
+  }
 }
 @media only screen and (max-height: 400px) {
   section{

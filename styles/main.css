@@ -92,6 +92,19 @@ body {
   transition: 0.5s ease-in-out;
   transform: translate(-50%, -50%);
 }
+#pang-demo{
+  position: absolute;
+  text-shadow: 1px 1px black;
+  color: rgb(255, 255, 255);
+  border: none;
+  border-radius: 15px;
+  background-color: rgba(158, 6, 6, 0.549);
+  top:6%;
+  left:15%;
+  font-size: calc(12px + 0.7vw);
+  transition: 0.5s ease-in-out;
+  transform: translate(-50%, -50%);
+}
 /* iiiiconos */
 
 #instrucciones-btn{

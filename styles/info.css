@@ -1,11 +1,12 @@
 .ayudas{
-  width: calc(14px +18vw);
-  height: 15vw;
+  width: calc(30px + 28vw);
+  height: calc(20px + 18vw);
   min-width: 150px;
   min-height: 110px;
   position: absolute; 
-  right: 1vw;
-  top: 25vw;
+  right: 50%;
+  top: 2vw;
+  transform: translate(50%, 0);
 }
 .introAyuda1{
 display: none;
@@ -26,4 +27,27 @@ transition: 1s ease-in-out;
 .munHook,
 .munStep {
   display: none;
+}
+
+
+#demo-text-box0 {
+  position: absolute;
+  z-index: 20;
+  top: 1vw;
+  left: 50%;
+  transform: translate(-50%, 0%);
+  display: none;
+  justify-content: center; /* Centra horizontalmente los elementos */
+  align-items: center; /* Centra verticalmente los elementos */
+}
+
+#demo-text-box0 div{
+  display: flex;
+  justify-content: center;
+}
+
+#demo-text-box0 div h1{
+font-size:calc(12px + 0.6vw);
+margin: 4px;
+text-shadow: 1px 1px blue;
 }
