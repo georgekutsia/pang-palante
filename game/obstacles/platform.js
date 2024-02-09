@@ -13,7 +13,8 @@ class Platform {
     this.xLimit2 = xLimit2 || CTXW
     this.yLimit1 = yLimit1 || CTXH
     this.yLimit2 = yLimit2 || CTXH
-    this.speedX = vx || 0 
+    this.speedX = vx || 0;
+    this.speedY = vy || 0;
     this.color = "#ff0000"; // Color predeterminado, puedes ajustarlo según tus necesidades
     this.red =  (this.w + this.h) * 4; // solo usamos como numero fijo a recoger el rojo, que dependerá de la anchura total de la plataforma
     this.green = Math.random() * 140;
@@ -65,6 +66,11 @@ class Platform {
         this.vx = -this.speedX;
     } else if (this.vx && this.x <= this.xLimit1){
       this.vx = this.speedX;
+    }
+    if(this.vy && this.y + this.h >= this.yLimit2){
+      this.vy = -this.speedY
+    } else if(this.vy && this.y <= this.yLimit1){
+      this.vy = this.speedY
     }
   }
   
