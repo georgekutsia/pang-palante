@@ -107,8 +107,6 @@ class Game {
           demoFunctions.mostrarVariosTextosPocoAPoco3()
           addDemo3(this.ctx, this.platforms, this.levers, this.bubbles, this.levelBalls)
           demoPhase = 3;
-
-
             // demoFunctions.mostrarVariosTextosPocoAPoco1()
             // infoIntro1()
             // addDemo1(this.ctx, this.platforms)
@@ -590,10 +588,11 @@ class Game {
             ballBroke = false;
             levelBall.ballBroke = true;
             levelBall.breakingLevelBallSound.play();
-            if(GAMELEVEL < 1900){
+            if(GAMELEVEL <= 1500){
               this.levelChange();
-            } else {
-              console.log("hey, aqui estamos")
+            }
+            if(GAMELEVEL >= 1800){
+              ballBroke = true; 
               demoPhase++;
             }
             levelBall.isActive = false;
@@ -667,13 +666,9 @@ if(this.player.wasNotDamaged) {
         } else if (GAMELEVEL === 9) {
           this.background.img.src ="/public/Imagenes/background/background9.jpeg";
           level9( this.ctx, this.bubbles, this.platforms,this.bouncers, this.stairs,  this.healings, this.bars, this.boxes,  this.levelBalls,this.spikes, this.levers);
-
-          
         }else if (GAMELEVEL === 10) {
           this.background.img.src ="/public/Imagenes/background/background10.jpeg";
-
           level10( this.ctx, this.bubbles, this.platforms, this.stairs,  this.healings, this.bars, this.boxes,this.levelBalls);
-          
         } else if (GAMELEVEL === 11) {
           this.background.img.src ="/public/Imagenes/background/background11.jpeg";
         level11( this.ctx, this.bubbles, this.platforms, this.stairs,  this.healings, this.bars, this.boxes,this.levelBalls, this.levers);
@@ -698,7 +693,7 @@ if(this.player.wasNotDamaged) {
 
           setInterval(() => {
             this.cannons.forEach(c => c.shooting = true)
-          }, 3000);
+          }, 36000);
           level15( this.ctx,this.platforms, this.bubbles, this.levelBalls, this.darkBubbles, this.cannons, this.boxes);
           setInterval(() => {
             this.otherBubbles++
@@ -711,6 +706,7 @@ if(this.player.wasNotDamaged) {
       }, 3000);
     }, 1000);
   } else{
+    console.log("bulala")
     this.changingLevel = true;
     this.indiceAleatorio = Math.floor(Math.random() * this.frases.length);
     GAMELEVEL += 1;
@@ -747,11 +743,13 @@ if(this.player.wasNotDamaged) {
       if(demoPhase === 2 && this.levers.every(lever =>lever.activated === true)){
           this.emptyAllGameArrays()
           demoFunctions.mostrarVariosTextosPocoAPoco3()
-          addDemo3(this.ctx, this.platforms, this.levers, this.bubbles)
+          addDemo3(this.ctx, this.platforms, this.levers, this.bubbles, this.levelBalls)
           demoPhase = 3;
       }
       if(demoPhase === 4){
-console.log("demophase4")
+      this.emptyAllGameArrays()
+      addDemo4(this.ctx, this.platforms, this.levers, this.bubbles, this.levelBalls)
+      demoPhase = 5;
       }
     }
 

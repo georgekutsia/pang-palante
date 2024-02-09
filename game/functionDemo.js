@@ -21,7 +21,6 @@ const demoFunctions = {
   
   
     mostrarVariosTextosPocoAPoco1(){
-      console.log("bulala")
         setTimeout(() => {
           textoPianoPiano("demo-text1");
       }, 12000);
@@ -81,7 +80,18 @@ const demoFunctions = {
         document.getElementById("demo-text12").style.display = "none";
         document.getElementById("demo-text13").style.display = "none";
         document.getElementById("demo-text14").style.display = "none";
+        textoPianoPiano("demo-text15")
+        setTimeout(() => {
+        textoPianoPiano("demo-text16")
+        }, 2000);
+        setTimeout(() => {
+        textoPianoPiano("demo-text17")
+        }, 4000);
+        setTimeout(() => {
+        textoPianoPiano("demo-text18")
+        }, 6000);
       }, 12000);
+
 },
 
 
