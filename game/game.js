@@ -95,7 +95,6 @@ class Game {
         level1(this.ctx, this.bubbles, this.platforms, this.levelBalls, this.boxes)
         setTimeout(() => {
           addBubble1(this.ctx, this.bubbles)
-      this.levelBalls.forEach((e) => (e.winCondition = false));
         }, 10000);
       }
 
@@ -104,9 +103,14 @@ class Game {
       }
 
         if(GAMELEVEL === 1987 ) {
-          demoFunctions.mostrarVariosTextosPocoAPoco3()
-          addDemo3(this.ctx, this.platforms, this.levers, this.bubbles, this.levelBalls)
-          demoPhase = 3;
+          this.emptyAllGameArrays()
+          addDemo5(this.ctx, this.platforms, this.levers, this.levelBalls,this.boxes, this.gatlings, this.darkBubbles)
+          demoPhase = 6;
+
+          // let bu =  new Bubble(this.ctx, 200, 80, 25, 25)
+          // this.bubbles.push(bu)
+
+          
             // demoFunctions.mostrarVariosTextosPocoAPoco1()
             // infoIntro1()
             // addDemo1(this.ctx, this.platforms)
@@ -215,7 +219,7 @@ class Game {
     this.bars.forEach((e) => e.move()); //mueve los obstáculos
     this.steps.forEach((e) => e.move()); //mueve los obstáculos
     this.puffBubbles.forEach((e) => e.move()); //mueve los obstáculos
-      this.gatlings.forEach((e) =>e.checkPosition(this.player))
+    this.gatlings.forEach((e) =>e.checkPosition(this.player))
   }
   setListeners() {
     //permite hacer keyup y keydown para usar teclado para mover el personaje
@@ -356,7 +360,16 @@ class Game {
     checkHookCollisions(this.player.hooksArray, this.bouncers, this.barHit, this.player);
     checkHookCollisions(this.player.hooksArray, this.boxes, this.barHit, this.player);
     
-
+    this.player.bulletBarArray.forEach((bar) =>{
+      if(bar.collides(this.player)){
+            if(this.player.electricShieldIsActive){
+              bar.isElectrified = true;
+              bar.tick +=1.2;
+              bar.life = 3;
+            }
+          }
+        })
+    
     // colisiones con Platform
     // colisiones con Platform
     this.platforms.forEach((platform) => {// platform con player
@@ -477,11 +490,11 @@ class Game {
       // aditionalaura  choca con el personaje
       if (aura.collides(this.player)) {
         this.player.auraIsActive = true;
+        aura.dispose = false;
         eventInfo(munEscudo$$)
         setTimeout(() => {
           this.player.auraIsActive = false;
         }, this.player.auraTime);
-        aura.x = -100; // situa fuera del canvas la burbuja que colisiona con el player y luego isVisible la elimina del array
       } else return true;
     });
     this.levers.forEach((lever) => {
@@ -554,22 +567,41 @@ class Game {
       this.player.bulletArray = this.player.bulletArray.filter((bullet) => {
         if (bullet.collides(box) && !bullet.isBig) {
           box.boxHit();
-          if (box.boxImg.frame > 8) {
-            if(box.bubblePopup){
-              addBubble1(this.ctx, this.bubbles)
-            }
-            if (box.containsRandom) {
-              randomLootFromBox(this.ctx,this.flamethrowers,this.healings,this.bars,this.auras,this.machineguns,this.blasters,this.coins,this.steps,this.hooks, box.x ,box.y );
-            } else {
-              specificLootFromBox(this.ctx, box.lootNumber,this.flamethrowers,this.healings,this.bars,this.auras,this.machineguns,this.blasters,this.coins,this.steps, this.hooks, box.x + box.w/2-3, box.y + box.h);
-            }
-          }
           const puffBubble = new BubblePuff(ctx, box.x, box.y + box.h / 2,box.w,box.h);
           this.puffBubbles.push(puffBubble);
           return false;
         } else return true;
       });
     });
+    this.boxes.forEach((box) => {
+      if (box.boxImg.frame > 8) {
+        if(box.bubblePopup){
+          addBubble1(this.ctx, this.bubbles)
+        }
+        if (box.containsRandom) {
+          randomLootFromBox(this.ctx,this.flamethrowers,this.healings,this.bars,this.auras,this.machineguns,this.blasters,this.coins,this.steps,this.hooks, box.x ,box.y );
+        } else {
+          specificLootFromBox(this.ctx, box.lootNumber,this.flamethrowers,this.healings,this.bars,this.auras,this.machineguns,this.blasters,this.coins,this.steps, this.hooks, box.x + box.w/2-3, box.y + box.h);
+        }
+      }
+    });
+    this.boxes.forEach((box) => {//  box con fire
+      this.player.bulletFireArray =  this.player.bulletFireArray.filter((bullet) => {
+        if (bullet.collides(box) ) {
+          box.boxIgniteSound.play()
+          box.burningBoxSound.play()
+          box.burning = true;
+          box.burningForce++
+          if(box.burningForce > 4) box.burningForce = 4;
+          const puffBubble = new BubblePuff(ctx, box.x, box.y + box.h / 2,box.w, box.h, "../public/Imagenes/puffBubble2.png");
+          this.puffBubbles.push(puffBubble);
+          return false;
+
+        } else return true;
+      });
+    });
+
+
 
     this.boxes.forEach((box) => {
       this.player.bulletArray.forEach((bullet) => {
@@ -579,7 +611,6 @@ class Game {
         }else return true;  
       })
     })
-
 
     this.levelBalls.forEach((levelBall) => {//levelBall con bullets normales
       this.player.bulletArray.forEach((bullet) => {
@@ -706,7 +737,6 @@ if(this.player.wasNotDamaged) {
       }, 3000);
     }, 1000);
   } else{
-    console.log("bulala")
     this.changingLevel = true;
     this.indiceAleatorio = Math.floor(Math.random() * this.frases.length);
     GAMELEVEL += 1;
@@ -747,9 +777,15 @@ if(this.player.wasNotDamaged) {
           demoPhase = 3;
       }
       if(demoPhase === 4){
-      this.emptyAllGameArrays()
-      addDemo4(this.ctx, this.platforms, this.levers, this.bubbles, this.levelBalls)
-      demoPhase = 5;
+          demoFunctions.mostrarVariosTextosPocoAPoco4()
+          addDemo4(this.ctx, this.platforms, this.levers, this.bubbles, this.levelBalls, this.boxes)
+          demoPhase = 5;
+      }
+      if(demoPhase === 6){
+      // this.emptyAllGameArrays()
+      // addDemo5(this.ctx, this.platforms, this.levers, this.levelBalls,this.boxes, this.gatlings, this.darkBubbles)
+      // demoPhase = 6;
+
       }
     }
 

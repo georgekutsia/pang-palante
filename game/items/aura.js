@@ -9,11 +9,13 @@ class Aura {
     this.vx = 0;
     this.vy = 0;
     this.g = 0.05;
-    this.dispose = false;
+    this.dispose = true;
     this.auraImg = new Image();
     this.auraImg.src = "/public/Imagenes/auraItem.png";
     this.auraImg.frame = 0;
     this.imgTick = 0;
+
+    
   }
 
   draw() {
@@ -47,7 +49,7 @@ class Aura {
     }
   }
   isVisible() {
-    return !this.dispose;
+    return this.dispose;
   }
   collides(aura) {
     const colX = this.x <= aura.x + aura.w && this.x + this.w > aura.x;

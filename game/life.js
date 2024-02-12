@@ -24,8 +24,8 @@ class Life {
       this.ctx.drawImage(this.imgHalf, place + 10, this.y, this.w, this.h);
     }
     this.ctx.restore();
-    if(this.total >= 5){
-      this.total = 5
+    if(this.total >= 10){
+      this.total = 10
     }
   }
 

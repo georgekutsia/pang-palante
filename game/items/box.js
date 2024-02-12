@@ -13,15 +13,28 @@ class Box {
     this.boxImg = new Image();
     this.boxImg.src = "/public/Imagenes/box1.png";
     this.boxImg.frame = 0;
-    this.imgTick = 0;
+    this.burningBox = new Image();
+    this.burningBox.src = "/public/Imagenes/burningBox.png";
+    this.burningBox.framex = 0;
+    this.burningBox.framey = 0;
+    this.burningTick = 0;
+    this.burning = false;
+    this.burningForce = 0;
+
+
     this.boxHitSound = new Audio("/public/sounds/box/boxHit.mp3")
-    this.boxHitSound.volume = 0.3
+    this.boxHitSound.volume = 0.03;
     this.boxHitBreakSound = new Audio("/public/sounds/box/boxBreak.mp3")
-    this.boxHitBreakSound.volume = 0.2
+    this.boxHitBreakSound.volume = 0.03;
     this.boxHitBreakingLongSound = new Audio("/public/sounds/box/boxBreakingLong.mp3")
-    this.boxHitBreakingLongSound.volume = 0.1
+    this.boxHitBreakingLongSound.volume = 0.03;
     this.boxImpactMetalic = new Audio("/public/sounds/box/boxImpactMetalic.mp3")
-    this.boxImpactMetalic.volume = 0.08;
+    this.boxImpactMetalic.volume = 0.01;
+    this.boxIgniteSound = new Audio("/public/sounds/electrofire/boxBurning.mp3")
+    this.boxIgniteSound.volume = 0.03;
+    this.burningBoxSound = new Audio("/public/sounds/electrofire/burningBox.mp3")
+    this.burningBoxSound.volume = 0.05;
+
     this.coinsSound1 = new Audio("../public/sounds/coinsSound1.mp3")
     this.coinsSound1.volume = 1; 
     this.boxLevel = boxLevel;// de 1 a 3 determina la resistenci de la caja
@@ -46,15 +59,87 @@ class Box {
       this.h
     );
     
+    if(this.burning && this.burningForce >0){
+      this.ctx.drawImage(
+        this.burningBox,
+        (this.burningBox.framex * this.burningBox.width) / 8,
+        (this.burningBox.framey * this.burningBox.width) / 4,
+        this.burningBox.width / 8,
+        this.burningBox.height/4,
+        this.x,
+        this.y,
+        this.w,
+        this.h
+        );
+      }
+    if(this.burning && this.burningForce > 1){
+      this.ctx.drawImage(
+        this.burningBox,
+        (this.burningBox.framex * this.burningBox.width) / 8,
+        (this.burningBox.framey * this.burningBox.width) / 4,
+        this.burningBox.width / 8,
+        this.burningBox.height/4,
+        this.x,
+        this.y -3,
+        this.w+3,
+        this.h+3
+        );
+      }
+    if(this.burning && this.burningForce > 2){
+      this.ctx.drawImage(
+        this.burningBox,
+        (this.burningBox.framex * this.burningBox.width) / 8,
+        (this.burningBox.framey * this.burningBox.width) / 4,
+        this.burningBox.width / 8,
+        this.burningBox.height/4,
+        this.x - 3,
+        this.y - 5,
+        this.w+3,
+        this.h+3
+        );
+    if(this.burning && this.burningForce > 3){
+      this.ctx.drawImage(
+        this.burningBox,
+        (this.burningBox.framex * this.burningBox.width) / 8,
+        (this.burningBox.framey * this.burningBox.width) / 4,
+        this.burningBox.width / 8,
+        this.burningBox.height/4,
+        this.x,
+        this.y - 6,
+        this.w+5,
+        this.h+5
+        );
+      }
+    }
   }
   move() {
-    this.imgTick++
-    this.vy += this.g;  //efecto gravedad, aumenta la velocidad a medida que baja
-    this.y += this.vy;
-    if (this.y + this.h >= this.ctx.canvas.height ){
-      this.vy = 0; 
-      this.g = 0;
+    if(this.burning){
+      this.burningTick++;
+      if(this.burningTick > 5 - this.burningForce){
+        this.burningBox.framex++
+        this.burningTick = 0;
+      }
+      if(this.burningBox.framex > 7){
+        this.burningBox.framey+= 0.5
+        this.burningBox.framex = 0;
+      } 
+      if(this.burningBox.framey > 1.5 ) {
+        this.burningBox.framey = 0
+        this.burningBox.framex = 0;
+        if(this.boxLevel===1) {
+          this.boxImg.frame+=1;
+          this.boxImpactMetalic.play();
+        }
+        if(this.boxLevel===2) {
+          this.boxImg.frame+=2;
+        }
+        if(this.boxLevel===3) {
+          this.boxImg.frame+=3;
+        }
+        this.hitingSound()
+      }
     }
+
   }
   hitingSound(){
     if(this.boxImg.frame <= 4) {this.boxHitSound.play()}
@@ -62,6 +147,7 @@ class Box {
     if(this.boxImg.frame >8) this.boxHitBreakingLongSound.play();
     if(this.boxImg.frame > 8){ 
       coins+=2;
+      this.burningBoxSound.volume = 0;
       this.coinsSound1.play()
       this.dispose = false; 
     }
@@ -79,6 +165,10 @@ class Box {
     }
     this.hitingSound()
   }  
+
+
+
+
   isVisible() {
     return this.dispose;
   }

@@ -14,7 +14,7 @@
     position: absolute;
     top: 0;
     right: 1vw;
-    display: none;
+    display: flex;
   }
 
   #shop-btn{
@@ -54,7 +54,7 @@
   font-size: calc(8px + 0.3vw);
 }
 #shop-superGun{
-  margin-top: calc(5px + 1vh);
+  margin-top: calc(5px + 0.3vh);
   color: rgb(254, 0, 224);
 }
 
@@ -66,7 +66,7 @@
 
 
 #shop-speedGun{
-  margin-top: calc(5px + 1vh);
+  margin-top: calc(5px + 0.3vh);
 }
 #velocidad-text{
   font-size: calc(6px + 0.5vw);
@@ -81,7 +81,18 @@
 
 }
 #shop-barResistane{
-  margin-top: calc(5px + 1vh);
+  margin-top: calc(5px + 0.3vh);
+}
+#shop-electro{
+  display: none;
+}
+#shop-electricShield>span{
+  color: rgb(254, 0, 224);
+  
+
+}
+#shop-electricShield{
+  margin-top: calc(5px + 0.3vh);
 }
 
 #shop-btn, #moves-div{
