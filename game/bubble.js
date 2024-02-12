@@ -15,7 +15,12 @@ class Bubble { //posX posY, ancho, alto, velX, velY, gravedad, buleano si hay gr
     this.damage = damage || 1; // daño especificado o 1
     this.img = new Image();   //crear nueva imágene ne canvas
     this.img.src = bubbleImg || "../public/Imagenes/bubble.png";  //definir cual es la nueva imagen
+    this.electrified = new Image();   //crear nueva imágene ne canvas
+    this.electrified.src = "../public/Imagenes/electrifiedBall1.png";  //definir cual es la nueva imagen
+    this.electrified.frame = 0;
     this.randomColor = getRandomColor();
+    this.isElectrified = false;
+    this.electroTick = 0;
 
     this.bubbleBounceSound = new Audio("../public/sounds/bubbleBounce.mp3") //todo -- paso 1 traer el sonido y almacenarlo en una variable
     this.bubbleBounceSound.volume = 0.1;  //todo -- paso 2, no obligatorio, determinarle volumen de 0 a 1, creo
@@ -31,6 +36,20 @@ class Bubble { //posX posY, ancho, alto, velX, velY, gravedad, buleano si hay gr
     if(this.w <= this.explodingSize) {
       this.x = -100;
       coins++
+    }
+
+    if(this.isElectrified){
+      this.ctx.drawImage(
+        this.electrified,
+        (this.electrified.frame * this.electrified.width) / 10,
+        0,
+        this.electrified.width / 10,
+        this.electrified.height ,
+        this.x ,
+        this.y-1,
+        this.w ,
+        this.h 
+      );
     }
   }
   move() {
@@ -50,9 +69,19 @@ class Bubble { //posX posY, ancho, alto, velX, velY, gravedad, buleano si hay gr
     if(this.x <= 0){
       this.bubbleBounceSound.play()//todo --paso 3 llamar a .play() para invocar el sonido donde sea necesario
       this.vx = bubbleSpeedX;
-
     }
-
+    if(this.isElectrified){
+      this.w -= 0.05 + electricShieldlevel/150
+      this.h -= 0.05 + electricShieldlevel/150
+      this.electroTick++;
+      if(this.electroTick >3){
+        this.electrified.frame++;
+        this.electroTick = 0;
+      }
+      if(this.electrified.frame > 9){
+        this.electrified.frame = 0;
+      }
+    }
     if(this.isSlowGravity){
       setTimeout(() => {
         this.g = 0.05;

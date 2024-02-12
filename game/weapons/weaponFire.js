@@ -12,6 +12,11 @@ class WeaponFire {
     this.h = h || this.ctx.canvas.width/ 29;
     this.flameSpinTick = 0;
     this.damage = 0.05;
+
+    this.fireShootSOund = new Audio("/public/sounds/electrofire/fireShootSound.mp3")
+    this.fireShootSOund.volume = 0.05;
+    
+
   }
 
   draw() {

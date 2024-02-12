@@ -23,13 +23,14 @@ class Player {
     this.frameAmount = 5;
     this.immune = false; // al recibir daño se vuelve inmune durante unos segundos
     this.fading = 0; //necesario para el parpadeo del personaje cuando es inmune
+    this.electricCharge = 30;
     this.charging = 0;  // acumula la carga, lo que dibuja el semicírculo
     this.chargingFires = false; //   se pone en true mientras carga el disparo fuerte de fuego
     this.megaFireBlaster = false; //al ponerse en true, se puede activar la K
     this.megaFireBlasterAmount = 31; //la carga del blaster. cada 10, es una bola
-    this.fireAmount = 0; //cantidad de fuegos que puedes disparar con N
+    this.fireAmount = 20; //cantidad de fuegos que puedes disparar con N
     this.hookAmount = 10; // la cantidad de hooks con J
-    this.barAmount = 0; //la cantidad de barras disponibles con M
+    this.barAmount = 20; //la cantidad de barras disponibles con M
     this.stepsAmount = 0; //cantidad de plataformas que puedes crear con O / P
     this.ableToJump = false;
     this.wasNotDamaged = true;
@@ -42,6 +43,13 @@ class Player {
     this.img.frame = 3;
     this.auraImg = new Image();
     this.auraImg.src = "/public/Imagenes/aura1.png";
+    this.electricShieldImg = new Image();
+    this.electricShieldImg.src = "/public/Imagenes/electricShield.png";
+    this.electricShieldImg.frame = 0;
+    this.electricShieldIsActive = false;
+    this.electricShieldImgTick = 0;
+    this.clickedH = false;
+
     this.weaponFire = new Image();
     this.weaponFire.src = "/public/Imagenes/weaponFire.png";
     this.dodgeQ = new Image();
@@ -65,6 +73,8 @@ class Player {
     this.shootBarSound = new Audio("/public/sounds/shooting/shootBarSound2.mp3");
     this.hookShoot = new Audio("/public/sounds/shooting/hookShort.m4a")
     this.hookShoot.volume = 0.05
+    this.electroSoundOn = new Audio("/public/sounds/electrofire/electrifingShield.mp3")
+    this.electroSoundOn.volume = 0.1
 
     this.barInfo$$ = document.getElementById("bar-info")
     this.fireInfo$$ = document.getElementById("fire-info")
@@ -353,6 +363,11 @@ handleRightDodge = (event) =>{ //*
     if(this.charging >=1){
       this.charger.draw(this.x + 5, this.y + 10, this.charging, 16, 15, "yellow", "red")
     }
+    if(this.electricCharge >=1){
+      this.charger.draw(this.x + 5, this.y + 10, this.electricCharge, 12, 13, "blue", "green")
+    }
+    if(this.electricCharge <=0) {this.electricShieldIsActive = false; H = 0}
+    if(this.electricCharge > 1) H = 72
     if(this.immune){
       this.fading++
       if(this.fading >= 20){
@@ -381,6 +396,20 @@ handleRightDodge = (event) =>{ //*
     this.ctx.drawImage(this.auraImg, this.x-7, this.y-5, this.w + 10, this.h+10);
     }
 
+    if(this.electricShieldIsActive){
+      this.ctx.drawImage(
+        this.electricShieldImg,
+        (this.electricShieldImg.frame * this.electricShieldImg.width) / 8,
+        0,
+        this.electricShieldImg.width / 8,
+        this.electricShieldImg.height ,
+        this.x - 8,
+        this.y - 4,
+        this.w * 2,
+        this.h * 2
+      );
+      this.electricCharge -= 0.05;
+    }
 
   }
 
@@ -424,6 +453,16 @@ handleRightDodge = (event) =>{ //*
       this.vx = 0;
     }
 
+    if(this.electricShieldIsActive){
+      this.electricShieldImgTick++;
+      if(this.electricShieldImgTick >3){
+        this.electricShieldImg.frame++;
+        this.electricShieldImgTick = 0;
+      }
+      if(this.electricShieldImg.frame > 7){
+        this.electricShieldImg.frame = 0;
+      }
+    }
     this.bulletArray.forEach((bullet) => {bullet.move();}); //paso 4: mueve cada bullet que se dispare
     this.bulletFireArray.forEach((bullet) => {bullet.move();}); //paso 4: mueve cada bullet que se dispare
     this.bulletBarArray.forEach((bullet) => {bullet.move();}); //paso 4: mueve cada bullet que se dispare
@@ -538,6 +577,17 @@ handleRightDodge = (event) =>{ //*
       this.hookShoot.play()
           this.hookAmount--;
         } 
+      }
+    if(key === H){
+      if(this.clickedH === false){
+        this.electricShieldIsActive = true;
+        this.clickedH = true;
+        this.electroSoundOn.play()
+      } else if(this.clickedH === true){
+        this.electricShieldIsActive = false;
+        this.clickedH = false;
+        this.electricCharge = this.electricCharge
+      }
       }
   }
   keyUp(key) {
@@ -662,6 +712,7 @@ handleRightDodge = (event) =>{ //*
 
   shootFire(){
     const bulletFire = new WeaponFire(this.ctx, this.x, this.y)
+    bulletFire.fireShootSOund.play()
     this.bulletFireArray.push(bulletFire);
   }
   shootBar(){

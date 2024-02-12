@@ -29,6 +29,18 @@ let S = 83;
 let D = 68;
 
 
+let electroShockSound = new Audio("/public/sounds/electrofire/electrifingBall.mp3")
+electroShockSound.volume = 0.1
+let electroPlatformSound = new Audio("/public/sounds/electrofire/electrifingPlatforms.mp3")
+electroPlatformSound.volume = 0.05
+let electroBarSound = new Audio("/public/sounds/electrofire/electrifing.mp3")
+electroBarSound.volume = 0.01;
+let buyBig = new Audio("/public/sounds/buyBig.mp3")
+buyBig.volume = 0.1;
+let buySmall = new Audio("/public/sounds/buySmall1.mp3")
+buySmall.volume = 0.1;
+
+
 let recharge = 400;
 let jumpHeight = -3.5;
 let playerSpeed = 2;
@@ -39,6 +51,7 @@ let weaponBarSolidTick = 350;//el tiempo que se pasa la barra en estado sólido
 let fireSizing = 0.1 //el aumento de ancho y alto de la bala de fuego a medida que sube
 let barLife = 2; // las veces que puede la bola chocar con la barra antes de desaparecer
 let immuneTime = 2000;
+let electricShieldTime = 5000;
 let jumpDownDistance = 0;
 let bubbleSpeedY = 2.5;
 let bubbleSpeedX = 0.5;
@@ -47,9 +60,11 @@ let infiniteLeveling = 0;
 let coins = 3000;
 let ballBroke = true;
 let retry = 2;  // cuantas vecs se puede reinentar el juego
-let basicWeaponLevel  = 4; //para mejorar cuantas balas dispara
+let basicWeaponLevel  = 2; //para mejorar cuantas balas dispara
+let basicWeaponLevelingChanged = 0;
 let basicWeaponSpeed = 0;
 let barResistanceLevel = 0;
+let electricShieldlevel = 0;
 let shootFail = 0; //se acumula durante el nivel. si todas las balas aciertan, queda en 0. si el resultado es diferente, es que ha fallado
 
 const CTXW = ctx.canvas.width

@@ -1,10 +1,10 @@
 class BubblePuff {
-  constructor(ctx, x, y, w, h) {
+  constructor(ctx, x, y, w, h, img) {
     this.ctx = ctx;
     this.x = x;
     this.y = y;
     this.img = new Image();
-    this.img.src = "../public/Imagenes/puffBubble1.png";
+    this.img.src = img || "../public/Imagenes/puffBubble1.png";
     this.img.frame = 0;
     this.w = w ;
     this.h = h;

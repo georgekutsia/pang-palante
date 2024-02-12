@@ -1,15 +1,20 @@
 class Platform {
-  constructor(ctx, x, y, w, h, obstacleImg, isSolid, isBrakable, isBouncable, vx, vy, xLimit1, xLimit2, yLimit1, yLimit2) {
+  constructor(ctx, x, y, w, h, obstacleImg, isSolid, isBrakable, isBouncable, vx, vy, xLimit1, xLimit2, yLimit1, yLimit2, canBeElectrified) {
     this.ctx = ctx;
     this.x = x || 100;
     this.w = w || this.ctx.canvas.width / 13;
     this.h = h || this.ctx.canvas.width / 30;
     this.y = y || this.ctx.canvas.height - this.h - 20;
-    this.img = new Image();F
+    this.img = new Image();
     this.img.src = obstacleImg || "../../public/Imagenes/obstacles/platformSolid2.png";
+    this.electroImg = new Image();
+    this.electroImg.src = "/public/Imagenes/electrifiedPlatform1.png";
+    this.electroTick = 0;
+    this.electroImg.frame= 0;
+    this.electroShocked = false;
     this.vx = vx || 0;
     this.vy = vy || 0;
-    this.xLimit1   = xLimit1   || CTXW
+    this.xLimit1   = xLimit1   || 10
     this.xLimit2 = xLimit2 || CTXW
     this.yLimit1 = yLimit1 || CTXH
     this.yLimit2 = yLimit2 || CTXH
@@ -24,6 +29,8 @@ class Platform {
     this.isBrakable = isBrakable || false;
     this.isBouncable = isBouncable || false;
     this.goingToBreak = false;
+    this.isElectrified = false;
+    this.canBeElectrified = canBeElectrified ||false;
     this.braking = 150;
     //la vida de la plataforma depende de su tamaño, lo que significa que depende de Red, que es la anchura más la altura multiplicada por 2. 
     this.divisibleWithLife = this.life / 25 //como le restamos vida de 25 en 25, obtenemos cuantas veces se le podrá restar antes de llegar a 0 o menos//! a veces hay que restar 25 por un fallo
@@ -54,6 +61,22 @@ class Platform {
           this.x = -300
         }
     }
+
+    if(this.electroShocked){
+
+      this.ctx.drawImage(
+        this.electroImg,
+        (this.electroImg.frame * this.electroImg.width) / 5,
+        0,
+        this.electroImg.width / 5,
+        this.electroImg.height ,
+        this.x +1 ,
+        this.y -5,
+        this.w ,
+        this.h+10 
+      );
+    }
+
     this.ctx.drawImage(this.img, this.x, this.y, this.w, this.h);
 
   }
@@ -63,15 +86,28 @@ class Platform {
     this.x += this.vx;
     this.y += this.vy;
     if(this.vx && this.x + this.w >= this.xLimit2){
-        this.vx = -this.speedX;
+        this.vx = -this.speedX|| -0.5;
     } else if (this.vx && this.x <= this.xLimit1){
-      this.vx = this.speedX;
+      this.vx = this.speedX|| 0.5;
     }
     if(this.vy && this.y + this.h >= this.yLimit2){
       this.vy = -this.speedY
     } else if(this.vy && this.y <= this.yLimit1){
       this.vy = this.speedY
     }
+
+    if(this.electroShocked){
+      this.electroTick++;
+      if(this.electroTick >6){
+        this.electroImg.frame++;
+        this.electroTick = 0;
+      }
+      if(this.electroImg.frame > 4){
+        setTimeout(() => {
+          this.electroImg.frame = 0;
+        }, 1000);
+    }
+  }
   }
   
   calculateNewColor() {

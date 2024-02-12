@@ -18,8 +18,6 @@ let interval = setInterval(function() {
 }
 
 const demoFunctions = {
-  
-  
     mostrarVariosTextosPocoAPoco1(){
         setTimeout(() => {
           textoPianoPiano("demo-text1");
@@ -61,7 +59,7 @@ const demoFunctions = {
   }, 4000);
 },
 
-  mostrarVariosTextosPocoAPoco3(ctx, platforms, levers, bubbles){
+  mostrarVariosTextosPocoAPoco3(){
   document.getElementById("demo-text8").style.display = "none";
   document.getElementById("demo-text9").style.display = "none";
   document.getElementById("demo-text10").style.display = "none";
@@ -92,16 +90,24 @@ const demoFunctions = {
         }, 6000);
       }, 12000);
 
+
+
+
+
 },
 
+mostrarVariosTextosPocoAPoco4(){
+  document.getElementById("demo-text15").style.display = "none";
+  document.getElementById("demo-text16").style.display = "none";
+  document.getElementById("demo-text17").style.display = "none";
+  document.getElementById("demo-text18").style.display = "none";
+  textoPianoPiano("demo-text19");
+  // setTimeout(() => {
+  //   textoPianoPiano("demo-text20");
+  //   }, 2000);
 
 
-
-
-
-
-
-
+},
 
 
 }

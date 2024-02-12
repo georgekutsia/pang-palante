@@ -5,12 +5,19 @@ class WeaponBar {
     this.y = y;
     this.vy = -2;
     this.vx =  0;
+    this.w = 5;
+    this.h = this.ctx.canvas.height;
     this.img = new Image();
     this.img.src = "../public/Imagenes/weaponBarZigzag.png";
     this.img.frame = 0;
-    this.w = 5;
-    this.h = this.ctx.canvas.height;
     this.tick = weaponBarSolidTick;
+
+    this.electroImg = new Image();   //crear nueva imágene ne canvas
+    this.electroImg.src = "/public/Imagenes/electrifiedBar2.png";  //definir cual es la nueva imagen
+    this.electroImg.frame = 0;
+    this.electroTick = 0;
+    this.isElectrified = false;
+
     this.fading = 0;
     this.dispose = true;
     this.solidState = false;  //al pasar a true, empieza la cuenta atrás para que desaparezca;
@@ -26,10 +33,6 @@ class WeaponBar {
     }
     this.ctx.drawImage(
       this.img,
-      0,
-      (this.img.frame * this.img.width) / 1,
-      this.img.width / 1,
-      this.img.height,
       this.x,
       this.y,
       this.w,
@@ -37,10 +40,36 @@ class WeaponBar {
     );
     this.ctx.globalAlpha = 1;
 
+if(this.isElectrified){
+  for (let i = 0; i < 17;  i++) {
+    this.ctx.drawImage(
+      this.electroImg,
+      ((this.electroImg.frame+i)  * this.electroImg.width) / 17,
+      0,
+      this.electroImg.width / 17,
+      this.electroImg.height,
+      this.x - 6,
+      this.y + i*10 , 
+      14,
+      14
+      );
+  }
+  }
   }
   move() {
     this.x += this.vx;
     this.y += this.vy;
+    if(this.isElectrified){
+      electroBarSound.play();
+      this.electroTick++;
+      if(this.electroTick > 5){
+        this.electroImg.frame++;
+        this.electroTick = 0;
+      }
+      if(this.electroImg.frame >16){
+        this.electroImg.frame = 0;
+      }
+    }
     if(this.y <= 1 || this.solidState) {
       this.tick--;
       this.img.src = "../public/Imagenes/weaponBarSolid.png";
