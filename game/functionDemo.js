@@ -30,7 +30,7 @@ const demoFunctions = {
       arrowBubbles$$.style.display = "block"
       setTimeout(() => {
         arrowBubbles$$.style.left = "3vw"
-        arrowBubbles$$.style.top = "12vh"
+        arrowBubbles$$.style.top = "9vh"
         arrowBubbles$$.style.width = "calc(12px + 2vw)"
       }, 1000);
     }, 16000);
@@ -39,14 +39,14 @@ const demoFunctions = {
       document.getElementById("demo-text2").style.display = "none";
       document.getElementById("demo-text3").style.display = "none";
     textoPianoPiano("demo-text31");
-    arrowBubbles$$.style.top = "32vh"
+    arrowBubbles$$.style.top = "13vh"
     }, 20000);
     setTimeout(() => {
-      arrowBubbles$$.style.top = "0.5vh"
+      arrowBubbles$$.style.top = "-1vh"
     textoPianoPiano("demo-text32");
     }, 22000);
     setTimeout(() => {
-      arrowBubbles$$.style.top = "6vh"
+      arrowBubbles$$.style.top = "3vh"
     textoPianoPiano("demo-text33");
     }, 24000);
 

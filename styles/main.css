@@ -10,56 +10,50 @@ body {
 }
 #canvas{
   width: 88vw;
-  height: 38vw;
+  height: 42vw;
   border: 3px solid red;
   min-width: 100px;
   min-height: 100px;
 }
 /* iiiiconos */
+.icons-left {
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  padding: 2px 6px;
+  border: none;
+  color: rgb(255, 0, 0); /* Texto blanco para mayor contraste */
+  text-shadow: 1px 1px 1px rgb(0, 0, 0); /* Sombra del texto más contrastante */
+  transition: 0.3s ease-in-out;
+  background-color: rgb(255, 255, 255);
+}
+
+.icons-left:hover{
+    letter-spacing: 1px;
+      color: rgb(0, 189, 213);
+}
+
 
 #pang-restart{
   display: none;
   position: absolute;
   top: 1vh;
-  left: 1vw;
-  background-color: transparent ;
-  border: none;
-  color: rgb(255, 0, 0);
-  font-size: calc(14px + 1vw);
-  text-shadow: 1px 1px black;
-  transition: 0.3s ease-in-out;
-  
+  left: 0.1vw;
 }
-#pang-restart:hover{
-  letter-spacing: 1px;
-  color: rgb(0, 189, 213);
-}
-/* iiiiconos */
+
 
 #pang-retry{
   display: none;
   position: absolute;
-  top: 8vh;
-  left: 1vw;
-  padding: 0;
-  background-color: transparent ;
-  border: none;
-  color: rgb(255, 0, 0);
-  font-size: calc(14px + 1vw);
-  text-shadow: 1px 1px black;
-  transition: 0.3s ease-in-out;
+  top: 6vh;
+  left: 0.1vw;
 }
-#pang-retry:hover{
-  letter-spacing: 1px;
-  color: rgb(0, 189, 213);
-}
+
 #start-background{
   position: absolute;
   top: 1vw;
   left: 50%;
   transform: translate(-50%, 0%);
   width: 86vw;
-  height: 36vw;
+  height: 41vw;
   min-width: 100px;
   min-height: 100px;
 }
@@ -70,21 +64,15 @@ body {
 #retry-amount{
   margin-left: 25px;
   margin-top: -20px;
-  font-size: calc(15px + 0.7vw);
+  font-size: calc(12px + 1vh);
   color: rgb(255, 123, 123);
 
 }
-#pang-start:hover{
-    letter-spacing: 1px;
-    color: rgb(0, 189, 213);
-}
+
 #pang-start{
   position: absolute;
-  text-shadow: 1px 1px black;
-  color: red;
   border: none;
   border-radius: 15px;
-  background-color: rgba(255, 255, 255, 0.549);
   top:50%;
   left:50%;
   font-size: calc(14px + 1vw);
@@ -94,15 +82,12 @@ body {
 
 #pang-startInfinite:hover{
   letter-spacing: 1px;
-    color: rgb(0, 189, 213);
+  color: rgb(0, 189, 213);;
 }
 #pang-startInfinite{
   position: absolute;
-  text-shadow: 1px 1px black;
-  color: rgb(255, 255, 255);
   border: none;
   border-radius: 15px;
-  background-color: rgba(158, 6, 6, 0.549);
   top:60%;
   left:50%;
   font-size: calc(12px + 0.7vw);
@@ -110,13 +95,14 @@ body {
   transform: translate(-50%, -50%);
 }
 
+#pang-demo:hover{
+  letter-spacing: 1px;
+  color: rgb(0, 189, 213);;
+}
 #pang-demo{
   position: absolute;
-  text-shadow: 1px 1px black;
-  color: rgb(255, 255, 255);
   border: none;
   border-radius: 15px;
-  background-color: rgba(158, 6, 6, 0.549);
   top:6%;
   left:15%;
   font-size: calc(12px + 0.7vw);
@@ -127,22 +113,15 @@ body {
 
 #instrucciones-btn{
   position: absolute;
-  text-shadow: 1px 1px black;
-  color: red;
   border: none;
   border-radius: 15px;
-  background-color: rgba(255, 255, 255, 0.549);
   top:10% ;
   left:50%;
   font-size: calc(14px + 1vw);
-  transition: 0.3s ease-in-out;
   transform: translate(-50%,-50%);
 }
 
-#instrucciones-btn:hover{
-  letter-spacing: 1px;
-  color: rgb(0, 189, 213);
-}
+
 /* iiiiconos */
 
 /* .ayudas-btn{

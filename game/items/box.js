@@ -20,6 +20,7 @@ class Box {
     this.burningTick = 0;
     this.burning = false;
     this.burningForce = 0;
+    this.dam = 0;
 
 
     this.boxHitSound = new Audio("/public/sounds/box/boxHit.mp3")
@@ -44,7 +45,8 @@ class Box {
   }
 
   draw() {
-    if(this.boxLevel===1)this.boxImg.src = "/public/Imagenes/box1.png";
+    if(this.boxLevel===0)this.boxImg.src = "/public/Imagenes/box0.png";
+    if(this.boxLevel===1)this.boxImg.src = "/public/Imagenes/box12.png";
     if(this.boxLevel===2)this.boxImg.src = "/public/Imagenes/box2.png";
     if(this.boxLevel===3)this.boxImg.src = "/public/Imagenes/box3.png";
     this.ctx.drawImage(
@@ -126,6 +128,14 @@ class Box {
       if(this.burningBox.framey > 1.5 ) {
         this.burningBox.framey = 0
         this.burningBox.framex = 0;
+        if(this.boxLevel===0) {
+          this.dam +=1;
+          if(this.dam >=3){
+            this.boxImg.frame+=1;
+            this.boxImpactMetalic.play();
+            this.dam = 0;
+          }
+        }
         if(this.boxLevel===1) {
           this.boxImg.frame+=1;
           this.boxImpactMetalic.play();
@@ -153,6 +163,14 @@ class Box {
     }
   }
   boxHit(){
+    if(this.boxLevel===0) {
+      this.dam +=1;
+      if(this.dam >=3){
+        this.boxImg.frame+=1;
+        this.boxImpactMetalic.play();
+        this.dam = 0;
+      }
+    }
     if(this.boxLevel===1) {
       this.boxImg.frame+=1;
       this.boxImpactMetalic.play();

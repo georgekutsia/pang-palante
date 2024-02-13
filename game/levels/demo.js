@@ -38,7 +38,7 @@ function addDemo1(ctx, platforms){
   const platform1 = new Platform(ctx, 50, 125, 45, 5, "../public/Imagenes/obstacles/platformSolid2.png", false, false, true);
   const platform2 = new Platform(ctx, 120, 105, 45, 5, "../public/Imagenes/obstacles/platformSolid3.png", false, true, true);
   const platform3 = new Platform(ctx, 190, 85, 45, 5, "../public/Imagenes/obstacles/platformSolid4.png", true, false, true);
-  const platform4 = new Platform(ctx, 240, 65, 45, 5, "../public/Imagenes/obstacles/platformSolid4.png", false, true, true, 0, 0, 140, 230, 0, 0, true);
+  const platform4 = new Platform(ctx, 240, 65, 45, 5, "../public/Imagenes/obstacles/platformSolid4.png", true, false, true, 0, 0, 140, 230, 0, 0, true);
   platforms.push( platform1,platform2, platform3, platform4);
 
 }
@@ -83,12 +83,12 @@ function addDemo3(ctx, platforms, levers, bubbles, levelBalls){
 function addDemo4(ctx, platforms, levers, bubbles, levelBalls, boxes){
 
   const box1 = new Box(ctx, 60, 60,  3, false, 2)
-  const box2 = new Box(ctx, 60, 30,  2, false, 3)
+  const box2 = new Box(ctx, 60, 30,  2, false, 7)
   const box3 = new Box(ctx, 120, 80,  3, false, 1)
   const box4 = new Box(ctx, 120, 50,  2, false, 1)
   const box5 = new Box(ctx, 160, 80,  3, false, 1)
   const box6 = new Box(ctx, 160, 50,  2, false, 1)
-  const box7 = new Box(ctx, 220, 60,  3, false, 4)
+  const box7 = new Box(ctx, 220, 60,  3, false, 2)
   const box8 = new Box(ctx, 220, 30,  2, false, 7)
   const box9 = new Box(ctx, CTXW/2-10, 35,  1, false, 5)
   const box10 = new Box(ctx, CTXW/2-10, 55,  1, false, 5)
@@ -112,14 +112,13 @@ function addDemo4(ctx, platforms, levers, bubbles, levelBalls, boxes){
   platforms.push( platform1, platform2, platform3,platform4);
 }
 //!demo5
-function addDemo5(ctx, platforms, levers, levelBalls, boxes, darkBubbles){
+function addDemo5(ctx, platforms, levers, levelBalls, boxes, darkBubbles, spikes){
 
   const box1 = new Box(ctx, 60, 60,  3, false, 2)
   const box2 = new Box(ctx, 60, 30,  2, false, 3)
   const box3 = new Box(ctx, 90, 60,  3, false, 3)
-  const box4 = new Box(ctx, 120, 60,  3, false, 3)
-  const box5 = new Box(ctx, 150, 60,  1, false, 3)
-
+  const box4 = new Box(ctx, 120, 60,  1, false, 3)
+  const box5 = new Box(ctx, 150, 60,  0, false, 3)
   boxes.push(box1,box2,box3,box4,box5,)
 
   const levelBall1 = new LevelBall(ctx,220, 0)
@@ -128,19 +127,23 @@ function addDemo5(ctx, platforms, levers, levelBalls, boxes, darkBubbles){
   let lev2 = new Lever(ctx, 15, 0)
   let lev3 = new Lever(ctx, CTXW/2-10, 0)
   levers.push(lev1, lev2, lev3);
-  const platform1 = new Platform(ctx, 10, 90, 35, 5, "../public/Imagenes/obstacles/platformSolid1.png", false, false, true);
+  const platform1 = new Platform(ctx, 1, 90, 35, 5, "../public/Imagenes/obstacles/platformSolid1.png", false, false, true);
   const platform2 = new Platform(ctx, 40, 120, 45, 5, "../public/Imagenes/obstacles/platformSolid2.png", false, false, true, 0, 0, 80, 190, 0, 0, true);
-  const platform3 = new Platform(ctx, CTXW-45, 90, 35, 5, "../public/Imagenes/obstacles/platformSolid3.png", false, false, true,);
+  const platform3 = new Platform(ctx, CTXW-36, 90, 35, 5, "../public/Imagenes/obstacles/platformSolid3.png", false, false, true,);
   const platform4 = new Platform(ctx, CTXW-95, 120, 45, 5, "../public/Imagenes/obstacles/platformSolid4.png", false, false, true, 0, 0, 10, 230, 0, 0, true);
   platforms.push( platform1, platform2, platform3,platform4);
   let bu = new DarkBubble(ctx, CTXW/2 - 20, 20, 30, 30, 0.00000001, 0.0000001, 0.000002,)
   darkBubbles.push(bu)
+  const spike1 = new Spikes(ctx, 55, 110)
+  const spike2 = new Spikes(ctx, CTXW-90, 110)
+  spikes.push(spike1, spike2)
+
 }
 
 
 
 
-function addDemo5(ctx, platforms, levers, levelBalls, boxes, gatlings, darkBubbles){
+function addDemo6(ctx, platforms, levers, levelBalls, boxes, gatlings){
 
   const box1 = new Box(ctx, 60, 60,  3, false, 2)
   const box2 = new Box(ctx, 60, 30,  2, false, 3)
@@ -163,8 +166,7 @@ function addDemo5(ctx, platforms, levers, levelBalls, boxes, gatlings, darkBubbl
   platforms.push( platform1, platform2, platform3,platform4);
   let gat = new BubbleGatling(ctx)
   gatlings.push(gat)
-  let bu = new DarkBubble(ctx, CTXW/2 - 20, 20, 30, 30, 0.00000001, 0.0000001, 0.000002,)
-  darkBubbles.push(bu)
+
 }
 
 

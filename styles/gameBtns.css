@@ -16,21 +16,21 @@ section{
     position: absolute;
     display: flex;
   }
-  #instrucciones-btn{
+  /* #instrucciones-btn{
     top:5% ;
-  }
-  #pang-start{
+  } */
+  /* #pang-start{
     top:10%;
     left:50%;
   }
   #pang-startInfinite{
     top:15%;
     left:50%;
-  }
-  #pang-demo{
+  } */
+  /* #pang-demo{
     top:15%;
     left:50%;
-  }
+  } */
 }
 @media only screen and (max-height: 400px) {
   section{
