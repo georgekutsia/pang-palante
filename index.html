@@ -81,14 +81,15 @@
 <canvas id="canvas"></canvas>
 <div class="icons-btn">
   <img  id="start-background" src="/public//Imagenes/background/backgroundPang.webp" alt="">
-  <button id="pang-start">Partida Nivel 1</button>
-  <button id="pang-startInfinite">Niveles Infinitos</button>
-  <button id="pang-demo">Entrenamiento!</button>
-  <button id="pang-restart"><i class="fa-solid fa-power-off"></i></button>
-  <button id="pang-retry"><i class="fa-solid fa-arrow-rotate-left"></i> <h3 id="retry-amount"></h3></button>
+  <button  class="icons-left" id="pang-start" >Partida Nivel 1</button>
+  <button class="icons-left" id="pang-startInfinite">Niveles Infinitos</button>
+  <button class="icons-left" id="pang-demo">Entrenamiento!</button>
+  <button class="icons-left" id="instrucciones-btn">Instrucciones</button>
+  <button class="icons-left" id="pang-restart"><i class="fa-solid fa-power-off"></i></button>
+  <button class="icons-left" id="pang-retry"><i class="fa-solid fa-arrow-rotate-left"></i> <h3 id="retry-amount"></h3></button>
 </div>
 <div>
-  <button   class="icons-btn" id="instrucciones-btn">Instrucciones</button>
+  <button id="toggle-shop"><i class="fa-solid fa-shop"></i></button>
   <img  id="arrow-bubbles" src="/public/Imagenes/arrowBubbles.png" alt="arrow bubbles">
   <img id="instrucciones-info-1" src="/public/Imagenes/stats/instructionsShoots1.png" alt="instrucciones">
   <img id="instrucciones-info-2" src="/public/Imagenes/stats/instructionsMoves1.png" alt="instrucciones">
@@ -106,8 +107,7 @@
     <img class="ayudas munStep" src="/public/Imagenes/stats/playerTalkMunSteps.png" alt="Player Ayuda 9">
     <!-- <button  class="ayudas-btn icons-btn"><i class="fa-regular fa-comment"></i></button> -->
   </div>
-</div>
-  <button id="toggle-shop"><i class="fa-solid fa-shop"></i></button>
+  </div>
   <div id="shop-btn">
     <button id="shop-shield">50<i class="fa-solid fa-coins"></i> <i style="font-size: calc(14px + 0.53vw)" class="fa-solid fa-globe"></i></button>
     <button id="shop-fire">20<i class="fa-solid fa-coins"></i> <i style="font-size: calc(14px + 0.53vw)" class="fa-solid fa-fire-flame-simple"></i></button>
@@ -207,7 +207,7 @@
       <h1 id="demo-text5" style="display: none">Algunas son sólidas e irrompibles</h1>
     </div>
     <div>
-      <h1 id="demo-text6" style="display: none">Otras se derrumban al pisarlas y algunas</h1>
+      <h1 id="demo-text6" style="display: none">Otras se derrumban al pisarlas,  ciertas</h1>
     </div>
     <div>
       <h1 id="demo-text7" style="display: none">se rompen con disparos o enemigos poderosos</h1>
@@ -216,7 +216,7 @@
       <h1 id="demo-text71" style="display: none">y otros podrás activar con una descarga eléctrica!</h1>
     </div>
     <div>
-      <h1 id="demo-text72" style="display: none">pulsa H sobre la plataforma pequeña tras recoger una batería.</h1>
+      <h4 id="demo-text72" style="display: none">(pulsa H sobre la plataforma pequeña tras recoger una batería)</h4>
     </div>
     <div>
       <h1 id="demo-text8" style="display: none">Bien! También hay obstaculos emburbujados</h1>

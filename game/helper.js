@@ -27,7 +27,7 @@ function eventInfo(event$$){
   event$$.addEventListener("click", () => {
     if (!isActive) {
       event$$.style.transform = "scale(2)";
-      event$$.style.right = "13%";
+      event$$.style.right = "33%";
       event$$.style.top = "5vw";
       isActive = true; 
     } else {
@@ -36,12 +36,12 @@ function eventInfo(event$$){
       event$$.style.top = ""; 
       isActive = false; 
     }
-  event$$.addEventListener("dblclick", () => {
-  event$$.style.display = "none";
-  })
-  setTimeout(() => {
-  event$$.style.display = "none"
-  }, 5500);
+    event$$.addEventListener("dblclick", () => {
+    event$$.style.display = "none";
+    })
+    setTimeout(() => {
+    event$$.style.display = "none"
+    }, 5500);
 })}
 
 

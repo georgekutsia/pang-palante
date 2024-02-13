@@ -104,16 +104,23 @@ class Game {
         levelInfinite( this.ctx, this.bubbles, this.platforms, this.bouncers, this.spikes, this.stairs, this.flamethrowers, this.machineguns, this.healings, this.auras, this.boxes, this.blasters, this.levelBalls, this.gatlings, this.darkBubbles)
       }
         if(GAMELEVEL === 1987 ) {
-          infoIntro1()
-          this.background.img.src = "../public/Imagenes/background/backgroundTraining4.webp";
-          demoFunctions.mostrarVariosTextosPocoAPoco1()
-          setTimeout(() => {
-            addDemo1Electro(this.ctx,  this.platforms, this.electros)
-            this.background.img.src = "../public/Imagenes/background/backgroundTraining5.webp";
-          }, 11000);
-          setTimeout(() => {
-            addDemo1(this.ctx, this.platforms)
-          }, 32000);
+
+          this.levelBalls = [];
+          this.emptyAllGameArrays()
+          this.emptyAllPlayerArrays()
+          addDemo5(this.ctx, this.platforms, this.levers, this.levelBalls,this.boxes, this.darkBubbles, this.spikes)
+          demoPhase = 7;
+
+          // infoIntro1()
+          // this.background.img.src = "../public/Imagenes/background/backgroundTraining4.webp";
+          // demoFunctions.mostrarVariosTextosPocoAPoco1()
+          // setTimeout(() => {
+          //   addDemo1Electro(this.ctx,  this.platforms, this.electros)
+          //   this.background.img.src = "../public/Imagenes/background/backgroundTraining5.webp";
+          // }, 11000);
+          // setTimeout(() => {
+          //   addDemo1(this.ctx, this.platforms)
+          // }, 32000);
         }
 
     this.interval = setInterval(() => {
@@ -594,8 +601,15 @@ class Game {
         }
         if (box.containsRandom) {
           randomLootFromBox(this.ctx,this.flamethrowers,this.healings,this.bars,this.auras,this.machineguns,this.blasters,this.coins,this.steps,this.hooks,  box.x ,box.y );
+          if(box.boxLevel=== 0){
+          randomLootFromBox(this.ctx,this.flamethrowers,this.healings,this.bars,this.auras,this.machineguns,this.blasters,this.coins,this.steps,this.hooks,  box.x-5 ,box.y-5 );
+          }
         } else {
           specificLootFromBox(this.ctx, box.lootNumber,this.flamethrowers,this.healings,this.bars,this.auras,this.machineguns,this.blasters,this.coins,this.steps, this.hooks, box.x + box.w/2-3, box.y + box.h);
+          if(box.boxLevel=== 0){
+          specificLootFromBox(this.ctx, box.lootNumber,this.flamethrowers,this.healings,this.bars,this.auras,this.machineguns,this.blasters,this.coins,this.steps, this.hooks, box.x + box.w/2+3, box.y + box.h/2);
+
+          }
         }
       }
     });
@@ -768,18 +782,15 @@ if(this.player.wasNotDamaged) {
   }
 
   checkLevelsState(){
-    console.log('%cMyProject%cline:780%cthis.gameTim', 'color:#fff;background:#ee6f57;padding:3px;border-radius:2px', 'color:#fff;background:#1f3c88;padding:3px;border-radius:2px', 'color:#fff;background:rgb(3, 22, 52);padding:3px;border-radius:2px', this.gameTime)
       if (this.bubbles.length <= 0 && this.gatlings.every(gat => gat.bubbleArray.length <= 0) && this.cannons.every(can => can.bubbleArray.length <= 0) && this.levers.every(lev =>lev.activated)) {
         this.levelBalls.forEach(e => (e.img.src = e.img.newSrc));
         this.levelBalls.forEach(e => (e.winCondition = true));
       } else {this.levelBalls.forEach(e => (e.winCondition = false))}
-
     if(GAMELEVEL === 1987){
       if(demoPhase === 1){
         if(this.platforms.length<=2 && this.electros.length <=0 && this.gameTime >= 800){
           this.emptyAllGameArrays()
         this.emptyAllPlayerArrays()
-
           this.player.y = CTXH - 20;
           this.player.x = 50
           addDemo2(this.ctx, this.platforms, this.bouncers, this.stairs, this.levers)
@@ -789,14 +800,16 @@ if(this.player.wasNotDamaged) {
         }
       }
       if(demoPhase === 2 && this.levers.every(lever =>lever.activated === true)){
+        this.levelBalls = [];
           this.emptyAllGameArrays()
         this.emptyAllPlayerArrays()
-
           demoFunctions.mostrarVariosTextosPocoAPoco3()
           addDemo3(this.ctx, this.platforms, this.levers, this.bubbles, this.levelBalls)
           demoPhase = 3;
       }
       if(demoPhase === 4){
+        this.levelBalls = [];
+
         this.emptyAllGameArrays()
         this.emptyAllPlayerArrays()
           demoFunctions.mostrarVariosTextosPocoAPoco4()
@@ -804,10 +817,18 @@ if(this.player.wasNotDamaged) {
           demoPhase = 5;
       }
       if(demoPhase === 6){
+        this.levelBalls = [];
       this.emptyAllGameArrays()
       this.emptyAllPlayerArrays()
       addDemo5(this.ctx, this.platforms, this.levers, this.levelBalls,this.boxes, this.darkBubbles)
       demoPhase = 7;
+      }
+      if(demoPhase === 8){
+        this.levelBalls = [];
+        this.emptyAllGameArrays()
+        this.emptyAllPlayerArrays()
+        addDemo5(this.ctx, this.platforms, this.levers, this.levelBalls,this.boxes, this.gatlings);
+        demoPhase = 9;
       }
     }
 

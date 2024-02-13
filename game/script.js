@@ -5,6 +5,7 @@ const game = new Game(ctx);
 
 let arrowBubbles$$ = document.getElementById("arrow-bubbles")
 let saltarNivel$$ = document.getElementById("saltar-nivel");
+let iconsBtns$$ = document.querySelectorAll(".icons-left")
 let startInfinite$$ = document.getElementById("pang-startInfinite");
 let startDemo$$ = document.getElementById("pang-demo");
 let start$$ = document.getElementById("pang-start");
@@ -79,11 +80,11 @@ start$$.addEventListener("click", function () {
       start$$.innerHTML = '<i class="fa-solid fa-play"></i>';  
     } else {
       game.start();
-      start$$.style.left = "1vw";
-      start$$.style.top = "35vh";
+      start$$.style.left = "0.5vw";
+      start$$.style.top = "16vh";
       start$$.style.transform = "translate(0)";
-      instruccionesBtn$$.style.top = "16vh";
-      instruccionesBtn$$.style.left = "1vw";
+      instruccionesBtn$$.style.top = "11vh";
+      instruccionesBtn$$.style.left = "0.8vw";
       instruccionesBtn$$.style.transform = "translate(0)";
       instruccionesBtn$$.innerHTML = '<i class="fa-solid fa-info"></i>';  
       start$$.innerHTML = '<i class="fa-solid fa-pause"></i>';  
@@ -114,11 +115,11 @@ startInfinite$$.addEventListener("click", function () {
       start$$.innerHTML = '<i class="fa-solid fa-play"></i>';  
     } else {
       game.start();
-      startInfinite$$.style.left = "1vw";
-      startInfinite$$.style.top = "35vh";
+      startInfinite$$.style.left = "0.5vw";
+      startInfinite$$.style.top = "16vh";
       startInfinite$$.style.transform = "translate(0)";
-      instruccionesBtn$$.style.top = "16vh";
-      instruccionesBtn$$.style.left = "1vw";
+      instruccionesBtn$$.style.top = "11vh";
+      instruccionesBtn$$.style.left = "0.8vw";
       instruccionesBtn$$.style.transform = "translate(0)";
       instruccionesBtn$$.innerHTML = '<i class="fa-solid fa-info"></i>';  
       startInfinite$$.innerHTML = '<i class="fa-solid fa-pause"></i>';  
@@ -139,6 +140,9 @@ startDemo$$.addEventListener("click", function () {
   // infoPlayerBtn1$$.style.display = "block";
   ammosCount$$.style.display = "block";
   toggleShop$$.style.display = "block";
+  iconsBtns$$.forEach(function(icon) {
+    icon.style.backgroundColor = "transparent";
+  });
   game.isInfiniteChanging = false;
   if (window.innerWidth < 880 && window.innerHeight < 400) {
     actionsDiv$$.style.display = "flex"
@@ -149,11 +153,11 @@ startDemo$$.addEventListener("click", function () {
       startDemo$$.innerHTML = '<i class="fa-solid fa-play"></i>';  
     } else {
       game.start();
-      startDemo$$.style.left = "1vw";
-      startDemo$$.style.top = "35vh";
+      startDemo$$.style.left = "0.5vw";
+      startDemo$$.style.top = "16vh";
       startDemo$$.style.transform = "translate(0)";
-      instruccionesBtn$$.style.top = "16vh";
-      instruccionesBtn$$.style.left = "1vw";
+      instruccionesBtn$$.style.top = "11vh";
+      instruccionesBtn$$.style.left = "0.8vw";
       instruccionesBtn$$.style.transform = "translate(0)";
       instruccionesBtn$$.innerHTML = '<i class="fa-solid fa-info"></i>';  
       startDemo$$.innerHTML = '<i class="fa-solid fa-pause"></i>';  
