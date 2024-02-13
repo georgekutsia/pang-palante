@@ -27,8 +27,12 @@ body {
   color: rgb(255, 0, 0);
   font-size: calc(14px + 1vw);
   text-shadow: 1px 1px black;
-  transition: 0.5s ease-in-out;
-
+  transition: 0.3s ease-in-out;
+  
+}
+#pang-restart:hover{
+  letter-spacing: 1px;
+  color: rgb(0, 189, 213);
 }
 /* iiiiconos */
 
@@ -43,7 +47,11 @@ body {
   color: rgb(255, 0, 0);
   font-size: calc(14px + 1vw);
   text-shadow: 1px 1px black;
-  transition: 0.5s ease-in-out;
+  transition: 0.3s ease-in-out;
+}
+#pang-retry:hover{
+  letter-spacing: 1px;
+  color: rgb(0, 189, 213);
 }
 #start-background{
   position: absolute;
@@ -66,6 +74,10 @@ body {
   color: rgb(255, 123, 123);
 
 }
+#pang-start:hover{
+    letter-spacing: 1px;
+    color: rgb(0, 189, 213);
+}
 #pang-start{
   position: absolute;
   text-shadow: 1px 1px black;
@@ -76,8 +88,13 @@ body {
   top:50%;
   left:50%;
   font-size: calc(14px + 1vw);
-  transition: 0.5s ease-in-out;
+  transition: 0.3s ease-in-out;
   transform: translate(-50%, -50%);
+}
+
+#pang-startInfinite:hover{
+  letter-spacing: 1px;
+    color: rgb(0, 189, 213);
 }
 #pang-startInfinite{
   position: absolute;
@@ -89,9 +106,10 @@ body {
   top:60%;
   left:50%;
   font-size: calc(12px + 0.7vw);
-  transition: 0.5s ease-in-out;
+  transition: 0.3s ease-in-out;
   transform: translate(-50%, -50%);
 }
+
 #pang-demo{
   position: absolute;
   text-shadow: 1px 1px black;
@@ -102,7 +120,7 @@ body {
   top:6%;
   left:15%;
   font-size: calc(12px + 0.7vw);
-  transition: 0.5s ease-in-out;
+  transition: 0.3s ease-in-out;
   transform: translate(-50%, -50%);
 }
 /* iiiiconos */
@@ -117,17 +135,17 @@ body {
   top:10% ;
   left:50%;
   font-size: calc(14px + 1vw);
-  transition: 0.5s ease-in-out;
+  transition: 0.3s ease-in-out;
   transform: translate(-50%,-50%);
 }
 
 #instrucciones-btn:hover{
   letter-spacing: 1px;
-  background-color: rgba(36, 230, 255, 0.346);
+  color: rgb(0, 189, 213);
 }
 /* iiiiconos */
 
-.ayudas-btn{
+/* .ayudas-btn{
   display: none;;
   position: absolute;
   text-shadow: 1px 1px black;
@@ -138,21 +156,22 @@ body {
   top:15vh;
   left:1vw;
   font-size: calc(14px + 1vw);
-  transition: 0.5s ease-in-out;
+  transition: 0.3s ease-in-out;
 }
 .ayudas-btn:hover{
   color: rgb(0, 242, 255);
-}
+} */
 #instrucciones-info-1{
   display: none;
   position: absolute;
   width: 40vw;
   min-width: 100px;
   min-height: 100px;
-  top: 5vw;
+  top: 8vw;
   left: 15vw;
-  transition: 0.5s ease-in-out;
+  transition: 0.3s ease-in-out;
 }
+
 
 #instrucciones-info-2{
   display: none;
@@ -160,9 +179,9 @@ body {
   width: 40vw;
   min-width: 100px;
   min-height: 100px;
-  top: 10vw;
+  top: 13vw;
   left: 45vw;
-  transition: 0.5s ease-in-out;
+  transition: 0.3s ease-in-out;
 }
 
 #changing-level-img{

@@ -1,13 +1,24 @@
 .ayudas{
+  width: calc(30px + 8vw);
+  height: calc(20px + 3vw);
+  min-width: 150px;
+  min-height: 110px;
+  position: absolute; 
+  right: 10%;
+  top: 1vw;
+  transform: translate(50%, 0);
+}
+.ayudasDemo{
   width: calc(30px + 28vw);
   height: calc(20px + 18vw);
   min-width: 150px;
   min-height: 110px;
   position: absolute; 
   right: 50%;
-  top: 2vw;
+  top: 1vw;
   transform: translate(50%, 0);
 }
+
 .introAyuda1{
 display: none;
 transition: 1s ease-in-out;
@@ -27,6 +38,7 @@ transition: 1s ease-in-out;
 .munHook,
 .munStep {
   display: none;
+  transition: all 0.5s ease-in-out;
 }
 
 
@@ -49,5 +61,26 @@ transition: 1s ease-in-out;
 #demo-text-box0 div h1{
 font-size:calc(12px + 0.6vw);
 margin: 4px;
-text-shadow: 1px 1px blue;
+color: rgb(255, 0, 0);
+text-shadow: 1px 1px 1px rgb(0, 0, 0);
+backdrop-filter: blur(4px);
+}
+
+#arrow-bubbles {
+  width: calc(12px + 4vw);
+  transition:  1.5s ease-in-out; 
+  animation: scaleAnimation 0.5s infinite alternate;
+  position: absolute;
+  left: 50%;
+  top: 12vh;
+  display: none;
+}
+
+@keyframes scaleAnimation {
+  0% {
+    transform: scale(1); 
+  }
+  100% {
+    transform: scale(1.2); 
+  }
 }

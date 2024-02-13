@@ -38,6 +38,7 @@ class Game {
     this.levers = []; // Array para almacenar instancias de bubble cannons
     this.coins = []; // Array para almacenar instancias de bubble cannons
     this.hooks = []; // Array para almacenar instancias de bubble cannons
+    this.electros = []; // Array para almacenar instancias de bubble cannons
 
     // sounds sounds sounds
     this.bubblePopSound1 = new Audio("../public/sounds/bubblePop1.mp3"); //todo --  Sonido paso 1) guardar la ruta del sonido en una variable
@@ -71,6 +72,8 @@ class Game {
     this.playerHeals.volume = 0.1;
     this.playerBar = new Audio("/public/sounds/barItemRechargeSound.mp3");
     this.playerBar.volume = 0.1;
+    this.electroItemSound = new Audio("/public/sounds/electrofire/elecrtroItemSound.mp3");
+    this.electroItemSound.volume = 0.1;
 
     
     // Obtén un índice aleatorio
@@ -97,23 +100,20 @@ class Game {
           addBubble1(this.ctx, this.bubbles)
         }, 10000);
       }
-
       if(GAMELEVEL === 100) {
         levelInfinite( this.ctx, this.bubbles, this.platforms, this.bouncers, this.spikes, this.stairs, this.flamethrowers, this.machineguns, this.healings, this.auras, this.boxes, this.blasters, this.levelBalls, this.gatlings, this.darkBubbles)
       }
-
         if(GAMELEVEL === 1987 ) {
-          this.emptyAllGameArrays()
-          addDemo5(this.ctx, this.platforms, this.levers, this.levelBalls,this.boxes, this.gatlings, this.darkBubbles)
-          demoPhase = 6;
-
-          // let bu =  new Bubble(this.ctx, 200, 80, 25, 25)
-          // this.bubbles.push(bu)
-
-          
-            // demoFunctions.mostrarVariosTextosPocoAPoco1()
-            // infoIntro1()
-            // addDemo1(this.ctx, this.platforms)
+          infoIntro1()
+          this.background.img.src = "../public/Imagenes/background/backgroundTraining4.webp";
+          demoFunctions.mostrarVariosTextosPocoAPoco1()
+          setTimeout(() => {
+            addDemo1Electro(this.ctx,  this.platforms, this.electros)
+            this.background.img.src = "../public/Imagenes/background/backgroundTraining5.webp";
+          }, 11000);
+          setTimeout(() => {
+            addDemo1(this.ctx, this.platforms)
+          }, 32000);
         }
 
     this.interval = setInterval(() => {
@@ -160,6 +160,7 @@ class Game {
     this.levers = this.levers.filter((e) => e.isVisible()); //elimina cada obstáculo que ya no es visible y vacía el array
     this.coins = this.coins.filter((e) => e.isVisible()); //elimina cada obstáculo que ya no es visible y vacía el array
     this.hooks = this.hooks.filter((e) => e.isVisible()); //elimina cada obstáculo que ya no es visible y vacía el array
+    this.electros = this.electros.filter((e) => e.isVisible()); //elimina cada obstáculo que ya no es visible y vacía el array
     this.healings = this.healings.filter((e) => e.isVisible()); //elimina cada obstáculo que ya no es visible y vacía el array
     this.bars = this.bars.filter((e) => e.isVisible()); //elimina cada obstáculo que ya no es visible y vacía el array
     this.steps = this.steps.filter((e) => e.isVisible()); //elimina cada obstáculo que ya no es visible y vacía el array
@@ -189,11 +190,12 @@ class Game {
     this.levers.forEach((e) => e.draw()); //dibuja cada obstáculo
     this.coins.forEach((e) => e.draw()); //dibuja cada obstáculo
     this.hooks.forEach((e) => e.draw()); //dibuja cada obstáculo
+    this.electros.forEach((e) => e.draw()); //dibuja cada obstáculo
     this.bars.forEach((e) => e.draw()); //dibuja cada obstáculo
     this.steps.forEach((e) => e.draw()); //dibuja cada obstáculo
     this.levelBalls.forEach((e) => e.draw()); //dibuja cada obstáculo
     if (this.player.life.total <= 0) this.gameOver(); // cuando el player muere se llama a la funcion gameOver()
-
+    demoMessageDisable();
   }
   move() {
     this.player.move(); //muve al personaje y todo lo que se mueve en la clase de personaje
@@ -216,6 +218,7 @@ class Game {
     this.levers.forEach((e) => e.move()); //mueve los obstáculos
     this.coins.forEach((e) => e.move()); //mueve los obstáculos
     this.hooks.forEach((e) => e.move()); //mueve los obstáculos
+    this.electros.forEach((e) => e.move()); //mueve los obstáculos
     this.bars.forEach((e) => e.move()); //mueve los obstáculos
     this.steps.forEach((e) => e.move()); //mueve los obstáculos
     this.puffBubbles.forEach((e) => e.move()); //mueve los obstáculos
@@ -515,6 +518,14 @@ class Game {
             hook.dispose = false;
       } else return true;
     });
+    this.electros.forEach((electro) => {
+      if (electro.collides(this.player)) {
+            // eventInfo(munHook$$)
+            this.player.electroAmount += 5;
+            this.electroItemSound.play()
+            electro.dispose = false;
+      } else return true;
+    });
 
     //que el item se quede sobre la plataforma al caer
     itemDropOnPlatform(this.flamethrowers, this.platforms);
@@ -529,6 +540,7 @@ class Game {
     itemDropOnPlatform(this.steps, this.platforms);
     itemDropOnPlatform(this.levers, this.platforms);
     itemDropOnPlatform(this.hooks, this.platforms);
+    itemDropOnPlatform(this.electros, this.platforms);
 
     itemDropOnPlatform(this.flamethrowers, this.boxes);
     itemDropOnPlatform(this.machineguns, this.boxes);
@@ -542,6 +554,7 @@ class Game {
     itemDropOnPlatform(this.steps, this.boxes);
     itemDropOnPlatform(this.levers, this.boxes);
     itemDropOnPlatform(this.hooks, this.boxes);
+    itemDropOnPlatform(this.electros, this.boxes);
 
     //para que caiga lentamente por los escalenos antes de llegar al suelo
     itemDropOnStairs(this.flamethrowers, this.stairs);
@@ -555,6 +568,7 @@ class Game {
     itemDropOnStairs(this.steps, this.stairs);
     itemDropOnStairs(this.levers, this.stairs);
     itemDropOnStairs(this.hooks, this.stairs);
+    itemDropOnStairs(this.electros, this.stairs);
     // boxes...
     // boxes...
 
@@ -579,7 +593,7 @@ class Game {
           addBubble1(this.ctx, this.bubbles)
         }
         if (box.containsRandom) {
-          randomLootFromBox(this.ctx,this.flamethrowers,this.healings,this.bars,this.auras,this.machineguns,this.blasters,this.coins,this.steps,this.hooks, box.x ,box.y );
+          randomLootFromBox(this.ctx,this.flamethrowers,this.healings,this.bars,this.auras,this.machineguns,this.blasters,this.coins,this.steps,this.hooks,  box.x ,box.y );
         } else {
           specificLootFromBox(this.ctx, box.lootNumber,this.flamethrowers,this.healings,this.bars,this.auras,this.machineguns,this.blasters,this.coins,this.steps, this.hooks, box.x + box.w/2-3, box.y + box.h);
         }
@@ -754,6 +768,7 @@ if(this.player.wasNotDamaged) {
   }
 
   checkLevelsState(){
+    console.log('%cMyProject%cline:780%cthis.gameTim', 'color:#fff;background:#ee6f57;padding:3px;border-radius:2px', 'color:#fff;background:#1f3c88;padding:3px;border-radius:2px', 'color:#fff;background:rgb(3, 22, 52);padding:3px;border-radius:2px', this.gameTime)
       if (this.bubbles.length <= 0 && this.gatlings.every(gat => gat.bubbleArray.length <= 0) && this.cannons.every(can => can.bubbleArray.length <= 0) && this.levers.every(lev =>lev.activated)) {
         this.levelBalls.forEach(e => (e.img.src = e.img.newSrc));
         this.levelBalls.forEach(e => (e.winCondition = true));
@@ -761,31 +776,38 @@ if(this.player.wasNotDamaged) {
 
     if(GAMELEVEL === 1987){
       if(demoPhase === 1){
-        if(this.platforms.length<=1){
+        if(this.platforms.length<=2 && this.electros.length <=0 && this.gameTime >= 800){
           this.emptyAllGameArrays()
+        this.emptyAllPlayerArrays()
+
           this.player.y = CTXH - 20;
           this.player.x = 50
           addDemo2(this.ctx, this.platforms, this.bouncers, this.stairs, this.levers)
           demoFunctions.mostrarVariosTextosPocoAPoco2()
           demoPhase = 2
+          this.player.g = 1;
         }
       }
       if(demoPhase === 2 && this.levers.every(lever =>lever.activated === true)){
           this.emptyAllGameArrays()
+        this.emptyAllPlayerArrays()
+
           demoFunctions.mostrarVariosTextosPocoAPoco3()
           addDemo3(this.ctx, this.platforms, this.levers, this.bubbles, this.levelBalls)
           demoPhase = 3;
       }
       if(demoPhase === 4){
+        this.emptyAllGameArrays()
+        this.emptyAllPlayerArrays()
           demoFunctions.mostrarVariosTextosPocoAPoco4()
           addDemo4(this.ctx, this.platforms, this.levers, this.bubbles, this.levelBalls, this.boxes)
           demoPhase = 5;
       }
       if(demoPhase === 6){
-      // this.emptyAllGameArrays()
-      // addDemo5(this.ctx, this.platforms, this.levers, this.levelBalls,this.boxes, this.gatlings, this.darkBubbles)
-      // demoPhase = 6;
-
+      this.emptyAllGameArrays()
+      this.emptyAllPlayerArrays()
+      addDemo5(this.ctx, this.platforms, this.levers, this.levelBalls,this.boxes, this.darkBubbles)
+      demoPhase = 7;
       }
     }
 
@@ -843,13 +865,13 @@ if(this.player.wasNotDamaged) {
     this.levers = [];
     this.coins = [];
     this.hooks = [];
+    this.electros = [];
   }
   emptyAllPlayerArrays(){
     this.player.bulletArray = [];
     this.player.bulletBarArray = [];
     this.player.bulletFireArray = [];
-    this.player.fireAmount =0; 
-    this.player.barAmount = 0;
+
   }
 
   keyUp(key){

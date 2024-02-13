@@ -60,6 +60,7 @@
   <script src="./game/items/levelBall.js" defer></script>
   <script src="./game/items/bars.js" defer></script>
   <script src="./game/items/hook.js" defer></script>
+  <script src="./game/items/electro.js" defer></script>
   <script src="./game/items/steps.js" defer></script>
   <script src="./game/items/aura.js" defer></script>
   <script src="./game/items/box.js" defer></script>
@@ -79,7 +80,7 @@
 
 <canvas id="canvas"></canvas>
 <div class="icons-btn">
-  <img  id="start-background" src="/public//Imagenes/background/backgroundStart.jpeg" alt="">
+  <img  id="start-background" src="/public//Imagenes/background/backgroundPang.webp" alt="">
   <button id="pang-start">Partida Nivel 1</button>
   <button id="pang-startInfinite">Niveles Infinitos</button>
   <button id="pang-demo">Entrenamiento!</button>
@@ -88,12 +89,13 @@
 </div>
 <div>
   <button   class="icons-btn" id="instrucciones-btn">Instrucciones</button>
+  <img  id="arrow-bubbles" src="/public/Imagenes/arrowBubbles.png" alt="arrow bubbles">
   <img id="instrucciones-info-1" src="/public/Imagenes/stats/instructionsShoots1.png" alt="instrucciones">
   <img id="instrucciones-info-2" src="/public/Imagenes/stats/instructionsMoves1.png" alt="instrucciones">
   <img id="changing-level-img" src="/public/Imagenes/background/background0.jpeg" alt="instrucciones">
   <div>
-    <img class="ayudas introAyuda1" src="/public/Imagenes/stats/playerTalkIntroAyuda1.png" alt="Player Ayuda 1">
-    <img class="ayudas introAyuda2" src="/public/Imagenes/stats/playerTalkIntroAyuda2.png" alt="Player Ayuda 2">
+    <img class="ayudasDemo introAyuda1" src="/public/Imagenes/stats/trainingInfo1.png" alt="Player Ayuda 1">
+    <img class="ayudasDemo introAyuda2" src="/public/Imagenes/stats/trainingInfo2.png" alt="Player Ayuda 2">
     <img class="ayudas munAmetralladora" src="/public/Imagenes/stats/playerTalkMunAmetralladora.png" alt="Player Ayuda 3">
     <img class="ayudas munCadena" src="/public/Imagenes/stats/playerTalkMunCadena.png" alt="Player Ayuda 4">
     <img class="ayudas munEscudo" src="/public/Imagenes/stats/playerTalkMunEscudo.png" alt="Player Ayuda 5">
@@ -102,7 +104,7 @@
     <img class="ayudas munSalud" src="/public/Imagenes/stats/playerTalkMunSalud.png" alt="Player Ayuda 8">
     <img class="ayudas munHook" src="/public/Imagenes/stats/playerTalkMunHooks.png" alt="Player Ayuda 9">
     <img class="ayudas munStep" src="/public/Imagenes/stats/playerTalkMunSteps.png" alt="Player Ayuda 9">
-    <button  class="ayudas-btn icons-btn"><i class="fa-regular fa-comment"></i></button>
+    <!-- <button  class="ayudas-btn icons-btn"><i class="fa-regular fa-comment"></i></button> -->
   </div>
 </div>
   <button id="toggle-shop"><i class="fa-solid fa-shop"></i></button>
@@ -184,10 +186,19 @@
       <h1 id="demo-text1" style="display: none">Ahora a entrenar!</h1>
     </div>
     <div>
-      <h1 id="demo-text2" style="display: none">Voy a mostrarte lo necesario para sobrevivir</h1>
+      <h1 id="demo-text2" style="display: none">Para conocer tus movimientos y habilidades básicas</h1>
     </div>
     <div>
-      <h1 id="demo-text3" style="display: none">al ataque de BubbleMaster y derrotarlo!</h1>
+      <h1 id="demo-text3" style="display: none">pulsa el icono  i  a la izquierda!</h1>
+    </div>
+    <div>
+      <h1 id="demo-text31" style="display: none">Puedes pausar,</h1>
+    </div>
+    <div>
+      <h1 id="demo-text32" style="display: none">Reiniciar</h1>
+    </div>
+    <div>
+      <h1 id="demo-text33" style="display: none">e incluso reintentar un nivel del juego hasta 2 veces si algo ha salido mal!</h1>
     </div>
     <div>
       <h1 id="demo-text4" style="display: none">Hay varios tipos de plataformas por el mundo</h1>
@@ -200,6 +211,12 @@
     </div>
     <div>
       <h1 id="demo-text7" style="display: none">se rompen con disparos o enemigos poderosos</h1>
+    </div>
+    <div>
+      <h1 id="demo-text71" style="display: none">y otros podrás activar con una descarga eléctrica!</h1>
+    </div>
+    <div>
+      <h1 id="demo-text72" style="display: none">pulsa H sobre la plataforma pequeña tras recoger una batería.</h1>
     </div>
     <div>
       <h1 id="demo-text8" style="display: none">Bien! También hay obstaculos emburbujados</h1>
