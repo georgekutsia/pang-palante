@@ -3,6 +3,7 @@ const ctx = canvas.getContext("2d");
 const game = new Game(ctx);
 //gamOn es para indicar que se ha acabado el juego, que otras formas me han fallado
 
+let arrowBubbles$$ = document.getElementById("arrow-bubbles")
 let saltarNivel$$ = document.getElementById("saltar-nivel");
 let startInfinite$$ = document.getElementById("pang-startInfinite");
 let startDemo$$ = document.getElementById("pang-demo");
@@ -20,7 +21,7 @@ let levelChangeText2$$ = document.getElementById("level-change-text2");
 let levelChangeText3$$ = document.getElementById("level-change-text3");
 let levelChangeText4$$ = document.getElementById("level-change-text4");
 
-let infoPlayerBtn1$$ = document.querySelector(".ayudas-btn")
+// let infoPlayerBtn1$$ = document.querySelector(".ayudas-btn")
 let infoPlayer1$$ = document.querySelector(".introAyuda1")
 let infoPlayer2$$ = document.querySelector(".introAyuda2")
 let munAmetralladora$$ = document.querySelector(".munAmetralladora")
@@ -65,7 +66,7 @@ start$$.addEventListener("click", function () {
   startBackground$$.style.display = "none";
   instruccionesInfo1$$.style.display = "none";
   instruccionesInfo2$$.style.display = "none";
-  infoPlayerBtn1$$.style.display = "block";
+  // infoPlayerBtn1$$.style.display = "block";
   ammosCount$$.style.display = "block";
   toggleShop$$.style.display = "block";
   game.isInfiniteChanging = false;
@@ -81,7 +82,7 @@ start$$.addEventListener("click", function () {
       start$$.style.left = "1vw";
       start$$.style.top = "35vh";
       start$$.style.transform = "translate(0)";
-      instruccionesBtn$$.style.top = "25vh";
+      instruccionesBtn$$.style.top = "16vh";
       instruccionesBtn$$.style.left = "1vw";
       instruccionesBtn$$.style.transform = "translate(0)";
       instruccionesBtn$$.innerHTML = '<i class="fa-solid fa-info"></i>';  
@@ -100,7 +101,7 @@ startInfinite$$.addEventListener("click", function () {
   startBackground$$.style.display = "none";
   instruccionesInfo1$$.style.display = "none";
   instruccionesInfo2$$.style.display = "none";
-  infoPlayerBtn1$$.style.display = "block";
+  // infoPlayerBtn1$$.style.display = "block";
   ammosCount$$.style.display = "block";
   toggleShop$$.style.display = "block";
   game.isInfiniteChanging = true;
@@ -116,7 +117,7 @@ startInfinite$$.addEventListener("click", function () {
       startInfinite$$.style.left = "1vw";
       startInfinite$$.style.top = "35vh";
       startInfinite$$.style.transform = "translate(0)";
-      instruccionesBtn$$.style.top = "25vh";
+      instruccionesBtn$$.style.top = "16vh";
       instruccionesBtn$$.style.left = "1vw";
       instruccionesBtn$$.style.transform = "translate(0)";
       instruccionesBtn$$.innerHTML = '<i class="fa-solid fa-info"></i>';  
@@ -135,7 +136,7 @@ startDemo$$.addEventListener("click", function () {
   startBackground$$.style.display = "none";
   instruccionesInfo1$$.style.display = "none";
   instruccionesInfo2$$.style.display = "none";
-  infoPlayerBtn1$$.style.display = "block";
+  // infoPlayerBtn1$$.style.display = "block";
   ammosCount$$.style.display = "block";
   toggleShop$$.style.display = "block";
   game.isInfiniteChanging = false;
@@ -151,7 +152,7 @@ startDemo$$.addEventListener("click", function () {
       startDemo$$.style.left = "1vw";
       startDemo$$.style.top = "35vh";
       startDemo$$.style.transform = "translate(0)";
-      instruccionesBtn$$.style.top = "25vh";
+      instruccionesBtn$$.style.top = "16vh";
       instruccionesBtn$$.style.left = "1vw";
       instruccionesBtn$$.style.transform = "translate(0)";
       instruccionesBtn$$.innerHTML = '<i class="fa-solid fa-info"></i>';  

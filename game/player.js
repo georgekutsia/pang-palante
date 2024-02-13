@@ -23,10 +23,10 @@ class Player {
     this.frameAmount = 5;
     this.immune = false; // al recibir daño se vuelve inmune durante unos segundos
     this.fading = 0; //necesario para el parpadeo del personaje cuando es inmune
-    this.electricCharge = 30;
     this.charging = 0;  // acumula la carga, lo que dibuja el semicírculo
     this.chargingFires = false; //   se pone en true mientras carga el disparo fuerte de fuego
     this.megaFireBlaster = false; //al ponerse en true, se puede activar la K
+    this.electroAmount = 10; //cantidad de carga eléctrica que tiene
     this.megaFireBlasterAmount = 31; //la carga del blaster. cada 10, es una bola
     this.fireAmount = 20; //cantidad de fuegos que puedes disparar con N
     this.hookAmount = 10; // la cantidad de hooks con J
@@ -363,11 +363,11 @@ handleRightDodge = (event) =>{ //*
     if(this.charging >=1){
       this.charger.draw(this.x + 5, this.y + 10, this.charging, 16, 15, "yellow", "red")
     }
-    if(this.electricCharge >=1){
-      this.charger.draw(this.x + 5, this.y + 10, this.electricCharge, 12, 13, "blue", "green")
+    if(this.electroAmount >=1){
+      this.charger.draw(this.x + 5, this.y + 10, this.electroAmount, 12, 13, "blue", "green")
     }
-    if(this.electricCharge <=0) {this.electricShieldIsActive = false; H = 0}
-    if(this.electricCharge > 1) H = 72
+    if(this.electroAmount <=0) {this.electricShieldIsActive = false; H = 0}
+    if(this.electroAmount > 1) H = 72
     if(this.immune){
       this.fading++
       if(this.fading >= 20){
@@ -408,7 +408,7 @@ handleRightDodge = (event) =>{ //*
         this.w * 2,
         this.h * 2
       );
-      this.electricCharge -= 0.05;
+      this.electroAmount -= 0.05;
     }
 
   }
@@ -586,7 +586,7 @@ handleRightDodge = (event) =>{ //*
       } else if(this.clickedH === true){
         this.electricShieldIsActive = false;
         this.clickedH = false;
-        this.electricCharge = this.electricCharge
+        this.electroAmount = this.electroAmount
       }
       }
   }
