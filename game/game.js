@@ -108,7 +108,7 @@ class Game {
           this.levelBalls = [];
           this.emptyAllGameArrays()
           this.emptyAllPlayerArrays()
-          addDemo5(this.ctx, this.platforms, this.levers, this.levelBalls,this.boxes, this.darkBubbles, this.spikes)
+          addDemo5(this.ctx, this.platforms, this.levers, this.levelBalls,this.boxes, this.darkBubbles, this.spikes, this.healings)
           demoPhase = 7;
 
           // infoIntro1()
@@ -255,6 +255,13 @@ class Game {
       } else return true;
     });
 
+    this.spikes.forEach((spike) => {
+        this.platforms.forEach((platform) => {
+            if(spike.collides(platform)){
+              spike.vx = platform.vx
+            }
+        })
+    })
     this.stairs.forEach((stair) => {//player con stair
       if (stair.collidesTop(this.player)) {
         this.player.vy = 0;
@@ -351,6 +358,8 @@ class Game {
             if (bullet.collides(bubble)) {
               bubble.w += 2;
               bubble.h += 2;
+              bubble.x -= 1;
+              bubble.y -= 1;
               this.darkBubbbleHit.play()
               if(bubble.w >= CTXW/4){
                 darkBubbleExplosion(this.darkBubbleExplosion, bubble, this.bubbles, this.puffBubbles)//explota y genera bubbles pequeños
@@ -604,11 +613,16 @@ class Game {
           if(box.boxLevel=== 0){
           randomLootFromBox(this.ctx,this.flamethrowers,this.healings,this.bars,this.auras,this.machineguns,this.blasters,this.coins,this.steps,this.hooks,  box.x-5 ,box.y-5 );
           }
+          for (let i = 0; i < box.amountOfLoot; i++) {
+          randomLootFromBox(this.ctx,this.flamethrowers,this.healings,this.bars,this.auras,this.machineguns,this.blasters,this.coins,this.steps,this.hooks,  box.x-5 ,box.y-5 );
+          }
         } else {
-          specificLootFromBox(this.ctx, box.lootNumber,this.flamethrowers,this.healings,this.bars,this.auras,this.machineguns,this.blasters,this.coins,this.steps, this.hooks, box.x + box.w/2-3, box.y + box.h);
+          specificLootFromBox(this.ctx, box.lootNumber,this.flamethrowers,this.healings,this.bars,this.auras,this.machineguns,this.blasters,this.coins,this.steps, this.hooks,this.electros, box.x + box.w/2-3, box.y + box.h);
           if(box.boxLevel=== 0){
-          specificLootFromBox(this.ctx, box.lootNumber,this.flamethrowers,this.healings,this.bars,this.auras,this.machineguns,this.blasters,this.coins,this.steps, this.hooks, box.x + box.w/2+3, box.y + box.h/2);
-
+            specificLootFromBox(this.ctx, box.lootNumber,this.flamethrowers,this.healings,this.bars,this.auras,this.machineguns,this.blasters,this.coins,this.steps, this.hooks,this.electros, box.x + box.w/2+3, box.y + box.h/2);
+          }
+          for (let i = 0; i < box.amountOfLoot; i++) {
+            specificLootFromBox(this.ctx, box.lootNumber,this.flamethrowers,this.healings,this.bars,this.auras,this.machineguns,this.blasters,this.coins,this.steps, this.hooks,this.electros, box.x + box.w/2-5 + i*2, box.y + box.h/2 -i*4);      
           }
         }
       }

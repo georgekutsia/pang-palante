@@ -12,7 +12,7 @@ class Spikes {
     this.damage = 0.25;
     this.active = false;
     this.isMoving = isMoving || false;
-    this.vx = vx || 0.01
+    this.vx = vx || 0
     this.vxx = vx
   }
 
@@ -32,8 +32,8 @@ class Spikes {
   }
 
   move() {
+    this.x += this.vx;
     if(this.isMoving){
-      this.x += this.vx;
       if(this.x + this.w >= CTXW){
         this.vx = -this.vxx;
       } else if(this.x <= 3){

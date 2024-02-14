@@ -112,32 +112,40 @@ function addDemo4(ctx, platforms, levers, bubbles, levelBalls, boxes){
   platforms.push( platform1, platform2, platform3,platform4);
 }
 //!demo5
-function addDemo5(ctx, platforms, levers, levelBalls, boxes, darkBubbles, spikes){
+function addDemo5(ctx, platforms, levers, levelBalls, boxes, darkBubbles, spikes, healings){
 
-  const box1 = new Box(ctx, 60, 60,  3, false, 2)
-  const box2 = new Box(ctx, 60, 30,  2, false, 3)
-  const box3 = new Box(ctx, 90, 60,  3, false, 3)
-  const box4 = new Box(ctx, 120, 60,  1, false, 3)
-  const box5 = new Box(ctx, 150, 60,  0, false, 3)
-  boxes.push(box1,box2,box3,box4,box5,)
+  const box0 = new Box(ctx, 140, 20,  3, false, 1, false, 4)
+  const box1 = new Box(ctx, 105, 20,  3, false, 1, false, 4)
+  const box2 = new Box(ctx, 175, 20,  3, false, 1, false, 4)
+  const box3 = new Box(ctx, 15, 50,  1, false, 1)
+  const box4 = new Box(ctx, CTXW-30, 50,  1, false, 10, true, 2 )
+  const box5 = new Box(ctx, 60, 40,  0, false, 8, true, 3)
+  const box6 = new Box(ctx, CTXW - 80, 40,  0, false, 8, true, 3)
+  boxes.push(box0, box1, box2, box3,box4,box5,box6)
+  
 
-  const levelBall1 = new LevelBall(ctx,220, 0)
+  const levelBall1 = new LevelBall(ctx, CTXW-30, 0)
   levelBalls.push(levelBall1)
-  let lev1 = new Lever(ctx, CTXW-30, 0)
-  let lev2 = new Lever(ctx, 15, 0)
-  let lev3 = new Lever(ctx, CTXW/2-10, 0)
+  let lev1 = new Lever(ctx, CTXW-30, 45)
+  let lev2 = new Lever(ctx, 15, 45)
+  let lev3 = new Lever(ctx, CTXW/2-10, 45)
   levers.push(lev1, lev2, lev3);
   const platform1 = new Platform(ctx, 1, 90, 35, 5, "../public/Imagenes/obstacles/platformSolid1.png", false, false, true);
-  const platform2 = new Platform(ctx, 40, 120, 45, 5, "../public/Imagenes/obstacles/platformSolid2.png", false, false, true, 0, 0, 80, 190, 0, 0, true);
+  const platform2 = new Platform(ctx, 40, 120, 45, 5, "../public/Imagenes/obstacles/platformSolid2.png", false, false, true, 0, 0, 1, 110, 0, 0, true);
   const platform3 = new Platform(ctx, CTXW-36, 90, 35, 5, "../public/Imagenes/obstacles/platformSolid3.png", false, false, true,);
-  const platform4 = new Platform(ctx, CTXW-95, 120, 45, 5, "../public/Imagenes/obstacles/platformSolid4.png", false, false, true, 0, 0, 10, 230, 0, 0, true);
-  platforms.push( platform1, platform2, platform3,platform4);
-  let bu = new DarkBubble(ctx, CTXW/2 - 20, 20, 30, 30, 0.00000001, 0.0000001, 0.000002,)
+  const platform4 = new Platform(ctx, CTXW-95, 120, 45, 5, "../public/Imagenes/obstacles/platformSolid4.png", false, false, true, 0, 0, 150, 300, 0, 0, true);
+  const platform5 = new Platform(ctx, CTXW-45, 30, 35, 5, "../public/Imagenes/obstacles/platformSolid4.png", false, false, true, 0, 0, 150, 300, 0, 0, true);
+  platforms.push( platform1, platform2, platform3,platform4,platform5);
+  let bu = new DarkBubble(ctx, CTXW/2 - 20, 50, 30, 30, 0.00000001, 0.0000001, 0.000002,)
   darkBubbles.push(bu)
   const spike1 = new Spikes(ctx, 55, 110)
   const spike2 = new Spikes(ctx, CTXW-90, 110)
   spikes.push(spike1, spike2)
-
+  const heal1 = new Healing(ctx, 55, 90, 0.00001)
+  const heal2 = new Healing(ctx, 70, 90, 0.00001)
+  const heal3 = new Healing(ctx, 210, 90, 0.00001)
+  const heal4 = new Healing(ctx, 225, 90, 0.00001)
+  healings.push(heal1, heal2, heal3, heal4)
 }
 
 

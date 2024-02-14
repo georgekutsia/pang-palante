@@ -1,37 +1,16 @@
 #ammos-count{
   position: absolute;
-  top: 24vw;
-  left: 1vw;
+  top: 15vw;
+  left: 0.1vw;
 }
 
-#bar-img{
-  margin-top: calc(5px + 0.5vw);
+.weaponImg-info{
+  margin-top: calc(1px + 0.2vh);
   width: calc(8px + 0.5vw);
-  height: calc(28px + 0.5vw);
-  display: none;
-}
-#fire-img{
-  margin-top: calc(5px + 0.5vw);
-  width: calc(8px + 0.5vw);
-  height: calc(28px + 0.5vw);
-  display: none;
-}
-#hook-img{
-  margin-top: calc(5px + 0.5vw);
-  width: calc(8px + 0.5vw);
-  height: calc(28px + 0.5vw);
-  display: none;
-}
-#step-img{
-  margin-top: calc(5px + 0.5vw);
-  width: calc(15px + 0.5vw);
   height: calc(28px + 0.5vw);
   display: none;
 }
 
-#bar-info{
-  font-size: calc(10px + 1vw);
-}
 #ammos-count div{
   display: flex;
 }
