@@ -1,5 +1,5 @@
 class Box {
-  constructor(ctx, x, y, boxLevel, containsRandom, lootNumber, bubblePopup) {
+  constructor(ctx, x, y, boxLevel, containsRandom, lootNumber, bubblePopup, amountOfLoot) {
     this.ctx = ctx;
     this.x = x || 100;
     this.y = y || 20;
@@ -20,7 +20,8 @@ class Box {
     this.burningTick = 0;
     this.burning = false;
     this.burningForce = 0;
-    this.dam = 0;
+    this.damage0 = 0;
+    this.amountOfLoot = amountOfLoot || 0;
 
 
     this.boxHitSound = new Audio("/public/sounds/box/boxHit.mp3")
@@ -129,11 +130,11 @@ class Box {
         this.burningBox.framey = 0
         this.burningBox.framex = 0;
         if(this.boxLevel===0) {
-          this.dam +=1;
-          if(this.dam >=3){
+          this.damage0 +=1;
+          if(this.damage0 >=3){
             this.boxImg.frame+=1;
             this.boxImpactMetalic.play();
-            this.dam = 0;
+            this.damage0 = 0;
           }
         }
         if(this.boxLevel===1) {
@@ -164,11 +165,11 @@ class Box {
   }
   boxHit(){
     if(this.boxLevel===0) {
-      this.dam +=1;
-      if(this.dam >=3){
+      this.damage0 +=1;
+      if(this.damage0 >=3){
         this.boxImg.frame+=1;
         this.boxImpactMetalic.play();
-        this.dam = 0;
+        this.damage0 = 0;
       }
     }
     if(this.boxLevel===1) {

@@ -49,7 +49,7 @@ function levelChangeMessagesDisplay(){
   levelChangeText4$$.style.display = "none";
 }
 
-function specificLootFromBox(ctx, specificLoot, flamethrowers, healings, bars, auras,machineguns,blasters, coins, steps, hooks,x, y){
+function specificLootFromBox(ctx, specificLoot, flamethrowers, healings, bars, auras,machineguns,blasters, coins, steps, hooks, electros, x, y){
   if(specificLoot === 1){
     const flamethrower = new Flamethrower(ctx, x, y  )
     flamethrowers.push(flamethrower)
@@ -71,12 +71,15 @@ function specificLootFromBox(ctx, specificLoot, flamethrowers, healings, bars, a
   }else if(specificLoot === 7){
     const coin = new Coins(ctx, x, y)
     coins.push(coin)
-  }else if(randomItem === 8){
+  }else if(specificLoot === 8){
     const step = new Steps(ctx, x, y)
     steps.push(step)
-  }else if(randomItem === 9){
+  }else if(specificLoot === 9){
     const hook = new Hook(ctx, x, y)
     hooks.push(hook)
+}else if(specificLoot === 10){
+  const electro = new Electro(ctx, x, y)
+  electros.push(electro)
 }
 }
 
