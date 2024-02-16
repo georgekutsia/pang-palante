@@ -18,11 +18,34 @@ function infoIntro1(){
 //   infoIntro1()
 // })
 
+let moved = false
 
-function eventInfo(event$$){
+function eventInfo(event$$) {
   let isActive = false; // Variable para seguir el estado del elemento
 
   event$$.style.display = "block";
+  closeButton$$.style.display = "block"
+  moveButton$$.style.display = "block"
+  closeButton$$.addEventListener("click", function(){
+  event$$.style.display = "none";
+  closeButton$$.style.display = "none"
+  moveButton$$.style.display = "none"
+  })
+  moveButton$$.addEventListener("click", function(){
+  if(!moved){
+    event$$.style.right = "18%";
+    closeButton$$.style.right = "12%"
+    moveButton$$.style.right = "12%"
+    moveButton$$.innerText = "<-"
+    moved = true;
+  }else if(moved){
+    event$$.style.right = "35%";
+    closeButton$$.style.right = "29%"
+    moveButton$$.style.right = "29%"
+    moveButton$$.innerText = "->";
+    moved = false;
+  }
+  })
 
   event$$.addEventListener("click", () => {
     if (!isActive) {
@@ -36,13 +59,13 @@ function eventInfo(event$$){
       event$$.style.top = ""; 
       isActive = false; 
     }
-    event$$.addEventListener("dblclick", () => {
+  });
+
+  setTimeout(() => {
     event$$.style.display = "none";
-    })
-    setTimeout(() => {
-    event$$.style.display = "none"
-    }, 5500);
-})}
+  }, 15000);
+}
+
 
 
 //shop bts
@@ -264,4 +287,7 @@ game.player.fireImg$$.addEventListener("click", ()=>{
 })
 game.player.barImg$$.addEventListener("click", ()=>{
   eventInfo(munCadena$$)
+})
+game.player.stepImg$$.addEventListener("click", ()=>{
+  eventInfo(munStep$$)
 })

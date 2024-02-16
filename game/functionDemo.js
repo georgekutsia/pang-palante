@@ -130,11 +130,24 @@ const demoFunctions = {
     document.getElementById("demo-text17").style.display = "none";
     document.getElementById("demo-text18").style.display = "none";
     textoPianoPiano("demo-text19");
-    // setTimeout(() => {
-    //   textoPianoPiano("demo-text20");
-    //   }, 2000);
+    setTimeout(() => {
+      textoPianoPiano("demo-text20");
+      }, 2000);
+  },
+  mostrarVariosTextosPocoAPoco5() {
+    document.getElementById("demo-text19").style.display = "none";
+    document.getElementById("demo-text20").style.display = "none";
+    textoPianoPiano("demo-text21");
+    setTimeout(() => {
+      textoPianoPiano("demo-text22");
+      }, 2000);
   },
 };
+
+
+
+
+
 
 function demoMessageDisable() {
   if (demoPhase >= 2) {
@@ -169,5 +182,7 @@ function demoMessageDisable() {
 
   if (demoPhase >= 6) {
     document.getElementById("demo-text19").style.display = "none";
+    document.getElementById("demo-text20").style.display = "none";
   }
+
 }

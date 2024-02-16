@@ -1,6 +1,8 @@
-const ctx = canvas.getContext("2d");
+const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d');
 
 const game = new Game(ctx);
+
 //gamOn es para indicar que se ha acabado el juego, que otras formas me han fallado
 
 let arrowBubbles$$ = document.getElementById("arrow-bubbles")
@@ -13,6 +15,9 @@ let restart$$ = document.getElementById("pang-restart");
 let retry$$ = document.getElementById("pang-retry");
 let retryAmount$$ = document.getElementById("retry-amount");
 let startBackground$$ = document.getElementById("start-background");
+let gameOverBackground$$ = document.getElementById("gameOver-background");
+let gameOverBackgroundText$$ = document.getElementById("gameOver-backgroundText");
+let gameOverX$$ = document.getElementById("gameOver-X");
 let instruccionesBtn$$ = document.getElementById("instrucciones-btn");
 let instruccionesInfo1$$ = document.getElementById("instrucciones-info-1");
 let instruccionesInfo2$$ = document.getElementById("instrucciones-info-2");
@@ -23,6 +28,8 @@ let levelChangeText3$$ = document.getElementById("level-change-text3");
 let levelChangeText4$$ = document.getElementById("level-change-text4");
 
 // let infoPlayerBtn1$$ = document.querySelector(".ayudas-btn")
+let closeButton$$ = document.querySelector(".closeButton");
+let moveButton$$ = document.querySelector(".moveButton");
 let infoPlayer1$$ = document.querySelector(".introAyuda1")
 let infoPlayer2$$ = document.querySelector(".introAyuda2")
 let munAmetralladora$$ = document.querySelector(".munAmetralladora")
@@ -223,4 +230,10 @@ instruccionesInfo1$$.addEventListener("dblclick", () => {
 
 saltarNivel$$.addEventListener("click",()=>{
   game.levelChange()
+})
+
+gameOverX$$.addEventListener("click",()=>{
+  gameOverBackground$$.style.display = "none"
+  gameOverBackgroundText$$.style.display = "none"
+  gameOverX$$.style.display = "none"
 })

@@ -5,7 +5,7 @@
   min-height: 110px;
   position: absolute; 
   right: 35%;
-  top: 1vw;
+  top: 2vh;
   transform: translate(50%, 0);
 }
 .ayudasDemo{
@@ -92,4 +92,35 @@ padding: 3px 8px;
   100% {
     transform: scale(1.2); 
   }
+}
+
+
+/* Estilo para el botón de cierre (X) */
+.closeButton {
+  position: absolute;
+  cursor: pointer;
+  right: 29%;
+  top: 1vh;
+  color: white;
+  text-shadow: 1px 1px 1px red;
+  font-size: 40px;
+  display: none;
+transition: 0.5s ease-in-out;
+
+}
+.moveButton {
+  position: absolute;
+  cursor: pointer;
+  right: 29%;
+  top: 3.5vh;
+  color: white;
+  text-shadow: 1px 1px 1px red;
+  font-size: 40px;
+  display: none;
+transition: 0.5s ease-in-out;
+
+}
+.closeButton:hover {
+  text-shadow: 3px 3px 3px red;
+  font-weight: 900;
 }
