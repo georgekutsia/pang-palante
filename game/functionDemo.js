@@ -18,6 +18,34 @@ function textoPianoPiano(cualquierIdDeTexto) {
 }
 
 const demoFunctions = {
+  demoOverText(){
+    setTimeout(() => {
+      textoPianoPiano("demoOver-text1");
+      demoFriend1$$.style.display = "block"
+    }, 1000);
+    setTimeout(() => {
+      document.getElementById("demoOver-text1").style.display = "none";
+      textoPianoPiano("demoOver-text2");
+    }, 2600);
+    setTimeout(() => {
+      demoFriend1$$.style.display = "none";
+      demoFriend2$$.style.display = "block";
+      document.getElementById("demoOver-text2").style.display = "none";
+      textoPianoPiano("demoOver-text3");
+    }, 4000);
+
+    setTimeout(() => {
+      document.getElementById("demoOver-text3").style.display = "none";
+      demoFriend2$$.style.display = "none"
+      demoFriend3$$.style.display = "block"
+      textoPianoPiano("demoOver-text4");
+    }, 7000);
+    setTimeout(() => {
+      document.getElementById("demoOver-text4").style.display = "none";
+      demoFriend3$$.style.display = "none"
+    }, 9900);
+  },
+
   mostrarVariosTextosPocoAPoco1() {
     setTimeout(() => {
       textoPianoPiano("demo-text1");
@@ -141,6 +169,21 @@ const demoFunctions = {
     setTimeout(() => {
       textoPianoPiano("demo-text22");
       }, 2000);
+    setTimeout(() => {
+      document.getElementById("demo-text21").style.display = "none";
+      document.getElementById("demo-text22").style.display = "none";
+    }, 6000);
+  },
+
+
+  mostrarVariosTextosPocoAPoco6() {
+    document.getElementById("demo-text19").style.display = "none";
+    document.getElementById("demo-text20").style.display = "none";
+    textoPianoPiano("demo-text21");
+    setTimeout(() => {
+      textoPianoPiano("demo-text22");
+      }, 2000);
+
   },
 };
 

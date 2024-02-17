@@ -7,6 +7,7 @@
   right: 35%;
   top: 2vh;
   transform: translate(50%, 0);
+  z-index: 23;
 }
 .ayudasDemo{
   width: calc(30px + 28vw);
@@ -105,22 +106,37 @@ padding: 3px 8px;
   text-shadow: 1px 1px 1px red;
   font-size: 40px;
   display: none;
-transition: 0.5s ease-in-out;
+  transition: 0.5s ease-in-out;
+  background-color: transparent;
+  border: none;
+  z-index: 24;
 
 }
 .moveButton {
   position: absolute;
   cursor: pointer;
   right: 29%;
-  top: 3.5vh;
+  top: 4.5vh;
   color: white;
   text-shadow: 1px 1px 1px red;
   font-size: 40px;
   display: none;
 transition: 0.5s ease-in-out;
+background-color: transparent;
+border: none;
+z-index: 24;
 
 }
 .closeButton:hover {
   text-shadow: 3px 3px 3px red;
   font-weight: 900;
+}
+
+.demoFriend{
+  width: 10vw;
+  margin: auto;
+}
+
+.demoFriend1, .demoFriend2, .demoFriend3{
+  display: none;
 }

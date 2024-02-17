@@ -60,6 +60,19 @@ body {
   min-width: 100px;
   min-height: 100px;
 }
+#demoOver-background{
+  position: absolute;
+  top: 1vw;
+  left: 50%;
+  transform: translate(-50%, 0%);
+  width: 86vw;
+  height: 41vw;
+  min-width: 100px;
+  min-height: 100px;
+  display: none;
+  opacity: 0;
+  transition: all 0.3s ease-in-out;
+}
 #gameOver-background{
   position: absolute;
   top: 0.1vw;
@@ -72,7 +85,8 @@ body {
   opacity: 0;
   transition: all 1s ease-in-out;
 }
- #gameOver-backgroundText{
+
+#gameOver-backgroundText{
   position: absolute;
   top: 37vh;
   left: 50%;

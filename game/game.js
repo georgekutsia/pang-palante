@@ -14,7 +14,7 @@ class Game {
     this.isInfiniteChanging;
     this.gameTime = 0; //cuando el juego se inicia va sumando. Se usa para llevar cuenta del tiempo
     this.otherBubbles = 0;
-
+    this.gameStarted = false;
     this.setListeners(); // para que se pueda usar el teclado
     this.bubbles = []; // un array que almacena todos los obstáculos que aparecen en la pantalla
     this.darkBubbles = []; // un array que almacena todos los obstáculos que aparecen en la pantalla
@@ -95,6 +95,8 @@ class Game {
   }
 
   start() {
+    if(!this.gameStarted){
+
       if (GAMELEVEL === 1) {
         level1(this.ctx, this.bubbles, this.platforms, this.levelBalls, this.boxes)
         setTimeout(() => {
@@ -122,6 +124,7 @@ class Game {
           //   addDemo1(this.ctx, this.platforms)
           // }, 32000);
         }
+      }
 
     this.interval = setInterval(() => {
       retryAmount$$.innerText = `${retry}`
@@ -175,6 +178,7 @@ class Game {
   }
 
   draw() {
+    console.log(ayudasInfoArray)
     this.background.draw(); //dibuja el background
     this.stairs.forEach((e) => e.draw());
     this.spikes.forEach((e) => e.draw());
@@ -828,6 +832,7 @@ if(this.player.wasNotDamaged) {
 
   checkLevelsState(){
     if (this.player.life.total <= 0){
+      this.player.life.total = 3;
       GAMELEVEL<= 1800 ? this.gameOver() : this.demoOver(); 
     }
       if (this.bubbles.length <= 0 && this.gatlings.every(gat => gat.bubbleArray.length <= 0) && this.cannons.every(can => can.bubbleArray.length <= 0) && this.levers.every(lev =>lev.activated)) {
@@ -883,7 +888,7 @@ if(this.player.wasNotDamaged) {
         this.levelBalls = [];
         this.emptyAllGameArrays()
         this.emptyAllPlayerArrays()
-        addDemo6(this.ctx, this.platforms, this.levers, this.levelBalls,this.boxes, this.gatlings);
+        addDemo6(this.ctx, this.platforms, this.levers, this.levelBalls,this.boxes, this.gatlings, this.cannons);
         demoPhase = 9;
       }
 
@@ -924,25 +929,27 @@ if(this.player.wasNotDamaged) {
     }
 
   demoOver(){
-    this.stop();
     this.emptyAllGameArrays();
-      if(demoPhase<=6){
+    demoFunctions.demoOverText()
+    demoOverBackground$$.style.display = 'block';
+    setTimeout(() => {
+    demoOverBackground$$.style.opacity = '1';
+    }, 1000);
+    setTimeout(() => {
+    demoOverBackground$$.style.display = 'none';
+      
+      if(demoPhase<5){
         this.levelBalls = [];
-        this.emptyAllGameArrays()
-        this.emptyAllPlayerArrays()
         demoFunctions.mostrarVariosTextosPocoAPoco3()
         addDemo3(this.ctx, this.platforms, this.levers, this.bubbles, this.levelBalls)
         demoPhase = 3;
-        this.start()
       } else {
         this.levelBalls = [];
-        this.emptyAllGameArrays()
-        this.emptyAllPlayerArrays()
         demoFunctions.mostrarVariosTextosPocoAPoco5()
         addDemo5(this.ctx, this.platforms, this.levers, this.levelBalls,this.boxes, this.darkBubbles, this.spikes, this.healings)
         demoPhase = 7;
-        this.start()
       }
+    }, 10000);
   }
   gameOver() {
     //Función para terminar el juego y vaciar todos los arrays.

@@ -15,6 +15,7 @@ let restart$$ = document.getElementById("pang-restart");
 let retry$$ = document.getElementById("pang-retry");
 let retryAmount$$ = document.getElementById("retry-amount");
 let startBackground$$ = document.getElementById("start-background");
+let demoOverBackground$$ = document.getElementById("demoOver-background");
 let gameOverBackground$$ = document.getElementById("gameOver-background");
 let gameOverBackgroundText$$ = document.getElementById("gameOver-backgroundText");
 let gameOverX$$ = document.getElementById("gameOver-X");
@@ -27,9 +28,6 @@ let levelChangeText2$$ = document.getElementById("level-change-text2");
 let levelChangeText3$$ = document.getElementById("level-change-text3");
 let levelChangeText4$$ = document.getElementById("level-change-text4");
 
-// let infoPlayerBtn1$$ = document.querySelector(".ayudas-btn")
-let closeButton$$ = document.querySelector(".closeButton");
-let moveButton$$ = document.querySelector(".moveButton");
 let infoPlayer1$$ = document.querySelector(".introAyuda1")
 let infoPlayer2$$ = document.querySelector(".introAyuda2")
 let munAmetralladora$$ = document.querySelector(".munAmetralladora")
@@ -55,6 +53,11 @@ let shopSuperGun3$$ = document.getElementById("shop-superGun3")
 let shopSuperGun4$$ = document.getElementById("shop-superGun4")
 let shopBarResistance$$ = document.getElementById("shop-barResistane")
 let shopElectricShield$$ = document.getElementById("shop-electricShield")
+
+
+let demoFriend1$$ = document.querySelector(".demoFriend1")
+let demoFriend2$$ = document.querySelector(".demoFriend2")
+let demoFriend3$$ = document.querySelector(".demoFriend3")
 
 
 let shopSpeedGun$$ = document.getElementById("shop-speedGun")
@@ -95,6 +98,7 @@ start$$.addEventListener("click", function () {
       instruccionesBtn$$.style.transform = "translate(0)";
       instruccionesBtn$$.innerHTML = '<i class="fa-solid fa-info"></i>';  
       start$$.innerHTML = '<i class="fa-solid fa-pause"></i>';  
+      game.gameStarted = true;
     }
   }
 );
@@ -130,6 +134,7 @@ startInfinite$$.addEventListener("click", function () {
       instruccionesBtn$$.style.transform = "translate(0)";
       instruccionesBtn$$.innerHTML = '<i class="fa-solid fa-info"></i>';  
       startInfinite$$.innerHTML = '<i class="fa-solid fa-pause"></i>';  
+      game.gameStarted = true;
     }
   }
 );
@@ -168,6 +173,7 @@ startDemo$$.addEventListener("click", function () {
       instruccionesBtn$$.style.transform = "translate(0)";
       instruccionesBtn$$.innerHTML = '<i class="fa-solid fa-info"></i>';  
       startDemo$$.innerHTML = '<i class="fa-solid fa-pause"></i>';  
+      game.gameStarted = true;
     }
   }
 )
@@ -185,12 +191,30 @@ restart$$.addEventListener("click", ()=>{
     window.location.reload();
 })
 retry$$.addEventListener("click", ()=>{
-  if(retry >=1){
-    retry -= 1; //hay 2 retries
-    game.player.wasNotDamaged = false; //para que no se sumen 20 monedas
-    GAMELEVEL = GAMELEVEL -1; //para que reinicie en el mismo nivel en el que está
-    game.levelChange();
+  if(GAMELEVEL <= 1800){
+    if(retry >=1){
+      retry -= 1; //hay 2 retries
+      game.player.wasNotDamaged = false; //para que no se sumen 20 monedas
+      GAMELEVEL = GAMELEVEL -1; //para que reinicie en el mismo nivel en el que está
+      game.levelChange();
   }
+} else {
+  if(demoPhase<=6){
+    game.levelBalls = [];
+    game.emptyAllGameArrays()
+    game.emptyAllPlayerArrays()
+    demoFunctions.mostrarVariosTextosPocoAPoco3()
+    addDemo3(game.ctx, game.platforms, game.levers, game.bubbles, game.levelBalls)
+    demoPhase = 3;
+  } else {
+    game.levelBalls = [];
+    game.emptyAllGameArrays()
+    game.emptyAllPlayerArrays()
+    demoFunctions.mostrarVariosTextosPocoAPoco5()
+    addDemo5(game.ctx, game.platforms, game.levers, game.levelBalls,game.boxes, game.darkBubbles, game.spikes, game.healings)
+    demoPhase = 7;
+  }
+}
 })
 
 instruccionesInfo2$$.addEventListener("click",()=>{

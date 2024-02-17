@@ -67,6 +67,7 @@ let barResistanceLevel = 0;
 let electricShieldlevel = 0;
 let shootFail = 0; //se acumula durante el nivel. si todas las balas aciertan, queda en 0. si el resultado es diferente, es que ha fallado
 
+let ayudasInfoArray = [];
 const CTXW = ctx.canvas.width
 const CTXH = ctx.canvas.height
 const gameSpeed = 60;
