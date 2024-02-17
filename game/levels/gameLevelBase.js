@@ -1,4 +1,6 @@
 // level(this.ctx, this.bubbles, this.platforms, this.bouncers,this.spikes, this.stairs, this.flamethrowers, this.machineguns, this.healings, this.bars, this.auras, this.boxes, this.blasters, this.levelBalls)
+//? 1- flamethrowers, 2-healings,  3- auras,  4-machineguns,  5- bars, 6-blasters, 7-coins, 8-steps, 9-hooks,10- electros
+
 
 function levelx( ctx, bubbles, platforms, bouncers,spikes, stairs, flamethrowers, machineguns, healings, auras, boxes, blasters, levelBalls){
   addPlatformsx(ctx, platforms)

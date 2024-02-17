@@ -18,34 +18,81 @@ function infoIntro1(){
 //   infoIntro1()
 // })
 
+let moved = false
 
-function eventInfo(event$$){
+function eventInfo(event$$) {
+  if (!ayudasInfoArray.includes(event$$.alt)) {
+  event$$.style.display = "block";
+
+
+  // una forma para que no se vuelva a generar el boton move y close si el array ya tiene esa palabra
+ayudasInfoArray.push(event$$.alt)
+const index = ayudasInfoArray.indexOf(event$$.alt);
+
+
   let isActive = false; // Variable para seguir el estado del elemento
 
-  event$$.style.display = "block";
+  const closeButton = document.createElement("button");
+  closeButton.textContent = "X";
+  closeButton.classList.add("closeButton"); // Añadir clase closeButton
+  closeButton.style.display = "block";
+  
+  closeButton.addEventListener("click", function() {
+    event$$.style.right = "35%";
+    event$$.style.display = "none";
+    if (index !== -1) {
+      ayudasInfoArray.splice(index, 1);
+    }
+    closeButton.remove();
+    moveButton.remove();
+  });
+  const moveButton = document.createElement("button");
+  moveButton.textContent = ">";
+  moveButton.classList.add("moveButton"); // Añadir clase moveButton
+  moveButton.style.display = "block";
+  moveButton.style.backgroundColor = "transparent";
+
+  moveButton.addEventListener("click", function() {
+    if (!moved) {
+      event$$.style.right = "18%";
+      closeButton.style.right = "12%";
+      moveButton.style.right = "12%";
+      moveButton.textContent = "<";
+      moved = true;
+    } else {
+      event$$.style.right = "35%";
+      closeButton.style.right = "29%";
+      moveButton.style.right = "29%";
+      moveButton.textContent = ">";
+      moved = false;
+    }
+  });
+
+  document.body.appendChild(closeButton);
+  document.body.appendChild(moveButton);
 
   event$$.addEventListener("click", () => {
     if (!isActive) {
       event$$.style.transform = "scale(2)";
-      event$$.style.right = "33%";
       event$$.style.top = "5vw";
       isActive = true; 
     } else {
       event$$.style.transform = ""; 
-      event$$.style.right = ""; 
       event$$.style.top = ""; 
       isActive = false; 
     }
-    event$$.addEventListener("dblclick", () => {
+  });
+
+  
+  setTimeout(() => {
     event$$.style.display = "none";
-    })
-    setTimeout(() => {
-    event$$.style.display = "none"
-    }, 5500);
-})}
+    event$$.style.right = "35%";
+    closeButton.remove();
+    moveButton.remove();
+  }, 15500);
+}
+}
 
-
-//shop bts
 
 shopShield$$.addEventListener("click", function(){
   if(coins >= 50){
@@ -264,4 +311,7 @@ game.player.fireImg$$.addEventListener("click", ()=>{
 })
 game.player.barImg$$.addEventListener("click", ()=>{
   eventInfo(munCadena$$)
+})
+game.player.stepImg$$.addEventListener("click", ()=>{
+  eventInfo(munStep$$)
 })

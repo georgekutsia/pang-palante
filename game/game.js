@@ -14,7 +14,7 @@ class Game {
     this.isInfiniteChanging;
     this.gameTime = 0; //cuando el juego se inicia va sumando. Se usa para llevar cuenta del tiempo
     this.otherBubbles = 0;
-
+    this.gameStarted = false;
     this.setListeners(); // para que se pueda usar el teclado
     this.bubbles = []; // un array que almacena todos los obstáculos que aparecen en la pantalla
     this.darkBubbles = []; // un array que almacena todos los obstáculos que aparecen en la pantalla
@@ -39,6 +39,7 @@ class Game {
     this.coins = []; // Array para almacenar instancias de bubble cannons
     this.hooks = []; // Array para almacenar instancias de bubble cannons
     this.electros = []; // Array para almacenar instancias de bubble cannons
+    this.totalCannonBubbleCount = 0;
 
     // sounds sounds sounds
     this.bubblePopSound1 = new Audio("../public/sounds/bubblePop1.mp3"); //todo --  Sonido paso 1) guardar la ruta del sonido en una variable
@@ -94,6 +95,8 @@ class Game {
   }
 
   start() {
+    if(!this.gameStarted){
+
       if (GAMELEVEL === 1) {
         level1(this.ctx, this.bubbles, this.platforms, this.levelBalls, this.boxes)
         setTimeout(() => {
@@ -104,12 +107,11 @@ class Game {
         levelInfinite( this.ctx, this.bubbles, this.platforms, this.bouncers, this.spikes, this.stairs, this.flamethrowers, this.machineguns, this.healings, this.auras, this.boxes, this.blasters, this.levelBalls, this.gatlings, this.darkBubbles)
       }
         if(GAMELEVEL === 1987 ) {
-
           this.levelBalls = [];
           this.emptyAllGameArrays()
           this.emptyAllPlayerArrays()
-          addDemo5(this.ctx, this.platforms, this.levers, this.levelBalls,this.boxes, this.darkBubbles, this.spikes, this.healings)
-          demoPhase = 7;
+          addDemo6(this.ctx, this.platforms, this.levers, this.levelBalls,this.boxes, this.gatlings, this.cannons);
+          demoPhase = 9;
 
           // infoIntro1()
           // this.background.img.src = "../public/Imagenes/background/backgroundTraining4.webp";
@@ -122,6 +124,7 @@ class Game {
           //   addDemo1(this.ctx, this.platforms)
           // }, 32000);
         }
+      }
 
     this.interval = setInterval(() => {
       retryAmount$$.innerText = `${retry}`
@@ -175,6 +178,7 @@ class Game {
   }
 
   draw() {
+    console.log(ayudasInfoArray)
     this.background.draw(); //dibuja el background
     this.stairs.forEach((e) => e.draw());
     this.spikes.forEach((e) => e.draw());
@@ -201,7 +205,6 @@ class Game {
     this.bars.forEach((e) => e.draw()); //dibuja cada obstáculo
     this.steps.forEach((e) => e.draw()); //dibuja cada obstáculo
     this.levelBalls.forEach((e) => e.draw()); //dibuja cada obstáculo
-    if (this.player.life.total <= 0) this.gameOver(); // cuando el player muere se llama a la funcion gameOver()
     demoMessageDisable();
   }
   move() {
@@ -543,6 +546,37 @@ class Game {
       } else return true;
     });
 
+    // cannons..
+    // cannons..
+
+    this.cannons.forEach((cann) => {//  cannons con bullet
+      this.player.bulletArray = this.player.bulletArray.filter((bullet) => {
+        if (bullet.collides(cann) && !bullet.isBig) {
+          cann.cannonHit();
+          cann.cannonHit();
+          const puffBubble = new BubblePuff(ctx, cann.x, cann.y + cann.h / 2,cann.w, cann.h);
+          this.puffBubbles.push(puffBubble);
+          return false;
+        } else return true;
+      });
+    });
+    this.cannons.forEach((cann) => {//  box con fire
+      this.player.bulletFireArray =  this.player.bulletFireArray.filter((bullet) => {
+        if (bullet.collides(cann) ) {
+          cann.cannonIgniteSound.play()
+          cann.burningCannonSound.play()
+          cann.cannonHit();
+          cann.burning = true;
+          cann.burningForce++
+          if(cann.burningForce > 5) cann.burningForce = 5;
+          const puffBubble = new BubblePuff(ctx, cann.x, cann.y + cann.h / 2,cann.w, cann.h, "../public/Imagenes/puffBubble2.png");
+          this.puffBubbles.push(puffBubble);
+          return false;
+
+        } else return true;
+      });
+    });
+
     //que el item se quede sobre la plataforma al caer
     itemDropOnPlatform(this.flamethrowers, this.platforms);
     itemDropOnPlatform(this.machineguns, this.platforms);
@@ -627,6 +661,7 @@ class Game {
         }
       }
     });
+
     this.boxes.forEach((box) => {//  box con fire
       this.player.bulletFireArray =  this.player.bulletFireArray.filter((bullet) => {
         if (bullet.collides(box) ) {
@@ -796,6 +831,10 @@ if(this.player.wasNotDamaged) {
   }
 
   checkLevelsState(){
+    if (this.player.life.total <= 0){
+      this.player.life.total = 3;
+      GAMELEVEL<= 1800 ? this.gameOver() : this.demoOver(); 
+    }
       if (this.bubbles.length <= 0 && this.gatlings.every(gat => gat.bubbleArray.length <= 0) && this.cannons.every(can => can.bubbleArray.length <= 0) && this.levers.every(lev =>lev.activated)) {
         this.levelBalls.forEach(e => (e.img.src = e.img.newSrc));
         this.levelBalls.forEach(e => (e.winCondition = true));
@@ -823,26 +862,50 @@ if(this.player.wasNotDamaged) {
       }
       if(demoPhase === 4){
         this.levelBalls = [];
-
         this.emptyAllGameArrays()
         this.emptyAllPlayerArrays()
           demoFunctions.mostrarVariosTextosPocoAPoco4()
           addDemo4(this.ctx, this.platforms, this.levers, this.bubbles, this.levelBalls, this.boxes)
           demoPhase = 5;
+
       }
       if(demoPhase === 6){
         this.levelBalls = [];
-      this.emptyAllGameArrays()
-      this.emptyAllPlayerArrays()
-      addDemo5(this.ctx, this.platforms, this.levers, this.levelBalls,this.boxes, this.darkBubbles)
-      demoPhase = 7;
+        this.emptyAllGameArrays()
+        this.emptyAllPlayerArrays()
+        demoFunctions.mostrarVariosTextosPocoAPoco5()
+        addDemo5(this.ctx, this.platforms, this.levers, this.levelBalls,this.boxes, this.darkBubbles, this.spikes, this.healings)
+        this.totalCannonBubbleCount = this.cannons.reduce((total, cannon) => {
+          if (cannon.bubbleArray.length > 0) {
+              return total + cannon.bubbleArray.length;
+          } else {
+              return total;
+          }
+      }, 0);
+        demoPhase = 7;
       }
       if(demoPhase === 8){
         this.levelBalls = [];
         this.emptyAllGameArrays()
         this.emptyAllPlayerArrays()
-        addDemo5(this.ctx, this.platforms, this.levers, this.levelBalls,this.boxes, this.gatlings);
+        addDemo6(this.ctx, this.platforms, this.levers, this.levelBalls,this.boxes, this.gatlings, this.cannons);
         demoPhase = 9;
+      }
+
+      if(demoPhase === 9){
+        this.totalCannonBubbleCount = this.cannons.reduce((total, cannon) => {
+          if (cannon.bubbleArray.length > 0) {
+              return total + cannon.bubbleArray.length;
+          } else {
+              return total;
+          }
+      }, 0);
+      if(this.totalCannonBubbleCount >=10){
+        this.cannons.forEach((cannon) => cannon.shootInterval = 30000)
+      } else {
+        this.cannons.forEach((cannon) => cannon.shootInterval = 15000)
+
+      }
       }
     }
 
@@ -864,6 +927,30 @@ if(this.player.wasNotDamaged) {
 
       }
     }
+
+  demoOver(){
+    this.emptyAllGameArrays();
+    demoFunctions.demoOverText()
+    demoOverBackground$$.style.display = 'block';
+    setTimeout(() => {
+    demoOverBackground$$.style.opacity = '1';
+    }, 1000);
+    setTimeout(() => {
+    demoOverBackground$$.style.display = 'none';
+      
+      if(demoPhase<5){
+        this.levelBalls = [];
+        demoFunctions.mostrarVariosTextosPocoAPoco3()
+        addDemo3(this.ctx, this.platforms, this.levers, this.bubbles, this.levelBalls)
+        demoPhase = 3;
+      } else {
+        this.levelBalls = [];
+        demoFunctions.mostrarVariosTextosPocoAPoco5()
+        addDemo5(this.ctx, this.platforms, this.levers, this.levelBalls,this.boxes, this.darkBubbles, this.spikes, this.healings)
+        demoPhase = 7;
+      }
+    }, 10000);
+  }
   gameOver() {
     //Función para terminar el juego y vaciar todos los arrays.
     this.stop();
@@ -874,11 +961,16 @@ if(this.player.wasNotDamaged) {
     this.gameBackgroundMusic.pause();
     this.gameOver1.play();
     this.gameOver2.play();
-    this.ctx.save(); // guarda los estilos previos antes de ejecutar los siguientes para que no salgan los estilos estos en todos lados
-    this.ctx.font = "30px Arial";
-    this.ctx.fillStyle = "orange";
-    this.ctx.fillText("Game Over", 70, this.ctx.canvas.height / 2); // contador de vida
-    this.ctx.restore(); //reestablece el estilo al estado principal.
+    gameOverBackground$$.style.display = "block";
+    gameOverBackgroundText$$.style.display = "block"
+    gameOverX$$.style.display = "block"
+    setTimeout(() => {
+      gameOverBackground$$.style.opacity = "1"; // Cambiar la opacidad a 1 después de 1 segundo
+    }, 100); //
+    setTimeout(() => {
+      gameOverX$$.style.opacity = "1"; // Cambiar la opacidad a 1 después de 1 segundo
+      gameOverBackgroundText$$.style.opacity = "1"; // Cambiar la opacidad a 1 después de 1 segundo
+    }, 1000); //
   }
   emptyAllGameArrays(){
     this.bubbles = [];
@@ -930,4 +1022,27 @@ if(this.player.wasNotDamaged) {
       }, 10000);
     }
   }  
+
+  // canvas.addEventListener('mousemove', (event) => officeHover(event, game.player));
+
+    officeHover(event, player) {
+
+    const rect = canvas.getBoundingClientRect();
+    const mouseX = event.clientX - rect.left;
+    const mouseY = event.clientY - rect.top;
+  
+    if (
+      mouseX >= player.x &&
+      mouseX <= player.x + 50 &&
+      mouseY >= player.y  &&
+      mouseY <= player.y + 50
+      
+    ) {
+      alert("¡Estás aquí!");
+      console.log(game.player)
+      player.shootFire();
+    }
+  }
+  
+
 }
