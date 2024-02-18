@@ -1,5 +1,5 @@
 class WeaponSword {
-  constructor(ctx, x, y, swingDirection, frame) {
+  constructor(ctx, x, y, swingDirection, frame, w, h) {
     this.ctx = ctx;
     this.x = x;
     this.y = y;
@@ -8,8 +8,8 @@ class WeaponSword {
     this.img = new Image();
     this.img.src = "/public/Imagenes/swordSwing3.png";
     this.img.frame = frame || 0;;
-    this.w = this.ctx.canvas.width/ 13;
-    this.h =  this.ctx.canvas.width/ 8;
+    this.w = w || this.ctx.canvas.width/ 13;
+    this.h = h ||  this.ctx.canvas.width/ 8;
     this.tick = 0;
     this.damage = 0.05;
     this.fireShootSOund = new Audio("/public/sounds/electrofire/fireShootSound.mp3")
@@ -63,7 +63,7 @@ class WeaponSword {
     }
 
     if(!this.swingDirection){
-      if(this.tick >= 2){
+      if(this.tick >= 3){
         this.img.frame--;
         this.tick = 0
       }
@@ -77,6 +77,7 @@ class WeaponSword {
     const colY =this.y + this.h > objetivo.y && this.y < objetivo.y + objetivo.h;
     return colX && colY;
   }
+  
   isVisible() {
     return  this.dispose;
   }

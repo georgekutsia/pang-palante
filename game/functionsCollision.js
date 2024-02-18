@@ -109,6 +109,9 @@ function checkBubbleCollision(bubbles, player, bubbleSplash2, bubblePopSound1, p
     player.swordArray.forEach((bullet) => {
       if (bullet.collides(bubble)) {
         coins += 2;
+        bubble.swordSpeed = -2;
+        player.swordPowerUp++;
+        console.log(player.swordPowerUp)
         bubblePuff(bubble, puffBubbles, bubbles, ctx);
         bubblePopSound1.play(); //todo -- Sonido paso 3) invocar el sonido
         return false;

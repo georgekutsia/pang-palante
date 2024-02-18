@@ -47,7 +47,6 @@ class BasicWeapon {
     if (this.tick >= this.basicBulletDuration) {
       this.y = -200;
     }
-
   }
 
   collides(objetivo) {
