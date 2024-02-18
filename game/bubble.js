@@ -7,6 +7,7 @@ class Bubble { //posX posY, ancho, alto, velX, velY, gravedad, buleano si hay gr
     this.h = h || this.ctx.canvas.width / 14;  //altura calculada respecto al canvas
     this.vx = vx || bubbleSpeedX;
     this.vy = vy || bubbleSpeedY;
+    this.swordSpeed = 0;
     this.g = g || 0.05;
     this.gTick = 0;
     this.isSlowGravity = isSlowGravity || false;
