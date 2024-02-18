@@ -70,7 +70,7 @@ class Box {
         this.burningBox.width / 8,
         this.burningBox.height/4,
         this.x,
-        this.y,
+        this.y + 3,
         this.w,
         this.h
         );
@@ -82,8 +82,8 @@ class Box {
         (this.burningBox.framey * this.burningBox.width) / 4,
         this.burningBox.width / 8,
         this.burningBox.height/4,
-        this.x,
-        this.y -3,
+        this.x -3,
+        this.y -1,
         this.w+3,
         this.h+3
         );
@@ -95,10 +95,10 @@ class Box {
         (this.burningBox.framey * this.burningBox.width) / 4,
         this.burningBox.width / 8,
         this.burningBox.height/4,
-        this.x - 3,
-        this.y - 5,
-        this.w+3,
-        this.h+3
+        this.x +1,
+        this.y - 4,
+        this.w + 3,
+        this.h + 3
         );
     if(this.burning && this.burningForce > 3){
       this.ctx.drawImage(
@@ -107,10 +107,23 @@ class Box {
         (this.burningBox.framey * this.burningBox.width) / 4,
         this.burningBox.width / 8,
         this.burningBox.height/4,
-        this.x,
+        this.x -1,
         this.y - 6,
-        this.w+5,
-        this.h+5
+        this.w + 5,
+        this.h + 5
+        );
+      }
+    if(this.burning && this.burningForce > 4){
+      this.ctx.drawImage(
+        this.burningBox,
+        (this.burningBox.framex * this.burningBox.width) / 8,
+        (this.burningBox.framey * this.burningBox.width) / 4,
+        this.burningBox.width / 8,
+        this.burningBox.height/4,
+        this.x-3,
+        this.y - 8,
+        this.w + 8,
+        this.h + 8
         );
       }
     }
@@ -118,7 +131,7 @@ class Box {
   move() {
     if(this.burning){
       this.burningTick++;
-      if(this.burningTick > 5 - this.burningForce){
+      if(this.burningTick > 6 - this.burningForce){
         this.burningBox.framex++
         this.burningTick = 0;
       }
@@ -164,23 +177,25 @@ class Box {
     }
   }
   boxHit(){
+    this.damage0 +=1;
     if(this.boxLevel===0) {
-      this.damage0 +=1;
-      if(this.damage0 >=3){
+      if(this.damage0 >=4){
         this.boxImg.frame+=1;
         this.boxImpactMetalic.play();
         this.damage0 = 0;
       }
     }
-    if(this.boxLevel===1) {
+    if(this.boxLevel===1 && this.damage0 >=3) {
       this.boxImg.frame+=1;
       this.boxImpactMetalic.play();
+      this.damage0 = 0;
     }
-    if(this.boxLevel===2) {
+    if(this.boxLevel===2 && this.damage0 >= 2) {
       this.boxImg.frame+=2;
+      this.damage0 = 0;
     }
     if(this.boxLevel===3) {
-      this.boxImg.frame+=3;
+      this.boxImg.frame+=2;
     }
     this.hitingSound()
   }  

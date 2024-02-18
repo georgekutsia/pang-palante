@@ -62,11 +62,11 @@ body {
 }
 #demoOver-background{
   position: absolute;
-  top: 1vw;
+  top: 0.2vw;
   left: 50%;
-  transform: translate(-50%, 0%);
-  width: 86vw;
-  height: 41vw;
+  transform: translate(-50.5%, 0%);
+  width: 88vw;
+  height: 42vw;
   min-width: 100px;
   min-height: 100px;
   display: none;
@@ -113,9 +113,9 @@ border-radius: 50%;
   background-color: transparent;
 }
 #gameOver-X img{
-  width: 20px;
-  height: 20px;
-padding: 5px 5px;
+  width: 40px;
+  height: 40px;
+padding: 15px 15px;
 
 }
 
