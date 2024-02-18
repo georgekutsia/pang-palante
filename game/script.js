@@ -81,6 +81,9 @@ start$$.addEventListener("click", function () {
   ammosCount$$.style.display = "block";
   toggleShop$$.style.display = "block";
   game.isInfiniteChanging = false;
+  iconsBtns$$.forEach(function(icon) {
+    icon.style.backgroundColor = "transparent";
+  });
   if (window.innerWidth < 880 && window.innerHeight < 400) {
     actionsDiv$$.style.display = "flex"
     movesDiv$$.style.display = "flex"
@@ -117,6 +120,9 @@ startInfinite$$.addEventListener("click", function () {
   ammosCount$$.style.display = "block";
   toggleShop$$.style.display = "block";
   game.isInfiniteChanging = true;
+  iconsBtns$$.forEach(function(icon) {
+    icon.style.backgroundColor = "transparent";
+  });
   if (window.innerWidth < 880 && window.innerHeight < 400) {
     actionsDiv$$.style.display = "flex"
     movesDiv$$.style.display = "flex"

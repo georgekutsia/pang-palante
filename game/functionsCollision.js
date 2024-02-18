@@ -104,6 +104,17 @@ function checkBubbleCollision(bubbles, player, bubbleSplash2, bubblePopSound1, p
       } else return true;
     });
   });
+
+  bubbles.forEach((bubble) => {//  bulletBar con Bubble
+    player.swordArray.forEach((bullet) => {
+      if (bullet.collides(bubble)) {
+        coins += 2;
+        bubblePuff(bubble, puffBubbles, bubbles, ctx);
+        bubblePopSound1.play(); //todo -- Sonido paso 3) invocar el sonido
+        return false;
+      } else return true;
+    });
+  });
 }
 
 

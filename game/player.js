@@ -20,6 +20,7 @@ class Player {
     this.bulletBarArray = [];
     this.bulletPlatformArray = [];
     this.hooksArray = [];
+    this.swordArray = []; //
     this.frameAmount = 5;
     this.immune = false; // al recibir daño se vuelve inmune durante unos segundos
     this.fading = 0; //necesario para el parpadeo del personaje cuando es inmune
@@ -37,7 +38,6 @@ class Player {
     this.bigWeaponBubblesMaxAmount = 0;
     this.platformCreator = true;
     this.hookedOnPlatform = false;
-
     this.img = new Image();
     this.img.src = "../public/Imagenes/pangRunRight.png";
     this.img.frame = 3;
@@ -60,7 +60,11 @@ class Player {
     this.machinegunPaint.src = "/public/Imagenes/machinegunPaint.png";
     this.barItem = new Image();
     this.barItem.src = "/public/Imagenes/barItem.png";
-
+    this.swordBack = new Image();
+    this.swordBack.src = "/public/Imagenes/swordBack.png";
+    this.swingSwordState = false;
+    this.swordEquipped = true;
+    this.swordLevel = 3;
 
     this.blasterExplosion = new Audio("../public/sounds/megablasterBlastSound.mp3");
     this.blasterExplosion.volume = 0.5; //
@@ -315,6 +319,7 @@ handleRightDodge = (event) =>{ //*
     this.bulletBarArray.forEach((bullet) => {bullet.draw();}); // paso 3: dibujo cada bullet que se dispare
     this.bulletPlatformArray.forEach((bullet) => {bullet.draw();}); // paso 3: dibujo cada bullet que se dispare
     this.hooksArray.forEach((bullet) => {bullet.draw();}); // paso 3: dibujo cada bullet que se dispare
+    this.swordArray.forEach((bullet) => {bullet.draw();}); // paso 3: dibujo cada bullet que se dispare
     this.life.draw()
 
     this.blasterBtn$$.style.display = !this.megaFireBlaster ? 'none' : 'block';
@@ -410,6 +415,9 @@ handleRightDodge = (event) =>{ //*
       );
       this.electroAmount -= 0.05;
     }
+    if(this.swordEquipped && R === 82){
+      this.ctx.drawImage(this.swordBack, this.x, this.y + 6 , this.w-3, this.h-3);
+    }
 
   }
 
@@ -468,6 +476,7 @@ handleRightDodge = (event) =>{ //*
     this.bulletBarArray.forEach((bullet) => {bullet.move();}); //paso 4: mueve cada bullet que se dispare
     this.bulletPlatformArray.forEach((bullet) => {bullet.move();}); // paso 3: dibujo cada bullet que se dispare
     this.hooksArray.forEach((bullet) => {bullet.move();}); // paso 3: dibujo cada bullet que se dispare
+    this.swordArray.forEach((bullet) => {bullet.move();}); // paso 3: dibujo cada bullet que se dispare
 
   }
 //consultar constantes para el código de cada teclahjkl-
@@ -589,6 +598,14 @@ handleRightDodge = (event) =>{ //*
         this.electroAmount = this.electroAmount
       }
       }
+      if(key === R){
+        this.swingSword();
+        this.swingSwordState = !this.swingSwordState
+        R = 0
+        setTimeout(() => {
+          R = 82;
+        }, 500);
+        }
   }
   keyUp(key) {
     if (key === W) {
@@ -728,5 +745,30 @@ handleRightDodge = (event) =>{ //*
     this.hooksArray.push(hook);
   }
 
+    swingSword(){
+      if(this.swingSwordState){
+        let sword = new WeaponSword(this.ctx, this.x - 10, this.y - 20, this.swingSwordState, 0 )
+        this.swordArray.push(sword)
+        if(this.swordLevel > 2){
+          const bullet1 = new BasicWeapon(this.ctx, this.x +8, this.y, bulletDirection, -2.8,  -0.1 );
+          const bullet2 = new BasicWeapon(this.ctx, this.x + 8, this.y, bulletDirection, -3, -0.6 );
+          const bullet3 = new BasicWeapon(this.ctx, this.x + 8, this.y, bulletDirection, -2.8, -1.3 );
+          const bullet4 = new BasicWeapon(this.ctx, this.x + 8, this.y, bulletDirection, -2.3, -2 );
+          this.bulletArray.push(bullet1, bullet2,bullet3,  bullet4 );
+        }
+      } else {
+        let sword = new WeaponSword(this.ctx, this.x, this.y - 20, this.swingSwordState, 4 )
+        this.swordArray.push(sword)
+        if(this.swordLevel > 2){
+          const bullet1 = new BasicWeapon(this.ctx, this.x +8, this.y, bulletDirection, 2.8,  -0.1 );
+          const bullet2 = new BasicWeapon(this.ctx, this.x + 8, this.y, bulletDirection, 3, -0.6 );
+          const bullet3 = new BasicWeapon(this.ctx, this.x + 8, this.y, bulletDirection, 2.8, -1.3 );
+          const bullet4 = new BasicWeapon(this.ctx, this.x + 8, this.y, bulletDirection, 2.3, -2 );
+          this.bulletArray.push(bullet1, bullet2,bullet3,  bullet4 );
+        }
+      }
+
+
+    }
 
 }
