@@ -1,7 +1,7 @@
 class Player {
   constructor(ctx) {
     this.ctx = ctx;
-    this.x = 120;
+    this.x = 20;
     this.h = this.ctx.canvas.width / 19;
     this.y = this.ctx.canvas.height - this.h;
     this.w = this.ctx.canvas.width / 23;
@@ -63,7 +63,7 @@ class Player {
     this.swordBack = new Image();
     this.swordBack.src = "/public/Imagenes/swordBack.png";
     this.swingSwordState = false;
-    this.swordEquipped = true;
+    this.swordEquipped = false;
     this.swordLevel = 0;
     this.swordPowerUp = 8;
     this.swordPower1 = false;
@@ -425,13 +425,14 @@ handleRightDodge = (event) =>{ //*
   }
 
   move() {
+    if(!finalBoss){
+      this.velocidadX = this.vx += this.r;
+      if(this.velocidadX <= 0.5 && this.velocidadX >= -0.5 && this.r !==0){
+        this.r = 0;
+        this.vx = 0;
+        this.img.frame = 0;
+      }
     this.vy += this.g
-    this.velocidadX = this.vx += this.r;
-    if(this.velocidadX <= 0.5 && this.velocidadX >= -0.5 && this.r !==0){
-      this.r = 0;
-      this.vx = 0;
-      this.img.frame = 0;
-    }
     this.x += this.velocidadX;
     this.y += this.vy;
     bulletDirection = this.vx/2
@@ -445,54 +446,87 @@ handleRightDodge = (event) =>{ //*
     if (this.img.frame > 4) {
       this.img.frame = 0;
     }
-    //todo: lo que hace que el personaje no se salga de la pantalla. se podría meter en una función aparte y luego llamarla aquí
     if (this.y <= 0) {
       this.y = 0;
       this.vy = 0;
     }
-    if (this.y + this.h >= this.ctx.canvas.height) {//todo: bloqueo para el limite inferior.
+    if (this.y + this.h >= this.ctx.canvas.height) {
       this.y = this.ctx.canvas.height - this.h;
       this.vy = 0;
       this.g = 0;
     }
-    if (this.x <= 0) { //todo: bloque para el límite izquierdo
+    if (this.x <= 0) { 
       this.x = 0;
       this.vx = 0;
     }
-    if (this.x + this.w >= this.ctx.canvas.width) {//todo: bloqueo para el limite derecha
+    if (this.x + this.w >= this.ctx.canvas.width) {
       this.x = this.ctx.canvas.width - this.w;
       this.vx = 0;
     }
-
-    if(this.electricShieldIsActive){
-      this.electricShieldImgTick++;
-      if(this.electricShieldImgTick >3){
-        this.electricShieldImg.frame++;
-        this.electricShieldImgTick = 0;
-      }
-      if(this.electricShieldImg.frame > 7){
-        this.electricShieldImg.frame = 0;
-      }
+  } else{ //!final else
+    this.velocidadX = this.vx += this.r;
+    if(this.velocidadX <= 0.5 && this.velocidadX >= -0.5 && this.r !==0){
+      this.r = 0;
+      this.vx = 0;
+      this.img.frame = 0;
     }
-    this.bulletArray.forEach((bullet) => {bullet.move();}); //paso 4: mueve cada bullet que se dispare
-    this.bulletFireArray.forEach((bullet) => {bullet.move();}); //paso 4: mueve cada bullet que se dispare
-    this.bulletBarArray.forEach((bullet) => {bullet.move();}); //paso 4: mueve cada bullet que se dispare
-    this.bulletPlatformArray.forEach((bullet) => {bullet.move();}); // paso 3: dibujo cada bullet que se dispare
-    this.hooksArray.forEach((bullet) => {bullet.move();}); // paso 3: dibujo cada bullet que se dispare
-    this.swordArray.forEach((bullet) => {bullet.move();}); // paso 3: dibujo cada bullet que se dispare
-
-
-    if(this.swordPowerUp >=10){
-      this.swordPower1 = true;
-      this.swordCooldown = 500;
-
-      setTimeout(() => {
-      this.swordPower1 = false;
-      this.swordPowerUp = 0;
-      this.swordCooldown = 0;
-      }, 10000);
+    this.vy += this.g
+    this.x += this.velocidadX;
+    this.y += this.vy;
+    bulletDirection = this.vx/2
+      this.frameTick++
+      if (this.frameTick > 10  ) {
+        this.img.frame++;
+        this.frameTick = 0;
+      }
+    if (this.img.frame > 4) {
+      this.img.frame = 0;
+    }
+    if (this.y <= 0) {
+      this.y = 0;
+      this.vy = 0;
+    }
+    if (this.y + this.h >= this.ctx.canvas.height) {
+      this.y = this.ctx.canvas.height - this.h;
+      this.vy = 0;
+      this.g = 0;
+    }
+    if (this.x <= 0) { 
+      this.x = 0;
+      this.vx = 0;
+    }
+    if (this.x + this.w >= this.ctx.canvas.width) {
+      this.x = this.ctx.canvas.width - this.w;
+      this.vx = 0;
+    }
+  } //!final boss
+  if(this.electricShieldIsActive){
+    this.electricShieldImgTick++;
+    if(this.electricShieldImgTick >3){
+      this.electricShieldImg.frame++;
+      this.electricShieldImgTick = 0;
+    }
+    if(this.electricShieldImg.frame > 7){
+      this.electricShieldImg.frame = 0;
     }
   }
+  this.bulletArray.forEach((bullet) => {bullet.move();}); //paso 4: mueve cada bullet que se dispare
+  this.bulletFireArray.forEach((bullet) => {bullet.move();}); //paso 4: mueve cada bullet que se dispare
+  this.bulletBarArray.forEach((bullet) => {bullet.move();}); //paso 4: mueve cada bullet que se dispare
+  this.bulletPlatformArray.forEach((bullet) => {bullet.move();}); // paso 3: dibujo cada bullet que se dispare
+  this.hooksArray.forEach((bullet) => {bullet.move();}); // paso 3: dibujo cada bullet que se dispare
+  this.swordArray.forEach((bullet) => {bullet.move();}); // paso 3: dibujo cada bullet que se dispare
+  if(this.swordPowerUp >=10){
+    this.swordPower1 = true;
+    this.swordCooldown = 500;
+    setTimeout(() => {
+    this.swordPower1 = false;
+    this.swordPowerUp = 0;
+    this.swordCooldown = 0;
+    }, 10000);
+  }
+}
+
 //consultar constantes para el código de cada teclahjkl-
   keyDown(key) {
     if (key === W ) {
@@ -500,12 +534,21 @@ handleRightDodge = (event) =>{ //*
     }
     if (key === A ) {
       this.frameTick++;
-      this.vx = -playerSpeed;
-      this.img.src = "../public/Imagenes/pangRunLeft.png";
+      if(!finalBoss){
+        this.vx = -playerSpeed;
+        this.img.src = "../public/Imagenes/pangRunLeft.png";
+      } else {
+        this.vx = -0.5
+      }
       this.frameAmount = 5;
     }
     if (key === D ) {
-    this.vx = playerSpeed;
+      if(!finalBoss){
+        this.vx = playerSpeed;
+
+      } else {
+        this.vx = 0.5
+      }
     this.img.src = "../public/Imagenes/pangRunRight.png";
     this.frameAmount = 5;
     }
@@ -545,8 +588,10 @@ handleRightDodge = (event) =>{ //*
       if(basicWeaponLevel >= 2)this.shootTriple()
       if(basicWeaponLevel >= 3)this.shootCuatruple()
       if(basicWeaponLevel >= 4)this.shootQuintuple()
-      this.img.src = "../public/Imagenes/pangStandShoot.png";
-      this.frameAmount = 2;
+      if(!finalBoss){
+        this.img.src = "../public/Imagenes/pangStandShoot.png";
+        this.frameAmount = 2;
+      }
       this.img.frame = 1;
       B = 0;
       setTimeout(() => {
@@ -633,24 +678,30 @@ handleRightDodge = (event) =>{ //*
     }
     if (key === A) {
       this.vx = 0;
-      this.img.src = "../public/Imagenes/pangStandShoot.png";
-      this.frameAmount = 2;
-      this.img.frame = 0;
+      if(!finalBoss){
+        this.img.src = "../public/Imagenes/pangStandShoot.png";
+        this.frameAmount = 2;
+        this.img.frame = 0;
+      }
       }
     if (key === D) {
       this.vx = 0;
-      this.img.src = "../public/Imagenes/pangStandShoot.png";
+      if(!finalBoss){
+        this.img.src = "../public/Imagenes/pangStandShoot.png";
       this.frameAmount = 2;
       this.img.frame = 0;
+    }
       }
     if (key === S) {
       this.vy = 0;
     }
 
     if (key === B ) {
+      if(!finalBoss){
       this.img.src = "../public/Imagenes/pangStandShoot.png";
       this.frameAmount = 2;
       this.img.frame = 0;
+      }
     }
     if(key === K && this.megaFireBlaster ){
       A = 65;

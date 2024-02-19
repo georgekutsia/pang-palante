@@ -1,8 +1,4 @@
 function infoIntro1(){
-  if(infoPlayer1$$.style.display === "block"){
-    infoPlayer1$$.style.display = "none"
-    infoPlayer2$$.style.display = "none"
-  } else{
     infoPlayer1$$.style.display = "block"
     setTimeout(() => {
       infoPlayer1$$.style.display = "none"
@@ -12,8 +8,56 @@ function infoIntro1(){
       }, 6000);
     }, 4500);
   }
-}
 
+
+
+function inftroGame1(){
+  demoFriend4$$.style.display = "block"
+  setTimeout(() => {
+    demoFriend4$$.style.opacity = "1"
+  }, 100);
+  textoPianoPiano("gameIntro-text1");
+  setTimeout(() => {
+  textoPianoPiano("gameIntro-text2");
+  boss1$$.style.display = "block"
+  setTimeout(() => {
+  boss1$$.style.opacity = "1"
+  }, 200);
+  
+  }, 2000);
+  setTimeout(() => {
+    document.getElementById("gameIntro-text1").style.display = "none";
+    document.getElementById("gameIntro-text2").style.display = "none";
+  textoPianoPiano("gameIntro-text3");
+  minion1$$.style.display = "block";
+  minion2$$.style.display = "block";
+  minion3$$.style.display = "block";
+  minion4$$.style.display = "block";
+  minion5$$.style.display = "block";
+  minion6$$.style.display = "block";
+  setTimeout(() => {
+    minion1$$.style.opacity = "1";
+  }, 200)
+  setTimeout(() => {
+    minion2$$.style.opacity = "1";
+  }, 300)
+  setTimeout(() => {
+    minion3$$.style.opacity = "1";
+  }, 400)
+  setTimeout(() => {
+    minion4$$.style.opacity = "1";
+  }, 500)
+  setTimeout(() => {
+    minion5$$.style.opacity = "1";
+  }, 600)
+  setTimeout(() => {
+    minion6$$.style.opacity = "1";
+  }, 700)
+  }, 6000);
+  setTimeout(() => {
+  textoPianoPiano("gameIntro-text4");
+  }, 8000);
+}
 // infoPlayerBtn1$$.addEventListener("click", function(){
 //   infoIntro1()
 // })

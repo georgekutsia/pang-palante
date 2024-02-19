@@ -137,6 +137,101 @@ z-index: 24;
   margin: auto;
 }
 
-.demoFriend1, .demoFriend2, .demoFriend3{
+.demoFriend1, .demoFriend2, .demoFriend3, .demoFriend4{
+  transition: all 0.4s ease-in-out;
   display: none;
+}
+.demoFriend4{
+  opacity: 0;
+
+}
+
+
+.minions{
+  position: absolute;
+  width: 10vw;
+  height: 10vw;
+  z-index: 50;
+  display: none;
+  opacity: 0;
+}
+.minion1{
+  top: 10vh;
+  right: 20vw;
+  transition: all 0.5s ease-in-out;;
+  animation: minion1Animation 2.5s ease-in-out infinite;
+}
+.minion2{
+  top: 30vh;
+  left: 25vw;
+  transition: all 0.5s ease-in-out;
+  animation: minion1Animation 3s ease-in-out infinite;
+}
+.minion3{
+  top: 10vh;
+  left: 20vw;
+  transition: all 0.5s ease-in-out;
+  animation: minion1Animation 3.4s ease-in-out infinite;
+}
+.minion4{
+  top: 30vh;
+  right: 20vw;
+  transition: all 0.5s ease-in-out;
+  animation: minion1Animation 3.7s ease-in-out infinite;
+}
+.minion5{
+  top: 2vh;
+  left: 33vw;
+  transition: all 0.5s ease-in-out;
+  animation: minion1Animation 4s ease-in-out infinite;
+}
+.minion6{
+  top: 2vh;
+  right: 33vw;
+  transition: all 0.5s ease-in-out;
+  animation: minion1Animation 2.2s ease-in-out infinite;
+}
+
+@keyframes minion1Animation {
+  0% {
+    transform: translateX(-2%) translateY(0);
+  }
+  25% {
+    transform: translateX(2%) translateY(0);
+  }
+  50% {
+    transform: translateX(-2%) translateY(-1vh);
+  }
+  75% {
+    transform: translateX(2%) translateY(-1vh);
+  }
+  100% {
+    transform: translateX(-2%) translateY(0);
+  }
+}
+
+@keyframes boss1Animation {
+  50% { top: 35%}
+  0%{right: 43%;}
+  25%{right: 41%;}
+  50%{right: 43%;}
+  75%{right: 41%;}
+  100%{right: 43%;}
+}
+.boss1{
+  top: 30%;
+  right: 43%;
+  width: 15vw;
+  height: 15vw;
+  transition: all 0.5s ease-in-out;
+  animation: boss1Animation 2.5s ease-in-out infinite;
+}
+.minion1:hover, 
+.minion2:hover, 
+.minion3:hover, 
+.minion4:hover, 
+.minion5:hover, 
+.minion6:hover,
+.boss1:hover {
+  transform: scale(1.4);
 }

@@ -28,6 +28,8 @@ let W = 0; //87
 let S = 83;
 let D = 68;
 
+  let finalBoss = false;
+
 
 let electroShockSound = new Audio("/public/sounds/electrofire/electrifingBall.mp3")
 electroShockSound.volume = 0.1
