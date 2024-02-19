@@ -99,33 +99,35 @@ class Game {
     if(!this.gameStarted){
 
       if (GAMELEVEL === 1) {
-        let swo = new Sword(ctx, 50, 50)
-        this.swords.push(swo)
-        level1(this.ctx, this.bubbles, this.platforms, this.levelBalls, this.boxes)
-        setTimeout(() => {
-          addBubble1(this.ctx, this.bubbles)
-        }, 10000);
+        inftroGame1();
+    // level21( this.ctx, this.bubbles, this.platforms, this.bouncers, this.spikes, this.stairs, this.flamethrowers, this.machineguns, this.healings, this.auras, this.boxes, this.blasters, this.levelBalls)
+        // let swo = new Sword(ctx, 50, 50)
+        // this.swords.push(swo)
+        // level1(this.ctx, this.bubbles, this.platforms, this.levelBalls, this.boxes)
+        // setTimeout(() => {
+        //   addBubble1(this.ctx, this.bubbles)
+        // }, 10000);
       }
       if(GAMELEVEL === 100) {
         levelInfinite( this.ctx, this.bubbles, this.platforms, this.bouncers, this.spikes, this.stairs, this.flamethrowers, this.machineguns, this.healings, this.auras, this.boxes, this.blasters, this.levelBalls, this.gatlings, this.darkBubbles)
       }
         if(GAMELEVEL === 1987 ) {
-          this.levelBalls = [];
-          this.emptyAllGameArrays()
-          this.emptyAllPlayerArrays()
-          addDemo6(this.ctx, this.platforms, this.levers, this.levelBalls,this.boxes, this.gatlings, this.cannons);
-          demoPhase = 9;
+          // this.levelBalls = [];
+          // this.emptyAllGameArrays()
+          // this.emptyAllPlayerArrays()
+          // addDemo6(this.ctx, this.platforms, this.levers, this.levelBalls,this.boxes, this.gatlings, this.cannons);
+          // demoPhase = 9;
 
-          // infoIntro1()
-          // this.background.img.src = "../public/Imagenes/background/backgroundTraining4.webp";
-          // demoFunctions.mostrarVariosTextosPocoAPoco1()
-          // setTimeout(() => {
-          //   addDemo1Electro(this.ctx,  this.platforms, this.electros)
-          //   this.background.img.src = "../public/Imagenes/background/backgroundTraining5.webp";
-          // }, 11000);
-          // setTimeout(() => {
-          //   addDemo1(this.ctx, this.platforms)
-          // }, 32000);
+          infoIntro1()
+          this.background.img.src = "../public/Imagenes/background/backgroundTraining4.webp";
+          demoFunctions.mostrarVariosTextosPocoAPoco1()
+          setTimeout(() => {
+            addDemo1Electro(this.ctx,  this.platforms, this.electros)
+            this.background.img.src = "../public/Imagenes/background/backgroundTraining5.webp";
+          }, 11000);
+          setTimeout(() => {
+            addDemo1(this.ctx, this.platforms)
+          }, 32000);
         }
       }
 
@@ -214,6 +216,7 @@ class Game {
   }
   move() {
     this.player.move(); //muve al personaje y todo lo que se mueve en la clase de personaje
+    this.background.move(); //muve al personaje y todo lo que se mueve en la clase de personaje
     this.points.move(); //muve al personaje y todo lo que se mueve en la clase de personaje
     this.bubbles.forEach((e) => e.move()); //mueve los obstáculos
     this.darkBubbles.forEach((e) => e.move()); //mueve los obstáculos

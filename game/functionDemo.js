@@ -161,6 +161,10 @@ const demoFunctions = {
     setTimeout(() => {
       textoPianoPiano("demo-text20");
       }, 2000);
+      setTimeout(() => {
+        document.getElementById("demo-text19").style.display = "none";
+        document.getElementById("demo-text20").style.display = "none";
+      }, 20000)
   },
   mostrarVariosTextosPocoAPoco5() {
     document.getElementById("demo-text19").style.display = "none";
