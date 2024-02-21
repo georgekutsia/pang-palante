@@ -19,12 +19,11 @@ class BubbleGatling {
     this.damage = 0.001
     this.bubbleGatlingSound = new Audio("/public/sounds/shooting/bubbleGatling.mp3")
     this.bubbleGatlingSound.volume = 0.1;
-    this.gatlingMoveSpeed = gatlingMoveSpeed || 0.1
+    this.gatlingMoveSpeed = gatlingMoveSpeed || 0.1;
   }
 
   draw() {
     if(this.boxLevel===1)this.img.src = "/public/Imagenes/box1.png";
-
     this.ctx.drawImage(
       this.img,
       this.x,
@@ -43,25 +42,25 @@ class BubbleGatling {
     this.bubbleArray.forEach((e)=>e.move());
   }
 
-    checkPosition(player){
-      if( this.x !== player.x && this.x <player.x) this.vx = this.gatlingMoveSpeed
-      if( this.x !== player.x && this.x > player.x) this.vx = -this.gatlingMoveSpeed
-      if(this.x+ this.w/2 >= player.x + this.w/2  && this.x+ this.w/2 <= player.x + this.w/2 + 1 ) {
-        this.playerDetected = true;
-        this.shootingBubble()
-      }
+  checkPosition(player){
+    if( this.x !== player.x && this.x <player.x) this.vx = this.gatlingMoveSpeed
+    if( this.x !== player.x && this.x > player.x) this.vx = -this.gatlingMoveSpeed
+    if(this.x+ this.w/2 >= player.x + this.w/2  && this.x+ this.w/2 <= player.x + this.w/2 + 1 ) {
+      this.playerDetected = true;
+      this.shootingBubble()
     }
-    shootingBubble(){
-      if(this.playerDetected){
-          let bubble = new Bubble(ctx, this.x + this.w/2, this.y +this.h, this.w/2, this.w/2, -0.1)
-          this.bubbleArray.push( bubble)
-          this.bubbleGatlingSound.play()
-          this.x -= 5;
-          this.vy = -3;
-          this.g = 1;
-          this.playerDetected = false;
-      }
+  }
+  shootingBubble(){
+    if(this.playerDetected){
+        let bubble = new Bubble(ctx, this.x + this.w/2, this.y +this.h, this.w/2, this.w/2, -0.1)
+        this.bubbleArray.push( bubble)
+        this.bubbleGatlingSound.play()
+        this.x -= 5;
+        this.vy = -3;
+        this.g = 1;
+        this.playerDetected = false;
     }
+  }
   isVisible() {
     return this.dispose;
   }

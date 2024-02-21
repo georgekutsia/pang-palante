@@ -87,6 +87,9 @@ function getRandomColor() {
  function getRandomNumber(number) {
    return Math.floor(Math.random() * number) + 1;
 }
+ function getRandomNumberDecimals(number, aditional) {
+   return Math.floor(Math.random() * number)+ aditional;
+}
 
 
 function  itemDropOnPlatform (items, platforms){
@@ -135,8 +138,4 @@ function darkBubbleExplosion(darkBubbleExplosion, bubble, bubbles, puffBubbles){
   puffBubbles.push(puffBubble);
   bubble.x = -300
 }
-
-
-
-
 

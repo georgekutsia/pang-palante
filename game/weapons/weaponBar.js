@@ -6,6 +6,7 @@ class WeaponBar {
     this.vy = -2;
     this.vx =  0;
     this.w = 5;
+    this.width = 0,//para cuando la anchura aumenta al electrificarse, para que también la electricidad lo haga
     this.h = this.ctx.canvas.height;
     this.img = new Image();
     this.img.src = "../public/Imagenes/weaponBarZigzag.png";
@@ -50,7 +51,7 @@ if(this.isElectrified){
       this.electroImg.height,
       this.x - 6,
       this.y + i*10 , 
-      14,
+      this.width + 14,
       14
       );
   }
