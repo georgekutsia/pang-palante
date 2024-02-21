@@ -56,6 +56,13 @@ class BasicWeapon {
       return colX && colY;
     }
   }
+  collidesMiniboss1(objetivo) {
+    if(ballBroke){  //importante para no impactar muchas vecs sobre la bola mientras esté rota y cambiar de nivel 1 en 1 
+      const colX = this.x <= objetivo.x + objetivo.w && this.x + 2 * this.radius > objetivo.x;
+      const colY = this.y + 2 * this.radius > objetivo.y && this.y < objetivo.y + objetivo.h/2;
+      return colX && colY;
+    }
+  }
 
   isVisible() {
     return this.y >= -2  && this.y < CTXH && this.x >= 0 && this.x < CTXW;

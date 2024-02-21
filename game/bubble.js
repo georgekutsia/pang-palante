@@ -1,5 +1,5 @@
-class Bubble { //posX posY, ancho, alto, velX, velY, gravedad, buleano si hay gravedad, cuanto tarda la gravedad, el daño y la imagen
-  constructor(ctx, x , y, w, h, vx, vy, g, isSlowGravity, slowGrvityDuration, damage, bubbleImg ) {
+class Bubble { //posX posY, ancho, alto, velX, velY, gravedad, buleano si hay gravedad, cuanto tarda la gravedad, si las bolas rebotan, el daño y la imagen
+  constructor(ctx, x , y, w, h, vx, vy, g,           isSlowGravity, slowGrvityDuration, damage, willBounce = true, bubbleImg ) {
     this.ctx = ctx;
     this.x = x || Math.random() * this.ctx.canvas.width; //el obstáculo aparece desde arriba del canvas 
     this.y = y  || -30; // el obstáculo sale de una altura específica o de alguna altura randóm
@@ -22,6 +22,7 @@ class Bubble { //posX posY, ancho, alto, velX, velY, gravedad, buleano si hay gr
     this.randomColor = getRandomColor();
     this.isElectrified = false;
     this.electroTick = 0;
+    this.willBounce = willBounce;
 
     this.bubbleBounceSound = new Audio("../public/sounds/bubbleBounce.mp3") //todo -- paso 1 traer el sonido y almacenarlo en una variable
     this.bubbleBounceSound.volume = 0.1;  //todo -- paso 2, no obligatorio, determinarle volumen de 0 a 1, creo
@@ -61,13 +62,12 @@ class Bubble { //posX posY, ancho, alto, velX, velY, gravedad, buleano si hay gr
     if (this.y + this.h >= this.ctx.canvas.height ){
       this.bubbleBounceSound.play()//todo --paso 3 llamar a .play() para invocar el sonido donde sea necesario
       this.vy = -bubbleSpeedY; 
-
     }
-    if(this.x + this.w >= this.ctx.canvas.width){
+    if(this.x + this.w >= this.ctx.canvas.width && this.willBounce){
       this.bubbleBounceSound.play()//todo --paso 3 llamar a .play() para invocar el sonido donde sea necesario
       this.vx = -bubbleSpeedX;
     }
-    if(this.x <= 0){
+    if(this.x <= 0&& this.willBounce){
       this.bubbleBounceSound.play()//todo --paso 3 llamar a .play() para invocar el sonido donde sea necesario
       this.vx = bubbleSpeedX;
     }

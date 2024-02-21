@@ -40,6 +40,8 @@ class Game {
     this.hooks = []; // Array para almacenar instancias de bubble cannons
     this.electros = []; // Array para almacenar instancias de bubble cannons
     this.swords = []; // Array para almacenar instancias de bubble cannons
+    this.swords = []; // Array para almacenar instancias de bubble cannons
+    this.miniBoses = []; // Array para almacenar instancias de bubble cannons
     this.totalCannonBubbleCount = 0;
 
     // sounds sounds sounds
@@ -99,9 +101,12 @@ class Game {
     if(!this.gameStarted){
 
       if (GAMELEVEL === 1) {
-        inftroGame1();
-    // level21( this.ctx, this.bubbles, this.platforms, this.bouncers, this.spikes, this.stairs, this.flamethrowers, this.machineguns, this.healings, this.auras, this.boxes, this.blasters, this.levelBalls)
+        // inftroGame1();
+        let bo = new MiniBoss1(this.ctx, CTXW - 70, 80)
+        this.miniBoses.push(bo)
+       // level21( this.ctx, this.bubbles, this.platforms, this.bouncers, this.spikes, this.stairs, this.flamethrowers, this.machineguns, this.healings, this.auras, this.boxes, this.blasters, this.levelBalls)
         // let swo = new Sword(ctx, 50, 50)
+        // this.swords.push(swo)
         // this.swords.push(swo)
         // level1(this.ctx, this.bubbles, this.platforms, this.levelBalls, this.boxes)
         // setTimeout(() => {
@@ -121,6 +126,7 @@ class Game {
           infoIntro1()
           this.background.img.src = "../public/Imagenes/background/backgroundTraining4.webp";
           demoFunctions.mostrarVariosTextosPocoAPoco1()
+
           setTimeout(() => {
             addDemo1Electro(this.ctx,  this.platforms, this.electros)
             this.background.img.src = "../public/Imagenes/background/backgroundTraining5.webp";
@@ -178,6 +184,7 @@ class Game {
     this.hooks = this.hooks.filter((e) => e.isVisible()); //elimina cada obstáculo que ya no es visible y vacía el array
     this.electros = this.electros.filter((e) => e.isVisible()); //elimina cada obstáculo que ya no es visible y vacía el array
     this.swords = this.swords.filter((e) => e.isVisible()); //elimina cada obstáculo que ya no es visible y vacía el array
+    this.miniBoses = this.miniBoses.filter((e) => e.isVisible()); //elimina cada obstáculo que ya no es visible y vacía el array
     this.healings = this.healings.filter((e) => e.isVisible()); //elimina cada obstáculo que ya no es visible y vacía el array
     this.bars = this.bars.filter((e) => e.isVisible()); //elimina cada obstáculo que ya no es visible y vacía el array
     this.steps = this.steps.filter((e) => e.isVisible()); //elimina cada obstáculo que ya no es visible y vacía el array
@@ -209,6 +216,7 @@ class Game {
     this.hooks.forEach((e) => e.draw()); //dibuja cada obstáculo
     this.electros.forEach((e) => e.draw()); //dibuja cada obstáculo
     this.swords.forEach((e) => e.draw()); //dibuja cada obstáculo
+    this.miniBoses.forEach((e) => e.draw()); //dibuja cada obstáculo
     this.bars.forEach((e) => e.draw()); //dibuja cada obstáculo
     this.steps.forEach((e) => e.draw()); //dibuja cada obstáculo
     this.levelBalls.forEach((e) => e.draw()); //dibuja cada obstáculo
@@ -238,10 +246,13 @@ class Game {
     this.hooks.forEach((e) => e.move()); //mueve los obstáculos
     this.electros.forEach((e) => e.move()); //mueve los obstáculos
     this.swords.forEach((e) => e.move()); //mueve los obstáculos
+    this.miniBoses.forEach((e) => e.move()); //mueve los obstáculos
     this.bars.forEach((e) => e.move()); //mueve los obstáculos
     this.steps.forEach((e) => e.move()); //mueve los obstáculos
     this.puffBubbles.forEach((e) => e.move()); //mueve los obstáculos
     this.gatlings.forEach((e) =>e.checkPosition(this.player))
+    this.miniBoses.forEach((e) =>e.checkPosition(this.player))
+    this.miniBoses.forEach((e) =>e.checkDistance(this.player))
   }
   setListeners() {
     //permite hacer keyup y keydown para usar teclado para mover el personaje
@@ -305,6 +316,16 @@ class Game {
     this.cannons.forEach((e) => {
       checkBubbleCollision(e.bubbleArray, this.player, this.bubbleSplash2, this.bubblePopSound1, this.puffBubbles, this.ctx, this.platforms, this.bouncers, this.boxes)
     })
+    this.miniBoses.forEach((e) => {
+      checkBubbleCollision(e.bubbleArray, this.player, this.bubbleSplash2, this.bubblePopSound1, this.puffBubbles, this.ctx, this.platforms, this.bouncers, this.boxes)
+    })
+    this.miniBoses.forEach((e) => {e.explosiveArray.forEach((exp) => {if(exp.collides(this.player)){
+          this.player.loseLife(exp.damage, true)
+          exp.exploded = true;
+          exp.img.frame = 5;
+          exp.vx = this.player.vx;
+          exp.canCollide = false;
+    }})})
 
     //darkBubbles
     //darkBubbles
@@ -395,8 +416,10 @@ class Game {
       if(bar.collides(this.player)){
             if(this.player.electricShieldIsActive){
               bar.isElectrified = true;
-              bar.tick +=1.5;
-              bar.life = 3;
+              bar.tick +=2.5;
+              barLife += 0.1;
+              bar.w+= 0.01;
+              bar.width += 0.01;
             }
           }
         })
@@ -459,6 +482,46 @@ class Game {
         } else return true;
       });
     });
+
+// bosssss
+// bosssss
+// bosssss
+
+this.miniBoses.forEach((mini) => {//  minions con bullet
+  this.player.bulletArray = this.player.bulletArray.filter((bullet) => {
+    if (bullet.collidesMiniboss1(mini) && !bullet.isBig) {
+    mini.miniBossHit();           
+      return false;
+    } else return true;
+  });
+});
+this.cannons.forEach((cann) => {//  cannon con fire
+  this.player.bulletFireArray =  this.player.bulletFireArray.filter((bullet) => {
+    if (bullet.collides(cann) ) {
+      cann.cannonIgniteSound.play()
+      cann.burningCannonSound.play()
+      cann.cannonHit();
+      cann.burning = true;
+      cann.burningForce++
+      if(cann.burningForce > 5) cann.burningForce = 5;
+      const puffBubble = new BubblePuff(ctx, cann.x, cann.y + cann.h / 2,cann.w, cann.h, "../public/Imagenes/puffBubble2.png");
+      this.puffBubbles.push(puffBubble);
+      return false;
+
+    } else return true;
+  });
+});
+
+
+
+// bosssss
+// bosssss
+// bosssss
+
+
+
+
+
 
     // items que mejoran el personaje
     this.flamethrowers.forEach((flame) => {// flamethrowers  choca con el personaje
@@ -574,7 +637,7 @@ class Game {
         } else return true;
       });
     });
-    this.cannons.forEach((cann) => {//  box con fire
+    this.cannons.forEach((cann) => {//  cannon con fire
       this.player.bulletFireArray =  this.player.bulletFireArray.filter((bullet) => {
         if (bullet.collides(cann) ) {
           cann.cannonIgniteSound.play()
@@ -1011,6 +1074,7 @@ if(this.player.wasNotDamaged) {
     this.hooks = [];
     this.electros = [];
     this.swords = [];
+    this.miniBoses = [];
   }
   emptyAllPlayerArrays(){
     this.player.bulletArray = [];

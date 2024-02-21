@@ -99,7 +99,8 @@ class Box {
         this.y - 4,
         this.w + 3,
         this.h + 3
-        );
+        )
+      }
     if(this.burning && this.burningForce > 3){
       this.ctx.drawImage(
         this.burningBox,
@@ -126,7 +127,6 @@ class Box {
         this.h + 8
         );
       }
-    }
   }
   move() {
     if(this.burning){
