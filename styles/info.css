@@ -235,3 +235,38 @@ z-index: 24;
 .boss1:hover {
   transform: scale(1.4);
 }
+
+
+#minions-talk {
+  position: absolute;
+  z-index: 20;
+  top: 1vw;
+  right: 20%;
+  transform: translate(-20%, 0%);
+  display: none;
+  justify-content: center; /* Centra horizontalmente los elementos */
+  align-items: center; /* Centra verticalmente los elementos */
+}
+
+#minions-talk div{
+  display: flex;
+  justify-content: center;
+}
+
+#minios-talk div h1{
+  font-size:calc(12px + 0.6vw);
+  margin: 4px;
+  color: rgb(255, 255, 255);
+  text-shadow: 1px 1px 1px rgb(255, 0, 0);
+  backdrop-filter: contrast(10%);
+  padding: 3px 8px;
+  z-index: 60;
+  }
+
+  #miniBoss1{
+    width: 10vw;
+    position: absolute;
+    right: 10vw;
+    top: 5vh;
+    display: none;
+  }

@@ -72,6 +72,10 @@ let boss1$$ = document.querySelector(".boss1")
 
 
 
+let miniBoss1TalkImg$$ = document.getElementById("miniBoss1")
+
+
+
 
 
 let shopSpeedGun$$ = document.getElementById("shop-speedGun")

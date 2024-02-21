@@ -173,7 +173,7 @@ class MiniBoss1 {
       this.oneShot = false;
       setTimeout(() => {
         this.oneShot = true;
-      }, 500);
+      }, 1000);
     }
   }
 

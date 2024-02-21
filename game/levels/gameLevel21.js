@@ -2,33 +2,33 @@
 //? 1- flamethrowers, 2-healings,  3- auras,  4-machineguns,  5- bars, 6-blasters, 7-coins, 8-steps, 9-hooks,10- electros
 
 
-function level21( ctx, bubbles, platforms, bouncers,spikes, stairs, flamethrowers, machineguns, healings, auras, boxes, blasters, levelBalls){
-  addPlatforms21(ctx, platforms)
-  // addBouncer21(ctx, bouncers)
-  // addSpikes21(ctx, spikes)
-  // addStair21(ctx, stairs)
-  // flamethrowerItem21(ctx, flamethrowers)
+function levelMiniBoss1( ctx, bubbles, platforms, bouncers,spikes, stairs, flamethrowers, machineguns, healings, auras, boxes, blasters, levelBalls){
+  addPlatformsMiniBoss1(ctx, platforms)
+  // addBouncerMiniBoss1(ctx, bouncers)
+  // addSpikesMiniBoss1(ctx, spikes)
+  // addStairMiniBoss1(ctx, stairs)
+  // flamethrowerItemMiniBoss1(ctx, flamethrowers)
 
-  // auraItem21(ctx, auras)
-  // boxItem21(ctx, boxes)
-  // blasterItem21(ctx, blasters)
-  // blasterItem21(ctx, blasters)
-  // blasterItem21(ctx, blasters)
+  // auraItemMiniBoss1(ctx, auras)
+  // boxItemMiniBoss1(ctx, boxes)
+  // blasterItemMiniBoss1(ctx, blasters)
+  // blasterItemMiniBoss1(ctx, blasters)
+  // blasterItemMiniBoss1(ctx, blasters)
   // machinegunItem(ctx, machineguns)
-  // levelBallItem21(ctx, levelBalls)
-  // addBubble21(ctx, bubbles)
+  // levelBallItemMiniBoss1(ctx, levelBalls)
+  // addBubbleMiniBoss1(ctx, bubbles)
 }
-function levelBallItem21(ctx, levelBalls) {  
+function levelBallItemMiniBoss1(ctx, levelBalls) {  
   const levelBall = new LevelBall(ctx, ctx.canvas.width/2, 0)
   levelBalls.push(levelBall)
 }
 
-function addBubble21(ctx, bubbles){ 
+function addBubbleMiniBoss1(ctx, bubbles){ 
   const bubble = new Bubble(ctx)
   bubbles.push(bubble);
 }
 
-function addPlatforms21(ctx, platforms){
+function addPlatformsMiniBoss1(ctx, platforms){
                                                           //! ctx, x, y , w, h, image de 1 a 4,  si se puede romper o no a disparos, si se romperá al ponerse encima, si rebotará la burbuja, velocida en x, velocidad en y 
   // const platform = new Platform(ctx, 20, 20, 25, 5, "../public/Imagenes/obstacles/platformSolid1.png", true, true);
   const platform1 = new Platform(ctx, 10, 100, 45, 5, "../public/Imagenes/obstacles/platformSolid2.png", false, false, true);
@@ -39,57 +39,57 @@ function addPlatforms21(ctx, platforms){
       //!  la anchura más la altura de la plataforma nunca debe superar 60, para que el total de red sea como máximo 240;
       //opciones de anchura y altura  son 25, 5 la estándar y mínima. Las siguiente suben de 10 en 10 en anchura
 
-function addBouncer21(ctx, bouncers){
+function addBouncerMiniBoss1(ctx, bouncers){
   const bouncer1 = new Bouncer(ctx, 30, 70, 20, 30)
   bouncers.push(bouncer1)
 }
 
-function addSpikes21(ctx, spikes){
+function addSpikesMiniBoss1(ctx, spikes){
   const spike1 = new Spikes(ctx, 100, 136)
   spikes.push(spike1)
 }
 
-function addStair21(ctx, stairs) {                         // this.ctx, ubicacion en eje x, ubicacion en eje y, ancho y alto. la última sería la imágen
+function addStairMiniBoss1(ctx, stairs) {                         // this.ctx, ubicacion en eje x, ubicacion en eje y, ancho y alto. la última sería la imágen
   //! la escalera no debería colgar sola en el aire, debería tener una parte de la plataforma debajo o pasan cosas raras con la gravedad
   const stair1 = new Stair(ctx, 81, 90,  30, 40);
   stairs.push(stair1,);
 }
 
 
-function boxItem21(ctx, boxes) {   
+function boxItemMiniBoss1(ctx, boxes) {   
   //ctx, x, y, tipo de caja,si es random=true o si es especifico= false,  loot específico
-  const box1 = new Box21(ctx, 20, 20,  3, false, 5)
+  const box1 = new BoxMiniBoss1(ctx, 20, 20,  3, false, 5)
   boxes.push(box1,)
 }
 
-function flamethrowerItem21(ctx, flamethrowers) {  
+function flamethrowerItemMiniBoss1(ctx, flamethrowers) {  
   const flamethrower = new Flamethrower(ctx)
   flamethrowers.push(flamethrower)
 }
-function machinegunItem21(ctx, machineguns) {  
+function machinegunItemMiniBoss1(ctx, machineguns) {  
   const machinegun = new Machinegun(ctx)
   machineguns.push(machinegun)
 }
 
-function healingItem21(ctx, healings) {  
+function healingItemMiniBoss1(ctx, healings) {  
   const healingItem = new Healing(ctx )
   healings.push(healingItem)
 }
-function barItem21(ctx, bars){
+function barItemMiniBoss1(ctx, bars){
   const bar = new Bars(ctx);
   bars.push(bar)
 }
 
-function auraItem21(ctx, auras) {  
+function auraItemMiniBoss1(ctx, auras) {  
   const aura = new Aura(ctx)
   auras.push(aura)
 }
-function blasterItem21(ctx, blasters) {  
+function blasterItemMiniBoss1(ctx, blasters) {  
   const blaster = new MegaFireBlaster(ctx)
   blasters.push(blaster)
 }
 
-function addExplosion21(ctx,explosions){
+function addExplosionMiniBoss1(ctx,explosions){
   let explo = new Explosion(ctx)
   explosions.push(explo)
 }
@@ -112,4 +112,13 @@ function addSteps(ctx, steps){
 function addLever(ctx, levers){
   let lev = new Lever(ctx)
   levers.push(lev);
+}
+
+function addMiniboss1(ctx, miniBoses){
+  minionsTalking.miniBossTalk1()
+  
+  setTimeout(() => {
+    let bo = new MiniBoss1(ctx, CTXW - 70, 80)
+    miniBoses.push(bo)
+  }, 2000);
 }

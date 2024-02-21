@@ -101,13 +101,11 @@ class Game {
     if(!this.gameStarted){
 
       if (GAMELEVEL === 1) {
+
+        addMiniboss1(this.ctx, this.miniBoses)
+        // levelMiniBoss1( this.ctx, this.bubbles, this.platforms, this.bouncers, this.spikes, this.stairs, this.flamethrowers, this.machineguns, this.healings, this.auras, this.boxes, this.blasters, this.levelBalls)
+        
         // inftroGame1();
-        let bo = new MiniBoss1(this.ctx, CTXW - 70, 80)
-        this.miniBoses.push(bo)
-       // level21( this.ctx, this.bubbles, this.platforms, this.bouncers, this.spikes, this.stairs, this.flamethrowers, this.machineguns, this.healings, this.auras, this.boxes, this.blasters, this.levelBalls)
-        // let swo = new Sword(ctx, 50, 50)
-        // this.swords.push(swo)
-        // this.swords.push(swo)
         // level1(this.ctx, this.bubbles, this.platforms, this.levelBalls, this.boxes)
         // setTimeout(() => {
         //   addBubble1(this.ctx, this.bubbles)
