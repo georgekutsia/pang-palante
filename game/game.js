@@ -102,8 +102,16 @@ class Game {
 
       if (GAMELEVEL === 1) {
 
-        addMiniboss1(this.ctx, this.miniBoses)
-        // levelMiniBoss1( this.ctx, this.bubbles, this.platforms, this.bouncers, this.spikes, this.stairs, this.flamethrowers, this.machineguns, this.healings, this.auras, this.boxes, this.blasters, this.levelBalls)
+        addMiniboss1()
+        setTimeout(() => {
+          let bo = new MiniBoss1(ctx, CTXW - 70, 50)
+          this.miniBoses.push(bo)
+          const bouncer1 = new Bouncer(ctx, 130, 70, 20, 30)
+          this.bouncers.push(bouncer1)
+          let sta = new Stair(this.ctx, 100, CTXH - 50, 30, 50)
+          this.stairs.push(sta)
+          // levelMiniBoss1( this.ctx, this.bubbles, this.platforms, this.bouncers, this.spikes, this.stairs, this.flamethrowers, this.machineguns, this.healings, this.auras, this.boxes, this.blasters, this.levelBalls, this.miniBoses)
+        }, 100);
         
         // inftroGame1();
         // level1(this.ctx, this.bubbles, this.platforms, this.levelBalls, this.boxes)
@@ -287,7 +295,7 @@ class Game {
       if (stair.collidesTop(this.player)) {
         this.player.vy = 0;
         this.player.y = stair.y - this.player.h;
-          jumpDownDistance = 3;
+        jumpDownDistance = 3;
         W = 0;
         this.player.g = 0.2;
       }
@@ -300,30 +308,43 @@ class Game {
       }
       if (stair.collides(this.player)) {
         jumpDownDistance = 0;
-        W = 87;
+        this.player.canClimb = true;
       } else {
+        this.player.canClimb = false;
         return true;
       }
     });
+    console.log(this.player.canClimb)
     //bubbles...bubbles...bubbles...bubbles...bubbles...
     //bubbles...bubbles...bubbles...bubbles...bubbles...
-      checkBubbleCollision(this.bubbles, this.player, this.bubbleSplash2, this.bubblePopSound1, this.puffBubbles, this.ctx, this.platforms, this.bouncers, this.boxes)
+      checkBubbleCollision(this.bubbles, this.player, this.bubbleSplash2, this.bubblePopSound1, this.puffBubbles, this.ctx, this.platforms, this.bouncers, this.boxes, this.stairs)
     this.gatlings.forEach((e) => {  
-      checkBubbleCollision(e.bubbleArray, this.player, this.bubbleSplash2, this.bubblePopSound1, this.puffBubbles, this.ctx, this.platforms, this.bouncers, this.boxes)
+      checkBubbleCollision(e.bubbleArray, this.player, this.bubbleSplash2, this.bubblePopSound1, this.puffBubbles, this.ctx, this.platforms, this.bouncers, this.boxes, this.stairs)
     })
     this.cannons.forEach((e) => {
-      checkBubbleCollision(e.bubbleArray, this.player, this.bubbleSplash2, this.bubblePopSound1, this.puffBubbles, this.ctx, this.platforms, this.bouncers, this.boxes)
+      checkBubbleCollision(e.bubbleArray, this.player, this.bubbleSplash2, this.bubblePopSound1, this.puffBubbles, this.ctx, this.platforms, this.bouncers, this.boxes, this.stairs)
     })
     this.miniBoses.forEach((e) => {
-      checkBubbleCollision(e.bubbleArray, this.player, this.bubbleSplash2, this.bubblePopSound1, this.puffBubbles, this.ctx, this.platforms, this.bouncers, this.boxes)
+      checkBubbleCollision(e.bubbleArray, this.player, this.bubbleSplash2, this.bubblePopSound1, this.puffBubbles, this.ctx, this.platforms, this.bouncers, this.boxes, this.stairs)
     })
-    this.miniBoses.forEach((e) => {e.explosiveArray.forEach((exp) => {if(exp.collides(this.player)){
+    this.miniBoses.forEach((e) => {e.explosiveArray.forEach((exp) => {if(exp.collides(this.player) && !this.player.immune){
           this.player.loseLife(exp.damage, true)
           exp.exploded = true;
           exp.img.frame = 5;
           exp.vx = this.player.vx;
           exp.canCollide = false;
     }})})
+
+    
+    bossFireCollision(this.miniBoses, this.stairs)
+    bossFireCollision(this.miniBoses, this.platforms)
+    bossFireCollision(this.miniBoses, this.bouncers)
+    bossFireCollision(this.miniBoses, this.bubbles)
+    bossFireCollision(this.miniBoses, this.spikes)
+    bossFireCollision(this.miniBoses, this.boxes)
+    bossFireCollision(this.miniBoses, this.player.bulletArray)
+    bossFireCollision(this.miniBoses, this.player.bulletBarArray)
+    bossFireCollision(this.miniBoses, this.player.bulletPlatformArray)
 
     //darkBubbles
     //darkBubbles
@@ -488,11 +509,20 @@ class Game {
 this.miniBoses.forEach((mini) => {//  minions con bullet
   this.player.bulletArray = this.player.bulletArray.filter((bullet) => {
     if (bullet.collidesMiniboss1(mini) && !bullet.isBig) {
-    mini.miniBossHit();           
+      mini.miniBossHit();
+      mini.burningForce++;
+      mini.randomNumber = Math.floor(Math.random() * mini.burningShipImages.length)
       return false;
     } else return true;
   });
 });
+this.miniBoses.forEach((mini) => {//  miniboss con player
+    if (mini.collides(this.player) && !this.player.immune) {
+      this.player.loseLife(2, true)
+      return false;
+    } else return true;
+  });
+
 this.cannons.forEach((cann) => {//  cannon con fire
   this.player.bulletFireArray =  this.player.bulletFireArray.filter((bullet) => {
     if (bullet.collides(cann) ) {
@@ -1105,23 +1135,23 @@ if(this.player.wasNotDamaged) {
 
   // canvas.addEventListener('mousemove', (event) => officeHover(event, game.player));
 
-    officeHover(event, player) {
+  //   officeHover(event, player) {
 
-    const rect = canvas.getBoundingClientRect();
-    const mouseX = event.clientX - rect.left;
-    const mouseY = event.clientY - rect.top;
+  //   const rect = canvas.getBoundingClientRect();
+  //   const mouseX = event.clientX - rect.left;
+  //   const mouseY = event.clientY - rect.top;
   
-    if (
-      mouseX >= player.x &&
-      mouseX <= player.x + 50 &&
-      mouseY >= player.y  &&
-      mouseY <= player.y + 50
+  //   if (
+  //     mouseX >= player.x &&
+  //     mouseX <= player.x + 50 &&
+  //     mouseY >= player.y  &&
+  //     mouseY <= player.y + 50
       
-    ) {
-      alert("¡Estás aquí!");
-      player.shootFire();
-    }
-  }
+  //   ) {
+  //     alert("¡Estás aquí!");
+  //     player.shootFire();
+  //   }
+  // }
   
 
 }

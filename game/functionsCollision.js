@@ -1,6 +1,6 @@
 
 
-function checkBubbleCollision(bubbles, player, bubbleSplash2, bubblePopSound1, puffBubbles, ctx, platforms, bouncers, boxes){
+function checkBubbleCollision(bubbles, player, bubbleSplash2, bubblePopSound1, puffBubbles, ctx, platforms, bouncers, boxes, stairs){
   bubbles.forEach((bubble) => {//player con bubble
     if(bubble.collides(player)) {
         if(player.electricShieldIsActive){
@@ -101,6 +101,14 @@ function checkBubbleCollision(bubbles, player, bubbleSplash2, bubblePopSound1, p
       if (bouncer.collides(bubble)) {
         bubble.bubbleBounceSound.play()
         bounceFromObstacles(bubble, bouncer);
+      } else return true;
+    });
+  });
+  bubbles.forEach((bubble) => {//bubble con bouncer
+    stairs.forEach((stair) => {
+      if (stair.collides(bubble)) {
+        bubble.bubbleBounceSound.play()
+        bounceFromObstacles(bubble, stair);
       } else return true;
     });
   });
@@ -220,3 +228,22 @@ function checkHookCollisions(hookArray, obstacles, barHit, player) {
     });
   });
 }
+
+
+
+
+
+//miniboses fire
+
+function bossFireCollision (miniBoses, object){
+  miniBoses.forEach((e) => {e.explosiveArray.forEach((exp) => {
+    object.forEach((ob) => {
+     if(exp.collides(ob)){
+       exp.exploded = true;
+       exp.img.frame = 5;
+       exp.vx = -0.5;
+       exp.vy = 0;
+       exp.canCollide = false;
+      }})})
+    })
+  }

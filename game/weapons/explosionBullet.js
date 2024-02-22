@@ -69,7 +69,7 @@ class ExplosionBullet {
 
   collides(objetivo) {
     if(this.canCollide){
-      const colX = this.x  <= objetivo.x  && this.x + this.w > objetivo.x ;
+      const colX = this.x  <= objetivo.x + objetivo.w  && this.x + this.w > objetivo.x ;
       const colY =this.y + this.h -5 > objetivo.y && this.y < objetivo.y + objetivo.h;
       return colX && colY;
     }
