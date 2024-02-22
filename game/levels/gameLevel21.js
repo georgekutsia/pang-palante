@@ -114,11 +114,9 @@ function addLever(ctx, levers){
   levers.push(lev);
 }
 
-function addMiniboss1(ctx, miniBoses){
+function addMiniboss1(){
+  finalBoss = true;
+  dodgeCooldown = dodgeCooldown/2
   minionsTalking.miniBossTalk1()
-  
-  setTimeout(() => {
-    let bo = new MiniBoss1(ctx, CTXW - 70, 80)
-    miniBoses.push(bo)
-  }, 2000);
+
 }

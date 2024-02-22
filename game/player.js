@@ -49,7 +49,10 @@ class Player {
     this.electricShieldIsActive = false;
     this.electricShieldImgTick = 0;
     this.clickedH = false;
-
+    this.shootUp = true;
+    this.canClimb= false;
+    this.diagonalShoot = false;
+    this.walkingSpeed = 0;
     this.weaponFire = new Image();
     this.weaponFire.src = "/public/Imagenes/weaponFire.png";
     this.dodgeQ = new Image();
@@ -68,6 +71,7 @@ class Player {
     this.swordPowerUp = 8;
     this.swordPower1 = false;
     this.swordCooldown = 0;
+    this.keySwitchCounter = 0;
 
     this.blasterExplosion = new Audio("../public/sounds/megablasterBlastSound.mp3");
     this.blasterExplosion.volume = 0.5; //
@@ -425,6 +429,7 @@ handleRightDodge = (event) =>{ //*
   }
 
   move() {
+    this.canClimb ? W = 87 : 0;
     if(!finalBoss){
       this.velocidadX = this.vx += this.r;
       if(this.velocidadX <= 0.5 && this.velocidadX >= -0.5 && this.r !==0){
@@ -475,7 +480,7 @@ handleRightDodge = (event) =>{ //*
     this.y += this.vy;
     bulletDirection = this.vx/2
       this.frameTick++
-      if (this.frameTick > 10  ) {
+      if (this.frameTick > 15 - this.walkingSpeed) {   
         this.img.frame++;
         this.frameTick = 0;
       }
@@ -529,26 +534,37 @@ handleRightDodge = (event) =>{ //*
 
 //consultar constantes para el código de cada teclahjkl-
   keyDown(key) {
+    if(finalBoss) W = 87;
     if (key === W ) {
-      this.vy = -playerSpeed;
+      this.keySwitchCounter = 0;
+      if(this.canClimb){
+        this.vy = -playerSpeed;
+      } 
+     if(finalBoss) this.shootUp = true;
     }
     if (key === A ) {
       this.frameTick++;
       if(!finalBoss){
-        this.vx = -playerSpeed;
         this.img.src = "../public/Imagenes/pangRunLeft.png";
+        this.vx = -playerSpeed;
       } else {
-        this.vx = -0.5
+        this.walkingSpeed = 10
+        this.vx = -playerSpeed + 0.8;
       }
       this.frameAmount = 5;
     }
     if (key === D ) {
+      this.keySwitchCounter++
       if(!finalBoss){
         this.vx = playerSpeed;
-
       } else {
-        this.vx = 0.5
+        this.walkingSpeed = 10;
+        this.vx = playerSpeed - 0.8;
+
       }
+    if(finalBoss && this.keySwitchCounter >= 2) {
+      this.shootUp = false;
+    }
     this.img.src = "../public/Imagenes/pangRunRight.png";
     this.frameAmount = 5;
     }
@@ -683,6 +699,7 @@ handleRightDodge = (event) =>{ //*
         this.frameAmount = 2;
         this.img.frame = 0;
       }
+    this.walkingSpeed = 0;
       }
     if (key === D) {
       this.vx = 0;
@@ -691,6 +708,8 @@ handleRightDodge = (event) =>{ //*
       this.frameAmount = 2;
       this.img.frame = 0;
     }
+    this.walkingSpeed = 0;
+
       }
     if (key === S) {
       this.vy = 0;
@@ -728,11 +747,12 @@ handleRightDodge = (event) =>{ //*
   
   
   collides(objetivo) {
-    const colX = this.x <= objetivo.x + objetivo.w && this.x + this.w > objetivo.x + 10;
-    const colY = this.y + this.h > objetivo.y && this.y < objetivo.y + objetivo.h;
-    return colX && colY;
+    if(!this.immuneState){
+      const colX = this.x <= objetivo.x + objetivo.w && this.x + this.w > objetivo.x + 10;
+      const colY = this.y + this.h > objetivo.y && this.y < objetivo.y + objetivo.h;
+      return colX && colY;
+    }
   }
-
   
   loseLife(damage, immuneState){
     this.life.total -= damage;
@@ -748,22 +768,43 @@ handleRightDodge = (event) =>{ //*
     this.life.total += 1;
   }
   shoot() {// paso 1: invoca el disparo desde la posicion del personaje o su cercanía
+    if(this.shootUp){
+      const bullet = new BasicWeapon(this.ctx, this.x + 5, this.y, bulletDirection);
+      this.bulletArray.push(bullet);//paso 2: crea un array vacío en el constructor y luego haz un push de cada bullet;
+    } else{
+      const bullet = new BasicWeapon(this.ctx, this.x + 5, this.y, bulletDirection, 3, 0.001);
+      this.bulletArray.push(bullet);
+    }
     this.shootSound.play()
-    const bullet = new BasicWeapon(this.ctx, this.x + 5, this.y, bulletDirection);
-    this.bulletArray.push(bullet);//paso 2: crea un array vacío en el constructor y luego haz un push de cada bullet;
   }
   shootDouble() {// paso 1: invoca el disparo desde la posicion del personaje o su cercanía
+    if(!finalBoss){
+      const bullet1 = new BasicWeapon(this.ctx, this.x - 3, this.y, bulletDirection);
+      this.bulletArray.push(bullet1);//paso 2: crea un array vacío en el constructor y luego haz un push de cada bullet;
+    } else{
+      const bullet1 = new BasicWeapon(this.ctx, this.x +3, this.y, bulletDirection, 3, -0.1);
+      this.bulletArray.push(bullet1);//paso 2: crea un array vacío en el constructor y luego haz un push de cada bullet;
+    }
     this.shootSound.play()
-    const bullet1 = new BasicWeapon(this.ctx, this.x - 3, this.y, bulletDirection);
-    this.bulletArray.push(bullet1);//paso 2: crea un array vacío en el constructor y luego haz un push de cada bullet;
   }
   shootTriple() {// paso 1: invoca el disparo desde la posicion del personaje o su cercanía
+    if(!finalBoss){
+      const bullet1 = new BasicWeapon(this.ctx, this.x - 6, this.y, bulletDirection, -0.3 - basicWeaponSpeed/2);
+      const bullet2 = new BasicWeapon(this.ctx, this.x + 8, this.y, bulletDirection, 0.3+ basicWeaponSpeed/2);
+      this.bulletArray.push(bullet1, bullet2);//paso 2: crea un array vacío en el constructor y luego haz un push de cada bullet;
+    } else{
+      const bullet1 = new BasicWeapon(this.ctx, this.x , this.y, bulletDirection, 3, -0.2);
+      const bullet2 = new BasicWeapon(this.ctx, this.x - 3, this.y, bulletDirection, 3, -0.3);
+      this.bulletArray.push(bullet1, bullet2);//paso 2: crea un array vacío en el constructor y luego haz un push de cada bullet;
+    }
     this.shootSound.play()
-    const bullet1 = new BasicWeapon(this.ctx, this.x - 6, this.y, bulletDirection, -0.3 - basicWeaponSpeed/2);
-    const bullet2 = new BasicWeapon(this.ctx, this.x + 8, this.y, bulletDirection, 0.3+ basicWeaponSpeed/2);
-    this.bulletArray.push(bullet1, bullet2);//paso 2: crea un array vacío en el constructor y luego haz un push de cada bullet;
+
   }
   shootCuatruple() {// paso 1: invoca el disparo desde la posicion del personaje o su cercanía
+    if(!finalBoss){
+    } else{
+      
+    }
     this.shootSound.play()
     const bullet6 = new BasicWeapon(this.ctx, this.x-2, this.y +5, bulletDirection, 0, -1, true);
     this.bigWeaponBubblesMaxAmount  += 1
@@ -774,6 +815,10 @@ handleRightDodge = (event) =>{ //*
     this.bulletArray.push(bullet6);//paso 2: crea un array vacío en el constructor y luego haz un push de cada bullet;
   }
   shootQuintuple(){
+    if(!finalBoss){
+    } else{
+      
+    }
     this.shootSound.play()
     if(this.bigWeaponBubblesMaxAmount <= 4){
       this.bigWeaponBubblesMaxAmount  += 1

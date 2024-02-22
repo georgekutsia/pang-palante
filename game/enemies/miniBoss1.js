@@ -27,23 +27,34 @@ class MiniBoss1 {
     this.shootingIntervalBubbleTick = 0;
 
     //burning...
-    this.burningBox = new Image();
-    this.burningBox.src = "/public/Imagenes/burningBox.png";
-    this.burningBox.framex = 0;
-    this.burningBox.framey = 0;
+    this.burningShip = new Image();
+    this.burningShip.src = "/public/Imagenes/burningShip1.png";
+    this.burningShip.framex = 0;
+    this.burningShip.framey = 0;
     this.burningTick = 0;
-    this.burning = false;
-    this.burningForce = 0;
+    this.burning = true;
+    this.burningForce = 2;
     this.damage0 = 0;
+
+    this.burningShipImages = [
+      "/public/Imagenes/burningShip1.png",
+      "/public/Imagenes/burningShip2.png",
+      "/public/Imagenes/burningShip3.png",
+      "/public/Imagenes/burningShip4.png",
+      "/public/Imagenes/burningShip5.png",
+      "/public/Imagenes/burningShip6.png",
+      "/public/Imagenes/burningShip7.png",
+    ]
+    this.randomNumber = 1;
   }
 
   draw() {
     if(this.boxLevel===1)this.img.src = "/public/Imagenes/box1.png";
     this.ctx.drawImage(
       this.img,
-      (this.img.frame * this.img.width) / 4,
+      (this.img.frame * this.img.width) / 6,
       0,
-      this.img.width / 4,
+      this.img.width / 6,
       this.img.height ,
       this.x,
       this.y,
@@ -53,68 +64,69 @@ class MiniBoss1 {
 
     
     if(this.burning && this.burningForce >0){
+      this.burningShip.src = this.burningShipImages[this.randomNumber];
       this.ctx.drawImage(
-        this.burningBox,
-        (this.burningBox.framex * this.burningBox.width) / 8,
-        (this.burningBox.framey * this.burningBox.width) / 4,
-        this.burningBox.width / 8,
-        this.burningBox.height/4,
+        this.burningShip,
+        (this.burningShip.framex * this.burningShip.width) / 8,
+        (this.burningShip.framey * this.burningShip.width) / 4,
+        this.burningShip.width / 8,
+        this.burningShip.height/4,
         this.x,
-        this.y + 3,
-        this.w,
-        this.h
+        this.y + this.h/2-this.h/10,
+        this.w /3,
+        this.h/3
         );
       }
     if(this.burning && this.burningForce > 1){
       this.ctx.drawImage(
-        this.burningBox,
-        (this.burningBox.framex * this.burningBox.width) / 8,
-        (this.burningBox.framey * this.burningBox.width) / 4,
-        this.burningBox.width / 8,
-        this.burningBox.height/4,
-        this.x -3,
-        this.y -1,
-        this.w+3,
-        this.h+3
+        this.burningShip,
+        (this.burningShip.framex * this.burningShip.width) / 8,
+        (this.burningShip.framey * this.burningShip.width) / 4,
+        this.burningShip.width / 8,
+        this.burningShip.height/4,
+        this.x + this.w/2,
+        this.y + this.h/2-this.h/15,
+        this.w/3,
+        this.h/3
         );
       }
     if(this.burning && this.burningForce > 2){
       this.ctx.drawImage(
-        this.burningBox,
-        (this.burningBox.framex * this.burningBox.width) / 8,
-        (this.burningBox.framey * this.burningBox.width) / 4,
-        this.burningBox.width / 8,
-        this.burningBox.height/4,
-        this.x +1,
-        this.y - 4,
-        this.w + 3,
-        this.h + 3
+        this.burningShip,
+        ((this.burningShip.framex + 1) * this.burningShip.width) / 8,
+        ((this.burningShip.framey +1 )* this.burningShip.width) / 4,
+        this.burningShip.width / 8,
+        this.burningShip.height/4,
+        this.x + this.w/3,
+        this.y + this.h/3,
+        this.w/3,
+        this.h/3
         );
     if(this.burning && this.burningForce > 3){
       this.ctx.drawImage(
-        this.burningBox,
-        (this.burningBox.framex * this.burningBox.width) / 8,
-        (this.burningBox.framey * this.burningBox.width) / 4,
-        this.burningBox.width / 8,
-        this.burningBox.height/4,
-        this.x -1,
-        this.y - 6,
-        this.w + 5,
-        this.h + 5
+        this.burningShip,
+        (this.burningShip.framex * this.burningShip.width) / 8,
+        (this.burningShip.framey * this.burningShip.width) / 4,
+        this.burningShip.width / 8,
+        this.burningShip.height/4,
+        this.x + this.w/2.5,
+        this.y + this.h/10,
+        this.w/2,
+        this.h/2
         );
       }
     }
     if(this.burning && this.burningForce > 4){
       this.ctx.drawImage(
-        this.burningBox,
-        (this.burningBox.framex * this.burningBox.width) / 8,
-        (this.burningBox.framey * this.burningBox.width) / 4,
-        this.burningBox.width / 8,
-        this.burningBox.height/4,
-        this.x-3,
-        this.y - 8,
-        this.w + 8,
-        this.h + 8
+        this.burningShip,
+        (this.burningShip.framex * this.burningShip.width) / 8,
+        (this.burningShip.framey * this.burningShip.width) / 4,
+        this.burningShip.width / 8,
+        this.burningShip.height/4,
+        this.x + this.w/7,
+        this.y + this.h/20,
+        this.w/2,
+        this.h/2
         );
       }
 
@@ -142,17 +154,38 @@ class MiniBoss1 {
       this.shootOne = true;
     }
     this.tick++
-    if(this.tick > 15){
+    if(this.tick > 10){
       this.img.frame++
       this.tick = 0;
     }
-    if(this.img.frame > 3){
+    if(this.img.frame > 5){
       this.img.frame = 0;
     }
 
 
+    this.burningTick++;
+    if(this.burningTick > 6 - this.burningForce){
+      this.burningShip.framex++
+      this.burningTick = 0;
+    }
+    if(this.burningShip.framex > 7){
+      this.burningShip.framey+= 0.5
+      this.burningShip.framex = 0;
+    } 
+    if(this.burningShip.framey > 1.5 ) {
+      this.burningShip.framey = 0
+      this.burningShip.framex = 0;
+      if(this.boxLevel===0) {
+        this.damage0 +=1;
+        if(this.damage0 >=3){
+          this.boxImg.frame+=1;
+          this.boxImpactMetalic.play();
+          this.damage0 = 0;
+        }
+      }
+    }
+
     this.shootingIntervalBubbleTick++
-    console.log('%cMyProject%cline:156%c this.shootingIntervalBubbleTick++', 'color:#fff;background:#ee6f57;padding:3px;border-radius:2px', 'color:#fff;background:#1f3c88;padding:3px;border-radius:2px', 'color:#fff;background:rgb(237, 222, 139);padding:3px;border-radius:2px',  this.shootingIntervalBubble)
     if(this.shootingIntervalBubbleTick >= this.shootingIntervalBubble){
       this.shootingIntervalBubble = getRandomNumberDecimals(200, 500)
       this.shootingBubble1()
@@ -173,7 +206,7 @@ class MiniBoss1 {
       this.oneShot = false;
       setTimeout(() => {
         this.oneShot = true;
-      }, 1000);
+      }, this.distanceFromPlayer*2);
     }
   }
 
@@ -188,7 +221,7 @@ class MiniBoss1 {
 
   shootingBubble1(){
     let bubble2 = new Bubble(ctx, this.x , this.y + this.h/2 , 25, 25, -0.5, -1, 0.0001, true, 700, 0, false)
-    this.bubbleArray.push(bubble2);
+    // this.bubbleArray.push(bubble2);
   }
 
   checkDistance(player){

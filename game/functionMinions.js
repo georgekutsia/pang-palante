@@ -17,9 +17,25 @@ function textoMinionsPianoPiano(cualquierIdDeTexto) {
 }
 
 const minionsTalking = {
-
   miniBossTalk1(){
-    miniBoss1TalkImg$$.style.display = "block";
+    miniBoss1TalkImg$$.style.display = "block"; 
     textoMinionsPianoPiano("miniBoss1-talk1");
+    setTimeout(() => {
+      document.getElementById("miniBoss1-talk1").style.opacity = "0";
+    }, 3000);
+
+    setTimeout(() => {
+      document.getElementById("miniBoss1-talk1").style.display = "none";
+    textoMinionsPianoPiano("miniBoss1-talk2");
+    }, 3500);
+
+    setTimeout(() => {
+      miniBoss1TalkImg$$.style.top = "-150px";
+      miniBoss1TalkImg$$.style.width = "1px";
+
+    }, 5500);
+    setTimeout(() => {
+      miniBoss1TalkImg$$.style.display = "none";
+    }, 6500);
   },
 }
