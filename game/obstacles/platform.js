@@ -14,8 +14,8 @@ class Platform {
     this.electroShocked = false;
     this.vx = vx || 0;
     this.vy = vy || 0;
-    this.xLimit1   = xLimit1   || 10
-    this.xLimit2 = xLimit2 || CTXW
+    this.xLimit1   = xLimit1   || -40
+    this.xLimit2 = xLimit2 || CTXW + 40
     this.yLimit1 = yLimit1 || CTXH
     this.yLimit2 = yLimit2 || CTXH
     this.speedX = vx || 0;

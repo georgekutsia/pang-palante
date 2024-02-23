@@ -25,7 +25,9 @@ class MiniBoss1 {
     this.distanceFromPlayer = -2
     this.shootingIntervalBubble = 1;
     this.shootingIntervalBubbleTick = 0;
-
+    this.bossTalkGone = true;
+    this.bossTalk2 = true;
+    this.bossTalk3 = true;
     //burning...
     this.burningShip = new Image();
     this.burningShip.src = "/public/Imagenes/burningShip1.png";
@@ -33,9 +35,12 @@ class MiniBoss1 {
     this.burningShip.framey = 0;
     this.burningTick = 0;
     this.burning = true;
-    this.burningForce = 2;
+    this.burningForce = 0;
     this.damage0 = 0;
 
+
+    this.exploding = true;
+    this.explosions = [];
     this.burningShipImages = [
       "/public/Imagenes/burningShip1.png",
       "/public/Imagenes/burningShip2.png",
@@ -63,7 +68,7 @@ class MiniBoss1 {
     );
 
     
-    if(this.burning && this.burningForce >0){
+    if(this.burning && this.burningForce >0 || this.life <= 60 ){
       this.burningShip.src = this.burningShipImages[this.randomNumber];
       this.ctx.drawImage(
         this.burningShip,
@@ -77,7 +82,7 @@ class MiniBoss1 {
         this.h/3
         );
       }
-    if(this.burning && this.burningForce > 1){
+    if(this.burning && this.burningForce > 1 || this.life <= 50 ){
       this.ctx.drawImage(
         this.burningShip,
         (this.burningShip.framex * this.burningShip.width) / 8,
@@ -90,7 +95,7 @@ class MiniBoss1 {
         this.h/3
         );
       }
-    if(this.burning && this.burningForce > 2){
+    if(this.burning && this.burningForce > 2 || this.life <= 40 ){
       this.ctx.drawImage(
         this.burningShip,
         ((this.burningShip.framex + 1) * this.burningShip.width) / 8,
@@ -102,7 +107,7 @@ class MiniBoss1 {
         this.w/3,
         this.h/3
         );
-    if(this.burning && this.burningForce > 3){
+    if(this.burning && this.burningForce > 3 || this.life <= 30 ){
       this.ctx.drawImage(
         this.burningShip,
         (this.burningShip.framex * this.burningShip.width) / 8,
@@ -116,7 +121,7 @@ class MiniBoss1 {
         );
       }
     }
-    if(this.burning && this.burningForce > 4){
+    if(this.burning && this.burningForce > 4 || this.life <= 20 ){
       this.ctx.drawImage(
         this.burningShip,
         (this.burningShip.framex * this.burningShip.width) / 8,
@@ -128,12 +133,16 @@ class MiniBoss1 {
         this.w/2,
         this.h/2
         );
+        this.life-= 0.001; // que pierda la vida poco a poco si está muy reventado
       }
+    this.explodingShip()
 
     this.bubbleArray.forEach(bub => bub.draw())
     this.bubbleArray = this.bubbleArray.filter((e) =>e.isVisible()); 
     this.explosiveArray.forEach(bub => bub.draw())
     this.explosiveArray = this.explosiveArray.filter((e) =>e.isVisible()); 
+    this.explosions.forEach(bub => bub.draw())
+    this.explosions = this.explosions.filter((e) =>e.isVisible()); 
 
   }
   move() {
@@ -188,12 +197,18 @@ class MiniBoss1 {
     this.shootingIntervalBubbleTick++
     if(this.shootingIntervalBubbleTick >= this.shootingIntervalBubble){
       this.shootingIntervalBubble = getRandomNumberDecimals(200, 500)
-      this.shootingBubble1()
+      this.shootingBubble1(-1, 25, 25)
+      if(this.life <= 20 ){
+        this.shootingBubble1(-1.4, 20, 20)
+        this.shootingBubble1(-1.6, 20, 20)
+        this.shootingBubble1(-1.8, 20, 20)
+      }
       this.shootingIntervalBubbleTick = 0;
     }
 
     this.bubbleArray.forEach(bub => bub.move())
     this.explosiveArray.forEach(bub => bub.move())
+    this.explosions.forEach(bub => bub.move())
   }
 
   checkPosition(player){
@@ -219,9 +234,9 @@ class MiniBoss1 {
     this.explosiveArray.push(explo)
   }
 
-  shootingBubble1(){
-    let bubble2 = new Bubble(ctx, this.x , this.y + this.h/2 , 25, 25, -0.5, -1, 0.0001, true, 700, 0, false)
-    // this.bubbleArray.push(bubble2);
+  shootingBubble1(speedX, size){
+    let bubble2 = new Bubble(ctx, this.x , this.y + this.h/2 , size, size, -0.5, speedX, 0.0001, true, 700, 0, false)
+    this.bubbleArray.push(bubble2);
   }
 
   checkDistance(player){
@@ -230,6 +245,61 @@ class MiniBoss1 {
 
   miniBossHit(){
     this.life -= 1;
+  }
+  
+
+
+  explodingShip(){
+    if(this.life <= 50&& this.bossTalk2){
+      minionsTalking.miniBossTalk2();
+      this.bossTalk2 = false;
+    }
+    if(this.life <= 20&& this.bossTalk3){
+      minionsTalking.miniBossTalk3();
+      this.bossTalk3 = false;
+    }
+    if(this.life <=0.1){
+      this.vy = -2;
+      this.vx = 0.5;
+      if(this.bossTalkGone){
+        minionsTalking.miniBossTalk1Gone();
+        this.bossTalkGone = false;
+      }
+    }
+    if(this.life <= -1){
+      this.dispose = false;
+    }
+
+    if(this.exploding){
+      if(this.life <= 66){
+        let explo1 = new Explosion(this.ctx, this.x, this.y + this.h/2, this.w/5, this.w/5, this.vx, this.vy)
+        this.explosions.push(explo1);
+      }
+      if(this.life <= 64){
+        setTimeout(() => {
+          
+          let explo1 = new Explosion(this.ctx, this.x+ this.w/2,  this.y + this.h/2, this.w/4, this.w/4, this.vx, this.vy)
+          this.explosions.push(explo1);
+        }, 300);
+      }
+      if(this.life <= 62){
+        setTimeout(() => {
+          
+          let explo1 = new Explosion(this.ctx, this.x+ this.w/4,  this.y + this.h/4, this.w/4, this.w/4, this.vx, this.vy)
+          this.explosions.push(explo1);
+        }, 600);
+      }
+      if(this.life <= 61){
+        setTimeout(() => {
+          let explo1 = new Explosion(this.ctx, this.x + this.w/3, this.y + this.h/2, this.w/3, this.w/3, this.vx, this.vy)
+          this.explosions.push(explo1);
+        }, 900);
+      }
+      this.exploding = false;
+      setTimeout(() => {
+        this.exploding = true;
+      }, 2000);
+    }
   }
   isVisible() {
     return this.dispose;
