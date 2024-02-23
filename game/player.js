@@ -65,7 +65,7 @@ class Player {
     this.barItem.src = "/public/Imagenes/barItem.png";
     this.swordBack = new Image();
     this.swordBack.src = "/public/Imagenes/swordBack.png";
-    this.swingSwordState = false;
+    this.swingSwordState = true;
     this.swordEquipped = false;
     this.swordLevel = 0;
     this.swordPowerUp = 8;
@@ -861,22 +861,26 @@ handleRightDodge = (event) =>{ //*
   }
 
     swingSword(){
-      if(this.swingSwordState){
-        if(!this.electricShieldIsActive){
-          let sword = new WeaponSword(this.ctx, this.x - 10, this.y - 20, this.swingSwordState, 0 )
-          this.swordArray.push(sword)
+        if(this.swingSwordState){
+          if(this.vy > 0 || this.vy < 0){
+            this.vy = jumpHeight
+            this.g = 0.18
+          }
+          if(!this.electricShieldIsActive){
+            let sword = new WeaponSword(this.ctx, this.x - 10, this.y - 20, this.swingSwordState, 0 )
+            this.swordArray.push(sword)
+          } else {
+            let sword = new WeaponSword(this.ctx, this.x - 23, this.y - 42, this.swingSwordState, 0, CTXW/10, CTXW /5 )
+            this.swordArray.push(sword)
+          }
+          if(this.swordPower1){
+            const bullet1 = new BasicWeapon(this.ctx, this.x +8, this.y, bulletDirection, -2.8,  -0.1, false, 20);
+            const bullet2 = new BasicWeapon(this.ctx, this.x + 8, this.y, bulletDirection, -3, -0.6, false, 20 );
+            const bullet3 = new BasicWeapon(this.ctx, this.x + 8, this.y, bulletDirection, -2.8, -1.3, false, 20 );
+            const bullet4 = new BasicWeapon(this.ctx, this.x + 8, this.y, bulletDirection, -2.3, -2, false, 20 );
+            this.bulletArray.push(bullet1, bullet2,bullet3,  bullet4 );
+          }
         } else {
-          let sword = new WeaponSword(this.ctx, this.x - 23, this.y - 42, this.swingSwordState, 0, CTXW/10, CTXW /5 )
-          this.swordArray.push(sword)
-        }
-        if(this.swordPower1){
-          const bullet1 = new BasicWeapon(this.ctx, this.x +8, this.y, bulletDirection, -2.8,  -0.1, false, 20);
-          const bullet2 = new BasicWeapon(this.ctx, this.x + 8, this.y, bulletDirection, -3, -0.6, false, 20 );
-          const bullet3 = new BasicWeapon(this.ctx, this.x + 8, this.y, bulletDirection, -2.8, -1.3, false, 20 );
-          const bullet4 = new BasicWeapon(this.ctx, this.x + 8, this.y, bulletDirection, -2.3, -2, false, 20 );
-          this.bulletArray.push(bullet1, bullet2,bullet3,  bullet4 );
-        }
-      } else {
         if(!this.electricShieldIsActive){
           let sword = new WeaponSword(this.ctx, this.x, this.y - 20, this.swingSwordState, 4 )
           this.swordArray.push(sword)
@@ -892,8 +896,5 @@ handleRightDodge = (event) =>{ //*
           this.bulletArray.push(bullet1, bullet2,bullet3,  bullet4 );
         }
       }
-
-
     }
-
 }

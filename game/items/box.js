@@ -1,13 +1,13 @@
 class Box {
-  constructor(ctx, x, y, boxLevel, containsRandom, lootNumber, bubblePopup, amountOfLoot) {
+  constructor(ctx, x, y, boxLevel, containsRandom, lootNumber, bubblePopup, amountOfLoot, vx, vy) {
     this.ctx = ctx;
     this.x = x || 100;
     this.y = y || 20;
     this.w = this.ctx.canvas.width / 18;
     this.h = this.ctx.canvas.width / 18;
     this.tick = 0
-    this.vx = 0;
-    this.vy = 0;
+    this.vx = vx || 0;
+    this.vy = vy || 0;
     this.g = 0
     this.dispose = true;
     this.boxImg = new Image();
@@ -129,6 +129,8 @@ class Box {
       }
   }
   move() {
+    this.x += this.vx;
+    this.y += this.vy;
     if(this.burning){
       this.burningTick++;
       if(this.burningTick > 6 - this.burningForce){
@@ -163,7 +165,9 @@ class Box {
         this.hitingSound()
       }
     }
-
+    if(this.x <= -40){
+      this.dispose =false;
+    }
   }
   hitingSound(){
     if(this.boxImg.frame <= 4) {this.boxHitSound.play()}

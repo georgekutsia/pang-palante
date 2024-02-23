@@ -175,14 +175,16 @@ shopSuperGun$$.addEventListener("click", function(){
   shopSuperGun2$$.style.border = "none"
   shopSuperGun3$$.style.border = "none"
   shopSuperGun4$$.style.border = "none"
-  basicWeaponLevelingChanged++ //! 
 })
 
 
 shopSuperGun1$$.addEventListener("click", function(){
   if(coins >=90 && basicWeaponLevel < 1){
-    buySmall.play()
-    coins -=90;
+    if(basicWeaponLevel < 1 && basicWeaponLevelingChanged === 0) {
+      coins -=90;
+      basicWeaponLevelingChanged++;
+      buySmall.play()
+    }
     basicWeaponLevel = 1;
     shopSuperGun1$$.innerText = "Nivel 1"
     shopSuperGun1$$.style.color = "rgb(254, 0, 224)"
@@ -198,8 +200,11 @@ shopSuperGun1$$.addEventListener("click", function(){
 })
 shopSuperGun2$$.addEventListener("click", function(){
   if(coins >=100 && basicWeaponLevel < 2){
-    buySmall.play()
-    coins -=100;
+    if(basicWeaponLevel < 2 && basicWeaponLevelingChanged === 1) {
+      coins -=90;
+      basicWeaponLevelingChanged++;
+      buySmall.play()
+    }
     basicWeaponLevel = 2;
     shopSuperGun2$$.innerText = "Nivel 2"
     shopSuperGun2$$.style.color = "rgb(254, 0, 224)"
@@ -215,8 +220,11 @@ shopSuperGun2$$.addEventListener("click", function(){
 })
 shopSuperGun3$$.addEventListener("click", function(){
   if(coins >=110 && basicWeaponLevel < 3){
-    buySmall.play()
-    coins -=110;
+    if(basicWeaponLevel < 3 && basicWeaponLevelingChanged === 2) {
+      coins -=110;
+      basicWeaponLevelingChanged++;
+      buySmall.play()
+    }
     basicWeaponLevel  = 3;
     shopSuperGun3$$.innerText = "Nivel 3"
     shopSuperGun3$$.style.color = "rgb(254, 0, 224)"
@@ -233,8 +241,11 @@ shopSuperGun3$$.addEventListener("click", function(){
 
 shopSuperGun4$$.addEventListener("click", function(){
   if(coins >=120 && basicWeaponLevel < 4){
-    buySmall.play()
-    coins -=120;
+    if(basicWeaponLevel < 4 && basicWeaponLevelingChanged === 3) {
+      coins -=120;
+      basicWeaponLevelingChanged++;
+      buySmall.play()
+    }
     basicWeaponLevel  = 4 ;
     shopSuperGun4$$.innerText = "Nivel 4"
     shopSuperGun4$$.style.color = "rgb(254, 0, 224)"

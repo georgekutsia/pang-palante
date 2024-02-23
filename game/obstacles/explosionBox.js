@@ -1,4 +1,4 @@
-class Explosion { 
+class ExplosionBox { 
   constructor(ctx, x,  y, w, h, obstacleImg) {
     this.ctx = ctx; // Contexto del canvas
     this.x = x || 200; // Posición horizontal (coordenada x), valor predeterminado o especificado

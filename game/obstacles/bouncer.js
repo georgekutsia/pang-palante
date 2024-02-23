@@ -1,10 +1,12 @@
 class Bouncer { 
-  constructor(ctx, x,  y, w, h, obstacleImg) {
+  constructor(ctx, x,  y, w, h, vx, vy, obstacleImg) {
     this.ctx = ctx; // Contexto del canvas
     this.x = x || 100; // Posición horizontal (coordenada x), valor predeterminado o especificado
     this.w = w || this.ctx.canvas.width / 13; // Ancho de la escalera, valor predeterminado o especificado
     this.h = h || this.ctx.canvas.width / 40; // Altura de la escalera, valor predeterminado o especificado
     this.y = y || this.ctx.canvas.height - this.h - 20; // Posición vertical (coordenada y), valor predeterminado o especificado
+    this.vx = vx || 0;
+    this.vy = vy || 0;
     this.img = new Image(); // Imagen asociada a la escalera
     this.img.src = obstacleImg || "../../public/Imagenes/obstacles/platfomJump3.png"; // Ruta de la imagen de la escalera
 
@@ -20,12 +22,14 @@ class Bouncer {
 
   move() {
     // Método para actualizar la posición de la escalera en función de su velocidad
+    this.x += this.vx;
+    this.y += this.vy;
 
   }
 
   isVisible() {
     // Método para verificar si la escalera es visible en el canvas (puedes ajustar según tus necesidades)
-    return this.x > -2 && this.x <= this.ctx.canvas.width;
+    return this.x > -20 && this.x <= this.ctx.canvas.width + 30;
   }
 
   collides(objetivo) {

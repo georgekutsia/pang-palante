@@ -20,7 +20,7 @@ class Background {
     }
   }
   move() {
-    if(finalBoss){
+    if(miniBoss1){
     this.img.src = "/public/Imagenes/background/backgroundBoss1.jpeg";
       this.x += this.vx;
       if (this.x + this.w <= 0) {

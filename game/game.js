@@ -27,7 +27,6 @@ class Game {
     this.platforms = []; // plataformas para saltar
     this.bouncers = []; // plataformas que rebotan
     this.spikes = []; // plataformas que rebotan
-    this.explosions = []; // plataformas que rebotan
     this.stairs = []; // Array para almacenar instancias de la clase Stair
     this.auras = []; // Array para almacenar instancias de la clase auras
     this.boxes = []; // Array para almacenar instancias de la clase boxes
@@ -42,6 +41,7 @@ class Game {
     this.swords = []; // Array para almacenar instancias de bubble cannons
     this.swords = []; // Array para almacenar instancias de bubble cannons
     this.miniBoses = []; // Array para almacenar instancias de bubble cannons
+    this.explosions = []; // Array para almacenar instancias de bubble cannons
     this.totalCannonBubbleCount = 0;
 
     // sounds sounds sounds
@@ -80,6 +80,8 @@ class Game {
     this.electroItemSound.volume = 0.1;
 
     
+    this.tickMiniBoss1 = 0;
+
     // Obtén un índice aleatorio
     this.frases = [
       "Bien hecho! sigue así",
@@ -99,17 +101,11 @@ class Game {
 
   start() {
     if(!this.gameStarted){
-
       if (GAMELEVEL === 1) {
-
         addMiniboss1()
         setTimeout(() => {
-          let bo = new MiniBoss1(ctx, CTXW - 70, 50)
+          let bo = new MiniBoss1(ctx, CTXW - 70, -50)
           this.miniBoses.push(bo)
-          const bouncer1 = new Bouncer(ctx, 130, 70, 20, 30)
-          this.bouncers.push(bouncer1)
-          let sta = new Stair(this.ctx, 100, CTXH - 50, 30, 50)
-          this.stairs.push(sta)
           // levelMiniBoss1( this.ctx, this.bubbles, this.platforms, this.bouncers, this.spikes, this.stairs, this.flamethrowers, this.machineguns, this.healings, this.auras, this.boxes, this.blasters, this.levelBalls, this.miniBoses)
         }, 100);
         
@@ -154,6 +150,7 @@ class Game {
       this.move(); // mueve los objetos movibles
       this.draw(); // dibuja lo que haga falta
       this.checkLevelsState();// comprueba si algún nivel tiene una función especial, tipo setInterval que suelta burbujas
+      this.checkBoss();// comprueba si algún nivel tiene una función especial, tipo setInterval que suelta burbujas
       this.changingLevels(); // la función que hace que cambie de nivel, sus mensajes, borra arrays etc 
       this.checkCollisions(); //Comprueba las colisiones constantemtente
       this.bubbleTick++;
@@ -317,15 +314,15 @@ class Game {
     console.log(this.player.canClimb)
     //bubbles...bubbles...bubbles...bubbles...bubbles...
     //bubbles...bubbles...bubbles...bubbles...bubbles...
-      checkBubbleCollision(this.bubbles, this.player, this.bubbleSplash2, this.bubblePopSound1, this.puffBubbles, this.ctx, this.platforms, this.bouncers, this.boxes, this.stairs)
+      checkBubbleCollision(this.bubbles, this.player, this.bubbleSplash2, this.bubblePopSound1, this.puffBubbles, this.ctx, this.platforms, this.bouncers, this.boxes)
     this.gatlings.forEach((e) => {  
-      checkBubbleCollision(e.bubbleArray, this.player, this.bubbleSplash2, this.bubblePopSound1, this.puffBubbles, this.ctx, this.platforms, this.bouncers, this.boxes, this.stairs)
+      checkBubbleCollision(e.bubbleArray, this.player, this.bubbleSplash2, this.bubblePopSound1, this.puffBubbles, this.ctx, this.platforms, this.bouncers, this.boxes)
     })
     this.cannons.forEach((e) => {
-      checkBubbleCollision(e.bubbleArray, this.player, this.bubbleSplash2, this.bubblePopSound1, this.puffBubbles, this.ctx, this.platforms, this.bouncers, this.boxes, this.stairs)
+      checkBubbleCollision(e.bubbleArray, this.player, this.bubbleSplash2, this.bubblePopSound1, this.puffBubbles, this.ctx, this.platforms, this.bouncers, this.boxes)
     })
     this.miniBoses.forEach((e) => {
-      checkBubbleCollision(e.bubbleArray, this.player, this.bubbleSplash2, this.bubblePopSound1, this.puffBubbles, this.ctx, this.platforms, this.bouncers, this.boxes, this.stairs)
+      checkBubbleCollision(e.bubbleArray, this.player, this.bubbleSplash2, this.bubblePopSound1, this.puffBubbles, this.ctx, this.platforms, this.bouncers, this.boxes)
     })
     this.miniBoses.forEach((e) => {e.explosiveArray.forEach((exp) => {if(exp.collides(this.player) && !this.player.immune){
           this.player.loseLife(exp.damage, true)
@@ -510,7 +507,6 @@ this.miniBoses.forEach((mini) => {//  minions con bullet
   this.player.bulletArray = this.player.bulletArray.filter((bullet) => {
     if (bullet.collidesMiniboss1(mini) && !bullet.isBig) {
       mini.miniBossHit();
-      mini.burningForce++;
       mini.randomNumber = Math.floor(Math.random() * mini.burningShipImages.length)
       return false;
     } else return true;
@@ -936,6 +932,7 @@ if(this.player.wasNotDamaged) {
     }, 3000)
   }
   this.emptyAllGameArrays();
+  this.emptyAllPlayerArrays();
   }
 
   checkLevelsState(){
@@ -1032,10 +1029,22 @@ if(this.player.wasNotDamaged) {
         }
       }
       if(GAMELEVEL === 15){
-
       }
     }
 
+  
+  checkBoss(){
+    if(miniBoss1){
+      this.tickMiniBoss1++
+
+      if(this.tickMiniBoss1 >= 50){
+        // addPlatformsMiniBoss1(this.ctx, this.platforms)
+        // addBouncerMiniBoss1(this.ctx, this.bouncers)
+        boxItemMiniBoss1(this.ctx, this.boxes);
+        this.tickMiniBoss1 = 0
+      }
+    }
+  }
   demoOver(){
     this.emptyAllGameArrays();
     demoFunctions.demoOverText()

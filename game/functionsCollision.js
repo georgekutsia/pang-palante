@@ -1,6 +1,6 @@
 
 
-function checkBubbleCollision(bubbles, player, bubbleSplash2, bubblePopSound1, puffBubbles, ctx, platforms, bouncers, boxes, stairs){
+function checkBubbleCollision(bubbles, player, bubbleSplash2, bubblePopSound1, puffBubbles, ctx, platforms, bouncers, boxes){
   bubbles.forEach((bubble) => {//player con bubble
     if(bubble.collides(player)) {
         if(player.electricShieldIsActive){
@@ -104,14 +104,7 @@ function checkBubbleCollision(bubbles, player, bubbleSplash2, bubblePopSound1, p
       } else return true;
     });
   });
-  bubbles.forEach((bubble) => {//bubble con bouncer
-    stairs.forEach((stair) => {
-      if (stair.collides(bubble)) {
-        bubble.bubbleBounceSound.play()
-        bounceFromObstacles(bubble, stair);
-      } else return true;
-    });
-  });
+
 
   bubbles.forEach((bubble) => {//  bulletBar con Bubble
     player.swordArray.forEach((bullet) => {
