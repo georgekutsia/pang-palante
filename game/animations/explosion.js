@@ -27,19 +27,18 @@ class Explosion {
         this.w,
         this.h
         );
-        this.explosion1 = false;
   }
 
   move() {
-    this.x += this.vx
-    this.y += this.vy
+    this.x += miniBossVx
+    this.y += miniBossVy
     this.tick++;
     if (this.tick > 4) {
       this.img.frame++;
       this.tick = 0;
     }
-    if (this.img.frame > 10) {
-      this.dispose = false;
+    if (this.img.frame > 30) {
+      this.img.frame = 0;
     }
   }
 
@@ -48,10 +47,8 @@ class Explosion {
   }
 
   collides(objetivo) {
-    const colX =
-      this.x <= objetivo.x + objetivo.w && this.x + this.w >= objetivo.x;
-    const colY =
-      this.y + this.h > objetivo.y && this.y < objetivo.y + objetivo.h;
+    const colX =this.x <= objetivo.x + objetivo.w && this.x + this.w >= objetivo.x;
+    const colY =this.y + this.h > objetivo.y && this.y < objetivo.y + objetivo.h;
     return colX && colY;
   }
 }

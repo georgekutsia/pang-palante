@@ -14,10 +14,7 @@ class Sword {
     this.auraImg.src = "/public/Imagenes/swordShine1.png";
     this.auraImg.frame = 0;
     this.imgTick = 0;
-
-    
   }
-
   draw() {
     this.ctx.drawImage(
       this.auraImg,
@@ -30,7 +27,6 @@ class Sword {
       this.w,
       this.h
     );
-    
   }
   move() {
     this.imgTick++

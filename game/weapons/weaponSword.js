@@ -1,5 +1,5 @@
 class WeaponSword {
-  constructor(ctx, x, y, swingDirection, frame, w, h) {
+  constructor(ctx, x, y, swingDirection, frame, w, h, stab, direction) {
     this.ctx = ctx;
     this.x = x;
     this.y = y;
@@ -16,9 +16,22 @@ class WeaponSword {
     this.fireShootSOund.volume = 0.05;
     this.dispose = true;
     this.swingDirection =  swingDirection || false;
+    this.stab = stab || false;
+    this.direction = direction || false;
   }
 
   draw() {
+    if(this.stab){
+      this.direction ? this.img.src = "/public/Imagenes/swordStabRight.png" : this.img.src ="/public/Imagenes/swordStabLeft.png"
+        this.ctx.drawImage(
+          this.img,
+          this.x,
+          this.y,
+          this.w,
+          this.h
+          );
+    }
+    if(!this.stab){
     if(this.swingDirection){
     this.img.src = "/public/Imagenes/swordSwing3.png";
       this.ctx.drawImage(
@@ -47,6 +60,8 @@ class WeaponSword {
           this.h
           );
         }
+    }
+
   }
   move() {
     this.x += game.player.vx;

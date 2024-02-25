@@ -72,6 +72,7 @@ class Player {
     this.swordPower1 = false;
     this.swordCooldown = 0;
     this.keySwitchCounter = 0;
+    this.stabDirection = true;
 
     this.blasterExplosion = new Audio("../public/sounds/megablasterBlastSound.mp3");
     this.blasterExplosion.volume = 0.5; //
@@ -543,6 +544,7 @@ handleRightDodge = (event) =>{ //*
      if(finalBoss) this.shootUp = true;
     }
     if (key === A ) {
+      this.stabDirection = false;
       this.frameTick++;
       if(!finalBoss){
         this.img.src = "../public/Imagenes/pangRunLeft.png";
@@ -554,6 +556,7 @@ handleRightDodge = (event) =>{ //*
       this.frameAmount = 5;
     }
     if (key === D ) {
+      this.stabDirection = true;
       this.keySwitchCounter++
       if(!finalBoss){
         this.vx = playerSpeed;
@@ -686,6 +689,11 @@ handleRightDodge = (event) =>{ //*
           R = 82;
         }, 800 - this.swordCooldown);
         }
+
+        if(key === F){
+          this.stabSword();
+        }
+        
   }
   keyUp(key) {
     if (key === W) {
@@ -778,7 +786,7 @@ handleRightDodge = (event) =>{ //*
     this.shootSound.play()
   }
   shootDouble() {// paso 1: invoca el disparo desde la posicion del personaje o su cercanía
-    if(!finalBoss){
+    if(this.shootUp){
       const bullet1 = new BasicWeapon(this.ctx, this.x - 3, this.y, bulletDirection);
       this.bulletArray.push(bullet1);//paso 2: crea un array vacío en el constructor y luego haz un push de cada bullet;
     } else{
@@ -788,7 +796,7 @@ handleRightDodge = (event) =>{ //*
     this.shootSound.play()
   }
   shootTriple() {// paso 1: invoca el disparo desde la posicion del personaje o su cercanía
-    if(!finalBoss){
+    if(this.shootUp){
       const bullet1 = new BasicWeapon(this.ctx, this.x - 6, this.y, bulletDirection, -0.3 - basicWeaponSpeed/2);
       const bullet2 = new BasicWeapon(this.ctx, this.x + 8, this.y, bulletDirection, 0.3+ basicWeaponSpeed/2);
       this.bulletArray.push(bullet1, bullet2);//paso 2: crea un array vacío en el constructor y luego haz un push de cada bullet;
@@ -801,10 +809,7 @@ handleRightDodge = (event) =>{ //*
 
   }
   shootCuatruple() {// paso 1: invoca el disparo desde la posicion del personaje o su cercanía
-    if(!finalBoss){
-    } else{
-      
-    }
+
     this.shootSound.play()
     const bullet6 = new BasicWeapon(this.ctx, this.x-2, this.y +5, bulletDirection, 0, -1, true);
     this.bigWeaponBubblesMaxAmount  += 1
@@ -815,10 +820,6 @@ handleRightDodge = (event) =>{ //*
     this.bulletArray.push(bullet6);//paso 2: crea un array vacío en el constructor y luego haz un push de cada bullet;
   }
   shootQuintuple(){
-    if(!finalBoss){
-    } else{
-      
-    }
     this.shootSound.play()
     if(this.bigWeaponBubblesMaxAmount <= 4){
       this.bigWeaponBubblesMaxAmount  += 1
@@ -859,7 +860,19 @@ handleRightDodge = (event) =>{ //*
     let hook = new WeaponHook(this.ctx, this.x, this.y)
     this.hooksArray.push(hook);
   }
-
+  stabSword(){
+      if(this.stabDirection){
+        let stab = new WeaponSword(this.ctx, this.x - 10, this.y -10, true, 0, 50, 30, true, true );
+        this.swordArray.push(stab);
+        this.r = -0.4;
+        this.vx = 6;
+      } else {
+        let stab = new WeaponSword(this.ctx, this.x-30, this.y -10, true, 0, 50, 30, true, false );
+        this.swordArray.push(stab);
+        this.r = 0.4;
+        this.vx = -6;
+      }
+    }
     swingSword(){
         if(this.swingSwordState){
           if(this.vy > 0 || this.vy < 0){
@@ -867,10 +880,10 @@ handleRightDodge = (event) =>{ //*
             this.g = 0.18
           }
           if(!this.electricShieldIsActive){
-            let sword = new WeaponSword(this.ctx, this.x - 10, this.y - 20, this.swingSwordState, 0 )
+            let sword = new WeaponSword(this.ctx, this.x - 10, this.y - 20, this.swingSwordState, 0, 0, 0, false )
             this.swordArray.push(sword)
           } else {
-            let sword = new WeaponSword(this.ctx, this.x - 23, this.y - 42, this.swingSwordState, 0, CTXW/10, CTXW /5 )
+            let sword = new WeaponSword(this.ctx, this.x - 23, this.y - 42, this.swingSwordState, 0, CTXW/10, CTXW /5, false )
             this.swordArray.push(sword)
           }
           if(this.swordPower1){
