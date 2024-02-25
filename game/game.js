@@ -81,6 +81,10 @@ class Game {
 
     
     this.tickMiniBoss1 = 0;
+    this.tickMiniBoss2 = 0;
+    this.tickMiniBoss3 = 0;
+    this.randomIsOn = true;
+    this.randomNumberForTick1
 
     // Obtén un índice aleatorio
     this.frases = [
@@ -102,12 +106,11 @@ class Game {
   start() {
     if(!this.gameStarted){
       if (GAMELEVEL === 1) {
-        addMiniboss1()
-        setTimeout(() => {
-          let bo = new MiniBoss1(ctx, CTXW - 70, -50)
-          this.miniBoses.push(bo)
-          // levelMiniBoss1( this.ctx, this.bubbles, this.platforms, this.bouncers, this.spikes, this.stairs, this.flamethrowers, this.machineguns, this.healings, this.auras, this.boxes, this.blasters, this.levelBalls, this.miniBoses)
-        }, 100);
+        // addMiniboss1()
+        // setTimeout(() => {
+        //   let bo = new MiniBoss1(ctx, CTXW - 70, -50)
+        //   this.miniBoses.push(bo)
+        // }, 100);
         
         // inftroGame1();
         // level1(this.ctx, this.bubbles, this.platforms, this.levelBalls, this.boxes)
@@ -311,7 +314,6 @@ class Game {
         return true;
       }
     });
-    console.log(this.player.canClimb)
     //bubbles...bubbles...bubbles...bubbles...bubbles...
     //bubbles...bubbles...bubbles...bubbles...bubbles...
       checkBubbleCollision(this.bubbles, this.player, this.bubbleSplash2, this.bubblePopSound1, this.puffBubbles, this.ctx, this.platforms, this.bouncers, this.boxes)
@@ -507,11 +509,19 @@ this.miniBoses.forEach((mini) => {//  minions con bullet
   this.player.bulletArray = this.player.bulletArray.filter((bullet) => {
     if (bullet.collidesMiniboss1(mini) && !bullet.isBig) {
       mini.miniBossHit();
-      mini.randomNumber = Math.floor(Math.random() * mini.burningShipImages.length)
       return false;
     } else return true;
   });
 });
+this.miniBoses.forEach((mini) => {//  minions con bullet
+  this.player.bulletFireArray.forEach((bullet) => {
+    if (bullet.collidesMiniboss1(mini)){
+      mini.miniBossBurn();
+      // return false;
+    } else return true;
+  });
+});
+
 this.miniBoses.forEach((mini) => {//  miniboss con player
     if (mini.collides(this.player) && !this.player.immune) {
       this.player.loseLife(2, true)
@@ -1035,14 +1045,32 @@ if(this.player.wasNotDamaged) {
   
   checkBoss(){
     if(miniBoss1){
-      this.tickMiniBoss1++
-
-      if(this.tickMiniBoss1 >= 50){
-        // addPlatformsMiniBoss1(this.ctx, this.platforms)
-        // addBouncerMiniBoss1(this.ctx, this.bouncers)
-        boxItemMiniBoss1(this.ctx, this.boxes);
-        this.tickMiniBoss1 = 0
+      this.tickMiniBoss1++;
+      this.tickMiniBoss2++;
+      this.tickMiniBoss3++;
+      if(this.randomIsOn){
+        this.randomNumberForTick1 = Math.random() * 300;
+        this.randomIsOn = false;
       }
+      if(this.tickMiniBoss1 >= 550 + this.randomNumberForTick1){  
+        addPlatformsMiniBoss1(this.ctx, this.platforms)
+        this.tickMiniBoss1 = 0;
+        this.randomIsOn = true;
+      }
+      if(this.tickMiniBoss2 >= 750 + this.randomNumberForTick1){  
+        boxItemMiniBoss1(this.ctx, this.boxes);
+        this.tickMiniBoss2 = 0;
+        this.randomIsOn = true;
+      }
+      if(this.tickMiniBoss3 >= 950 + this.randomNumberForTick1){  
+        addBouncerMiniBoss1(this.ctx, this.bouncers)
+        this.tickMiniBoss3 = 0;
+        this.randomIsOn = true;
+      }
+
+
+
+
     }
   }
   demoOver(){

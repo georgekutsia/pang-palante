@@ -31,6 +31,9 @@ let D = 68;
   let finalBoss = false;
   let miniBoss1 = false;
 
+  let miniBossVx = 0;// para qeu burningColors se mantenga pegada a la nave mientras se mueve
+  let miniBossVy = 0;// para qeu burningColors se mantenga pegada a la nave mientras se mueve
+
 let electroShockSound = new Audio("/public/sounds/electrofire/electrifingBall.mp3")
 electroShockSound.volume = 0.1
 let electroPlatformSound = new Audio("/public/sounds/electrofire/electrifingPlatforms.mp3")
@@ -62,7 +65,7 @@ let infiniteLeveling = 0;
 let coins = 3000;
 let ballBroke = true;
 let retry = 2;  // cuantas vecs se puede reinentar el juego
-let basicWeaponLevel  = 0; //para mejorar cuantas balas dispara
+let basicWeaponLevel  = 1; //para mejorar cuantas balas dispara
 let basicWeaponLevelingChanged = 0;
 let basicWeaponSpeed = 0;
 let barResistanceLevel = 0;

@@ -51,6 +51,11 @@ class WeaponFire {
     const colY =this.y + this.h > objetivo.y && this.y < objetivo.y + objetivo.h;
     return colX && colY;
   }
+  collidesMiniboss1(objetivo) {
+      const colX = this.x <= objetivo.x + objetivo.w && this.x + this.w > objetivo.x;
+      const colY = this.y + this.h > objetivo.y && this.y < objetivo.y + objetivo.h/2;
+      return colX && colY;
+  }
   isVisible() {
     return this.y + this.h >= 0;
   }
