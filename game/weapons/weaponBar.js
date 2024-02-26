@@ -60,6 +60,9 @@ if(this.isElectrified){
   move() {
     this.x += this.vx;
     this.y += this.vy;
+    if(finalBoss){
+      this.vx = -0.3
+    }
     if(this.isElectrified){
       electroBarSound.play();
       this.electroTick++;

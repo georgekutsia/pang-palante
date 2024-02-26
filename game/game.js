@@ -105,13 +105,12 @@ class Game {
   start() {
     if(!this.gameStarted){
       if (GAMELEVEL === 1) {
-        // addMiniboss1()
-        // setTimeout(() => {
-        //   let bo = new MiniBoss1(ctx, CTXW - 70, -50)
-        //   this.miniBoses.push(bo)
-        // }, 100);
-          let blasd = new DarkBubble(this.ctx, 50, 50)
-          this.darkBubbles.push(blasd)
+        addMiniboss1()
+        setTimeout(() => {
+          let bo = new MiniBoss1(ctx, CTXW - 70, -50)
+          this.miniBoses.push(bo)
+        }, 100);
+
         // inftroGame1();
         // level1(this.ctx, this.bubbles, this.platforms, this.levelBalls, this.boxes)
         // setTimeout(() => {
@@ -339,6 +338,7 @@ class Game {
         }
     }})})
 
+
     this.miniBoses.forEach((e) => {e.explosiveArray.forEach((exp) => { 
       if(exp.collidesBoss(e)){
         exp.exploded = true;
@@ -460,10 +460,25 @@ this.miniBoses.forEach((mini) => {//  minions con bullet
   this.player.bulletFireArray.forEach((bullet) => {
     if (bullet.collidesMiniboss1(mini)){
       mini.miniBossBurn();
-      // return false;
     } else return true;
   });
 });
+this.miniBoses.forEach((mini) => {//  minions con sword
+  this.player.swordArray.forEach((bullet) => {
+    if (bullet.collides(mini)){
+      mini.miniBossBurn();
+      this.player.swordPowerUp += 0.05
+    } else return true;
+  });
+});
+this.miniBoses.forEach((e) => {e.explosiveArray.forEach((exp) => { 
+  this.player.swordArray.forEach((bullet) => {
+      if(exp.collides(bullet)){
+        exp.vx = exp.vx * -1;
+        exp.vy = exp.vy * -1;
+        this.player.swordPowerUp++
+      }
+  })})})
 
 this.miniBoses.forEach((mini) => {//  miniboss con player
     if (mini.collides(this.player) && !this.player.immune) {

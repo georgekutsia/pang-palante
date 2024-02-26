@@ -647,7 +647,7 @@ handleRightDodge = (event) =>{ //*
       M = 0
         setTimeout(() => {
           M = 77
-        }, 100);
+        }, 500);
     }
     if(key === ALT && this.vy === 0 || key === ALT && this.ableToJump === true){
       this.vy = jumpHeight 
