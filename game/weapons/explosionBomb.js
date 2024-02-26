@@ -17,36 +17,22 @@ class ExplosionBomb {
     this.fireShootSOund.volume = 0.05;
     this.exploded = false;
     this.dispose = true;
-    this.canCollide = true;
+    this.canCollide = false;
   }
 
   draw() {
-    if(!this.exploded){
-    this.ctx.drawImage(
-      this.img,
-      (this.img.frame * this.img.width) / 10,
-      0,
-      this.img.width / 10,
-      this.img.height,
-      this.x,
-      this.y,
-      this.w,
-      this.h
-    );
-  } else {
-    this.ctx.drawImage(
-      this.img,
-      (this.img.frame * this.img.width) / 10,
-      0,
-      this.img.width / 10,
-      this.img.height,
-      this.x,
-      this.y,
-      this.w,
-      this.h
-    );
-  }
 
+    this.ctx.drawImage(
+      this.img,
+      (this.img.frame * this.img.width) / 10,
+      0,
+      this.img.width / 10,
+      this.img.height,
+      this.x,
+      this.y,
+      this.w,
+      this.h
+    );
   }
   move() {
     this.vy += this.g
@@ -62,6 +48,8 @@ class ExplosionBomb {
       }
     if(this.img.frame > 3 && !this.exploded){
       this.img.frame = 0;
+      this.canCollide = true;
+      
     } else if(this.img.frame > 12 && this.exploded){
       this.dispose = false;
     }
@@ -80,10 +68,10 @@ class ExplosionBomb {
       return colX && colY;
     }
   }
-  collides(objetivo) {
+  collidesBoss(objetivo) {
     if(this.canCollide){
-      const colX = this.x  <= objetivo.x  && this.x + this.w > objetivo.x ;
-      const colY =this.y + this.h > objetivo.y && this.y < objetivo.y + objetivo.h;
+    const colX = this.x + this.w >= objetivo.x && this.x <= objetivo.x + objetivo.w;
+    const colY = this.y + this.h > objetivo.y + 40 && this.y < objetivo.y + objetivo.h/2;
       return colX && colY;
     }
   }

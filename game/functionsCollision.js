@@ -240,3 +240,80 @@ function bossFireCollision (miniBoses, object){
       }})})
     })
   }
+
+
+
+
+  function checkDarkBubbleCollision(darkBubbles, player, bubbleSplash2, platforms, darkBubbleExplosion, bubbles, puffBubbles, bouncers){
+    darkBubbles.forEach((bubble) => {//player darkbubble
+      if (bubble.collides(player) && !player.immune) {
+        if(player.y + player.h <= bubble.y +30 ){
+          player.vy = -3;
+        } else {
+          if (!player.auraIsActive) {
+            player.loseLife(bubble.damage, true); //el daño al jugador se le hace según lo que marca el daño de la burbuja. a burbuja más pequeña, menos daño
+            bubble.vy = -bubbleSpeedY; // rebota encima del jugador haciéndole daño
+          }
+        }
+        player.wasNotDamaged = false;
+        bubbleSplash2.play();
+      } else return true;
+    });
+
+    darkBubbles.forEach((bubble) => {//darkbubble con platform
+      platforms.forEach((platform) => {
+        if (platform.collides(bubble)) {
+          if(platform.isSolid){
+            const newColor = platform.calculateNewColor();
+            platform.color = newColor;
+            if(bubble.w >= CTXW/4){
+              darkBubbleExplosion(darkBubbleExplosion, bubble, bubbles, puffBubbles)//explota y genera bubbles pequeños
+            }
+          }
+          if (platform.isBouncable) {
+            bubble.bubbleBounceSound.play();
+            bounceFromObstacles(bubble, platform);
+          } else if (!platform.isBouncable) {
+            bubble.y = platform.y - bubble.h;
+            bubble.vy = platform.vy;
+            bubble.vx = platform.vx;
+          }
+        } else return true;
+      });
+    });
+
+
+   darkBubbles.forEach((bubble) => {//bubble con darkBubble
+     bouncers.forEach((bouncer) => {
+        if (bouncer.collides(bubble)) {
+          bubble.bubbleBounceSound.play();
+          bounceFromObstacles(bubble, bouncer);
+        } else return true;
+      });
+    });
+
+    darkBubbles.forEach((bubble) => {//  bulletBar con dark bubble
+      player.bulletBarArray.forEach((bullet) => {
+        if (bullet.collides(bubble)) {
+          bubble.vx = bubble.vx * -1
+          return false;
+        } else return true;
+      });
+    });
+
+    darkBubbles.forEach((bubble) => {//  darkbubble con bullet
+      player.bulletArray = player.bulletArray.filter((bullet) => {
+        if (bullet.collides(bubble)) {
+          bubble.w += 2;
+          bubble.h += 2;
+          bubble.x -= 1;
+          bubble.y -= 1;
+          bubble.darkBubbbleHit.play()
+          if(bubble.w >= CTXW/4){
+            darkBubbleExplosion(darkBubbleExplosion, bubble, bubbles, puffBubbles)//explota y genera bubbles pequeños
+          }
+          return false;
+        } else return true;
+      });
+    });
+  }

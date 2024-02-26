@@ -22,13 +22,11 @@ class MiniBoss1 {
     this.burningColorsArray = [];
     this.shootOne = true;  // el primer tipo de disparo especial
     this.oneShot = true; // para que dispare solo una vez al detectar al jugador
-    this.life = life || 59;
+    this.life = life || 1;
     this.distanceFromPlayer = -2
     this.shootingIntervalBubble = 1;
     this.shootingIntervalBubbleTick = 0;
     this.bossTalkGone = true;
-    this.bossTalk2 = true;
-    this.bossTalk3 = true;
     this.burningLevel = 0;
     this.explodingLevel = 0;
     //burning...
@@ -54,7 +52,7 @@ class MiniBoss1 {
       this.h
     );
 
-
+    this.checkLife()
     this.burningShip();
     this.explodingShip()
     this.bubbleArray.forEach(bub => bub.draw())
@@ -66,25 +64,6 @@ class MiniBoss1 {
     this.burningColorsArray.forEach(bub => bub.draw())
     this.burningColorsArray = this.burningColorsArray.filter((e) =>e.isVisible()); 
 
-    if(this.life <= 50&& this.bossTalk2){
-      minionsTalking.miniBossTalk2();
-      this.bossTalk2 = false;
-    }
-    if(this.life <= 20&& this.bossTalk3){
-      minionsTalking.miniBossTalk3();
-      this.bossTalk3 = false;
-    }
-    if(this.life <= 0.1){
-      this.vy = -2;
-      this.vx = 0.5;
-      if(this.bossTalkGone){
-        minionsTalking.miniBossTalk1Gone();
-        this.bossTalkGone = false;
-      }
-    }
-    if(this.life <= -1){
-      this.dispose = false;
-    }
   }
   move() {
     console.log("life", this.life)
@@ -171,11 +150,11 @@ class MiniBoss1 {
   }
 
   shootingExplosive(){
-    let explo = new ExplosionBullet(this.ctx, this.x, this.y + this.h/2, CTXW/15, CTXW/15, -3);
+    let explo = new ExplosionBullet(this.ctx, this.x , this.y + this.h/2, CTXW/15, CTXW/15, -2);
     this.explosiveArray.push(explo)
   }
   shootingBomb(){
-    let explo = new ExplosionBomb(this.ctx, this.x, this.y, CTXW/5, CTXW/5, -this.distanceFromPlayer/100, -2.5);
+    let explo = new ExplosionBomb(this.ctx, this.x, this.y - 10, CTXW/5, CTXW/5, -this.distanceFromPlayer/100, -2.5);
     this.explosiveArray.push(explo)
   }
 
@@ -197,48 +176,47 @@ class MiniBoss1 {
   
 
   burningShip(){
-      if( this.life <= 60 && this.burningLevel === 0 ){
+      if( this.life <= 50 && this.burningLevel === 0 ){
         let fire =  new BurningColors(this.ctx, this.x, this.y, 60, 60)
         this.burningColorsArray.push(fire);
+      minionsTalking.miniBossTalk2();
         this.burningLevel = 1;
       }
-      if( this.life <= 56 && this.burningLevel === 1 ){
+      if( this.life <= 40 && this.burningLevel === 1 ){
 
         let fire =  new BurningColors(this.ctx, this.x + 40, this.y - this.h/4, 70, 70)
         this.burningColorsArray.push(fire);
         this.burningLevel = 2;
 
       }
-      if( this.life <= 50 && this.burningLevel === 2 ){
+      if( this.life <=  30&& this.burningLevel === 2 ){
         let fire =  new BurningColors(this.ctx, this.x + this.w /2, this.y+ this.h/10, 60, 60)
         this.burningColorsArray.push(fire);
         this.burningLevel = 3;
 
       }
-      if( this.life <= 46 && this.burningLevel === 3 ){
+      if( this.life <= 20 && this.burningLevel === 3 ){
         let fire =  new BurningColors(this.ctx, this.x + this.w/5, this.y, 80, 80)
-
         this.burningColorsArray.push(fire);
+        minionsTalking.miniBossTalk3();
         this.burningLevel = 4;
 
       }
-      if( this.life <= 41 && this.burningLevel === 4 ){
+      if( this.life <= 10 && this.burningLevel === 4 ){
         let fire =  new BurningColors(this.ctx, this.x + this.w/4.3, this.y - this.h/20, 120, 70)
-
         this.burningColorsArray.push(fire);
         this.burningLevel = 5;
-
       }
   }
 
 
   explodingShip(){
-      if(this.life <= 24 && this.explodingLevel === 0){
+      if(this.life <= 34 && this.explodingLevel === 0){
           let explo1 = new Explosion(this.ctx, this.x+ this.w/2,  this.y + this.h/2.5, this.w/4, this.w/4, this.vx, this.vy)
           this.explosions.push(explo1);
           this.explodingLevel = 1;
       }
-      if(this.life <= 18 && this.explodingLevel === 1){
+      if(this.life <= 28 && this.explodingLevel === 1){
           let explo1 = new Explosion(this.ctx, this.x+ this.w/4,  this.y + this.h/4, this.w/4, this.w/4, this.vx, this.vy)
           this.explosions.push(explo1);
           this.explodingLevel = 2;
@@ -259,7 +237,25 @@ class MiniBoss1 {
           this.explodingLevel = 5;
       }
   }
-
+  checkLife(){
+      // if(this.life <= 20){
+      //   this.life -= 0.0001
+      // }
+      // if(this.life <= 10){
+      //   this.life -= 0.0001
+      // }
+    if(this.life <= 0.1){
+      this.vy = -2;
+      this.vx = 0.5;
+      if(this.bossTalkGone){
+        minionsTalking.miniBossTalk1Gone();
+        this.bossTalkGone = false;
+      }
+    }
+    if(this.life <= -3){
+      this.dispose = false;
+    }
+  }
 
   isVisible() {
     return this.dispose;

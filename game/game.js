@@ -64,8 +64,7 @@ class Game {
     this.coinsSound1.volume = 0.1; 
     this.coinsSound2 = new Audio("../public/sounds/coinsSound2.mp3")
     this.coinsSound2.volume = 0.1; 
-    this.darkBubbbleHit = new Audio("../public/sounds/darkBubbleHit2.mp3")
-    this.darkBubbbleHit.volume = 0.1; 
+
     this.darkBubbleExplosion = new Audio("../public/sounds/darkBubbleExplosion.mp3")
     this.darkBubbleExplosion.volume = 0.1; 
     this.barHit = new Audio("/public/sounds/shooting/barHit.mp3");
@@ -111,7 +110,8 @@ class Game {
         //   let bo = new MiniBoss1(ctx, CTXW - 70, -50)
         //   this.miniBoses.push(bo)
         // }, 100);
-        
+          let blasd = new DarkBubble(this.ctx, 50, 50)
+          this.darkBubbles.push(blasd)
         // inftroGame1();
         // level1(this.ctx, this.bubbles, this.platforms, this.levelBalls, this.boxes)
         // setTimeout(() => {
@@ -326,12 +326,25 @@ class Game {
     this.miniBoses.forEach((e) => {
       checkBubbleCollision(e.bubbleArray, this.player, this.bubbleSplash2, this.bubblePopSound1, this.puffBubbles, this.ctx, this.platforms, this.bouncers, this.boxes)
     })
-    this.miniBoses.forEach((e) => {e.explosiveArray.forEach((exp) => {if(exp.collides(this.player) && !this.player.immune){
-          this.player.loseLife(exp.damage, true)
+    this.miniBoses.forEach((e) => {e.explosiveArray.forEach((exp) => { if(exp.collides(this.player)){
+        if(this.player.electricShieldIsActive || this.player.immune || this.player.auraIsActive){
+            exp.vx = exp.vx * -1;
+            exp.vy = exp.vy * -1;
+        } else {
+          this.player.loseLife(exp.damage, true);
           exp.exploded = true;
           exp.img.frame = 5;
           exp.vx = this.player.vx;
           exp.canCollide = false;
+        }
+    }})})
+
+    this.miniBoses.forEach((e) => {e.explosiveArray.forEach((exp) => { 
+      if(exp.collidesBoss(e)){
+        exp.exploded = true;
+        exp.vx = miniBossVx;
+        exp.vy = miniBossVy;
+        e.miniBossBurn()
     }})})
 
     
@@ -340,85 +353,15 @@ class Game {
     bossFireCollision(this.miniBoses, this.bouncers)
     bossFireCollision(this.miniBoses, this.bubbles)
     bossFireCollision(this.miniBoses, this.spikes)
-    bossFireCollision(this.miniBoses, this.boxes)
+    // bossFireCollision(this.miniBoses, this.boxes)
     bossFireCollision(this.miniBoses, this.player.bulletArray)
     bossFireCollision(this.miniBoses, this.player.bulletBarArray)
     bossFireCollision(this.miniBoses, this.player.bulletPlatformArray)
 
-    //darkBubbles
-    //darkBubbles
-    this.darkBubbles.forEach((bubble) => {//player darkbubble
-      if (bubble.collides(this.player) && !this.player.immune) {
-        if(this.player.y + this.player.h <= bubble.y +30 ){
-          this.player.vy = -3;
-        } else {
-          if (!this.player.auraIsActive) {
-            this.player.loseLife(bubble.damage, true); //el daño al jugador se le hace según lo que marca el daño de la burbuja. a burbuja más pequeña, menos daño
-            bubble.vy = -bubbleSpeedY; // rebota encima del jugador haciéndole daño
-          }
-        }
-        this.player.wasNotDamaged = false;
-        this.bubbleSplash2.play();
-      } else return true;
-    });
-    this.darkBubbles.forEach((bubble) => {//darkbubble con platform
-      this.platforms.forEach((platform) => {
-        if (platform.collides(bubble)) {
-          if(platform.isSolid){
-            const newColor = platform.calculateNewColor();
-            platform.color = newColor;
-            if(bubble.w >= CTXW/4){
-              darkBubbleExplosion(this.darkBubbleExplosion, bubble, this.bubbles, this.puffBubbles)//explota y genera bubbles pequeños
-            }
-          }
-          if (platform.isBouncable) {
-            bubble.bubbleBounceSound.play();
-            bounceFromObstacles(bubble, platform);
-          } else if (!platform.isBouncable) {
-            bubble.y = platform.y - bubble.h;
-            bubble.vy = platform.vy;
-            bubble.vx = platform.vx;
-          }
-        } else return true;
-      });
-    });
 
-    this.darkBubbles.forEach((bubble) => {//bubble con bouncer
-      this.bouncers.forEach((bouncer) => {
-        if (bouncer.collides(bubble)) {
-          bubble.bubbleBounceSound.play();
-          bounceFromObstacles(bubble, bouncer);
-        } else return true;
-      });
-    });
-    
-        this.darkBubbles.forEach((bubble) => {//  bulletBar con dark bubble
-          this.player.bulletBarArray.forEach((bullet) => {
-            if (bullet.collides(bubble)) {
-              if(bubble.x <= bullet.x){
-                bubble.vx = -1
-              } else {
-                bubble.vx = 1
-              }
-              return false;
-            } else return true;
-          });
-        });
-        this.darkBubbles.forEach((bubble) => {//  darkbubble con bullet
-          this.player.bulletArray = this.player.bulletArray.filter((bullet) => {
-            if (bullet.collides(bubble)) {
-              bubble.w += 2;
-              bubble.h += 2;
-              bubble.x -= 1;
-              bubble.y -= 1;
-              this.darkBubbbleHit.play()
-              if(bubble.w >= CTXW/4){
-                darkBubbleExplosion(this.darkBubbleExplosion, bubble, this.bubbles, this.puffBubbles)//explota y genera bubbles pequeños
-              }
-              return false;
-            } else return true;
-          });
-        });
+
+    checkDarkBubbleCollision(this.darkBubbles, this.player, this.bubbleSplash2, this.platforms, this.darkBubbleExplosion, this.bubbles, this.puffBubbles, this.bouncers)
+
     //weaponBar..weaponBar..weaponBar..weaponBar..
     //weaponBar..weaponBar..weaponBar..weaponBar..
 
@@ -627,7 +570,7 @@ this.cannons.forEach((cann) => {//  cannon con fire
     });
     this.levers.forEach((lever) => {
       if (lever.collides(this.player)) {
-            lever.activated = true;
+      lever.activated = true;
       } else return true;
     });
     this.coins.forEach((coin) => {
@@ -689,52 +632,14 @@ this.cannons.forEach((cann) => {//  cannon con fire
     });
 
     //que el item se quede sobre la plataforma al caer
-    itemDropOnPlatform(this.flamethrowers, this.platforms);
-    itemDropOnPlatform(this.machineguns, this.platforms);
-    itemDropOnPlatform(this.healings, this.platforms);
-    itemDropOnPlatform(this.bars, this.platforms);
-    itemDropOnPlatform(this.bars, this.platforms);
-    itemDropOnPlatform(this.blasters, this.platforms);
-    itemDropOnPlatform(this.auras, this.platforms);
-    itemDropOnPlatform(this.blasters, this.platforms);
-    itemDropOnPlatform(this.coins, this.platforms);
-    itemDropOnPlatform(this.steps, this.platforms);
-    itemDropOnPlatform(this.levers, this.platforms);
-    itemDropOnPlatform(this.hooks, this.platforms);
-    itemDropOnPlatform(this.electros, this.platforms);
-    itemDropOnPlatform(this.swords, this.platforms);
 
-    itemDropOnPlatform(this.flamethrowers, this.boxes);
-    itemDropOnPlatform(this.machineguns, this.boxes);
-    itemDropOnPlatform(this.healings, this.boxes);
-    itemDropOnPlatform(this.bars, this.boxes);
-    itemDropOnPlatform(this.bars, this.boxes);
-    itemDropOnPlatform(this.blasters, this.boxes);
-    itemDropOnPlatform(this.auras, this.boxes);
-    itemDropOnPlatform(this.blasters, this.boxes);
-    itemDropOnPlatform(this.coins, this.boxes);
-    itemDropOnPlatform(this.steps, this.boxes);
-    itemDropOnPlatform(this.levers, this.boxes);
-    itemDropOnPlatform(this.hooks, this.boxes);
-    itemDropOnPlatform(this.electros, this.boxes);
-    itemDropOnPlatform(this.swords, this.boxes);
+
 
     //para que caiga lentamente por los escalenos antes de llegar al suelo
-    itemDropOnStairs(this.flamethrowers, this.stairs);
-    itemDropOnStairs(this.machineguns, this.stairs);
-    itemDropOnStairs(this.healings, this.stairs);
-    itemDropOnStairs(this.bars, this.stairs);
-    itemDropOnStairs(this.blasters, this.stairs);
-    itemDropOnStairs(this.auras, this.stairs);
-    itemDropOnStairs(this.blasters, this.stairs);
-    itemDropOnStairs(this.coins, this.stairs);
-    itemDropOnStairs(this.steps, this.stairs);
-    itemDropOnStairs(this.levers, this.stairs);
-    itemDropOnStairs(this.hooks, this.stairs);
-    itemDropOnStairs(this.electros, this.stairs);
-    itemDropOnStairs(this.swords, this.stairs);
+
     // boxes...
     // boxes...
+      itemDropOn(this.platforms,this.boxes,this.stairs, this.flamethrowers,this.machineguns,this.healings, this.bars,this.blasters,this.auras,this.coins,this.steps,this.levers,this.hooks,this.electros,this.swords)
 
     this.boxes.forEach((box) => {// box con player
       if (box.collides(this.player)) {
@@ -1045,9 +950,9 @@ if(this.player.wasNotDamaged) {
   
   checkBoss(){
     if(miniBoss1){
-      this.tickMiniBoss1++;
-      this.tickMiniBoss2++;
-      this.tickMiniBoss3++;
+      // this.tickMiniBoss1++;
+      // this.tickMiniBoss2++;
+      // this.tickMiniBoss3++;
       if(this.randomIsOn){
         this.randomNumberForTick1 = Math.random() * 300;
         this.randomIsOn = false;

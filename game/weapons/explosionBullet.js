@@ -21,7 +21,6 @@ class ExplosionBullet {
   }
 
   draw() {
-    if(!this.exploded){
     this.ctx.drawImage(
       this.img,
       (this.img.frame * this.img.width) / 11,
@@ -33,20 +32,6 @@ class ExplosionBullet {
       this.w,
       this.h
     );
-  } else {
-    this.ctx.drawImage(
-      this.img,
-      (this.img.frame * this.img.width) / 11,
-      0,
-      this.img.width / 11,
-      this.img.height,
-      this.x,
-      this.y,
-      this.w,
-      this.h
-    );
-  }
-
   }
   move() {
     this.vy += this.g
@@ -73,6 +58,11 @@ class ExplosionBullet {
       const colY =this.y + this.h -5 > objetivo.y && this.y < objetivo.y + objetivo.h;
       return colX && colY;
     }
+  }
+  collidesBoss(objetivo) {
+      const colX = this.x  <= objetivo.x + objetivo.w  && this.x - this.w > objetivo.x ;
+      const colY =this.y + this.h -5 > objetivo.y && this.y < objetivo.y + objetivo.h;
+      return colX && colY;
   }
   isVisible() {
     return this.dispose;

@@ -27,7 +27,7 @@ class Player {
     this.charging = 0;  // acumula la carga, lo que dibuja el semicírculo
     this.chargingFires = false; //   se pone en true mientras carga el disparo fuerte de fuego
     this.megaFireBlaster = false; //al ponerse en true, se puede activar la K
-    this.electroAmount = 10; //cantidad de carga eléctrica que tiene
+    this.electroAmount = 30; //cantidad de carga eléctrica que tiene
     this.megaFireBlasterAmount = 31; //la carga del blaster. cada 10, es una bola
     this.fireAmount = 20; //cantidad de fuegos que puedes disparar con N
     this.hookAmount = 10; // la cantidad de hooks con J
@@ -65,8 +65,14 @@ class Player {
     this.barItem.src = "/public/Imagenes/barItem.png";
     this.swordBack = new Image();
     this.swordBack.src = "/public/Imagenes/swordBack.png";
+    
+    this.swordLeftStab = new Image();
+    this.swordLeftStab.src = "/public/Imagenes/dodgeLeftSwordImg.png";
+    this.swordRightStab = new Image();
+    this.swordRightStab.src = "/public/Imagenes/dodgeRightSwordImg.png";
+    
     this.swingSwordState = true;
-    this.swordEquipped = false;
+    this.swordEquipped = true;
     this.swordLevel = 0;
     this.swordPowerUp = 8;
     this.swordPower1 = false;
@@ -336,8 +342,14 @@ handleRightDodge = (event) =>{ //*
     
 
     if(Q === 81){
+      this.ctx.globalAlpha = 0.5;
       this.ctx.drawImage(this.dodgeE, this.x + this.w , this.y + this.h/2, this.w/2, this.h/2);
       this.ctx.drawImage(this.dodgeQ, this.x-this.w/1.6, this.y + this.h/2, this.w/2 , this.h/2);
+      this.ctx.globalAlpha = 1;
+    }
+    if(F === 70){
+      this.ctx.drawImage(this.swordLeftStab, this.x - this.w, this.y +this.h/2, this.w, this.h/2);
+      this.ctx.drawImage(this.swordRightStab, this.x + this.w,  this.y +this.h/2 , this.w , this.h/2);
     }
     for (let i = 0; i < this.charging /10 -1; i++) {
       if(this.charging >= 11)
@@ -692,6 +704,10 @@ handleRightDodge = (event) =>{ //*
 
         if(key === F){
           this.stabSword();
+          F = 0;
+          setTimeout(() => {
+            F = 70;
+          }, 3000);
         }
         
   }
