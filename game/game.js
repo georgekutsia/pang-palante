@@ -109,7 +109,7 @@ class Game {
         setTimeout(() => {
           let bo = new MiniBoss1(ctx, CTXW - 70, -50)
           this.miniBoses.push(bo)
-        }, 100);
+        }, 6100);
 
         // inftroGame1();
         // level1(this.ctx, this.bubbles, this.platforms, this.levelBalls, this.boxes)
