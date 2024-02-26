@@ -113,7 +113,48 @@ function  itemDropOnStairs (items, platforms){
   })
 }   
 
+function itemDropOn(platforms, boxes, stairs,flamethrowers, machineguns, healings,bars, blasters,  auras, coins, steps, levers, hooks, electros, swords){
+  itemDropOnPlatform(flamethrowers, platforms);
+  itemDropOnPlatform(machineguns, platforms);
+  itemDropOnPlatform(healings, platforms);
+  itemDropOnPlatform(bars, platforms);
+  itemDropOnPlatform(blasters, platforms);
+  itemDropOnPlatform(auras, platforms);
+  itemDropOnPlatform(coins, platforms);
+  itemDropOnPlatform(steps, platforms);
+  itemDropOnPlatform(levers, platforms);
+  itemDropOnPlatform(hooks, platforms);
+  itemDropOnPlatform(electros, platforms);
+  itemDropOnPlatform(swords, platforms);
 
+
+  itemDropOnPlatform(flamethrowers, boxes);
+  itemDropOnPlatform(machineguns, boxes);
+  itemDropOnPlatform(healings, boxes);
+  itemDropOnPlatform(bars, boxes);
+  itemDropOnPlatform(auras, boxes);
+  itemDropOnPlatform(blasters, boxes);
+  itemDropOnPlatform(coins, boxes);
+  itemDropOnPlatform(steps, boxes);
+  itemDropOnPlatform(levers, boxes);
+  itemDropOnPlatform(hooks, boxes);
+  itemDropOnPlatform(electros, boxes);
+  itemDropOnPlatform(swords, boxes);
+
+  itemDropOnStairs(flamethrowers, stairs);
+  itemDropOnStairs(machineguns, stairs);
+  itemDropOnStairs(healings, stairs);
+  itemDropOnStairs(bars, stairs);
+  itemDropOnStairs(blasters, stairs);
+  itemDropOnStairs(auras, stairs);
+  itemDropOnStairs(blasters, stairs);
+  itemDropOnStairs(coins, stairs);
+  itemDropOnStairs(steps, stairs);
+  itemDropOnStairs(levers, stairs);
+  itemDropOnStairs(hooks, stairs);
+  itemDropOnStairs(electros, stairs);
+  itemDropOnStairs(swords, stairs);
+}
 
 
 function bigWeaponBubble (ctx, bullet, player){ //la burbuja gigante que dispara player
