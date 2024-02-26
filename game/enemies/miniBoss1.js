@@ -22,7 +22,7 @@ class MiniBoss1 {
     this.burningColorsArray = [];
     this.shootOne = true;  // el primer tipo de disparo especial
     this.oneShot = true; // para que dispare solo una vez al detectar al jugador
-    this.life = life || 1;
+    this.life = life || 90;
     this.distanceFromPlayer = -2
     this.shootingIntervalBubble = 1;
     this.shootingIntervalBubbleTick = 0;

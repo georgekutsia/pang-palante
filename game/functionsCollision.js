@@ -231,12 +231,12 @@ function checkHookCollisions(hookArray, obstacles, barHit, player) {
 function bossFireCollision (miniBoses, object){
   miniBoses.forEach((e) => {e.explosiveArray.forEach((exp) => {
     object.forEach((ob) => {
-     if(exp.collides(ob)){
-       exp.exploded = true;
-       exp.img.frame = 5;
-       exp.vx = -0.5;
-       exp.vy = 0;
-       exp.canCollide = false;
+    if(exp.collides(ob)){
+      exp.exploded = true;
+      exp.img.frame = 5;
+      exp.vx = -0.5;
+      exp.vy = 0;
+      exp.canCollide = false;
       }})})
     })
   }
