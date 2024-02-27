@@ -77,7 +77,10 @@ class Game {
     this.playerBar.volume = 0.1;
     this.electroItemSound = new Audio("/public/sounds/electrofire/elecrtroItemSound.mp3");
     this.electroItemSound.volume = 0.1;
-
+    this.minibossArrivingShip = new Audio("/public/sounds/minibossArrivingShip3.mp3")
+    this.minibossArrivingShip.volume = 0.05;
+    this.miniBossTalk1 = new Audio("/public/sounds/miniBossTalk1.mp3")
+    this.miniBossTalk1.volume = 0.05;
     
     this.tickMiniBoss1 = 0;
     this.tickMiniBoss2 = 0;
@@ -97,7 +100,17 @@ class Game {
       "He visto marines menos hábiles!",
       "Una resposiro y a seguir",
       "Eres el orgullo de la patria!",
-      "Que la adrenalina potencie tus disparos!"
+      "Que la adrenalina potencie tus disparos!",
+      "¡Estás on fire! ¡Sigue así!",
+      "¡Tienes el control! ¡No te detengas!",
+      "¡Tus habilidades son impresionantes!",
+      "¡Eres una máquina! ¡Sigue adelante!",
+      "¡No hay obstáculo que te detenga!",
+      "¡Tu determinación es inspiradora!",
+      "¡Eres un verdadero guerrero! ¡Continúa luchando!",
+      "¡Tu perseverancia es admirable!",
+      "¡Demuestra tu valentía y sigue adelante!",
+      "¡Eres una fuerza imparable! ¡Mantén el ritmo!",
     ];
     this.indiceAleatorio;
   }
@@ -106,9 +119,11 @@ class Game {
     if(!this.gameStarted){
       if (GAMELEVEL === 1) {
         addMiniboss1()
+        this.miniBossTalk1.play()
         setTimeout(() => {
           let bo = new MiniBoss1(ctx, CTXW - 70, -50)
-          this.miniBoses.push(bo)
+          this.miniBoses.push(bo);
+        this.minibossArrivingShip.play()
         }, 6100);
 
         // inftroGame1();
@@ -121,23 +136,23 @@ class Game {
         levelInfinite( this.ctx, this.bubbles, this.platforms, this.bouncers, this.spikes, this.stairs, this.flamethrowers, this.machineguns, this.healings, this.auras, this.boxes, this.blasters, this.levelBalls, this.gatlings, this.darkBubbles)
       }
         if(GAMELEVEL === 1987 ) {
-          // this.levelBalls = [];
-          // this.emptyAllGameArrays()
-          // this.emptyAllPlayerArrays()
-          // addDemo6(this.ctx, this.platforms, this.levers, this.levelBalls,this.boxes, this.gatlings, this.cannons);
-          // demoPhase = 9;
+          this.levelBalls = [];
+          this.emptyAllGameArrays()
+          this.emptyAllPlayerArrays()
+          addDemo6(this.ctx, this.platforms, this.levers, this.levelBalls,this.boxes, this.gatlings, this.cannons);
+          demoPhase = 9;
 
-          infoIntro1()
-          this.background.img.src = "../public/Imagenes/background/backgroundTraining4.webp";
-          demoFunctions.mostrarVariosTextosPocoAPoco1()
+          // infoIntro1()
+          // this.background.img.src = "../public/Imagenes/background/backgroundTraining4.webp";
+          // demoFunctions.mostrarVariosTextosPocoAPoco1()
 
-          setTimeout(() => {
-            addDemo1Electro(this.ctx,  this.platforms, this.electros)
-            this.background.img.src = "../public/Imagenes/background/backgroundTraining5.webp";
-          }, 11000);
-          setTimeout(() => {
-            addDemo1(this.ctx, this.platforms)
-          }, 32000);
+          // setTimeout(() => {
+          //   addDemo1Electro(this.ctx,  this.platforms, this.electros)
+          //   this.background.img.src = "../public/Imagenes/background/backgroundTraining5.webp";
+          // }, 11000);
+          // setTimeout(() => {
+          //   addDemo1(this.ctx, this.platforms)
+          // }, 32000);
         }
       }
 
@@ -332,6 +347,11 @@ class Game {
         } else {
           this.player.loseLife(exp.damage, true);
           exp.exploded = true;
+          if(exp.bigBomb){
+            exp.fireExplosionBig.play()
+          } else {
+            exp.fireExplosionSmall.play()
+          }
           exp.img.frame = 5;
           exp.vx = this.player.vx;
           exp.canCollide = false;
@@ -341,6 +361,11 @@ class Game {
 
     this.miniBoses.forEach((e) => {e.explosiveArray.forEach((exp) => { 
       if(exp.collidesBoss(e)){
+        if(exp.bigBomb){
+          exp.fireExplosionBig.play()
+        } else {
+          exp.fireExplosionSmall.play()
+        }
         exp.exploded = true;
         exp.vx = miniBossVx;
         exp.vy = miniBossVy;
@@ -920,13 +945,12 @@ if(this.player.wasNotDamaged) {
         demoPhase = 7;
       }
       if(demoPhase === 8){
-        this.levelBalls = [];
-        this.emptyAllGameArrays()
-        this.emptyAllPlayerArrays()
-        addDemo6(this.ctx, this.platforms, this.levers, this.levelBalls,this.boxes, this.gatlings, this.cannons);
-        demoPhase = 9;
+          this.levelBalls = [];
+          this.emptyAllGameArrays()
+          this.emptyAllPlayerArrays()
+          addDemo6(this.ctx, this.platforms, this.levers, this.levelBalls,this.boxes, this.gatlings, this.cannons);
+          demoPhase = 9;
       }
-
       if(demoPhase === 9){
         this.totalCannonBubbleCount = this.cannons.reduce((total, cannon) => {
           if (cannon.bubbleArray.length > 0) {
@@ -939,8 +963,15 @@ if(this.player.wasNotDamaged) {
         this.cannons.forEach((cannon) => cannon.shootInterval = 30000)
       } else {
         this.cannons.forEach((cannon) => cannon.shootInterval = 15000)
-
       }
+      }
+      if(demoPhase === 10){
+        this.emptyAllGameArrays()
+        this.emptyAllPlayerArrays()
+        // addDemo7(this.ctx, this.platforms, this.levers, this.levelBalls,this.boxes, this.gatlings, this.cannons);
+        demoFunctions.mostrarVariosTextosPocoAPoco7()
+        
+        demoPhase = 11
       }
     }
 
