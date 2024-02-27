@@ -20,6 +20,7 @@ class MiniBoss1 {
     this.bubbleArray = [];
     this.explosiveArray = [];
     this.burningColorsArray = [];
+    this.explosions = [];
     this.shootOne = true;  // el primer tipo de disparo especial
     this.oneShot = true; // para que dispare solo una vez al detectar al jugador
     this.life = life || 90;
@@ -34,11 +35,20 @@ class MiniBoss1 {
     this.burning = true;
     this.burningForce = 0;
     this.damage0 = 0;
-
-    this.explosions = [];
+    
+    this.minibossFlyingShip = new Audio("/public/sounds/minibossFlyingShip.mp3")
+    this.minibossFlyingShip.volume = 0.3;
+    this.arriving = true;
   }
 
   draw() {
+if(this.arriving){
+  this.minibossFlyingShip.play();
+  this.arriving = false;
+  setTimeout(() => {
+    this.arriving = true;
+  }, 60000);
+}
     if(this.boxLevel===1)this.img.src = "/public/Imagenes/box1.png";
     this.ctx.drawImage(
       this.img,

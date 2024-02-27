@@ -187,8 +187,29 @@ const demoFunctions = {
     setTimeout(() => {
       textoPianoPiano("demo-text22");
       }, 2000);
-
   },
+
+  mostrarVariosTextosPocoAPoco7() {
+    document.getElementById("demo-text21").style.display = "none";
+    document.getElementById("demo-text22").style.display = "none";
+    textoPianoPiano("demo-text23");
+    setTimeout(() => {
+      textoPianoPiano("demo-text24");
+      }, 2000);
+    setTimeout(() => {
+      textoPianoPiano("demo-text25");
+      }, 4000);
+    setTimeout(() => {
+      textoPianoPiano("demo-text26");
+      }, 6000);
+      setTimeout(() => {
+        document.getElementById("demo-text23").style.display = "none";
+        document.getElementById("demo-text24").style.display = "none";
+        document.getElementById("demo-text25").style.display = "none";
+        document.getElementById("demo-text26").style.display = "none";
+      },11000);
+  },
+
 };
 
 
@@ -230,6 +251,10 @@ function demoMessageDisable() {
   if (demoPhase >= 6) {
     document.getElementById("demo-text19").style.display = "none";
     document.getElementById("demo-text20").style.display = "none";
+  }
+  if (demoPhase >= 8) {
+    document.getElementById("demo-text21").style.display = "none";
+    document.getElementById("demo-text22").style.display = "none";
   }
 
 }

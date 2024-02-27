@@ -13,14 +13,21 @@ class ExplosionBullet {
     this.img.frame = 0;
     this.tick = 0;
     this.damage = 0.5;
-    this.fireShootSOund = new Audio("/public/sounds/electrofire/fireShootSound.mp3")
-    this.fireShootSOund.volume = 0.05;
+    this.fireShotSmall = new Audio("/public/sounds/shooting/fireShotSmall.mp3")
+    this.fireShotSmall.volume = 0.1;
+    this.fireExplosionSmall = new Audio("/public/sounds/shooting/fireExplosionSmall.mp3")
+    this.fireExplosionSmall.volume = 0.05;
     this.exploded = false;
     this.dispose = true;
     this.canCollide = true;
+    this.shot = true;
   }
 
   draw() {
+    if(this.shot){
+    this.fireShotSmall.play();
+    this.shot = false;
+    }
     this.ctx.drawImage(
       this.img,
       (this.img.frame * this.img.width) / 11,
