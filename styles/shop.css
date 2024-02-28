@@ -3,20 +3,27 @@
   top: 0;
   right: 0;
   display: none;
-  background-color: aquamarine;
+  border: none;
+  background-color: transparent;
+  border-radius: 50%;
+  transition: all 0.5s ease-in-out;
 }
-#toggle-shop i{
-  font-size: calc(15px + 0.5vw);
-  padding: 5px 5px;
+#toggle-shop:hover{
+background-color: aquamarine;
 }
+#toggle-shop img{
+  width: calc(30px + 2vw);
+  padding: 5px;
+  }
+  
 @media only screen and (min-height: 420px) {
   #toggle-shop{
     position: absolute;
     top: 0;
     right: 1vw;
-    display: flex;
+    display: none;
+    opacity: 0;
   }
-
   #shop-btn{
     position: absolute;
     right: 0vw;

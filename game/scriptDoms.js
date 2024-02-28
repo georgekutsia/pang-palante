@@ -59,6 +59,7 @@ let demoFriend1$$ = document.querySelector(".demoFriend1")
 let demoFriend2$$ = document.querySelector(".demoFriend2")
 let demoFriend3$$ = document.querySelector(".demoFriend3")
 let demoFriend4$$ = document.querySelector(".demoFriend4")
+let demoFriend5$$ = document.querySelector(".demoFriend5")
 
 
 let minion1$$ = document.querySelector(".minion1")
@@ -69,7 +70,7 @@ let minion5$$ = document.querySelector(".minion5")
 let minion6$$ = document.querySelector(".minion6")
 let boss1$$ = document.querySelector(".boss1")
 
-
+let poltra$$ = document.getElementById("poltra-scrap0")
 
 
 let miniBoss1TalkImg$$ = document.getElementById("miniBoss1")

@@ -136,13 +136,12 @@ z-index: 24;
   margin: auto;
 }
 
-.demoFriend1, .demoFriend2, .demoFriend3, .demoFriend4{
+.demoFriend1, .demoFriend2, .demoFriend3, .demoFriend4, .demoFriend5{
   transition: all 0.4s ease-in-out;
   display: none;
 }
-.demoFriend4{
+.demoFriend4, .demoFriend5{
   opacity: 0;
-
 }
 
 
@@ -225,6 +224,7 @@ z-index: 24;
   transition: all 0.5s ease-in-out;
   animation: boss1Animation 2.5s ease-in-out infinite;
 }
+
 .minion1:hover, 
 .minion2:hover, 
 .minion3:hover, 
@@ -283,4 +283,13 @@ z-index: 24;
     top: 1%;
     right: 10%;
     display: none;
+  }
+
+  #poltra-scrap0{
+    width: calc(100px + 2vw);
+    position: absolute;
+    top: 5vh;
+    right: 40vw;
+    opacity: 0;
+    transition: all 1s ease-in-out;
   }

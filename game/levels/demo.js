@@ -1,31 +1,3 @@
-function levelDemo1( ctx, bubbles, platforms, bouncers,spikes, stairs, flamethrowers, machineguns, healings, auras, boxes, blasters, levelBalls){    
-    addPlatforms1987(ctx, platforms)
-  // addBouncer1987(ctx, bouncers)
-  // addSpikes1987(ctx, spikes)
-  // addStair1987(ctx, stairs)
-  // flamethrowerItem1987(ctx, flamethrowers)
-
-  // auraItem1987(ctx, auras)
-  // boxItem1987(ctx, boxes)
-  // blasterItem1987(ctx, blasters)
-  // blasterItem1987(ctx, blasters)
-  // blasterItem1987(ctx, blasters)
-  // machinegunItem(ctx, machineguns)
-  // levelBallItem1987(ctx, levelBalls)
-  // addBubble1987(ctx, bubbles)
-}
-function levelBallItem1987(ctx, levelBalls) {  
-  const levelBall = new LevelBall(ctx, ctx.canvas.width/2, 0)
-  levelBalls.push(levelBall)
-}
-
-function addBubble1987(ctx, bubbles){ 
-  const bubble = new Bubble(ctx)
-  bubbles.push(bubble);
-}
-
-
-
 
 //!demo1
 function addDemo1Electro(ctx, platforms, electros){
@@ -184,7 +156,6 @@ function addDemo6(ctx, platforms, levers, levelBalls, boxes, gatlings, cannons){
 function addDemo7(ctx, platforms, swords){
   let swor = new Sword(ctx, 100, 50)
   swords.push(swor)
-
 
   const platform1 = new Platform(ctx, 30, 60, 35, 5, "../public/Imagenes/obstacles/platformSolid1.png", true, true, true, 0, 0.6, 0, 0, 40, 130);
   const platform2 = new Platform(ctx, 90, 50, 35, 5, "../public/Imagenes/obstacles/platformSolid2.png", true, true, true, 0, 0.4, 0, 0, 70, 110,);

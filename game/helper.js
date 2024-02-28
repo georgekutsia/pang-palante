@@ -58,17 +58,75 @@ function inftroGame1(){
   setTimeout(() => {
   textoPianoPiano("gameIntro-text4");
   }, 8000);
-}
-// infoPlayerBtn1$$.addEventListener("click", function(){
-//   infoIntro1()
-// })
+  setTimeout(() => {
+    minion1$$.style.opacity = "0";
+    minion2$$.style.opacity = "0";
+    minion3$$.style.opacity = "0";
+    minion4$$.style.opacity = "0";
+    minion5$$.style.opacity = "0";
+    minion6$$.style.opacity = "0";
+    setTimeout(() => {
+      boss1$$.style.opacity = "0"
+      minion1$$.style.display = "none";
+      minion2$$.style.display = "none";
+      minion3$$.style.display = "none";
+      minion4$$.style.display = "none";
+      minion5$$.style.display = "none";
+      minion6$$.style.display = "none";
+      setTimeout(() => {
+      boss1$$.style.display = "none"
+      }, 500);
+    }, 500);
+  }, 13000);
 
-let moved = false
+  setTimeout(() => {
+  demoFriend4$$.style.opacity = "0"
+  demoFriend5$$.style.display = "block"
+  setTimeout(() => {
+  demoFriend4$$.style.display = "none"
+    demoFriend5$$.style.opacity = "1"
+    setTimeout(() => {
+      poltra$$.style.display = "flex";
+      setTimeout(() => {
+      poltra$$.style.opacity = "1";
+      }, 800);
+      setTimeout(() => {
+      poltra$$.style.right = "1vw";
+      poltra$$.style.top = "0.5vw";
+      poltra$$.style.width = "calc(35px + 2vw"
+          setTimeout(() => {
+            poltra$$.style.display = "none";
+              toggleShop$$.style.display = "block";
+              setTimeout(() => {
+              toggleShop$$.style.opacity = "1";
+              }, 200);
+          }, 1000);
+      }, 2500);
+    }, 300);
+  }, 500);
+    document.getElementById("gameIntro-text3").style.display = "none";
+    document.getElementById("gameIntro-text4").style.display = "none";
+      textoPianoPiano("gameIntro-text5");
+        setTimeout(() => {
+      textoPianoPiano("gameIntro-text6");
+        }, 2000);
+        setTimeout(() => {
+          document.getElementById("gameIntro-text5").style.display = "none";
+          document.getElementById("gameIntro-text6").style.display = "none";
+          demoFriend5$$.style.display = "none";
+          demoFriend3$$.style.display = "block";
+      textoPianoPiano("gameIntro-text7");
+      setTimeout(() => {
+          document.getElementById("gameIntro-text7").style.display = "none";
+        }, 2000);
+        }, 5000);
+  }, 14000);
+}
+
 
 function eventInfo(event$$) {
   if (!ayudasInfoArray.includes(event$$.alt)) {
   event$$.style.display = "block";
-
 
   // una forma para que no se vuelva a generar el boton move y close si el array ya tiene esa palabra
 ayudasInfoArray.push(event$$.alt)
@@ -349,6 +407,8 @@ shopElectro$$.addEventListener("click", function(){
     game.player.electroAmount += 10;
   }
 })
+
+
 
 toggleShop$$.addEventListener("click", ()=>{
   if(shopBtnsAll$$.style.display === "flex"){
