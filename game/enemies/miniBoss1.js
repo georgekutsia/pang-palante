@@ -1,5 +1,5 @@
 class MiniBoss1 {
-  constructor(ctx, x, y, w, h, vx, vy, damage, life) {
+  constructor(ctx, x, y, w, h, vx, vy, life, gun1 = true, gun2 = true, gun3= true) {
     this.ctx = ctx;
     this.x = x ||  this.ctx.canvas.width -30;
     this.y = y || -4;
@@ -12,11 +12,10 @@ class MiniBoss1 {
     this.tick = 0;
     this.dispose = true;
     this.img = new Image();
-    this.img.src = "/public/Imagenes/minions/MiniBoss1.webp";
+    this.img.src = "/public/Imagenes/minions/miniBoss2.png";
     this.img.frame = 0;
     this.imgTick = 0;
     this.playerDetected = false;
-    this.damage = damage || 0.001;
     this.bubbleArray = [];
     this.explosiveArray = [];
     this.burningColorsArray = [];
@@ -24,6 +23,11 @@ class MiniBoss1 {
     this.shootOne = true;  // el primer tipo de disparo especial
     this.oneShot = true; // para que dispare solo una vez al detectar al jugador
     this.life = life || 90;
+
+    this.gun1 = gun1;
+    this.gun2 = gun2;
+    this.gun3 = gun3;
+
     this.distanceFromPlayer = -2
     this.shootingIntervalBubble = 1;
     this.shootingIntervalBubbleTick = 0;
@@ -117,14 +121,14 @@ if(this.arriving){
     if(this.burningShip.framey > 1.5 ) {
       this.burningShip.framey = 0
       this.burningShip.framex = 0;
-      if(this.boxLevel === 0) {
-        this.damage0 +=1;
-        if(this.damage0 >=3){
-          this.boxImg.frame+=1;
-          this.boxImpactMetalic.play();
-          this.damage0 = 0;
-        }
-      }
+      // if(this.boxLevel === 0) {
+      //   this.damage0 +=1;
+      //   if(this.damage0 >=3){
+      //     this.boxImg.frame+=1;
+      //     this.boxImpactMetalic.play();
+      //     this.damage0 = 0;
+      //   }
+      // }
     }
 
     this.shootingIntervalBubbleTick++
@@ -155,22 +159,28 @@ if(this.arriving){
       this.oneShot = false;
       setTimeout(() => {
         this.oneShot = true;
-      }, this.distanceFromPlayer*2);
+      }, this.distanceFromPlayer*2 + 300);
     }
   }
 
   shootingExplosive(){
-    let explo = new ExplosionBullet(this.ctx, this.x , this.y + this.h/2, CTXW/15, CTXW/15, -2);
-    this.explosiveArray.push(explo)
+    if(this.gun1){
+      let explo = new ExplosionBullet(this.ctx, this.x , this.y + this.h/2, CTXW/15, CTXW/15, -2);
+      this.explosiveArray.push(explo)
+    }
   }
   shootingBomb(){
-    let explo = new ExplosionBomb(this.ctx, this.x, this.y - 10, CTXW/5, CTXW/5, -this.distanceFromPlayer/100, -2.5);
-    this.explosiveArray.push(explo)
+    if(this.gun2){
+      let explo = new ExplosionBomb(this.ctx, this.x, this.y - 10, CTXW/5, CTXW/5, -this.distanceFromPlayer/100, -2.5);
+      this.explosiveArray.push(explo)
+    }
   }
 
   shootingBubble1(speedX, size){
-    let bubble2 = new Bubble(ctx, this.x , this.y + this.h/2 , size, size, -0.5, speedX, 0.0001, true, 700, 0, false)
-    // this.bubbleArray.push(bubble2);
+    if(this.gun3){
+      let bubble2 = new Bubble(ctx, this.x , this.y + this.h/2 , size, size, -0.5, speedX, 0.0001, true, 700, 0, false)
+      this.bubbleArray.push(bubble2);
+    }
   }
 
   checkDistance(player){
@@ -189,7 +199,10 @@ if(this.arriving){
       if( this.life <= 50 && this.burningLevel === 0 ){
         let fire =  new BurningColors(this.ctx, this.x, this.y, 60, 60)
         this.burningColorsArray.push(fire);
-      minionsTalking.miniBossTalk2();
+        if(finalBoss){
+          minionsTalking.miniBossTalk2();
+
+        }
         this.burningLevel = 1;
       }
       if( this.life <= 40 && this.burningLevel === 1 ){
@@ -208,14 +221,18 @@ if(this.arriving){
       if( this.life <= 20 && this.burningLevel === 3 ){
         let fire =  new BurningColors(this.ctx, this.x + this.w/5, this.y, 80, 80)
         this.burningColorsArray.push(fire);
+        if(finalBoss){
         minionsTalking.miniBossTalk3();
+        } 
         this.burningLevel = 4;
-
       }
       if( this.life <= 10 && this.burningLevel === 4 ){
         let fire =  new BurningColors(this.ctx, this.x + this.w/4.3, this.y - this.h/20, 120, 70)
         this.burningColorsArray.push(fire);
         this.burningLevel = 5;
+      }
+      if(this.life <= 9 ){
+        this.life -= 0.001
       }
   }
 
@@ -248,22 +265,17 @@ if(this.arriving){
       }
   }
   checkLife(){
-      // if(this.life <= 20){
-      //   this.life -= 0.0001
-      // }
-      // if(this.life <= 10){
-      //   this.life -= 0.0001
-      // }
+
     if(this.life <= 0.1){
       this.vy = -2;
       this.vx = 0.5;
+      setTimeout(() => {
+        this.dispose = false;
+      }, 3000);
       if(this.bossTalkGone){
         minionsTalking.miniBossTalk1Gone();
         this.bossTalkGone = false;
       }
-    }
-    if(this.life <= -3){
-      this.dispose = false;
     }
   }
 

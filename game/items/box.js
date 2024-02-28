@@ -165,7 +165,7 @@ class Box {
         this.hitingSound()
       }
     }
-    if(this.x <= -40){
+    if(this.x <= -40 ||  this.x >= 350){
       this.dispose =false;
     }
   }

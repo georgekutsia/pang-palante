@@ -85,3 +85,7 @@ let movesDiv$$ = document.getElementById("moves-div")
 let ammosCount$$ = document.getElementById("ammos-count")
 
 
+
+
+let btnInstrucciones$$ = document.getElementById("btn-instrucciones")
+let introAyudaFinal1$$ = document.querySelector(".introAyudaFinal1")

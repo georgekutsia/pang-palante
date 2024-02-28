@@ -5,6 +5,7 @@ function infoIntro1(){
       infoPlayer2$$.style.display = "block"
       setTimeout(() => {
         infoPlayer2$$.style.display = "none"
+        demoFunctions.mostrarVariosTextosPocoAPoco1()
       }, 6000);
     }, 4500);
   }
