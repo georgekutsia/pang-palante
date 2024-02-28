@@ -123,7 +123,8 @@ class Game {
         setTimeout(() => {
           let bo = new MiniBoss1(ctx, CTXW - 70, -50)
           this.miniBoses.push(bo);
-        this.minibossArrivingShip.play()
+          this.minibossArrivingShip.play()
+          
         }, 6100);
 
         // inftroGame1();
@@ -135,26 +136,18 @@ class Game {
       if(GAMELEVEL === 100) {
         levelInfinite( this.ctx, this.bubbles, this.platforms, this.bouncers, this.spikes, this.stairs, this.flamethrowers, this.machineguns, this.healings, this.auras, this.boxes, this.blasters, this.levelBalls, this.gatlings, this.darkBubbles)
       }
-        if(GAMELEVEL === 1987 ) {
-          this.levelBalls = [];
-          this.emptyAllGameArrays()
-          this.emptyAllPlayerArrays()
-          addDemo6(this.ctx, this.platforms, this.levers, this.levelBalls,this.boxes, this.gatlings, this.cannons);
-          demoPhase = 9;
-
-          // infoIntro1()
-          // this.background.img.src = "../public/Imagenes/background/backgroundTraining4.webp";
-          // demoFunctions.mostrarVariosTextosPocoAPoco1()
-
-          // setTimeout(() => {
-          //   addDemo1Electro(this.ctx,  this.platforms, this.electros)
-          //   this.background.img.src = "../public/Imagenes/background/backgroundTraining5.webp";
-          // }, 11000);
-          // setTimeout(() => {
-          //   addDemo1(this.ctx, this.platforms)
-          // }, 32000);
-        }
+      if(GAMELEVEL === 1987 ) {
+        infoIntro1()
+        this.background.img.src = "../public/Imagenes/background/backgroundTraining4.webp";
+        setTimeout(() => {
+          addDemo1Electro(this.ctx,  this.platforms, this.electros)
+          this.background.img.src = "../public/Imagenes/background/backgroundTraining7.webp";
+        }, 10500);
+        setTimeout(() => {
+          addDemo1(this.ctx, this.platforms)
+        }, 30000);
       }
+    }
 
     this.interval = setInterval(() => {
       retryAmount$$.innerText = `${retry}`
@@ -895,21 +888,21 @@ if(this.player.wasNotDamaged) {
       this.player.life.total = 3;
       GAMELEVEL<= 1800 ? this.gameOver() : this.demoOver(); 
     }
-      if (this.bubbles.length <= 0 && this.gatlings.every(gat => gat.bubbleArray.length <= 0) && this.cannons.every(can => can.bubbleArray.length <= 0) && this.levers.every(lev =>lev.activated)) {
+      if (this.bubbles.length <= 0 && this.gatlings.every(gat => gat.bubbleArray.length <= 0) && this.cannons.every(can => can.bubbleArray.length <= 0) && this.levers.every(lev =>lev.activated)&& this.miniBoses.length <= 0) {
         this.levelBalls.forEach(e => (e.img.src = e.img.newSrc));
         this.levelBalls.forEach(e => (e.winCondition = true));
       } else {this.levelBalls.forEach(e => (e.winCondition = false))}
     if(GAMELEVEL === 1987){
       if(demoPhase === 1){
         if(this.platforms.length<=2 && this.electros.length <=0 && this.gameTime >= 800){
-          this.emptyAllGameArrays()
+        this.emptyAllGameArrays()
         this.emptyAllPlayerArrays()
           this.player.y = CTXH - 20;
           this.player.x = 50
           addDemo2(this.ctx, this.platforms, this.bouncers, this.stairs, this.levers)
           demoFunctions.mostrarVariosTextosPocoAPoco2()
-          demoPhase = 2
           this.player.g = 1;
+          demoPhase = 2;
         }
       }
       if(demoPhase === 2 && this.levers.every(lever =>lever.activated === true)){
@@ -918,6 +911,7 @@ if(this.player.wasNotDamaged) {
         this.emptyAllPlayerArrays()
           demoFunctions.mostrarVariosTextosPocoAPoco3()
           addDemo3(this.ctx, this.platforms, this.levers, this.bubbles, this.levelBalls)
+
           demoPhase = 3;
       }
       if(demoPhase === 4){
@@ -966,15 +960,47 @@ if(this.player.wasNotDamaged) {
       }
       }
       if(demoPhase === 10){
+        this.levelBalls = [];
         this.emptyAllGameArrays()
         this.emptyAllPlayerArrays()
-        // addDemo7(this.ctx, this.platforms, this.levers, this.levelBalls,this.boxes, this.gatlings, this.cannons);
-        demoFunctions.mostrarVariosTextosPocoAPoco7()
+        let bub1 = new Bubble(this.ctx, 20, 30, 30, 30)
+        let bub2 = new Bubble(this.ctx, CTXW-40, 30, 30, 30)
+        this.bubbles.push(bub1, bub2)
         
+        addDemo7(this.ctx, this.platforms, this.swords);
+        demoFunctions.mostrarVariosTextosPocoAPoco7()
+        setTimeout(() => {
+          let boss = new MiniBoss1(ctx, CTXW-60, -200, CTXW/5, CTXW/5, 0, 0, 70, true, false, false);
+          this.miniBoses.push(boss);
+
+          let bub1 = new Bubble(this.ctx, 20, 30, 20, 20)
+          let bub2 = new Bubble(this.ctx, CTXW-40, 30, 20, 20)
+          this.bubbles.push(bub1, bub2)
+
+          const levelBall1 = new LevelBall(ctx, 120, 0)
+          this.levelBalls.push(levelBall1)
+        }, 25000);
+        setInterval(() => {
+          boxMoveDemo7(this.ctx, this.boxes)
+        }, 15000);
         demoPhase = 11
+      }
+      if(demoPhase === 12){
+        this.emptyAllGameArrays()
+        this.emptyAllPlayerArrays()
+        introAyudaFinal1$$.style.display = "block"
+        setTimeout(() => {
+          window.location.reload();
+        }, 10000);
+        demoPhase = 13;
       }
     }
 
+
+
+
+
+    
     if(GAMELEVEL===11 && this.levelBalls.every(e =>e.winCondition===true)){
         this.platforms.forEach(element => {
           element.isSolid = true;

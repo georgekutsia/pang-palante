@@ -49,10 +49,10 @@ const demoFunctions = {
   mostrarVariosTextosPocoAPoco1() {
     setTimeout(() => {
       textoPianoPiano("demo-text1");
-    },11000);
+    },100);
     setTimeout(() => {
       textoPianoPiano("demo-text2");
-    }, 12500);
+    }, 2200);
     setTimeout(() => {
       textoPianoPiano("demo-text3");
       arrowBubbles$$.style.display = "block"
@@ -61,22 +61,22 @@ const demoFunctions = {
         arrowBubbles$$.style.top = "9vh"
         arrowBubbles$$.style.width = "calc(12px + 2vw)"
       }, 1000);
-    }, 16000);
+    }, 5000);
     setTimeout(() => {
       document.getElementById("demo-text1").style.display = "none";
       document.getElementById("demo-text2").style.display = "none";
       document.getElementById("demo-text3").style.display = "none";
     textoPianoPiano("demo-text31");
     arrowBubbles$$.style.top = "13vh"
-    }, 20000);
+    }, 9000);
     setTimeout(() => {
       arrowBubbles$$.style.top = "-1vh"
     textoPianoPiano("demo-text32");
-    }, 22000);
+    }, 11000);
     setTimeout(() => {
       arrowBubbles$$.style.top = "3vh"
     textoPianoPiano("demo-text33");
-    }, 24000);
+    }, 13000);
 
     setTimeout(() => {
       document.getElementById("demo-text31").style.display = "none";
@@ -84,43 +84,60 @@ const demoFunctions = {
       document.getElementById("demo-text33").style.display = "none";
       textoPianoPiano("demo-text4");
       arrowBubbles$$.style.display = "none"
-    }, 32000);
+    }, 20000);
 
     setTimeout(() => {
       textoPianoPiano("demo-text5");
-    }, 35000);
+    }, 23000);
     setTimeout(() => {
       textoPianoPiano("demo-text6");
-    }, 37000);
+    }, 25000);
     setTimeout(() => {
       textoPianoPiano("demo-text7");
-    }, 39000);
+    }, 27000);
     setTimeout(() => {
       textoPianoPiano("demo-text71");
-    }, 41000);
+    }, 29000);
     setTimeout(() => {
       textoPianoPiano("demo-text72");
-    }, 43000);
+    }, 31000);
+    setTimeout(() => {
+    document.getElementById("demo-text4").style.display = "none";
+      document.getElementById("demo-text5").style.display = "none";
+      document.getElementById("demo-text6").style.display = "none";
+      document.getElementById("demo-text7").style.display = "none";
+      document.getElementById("demo-text71").style.display = "none";
+      document.getElementById("demo-text72").style.display = "none";
+      btnInstrucciones$$.style.display = "block"
+      btnInstrucciones$$.addEventListener("click", ()=>{
+              this.mostrarVariosTextosPocoAPoco1();
+      })
+    }, 38000);
   },
 
   mostrarVariosTextosPocoAPoco2() {
+    btnInstrucciones$$.style.display = "none"
     document.getElementById("demo-text4").style.display = "none";
     document.getElementById("demo-text5").style.display = "none";
     document.getElementById("demo-text6").style.display = "none";
     document.getElementById("demo-text7").style.display = "none";
     document.getElementById("demo-text71").style.display = "none";
     document.getElementById("demo-text72").style.display = "none";
-    
     textoPianoPiano("demo-text8");
     setTimeout(() => {
       textoPianoPiano("demo-text9");
     }, 2000);
     setTimeout(() => {
       textoPianoPiano("demo-text10");
+      btnInstrucciones$$.style.display = "block"
+      btnInstrucciones$$.addEventListener("click", ()=>{
+              this.mostrarVariosTextosPocoAPoco2();
+      })
     }, 4000);
   },
 
   mostrarVariosTextosPocoAPoco3() {
+    btnInstrucciones$$.style.display = "none"
     document.getElementById("demo-text8").style.display = "none";
     document.getElementById("demo-text9").style.display = "none";
     document.getElementById("demo-text10").style.display = "none";
@@ -150,9 +167,20 @@ const demoFunctions = {
         textoPianoPiano("demo-text18");
       }, 6000);
     }, 12000);
+    setTimeout(() => {
+      document.getElementById("demo-text15").style.display = "none";
+      document.getElementById("demo-text16").style.display = "none";
+      document.getElementById("demo-text17").style.display = "none";
+      document.getElementById("demo-text18").style.display = "none";
+      btnInstrucciones$$.style.display = "block"
+      btnInstrucciones$$.addEventListener("click", ()=>{
+              this.mostrarVariosTextosPocoAPoco3();
+      })
+    }, 17000);
   },
 
   mostrarVariosTextosPocoAPoco4() {
+    btnInstrucciones$$.style.display = "none"
     document.getElementById("demo-text15").style.display = "none";
     document.getElementById("demo-text16").style.display = "none";
     document.getElementById("demo-text17").style.display = "none";
@@ -164,9 +192,16 @@ const demoFunctions = {
       setTimeout(() => {
         document.getElementById("demo-text19").style.display = "none";
         document.getElementById("demo-text20").style.display = "none";
+        btnInstrucciones$$.style.display = "block"
+        btnInstrucciones$$.addEventListener("click", ()=>{
+                this.mostrarVariosTextosPocoAPoco4();
+        })
       }, 20000)
   },
+
+
   mostrarVariosTextosPocoAPoco5() {
+    btnInstrucciones$$.style.display = "none"
     document.getElementById("demo-text19").style.display = "none";
     document.getElementById("demo-text20").style.display = "none";
     textoPianoPiano("demo-text21");
@@ -176,20 +211,34 @@ const demoFunctions = {
     setTimeout(() => {
       document.getElementById("demo-text21").style.display = "none";
       document.getElementById("demo-text22").style.display = "none";
+      btnInstrucciones$$.style.display = "block"
+      btnInstrucciones$$.addEventListener("click", ()=>{
+              this.mostrarVariosTextosPocoAPoco5();
+      })
     }, 6000);
   },
 
 
   mostrarVariosTextosPocoAPoco6() {
+    btnInstrucciones$$.style.display = "none"
     document.getElementById("demo-text19").style.display = "none";
     document.getElementById("demo-text20").style.display = "none";
     textoPianoPiano("demo-text21");
     setTimeout(() => {
       textoPianoPiano("demo-text22");
       }, 2000);
+      setTimeout(() => {
+    document.getElementById("demo-text21").style.display = "none";
+    document.getElementById("demo-text22").style.display = "none";
+        btnInstrucciones$$.style.display = "block"
+        btnInstrucciones$$.addEventListener("click", ()=>{
+                this.mostrarVariosTextosPocoAPoco6();
+        })
+      }, 5000);
   },
 
   mostrarVariosTextosPocoAPoco7() {
+    btnInstrucciones$$.style.display = "none"
     document.getElementById("demo-text21").style.display = "none";
     document.getElementById("demo-text22").style.display = "none";
     textoPianoPiano("demo-text23");
@@ -207,7 +256,11 @@ const demoFunctions = {
         document.getElementById("demo-text24").style.display = "none";
         document.getElementById("demo-text25").style.display = "none";
         document.getElementById("demo-text26").style.display = "none";
-      },11000);
+        btnInstrucciones$$.style.display = "block"
+        btnInstrucciones$$.addEventListener("click", ()=>{
+                this.mostrarVariosTextosPocoAPoco7();
+        })
+      },12000);
   },
 
 };
@@ -222,10 +275,15 @@ function demoMessageDisable() {
     document.getElementById("demo-text1").style.display = "none";
     document.getElementById("demo-text2").style.display = "none";
     document.getElementById("demo-text3").style.display = "none";
+    document.getElementById("demo-text31").style.display = "none";
+    document.getElementById("demo-text32").style.display = "none";
+    document.getElementById("demo-text33").style.display = "none";
     document.getElementById("demo-text4").style.display = "none";
     document.getElementById("demo-text5").style.display = "none";
     document.getElementById("demo-text6").style.display = "none";
     document.getElementById("demo-text7").style.display = "none";
+    document.getElementById("demo-text71").style.display = "none";
+    document.getElementById("demo-text72").style.display = "none";
   }
   if (demoPhase >= 3) {
     document.getElementById("demo-text8").style.display = "none";
@@ -255,6 +313,12 @@ function demoMessageDisable() {
   if (demoPhase >= 8) {
     document.getElementById("demo-text21").style.display = "none";
     document.getElementById("demo-text22").style.display = "none";
+  }
+  if (demoPhase >= 11) {
+    document.getElementById("demo-text23").style.display = "none";
+    document.getElementById("demo-text24").style.display = "none";
+    document.getElementById("demo-text25").style.display = "none";
+    document.getElementById("demo-text26").style.display = "none";
   }
 
 }

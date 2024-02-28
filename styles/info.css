@@ -20,12 +20,11 @@
   transform: translate(50%, 0);
 }
 
-.introAyuda1{
-display: none;
-transition: 1s ease-in-out;
-}
-.introAyuda2{
+.introAyuda1,
+.introAyuda2,
+.introAyudaFinal1{
   display: none;
+transition: 1s ease-in-out;
 
 }
 
@@ -272,4 +271,16 @@ z-index: 24;
     display: none;
   transition: all 1s ease-in-out;
 
+  }
+
+
+
+
+  #btn-instrucciones{
+    position: absolute;
+    padding: 5px 10px;
+    background-color: rgb(0, 255, 255);
+    top: 1%;
+    right: 10%;
+    display: none;
   }

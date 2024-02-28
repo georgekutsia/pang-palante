@@ -72,7 +72,7 @@ class Player {
     this.swordRightStab.src = "/public/Imagenes/dodgeRightSwordImg.png";
     
     this.swingSwordState = true;
-    this.swordEquipped = true;
+    this.swordEquipped = false;
     this.swordLevel = 0;
     this.swordPowerUp = 8;
     this.swordPower1 = false;
@@ -347,7 +347,7 @@ handleRightDodge = (event) =>{ //*
       this.ctx.drawImage(this.dodgeQ, this.x-this.w/1.6, this.y + this.h/2, this.w/2 , this.h/2);
       this.ctx.globalAlpha = 1;
     }
-    if(F === 70){
+    if(F === 70 && this.swordEquipped){
       this.ctx.drawImage(this.swordLeftStab, this.x - this.w, this.y +this.h/2, this.w, this.h/2);
       this.ctx.drawImage(this.swordRightStab, this.x + this.w,  this.y +this.h/2 , this.w , this.h/2);
     }
@@ -442,6 +442,15 @@ handleRightDodge = (event) =>{ //*
   }
 
   move() {
+    if(this.life.total >=  9){
+      jumpCooldown = 300;
+      jumpHeight  = -4.5;
+      playerSpeed = 3;
+    } else{
+      jumpCooldown = 500;
+      jumpHeight  = -3.5;
+      playerSpeed = 2;
+    }
     this.canClimb ? W = 87 : 0;
     if(!finalBoss){
       this.velocidadX = this.vx += this.r;
@@ -534,6 +543,7 @@ handleRightDodge = (event) =>{ //*
   this.bulletPlatformArray.forEach((bullet) => {bullet.move();}); // paso 3: dibujo cada bullet que se dispare
   this.hooksArray.forEach((bullet) => {bullet.move();}); // paso 3: dibujo cada bullet que se dispare
   this.swordArray.forEach((bullet) => {bullet.move();}); // paso 3: dibujo cada bullet que se dispare
+
   if(this.swordPowerUp >=10){
     this.swordPower1 = true;
     this.swordCooldown = 500;
@@ -650,7 +660,7 @@ handleRightDodge = (event) =>{ //*
         }, 500);
     }
     if(key === ALT && this.vy === 0 || key === ALT && this.ableToJump === true){
-      this.vy = jumpHeight 
+      this.vy = jumpHeight;
       this.g = 0.2
       this.ableToJump = false;
       ALT = 0;
@@ -690,7 +700,7 @@ handleRightDodge = (event) =>{ //*
       }
       if(key === R){
         this.swingSword();
-        if(this.swordLevel >=1){
+        if(this.swordLevel >=2){
           setTimeout(() => {
             this.swingSword();
           }, 200);
@@ -825,7 +835,6 @@ handleRightDodge = (event) =>{ //*
 
   }
   shootCuatruple() {// paso 1: invoca el disparo desde la posicion del personaje o su cercanía
-
     this.shootSound.play()
     const bullet6 = new BasicWeapon(this.ctx, this.x-2, this.y +5, bulletDirection, 0, -1, true);
     this.bigWeaponBubblesMaxAmount  += 1
