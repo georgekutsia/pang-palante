@@ -1,6 +1,6 @@
 
 start$$.addEventListener("click", function () {
-  GAMELEVEL = 1;
+  GAMELEVEL = 15;
   canvas.style.display = "block";
   restart$$.style.display = "block";
   retry$$.style.display = "block";
@@ -11,7 +11,7 @@ start$$.addEventListener("click", function () {
   instruccionesInfo2$$.style.display = "none";
   // infoPlayerBtn1$$.style.display = "block";
   ammosCount$$.style.display = "block";
-  toggleShop$$.style.display = "block";
+  
   game.isInfiniteChanging = false;
   iconsBtns$$.forEach(function(icon) {
     icon.style.backgroundColor = "transparent";
@@ -50,7 +50,7 @@ startInfinite$$.addEventListener("click", function () {
   instruccionesInfo2$$.style.display = "none";
   // infoPlayerBtn1$$.style.display = "block";
   ammosCount$$.style.display = "block";
-  toggleShop$$.style.display = "block";
+  
   game.isInfiniteChanging = true;
   iconsBtns$$.forEach(function(icon) {
     icon.style.backgroundColor = "transparent";
@@ -89,7 +89,7 @@ startDemo$$.addEventListener("click", function () {
   instruccionesInfo2$$.style.display = "none";
   // infoPlayerBtn1$$.style.display = "block";
   ammosCount$$.style.display = "block";
-  toggleShop$$.style.display = "block";
+  
   iconsBtns$$.forEach(function(icon) {
     icon.style.backgroundColor = "transparent";
   });

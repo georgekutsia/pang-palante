@@ -117,21 +117,15 @@ class Game {
 
   start() {
     if(!this.gameStarted){
-      if (GAMELEVEL === 1) {
-        addMiniboss1()
-        this.miniBossTalk1.play()
-        setTimeout(() => {
-          let bo = new MiniBoss1(ctx, CTXW - 70, -50)
-          this.miniBoses.push(bo);
-          this.minibossArrivingShip.play()
-          
-        }, 6100);
+      if (GAMELEVEL === 15) {
 
-        // inftroGame1();
-        // level1(this.ctx, this.bubbles, this.platforms, this.levelBalls, this.boxes)
-        // setTimeout(() => {
-        //   addBubble1(this.ctx, this.bubbles)
-        // }, 10000);
+        inftroGame1();
+        setTimeout(() => {
+        level1(this.ctx, this.bubbles, this.platforms, this.levelBalls, this.boxes)
+        }, 8000);
+        setTimeout(() => {
+          addBubble1(this.ctx, this.bubbles)
+        }, 10000);
       }
       if(GAMELEVEL === 100) {
         levelInfinite( this.ctx, this.bubbles, this.platforms, this.bouncers, this.spikes, this.stairs, this.flamethrowers, this.machineguns, this.healings, this.auras, this.boxes, this.blasters, this.levelBalls, this.gatlings, this.darkBubbles)
@@ -862,6 +856,14 @@ if(this.player.wasNotDamaged) {
             this.cannons.forEach((c) =>(c.vx = -0.05))
             }
           }, 3000);
+        } else if (GAMELEVEL === 16){//pero 21 en realidad
+          addMiniboss1()
+          this.miniBossTalk1.play()
+          setTimeout(() => {
+            let bo = new MiniBoss1(ctx, CTXW - 70, -50)
+            this.miniBoses.push(bo);
+            this.minibossArrivingShip.play()
+          }, 6100);
         }
       }, 3000);
     }, 1000);
