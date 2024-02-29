@@ -22,7 +22,6 @@ class Player {
     this.hooksArray = [];
     this.swordArray = []; //
     this.frameAmount = 5;
-    this.immune = false; // al recibir daño se vuelve inmune durante unos segundos
     this.fading = 0; //necesario para el parpadeo del personaje cuando es inmune
     this.charging = 0;  // acumula la carga, lo que dibuja el semicírculo
     this.chargingFires = false; //   se pone en true mientras carga el disparo fuerte de fuego
@@ -30,8 +29,8 @@ class Player {
     this.electroAmount = 30; //cantidad de carga eléctrica que tiene
     this.megaFireBlasterAmount = 31; //la carga del blaster. cada 10, es una bola
     this.fireAmount = 20; //cantidad de fuegos que puedes disparar con N
-    this.hookAmount = 10; // la cantidad de hooks con J
-    this.barAmount = 20; //la cantidad de barras disponibles con M
+    this.hookAmount = 50; // la cantidad de hooks con J
+    this.barAmount = 320; //la cantidad de barras disponibles con M
     this.stepsAmount = 0; //cantidad de plataformas que puedes crear con O / P
     this.ableToJump = false;
     this.wasNotDamaged = true;
@@ -393,7 +392,7 @@ handleRightDodge = (event) =>{ //*
     }
     if(this.electroAmount <=0) {this.electricShieldIsActive = false; H = 0}
     if(this.electroAmount > 1) H = 72
-    if(this.immune){
+    if(playerIsImmune){
       this.fading++
       if(this.fading >= 20){
         this.fading = 0;
@@ -445,7 +444,7 @@ handleRightDodge = (event) =>{ //*
     if(this.life.total >=  9){
       jumpCooldown = 300;
       jumpHeight  = -4.5;
-      playerSpeed = 3;
+      playerSpeed = 4;
     } else{
       jumpCooldown = 500;
       jumpHeight  = -3.5;
@@ -781,7 +780,7 @@ handleRightDodge = (event) =>{ //*
   
   
   collides(objetivo) {
-    if(!this.immuneState){
+    if(!playerIsImmune){
       const colX = this.x <= objetivo.x + objetivo.w && this.x + this.w > objetivo.x + 10;
       const colY = this.y + this.h > objetivo.y && this.y < objetivo.y + objetivo.h;
       return colX && colY;
@@ -790,10 +789,10 @@ handleRightDodge = (event) =>{ //*
   
   loseLife(damage, immuneState){
     this.life.total -= damage;
-    this.immune = immuneState;
+    playerIsImmune = immuneState;
     this.playerDamageSound1.play();
     setTimeout(() => {  // para desactivar immune y que el personaje deje de parpadear
-        this.immune = false;
+        playerIsImmune = false;
         this.fading = 0;
     }, immuneTime);
   }
@@ -824,7 +823,7 @@ handleRightDodge = (event) =>{ //*
   shootTriple() {// paso 1: invoca el disparo desde la posicion del personaje o su cercanía
     if(this.shootUp){
       const bullet1 = new BasicWeapon(this.ctx, this.x - 6, this.y, bulletDirection, -0.3 - basicWeaponSpeed/2);
-      const bullet2 = new BasicWeapon(this.ctx, this.x + 8, this.y, bulletDirection, 0.3+ basicWeaponSpeed/2);
+      const bullet2 = new BasicWeapon(this.ctx, this.x + 8, this.y, bulletDirection, 0.3 + basicWeaponSpeed/2);
       this.bulletArray.push(bullet1, bullet2);//paso 2: crea un array vacío en el constructor y luego haz un push de cada bullet;
     } else{
       const bullet1 = new BasicWeapon(this.ctx, this.x , this.y, bulletDirection, 3, -0.2);
@@ -887,15 +886,15 @@ handleRightDodge = (event) =>{ //*
   }
   stabSword(){
       if(this.stabDirection){
-        let stab = new WeaponSword(this.ctx, this.x - 10, this.y -10, true, 0, 50, 30, true, true );
+        let stab = new WeaponSword(this.ctx, this.x - 30, this.y , true, 0, 70, 17, true, true );
         this.swordArray.push(stab);
         this.r = -0.4;
-        this.vx = 6;
+        this.vx = 4 + playerSpeed;
       } else {
-        let stab = new WeaponSword(this.ctx, this.x-30, this.y -10, true, 0, 50, 30, true, false );
+        let stab = new WeaponSword(this.ctx, this.x-30, this.y, true, 0, 70, 17, true, false );
         this.swordArray.push(stab);
         this.r = 0.4;
-        this.vx = -6;
+        this.vx = -4 - playerSpeed;
       }
     }
     swingSword(){

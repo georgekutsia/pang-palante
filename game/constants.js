@@ -72,8 +72,10 @@ let basicWeaponSpeed = 0;
 let barResistanceLevel = 0;
 let electricShieldlevel = 0;
 let shootFail = 0; //se acumula durante el nivel. si todas las balas aciertan, queda en 0. si el resultado es diferente, es que ha fallado
-
+let playerIsImmune = false;  // vuelve los collides de  muchas cosas en false;
 let ayudasInfoArray = [];
+let swordRounds = 2;
+let stabDuration = 400; //cuanto dura cuando haces el estoque, para poder dejar la espada fija un rato si quires de
 const CTXW = ctx.canvas.width
 const CTXH = ctx.canvas.height
 const gameSpeed = 60;

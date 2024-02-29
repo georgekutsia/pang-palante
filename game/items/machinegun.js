@@ -5,6 +5,7 @@ constructor(ctx, x, y) {
     this.y =  y || Math.random() * this.ctx.canvas.height; // el obstáculo sale de una altura específica o de alguna altura randóm
     this.w = this.ctx.canvas.width / 17;  //anchura calculada respecto al canvas
     this.h = this.ctx.canvas.width / 22;  //altura calculada respecto al canvas
+    this.vx = 0;
     this.vy = 0;
     this.g = 0.1;
     this.img = new Image();   //crear nueva imágene ne canvas
@@ -16,6 +17,7 @@ constructor(ctx, x, y) {
   move() {
     this.vy += this.g;  //efecto gravedad, aumenta la velocidad a medida que baja
     this.y += this.vy;
+    this.x += this.vx;
     if (this.y + this.h >= this.ctx.canvas.height ){
       this.vy = 0; 
       this.g = 0;

@@ -5,6 +5,7 @@ constructor(ctx, x, y) {
     this.y =   y || 0; // el obstáculo sale de una altura específica o de alguna altura randóm
     this.w = this.ctx.canvas.width / 33;  //anchura calculada respecto al canvas
     this.h = this.ctx.canvas.width / 18;  //altura calculada respecto al canvas
+    this.vx = 0;
     this.vy = 0;
     this.g = 0.1;
     this.img = new Image();   //crear nueva imágene ne canvas

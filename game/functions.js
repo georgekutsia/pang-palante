@@ -97,7 +97,8 @@ function  itemDropOnPlatform (items, platforms){
     platforms.forEach((platform) => {
       if(item.collides(platform)){
         item.y =  platform.y - item.h
-        item.vy = 0;
+        item.vy = platform.vy;
+        item.vx = platform.vx;
       }
     })
   })
@@ -106,7 +107,8 @@ function  itemDropOnStairs (items, platforms){
   items.forEach((item) => {  
     platforms.forEach((platform) => {
       if(item.collides(platform)){
-        item.vy = 0.;
+        item.vy = platform.vy;
+        item.vx = platform.vx
         item.g = 0.3
       }
     })
