@@ -8,7 +8,7 @@ function invertImage(ctx, x, y, w, h, img) {
   ctx.setTransform(1, 0, 0, 1, 0, 0);
 }
 
-function randomLootFromBox(ctx, flamethrowers, healings, bars, auras, machineguns, blasters, coins,steps, hooks, x, y){
+function randomLootFromBox(ctx, flamethrowers, healings, bars, auras, machineguns, blasters, coins, steps, hooks, x, y){
   const randomItem = Math.floor(Math.random() *9) + 1;
   if(randomItem === 1){
     const flamethrower = new Flamethrower(ctx, x, y  )

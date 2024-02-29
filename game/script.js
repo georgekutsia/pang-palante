@@ -199,3 +199,53 @@ gameOverX$$.addEventListener("click",()=>{
   gameOverBackgroundText$$.style.display = "none"
   gameOverX$$.style.display = "none"
 })
+
+btnCambiarSala$$.addEventListener("click", ()=>{
+  trainingRoom++;
+  switch (trainingRoom) {
+    case 1:
+      game.background.img.src = "../public/Imagenes/background/backgroundTraining1.webp";
+      btnCambiarSala$$.style.backgroundColor = getRandomColor()
+      break;
+  
+    case 2:
+      game.background.img.src = "../public/Imagenes/background/backgroundTraining2.webp";
+      btnCambiarSala$$.style.backgroundColor = getRandomColor()
+      break;
+  
+    case 3:
+      game.background.img.src = "../public/Imagenes/background/backgroundTraining3.webp";
+      btnCambiarSala$$.style.backgroundColor = getRandomColor()
+      break;
+  
+    case 4:
+      game.background.img.src = "../public/Imagenes/background/backgroundTraining4.webp";
+      btnCambiarSala$$.style.backgroundColor = getRandomColor()
+      break;
+  
+    case 5:
+      game.background.img.src = "../public/Imagenes/background/backgroundTraining5.webp";
+      btnCambiarSala$$.style.backgroundColor = getRandomColor()
+      break;
+    case 6:
+      game.background.img.src = "../public/Imagenes/background/backgroundTraining6.webp";
+      btnCambiarSala$$.style.backgroundColor = getRandomColor()
+      break;
+    case 7:
+      game.background.img.src = "../public/Imagenes/background/backgroundTraining7.webp";
+      btnCambiarSala$$.style.backgroundColor = getRandomColor()
+      break;
+    case 8:
+      game.background.img.src = "../public/Imagenes/background/backgroundTraining8.webp";
+      btnCambiarSala$$.style.backgroundColor = getRandomColor()
+      break;
+    case 9:
+      game.background.img.src = "../public/Imagenes/background/backgroundTraining0.webp";
+      btnCambiarSala$$.style.backgroundColor = getRandomColor()
+      trainingRoom = 0;
+      break;
+  
+    default:
+      break;
+  }
+})

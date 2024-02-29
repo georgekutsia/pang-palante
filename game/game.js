@@ -43,7 +43,8 @@ class Game {
     this.miniBoses = []; // Array para almacenar instancias de bubble cannons
     this.explosions = []; // Array para almacenar instancias de bubble cannons
     this.totalCannonBubbleCount = 0;
-
+    this.changingLevelSoChangeImage = true;
+    this.dispached = true;
     // sounds sounds sounds
     this.bubblePopSound1 = new Audio("../public/sounds/bubblePop1.mp3"); //todo --  Sonido paso 1) guardar la ruta del sonido en una variable
     this.bubblePopSound1.volume = 0.3; // todo -- Sonido paso 2) ponerle volumen, auque no es obligatorio
@@ -98,7 +99,7 @@ class Game {
       "Cuidado donde apuntas!",
       "Esto se pondrá dificil!",
       "He visto marines menos hábiles!",
-      "Una resposiro y a seguir",
+      "Una respiro y a seguir",
       "Eres el orgullo de la patria!",
       "Que la adrenalina potencie tus disparos!",
       "¡Estás on fire! ¡Sigue así!",
@@ -107,25 +108,58 @@ class Game {
       "¡Eres una máquina! ¡Sigue adelante!",
       "¡No hay obstáculo que te detenga!",
       "¡Tu determinación es inspiradora!",
-      "¡Eres un verdadero guerrero! ¡Continúa luchando!",
+      "¡Eres un verdadero guerrero!",
+      " ¡Continúa luchando!",
       "¡Tu perseverancia es admirable!",
       "¡Demuestra tu valentía y sigue adelante!",
-      "¡Eres una fuerza imparable! ¡Mantén el ritmo!",
+      "¡Eres una fuerza imparable! ",
+      "¡Mantén el ritmo!",
     ];
+    this.listaImagenes = [
+      "/public/Imagenes/background/changeLevel1.webp",
+      "/public/Imagenes/background/changeLevel2.webp",
+      "/public/Imagenes/background/changeLevel3.webp",
+      "/public/Imagenes/background/changeLevel4.webp",
+      "/public/Imagenes/background/changeLevel5.webp",
+      "/public/Imagenes/background/changeLevel6.webp",
+      "/public/Imagenes/background/changeLevel7.webp",
+      "/public/Imagenes/background/changeLevel8.webp",
+      "/public/Imagenes/background/changeLevel9.webp",
+      "/public/Imagenes/background/changeLevel10.webp",
+    ]
+    this.gameOverImgs = [
+      "/public/Imagenes/background/gameOverImg1.webp",
+      "/public/Imagenes/background/gameOverImg2.webp",
+      "/public/Imagenes/background/gameOverImg3.webp",
+      "/public/Imagenes/background/gameOverImg4.webp",
+      "/public/Imagenes/background/gameOverImg5.webp",
+      "/public/Imagenes/background/gameOverImg6.webp",
+      "/public/Imagenes/background/gameOverImg7.webp",
+      "/public/Imagenes/background/gameOverImg8.webp",
+      "/public/Imagenes/background/gameOverImg9.webp",
+      "/public/Imagenes/background/gameOverImg10.webp",
+    ]
     this.indiceAleatorio;
   }
 
   start() {
     if(!this.gameStarted){
       if (GAMELEVEL === 15) {
+        addMiniboss1()
+        this.miniBossTalk1.play()
+        setTimeout(() => {
+          let bo = new MiniBoss1(ctx, CTXW - 70, -50)
+          this.miniBoses.push(bo);
+          this.minibossArrivingShip.play()
+        }, 100);
 
-        inftroGame1();
-        setTimeout(() => {
-        level1(this.ctx, this.bubbles, this.platforms, this.levelBalls, this.boxes)
-        }, 8000);
-        setTimeout(() => {
-          addBubble1(this.ctx, this.bubbles)
-        }, 10000);
+        // inftroGame1();
+        // setTimeout(() => {
+        // level1(this.ctx, this.bubbles, this.platforms, this.levelBalls, this.boxes)
+        // }, 8000);
+        // setTimeout(() => {
+        //   addBubble1(this.ctx, this.bubbles)
+        // }, 10000);
       }
       if(GAMELEVEL === 100) {
         levelInfinite( this.ctx, this.bubbles, this.platforms, this.bouncers, this.spikes, this.stairs, this.flamethrowers, this.machineguns, this.healings, this.auras, this.boxes, this.blasters, this.levelBalls, this.gatlings, this.darkBubbles)
@@ -135,11 +169,16 @@ class Game {
         this.background.img.src = "../public/Imagenes/background/backgroundTraining4.webp";
         setTimeout(() => {
           addDemo1Electro(this.ctx,  this.platforms, this.electros)
-          this.background.img.src = "../public/Imagenes/background/backgroundTraining7.webp";
+          this.background.img.src = "../public/Imagenes/background/backgroundTraining0.webp";
         }, 10500);
         setTimeout(() => {
           addDemo1(this.ctx, this.platforms)
         }, 30000);
+
+
+
+
+
       }
     }
 
@@ -767,6 +806,15 @@ this.cannons.forEach((cann) => {//  cannon con fire
   }
   changingLevels(){
   if (this.changingLevel) {
+    if(this.changingLevelSoChangeImage){
+      let indiceAleatorio = Math.floor(Math.random() * this.listaImagenes.length);
+      changingLevelImg$$.src = this.listaImagenes[indiceAleatorio];
+      this.changingLevelSoChangeImage = false;
+      setTimeout(() => {
+    this.changingLevelSoChangeImage = true;
+        
+      }, 5000);
+    }
     changingLevelImg$$.style.display = "block";
     levelChangeText1$$.style.display = "block";
     levelChangeText2$$.style.display = "block";
@@ -1001,8 +1049,6 @@ if(this.player.wasNotDamaged) {
 
 
 
-
-    
     if(GAMELEVEL===11 && this.levelBalls.every(e =>e.winCondition===true)){
         this.platforms.forEach(element => {
           element.isSolid = true;
@@ -1046,11 +1092,34 @@ if(this.player.wasNotDamaged) {
         this.tickMiniBoss3 = 0;
         this.randomIsOn = true;
       }
-
+      if (this.miniBoses.every((mini) => mini.life <= 50) && this.dispached) {
+        let randomNumber = Math.floor(Math.random() * 4); // Generar un número aleatorio entre 0 y 2
+      
+        if (randomNumber === 0) {
+          let heali = new Healing(this.ctx, CTXW - 10 - getRandomNumber(40), 70);
+          this.healings.push(heali);
+        } else if (randomNumber === 1) {
+          let fire = new Flamethrower(this.ctx, CTXW - 10 - getRandomNumber(40), 70);
+          this.flamethrowers.push(fire);
+        } else if (randomNumber === 2) {
+          let bar = new Bars(this.ctx, CTXW - 10 - getRandomNumber(40), 70);
+          this.bars.push(bar);
+        } else if (randomNumber === 3){
+          const hook = new Hook(  this.ctx, CTXW - 10 - getRandomNumber(40), 70)
+          this.hooks.push(hook)
+        }
+      
+        this.dispached = false;
+        setTimeout(() => {
+          this.dispached = true;
+        }, 10000);
+      }
+      
 
 
 
     }
+    console.log(this.miniBoses.every((mini) => console.log(mini.life)))
   }
   demoOver(){
     this.emptyAllGameArrays();
@@ -1085,6 +1154,8 @@ if(this.player.wasNotDamaged) {
     this.gameBackgroundMusic.pause();
     this.gameOver1.play();
     this.gameOver2.play();
+    let randomIndex = Math.floor(Math.random() * this.gameOverImgs.length);
+    gameOverBackground$$.src = this.gameOverImgs[randomIndex];
     gameOverBackground$$.style.display = "block";
     gameOverBackgroundText$$.style.display = "block"
     gameOverX$$.style.display = "block"
@@ -1126,7 +1197,6 @@ if(this.player.wasNotDamaged) {
     this.player.bulletFireArray = [];
 
   }
-
   keyUp(key){
     if(key === P){
       this.shootStep(15);
@@ -1148,26 +1218,4 @@ if(this.player.wasNotDamaged) {
       }, 10000);
     }
   }  
-
-  // canvas.addEventListener('mousemove', (event) => officeHover(event, game.player));
-
-  //   officeHover(event, player) {
-
-  //   const rect = canvas.getBoundingClientRect();
-  //   const mouseX = event.clientX - rect.left;
-  //   const mouseY = event.clientY - rect.top;
-  
-  //   if (
-  //     mouseX >= player.x &&
-  //     mouseX <= player.x + 50 &&
-  //     mouseY >= player.y  &&
-  //     mouseY <= player.y + 50
-      
-  //   ) {
-  //     alert("¡Estás aquí!");
-  //     player.shootFire();
-  //   }
-  // }
-  
-
 }
