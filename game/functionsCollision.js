@@ -11,7 +11,7 @@ function checkBubbleCollision(bubbles, player, bubbleSplash2, bubblePopSound1, p
             bubble.isElectrified = false;
           }, electricShieldTime);
         }
-        if(!player.immune){
+        if(!playerIsImmune){
           if(player.y + player.h <= bubble.y +30 && bubble.w>=20){
             player.vy = -3;
           } else {
@@ -246,7 +246,7 @@ function bossFireCollision (miniBoses, object){
 
   function checkDarkBubbleCollision(darkBubbles, player, bubbleSplash2, platforms, darkBubbleExplosion, bubbles, puffBubbles, bouncers){
     darkBubbles.forEach((bubble) => {//player darkbubble
-      if (bubble.collides(player) && !player.immune) {
+      if (bubble.collides(player) && !playerIsImmune) {
         if(player.y + player.h <= bubble.y +30 ){
           player.vy = -3;
         } else {

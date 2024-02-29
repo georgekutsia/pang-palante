@@ -22,7 +22,7 @@ class MiniBoss1 {
     this.explosions = [];
     this.shootOne = true;  // el primer tipo de disparo especial
     this.oneShot = true; // para que dispare solo una vez al detectar al jugador
-    this.life = life || 50;
+    this.life = life || 51;
 
     this.gun1 = gun1;
     this.gun2 = gun2;
@@ -46,6 +46,7 @@ class MiniBoss1 {
   }
 
   draw() {
+    console.log(this.life)
 if(this.arriving){
   this.minibossFlyingShip.play();
   this.arriving = false;
@@ -80,7 +81,6 @@ if(this.arriving){
 
   }
   move() {
-    console.log("life", this.life)
     this.vy += this.g;
     this.x += this.vx;
     this.y += this.vy;
@@ -172,7 +172,7 @@ if(this.arriving){
   shootingBomb(){
     if(this.gun2){
       let explo = new ExplosionBomb(this.ctx, this.x, this.y - 10, CTXW/5, CTXW/5, -this.distanceFromPlayer/100, -2.5);
-      this.explosiveArray.push(explo)
+      // this.explosiveArray.push(explo)
     }
   }
 

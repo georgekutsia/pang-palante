@@ -6,6 +6,8 @@ constructor(ctx, x, y, g) {
     this.w = this.ctx.canvas.width / 23;  //anchura calculada respecto al canvas
     this.h = this.ctx.canvas.width / 23;  //altura calculada respecto al canvas
     this.vy = 0;
+    this.vx = 0;
+
     this.g = g || 0.1;
     this.img = new Image();   //crear nueva imágene ne canvas
     this.img.src = "../../public/Imagenes/healing.png";  //definir cual es la nueva imagen
@@ -16,6 +18,7 @@ constructor(ctx, x, y, g) {
   move() {
     this.vy += this.g;  //efecto gravedad, aumenta la velocidad a medida que baja
     this.y += this.vy;
+    this.x += this.vx;
     if (this.y + this.h >= CTXH-5 ){
       this.vy = 0; 
       this.g = 0;

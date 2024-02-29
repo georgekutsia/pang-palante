@@ -6,6 +6,7 @@ constructor(ctx, x, y) {
     this.w = this.ctx.canvas.width / 44;  //anchura calculada respecto al canvas
     this.h = this.ctx.canvas.width / 23;  //altura calculada respecto al canvas
     this.vy = 0;
+    this.vx = 0;
     this.g = 0.1;
     this.img = new Image();   //crear nueva imágene ne canvas
     this.img.src = "../../public/Imagenes/barItem4.png";  //definir cual es la nueva imagen
@@ -17,6 +18,7 @@ constructor(ctx, x, y) {
   move() {
     this.vy += this.g;  //efecto gravedad, aumenta la velocidad a medida que baja
     this.y += this.vy;
+    this.x += this.vx;
     if (this.y + this.h >= this.ctx.canvas.height-1 ){
       this.vy = 0; 
       this.g = 0;

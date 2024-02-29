@@ -70,7 +70,7 @@ if(this.fireShotBig){
     }
   }
   collides(objetivo) {
-    if(this.canCollide){
+    if(this.canCollide && !playerIsImmune){
       const colX = this.x  <= objetivo.x  && this.x + this.w > objetivo.x ;
       const colY =this.y + this.h > objetivo.y && this.y < objetivo.y + objetivo.h;
       return colX && colY;

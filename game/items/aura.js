@@ -33,6 +33,7 @@ class Aura {
     
   }
   move() {
+    
     this.imgTick++
     if(this.imgTick > 10){
       this.auraImg.frame++
@@ -43,6 +44,7 @@ class Aura {
     }
     this.vy += this.g;  //efecto gravedad, aumenta la velocidad a medida que baja
     this.y += this.vy;
+    this.x += this.vx;
     if (this.y + this.h >= this.ctx.canvas.height ){
       this.vy = 0; 
       this.g = 0;

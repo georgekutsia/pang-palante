@@ -144,22 +144,14 @@ class Game {
 
   start() {
     if(!this.gameStarted){
-      if (GAMELEVEL === 15) {
-        addMiniboss1()
-        this.miniBossTalk1.play()
+      if (GAMELEVEL === 1) {
+        inftroGame1();
         setTimeout(() => {
-          let bo = new MiniBoss1(ctx, CTXW - 70, -50)
-          this.miniBoses.push(bo);
-          this.minibossArrivingShip.play()
-        }, 100);
-
-        // inftroGame1();
-        // setTimeout(() => {
-        // level1(this.ctx, this.bubbles, this.platforms, this.levelBalls, this.boxes)
-        // }, 8000);
-        // setTimeout(() => {
-        //   addBubble1(this.ctx, this.bubbles)
-        // }, 10000);
+        level1(this.ctx, this.bubbles, this.platforms, this.levelBalls, this.boxes)
+        }, 15000);
+        setTimeout(() => {
+          addBubble1(this.ctx, this.bubbles)
+        }, 25000);
       }
       if(GAMELEVEL === 100) {
         levelInfinite( this.ctx, this.bubbles, this.platforms, this.bouncers, this.spikes, this.stairs, this.flamethrowers, this.machineguns, this.healings, this.auras, this.boxes, this.blasters, this.levelBalls, this.gatlings, this.darkBubbles)
@@ -315,7 +307,7 @@ class Game {
   checkCollisions() {
     //función para comprobar las colisiones
     this.spikes.forEach((spike) => {//player con spikes
-      if (spike.collides(this.player) && !this.player.immune) {
+      if (spike.collides(this.player) && !playerIsImmune) {
         if (!this.player.auraIsActive) {
           spike.active = true;
           this.player.wasNotDamaged = false;
@@ -367,10 +359,10 @@ class Game {
       checkBubbleCollision(e.bubbleArray, this.player, this.bubbleSplash2, this.bubblePopSound1, this.puffBubbles, this.ctx, this.platforms, this.bouncers, this.boxes)
     })
     this.miniBoses.forEach((e) => {e.explosiveArray.forEach((exp) => { if(exp.collides(this.player)){
-        if(this.player.electricShieldIsActive || this.player.immune || this.player.auraIsActive){
+        if(this.player.electricShieldIsActive || this.player.auraIsActive){
             exp.vx = exp.vx * -1;
             exp.vy = exp.vy * -1;
-        } else {
+        } else if (!this.player.electricShieldIsActive || !this.player.auraIsActive){
           this.player.loseLife(exp.damage, true);
           exp.exploded = true;
           if(exp.bigBomb){
@@ -532,7 +524,7 @@ this.miniBoses.forEach((e) => {e.explosiveArray.forEach((exp) => {
   })})})
 
 this.miniBoses.forEach((mini) => {//  miniboss con player
-    if (mini.collides(this.player) && !this.player.immune) {
+    if (mini.collides(this.player) && !playerIsImmune) {
       this.player.loseLife(2, true)
       return false;
     } else return true;
@@ -870,7 +862,7 @@ if(this.player.wasNotDamaged) {
           level9( this.ctx, this.bubbles, this.platforms,this.bouncers, this.stairs,  this.healings, this.bars, this.boxes,  this.levelBalls,this.spikes, this.levers);
         }else if (GAMELEVEL === 10) {
           this.background.img.src ="/public/Imagenes/background/background10.jpeg";
-          level10( this.ctx, this.bubbles, this.platforms, this.stairs,  this.healings, this.bars, this.boxes,this.levelBalls);
+          level10( this.ctx, this.bubbles, this.platforms, this.stairs,  this.healings, this.bars, this.boxes,this.levelBalls, this.coins);
         } else if (GAMELEVEL === 11) {
           this.background.img.src ="/public/Imagenes/background/background11.jpeg";
         level11( this.ctx, this.bubbles, this.platforms, this.stairs,  this.healings, this.bars, this.boxes,this.levelBalls, this.levers);
@@ -892,7 +884,6 @@ if(this.player.wasNotDamaged) {
           
         } else if (GAMELEVEL === 15) {
           this.background.img.src ="/public/Imagenes/background/background15.jpeg";
-
           setInterval(() => {
             this.cannons.forEach(c => c.shooting = true)
           }, 36000);
@@ -911,6 +902,7 @@ if(this.player.wasNotDamaged) {
             let bo = new MiniBoss1(ctx, CTXW - 70, -50)
             this.miniBoses.push(bo);
             this.minibossArrivingShip.play()
+            this.dispached = false;
           }, 6100);
         }
       }, 3000);
@@ -1063,63 +1055,63 @@ if(this.player.wasNotDamaged) {
           }, 3000);
         }
       }
-      if(GAMELEVEL === 15){
-      }
     }
 
   
   checkBoss(){
     if(miniBoss1){
-      // this.tickMiniBoss1++;
-      // this.tickMiniBoss2++;
-      // this.tickMiniBoss3++;
+      this.tickMiniBoss1++;
+      this.tickMiniBoss2++;
+      this.tickMiniBoss3++;
       if(this.randomIsOn){
         this.randomNumberForTick1 = Math.random() * 300;
         this.randomIsOn = false;
       }
-      if(this.tickMiniBoss1 >= 550 + this.randomNumberForTick1){  
+      if(this.tickMiniBoss1 >= 850 + this.randomNumberForTick1){  
         addPlatformsMiniBoss1(this.ctx, this.platforms)
         this.tickMiniBoss1 = 0;
         this.randomIsOn = true;
       }
-      if(this.tickMiniBoss2 >= 750 + this.randomNumberForTick1){  
+      if(this.tickMiniBoss2 >= 1250 + this.randomNumberForTick1){  
         boxItemMiniBoss1(this.ctx, this.boxes);
         this.tickMiniBoss2 = 0;
         this.randomIsOn = true;
       }
-      if(this.tickMiniBoss3 >= 950 + this.randomNumberForTick1){  
+      if(this.tickMiniBoss3 >= 1450 + this.randomNumberForTick1){  
         addBouncerMiniBoss1(this.ctx, this.bouncers)
         this.tickMiniBoss3 = 0;
         this.randomIsOn = true;
       }
-      if (this.miniBoses.every((mini) => mini.life <= 50) && this.dispached) {
+
+      if (this.miniBoses.every((mini) => mini.life <= 50) && !this.dispached) {
         let randomNumber = Math.floor(Math.random() * 4); // Generar un número aleatorio entre 0 y 2
-      
         if (randomNumber === 0) {
-          let heali = new Healing(this.ctx, CTXW - 10 - getRandomNumber(40), 70);
+          let heali = new Healing(this.ctx, CTXW - getRandomNumber(40), 70);
           this.healings.push(heali);
         } else if (randomNumber === 1) {
-          let fire = new Flamethrower(this.ctx, CTXW - 10 - getRandomNumber(40), 70);
+          let fire = new Flamethrower(this.ctx, CTXW - getRandomNumber(40), 70);
           this.flamethrowers.push(fire);
         } else if (randomNumber === 2) {
-          let bar = new Bars(this.ctx, CTXW - 10 - getRandomNumber(40), 70);
+          let bar = new Bars(this.ctx, CTXW - getRandomNumber(40), 70);
           this.bars.push(bar);
         } else if (randomNumber === 3){
-          const hook = new Hook(  this.ctx, CTXW - 10 - getRandomNumber(40), 70)
+          const hook = new Hook(  this.ctx, CTXW - getRandomNumber(40), 70)
           this.hooks.push(hook)
         }
-      
-        this.dispached = false;
+        let breakable = Math.random() > 0.5;
+        let jumpable = Math.random() > 0.5;
+        const platform = new Platform(this.ctx, CTXW - 30, CTXH-25 , 35, 5, "../public/Imagenes/obstacles/platformSolid2.png", breakable, jumpable, true, -0.3);
+        this.platforms.push( platform);
+        this.dispached = true;
         setTimeout(() => {
-          this.dispached = true;
-        }, 10000);
+          this.dispached = false;
+        }, 5000);
       }
       
 
 
 
     }
-    console.log(this.miniBoses.every((mini) => console.log(mini.life)))
   }
   demoOver(){
     this.emptyAllGameArrays();

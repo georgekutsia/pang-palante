@@ -115,11 +115,15 @@ function inftroGame1(){
           document.getElementById("gameIntro-text6").style.display = "none";
           demoFriend5$$.style.display = "none";
           demoFriend3$$.style.display = "block";
-      textoPianoPiano("gameIntro-text7");
-      setTimeout(() => {
-          document.getElementById("gameIntro-text7").style.display = "none";
-        }, 2000);
-        }, 5000);
+        textoPianoPiano("gameIntro-text7");
+          setTimeout(() => {
+            demoFriend3$$.style.opacity = "0";
+            document.getElementById("gameIntro-text7").style.display = "none";
+            setTimeout(() => {
+              demoFriend3$$.style.display = "none";
+            }, 1000);
+          }, 3000);
+        }, 4000);
   }, 14000);
 }
 
