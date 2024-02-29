@@ -45,6 +45,7 @@ buyBig.volume = 0.1;
 let buySmall = new Audio("/public/sounds/buySmall1.mp3")
 buySmall.volume = 0.1;
 
+let trainingRoom = 0;// configura en cual sala está entreando 
 let moved = false //para mover info de un lado a otro
 let recharge = 400;
 let jumpHeight = -3.5;

@@ -268,8 +268,6 @@ const demoFunctions = {
 
 
 
-
-
 function demoMessageDisable() {
   if (demoPhase >= 2) {
     document.getElementById("demo-text1").style.display = "none";

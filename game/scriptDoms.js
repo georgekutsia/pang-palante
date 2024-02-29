@@ -89,4 +89,5 @@ let ammosCount$$ = document.getElementById("ammos-count")
 
 
 let btnInstrucciones$$ = document.getElementById("btn-instrucciones")
+let btnCambiarSala$$ = document.getElementById("cambiar-sala")
 let introAyudaFinal1$$ = document.querySelector(".introAyudaFinal1")
