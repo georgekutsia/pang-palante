@@ -435,3 +435,6 @@ game.player.barImg$$.addEventListener("click", ()=>{
 game.player.stepImg$$.addEventListener("click", ()=>{
   eventInfo(munStep$$)
 })
+game.player.swordImg$$.addEventListener("click", ()=>{
+  // eventInfo(munStep$$)
+})

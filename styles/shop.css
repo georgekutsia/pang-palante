@@ -6,10 +6,10 @@
   border: none;
   background-color: transparent;
   border-radius: 50%;
-  transition: all 0.5s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
 #toggle-shop:hover{
-background-color: aquamarine;
+  filter: drop-shadow(0px 6px 6px rgba(0, 105, 175, 0.9));
 }
 #toggle-shop img{
   width: calc(30px + 2vw);
@@ -27,11 +27,11 @@ background-color: aquamarine;
   #shop-btn{
     position: absolute;
     right: 0vw;
-    top: 1vh;
+    top: 3.5vh;
     display: flex;
     flex-direction: column;
   margin-top: calc(23px + 1.3vw);
-
+  filter: drop-shadow(0px 3px 3px rgba(0, 105, 175, 0.9));
   }
 
   
@@ -55,6 +55,8 @@ background-color: aquamarine;
 
 #shop-btn button:hover{
   background-color: rgb(246, 199, 246);
+  filter: drop-shadow(0px 3px 3px rgba(175, 0, 122, 0.9));
+
 }
 
 #shop-btn, i{

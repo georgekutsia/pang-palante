@@ -299,5 +299,6 @@ z-index: 24;
     top: 5vh;
     right: 40vw;
     opacity: 0;
+    display: none;
     transition: all 1s ease-in-out;
   }

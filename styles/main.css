@@ -173,7 +173,7 @@ padding: 15px 15px;
 #instrucciones-btn{
   position: absolute;
   border: none;
-  top:10% ;
+  top:5vh ;
   left:50%;
   font-size: calc(14px + 1vw);
   transform: translate(-50%,-50%);
@@ -201,11 +201,11 @@ padding: 15px 15px;
 #instrucciones-info-1{
   display: none;
   position: absolute;
-  width: 40vw;
+  width: 25vw;
   min-width: 100px;
   min-height: 100px;
-  top: 8vw;
-  left: 15vw;
+  top: 13vh;
+  left: 5vw;
   transition: 0.3s ease-in-out;
 }
 
@@ -213,11 +213,31 @@ padding: 15px 15px;
 #instrucciones-info-2{
   display: none;
   position: absolute;
-  width: 40vw;
+  width: 25vw;
   min-width: 100px;
   min-height: 100px;
-  top: 13vw;
+  top: 20vh;
+  left: 25vw;
+  transition: 0.3s ease-in-out;
+}
+#instrucciones-info-3{
+  display: none;
+  position: absolute;
+  width: 25vw;
+  min-width: 100px;
+  min-height: 100px;
+  top: 20vh;
   left: 45vw;
+  transition: 0.3s ease-in-out;
+}
+#instrucciones-info-4{
+  display: none;
+  position: absolute;
+  width: 25vw;
+  min-width: 100px;
+  min-height: 100px;
+  top: 13vh;
+  left: 68vw;
   transition: 0.3s ease-in-out;
 }
 
