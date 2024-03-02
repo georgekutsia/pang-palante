@@ -9,6 +9,8 @@ start$$.addEventListener("click", function () {
   startBackground$$.style.display = "none";
   instruccionesInfo1$$.style.display = "none";
   instruccionesInfo2$$.style.display = "none";
+  instruccionesInfo3$$.style.display = "none";
+  instruccionesInfo4$$.style.display = "none";
   // infoPlayerBtn1$$.style.display = "block";
   ammosCount$$.style.display = "block";
   
@@ -48,6 +50,8 @@ startInfinite$$.addEventListener("click", function () {
   startBackground$$.style.display = "none";
   instruccionesInfo1$$.style.display = "none";
   instruccionesInfo2$$.style.display = "none";
+  instruccionesInfo3$$.style.display = "none";
+  instruccionesInfo4$$.style.display = "none";
   // infoPlayerBtn1$$.style.display = "block";
   ammosCount$$.style.display = "block";
   
@@ -87,6 +91,8 @@ startDemo$$.addEventListener("click", function () {
   startBackground$$.style.display = "none";
   instruccionesInfo1$$.style.display = "none";
   instruccionesInfo2$$.style.display = "none";
+  instruccionesInfo3$$.style.display = "none";
+  instruccionesInfo4$$.style.display = "none";
   // infoPlayerBtn1$$.style.display = "block";
   ammosCount$$.style.display = "block";
   
@@ -119,9 +125,13 @@ instruccionesBtn$$.addEventListener("click", function () {
     if(instruccionesInfo1$$.style.display === "block"){
       instruccionesInfo1$$.style.display = "none";
       instruccionesInfo2$$.style.display = "none";
+      instruccionesInfo3$$.style.display = "none";
+      instruccionesInfo4$$.style.display = "none";
     } else{
       instruccionesInfo1$$.style.display = "block";
       instruccionesInfo2$$.style.display = "block";
+      instruccionesInfo3$$.style.display = "block";
+      instruccionesInfo4$$.style.display = "block";
     }
 });
 
@@ -155,38 +165,101 @@ retry$$.addEventListener("click", ()=>{
 }
 })
 
-instruccionesInfo2$$.addEventListener("click",()=>{
-    instruccionesInfo1$$.style.zIndex = 1;
-    instruccionesInfo2$$.style.zIndex = 2;
-})
-
 instruccionesInfo1$$.addEventListener("click",()=>{
     instruccionesInfo1$$.style.zIndex = 2;
     instruccionesInfo2$$.style.zIndex = 1;
+    instruccionesInfo3$$.style.zIndex = 1;
+    instruccionesInfo4$$.style.zIndex = 1;
 })
+instruccionesInfo2$$.addEventListener("click",()=>{
+  instruccionesInfo1$$.style.zIndex = 1;
+  instruccionesInfo2$$.style.zIndex = 2;
+  instruccionesInfo3$$.style.zIndex = 1;
+  instruccionesInfo4$$.style.zIndex = 1;
+})
+instruccionesInfo3$$.addEventListener("click",()=>{
+  instruccionesInfo1$$.style.zIndex = 1;
+  instruccionesInfo2$$.style.zIndex = 1;
+  instruccionesInfo3$$.style.zIndex = 2;
+  instruccionesInfo4$$.style.zIndex = 1;
+})
+instruccionesInfo4$$.addEventListener("click",()=>{
+  instruccionesInfo1$$.style.zIndex = 1;
+  instruccionesInfo2$$.style.zIndex = 1;
+  instruccionesInfo3$$.style.zIndex = 1;
+  instruccionesInfo4$$.style.zIndex = 2;
+})
+
+
+instruccionesInfo1$$.addEventListener("dblclick", () => {
+  const currentScale = parseFloat(instruccionesInfo1$$.style.transform.replace("scale(", "").replace(")", "")) || 1.0;
+  if (currentScale === 1.5) {
+    instruccionesInfo1$$.style.transform = "scale(1.0)";
+  } else {
+    instruccionesInfo1$$.style.transform = "scale(1.5)";
+    instruccionesInfo2$$.style.transform = "scale(1.0)";
+    instruccionesInfo3$$.style.transform = "scale(1.0)";
+    instruccionesInfo4$$.style.transform = "scale(1.0)";
+
+    instruccionesInfo1$$.style.zIndex = 2;
+    instruccionesInfo2$$.style.zIndex = 1;
+    instruccionesInfo3$$.style.zIndex = 1;
+    instruccionesInfo4$$.style.zIndex = 1;
+  }
+});
 
 instruccionesInfo2$$.addEventListener("dblclick", () => {
   const currentScale = parseFloat(instruccionesInfo2$$.style.transform.replace("scale(", "").replace(")", "")) || 1.0;
-  if (currentScale === 1.3) {
+  if (currentScale === 1.5) {
     instruccionesInfo2$$.style.transform = "scale(1.0)";
   } else {
-    instruccionesInfo2$$.style.transform = "scale(1.3)";
     instruccionesInfo1$$.style.transform = "scale(1.0)";
+    instruccionesInfo2$$.style.transform = "scale(1.5)";
+    instruccionesInfo3$$.style.transform = "scale(1.0)";
+    instruccionesInfo4$$.style.transform = "scale(1.0)";
+
     instruccionesInfo1$$.style.zIndex = 1;
     instruccionesInfo2$$.style.zIndex = 2;
+    instruccionesInfo3$$.style.zIndex = 1;
+    instruccionesInfo4$$.style.zIndex = 1;
   }
 });
-instruccionesInfo1$$.addEventListener("dblclick", () => {
-  const currentScale = parseFloat(instruccionesInfo1$$.style.transform.replace("scale(", "").replace(")", "")) || 1.0;
-  if (currentScale === 1.3) {
-    instruccionesInfo1$$.style.transform = "scale(1.0)";
+
+instruccionesInfo3$$.addEventListener("dblclick", () => {
+  const currentScale = parseFloat(instruccionesInfo3$$.style.transform.replace("scale(", "").replace(")", "")) || 1.0;
+  if (currentScale === 1.5) {
+    instruccionesInfo3$$.style.transform = "scale(1.0)";
   } else {
-    instruccionesInfo1$$.style.transform = "scale(1.3)";
+    instruccionesInfo1$$.style.transform = "scale(1.0)";
     instruccionesInfo2$$.style.transform = "scale(1.0)";
-    instruccionesInfo1$$.style.zIndex = 2;
+    instruccionesInfo3$$.style.transform = "scale(1.5)";
+    instruccionesInfo4$$.style.transform = "scale(1.0)";
+
+    instruccionesInfo1$$.style.zIndex = 1;
     instruccionesInfo2$$.style.zIndex = 1;
+    instruccionesInfo3$$.style.zIndex = 2;
+    instruccionesInfo4$$.style.zIndex = 1;
   }
 });
+
+instruccionesInfo4$$.addEventListener("dblclick", () => {
+  const currentScale = parseFloat(instruccionesInfo4$$.style.transform.replace("scale(", "").replace(")", "")) || 1.0;
+  if (currentScale === 1.5) {
+    instruccionesInfo4$$.style.transform = "scale(1.0)";
+  } else {
+    instruccionesInfo1$$.style.transform = "scale(1.0)";
+    instruccionesInfo2$$.style.transform = "scale(1.0)";
+    instruccionesInfo3$$.style.transform = "scale(1.0)";
+    instruccionesInfo4$$.style.transform = "scale(1.5)";
+
+    instruccionesInfo1$$.style.zIndex = 1;
+    instruccionesInfo2$$.style.zIndex = 1;
+    instruccionesInfo3$$.style.zIndex = 1;
+    instruccionesInfo4$$.style.zIndex = 2;
+  }
+});
+
+
 
 
 

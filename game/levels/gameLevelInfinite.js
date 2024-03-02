@@ -4,7 +4,6 @@ function levelInfinite( ctx, bubbles, platforms, bouncers,spikes, stairs, flamet
   addPlatformsInfinite(ctx, platforms, stairs)
   levelBallItemInfinite(ctx, levelBalls)
   addBubbleInfinite(ctx, bubbles)
-  addPlatformInMove(ctx,  platforms)
 if(infiniteLeveling >= 3){boxItemInfinite(ctx, boxes)}
 if(infiniteLeveling >= 5){boxItemInfinite(ctx, boxes);amountOfBoxes = 2; randomAcordingToLevel = 5}
 if(infiniteLeveling >= 10){addTrapPlatformInfinite(ctx, platforms, spikes); amountOfBoxes = 3; randomAcordingToLevel = 7}
@@ -12,7 +11,6 @@ if(infiniteLeveling >= 13){addGatling(ctx, gatlings)}
 if(infiniteLeveling >= 16){addDarkBubble(ctx, darkBubbles); randomAcordingToLevel = 9}
 if(infiniteLeveling >= 19){addStairAndPlatformsInfinite1(ctx, stairs, platforms)}
 if(infiniteLeveling >= 21){addStairAndPlatformsInfinite2(ctx, stairs, platforms)}
-  // addBouncerInfinite(ctx, bouncers)
 
 }
 function levelBallItemInfinite(ctx, levelBalls) {  

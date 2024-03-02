@@ -71,7 +71,7 @@ class Player {
     this.swordRightStab.src = "/public/Imagenes/dodgeRightSwordImg.png";
     
     this.swingSwordState = true;
-    this.swordEquipped = false;
+    this.swordEquipped = true;
     this.swordLevel = 0;
     this.swordPowerUp = 8;
     this.swordPower1 = false;
@@ -97,10 +97,12 @@ class Player {
     this.fireInfo$$ = document.getElementById("fire-info")
     this.hookInfo$$ = document.getElementById("hook-info")
     this.stepInfo$$ = document.getElementById("step-info")
+    this.swordInfo$$ = document.getElementById("sword-info")
     this.barImg$$ = document.getElementById("bar-img")
     this.fireImg$$ = document.getElementById("fire-img")
     this.hookImg$$ = document.getElementById("hook-img")
     this.stepImg$$ = document.getElementById("step-img")
+    this.swordImg$$ = document.getElementById("sword-img")
     // move btns
     this.upBtn$$ = document.getElementById("upBtn");
     this.rightBtn$$ = document.getElementById("rightBtn");
@@ -375,6 +377,7 @@ handleRightDodge = (event) =>{ //*
       this.stepInfo$$.innerText = ``
       this.stepImg$$.style.display = "none"
     }
+
     if(this.fireAmount>=1){    
       this.fireInfo$$.innerText = `x ${this.fireAmount}`
       this.fireImg$$.style.display = "flex"
@@ -382,6 +385,13 @@ handleRightDodge = (event) =>{ //*
     } else{
       this.fireInfo$$.innerText = ``
       this.fireImg$$.style.display = "none"
+    }
+    if(this.swordEquipped === true){    
+      if(this.swordLevel >= 0) this.swordInfo$$.innerText = ` lvl ${this.swordLevel}`;
+      this.swordImg$$.style.display = "flex"
+    } else{
+      this.swordInfo$$.innerText = ``
+      this.swordImg$$.style.display = "none"
     }
 
     if(this.charging >=1){
@@ -444,13 +454,13 @@ handleRightDodge = (event) =>{ //*
     if(this.life.total >=  9){
       jumpCooldown = 300;
       jumpHeight  = -4.5;
-      playerSpeed = 4;
+      playerSpeed = 3.2;
     } else{
       jumpCooldown = 500;
       jumpHeight  = -3.5;
       playerSpeed = 2;
     }
-    this.canClimb ? W = 87 : 0;
+    // this.canClimb ? W = 87 : 0;
     if(!finalBoss){
       this.velocidadX = this.vx += this.r;
       if(this.velocidadX <= 0.5 && this.velocidadX >= -0.5 && this.r !==0){
@@ -562,7 +572,7 @@ handleRightDodge = (event) =>{ //*
       if(this.canClimb){
         this.vy = -playerSpeed;
       } 
-     if(finalBoss) this.shootUp = true;
+    if(finalBoss) this.shootUp = true;
     }
     if (key === A ) {
       this.stabDirection = false;

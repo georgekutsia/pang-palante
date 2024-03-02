@@ -330,6 +330,8 @@ class Game {
         jumpDownDistance = 3;
         W = 0;
         this.player.g = 0.2;
+        
+
       }
       if (stair.collidesSides(this.player)) {
         this.player.vy = 0;
@@ -339,10 +341,12 @@ class Game {
         }, 200);
       }
       if (stair.collides(this.player)) {
+        console.log(W )
+        W = 87
         jumpDownDistance = 0;
         this.player.canClimb = true;
       } else {
-        this.player.canClimb = false;
+        // this.player.canClimb = false;    // esto impide que suba a las otras esfcaleras, solo a la ultima del array
         return true;
       }
     });
@@ -1012,7 +1016,7 @@ if(this.player.wasNotDamaged) {
         addDemo7(this.ctx, this.platforms, this.swords);
         demoFunctions.mostrarVariosTextosPocoAPoco7()
         setTimeout(() => {
-          let boss = new MiniBoss1(ctx, CTXW-60, -200, CTXW/5, CTXW/5, 0, 0, 70, true, false, false);
+          let boss = new MiniBoss1(ctx, CTXW-60, -200, CTXW/5, CTXW/5, 0, 0, 10, true, false, false);
           this.miniBoses.push(boss);
 
           let bub1 = new Bubble(this.ctx, 20, 30, 20, 20)
@@ -1021,7 +1025,7 @@ if(this.player.wasNotDamaged) {
 
           const levelBall1 = new LevelBall(ctx, 120, 0)
           this.levelBalls.push(levelBall1)
-        }, 25000);
+        }, 20000);
         setInterval(() => {
           boxMoveDemo7(this.ctx, this.boxes)
         }, 15000);

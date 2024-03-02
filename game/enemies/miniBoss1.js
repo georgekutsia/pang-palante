@@ -22,7 +22,7 @@ class MiniBoss1 {
     this.explosions = [];
     this.shootOne = true;  // el primer tipo de disparo especial
     this.oneShot = true; // para que dispare solo una vez al detectar al jugador
-    this.life = life || 51;
+    this.life = life || 11;
 
     this.gun1 = gun1;
     this.gun2 = gun2;
