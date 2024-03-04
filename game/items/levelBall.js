@@ -57,7 +57,7 @@ constructor(ctx, x, y) {
     this.ctx.drawImage(this.img, this.x, this.y, this.w, this.h);  // dibuja el obstáculo
     }
     if(!this.isActive && !this.ballBroke) {
-      this.ctx.drawImage(this.imgBallShield, this.x-3, this.y+5, this.w+5, this.w + 5);  // dibuja el escudo protector
+      this.ctx.drawImage(this.imgBallShield, this.x-3, this.y+35, this.w+5, this.w + 5);  // dibuja el escudo protector
     }
 
     if(this.ballShieldForceResist){
@@ -73,10 +73,10 @@ constructor(ctx, x, y) {
         0,
         this.ballShieldForce.width / 4,
         this.ballShieldForce.height ,
-        this.x-5,
-        this.y + 3,
-        this.w *2,
-        this.w * 2
+        this.x - 5,
+        this.y + 33,
+        this.w * 1.3,
+        this.w * 1.3
       );
     }
     if(this.ballShieldBreaking){
@@ -87,9 +87,9 @@ constructor(ctx, x, y) {
         this.ballShieldBreak.width / 9,
         this.ballShieldBreak.height ,
         this.x-5,
-        this.y + 3,
-        this.w *2,
-        this.w * 2
+        this.y + 33,
+        this.w * 1.3,
+        this.w * 1.3
       );
     }
     if(this.ballBroke){

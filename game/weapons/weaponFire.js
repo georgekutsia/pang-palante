@@ -3,20 +3,17 @@ class WeaponFire {
     this.ctx = ctx;
     this.x = x;
     this.y = y;
-    this.vx = -0.065; // minimo ajuste para que el fuego vaya recto de verdad, ya que al aumentar de tamaño solo se expande hacia al derecha
-    this.vy = -0.5;
+    this.vx = -0.18; // minimo ajuste para que el fuego vaya recto de verdad, ya que al aumentar de tamaño solo se expande hacia al derecha
+    this.vy = -1.5;
     this.img = new Image();
     this.img.src = "../public/Imagenes/weaponFire1.png";
     this.img.frame = 0;
-    this.w = w  || this.ctx.canvas.width/ 29;
+    this.w = w  || this.ctx.canvas.width/ 80;
     this.h = h || this.ctx.canvas.width/ 29;
     this.flameSpinTick = 0;
     this.damage = 0.05;
-
     this.fireShootSOund = new Audio("/public/sounds/electrofire/fireShootSound.mp3")
     this.fireShootSOund.volume = 0.05;
-    
-
   }
 
   draw() {
@@ -38,7 +35,7 @@ class WeaponFire {
     this.w += fireSizing; //aumenta el ancho de la bala mientras sube
     this.h += fireSizing; //aumenta la altura de la bala mientra sube
     this.flameSpinTick++
-    if(this.flameSpinTick >= 0.5){
+    if(this.flameSpinTick >= 1){
       this.img.frame++;
     this.flameSpinTick = 0
     }

@@ -5,7 +5,7 @@ function checkBubbleCollision(bubbles, player, bubbleSplash2, bubblePopSound1, p
     if(bubble.collides(player)) {
         if(player.electricShieldIsActive){
           electroShockSound.play()
-          bubble.vy = -2;
+          bubble.vy = -10;
           bubble.isElectrified = true;
           setTimeout(() => {
             bubble.isElectrified = false;
@@ -13,7 +13,7 @@ function checkBubbleCollision(bubbles, player, bubbleSplash2, bubblePopSound1, p
         }
         if(!playerIsImmune){
           if(player.y + player.h <= bubble.y +30 && bubble.w>=20){
-            player.vy = -3;
+            player.vy = -10;
           } else {
             if (!player.auraIsActive && !player.electricShieldIsActive) { 
               player.loseLife(bubble.damage, true); //el daño al jugador se le hace según lo que marca el daño de la burbuja. a burbuja más pequeña, menos daño
@@ -28,7 +28,7 @@ function checkBubbleCollision(bubbles, player, bubbleSplash2, bubblePopSound1, p
  bubbles.forEach((bubble) => {//  bubble con bullet
     player.bulletArray = player.bulletArray.filter((bullet) => {
       if (bullet.collides(bubble) && !bullet.isBig) {
-        bubblePuff(bubble, puffBubbles,bubbles, ctx);
+        bubblePuff(bubble, puffBubbles, bubbles, ctx);
        bubblePopSound1.play();
         return false;
       } else return true;
@@ -132,14 +132,14 @@ function bouncerPlayerCollision(player, bouncer){
     player.vy = 0;
   }
   if (player.x >= bouncer.x + bouncer.w - 6) {//colisión por la derecha
-    player.g = 0.2;
+    player.g = 2;
     player.vx = 1.5;
     setTimeout(() => {
       player.vx = 0;
     }, 500);
   }
   if (player.x - 1 <= bouncer.x) {//colisión por la izquierda
-    player.g = 0.2;
+    player.g = 2;
     player.vx = -1.5
     setTimeout(() => {
       player.vx = 0;
@@ -170,9 +170,9 @@ function platformPlayerCollision(player, platform){
     player.vy = 0;
     jumpDownDistance = 0;
     if(player.hookedOnPlatform){
-      player.y = player.y - 20;
+      player.y = player.y - 80;
       player.hookedOnPlatform = false;
-      player.g = 0.03;
+      player.g = 1;
     }
 
   }
@@ -181,7 +181,7 @@ function platformPlayerCollision(player, platform){
     jumpDownDistance = 0;
     player.vy = 0;
     player.vx = 0;
-    player.g = 0.2;
+    player.g = 2;
   }
 }
 
@@ -211,12 +211,15 @@ function checkHookCollisions(hookArray, obstacles, barHit, player) {
     obstacles.forEach((obstacle) => {
       if (hook.collidesTop(obstacle)) {
           player.hookedOnPlatform = true;;
-          player.vy = -6;
+          player.vy = -26;
           hook.solidState = true;
           hook.y = obstacle.y + obstacle.h;
           hook.vy = 0;
           barHit.play();
           hook.img.src = "../public/Imagenes/weaponBarSolid.png";
+          setTimeout(() => {
+            player.g = 1
+          }, 500);
       }
     });
   });

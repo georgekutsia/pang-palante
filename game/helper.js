@@ -99,7 +99,7 @@ function inftroGame1(){
               toggleShop$$.style.display = "block";
               setTimeout(() => {
               toggleShop$$.style.opacity = "1";
-              }, 200);
+              }, 20);
           }, 1000);
       }, 2500);
     }, 300);
@@ -132,16 +132,14 @@ function eventInfo(event$$) {
   if (!ayudasInfoArray.includes(event$$.alt)) {
   event$$.style.display = "block";
 
-  // una forma para que no se vuelva a generar el boton move y close si el array ya tiene esa palabra
 ayudasInfoArray.push(event$$.alt)
 const index = ayudasInfoArray.indexOf(event$$.alt);
 
-
-  let isActive = false; // Variable para seguir el estado del elemento
+  let isActive = false; 
 
   const closeButton = document.createElement("button");
   closeButton.textContent = "X";
-  closeButton.classList.add("closeButton"); // Añadir clase closeButton
+  closeButton.classList.add("closeButton");
   closeButton.style.display = "block";
   
   closeButton.addEventListener("click", function() {
@@ -212,7 +210,7 @@ shopShield$$.addEventListener("click", function(){
   }
 })
 shopFire$$.addEventListener("click", function(){
-  if(coins >= 20 && game.player.fireAmount <=29){
+  if(coins >= 20 && game.player.fireAmount <= 28){
     buySmall.play()
     game.player.fireAmount += 3;
     coins -= 20; 
@@ -328,19 +326,19 @@ shopSpeedGun$$.addEventListener("click", function(){
   if(basicWeaponSpeed === 0 && coins >= 50){
     buySmall.play()
     coins -=50;
-    basicWeaponSpeed = 1
-    shopSpeedGun$$.innerHTML = ` <span><i style="font-size: calc(14px + 0.53vw)" class="fa-solid fa-gauge-simple-high"></i> x 3</span>   <br> <i class="fa-solid fa-angles-up fonts-i"></i><span id="velocidad-text">Velocidad</span>   <br> 60<i class="fa-solid fa-coins"></i>`
-  } else if(basicWeaponSpeed === 1 && coins >= 60){
-    buySmall.play()
-    basicWeaponSpeed = 2
-    shopSpeedGun$$.innerHTML = ` <span><i style="font-size: calc(14px + 0.53vw)" class="fa-solid fa-gauge-simple-high"></i> x 4</span>  <br> <i class="fa-solid fa-angles-up fonts-i"></i><span id="velocidad-text">Velocidad</span>   <br> 70<i class="fa-solid fa-coins"></i>`
-  } else if(basicWeaponSpeed === 2 && coins >= 70){
-    buySmall.play()
     basicWeaponSpeed = 3
-    shopSpeedGun$$.innerHTML = ` <span><i style="font-size: calc(14px + 0.53vw)" class="fa-solid fa-gauge-simple-high"></i> x 5</span>  <br> <i class="fa-solid fa-angles-up fonts-i"></i><span id="velocidad-text">Velocidad</span>   <br> 80<i class="fa-solid fa-coins"></i>`
-  } else if(basicWeaponSpeed === 3 && coins >= 80){
+    shopSpeedGun$$.innerHTML = ` <span><i style="font-size: calc(14px + 0.53vw)" class="fa-solid fa-gauge-simple-high"></i> x 3</span>   <br> <i class="fa-solid fa-angles-up fonts-i"></i><span id="velocidad-text">Velocidad</span>   <br> 60<i class="fa-solid fa-coins"></i>`
+  } else if(basicWeaponSpeed === 3 && coins >= 60){
     buySmall.play()
-    basicWeaponSpeed = 4
+    basicWeaponSpeed = 5
+    shopSpeedGun$$.innerHTML = ` <span><i style="font-size: calc(14px + 0.53vw)" class="fa-solid fa-gauge-simple-high"></i> x 4</span>  <br> <i class="fa-solid fa-angles-up fonts-i"></i><span id="velocidad-text">Velocidad</span>   <br> 70<i class="fa-solid fa-coins"></i>`
+  } else if(basicWeaponSpeed === 5 && coins >= 70){
+    buySmall.play()
+    basicWeaponSpeed = 8
+    shopSpeedGun$$.innerHTML = ` <span><i style="font-size: calc(14px + 0.53vw)" class="fa-solid fa-gauge-simple-high"></i> x 5</span>  <br> <i class="fa-solid fa-angles-up fonts-i"></i><span id="velocidad-text">Velocidad</span>   <br> 80<i class="fa-solid fa-coins"></i>`
+  } else if(basicWeaponSpeed === 8 && coins >= 80){
+    buySmall.play()
+    basicWeaponSpeed = 12
     shopSpeedGun$$.innerHTML = ` <span style="color:rgb(243, 160, 234)"><i style="font-size: calc(14px + 0.53vw)" class="fa-solid fa-gauge-simple-high"></i> x 6   </span>`
   } 
 })

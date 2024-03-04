@@ -4,7 +4,7 @@ class BasicWeapon {
     this.x = x;
     this.y = y;
     this.vx = vx || 0;
-    this.vy = vy || -3;
+    this.vy = vy || -13;
     this.direction = direction;
     this.radius =  CTXW / 90; // radio del círculo
     this.color = getRandomColor(); // función para obtener un color aleatorio
@@ -19,7 +19,6 @@ class BasicWeapon {
     this.ctx.fillStyle = this.color;
     this.ctx.fill();
     this.ctx.closePath();
-    
     const outerRadius = this.radius; // Puedes ajustar el tamaño del borde aquí
     this.ctx.beginPath();
     this.ctx.arc(this.x + this.radius, this.y + this.radius, outerRadius, 0, 2 * Math.PI);

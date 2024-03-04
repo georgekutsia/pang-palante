@@ -1,29 +1,30 @@
 function bounceFromObstacles(elem1, elem2){
   if (elem1.y <= elem2.y + 5 ) {
-    elem1.vy = -3;
+    elem1.vy = -bubbleSpeedY;
   }
   if(elem1.y >= elem2.y + elem2.h -5){
-    elem1.vy = 3;
+    elem1.vy = bubbleSpeedY;
   }
   if(elem1.x <= elem2.x +5){
-    elem1.vx = -0.5;
+    elem1.vx = -bubbleSpeedX;
   } 
   if(elem1.x >= elem2.x +elem2.w - 5){
-    elem1.vx = 0.5;
+    elem1.vx = bubbleSpeedX;
   }
 }
+
 function bounceFromBox(elem1, elem2){
   if (elem1.y <= elem2.y + 5 ) {
-    elem1.vy = -1;
+    elem1.vy = -bubbleSpeedX/2;
   }
   if(elem1.y >= elem2.y + elem2.h -5){
-    elem1.vy = 1;
+    elem1.vy = bubbleSpeedX/2;
   }
   if(elem1.x <= elem2.x +5){
-    elem1.vx = -0.3;
+    elem1.vx = -bubbleSpeedY/2;
   } 
-  if(elem1.x >= elem2.x +elem2.w - 5){
-    elem1.vx = 0.3;
+  if(elem1.x >= elem2.x + elem2.w - 5){
+    elem1.vx = bubbleSpeedY/2;
   }
 }
 function basicBulletBounce(elem1, elem2){
@@ -50,8 +51,8 @@ function bubblePuff(bubble, puffBubbles, bubbles, ctx){
   bubble.x = -200
   const puffBubble = new BubblePuff(ctx, elx, ely, bubble.w, bubble.h)
   puffBubbles.push(puffBubble)      // 0.8 es la direccion y velocidad a la que salen las nuevas, el otro es la dirección
-  const smallBubble1 = new Bubble(ctx,  elx, ely, bubble.w/2, bubble.h/2, -0.8, -1 + bubble.swordSpeed, bubble.g + 0.01, false, false, bubble.damage / 2 )// al explotar una burbuja, crea otra en su lugar, usando su ubicación y dimensiones para hacerla más pequeña
-  const smallBubble2 = new Bubble(ctx, elx, ely,  bubble.w/2, bubble.h/2, 0.8, -1 + bubble.swordSpeed, bubble.g + 0.01, false, false, bubble.damage / 2 )
+  const smallBubble1 = new Bubble(ctx,  elx, ely, bubble.w/2, bubble.h/2, -bubbleSpeedX, -1 , bubble.g + 0.01, false, false, bubble.damage / 2 )// al explotar una burbuja, crea otra en su lugar, usando su ubicación y dimensiones para hacerla más pequeña
+  const smallBubble2 = new Bubble(ctx, elx, ely,  bubble.w/2, bubble.h/2, bubbleSpeedX, -1 , bubble.g + 0.01, false, false, bubble.damage / 2 )
   bubbles.push(smallBubble1, smallBubble2)
 }
 
@@ -160,10 +161,10 @@ function itemDropOn(platforms, boxes, stairs,flamethrowers, machineguns, healing
 
 
 function bigWeaponBubble (ctx, bullet, player){ //la burbuja gigante que dispara player
-  const bullet1 = new BasicWeapon(ctx, bullet.x, bullet.y, 0, -2, 2);
-  const bullet2 = new BasicWeapon(ctx, bullet.x, bullet.y, 0, 2, -2);
-  const bullet3 = new BasicWeapon(ctx, bullet.x, bullet.y, 0, 2, 2);
-  const bullet4 = new BasicWeapon(ctx, bullet.x, bullet.y, 0, -2, -2);
+  const bullet1 = new BasicWeapon(ctx, bullet.x, bullet.y, 0, -12, 12);
+  const bullet2 = new BasicWeapon(ctx, bullet.x, bullet.y, 0, 12, -12);
+  const bullet3 = new BasicWeapon(ctx, bullet.x, bullet.y, 0, 12, 12);
+  const bullet4 = new BasicWeapon(ctx, bullet.x, bullet.y, 0, -12, -12);
   player.bulletArray.push(bullet1, bullet2,bullet3,bullet4)
 }
 

@@ -145,13 +145,13 @@ class Game {
   start() {
     if(!this.gameStarted){
       if (GAMELEVEL === 1) {
-        inftroGame1();
-        setTimeout(() => {
+        // inftroGame1();
+        // setTimeout(() => {
         level1(this.ctx, this.bubbles, this.platforms, this.levelBalls, this.boxes)
-        }, 15000);
-        setTimeout(() => {
-          addBubble1(this.ctx, this.bubbles)
-        }, 25000);
+        // }, 15000);
+        // setTimeout(() => {
+          // addBubble1(this.ctx, this.bubbles)
+        // }, 25000);
       }
       if(GAMELEVEL === 100) {
         levelInfinite( this.ctx, this.bubbles, this.platforms, this.bouncers, this.spikes, this.stairs, this.flamethrowers, this.machineguns, this.healings, this.auras, this.boxes, this.blasters, this.levelBalls, this.gatlings, this.darkBubbles)
@@ -426,8 +426,7 @@ class Game {
               bar.isElectrified = true;
               bar.tick +=2.5;
               barLife += 0.1;
-              bar.w+= 0.01;
-              bar.width += 0.01;
+              bar.w+= 0.05;
             }
           }
         })
@@ -568,7 +567,7 @@ this.cannons.forEach((cann) => {//  cannon con fire
         N = 78;
         eventInfo(munLanzallamas$$)
         this.player.fireAmount += 3; // sumamos 5 balas de fuego
-        if (this.player.fireAmount >= 30) {//para que el charger que se dibuja haga el semicírculo
+        if (this.player.fireAmount >= 28) {//para que el charger que se dibuja haga el semicírculo
           this.player.fireAmount = 30;
         }
         flame.x = -100; // situa fuera del canvas la burbuja que colisiona con el player y luego isVisible la elimina del array
@@ -804,11 +803,22 @@ this.cannons.forEach((cann) => {//  cannon con fire
   if (this.changingLevel) {
     if(this.changingLevelSoChangeImage){
       let indiceAleatorio = Math.floor(Math.random() * this.listaImagenes.length);
-      changingLevelImg$$.src = this.listaImagenes[indiceAleatorio];
+      if(GAMELEVEL <100){
+        mapChangeLevel$$.style.width = 'calc(200px + 2vw)';
+        mapChangeLevel$$.style.top = '35vh';
+        mapChangeLevel$$.style.left = '20vw';
+        changingLevelImg$$.src = this.listaImagenes[indiceAleatorio];
+        mapChangeLevel$$.src = mapArray[GAMELEVEL - 1];
+        mapChangeLevel$$.style.display = 'block';
+      }
       this.changingLevelSoChangeImage = false;
       setTimeout(() => {
     this.changingLevelSoChangeImage = true;
-        
+    if(GAMELEVEL < 100){
+      mapChangeLevel$$.style.left = '0.5vw';
+      mapChangeLevel$$.style.width = 'calc(20px + 0.7vw)';
+      mapChangeLevel$$.style.top = '21vh';
+    }
       }, 5000);
     }
     changingLevelImg$$.style.display = "block";
@@ -1086,7 +1096,6 @@ if(this.player.wasNotDamaged) {
         this.tickMiniBoss3 = 0;
         this.randomIsOn = true;
       }
-
       if (this.miniBoses.every((mini) => mini.life <= 50) && !this.dispached) {
         let randomNumber = Math.floor(Math.random() * 4); // Generar un número aleatorio entre 0 y 2
         if (randomNumber === 0) {
@@ -1111,10 +1120,6 @@ if(this.player.wasNotDamaged) {
           this.dispached = false;
         }, 5000);
       }
-      
-
-
-
     }
   }
   demoOver(){

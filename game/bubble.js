@@ -1,18 +1,18 @@
 class Bubble { //posX posY, ancho, alto, velX, velY, gravedad, buleano si hay gravedad, cuanto tarda la gravedad, si las bolas rebotan, el daño y la imagen
-  constructor(ctx, x , y, w, h, vx, vy, g,           isSlowGravity, slowGrvityDuration, damage, willBounce = true, bubbleImg ) {
+  constructor(ctx, x , y, w, h, vx, vy, g, isSlowGravity, slowGrvityDuration, damage, willBounce = true, bubbleImg ) {
     this.ctx = ctx;
     this.x = x || Math.random() * this.ctx.canvas.width; //el obstáculo aparece desde arriba del canvas 
     this.y = y  || -30; // el obstáculo sale de una altura específica o de alguna altura randóm
-    this.w = w || this.ctx.canvas.width / 14;  //anchura calculada respecto al canvas
+    this.w = w || this.ctx.canvas.width / 14;  //anchura calculada respecto al canvas      ctxw/18 hará que se divida otras 2 veces
     this.h = h || this.ctx.canvas.width / 14;  //altura calculada respecto al canvas
     this.vx = vx || bubbleSpeedX;
     this.vy = vy || bubbleSpeedY;
     this.swordSpeed = 0;
-    this.g = g || 0.05;
+    this.g = g || 0.2;
     this.gTick = 0;
     this.isSlowGravity = isSlowGravity || false;
     this.slowGrvityDuration = slowGrvityDuration || 3000; 
-    this.explodingSize = this.ctx.canvas.width/80
+    this.explodingSize = this.ctx.canvas.width/90
     this.damage = damage || 1; // daño especificado o 1
     this.img = new Image();   //crear nueva imágene ne canvas
     this.img.src = bubbleImg || "../public/Imagenes/bubble.png";  //definir cual es la nueva imagen
@@ -61,7 +61,8 @@ class Bubble { //posX posY, ancho, alto, velX, velY, gravedad, buleano si hay gr
     this.gTick++
     if (this.y + this.h >= this.ctx.canvas.height ){
       this.bubbleBounceSound.play()//todo --paso 3 llamar a .play() para invocar el sonido donde sea necesario
-      this.vy = -bubbleSpeedY; 
+      this.vy = -Math.abs(this.w/20 + 7); 
+      console.log(this.w)
     }
     if(this.x + this.w >= this.ctx.canvas.width && this.willBounce){
       this.bubbleBounceSound.play()//todo --paso 3 llamar a .play() para invocar el sonido donde sea necesario
@@ -72,8 +73,8 @@ class Bubble { //posX posY, ancho, alto, velX, velY, gravedad, buleano si hay gr
       this.vx = bubbleSpeedX;
     }
     if(this.isElectrified){
-      this.w -= 0.05 + electricShieldlevel/150
-      this.h -= 0.05 + electricShieldlevel/150
+      this.w -= 0.25 + electricShieldlevel/150
+      this.h -= 0.25 + electricShieldlevel/150
       this.electroTick++;
       if(this.electroTick >3){
         this.electrified.frame++;
@@ -93,7 +94,7 @@ class Bubble { //posX posY, ancho, alto, velX, velY, gravedad, buleano si hay gr
   }
   
   isVisible(){
-    return  this.x > -2 && this.x <= this.ctx.canvas.width;  //determina cuándo es visible el obstáculo
+    return  this.x > -10 && this.x <= this.ctx.canvas.width;  //determina cuándo es visible el obstáculo
   }
   collides(objetivo) {  //chequéa la colisión. 
     const colX = this.x <= objetivo.x + objetivo.w  && this.x + this.w > objetivo.x;   

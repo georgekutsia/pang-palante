@@ -3,9 +3,9 @@ class Life {
     this.ctx = ctx;
     this.x = 5;
     this.y = 0;
-    this.w = 10;
-    this.h = 10;
-    this.total = 10; // Puedes cambiar esto a cualquier número, entero o decimal
+    this.w = this.ctx.canvas.width/35;
+    this.h = this.ctx.canvas.width/35;
+    this.total = 9; // Puedes cambiar esto a cualquier número, entero o decimal
     this.img = new Image();
     this.img.src = "../public/Imagenes/stats/heart.png";
     this.imgHalf = new Image();

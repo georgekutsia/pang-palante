@@ -8,12 +8,13 @@ body {
   justify-content: center;
   margin-top: 0;
 }
-#canvas{
-  width: 88vw;
-  height: 42vw;
-  border: 3px solid red;
-  min-width: 100px;
-  min-height: 100px;
+#canvas {
+  margin: 0 auto; /* Esto centra el canvas horizontalmente */
+  display: block; /* Esto asegura que el canvas se muestre como un bloque */
+  max-width: 90vw; /* Establece el ancho máximo del canvas al 90% del ancho de la ventana gráfica */
+  max-height: 90vh; /* Establece la altura máxima del canvas al 90% de la altura de la ventana gráfica */
+  border: 5px ridge red;
+
 }
 /* iiiiconos */
 .icons-left {
@@ -111,6 +112,7 @@ border-radius: 50%;
   transition: all 0.5s ease-in-out;
   z-index: 10;
   background-color: transparent;
+  display: none;
 }
 #gameOver-X img{
   width: 40px;
@@ -283,4 +285,15 @@ padding: 15px 15px;
 #level-change-text4{
   top: 40%;
   left: 20%;
+}
+
+
+#changing-level-map{
+  position: absolute;
+  top: 35vh;
+  left: 20vw;
+  width: calc(100px + 2vw);
+  transition: all 0.5s ease-in-out;
+  display: none;
+  border: 4px double red;
 }

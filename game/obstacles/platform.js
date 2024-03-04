@@ -1,4 +1,5 @@
 class Platform {
+  // anchura 125 requiere 3 impactos.    145 require 4     195 requiere 5     245 require 6
   constructor(ctx, x, y, w, h, obstacleImg, isSolid, isBrakable, isBouncable, vx, vy, xLimit1, xLimit2, yLimit1, yLimit2, canBeElectrified) {
     this.ctx = ctx;
     this.x = x || 100;
@@ -21,7 +22,7 @@ class Platform {
     this.speedX = vx || 0;
     this.speedY = vy || 0;
     this.color = "#ff0000"; // Color predeterminado, puedes ajustarlo según tus necesidades
-    this.red =  (this.w + this.h) * 4; // solo usamos como numero fijo a recoger el rojo, que dependerá de la anchura total de la plataforma
+    this.red =  (this.w + this.h) ; // solo usamos como numero fijo a recoger el rojo, que dependerá de la anchura total de la plataforma
     this.green = Math.random() * 140;
     this.blue = Math.random() * 140;
     this.life =  this.red /2;   
