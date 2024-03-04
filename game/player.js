@@ -1,7 +1,7 @@
 class Player {
   constructor(ctx) {
     this.ctx = ctx;
-    this.x = 20;
+    this.x =720;
     this.h = this.ctx.canvas.width / 19;
     this.y = this.ctx.canvas.height - this.h;
     this.w = this.ctx.canvas.width / 23;
@@ -799,7 +799,7 @@ handleRightDodge = (event) =>{ //*
   
   collides(objetivo) {
     if(!playerIsImmune){
-      const colX = this.x <= objetivo.x + objetivo.w && this.x + this.w > objetivo.x + 10;
+      const colX = this.x <= objetivo.x + objetivo.w && this.x + this.w > objetivo.x ;
       const colY = this.y + this.h > objetivo.y && this.y < objetivo.y + objetivo.h;
       return colX && colY;
     }
@@ -897,7 +897,7 @@ handleRightDodge = (event) =>{ //*
     if(this.barAmount > 0){
     this.shootBarSound.volume = 0.09;
     this.shootBarSound.play();
-    const bulletBar = new WeaponBar(this.ctx, this.x + 5, this.y)
+    const bulletBar = new WeaponBar(this.ctx, this.x + this.w/2, this.y)
     this.bulletBarArray.push(bulletBar);
     }
   }

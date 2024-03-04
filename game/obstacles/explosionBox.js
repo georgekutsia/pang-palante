@@ -6,9 +6,9 @@ class ExplosionBox {
     this.w = w || 60; // Ancho de la escalera, valor predeterminado o especificado
     this.h = h || 60; // Altura de la escalera, valor predeterminado o especificado
     this.img = new Image(); // Imagen asociada a la escalera
-    this.img.src = obstacleImg || "../../public/Imagenes/obstacles/cajaRota1.png"; // Ruta de la imagen de la escalera
+    this.img.src = obstacleImg || "/public/Imagenes/obstacles/cajaRota1.png"; // Ruta de la imagen de la escalera
     this.imgBox = new Image(); // Imagen asociada a la escalera
-    this.imgBox.src = "../../public/Imagenes/obstacles/box.png"
+    this.imgBox.src = "/public/Imagenes/obstacles/box.png"
     this.img.frameX = 0;
     this.img.frameY = 0;
     this.imgTick = 0;

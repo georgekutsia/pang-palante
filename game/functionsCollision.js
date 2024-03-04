@@ -139,7 +139,7 @@ function bouncerPlayerCollision(player, bouncer){
 }
 
 function platformPlayerCollision(player, platform){
-  if (player.y <= platform.y - 10 &&player.x <= platform.x + platform.w &&player.x + player.w > platform.x) {
+  if (player.y <= platform.y - player.h/1.2 && player.x <= platform.x + platform.w && player.x + player.w > platform.x) {
     if(player.electricShieldIsActive &&platform.canBeElectrified && !platform.isElectrified){
       electroPlatformSound.play()
       platform.vx = -0.5;
@@ -167,7 +167,7 @@ function platformPlayerCollision(player, platform){
     }
 
   }
-  if (player.x >= platform.x + platform.w ||player.x <= platform.x) {//colisión por los lados de la plataforma
+  if (player.x + player.w >= platform.x + platform.w  || player.x <= platform.x) {//colisión por los lados de la plataforma. Por alguna razón, funciona
     jumpDownDistance = 0;
     player.vy = 0;
     player.vx = 0;

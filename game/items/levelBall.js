@@ -11,23 +11,23 @@ constructor(ctx, x, y) {
     this.img = new Image();   //crear nueva imágene ne canvas
 
     const randomImgs = [
-      "../../public/Imagenes/levelBall1.png",
-      "../../public/Imagenes/levelBall2.png",
-      "../../public/Imagenes/levelBall3.png",
-      "../../public/Imagenes/levelBall4.png",
+      "/public/Imagenes/levelBall1.png",
+      "/public/Imagenes/levelBall2.png",
+      "/public/Imagenes/levelBall3.png",
+      "/public/Imagenes/levelBall4.png",
     ];
     const randomIndex = Math.floor(Math.random() * randomImgs.length);
     this.img.newSrc = randomImgs[randomIndex];
-    this.img.src = "../../public/Imagenes/levelBall5.png";  //definir cual es la nueva imagen
+    this.img.src = "/public/Imagenes/levelBall5.png";  //definir cual es la nueva imagen
     this.imgBallShield = new Image();   //crear nueva imágene ne canvas
-    this.imgBallShield.src = "../../public/Imagenes/ballShield.png";  //definir cual es la nueva imagen
+    this.imgBallShield.src = "/public/Imagenes/ballShield.png";  //definir cual es la nueva imagen
     this.isActive = false;
     this.winCondition = false;
     this.bulala = false;
 
   //cuando se rompe la bola
     this.ballBreaks = new Image();
-    this.ballBreaks.src = "../../public/Imagenes/levelBall1Breaking.png"
+    this.ballBreaks.src = "/public/Imagenes/levelBall1Breaking.png"
     this.ballBreaks.frame = 0;
     this.ballBreaksTick = 0;
     this.ballBroke = false;
@@ -36,7 +36,7 @@ constructor(ctx, x, y) {
     
   //cuando resiste el daño de las balas y sale el escudo de plasma
     this.ballShieldForce = new Image(); 
-    this.ballShieldForce.src = "../../public/Imagenes/ballShieldForce.png"; 
+    this.ballShieldForce.src = "/public/Imagenes/ballShieldForce.png"; 
     this.ballShieldForce.frame = 0;
     this.ballShieldForceTick = 0;
     this.ballShieldForceTickTimer = 0;
@@ -46,7 +46,7 @@ constructor(ctx, x, y) {
 
     //el efecto de romperse cuando ya no tiene ball shield
     this.ballShieldBreak = new Image(); 
-    this.ballShieldBreak.src = "../../public/Imagenes/ballShieldForceBreak.png"; 
+    this.ballShieldBreak.src = "/public/Imagenes/ballShieldForceBreak.png"; 
     this.ballShieldBreak.frame = 0;
     this.ballShieldBreakTick = 0;
     this.ballShieldBreaking = false;

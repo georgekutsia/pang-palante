@@ -6,12 +6,12 @@ function level1(ctx, bubbles, platforms, levelBalls, boxes){
 }
 
 function levelBallItem1(ctx, levelBalls) {  
-  const levelBall = new LevelBall(ctx, ctx.canvas.width/2 -ctx.canvas.width / 33 + 7, 0)
+  const levelBall = new LevelBall(ctx, CTXW/2 -CTXW / 33 + 7, 0)
   levelBalls.push(levelBall)
 }
 
 function addBubble1(ctx, bubbles){ 
-  const bubble1 = new Bubble(ctx, 90, -350, ctx.canvas.width / 10, ctx.canvas.width / 10)
+  const bubble1 = new Bubble(ctx, 90, -350, CTXW / 10, CTXW / 10)
   bubbles.push(bubble1);
 }
 

@@ -6,7 +6,7 @@ class Stair {
     this.h = h || this.ctx.canvas.width / 7; // Altura de la escalera, valor predeterminado o especificado
     this.y = y || this.ctx.canvas.height - this.h; // Posición vertical (coordenada y), valor predeterminado o especificado
     this.img = new Image(); // Imagen asociada a la escalera
-    this.img.src = obstacleImg || "../../public/Imagenes/obstacles/stair1.png"; // Ruta de la imagen de la escalera
+    this.img.src = obstacleImg || "/public/Imagenes/obstacles/stair1.png"; // Ruta de la imagen de la escalera
 
   }
 
@@ -27,8 +27,8 @@ class Stair {
 
   collides(objetivo) {
     // Método para verificar colisiones con otro objeto (puedes ajustar según tus necesidades)
-    const colX = this.x + 7 <= objetivo.x + objetivo.w && this.x + this.w - 7 > objetivo.x;
-    const colY = this.y + this.h > objetivo.y && this.y  < objetivo.y + objetivo.h;
+    const colX = this.x <= objetivo.x + objetivo.w && this.x + this.w > objetivo.x ;
+    const colY = this.y + this.h > objetivo.y && this.y < objetivo.y + objetivo.h;
     return colX && colY;
   }
   collidesTop(objetivo) { //colisiona con la parte superior de la escalera para dejar el jugador fijo arriba y activar la gravedad si se sale

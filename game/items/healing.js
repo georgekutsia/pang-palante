@@ -3,14 +3,14 @@ constructor(ctx, x, y, g) {
     this.ctx = ctx;
     this.x =  x || Math.random() * this.ctx.canvas.width; //el obstáculo aparece desde arriba del canvas 
     this.y = y  || this.ctx.canvas.height - 80; // el obstáculo sale de una altura específica o de alguna altura randóm
-    this.w = this.ctx.canvas.width / 23;  //anchura calculada respecto al canvas
-    this.h = this.ctx.canvas.width / 23;  //altura calculada respecto al canvas
+    this.w = this.ctx.canvas.width / 40;  //anchura calculada respecto al canvas
+    this.h = this.ctx.canvas.width / 40;  //altura calculada respecto al canvas
     this.vy = 0;
     this.vx = 0;
 
     this.g = g || 0.1;
     this.img = new Image();   //crear nueva imágene ne canvas
-    this.img.src = "../../public/Imagenes/healing.png";  //definir cual es la nueva imagen
+    this.img.src = "/public/Imagenes/healing.png";  //definir cual es la nueva imagen
   }
   draw() {
     this.ctx.drawImage(this.img, this.x, this.y, this.w, this.h);  // dibuja el obstáculo
