@@ -147,7 +147,9 @@ class Game {
       if (GAMELEVEL === 1) {
         // inftroGame1();
         // setTimeout(() => {
-        level1(this.ctx, this.bubbles, this.platforms, this.levelBalls, this.boxes)
+        // level1(this.ctx, this.bubbles, this.platforms, this.levelBalls, this.boxes)
+        level3(this.ctx,this.bubbles,this.platforms,this.stairs,this.boxes,this.healings,this.levelBalls);
+
         // }, 15000);
         // setTimeout(() => {
           // addBubble1(this.ctx, this.bubbles)
@@ -325,13 +327,12 @@ class Game {
     })
     this.stairs.forEach((stair) => {//player con stair
       if (stair.collidesTop(this.player)) {
+        console.log("hcohhcochocho")
         this.player.vy = 0;
         this.player.y = stair.y - this.player.h;
         jumpDownDistance = 3;
         W = 0;
-        this.player.g = 0.2;
-        
-
+        this.player.g = 2;
       }
       if (stair.collidesSides(this.player)) {
         this.player.vy = 0;
@@ -341,7 +342,6 @@ class Game {
         }, 200);
       }
       if (stair.collides(this.player)) {
-        console.log(W )
         W = 87
         jumpDownDistance = 0;
         this.player.canClimb = true;
@@ -484,7 +484,7 @@ class Game {
     this.bouncers.forEach((bouncer) => {//bouncer con bullets normales
       this.player.bulletArray.forEach((bullet) => {
         if (bullet.collides(bouncer)) {
-          bounceFromObstacles(bullet, bouncer);
+          basicBulletBounce(bullet, bouncer);
           return false;
         } else return true;
       });

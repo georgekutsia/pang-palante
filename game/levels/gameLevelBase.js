@@ -113,3 +113,7 @@ function addLever(ctx, levers){
   let lev = new Lever(ctx)
   levers.push(lev);
 }
+
+
+
+

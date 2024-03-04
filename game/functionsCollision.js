@@ -91,7 +91,7 @@ function checkBubbleCollision(bubbles, player, bubbleSplash2, bubblePopSound1, p
     boxes.forEach((box) => {
       if (box.collides(bubble)) {
         bubble.bubbleBounceSound.play()
-        bounceFromBox(bubble, box);
+        bounceFromObstacles(bubble, box);
       } else return true;
     });
   });
@@ -100,7 +100,7 @@ function checkBubbleCollision(bubbles, player, bubbleSplash2, bubblePopSound1, p
     bouncers.forEach((bouncer) => {
       if (bouncer.collides(bubble)) {
         bubble.bubbleBounceSound.play()
-        bounceFromObstacles(bubble, bouncer);
+        bounceFromObstacles(bubble, bouncer, 5);
       } else return true;
     });
   });
@@ -123,28 +123,19 @@ function checkBubbleCollision(bubbles, player, bubbleSplash2, bubblePopSound1, p
 
 
 function bouncerPlayerCollision(player, bouncer){
-  player.vy = 0;
-  if ( player.y <= bouncer.y && player.x <= bouncer.x + bouncer.w && player.x + player.w > bouncer.x - 30) {
-    player.vy = -3;
-    player.y = bouncer.y - player.h;
+  if (player.y +  player.h/2 <= bouncer.y   ) {
+    player.vy =  -15 ;
   }
-  if (player.y + player.h >= bouncer.y + bouncer.h) {//colisión por la parte inferior de la plataforma
-    player.vy = 0;
+  if (player.y +  player.h/2 >= bouncer.y   ) {
+    player.vy =  15 ;
   }
-  if (player.x >= bouncer.x + bouncer.w - 6) {//colisión por la derecha
-    player.g = 2;
-    player.vx = 1.5;
-    setTimeout(() => {
-      player.vx = 0;
-    }, 500);
+  if(player.x + player.w/2 <= bouncer.x ){
+    player.vx = -10 ;
   }
-  if (player.x - 1 <= bouncer.x) {//colisión por la izquierda
-    player.g = 2;
-    player.vx = -1.5
-    setTimeout(() => {
-      player.vx = 0;
-    }, 500);
+  if(player.x + player.w/2> bouncer.x + bouncer.w ){
+    player.vx = 10 ;
   }
+
 }
 
 function platformPlayerCollision(player, platform){
@@ -176,8 +167,7 @@ function platformPlayerCollision(player, platform){
     }
 
   }
-  if (player.x >= platform.x + platform.w ||player.x <= platform.x) {
-    //colisión por los lados de la plataforma
+  if (player.x >= platform.x + platform.w ||player.x <= platform.x) {//colisión por los lados de la plataforma
     jumpDownDistance = 0;
     player.vy = 0;
     player.vx = 0;
