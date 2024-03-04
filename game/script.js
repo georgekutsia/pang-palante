@@ -52,7 +52,7 @@ startInfinite$$.addEventListener("click", function () {
   instruccionesInfo2$$.style.display = "none";
   instruccionesInfo3$$.style.display = "none";
   instruccionesInfo4$$.style.display = "none";
-  // infoPlayerBtn1$$.style.display = "block";
+  toggleShop$$.style.display = "block"
   ammosCount$$.style.display = "block";
   
   game.isInfiniteChanging = true;
@@ -165,98 +165,22 @@ retry$$.addEventListener("click", ()=>{
 }
 })
 
-instruccionesInfo1$$.addEventListener("click",()=>{
-    instruccionesInfo1$$.style.zIndex = 2;
-    instruccionesInfo2$$.style.zIndex = 1;
-    instruccionesInfo3$$.style.zIndex = 1;
-    instruccionesInfo4$$.style.zIndex = 1;
-})
-instruccionesInfo2$$.addEventListener("click",()=>{
-  instruccionesInfo1$$.style.zIndex = 1;
-  instruccionesInfo2$$.style.zIndex = 2;
-  instruccionesInfo3$$.style.zIndex = 1;
-  instruccionesInfo4$$.style.zIndex = 1;
-})
-instruccionesInfo3$$.addEventListener("click",()=>{
-  instruccionesInfo1$$.style.zIndex = 1;
-  instruccionesInfo2$$.style.zIndex = 1;
-  instruccionesInfo3$$.style.zIndex = 2;
-  instruccionesInfo4$$.style.zIndex = 1;
-})
-instruccionesInfo4$$.addEventListener("click",()=>{
-  instruccionesInfo1$$.style.zIndex = 1;
-  instruccionesInfo2$$.style.zIndex = 1;
-  instruccionesInfo3$$.style.zIndex = 1;
-  instruccionesInfo4$$.style.zIndex = 2;
-})
 
+const instrucciones = [instruccionesInfo1$$, instruccionesInfo2$$, instruccionesInfo3$$, instruccionesInfo4$$];
 
-instruccionesInfo1$$.addEventListener("dblclick", () => {
-  const currentScale = parseFloat(instruccionesInfo1$$.style.transform.replace("scale(", "").replace(")", "")) || 1.0;
-  if (currentScale === 1.5) {
-    instruccionesInfo1$$.style.transform = "scale(1.0)";
-  } else {
-    instruccionesInfo1$$.style.transform = "scale(1.5)";
-    instruccionesInfo2$$.style.transform = "scale(1.0)";
-    instruccionesInfo3$$.style.transform = "scale(1.0)";
-    instruccionesInfo4$$.style.transform = "scale(1.0)";
+instrucciones.forEach((instruccion, index) => {
+  instruccion.addEventListener("click", () => {
+    instrucciones.forEach((instr, i) => {
+      instr.style.zIndex = (i === index) ? 2 : 1;
+    });
+  });
 
-    instruccionesInfo1$$.style.zIndex = 2;
-    instruccionesInfo2$$.style.zIndex = 1;
-    instruccionesInfo3$$.style.zIndex = 1;
-    instruccionesInfo4$$.style.zIndex = 1;
-  }
-});
-
-instruccionesInfo2$$.addEventListener("dblclick", () => {
-  const currentScale = parseFloat(instruccionesInfo2$$.style.transform.replace("scale(", "").replace(")", "")) || 1.0;
-  if (currentScale === 1.5) {
-    instruccionesInfo2$$.style.transform = "scale(1.0)";
-  } else {
-    instruccionesInfo1$$.style.transform = "scale(1.0)";
-    instruccionesInfo2$$.style.transform = "scale(1.5)";
-    instruccionesInfo3$$.style.transform = "scale(1.0)";
-    instruccionesInfo4$$.style.transform = "scale(1.0)";
-
-    instruccionesInfo1$$.style.zIndex = 1;
-    instruccionesInfo2$$.style.zIndex = 2;
-    instruccionesInfo3$$.style.zIndex = 1;
-    instruccionesInfo4$$.style.zIndex = 1;
-  }
-});
-
-instruccionesInfo3$$.addEventListener("dblclick", () => {
-  const currentScale = parseFloat(instruccionesInfo3$$.style.transform.replace("scale(", "").replace(")", "")) || 1.0;
-  if (currentScale === 1.5) {
-    instruccionesInfo3$$.style.transform = "scale(1.0)";
-  } else {
-    instruccionesInfo1$$.style.transform = "scale(1.0)";
-    instruccionesInfo2$$.style.transform = "scale(1.0)";
-    instruccionesInfo3$$.style.transform = "scale(1.5)";
-    instruccionesInfo4$$.style.transform = "scale(1.0)";
-
-    instruccionesInfo1$$.style.zIndex = 1;
-    instruccionesInfo2$$.style.zIndex = 1;
-    instruccionesInfo3$$.style.zIndex = 2;
-    instruccionesInfo4$$.style.zIndex = 1;
-  }
-});
-
-instruccionesInfo4$$.addEventListener("dblclick", () => {
-  const currentScale = parseFloat(instruccionesInfo4$$.style.transform.replace("scale(", "").replace(")", "")) || 1.0;
-  if (currentScale === 1.5) {
-    instruccionesInfo4$$.style.transform = "scale(1.0)";
-  } else {
-    instruccionesInfo1$$.style.transform = "scale(1.0)";
-    instruccionesInfo2$$.style.transform = "scale(1.0)";
-    instruccionesInfo3$$.style.transform = "scale(1.0)";
-    instruccionesInfo4$$.style.transform = "scale(1.5)";
-
-    instruccionesInfo1$$.style.zIndex = 1;
-    instruccionesInfo2$$.style.zIndex = 1;
-    instruccionesInfo3$$.style.zIndex = 1;
-    instruccionesInfo4$$.style.zIndex = 2;
-  }
+  instruccion.addEventListener("dblclick", () => {
+    instrucciones.forEach((instr, i) => {
+      instr.style.transform = (i === index) ? "scale(1.5)" : "scale(1.0)";
+      instr.style.zIndex = (i === index) ? 2 : 1;
+    });
+  });
 });
 
 
@@ -322,3 +246,12 @@ btnCambiarSala$$.addEventListener("click", ()=>{
       break;
   }
 })
+
+mapChangeLevel$$.addEventListener("mouseover", () => {
+  mapChangeLevel$$.style.width = "calc(400px + 6vw)";
+});
+
+mapChangeLevel$$.addEventListener("mouseout", () => {
+  mapChangeLevel$$.style.width = "calc(20px + 0.7vw)";
+
+});

@@ -14,43 +14,47 @@ if(infiniteLeveling >= 21){addStairAndPlatformsInfinite2(ctx, stairs, platforms)
 
 }
 function levelBallItemInfinite(ctx, levelBalls) {  
-let randomNumber =  getRandomNumber(9)
+let randomNumber =  getRandomNumber(10)
 switch (randomNumber) {
   case 1:
-  const levelBall1 = new LevelBall(ctx, 30, 0)
+  const levelBall1 = new LevelBall(ctx, 50, 0)
   levelBalls.push(levelBall1)
   break;
   case 2:
-  const levelBall2 = new LevelBall(ctx, 60, 0)
+  const levelBall2 = new LevelBall(ctx, 160, 0)
   levelBalls.push(levelBall2)
   break;
   case 3:
-  const levelBall3 = new LevelBall(ctx, 90, 0)
+  const levelBall3 = new LevelBall(ctx, 190, 0)
   levelBalls.push(levelBall3)
   break;
   case 4:
-  const levelBall4 = new LevelBall(ctx, 120, 0)
+  const levelBall4 = new LevelBall(ctx, 320, 0)
   levelBalls.push(levelBall4)
   break;
   case 5:
-  const levelBall5 = new LevelBall(ctx, 150, 0)
+  const levelBall5 = new LevelBall(ctx, 540, 0)
   levelBalls.push(levelBall5)
   break;
   case 6:
-  const levelBall6 = new LevelBall(ctx, 180, 0)
+  const levelBall6 = new LevelBall(ctx, 650, 0)
   levelBalls.push(levelBall6)
   break;
   case 7:
-  const levelBall7 = new LevelBall(ctx, 210, 0)
+  const levelBall7 = new LevelBall(ctx, 780, 0)
   levelBalls.push(levelBall7)
   break;
   case 8:
-  const levelBall8 = new LevelBall(ctx, 240, 0)
+  const levelBall8 = new LevelBall(ctx, 890, 0)
   levelBalls.push(levelBall8)
   break;
   case 9:
-  const levelBall9 = new LevelBall(ctx, 270, 0)
+  const levelBall9 = new LevelBall(ctx, 1100, 0)
   levelBalls.push(levelBall9)
+  break;
+  case 10:
+  const levelBall10 = new LevelBall(ctx, 1220, 0)
+  levelBalls.push(levelBall10)
   break;
   default:
 break;
@@ -59,15 +63,15 @@ break;
 
 
 function addBubbleInfinite(ctx, bubbles){ 
-  let randomNumber =  getRandomNumber(randomAcordingToLevel)
+  let randomNumber =  getRandomNumber(1)
 switch (randomNumber) {
-  case 1:
-    const bubble1 = new Bubble(ctx, 0, 0, 20, 20)
+  case 2:
+    const bubble1 = new Bubble(ctx, 0, 0, CTXW/18, CTXW/18)
     bubbles.push(bubble1);  
   break;   
-  case 2:
-    const bubble2 = new Bubble(ctx, 0, 0, 30, 30)
-    bubbles.push(bubble2);   
+  case 1:
+    const bubble2 = new Bubble(ctx, 0, 0, CTXW/10, CTXW/10)
+    // bubbles.push(bubble2);   
   break;
   case 3:
     const bubble3 = new Bubble(ctx, 0, 0, 60, 60)
@@ -116,12 +120,12 @@ switch (randomNumber) {
 
 // hasta 9 niveles distintos según el progreso. quizás los primeros 3 hasta nivel 3, luego 5 hasta nivel 8, luego hasta 7 hasta nivel 12 y luego todo
 function addPlatformsInfinite(ctx, platforms, stairs){
-let randomNumber =  getRandomNumber(randomAcordingToLevel)
+let randomNumber =  getRandomNumber(1)
 switch (randomNumber) {
 case 1:
-  const platform1 = new Platform(ctx, 10, 120, 45, 5, "../public/Imagenes/obstacles/platformSolid1.png", false, false, true);
-  const platform2 = new Platform(ctx, ctx.canvas.width/2 - 22, 120, 45, 5, "../public/Imagenes/obstacles/platformSolid2.png", false, false, true);
-  const platform3 = new Platform(ctx, 240, 120, 45, 5, "../public/Imagenes/obstacles/platformSolid3.png", false, false, true);
+  const platform1 = new Platform(ctx, 10, 120, 245, 15, "../public/Imagenes/obstacles/platformSolid1.png", true, false, true);
+  const platform2 = new Platform(ctx, ctx.canvas.width/2 - 22, 120, 165, 15, "../public/Imagenes/obstacles/platformSolid2.png", true, false, true);
+  const platform3 = new Platform(ctx, 240, 120, 185, 15, "../public/Imagenes/obstacles/platformSolid3.png", true, false, true);
 platforms.push( platform1,platform2, platform3);
 break;
 case 2:

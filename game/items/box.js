@@ -3,8 +3,8 @@ class Box {
     this.ctx = ctx;
     this.x = x || 100;
     this.y = y || 20;
-    this.w = this.ctx.canvas.width / 18;
-    this.h = this.ctx.canvas.width / 18;
+    this.w = this.ctx.canvas.width / 25;
+    this.h = this.ctx.canvas.width / 25;
     this.tick = 0
     this.vx = vx || 0;
     this.vy = vy || 0;
@@ -165,7 +165,7 @@ class Box {
         this.hitingSound()
       }
     }
-    if(this.x <= -40 ||  this.x >= 350){
+    if(this.x <= -40 ||  this.x >= CTXW + 30){
       this.dispose =false;
     }
   }

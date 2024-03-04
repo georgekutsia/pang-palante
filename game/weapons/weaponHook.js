@@ -3,13 +3,13 @@ class WeaponHook {
     this.ctx = ctx;
     this.x = x;
     this.y = y;
-    this.vy = -3;
+    this.vy = -15;
     this.vx =  0;
     this.img = new Image();
-    this.img.src = "/public/Imagenes/hookup.png";
+    this.img.src = "/public/Imagenes/hookup2.png";
     this.img.frame = 0;
-    this.w = 3;
-    this.h = 20;
+    this.w = this.ctx.canvas.width /50;
+    this.h = this.ctx.canvas.width/2;
     this.tick = 20;
     this.fading = 0;
     this.dispose = true;

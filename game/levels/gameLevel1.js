@@ -17,59 +17,41 @@ function addBubble1(ctx, bubbles){
 
 
 function addPlatforms1(ctx, platforms){
-                                                          //! ctx, x, y , w, h, image de 1 a 4,  si se puede romper o no a disparos, si se romperá al ponerse encima, si rebotará la burbuja, velocida en x, velocidad en y 
-    let randomNumber =  getRandomNumber(5)
+    let randomNumber =  getRandomNumber(4)
     switch (randomNumber) {
       case 1:
-        const platform1 = new Platform(ctx, 10, 120, 45, 5, "../public/Imagenes/obstacles/platformSolid1.png", false, false, true);
-        const platform2 = new Platform(ctx, ctx.canvas.width/2 - 22, 120, 45, 5, "../public/Imagenes/obstacles/platformSolid2.png", false, false, true);
-        const platform3 = new Platform(ctx, 240, 120, 45, 5, "../public/Imagenes/obstacles/platformSolid3.png", false, false, true);
+        const platform1 = new Platform(ctx, 75, CTXH-120, 125, 15, "../public/Imagenes/obstacles/platformSolid1.png", false, false, true);
+        const platform2 = new Platform(ctx, CTXW/2 - 62, CTXH-120, 125, 15, "../public/Imagenes/obstacles/platformSolid2.png", false, false, true);
+        const platform3 = new Platform(ctx, CTXW-200, CTXH-120, 125, 15, "../public/Imagenes/obstacles/platformSolid3.png", false, false, true);
       platforms.push( platform1,platform2, platform3);
 
         break;
     case 2:
-      const platform4 = new Platform(ctx, 50, 120, 45, 5, "../public/Imagenes/obstacles/platformSolid1.png", false, false, true);
-      const platform5 = new Platform(ctx, ctx.canvas.width/2 - 22, 90, 45, 5, "../public/Imagenes/obstacles/platformSolid2.png", false, false, true);
-      const platform6 = new Platform(ctx, 200, 120, 45, 5, "../public/Imagenes/obstacles/platformSolid3.png", false, false, true);
+      const platform4 = new Platform(ctx, 375, CTXH-120, 125, 15, "../public/Imagenes/obstacles/platformSolid1.png", false, false, true);
+      const platform5 = new Platform(ctx, CTXW/2 - 95, CTXH-210, 195, 15, "../public/Imagenes/obstacles/platformSolid2.png", false, false, true);
+      const platform6 = new Platform(ctx, CTXW-500, CTXH-120, 125, 15, "../public/Imagenes/obstacles/platformSolid3.png", false, false, true);
       platforms.push(platform4,platform5, platform6);
       break
     case 3:
-      const platform7 = new Platform(ctx, 30, 110, 55, 5, "../public/Imagenes/obstacles/platformSolid1.png", false, false, true);
-      const platform8 = new Platform(ctx, 210, 110, 55, 5, "../public/Imagenes/obstacles/platformSolid3.png", false, false, true);
+      const platform7 = new Platform(ctx, 300, CTXH-120, 200, 15, "../public/Imagenes/obstacles/platformSolid1.png", false, false, true);
+      const platform8 = new Platform(ctx, CTXW-500, CTXH-120, 200, 15, "../public/Imagenes/obstacles/platformSolid3.png", false, false, true);
       platforms.push(platform7,platform8);
       break
     case 4:
-      const platform9 = new Platform(ctx, 1, 120, 35, 5, "../public/Imagenes/obstacles/platformSolid1.png", false, false, true);
-      const platform10 = new Platform(ctx, 100, 80, 35, 5, "../public/Imagenes/obstacles/platformSolid3.png", false, false, true);
-      const platform11 = new Platform(ctx, 160, 80, 35, 5, "../public/Imagenes/obstacles/platformSolid2.png", false, false, true);
-      const platform12 = new Platform(ctx, ctx.canvas.width - 35, 120, 35, 5, "../public/Imagenes/obstacles/platformSolid4.png", false, false, true);
+      const platform9 = new Platform(ctx, 75, CTXH-120, 150, 15, "../public/Imagenes/obstacles/platformSolid1.png", false, false, true);
+      const platform10 = new Platform(ctx, 400, CTXH-220, 150, 15, "../public/Imagenes/obstacles/platformSolid2.png", false, false, true);
+      const platform11 = new Platform(ctx, CTXW-550, CTXH-220, 150, 15, "../public/Imagenes/obstacles/platformSolid3.png", false, false, true);
+      const platform12 = new Platform(ctx, CTXW-200, CTXH-120, 150, 15, "../public/Imagenes/obstacles/platformSolid4.png", false, false, true);
       platforms.push(platform9,platform10,platform11,platform12);
-      break
-    case 5:
-      const platform13 = new Platform(ctx, 40, 120, 35, 5, "../public/Imagenes/obstacles/platformSolid1.png", false, false, true);
-      const platform14 = new Platform(ctx, 70, 95, 35, 5, "../public/Imagenes/obstacles/platformSolid3.png", false, false, true);
-      const platform15 = new Platform(ctx, 190, 95, 35, 5, "../public/Imagenes/obstacles/platformSolid2.png", false, false, true);
-      const platform16 = new Platform(ctx, CTXW - 75, 120, 35, 5, "../public/Imagenes/obstacles/platformSolid4.png", false, false, true);
-      platforms.push(platform13,platform14,platform15,platform16);
-      break
-    case 6:
-      const platform17 = new Platform(ctx, 1, 120, 35, 5, "../public/Imagenes/obstacles/platformSolid1.png", false, false, true);
-      const platform18 = new Platform(ctx, 100, 80, 35, 5, "../public/Imagenes/obstacles/platformSolid3.png", false, false, true);
-      const platform19 = new Platform(ctx, 160, 80, 35, 5, "../public/Imagenes/obstacles/platformSolid2.png", false, false, true);
-      const platform20 = new Platform(ctx, ctx.canvas.width - 35, 120, 35, 5, "../public/Imagenes/obstacles/platformSolid4.png", false, false, true);
-      platforms.push(platform17,platform18,platform19, platform20);
       break
       default:
         break;
     }
 }
 
-function addExplosion(ctx,explosions){
-  let explo = new Explosion(ctx)
-  explosions.push(explo)
-}
-
 function addBox1(ctx, boxes){
-  const box1 = new Box(ctx, 230, 6,  3, false, 7)
-  boxes.push(box1)
+  for (let i = 0; i < getRandomNumber(3); i++) {    
+    const box1 = new Box(ctx, 10 + getRandomNumber(1200), 30 + getRandomNumber(80),  3, false, 7)
+    boxes.push(box1)
+  }
 }

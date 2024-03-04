@@ -85,63 +85,62 @@
   <title>Document</title>
 </head>
 <body>
-  <div>
+<!-- <canvas id="canvas"></canvas> -->
 
-<canvas id="canvas"></canvas>
+    <canvas id="canvas" width="1400vw" height="670vh"></canvas>
 
-<div id="gameOver-section">
-  <button id="gameOver-X"><img src="/public/Imagenes/background/overX.png" alt="x"></button>
-  <img  id="gameOver-background" src="/public/Imagenes/background/gameOverImg1.webp" alt="game over background">
-  <img  id="gameOver-backgroundText" src="/public/Imagenes/background/gameOverText.png" alt="game over background">
-</div>
-<div class="icons-btn">
-  <img  id="start-background" src="/public//Imagenes/background/backgroundPang.webp" alt="start background">
-  <img  id="demoOver-background" src="/public//Imagenes/background/demoOverBackground.webp" alt="demoOver background">
-  <button  class="icons-left" id="pang-start" >Partida Nivel 1</button>
-  <button class="icons-left" id="pang-startInfinite">Niveles Infinitos</button>
-  <button class="icons-left" id="pang-demo">Entrenamiento!</button>
-  <button class="icons-left" id="instrucciones-btn">Instrucciones</button>
-  <button class="icons-left" id="pang-restart"><i class="fa-solid fa-power-off"></i></button>
-  <button class="icons-left" id="pang-retry"><i class="fa-solid fa-arrow-rotate-left"></i> <h3 id="retry-amount"></h3></button>
-</div>
-<div>
-  <button id="toggle-shop"><img src="/public//Imagenes/stats/PoltraScrap1.png" alt="shop"></button>
-  <img  id="arrow-bubbles" src="/public/Imagenes/arrowBubbles.png" alt="arrow bubbles">
-  <img id="instrucciones-info-1" src="/public/Imagenes/stats/instructionsMoves3.png" alt="instrucciones">
-  <img id="instrucciones-info-2" src="/public/Imagenes/stats/instruShoot1.png" alt="instrucciones">
-  <img id="instrucciones-info-3" src="/public/Imagenes/stats/instruShoot2.png" alt="instrucciones">
-  <img id="instrucciones-info-4" src="/public/Imagenes/stats/instruShoot3.png" alt="instrucciones">
-  <img id="changing-level-img" src="/public/Imagenes/background/changeLevel1.webp" alt="instrucciones">
-
-  <div>
-    <img class="ayudasDemo introAyuda1" src="/public/Imagenes/stats/trainingInfo1.png" alt="Player Ayuda 1">
-    <img class="ayudasDemo introAyuda2" src="/public/Imagenes/stats/trainingInfo2.png" alt="Player Ayuda 2">
-    <img class="ayudasDemo introAyudaFinal1" src="/public/Imagenes/stats/trainingInfoFinal1.png" alt="Player Ayuda final">
-    <img class="ayudas munAmetralladora" src="/public/Imagenes/stats/playerTalkMunAmetralladora.png" alt="Ayuda3">
-    <img class="ayudas munCadena" src="/public/Imagenes/stats/playerTalkMunCadena.png" alt="Ayuda4">
-    <img class="ayudas munEscudo" src="/public/Imagenes/stats/playerTalkMunEscudo.png" alt="Ayuda5">
-    <img class="ayudas munLanzallamas" src="/public/Imagenes/stats/playerTalkMunLanzallamas.png" alt="Ayuda6">
-    <img class="ayudas munMegablaster" src="/public/Imagenes/stats/playerTalkMunMegablaster.png" alt="Ayuda7">
-    <img class="ayudas munSalud" src="/public/Imagenes/stats/playerTalkMunSalud.png" alt="Ayuda8">
-    <img class="ayudas munHook" src="/public/Imagenes/stats/playerTalkMunHooks.png" alt="Ayuda9">
-    <img class="ayudas munStep" src="/public/Imagenes/stats/playerTalkMunSteps.png" alt="Ayuda10">
-
-  </div>
-  </div>
-  <div id="shop-btn">
-    <button id="shop-shield">50<i class="fa-solid fa-coins"></i> <i style="font-size: calc(14px + 0.53vw)" class="fa-solid fa-globe"></i></button>
-    <button id="shop-fire">20<i class="fa-solid fa-coins"></i> <i style="font-size: calc(14px + 0.53vw)" class="fa-solid fa-fire-flame-simple"></i></button>
-    <button id="shop-bar">25<i class="fa-solid fa-coins"></i> <i style="font-size: calc(14px + 0.53vw)" class="fa-solid fa-anchor"></i></button>
-    <button id="shop-electro">50<i class="fa-solid fa-coins"></i> <i style="font-size: calc(14px + 0.53vw)" class="fa-solid fa-bolt-lightning"></i></button>
-    <button id="shop-superGun"><i style="font-size: calc(14px + 0.53vw)" class="fa-solid fa-bullseye"></i> <br>Nivel 0 </button>
-    <button id="shop-superGun1">90<i class="fa-solid fa-coins"></i> <i style="font-size: calc(14px + 0.53vw)" class="fa-solid fa-angles-up"></i> <br>Nivel 1 </button>
-    <button id="shop-superGun2">100<i class="fa-solid fa-coins"></i> <i style="font-size: calc(14px + 0.53vw)" class="fa-solid fa-angles-up"></i> <br>Nivel 2 </button>
-    <button id="shop-superGun3">110<i class="fa-solid fa-coins"></i> <i style="font-size: calc(14px + 0.53vw)" class="fa-solid fa-angles-up"></i> <br>Nivel 3 </button>
-    <button id="shop-superGun4">120<i class="fa-solid fa-coins"></i> <i style="font-size: calc(14px + 0.53vw)" class="fa-solid fa-angles-up"></i> <br>Nivel 4 </button>
-    <button id="shop-speedGun"> <span><i style="font-size: calc(14px + 0.53vw)" class="fa-solid fa-gauge-simple-high"></i> x 2</span> <br> <i style="font-size: calc(8px + 0.3vw)" class="fa-solid fa-angles-up fonts-i"></i><span id="velocidad-text">Velocidad</span>  <br> 50<i class="fa-solid fa-coins"></i> </button>
-    <button id="shop-barResistane"> <span><i style="font-size: calc(14px + 0.53vw)" class="fa-solid fa-anchor"></i> x 2</span> <br> <i style="font-size: calc(8px + 0.3vw)" class="fa-solid fa-angles-up fonts-i"></i><span id="velocidad-text">Resistance</span>  <br> 50<i class="fa-solid fa-coins"></i> </button>
-    <button id="shop-electricShield"> </i> <span id="electro-text"><i style="font-size: calc(8px + 0.4vw)" class="fa-solid fa-bolt-lightning"></i>Electro</span>  <br> 130<i class="fa-solid fa-coins"></i> </button>
-  </div>
+    <div id="gameOver-section">
+      <button id="gameOver-X"><img src="/public/Imagenes/background/overX.png" alt="x"></button>
+      <img  id="gameOver-background" src="/public/Imagenes/background/gameOverImg1.webp" alt="game over background">
+      <img  id="gameOver-backgroundText" src="/public/Imagenes/background/gameOverText.png" alt="game over background">
+    </div>
+    <div class="icons-btn">
+      <img  id="start-background" src="/public//Imagenes/background/backgroundPang.webp" alt="start background">
+      <img  id="demoOver-background" src="/public//Imagenes/background/demoOverBackground.webp" alt="demoOver background">
+      <button  class="icons-left" id="pang-start" >Partida Nivel 1</button>
+      <button class="icons-left" id="pang-startInfinite">Niveles Infinitos</button>
+      <button class="icons-left" id="pang-demo">Entrenamiento!</button>
+      <button class="icons-left" id="instrucciones-btn">Instrucciones</button>
+      <button class="icons-left" id="pang-restart"><i class="fa-solid fa-power-off"></i></button>
+      <button class="icons-left" id="pang-retry"><i class="fa-solid fa-arrow-rotate-left"></i> <h3 id="retry-amount"></h3></button>
+    </div>
+    <div>
+      <button id="toggle-shop"><img src="/public//Imagenes/stats/PoltraScrap1.png" alt="shop"></button>
+      <img  id="arrow-bubbles" src="/public/Imagenes/arrowBubbles.png" alt="arrow bubbles">
+      <img id="instrucciones-info-1" src="/public/Imagenes/stats/instructionsMoves3.png" alt="instrucciones">
+      <img id="instrucciones-info-2" src="/public/Imagenes/stats/instruShoot1.png" alt="instrucciones">
+      <img id="instrucciones-info-3" src="/public/Imagenes/stats/instruShoot2.png" alt="instrucciones">
+      <img id="instrucciones-info-4" src="/public/Imagenes/stats/instruShoot3.png" alt="instrucciones">
+      <img id="changing-level-img" src="/public/Imagenes/background/changeLevel1.webp" alt="cambio de nivel">
+      <img id="changing-level-map" src="/public/Imagenes/background/map1.webp" alt="mapa">
+      <div>
+        <img class="ayudasDemo introAyuda1" src="/public/Imagenes/stats/trainingInfo1.png" alt="Player Ayuda 1">
+        <img class="ayudasDemo introAyuda2" src="/public/Imagenes/stats/trainingInfo2.png" alt="Player Ayuda 2">
+        <img class="ayudasDemo introAyudaFinal1" src="/public/Imagenes/stats/trainingInfoFinal1.png" alt="Player Ayuda final">
+        <img class="ayudas munAmetralladora" src="/public/Imagenes/stats/playerTalkMunAmetralladora.png" alt="Ayuda3">
+        <img class="ayudas munCadena" src="/public/Imagenes/stats/playerTalkMunCadena.png" alt="Ayuda4">
+        <img class="ayudas munEscudo" src="/public/Imagenes/stats/playerTalkMunEscudo.png" alt="Ayuda5">
+        <img class="ayudas munLanzallamas" src="/public/Imagenes/stats/playerTalkMunLanzallamas.png" alt="Ayuda6">
+        <img class="ayudas munMegablaster" src="/public/Imagenes/stats/playerTalkMunMegablaster.png" alt="Ayuda7">
+        <img class="ayudas munSalud" src="/public/Imagenes/stats/playerTalkMunSalud.png" alt="Ayuda8">
+        <img class="ayudas munHook" src="/public/Imagenes/stats/playerTalkMunHooks.png" alt="Ayuda9">
+        <img class="ayudas munStep" src="/public/Imagenes/stats/playerTalkMunSteps.png" alt="Ayuda10">
+      </div>
+    </div>
+    <div id="shop-btn">
+      <button id="shop-shield">50<i class="fa-solid fa-coins"></i> <i style="font-size: calc(14px + 0.53vw)" class="fa-solid fa-globe"></i></button>
+      <button id="shop-fire">20<i class="fa-solid fa-coins"></i> <i style="font-size: calc(14px + 0.53vw)" class="fa-solid fa-fire-flame-simple"></i></button>
+      <button id="shop-bar">25<i class="fa-solid fa-coins"></i> <i style="font-size: calc(14px + 0.53vw)" class="fa-solid fa-anchor"></i></button>
+      <button id="shop-electro">50<i class="fa-solid fa-coins"></i> <i style="font-size: calc(14px + 0.53vw)" class="fa-solid fa-bolt-lightning"></i></button>
+      <button id="shop-superGun"><i style="font-size: calc(14px + 0.53vw)" class="fa-solid fa-bullseye"></i> <br>Nivel 0 </button>
+      <button id="shop-superGun1">90<i class="fa-solid fa-coins"></i> <i style="font-size: calc(14px + 0.53vw)" class="fa-solid fa-angles-up"></i> <br>Nivel 1 </button>
+      <button id="shop-superGun2">100<i class="fa-solid fa-coins"></i> <i style="font-size: calc(14px + 0.53vw)" class="fa-solid fa-angles-up"></i> <br>Nivel 2 </button>
+      <button id="shop-superGun3">110<i class="fa-solid fa-coins"></i> <i style="font-size: calc(14px + 0.53vw)" class="fa-solid fa-angles-up"></i> <br>Nivel 3 </button>
+      <button id="shop-superGun4">120<i class="fa-solid fa-coins"></i> <i style="font-size: calc(14px + 0.53vw)" class="fa-solid fa-angles-up"></i> <br>Nivel 4 </button>
+      <button id="shop-speedGun"> <span><i style="font-size: calc(14px + 0.53vw)" class="fa-solid fa-gauge-simple-high"></i> x 2</span> <br> <i style="font-size: calc(8px + 0.3vw)" class="fa-solid fa-angles-up fonts-i"></i><span id="velocidad-text">Velocidad</span>  <br> 50<i class="fa-solid fa-coins"></i> </button>
+      <button id="shop-barResistane"> <span><i style="font-size: calc(14px + 0.53vw)" class="fa-solid fa-anchor"></i> x 2</span> <br> <i style="font-size: calc(8px + 0.3vw)" class="fa-solid fa-angles-up fonts-i"></i><span id="velocidad-text">Resistance</span>  <br> 50<i class="fa-solid fa-coins"></i> </button>
+      <button id="shop-electricShield"> </i> <span id="electro-text"><i style="font-size: calc(8px + 0.4vw)" class="fa-solid fa-bolt-lightning"></i>Electro</span>  <br> 130<i class="fa-solid fa-coins"></i> </button>
+    </div>
   <section id="moves-div">
     <div>
       <button class="btn-block"  id="jumpBtn"><i class="fa-solid fa-angles-up fonts-i"></i></button>
@@ -170,7 +169,6 @@
     </div>
     <button id="shootBtn"><img src="/public/Imagenes/gameBtns/bubbleGunImg.png" alt="bubbleGun" height="30px"></button>
   </section>
-</div>
 <div>
   <h1 class="level-change-text" id="level-change-text1"></1>
   <h1 class="level-change-text" id="level-change-text2"></12>
@@ -203,7 +201,7 @@
   </div>
 </div>
 <div>
-  <button id="saltar-nivel">Aqui</button>
+  <button id="saltar-nivel">Next</button>
 </div>
 <button id="btn-instrucciones">Repetir  instrucciones</button>
 <button id="cambiar-sala">Cambiar  <br> de sala</button>

@@ -3,10 +3,9 @@ class WeaponBar {
     this.ctx = ctx;
     this.x = x;
     this.y = y;
-    this.vy = -2;
+    this.vy = -10;
     this.vx =  0;
-    this.w = 5;
-    this.width = 0,//para cuando la anchura aumenta al electrificarse, para que también la electricidad lo haga
+    this.w = 10;
     this.h = this.ctx.canvas.height;
     this.img = new Image();
     this.img.src = "../public/Imagenes/weaponBarZigzag.png";
@@ -14,7 +13,7 @@ class WeaponBar {
     this.tick = weaponBarSolidTick;
 
     this.electroImg = new Image();   //crear nueva imágene ne canvas
-    this.electroImg.src = "/public/Imagenes/electrifiedBar2.png";  //definir cual es la nueva imagen
+    this.electroImg.src = "/public/Imagenes/electrifiedBar4.png";  //definir cual es la nueva imagen
     this.electroImg.frame = 0;
     this.electroTick = 0;
     this.isElectrified = false;
@@ -49,10 +48,10 @@ if(this.isElectrified){
       0,
       this.electroImg.width / 17,
       this.electroImg.height,
-      this.x - 6,
-      this.y + i*10 , 
-      this.width + 14,
-      14
+      this.x - 10,
+      this.y + i*40 , 
+      this.w +13,
+      this.w +13
       );
   }
   }

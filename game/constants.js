@@ -48,19 +48,19 @@ buySmall.volume = 0.1;
 let trainingRoom = 0;// configura en cual sala está entreando 
 let moved = false //para mover info de un lado a otro
 let recharge = 400;
-let jumpHeight = -3.5;
-let playerSpeed = 2;
+let jumpHeight = -16.5;
+let playerSpeed = 10;
 let jumpCooldown = 500;
 let dodgeCooldown = 2400;
 let bulletDirection = 0;
 let weaponBarSolidTick = 350;//el tiempo que se pasa la barra en estado sólido
-let fireSizing = 0.1 //el aumento de ancho y alto de la bala de fuego a medida que sube
+let fireSizing = 0.3 //el aumento de ancho y alto de la bala de fuego a medida que sube
 let barLife = 2; // las veces que puede la bola chocar con la barra antes de desaparecer
 let immuneTime = 2000;
 let electricShieldTime = 5000;
 let jumpDownDistance = 0;
-let bubbleSpeedY = 2.5;
-let bubbleSpeedX = 0.5;
+let bubbleSpeedY = 14;
+let bubbleSpeedX = 3;
 let GAMELEVEL = 0;
 let infiniteLeveling = 0;
 let coins = 3000;
@@ -80,5 +80,22 @@ const CTXW = ctx.canvas.width
 const CTXH = ctx.canvas.height
 const gameSpeed = 60;
 
-
+const mapArray = [
+  "/public/Imagenes/background/map1.webp",
+  "/public/Imagenes/background/map2.webp",
+  "/public/Imagenes/background/map3.webp",
+  "/public/Imagenes/background/map4.webp",
+  "/public/Imagenes/background/map5.webp",
+  "/public/Imagenes/background/map6.webp",
+  "/public/Imagenes/background/map7.webp",
+  "/public/Imagenes/background/map8.webp",
+  "/public/Imagenes/background/map9.webp",
+  "/public/Imagenes/background/map10.webp",
+  "/public/Imagenes/background/map11.webp",
+  "/public/Imagenes/background/map12.webp",
+  "/public/Imagenes/background/map13.webp",
+  "/public/Imagenes/background/map14.webp",
+  "/public/Imagenes/background/map15.webp",
+  "/public/Imagenes/background/map16.webp",
+]
 //cuando se ralentice  this.g de player en 0.6, this.playerSpeed =  4 y gameSpeed en 20;

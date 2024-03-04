@@ -32,7 +32,7 @@ class WeaponSword {
     }, stabDuration);
     if(this.stab){
       this.direction ? this.img.src = "/public/Imagenes/swordStabRight.png" : this.img.src ="/public/Imagenes/swordStabLeft.png";
-      this.direction ? this.vx = 1 : this.vx = -1
+      this.direction ? this.vx = 4 : this.vx = -4
       this.stabSound.play()
         this.ctx.drawImage(
           this.img,
