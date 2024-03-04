@@ -9,7 +9,7 @@ constructor(ctx, x, y) {
     this.vy = 0;
     this.g = 0.1;
     this.img = new Image();   //crear nueva imágene ne canvas
-    this.img.src = "../../public/Imagenes/lever3.png";  //definir cual es la nueva imagen
+    this.img.src = "/public/Imagenes/lever3.png";  //definir cual es la nueva imagen
     this.tick = 0;
     this.img.frame = 0;
     this.activated = false;

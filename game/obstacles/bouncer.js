@@ -8,7 +8,7 @@ class Bouncer {
     this.vx = vx || 0;
     this.vy = vy || 0;
     this.img = new Image(); // Imagen asociada a la escalera
-    this.img.src = obstacleImg || "../../public/Imagenes/obstacles/platfomJump3.png"; // Ruta de la imagen de la escalera
+    this.img.src = obstacleImg || "/public/Imagenes/obstacles/platfomJump3.png"; // Ruta de la imagen de la escalera
 
     // ** Se ha comentado la parte relacionada con el sonido
     // this.bubbleBounceSound = new Audio("../public/sounds/bubbleBounce.mp3");

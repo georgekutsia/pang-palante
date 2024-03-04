@@ -6,7 +6,7 @@ class Spikes {
     this.h = h || this.ctx.canvas.width / 22; // Altura de la escalera, valor predeterminado o especificado
     this.y = y || this.ctx.canvas.height - this.h - 20; // Posición vertical (coordenada y), valor predeterminado o especificado
     this.img = new Image(); // Imagen asociada a la escalera
-    this.img.src = obstacleImg || "../../public/Imagenes/obstacles/spikes5.png"; // Ruta de la imagen de la escalera
+    this.img.src = obstacleImg || "/public/Imagenes/obstacles/spikes5.png"; // Ruta de la imagen de la escalera
     this.img.frame = 0;
     this.imgTick = 0;
     this.damage = 0.25;

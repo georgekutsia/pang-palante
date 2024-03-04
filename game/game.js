@@ -148,8 +148,11 @@ class Game {
         // inftroGame1();
         // setTimeout(() => {
         // level1(this.ctx, this.bubbles, this.platforms, this.levelBalls, this.boxes)
-        level3(this.ctx,this.bubbles,this.platforms,this.stairs,this.boxes,this.healings,this.levelBalls);
+        level5( this.ctx, this.bubbles, this.platforms, this.stairs,  this.healings, this.bars, this.boxes,this.levelBalls);
 
+          // let sta =  new Stair(this.ctx, 200, CTXH - 150, 100, 150)
+          // let sta1 =  new Stair(this.ctx, 600, CTXH - 150, 100, 150)
+          // this.stairs.push(sta, sta1)
         // }, 15000);
         // setTimeout(() => {
           // addBubble1(this.ctx, this.bubbles)

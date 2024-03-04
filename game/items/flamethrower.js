@@ -10,7 +10,7 @@ constructor(ctx, x, y) {
 
     this.g = 0.1;
     this.img = new Image();   //crear nueva imágene ne canvas
-    this.img.src =  "../../public/Imagenes/fireCounterImg.png";  //definir cual es la nueva imagen
+    this.img.src =  "/public/Imagenes/fireCounterImg.png";  //definir cual es la nueva imagen
   }
   draw() {
     this.ctx.drawImage(this.img, this.x, this.y, this.w, this.h);  // dibuja el obstáculo

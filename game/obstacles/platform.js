@@ -7,7 +7,7 @@ class Platform {
     this.h = h || this.ctx.canvas.width / 30;
     this.y = y || this.ctx.canvas.height - this.h - 20;
     this.img = new Image();
-    this.img.src = obstacleImg || "../../public/Imagenes/obstacles/platformSolid2.png";
+    this.img.src = obstacleImg || "/public/Imagenes/obstacles/platformSolid2.png";
     this.electroImg = new Image();
     this.electroImg.src = "/public/Imagenes/electrifiedPlatform1.png";
     this.electroTick = 0;
