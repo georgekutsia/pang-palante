@@ -1,9 +1,9 @@
 function bounceFromObstacles(elem1, elem2){
   if (elem1.y <= elem2.y + 5 ) {
-    elem1.vy = -bubbleSpeedY;
+    elem1.vy = -elem1.vy ;
   }
-  if(elem1.y >= elem2.y + elem2.h -5){
-    elem1.vy = bubbleSpeedY;
+  if(elem1.y + elem1.h >= elem2.y + elem2.h -5){
+    elem1.vy = elem1.vy ;
   }
   if(elem1.x <= elem2.x +5){
     elem1.vx = -bubbleSpeedX;
@@ -15,16 +15,16 @@ function bounceFromObstacles(elem1, elem2){
 
 function bounceFromBox(elem1, elem2){
   if (elem1.y <= elem2.y + 5 ) {
-    elem1.vy = -bubbleSpeedX/2;
+    elem1.vy = -elem1.vy;
   }
   if(elem1.y >= elem2.y + elem2.h -5){
-    elem1.vy = bubbleSpeedX/2;
+    elem1.vy = elem1.vy;
   }
   if(elem1.x <= elem2.x +5){
-    elem1.vx = -bubbleSpeedY/2;
+    elem1.vx = -elem1.vx;
   } 
   if(elem1.x >= elem2.x + elem2.w - 5){
-    elem1.vx = bubbleSpeedY/2;
+    elem1.vx = elem1.vx;
   }
 }
 function basicBulletBounce(elem1, elem2){
@@ -171,12 +171,12 @@ function bigWeaponBubble (ctx, bullet, player){ //la burbuja gigante que dispara
 function darkBubbleExplosion(darkBubbleExplosion, bubble, bubbles, puffBubbles){
   darkBubbleExplosion.play()
   const bub1 = new Bubble(ctx, bubble.x, bubble.y, 15, 15, -1.5, -0.5)
-  const bub2 = new Bubble(ctx, bubble.x + 5, bubble.y, 15, 15, -1, -0.5)
-  const bub3 = new Bubble(ctx, bubble.x + 10, bubble.y, 15, 15, -0.5, -0.5)
-  const bub4 = new Bubble(ctx, bubble.x + 15, bubble.y, 15, 15, 0.01, -0.5)
-  const bub5 = new Bubble(ctx, bubble.x + 20, bubble.y, 15, 15, 0.5, -0.5)
-  const bub6 = new Bubble(ctx, bubble.x + 30, bubble.y, 15, 15, 1, -0.5)
-  const bub7 = new Bubble(ctx, bubble.x + 35, bubble.y, 15, 15, 1.5, -0.5)
+  const bub2 = new Bubble(ctx, bubble.x - 50, bubble.y, 15, 15, -1, -0.5)
+  const bub3 = new Bubble(ctx, bubble.x - 10, bubble.y, 15, 15, -0.5, -0.5)
+  const bub4 = new Bubble(ctx, bubble.x + 30, bubble.y, 15, 15, 0.01, -0.5)
+  const bub5 = new Bubble(ctx, bubble.x + 70, bubble.y, 15, 15, 0.5, -0.5)
+  const bub6 = new Bubble(ctx, bubble.x + 110, bubble.y, 15, 15, 1, -0.5)
+  const bub7 = new Bubble(ctx, bubble.x + 150, bubble.y, 15, 15, 1.5, -0.5)
   bubbles.push(bub1, bub2, bub3, bub4, bub5, bub6, bub7)
   const puffBubble = new BubblePuff(ctx, bubble.x ,bubble.y, bubble.w, bubble.h );
   puffBubbles.push(puffBubble);

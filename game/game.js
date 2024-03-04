@@ -810,15 +810,17 @@ this.cannons.forEach((cann) => {//  cannon con fire
         changingLevelImg$$.src = this.listaImagenes[indiceAleatorio];
         mapChangeLevel$$.src = mapArray[GAMELEVEL - 1];
         mapChangeLevel$$.style.display = 'block';
+        setTimeout(() => {
+          if(GAMELEVEL < 100){
+            mapChangeLevel$$.style.left = '0.5vw';
+            mapChangeLevel$$.style.width = 'calc(20px + 0.7vw)';
+            mapChangeLevel$$.style.top = '21vh';
+          }
+        }, 1500);
       }
       this.changingLevelSoChangeImage = false;
       setTimeout(() => {
     this.changingLevelSoChangeImage = true;
-    if(GAMELEVEL < 100){
-      mapChangeLevel$$.style.left = '0.5vw';
-      mapChangeLevel$$.style.width = 'calc(20px + 0.7vw)';
-      mapChangeLevel$$.style.top = '21vh';
-    }
       }, 5000);
     }
     changingLevelImg$$.style.display = "block";
