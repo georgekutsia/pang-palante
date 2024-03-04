@@ -7,6 +7,7 @@ class Bubble { //posX posY, ancho, alto, velX, velY, gravedad, buleano si hay gr
     this.h = h || this.ctx.canvas.width / 14;  //altura calculada respecto al canvas
     this.vx = vx || bubbleSpeedX;
     this.vy = vy || bubbleSpeedY;
+    this.wvy = this.w / 10
     this.swordSpeed = 0;
     this.g = g || 0.2;
     this.gTick = 0;
@@ -62,7 +63,6 @@ class Bubble { //posX posY, ancho, alto, velX, velY, gravedad, buleano si hay gr
     if (this.y + this.h >= this.ctx.canvas.height ){
       this.bubbleBounceSound.play()//todo --paso 3 llamar a .play() para invocar el sonido donde sea necesario
       this.vy = -Math.abs(this.w/20 + 7); 
-      console.log(this.w)
     }
     if(this.x + this.w >= this.ctx.canvas.width && this.willBounce){
       this.bubbleBounceSound.play()//todo --paso 3 llamar a .play() para invocar el sonido donde sea necesario

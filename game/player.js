@@ -38,7 +38,7 @@ class Player {
     this.platformCreator = true;
     this.hookedOnPlatform = false;
     this.img = new Image();
-    this.img.src = "../public/Imagenes/pangPjNuevoDerecha1.png";
+    this.img.src = "../public/Imagenes/pangPjNuevoDerecha2.png";
     this.img.frame = 3;
     this.auraImg = new Image();
     this.auraImg.src = "/public/Imagenes/aura1.png";
@@ -153,8 +153,8 @@ class Player {
     if(basicWeaponLevel >= 2)this.shootTriple()
     if(basicWeaponLevel >= 3)this.shootCuatruple()
     if(basicWeaponLevel >= 4)this.shootQuintuple()
-    this.img.src = "../public/Imagenes/pjShoot2.png";
-    this.frameAmount = 2;
+    this.img.src = "../public/Imagenes/pjShoot3.png";
+    this.frameAmount = 4;
     this.img.frame = 1;
     B = 0;
     setTimeout(() => {
@@ -165,8 +165,8 @@ class Player {
     }, recharge);
     }
   handleShootU = () =>{ //*
-    this.img.src = "../public/Imagenes/pjShoot2.png";
-    this.frameAmount = 2;
+    this.img.src = "../public/Imagenes/pjShoot3.png";
+    this.frameAmount = 4;
     this.img.frame = 0;
   }
   handleFIre = (event) => {//*
@@ -255,14 +255,14 @@ class Player {
     handleRight = (event) => {
       event.preventDefault(); 
       this.vx = playerSpeed;
-      this.img.src = "../public/Imagenes/pangPjNuevoDerecha1.png";
+      this.img.src = "../public/Imagenes/pangPjNuevoDerecha2.png";
       this.frameAmount = 8;
     }
     handleLeft = (event) => {
   event.preventDefault(); 
       this.frameTick++;
       this.vx = -playerSpeed;
-      this.img.src = "../public/Imagenes/pangPjNuevoIzquierda1 copia.png";
+      this.img.src = "../public/Imagenes/pangPjNuevoIzquierda2";
       this.frameAmount = 8;
     }
     handleDown = (event) => {
@@ -279,22 +279,22 @@ handleDownU = (event) => {//*
   event.preventDefault(); 
   this.vx = 0;
   this.vy = 0;
-  this.img.src = "../public/Imagenes/pjShoot2.png";
-  this.frameAmount = 2;
+  this.img.src = "../public/Imagenes/pjShoot3.png";
+  this.frameAmount = 4;
   this.img.frame = 0;
 }
 handleLeftU = (event) =>{//*
   event.preventDefault(); 
   this.vx = 0;
-  this.img.src = "../public/Imagenes/pjShoot2.png";
-  this.frameAmount = 2;
+  this.img.src = "../public/Imagenes/pjShoot3.png";
+  this.frameAmount = 4;
   this.img.frame = 0;
 }
 handleRightU = (event) =>{//*
   event.preventDefault(); 
   this.vx = 0;
-  this.img.src = "../public/Imagenes/pjShoot2.png";
-  this.frameAmount = 2;
+  this.img.src = "../public/Imagenes/pjShoot3.png";
+  this.frameAmount = 4;
   this.img.frame = 0;
 }
 
@@ -340,7 +340,6 @@ handleRightDodge = (event) =>{ //*
     this.blasterBtn$$.style.display = !this.megaFireBlaster ? 'none' : 'block';
     this.cadenaBtn$$.style.display = this.barAmount <= 0 ? 'none' : 'block';
     this.fireBtn$$.style.display = this.fireAmount <= 0 ? 'none' : 'block';
-    console.log(this.fireAmount)
     
 
     if(Q === 81){
@@ -464,7 +463,7 @@ handleRightDodge = (event) =>{ //*
     // this.canClimb ? W = 87 : 0;
     if(!finalBoss){
       this.velocidadX = this.vx += this.r;
-      if(this.velocidadX <= 0.5 && this.velocidadX >= -0.5 && this.r !==0){
+      if(this.velocidadX <= 1.5 && this.velocidadX >= -1.5 && this.r !==0){
         this.r = 0;
         this.vx = 0;
         this.img.frame = 0;
@@ -579,7 +578,7 @@ handleRightDodge = (event) =>{ //*
       this.stabDirection = false;
       this.frameTick++;
       if(!finalBoss){
-        this.img.src = "../public/Imagenes/pangPjNuevoIzquierda1 copia.png";
+        this.img.src = "../public/Imagenes/pangPjNuevoIzquierda2.png";
         this.vx = -playerSpeed;
       } else {
         this.walkingSpeed = 10
@@ -600,7 +599,7 @@ handleRightDodge = (event) =>{ //*
     if(finalBoss && this.keySwitchCounter >= 2) {
       this.shootUp = false;
     }
-    this.img.src = "../public/Imagenes/pangPjNuevoDerecha1.png";
+    this.img.src = "../public/Imagenes/pangPjNuevoDerecha2.png";
     this.frameAmount = 8;
     }
     if (key === S ) {//todo: bloqueo para el limite inferior
@@ -640,8 +639,8 @@ handleRightDodge = (event) =>{ //*
       if(basicWeaponLevel >= 3)this.shootCuatruple()
       if(basicWeaponLevel >= 4)this.shootQuintuple()
       if(!finalBoss){
-        this.img.src = "../public/Imagenes/pjShoot2.png";
-        this.frameAmount = 2;
+        this.img.src = "../public/Imagenes/pjShoot3.png";
+        this.frameAmount = 4;
       }
       this.img.frame = 1;
       B = 0;
@@ -674,8 +673,8 @@ handleRightDodge = (event) =>{ //*
       this.frameAmount = 1;
       this.img.frame = 0;
       setTimeout(() => {
-        this.img.src = "../public/Imagenes/pjShoot2.png";
-        this.frameAmount = 2;
+        this.img.src = "../public/Imagenes/pjShoot3.png";
+        this.frameAmount = 4;
         this.img.frame = 0;
       }, 300);
       this.vy = jumpHeight;
@@ -747,8 +746,8 @@ handleRightDodge = (event) =>{ //*
     if (key === A) {
       this.vx = 0;
       if(!finalBoss){
-        this.img.src = "../public/Imagenes/pjShoot2.png";
-        this.frameAmount = 2;
+        this.img.src = "../public/Imagenes/pjShoot3.png";
+        this.frameAmount = 4;
         this.img.frame = 0;
       }
     this.walkingSpeed = 0;
@@ -756,8 +755,8 @@ handleRightDodge = (event) =>{ //*
     if (key === D) {
       this.vx = 0;
       if(!finalBoss){
-        this.img.src = "../public/Imagenes/pjShoot2.png";
-      this.frameAmount = 2;
+        this.img.src = "../public/Imagenes/pjShoot3.png";
+      this.frameAmount = 4;
       this.img.frame = 0;
     }
     this.walkingSpeed = 0;
@@ -769,8 +768,8 @@ handleRightDodge = (event) =>{ //*
 
     if (key === B ) {
       if(!finalBoss){
-      this.img.src = "../public/Imagenes/pjShoot2.png";
-      this.frameAmount = 2;
+      this.img.src = "../public/Imagenes/pjShoot3.png";
+      this.frameAmount = 4;
       this.img.frame = 0;
       }
     }

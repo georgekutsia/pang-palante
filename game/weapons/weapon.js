@@ -40,7 +40,7 @@ class BasicWeapon {
       this.y -= basicWeaponSpeed;
     }
     if (this.y + 2 * this.radius >= this.ctx.canvas.height) {
-      this.vy = -3;
+      this.vy = -this.vy;
     }
     this.tick++;
     if (this.tick >= this.basicBulletDuration) {

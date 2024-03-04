@@ -1,47 +1,34 @@
-function bounceFromObstacles(elem1, elem2){
-  if (elem1.y <= elem2.y + 5 ) {
-    elem1.vy = -elem1.vy ;
+function bounceFromObstacles(elem1, elem2, extraBounce = 0){
+  if (elem1.y +  elem1.h/2 <= elem2.y   ) {
+    elem1.vy =  -Math.abs(elem1.w/20 + 7 + extraBounce) ;
   }
-  if(elem1.y + elem1.h >= elem2.y + elem2.h -5){
-    elem1.vy = elem1.vy ;
+  if (elem1.y +  elem1.h/2 >= elem2.y   ) {
+    elem1.vy =  Math.abs(elem1.w/20 + 7 + extraBounce) ;
   }
-  if(elem1.x <= elem2.x +5){
-    elem1.vx = -bubbleSpeedX;
-  } 
-  if(elem1.x >= elem2.x +elem2.w - 5){
-    elem1.vx = bubbleSpeedX;
+  if(elem1.x + elem1.w/2 <= elem2.x ){
+    elem1.vx = -Math.abs(elem1.w/40 + extraBounce) ;
+  }
+  if(elem1.x + elem1.w/2> elem2.x + elem2.w ){
+    elem1.vx = Math.abs(elem1.w/40 + extraBounce) ;
   }
 }
 
-function bounceFromBox(elem1, elem2){
-  if (elem1.y <= elem2.y + 5 ) {
-    elem1.vy = -elem1.vy;
-  }
-  if(elem1.y >= elem2.y + elem2.h -5){
-    elem1.vy = elem1.vy;
-  }
-  if(elem1.x <= elem2.x +5){
-    elem1.vx = -elem1.vx;
-  } 
-  if(elem1.x >= elem2.x + elem2.w - 5){
-    elem1.vx = elem1.vx;
-  }
-}
 function basicBulletBounce(elem1, elem2){
   if(elem1.direction){
     elem1.vx = elem1.direction;
   }
-  if (elem1.y <= elem2.y) {
-    elem1.vy = bubbleSpeedY;
+  if (elem1.y + elem1.radius >= elem2.y) {
+    elem1.vy = -elem1.vy;
   }
-  if(elem1.y >= elem2.y + elem2.h){
-    elem1.vy = -bubbleSpeedY;
-  }
-  if(elem1.x <= elem2.x){
-    elem1.vx = -bubbleSpeedY;
+
+  if(elem1.x + elem1.radius<= elem2.x){
+    elem1.vx = -elem1.vx;
+    elem1.direction = elem1.vx // para que tras rebotar en una plataforma vertical y volver en otra dirección a rebotar sobre plataforma horizontal, mantenga la dirección
   } 
   if(elem1.x >= elem2.x +elem2.w){
-    elem1.vx = bubbleSpeedY;
+    elem1.vx = elem1.vx;
+    elem1.direction = elem1.vx; // para que tras rebotar en una plataforma vertical y volver en otra dirección a rebotar sobre plataforma horizontal, mantenga la dirección
+
   }
 }
 

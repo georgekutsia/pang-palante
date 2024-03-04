@@ -46,7 +46,6 @@ class MiniBoss1 {
   }
 
   draw() {
-    console.log(this.life)
 if(this.arriving){
   this.minibossFlyingShip.play();
   this.arriving = false;
