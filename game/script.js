@@ -255,3 +255,18 @@ mapChangeLevel$$.addEventListener("mouseout", () => {
   mapChangeLevel$$.style.width = "calc(20px + 0.7vw)";
 
 });
+
+function getMousePos(canvas, evt) {
+  const rect = canvas.getBoundingClientRect(); // Obtener el rectángulo del canvas
+  const scaleX = canvas.width / rect.width; // Calcular la escala X
+  const scaleY = canvas.height / rect.height; // Calcular la escala Y
+  const mouseX = (evt.clientX - rect.left) * scaleX; // Calcular la posición X del ratón
+  const mouseY = (evt.clientY - rect.top) * scaleY; // Calcular la posición Y del ratón
+  return { x: mouseX, y: mouseY }; // Devolver la posición del ratón dentro del canvas
+}
+
+// Ejemplo de uso
+canvas.addEventListener('mousemove', function(evt) { // Añadir un evento de ratón
+  const mousePos = getMousePos(canvas, evt); // Obtener la posición del ratón
+  console.log('Posición del ratón:', mousePos); // Mostrar la posición del ratón en la consola
+}, false);
