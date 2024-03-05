@@ -21,6 +21,7 @@ class Player {
     this.bulletPlatformArray = [];
     this.hooksArray = [];
     this.swordArray = []; //
+    this.itemTakens = [];
     this.frameAmount = 8;
     this.fading = 0; //necesario para el parpadeo del personaje cuando es inmune
     this.charging = 0;  // acumula la carga, lo que dibuja el semicírculo
@@ -52,6 +53,9 @@ class Player {
     this.canClimb= false;
     this.diagonalShoot = false;
     this.walkingSpeed = 0;
+    this.itemJustTaken = false;
+
+
     this.weaponFire = new Image();
     this.weaponFire.src = "/public/Imagenes/weaponFire.png";
     this.dodgeQ = new Image();
@@ -448,6 +452,13 @@ handleRightDodge = (event) =>{ //*
       this.ctx.drawImage(this.swordBack, this.x, this.y + 25, this.w/1.4, this.h/1.4);
     }
 
+    if(this.itemJustTaken){
+      let sparkle = new ItemTaken(this.ctx);
+      this.itemTakens.push(sparkle)
+      this.itemJustTaken = false;
+    }
+    this.itemTakens.forEach((sparkle) => {sparkle.draw();}); // paso 3: dibujo cada bullet que se dispare
+
   }
 
   move() {
@@ -551,7 +562,8 @@ handleRightDodge = (event) =>{ //*
   this.bulletBarArray.forEach((bullet) => {bullet.move();}); //paso 4: mueve cada bullet que se dispare
   this.bulletPlatformArray.forEach((bullet) => {bullet.move();}); // paso 3: dibujo cada bullet que se dispare
   this.hooksArray.forEach((bullet) => {bullet.move();}); // paso 3: dibujo cada bullet que se dispare
-  this.swordArray.forEach((bullet) => {bullet.move();}); // paso 3: dibujo cada bullet que se dispare
+  this.swordArray.forEach((sparkle) => {sparkle.move();}); // paso 3: dibujo cada bullet que se dispare
+  this.itemTakens.forEach((sparkle) => {sparkle.move();}); // paso 3: dibujo cada bullet que se dispare
 
   if(this.swordPowerUp >=10){
     this.swordPower1 = true;

@@ -7,7 +7,7 @@ constructor(ctx, x, y) {
     this.h = this.ctx.canvas.width / 22;  //altura calculada respecto al canvas
     this.vx = 0;
     this.vy = 0;
-    this.g = 0.1;
+    this.g = 0.3;
     this.img = new Image();   //crear nueva imágene ne canvas
     this.img.src =  "/public/Imagenes/machinegun.png";  //definir cual es la nueva imagen
   }

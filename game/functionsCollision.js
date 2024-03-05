@@ -139,12 +139,11 @@ function bouncerPlayerCollision(player, bouncer){
 }
 
 function platformPlayerCollision(player, platform){
-  if (player.y <= platform.y - player.h/1.2 && player.x <= platform.x + platform.w && player.x + player.w > platform.x) {
-    if(player.electricShieldIsActive &&platform.canBeElectrified && !platform.isElectrified){
+  if (player.y <= platform.y - player.h/1.5&& player.x <= platform.x + platform.w && player.x + player.w > platform.x) {
+    if(player.electricShieldIsActive && platform.canBeElectrified && !platform.isElectrified){  // si el jugador activa el escudo eléctrico, la plataforma puede ser electrificada y luego se activa
       electroPlatformSound.play()
       platform.vx = -0.5;
-      platform.isElectrified = true;
-      platform.electroShocked = true;
+      platform.isElectrified = true;  //activa la animación de electricidad y movimiento
     }
     if (platform.isBrakable) {
       platform.braking--; 
@@ -169,8 +168,6 @@ function platformPlayerCollision(player, platform){
   }
   if (player.x + player.w >= platform.x + platform.w  || player.x <= platform.x) {//colisión por los lados de la plataforma. Por alguna razón, funciona
     jumpDownDistance = 0;
-    player.vy = 0;
-    player.vx = 0;
     player.g = 2;
   }
 }

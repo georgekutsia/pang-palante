@@ -209,6 +209,7 @@ class Game {
     this.player.bulletArray = this.player.bulletArray.filter((e) =>e.isVisible()); //elimina cada bullet que ya no es visible y vacía el array
     this.player.bulletFireArray = this.player.bulletFireArray.filter((e) =>e.isVisible()); //elimina cada bullet de fuego que ya no es visible y vacía el array
     this.player.bulletBarArray = this.player.bulletBarArray.filter((e) =>e.isVisible()); //elimina cada bullet de cadena que ya no es visible y vacía el array
+    this.player.itemTakens = this.player.itemTakens.filter((e) =>e.isVisible()); //elimina cada bullet de cadena que ya no es visible y vacía el array
     this.player.swordArray = this.player.swordArray.filter((e) =>e.isVisible()); //elimina cada bullet de cadena que ya no es visible y vacía el array
     this.player.hooksArray = this.player.hooksArray.filter((e) =>e.isVisible()); //elimina cada bullet de cadena que ya no es visible y vacía el array
     this.bubbles = this.bubbles.filter((e) => e.isVisible()); //elimina cada obstáculo que ya no es visible y vacía el array
@@ -330,7 +331,6 @@ class Game {
     })
     this.stairs.forEach((stair) => {//player con stair
       if (stair.collidesTop(this.player)) {
-        console.log("hcohhcochocho")
         this.player.vy = 0;
         this.player.y = stair.y - this.player.h;
         jumpDownDistance = 3;
@@ -568,6 +568,7 @@ this.cannons.forEach((cann) => {//  cannon con fire
     this.flamethrowers.forEach((flame) => {// flamethrowers  choca con el personaje
       if (flame.collides(this.player)) {
         N = 78;
+        this.player.itemJustTaken = true;
         eventInfo(munLanzallamas$$)
         this.player.fireAmount += 3; // sumamos 5 balas de fuego
         if (this.player.fireAmount >= 28) {//para que el charger que se dibuja haga el semicírculo
@@ -579,6 +580,7 @@ this.cannons.forEach((cann) => {//  cannon con fire
     this.machineguns.forEach((machinegun) => {// machineguns  choca con el personaje
       if (machinegun.collides(this.player)) {
         recharge = 50;
+        this.player.itemJustTaken = true;
         eventInfo(munAmetralladora$$)
         setTimeout(() => {
           recharge = 500;
@@ -592,6 +594,8 @@ this.cannons.forEach((cann) => {//  cannon con fire
         eventInfo(munSalud$$)
         this.player.gainLife();
         this.playerHeals.play();
+        itemTakenImages = "../public/Imagenes/itemTakenHealing1.png";
+        this.player.itemJustTaken = true;
         healing.x = -100; // situa fuera del canvas la burbuja que colisiona con el player y luego isVisible la elimina del array
       } else return true;
     });
@@ -600,6 +604,7 @@ this.cannons.forEach((cann) => {//  cannon con fire
       if (bar.collides(this.player)) {
         this.player.barAmount += 2;
         this.playerBar.play();
+        this.player.itemJustTaken = true;
         eventInfo(munCadena$$)
         bar.x = -100; // situa fuera del canvas la burbuja que colisiona con el player y luego isVisible la elimina del array
       } else return true;
@@ -609,6 +614,7 @@ this.cannons.forEach((cann) => {//  cannon con fire
       if (step.collides(this.player)) {
         this.player.stepsAmount += 5;
         this.playerBar.play();
+        this.player.itemJustTaken = true;
         eventInfo(munStep$$)
         step.x = -100; // situa fuera del canvas la burbuja que colisiona con el player y luego isVisible la elimina del array
       } else return true;
@@ -617,6 +623,7 @@ this.cannons.forEach((cann) => {//  cannon con fire
       if (blaster.collides(this.player)) {
         this.player.megaFireBlaster = true;
         this.player.megaFireBlasterAmount += 31;
+        this.player.itemJustTaken = true;
         eventInfo(munMegablaster$$)
         blaster.dispose = true; // situa fuera del canvas la burbuja que colisiona con el player y luego isVisible la elimina del array
       } else return true;
@@ -626,6 +633,7 @@ this.cannons.forEach((cann) => {//  cannon con fire
       if (aura.collides(this.player)) {
         this.player.auraIsActive = true;
         aura.dispose = false;
+        this.player.itemJustTaken = true;
         eventInfo(munEscudo$$)
         setTimeout(() => {
           this.player.auraIsActive = false;
@@ -641,6 +649,7 @@ this.cannons.forEach((cann) => {//  cannon con fire
       if (coin.collides(this.player)) {
             coins+= coin.amountOfCoins;
             coin.dispose = false;
+        this.player.itemJustTaken = true;
       } else return true;
     });
     this.hooks.forEach((hook) => {
@@ -648,6 +657,8 @@ this.cannons.forEach((cann) => {//  cannon con fire
             eventInfo(munHook$$)
             this.player.hookAmount += 2;
             hook.dispose = false;
+        this.player.itemJustTaken = true;
+
       } else return true;
     });
     this.electros.forEach((electro) => {
@@ -655,13 +666,16 @@ this.cannons.forEach((cann) => {//  cannon con fire
             this.player.electroAmount += 5;
             this.electroItemSound.play()
             electro.dispose = false;
+        this.player.itemJustTaken = true;
       } else return true;
     });
     this.swords.forEach((sword) => {
       if (sword.collides(this.player)) {
-            this.player.swordEquipped = true;
-            this.player.swordLevel ++;
-            sword.dispose = false;
+        this.player.swordEquipped = true;
+        this.player.swordLevel ++;
+        sword.dispose = false;
+        itemTakenImages = "../public/Imagenes/itemTaken1.png";
+        this.player.itemJustTaken = true;
       } else return true;
     });
     // cannons..

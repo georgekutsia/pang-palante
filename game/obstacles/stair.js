@@ -32,8 +32,8 @@ class Stair {
     return colX && colY;
   }
   collidesTop(objetivo) { //colisiona con la parte superior de la escalera para dejar el jugador fijo arriba y activar la gravedad si se sale
-    const colX = this.x + 7 <= objetivo.x + objetivo.w && this.x + this.w - 7 >= objetivo.x;
-    const colY = this.y  + 5> objetivo.y + objetivo.h && this.y  < objetivo.y + objetivo.h;
+    const colX = this.x  <= objetivo.x && this.x + this.w  >= objetivo.x ;
+    const colY = this.y + 25 > objetivo.y + objetivo.h && this.y  < objetivo.y + objetivo.h;
     return colX && colY
   }
   collidesSides(objetivo) { //colisiona con los lados de la escalera para desactivar W y activar gravedad

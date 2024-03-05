@@ -12,7 +12,6 @@ class Platform {
     this.electroImg.src = "/public/Imagenes/electrifiedPlatform1.png";
     this.electroTick = 0;
     this.electroImg.frame= 0;
-    this.electroShocked = false;
     this.vx = vx || 0;
     this.vy = vy || 0;
     this.xLimit1   = xLimit1   || -40
@@ -63,8 +62,7 @@ class Platform {
         }
     }
 
-    if(this.electroShocked){
-
+    if(this.isElectrified){
       this.ctx.drawImage(
         this.electroImg,
         (this.electroImg.frame * this.electroImg.width) / 5,
@@ -97,7 +95,7 @@ class Platform {
       this.vy = this.speedY
     }
 
-    if(this.electroShocked){
+    if(this.isElectrified){
       this.electroTick++;
       if(this.electroTick >6){
         this.electroImg.frame++;

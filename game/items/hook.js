@@ -7,7 +7,7 @@ constructor(ctx, x, y) {
     this.h = this.ctx.canvas.width / 20;  //altura calculada respecto al canvas
     this.vx = 0;
     this.vy = 0;
-    this.g = 0.1;
+    this.g = 0.3;
     this.dispose = true;
     this.img = new Image();   //crear nueva imágene ne canvas
     this.img.src = "/public/Imagenes/hookItem.png";  //definir cual es la nueva imagen
