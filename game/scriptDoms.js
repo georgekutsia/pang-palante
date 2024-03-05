@@ -95,22 +95,3 @@ let btnCambiarSala$$ = document.getElementById("cambiar-sala")
 let introAyudaFinal1$$ = document.querySelector(".introAyudaFinal1")
 
 let mapChangeLevel$$ =  document.getElementById("changing-level-map")
-
-canvas.addEventListener('mousemove', function(event) {
-  // Obtener las coordenadas del ratón relativas al canvas
-  const rect = canvas.getBoundingClientRect();
-  const mouseX = event.clientX - rect.left;
-  const mouseY = event.clientY - rect.top;
-
-  // Mostrar las coordenadas en la consola
-  console.log('Posición del ratón - X: ' + mouseX + ', Y: ' + mouseY);
-
-  // Puedes usar estas coordenadas para hacer lo que necesites, como dibujar en el canvas
-  // Por ejemplo, para dibujar un punto en la posición del ratón
-  // ctx.clearRect(0, 0, canvas.width, canvas.height); // Limpiar el canvas (opcional)
-  // ctx.beginPath();
-  // ctx.arc(mouseX, mouseY, 5, 0, Math.PI * 2);
-  // ctx.fillStyle = 'red';
-  // ctx.fill();
-  // ctx.closePath();
-});
