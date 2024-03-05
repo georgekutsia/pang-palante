@@ -15,7 +15,7 @@ function addBubble5(ctx, bubbles){
   const bubble3 = new Bubble(ctx, 400, -210)
   const bubble4 = new Bubble(ctx, 550, -310)
   const bubble5 = new Bubble(ctx, 700, -410)
-  // bubbles.push(bubble1,bubble2,bubble3,bubble4,bubble5);
+  bubbles.push(bubble1,bubble2,bubble3,bubble4,bubble5);
 }
 
 function addPlatforms5(ctx, platforms, healings, boxes, stairs,bars){
@@ -28,7 +28,7 @@ function addPlatforms5(ctx, platforms, healings, boxes, stairs,bars){
     const platform7 = new Platform(ctx, CTXW-735, CTXH - 350, 165, 15, "../public/Imagenes/obstacles/platformSolid3.png", false, false, true);
   const platform8 = new Platform(ctx, CTXW - 400, CTXH - 100, 145, 15, "../public/Imagenes/obstacles/platformSolid4.png", true, false, true, 0, 0, 140, 230, 0, 0, true);
 
-    platforms.push( platform1,platform2, platform3,platform4, platform5, platform6, platform7, platform8);
+    platforms.push( platform1,platform2, platform3,platform4, platform5, platform6, platform7);
     const healingItem = new Healing(ctx, 20, 70)
     healings.push(healingItem)
     const box1 = new Box(ctx, 155, 30,  3, false, 5)

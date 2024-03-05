@@ -1,63 +1,17 @@
-// ahora solo salta cuando su vy es 0, pero si se mueve junto a una plataforma, no puede saltar
-
-// averiguar  && this.levelBalls.every(e =>e.ballBroke === false) como hacer que no cambie de nivel hasta que se rompan todas las bolas
-
-la aceleración afecta a cuando se dispara hacia la derecha en el boss con balas normales !!! pendiente, pero no importante. se dispara en diagonal y ya
-
-cuando playerIsImmune los disparos explosivos atraviesan las bars del player, pero no es importante
-
-actualizar instrucciones
-
-info de sword al pulsar sobre el icono de la derecha de espada
-
-en level infinito sale el mapa al cambiar de nivel que no existe
-
-electro charger al comprar es raro
-
-hooks podrían empujar los bubbles un poco mas arriba
-
-
-y rebote sobre pelotas otra vez
-
-
-
-
-
-
-// Variables globales
-const canvas = document.getElementById('canvas');
-const ctx = canvas.getContext('2d');
-const game = new Game(ctx);
-
-// Función para manejar clics en el canvas
 canvas.addEventListener('click', handleClick);
 
-// Función para manejar clics en el canvas
 function handleClick(event) {
   const rect = canvas.getBoundingClientRect();
   const clickX = event.clientX - rect.left;
   const clickY = event.clientY - rect.top;
   
-  // Comprueba si el clic fue en el jugador
-  if (
-    clickX >= game.points.x &&
-    clickX <= game.points.x + game.points.w + 80 &&
-    clickY >= game.points.y &&
-    clickY <= game.points.y + game.points.h
-  ) {
-    alert("player");
+  if (isPointInsideObject( game.points, clickX, clickY, )) {
+    alert("puntos");
     return;
   }
 
-  // Comprueba si el clic fue en alguna burbuja
-  if (isPointInsideAnyPlatform(game.bubbles, clickX, clickY)) {
-    alert("burbuja");
-    return;
-  }
-
-  // Comprueba si el clic fue en alguna burbuja oscura
-  if (isPointInsideAnyPlatform(game.darkBubbles, clickX, clickY)) {
-    alert("burbuja oscura");
+  if (isPointInsideAnyPlatform(game.platforms, clickX, clickY, )) {
+    alert("plataforma");
     return;
   }
 
@@ -84,13 +38,6 @@ function handleClick(event) {
     alert("barra");
     return;
   }
-
-  // Comprueba si el clic fue en alguna plataforma
-  if (isPointInsideAnyPlatform(game.platforms, clickX, clickY)) {
-    alert("plataforma");
-    return;
-  }
-
 
   if (isPointInsideAnyPlatform(game.bouncers, clickX, clickY)) {
     alert("bouncers");
@@ -152,18 +99,25 @@ function handleClick(event) {
     alert("miniBoses");
     return;
   }
-
-
 }
 
-// Función para comprobar si se hizo clic en algún objeto de un array
-function isPointInsideAnyPlatform(array, x, y) {
-  return array.some((obj) => {
+
+function isPointInsideObject(x, y, object) {
+  return (
+    x >= object.x &&
+    x <= object.x + object.w + 80 &&
+    y >= object.y &&
+    y <= object.y + object.h
+  );
+}
+
+function isPointInsideAnyPlatform(platforms, x, y) {
+  return platforms.some((plat) => {
     return (
-      x >= obj.x &&
-      x <= obj.x + obj.w &&
-      y >= obj.y &&
-      y <= obj.y + obj.h
+      x >= plat.x &&
+      x <= plat.x + plat.w  &&
+      y >= plat.y &&
+      y <= plat.y + plat.h 
     );
   });
 }

@@ -75,7 +75,7 @@ class Player {
     this.swordRightStab.src = "/public/Imagenes/dodgeRightSwordImg.png";
     
     this.swingSwordState = true;
-    this.swordEquipped = true;
+    this.swordEquipped = false;
     this.swordLevel = 0;
     this.swordPowerUp = 8;
     this.swordPower1 = true;
