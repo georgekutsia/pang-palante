@@ -3,45 +3,45 @@ class Aura {
     this.ctx = ctx;
     this.x = x || Math.random() * this.ctx.canvas.width; ;
     this.y = y ||  Math.random() * this.ctx.canvas.height - 40 ;
-    this.w = this.ctx.canvas.width / 20;
-    this.h = this.ctx.canvas.width / 20;
+    this.w = this.ctx.canvas.width / 30;
+    this.h = this.ctx.canvas.width / 30;
     this.tick = 0
     this.vx = 0;
     this.vy = 0;
-    this.g = 0.05;
+    this.g = 0.3;
     this.dispose = true;
-    this.auraImg = new Image();
-    this.auraImg.src = "/public/Imagenes/auraItem.png";
-    this.auraImg.frame = 0;
-    this.imgTick = 0;
+    this.img = new Image();
+    this.img.src = "/public/Imagenes/auraItem2.png";
+    this.img.frame = 0;
+    this.tick = 0;
 
     
   }
 
   draw() {
     this.ctx.drawImage(
-      this.auraImg,
+      this.img,
+      (this.img.frame * this.img.width) / 8,
       0,
-      (this.auraImg.frame * this.auraImg.height) / 8,
-      this.auraImg.width ,
-      this.auraImg.height / 8,
+      this.img.width / 8,
+      this.img.height ,
       this.x,
       this.y,
       this.w,
       this.h
     );
-    
+
   }
   move() {
-    
-    this.imgTick++
-    if(this.imgTick > 10){
-      this.auraImg.frame++
-      this.imgTick = 0;
+    this.tick++
+    if(this.tick > 4){
+      this.img.frame++
+      this.tick = 0;
     }
-    if(this.auraImg.frame > 7){
-      this.auraImg.frame = 0;
+    if(this.img.frame > 7){
+      this.img.frame = 0;
     }
+
     this.vy += this.g;  //efecto gravedad, aumenta la velocidad a medida que baja
     this.y += this.vy;
     this.x += this.vx;

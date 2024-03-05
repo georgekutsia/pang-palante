@@ -7,7 +7,7 @@ constructor(ctx, x, y) {
     this.h = this.ctx.canvas.width / 30;  //altura calculada respecto al canvas
     this.vy = 0;
     this.vx = 0;
-    this.g = 0.1;
+    this.g = 0.3;
     this.img = new Image();   //crear nueva imágene ne canvas
     this.img.src = "/public/Imagenes/barItem2.png";  //definir cual es la nueva imagen
 

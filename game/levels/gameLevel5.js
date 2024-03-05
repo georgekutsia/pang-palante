@@ -20,19 +20,21 @@ function addBubble5(ctx, bubbles){
 
 function addPlatforms5(ctx, platforms, healings, boxes, stairs,bars){
     const platform1 = new Platform(ctx, 10, CTXH-230, 135, 15, "../public/Imagenes/obstacles/platformSolid2.png", false, false, true);
-    const platform2 = new Platform(ctx, 200, CTXH-220, 235, 15, "../public/Imagenes/obstacles/platformSolid3.png", true, false, true);
+    const platform2 = new Platform(ctx, 200, CTXH-220, 235, 15, "../public/Imagenes/obstacles/platformSolid3.png", false, false, true);
     const platform3 = new Platform(ctx, 250, CTXH-110, 135, 15, "../public/Imagenes/obstacles/platformSolid3.png", false, false, true);
-    const platform4 = new Platform(ctx, 150, 50, 135, 15, "../public/Imagenes/obstacles/platformSolid3.png", true, false, true);
-    const platform5 = new Platform(ctx, CTXW-285, CTXH - 160, 195, 15, "../public/Imagenes/obstacles/platformSolid3.png", true, true, true);
+    const platform4 = new Platform(ctx, 150, 50, 135, 15, "../public/Imagenes/obstacles/platformSolid3.png", false, false, true);
+    const platform5 = new Platform(ctx, CTXW-285, CTXH - 160, 195, 15, "../public/Imagenes/obstacles/platformSolid3.png", false, true, true);
     const platform6 = new Platform(ctx, CTXW-535, CTXH - 250, 195, 15, "../public/Imagenes/obstacles/platformSolid3.png", false, false, true);
-    const platform7 = new Platform(ctx, CTXW-735, CTXH - 350, 165, 15, "../public/Imagenes/obstacles/platformSolid3.png", true, false, true);
-    platforms.push( platform1,platform2, platform3,platform4, platform5, platform6, platform7);
+    const platform7 = new Platform(ctx, CTXW-735, CTXH - 350, 165, 15, "../public/Imagenes/obstacles/platformSolid3.png", false, false, true);
+  const platform8 = new Platform(ctx, CTXW - 400, CTXH - 100, 145, 15, "../public/Imagenes/obstacles/platformSolid4.png", true, false, true, 0, 0, 140, 230, 0, 0, true);
+
+    platforms.push( platform1,platform2, platform3,platform4, platform5, platform6, platform7, platform8);
     const healingItem = new Healing(ctx, 20, 70)
     healings.push(healingItem)
     const box1 = new Box(ctx, 155, 30,  3, false, 5)
     boxes.push(box1,)
     const stair1 = new Stair(ctx, CTXW-90, CTXH - 160,  80, 160);
     stairs.push(stair1);
-    const bar1 = new Bars(ctx, CTXW-85, 40, 35, 5, );
+    const bar1 = new Aura(ctx, CTXW-285, CTXH - 60 );
     bars.push(bar1)
 }

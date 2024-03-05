@@ -95,9 +95,10 @@ function  itemDropOnStairs (items, platforms){
   items.forEach((item) => {  
     platforms.forEach((platform) => {
       if(item.collides(platform)){
-        item.vy = platform.vy;
-        item.vx = platform.vx
-        item.g = 0.3
+        if(item.y + item.h <= platform.y +20){
+          item.vy = 0.5; 
+        }
+        console.log("hey")
       }
     })
   })

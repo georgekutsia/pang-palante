@@ -8,7 +8,7 @@ class Sword {
     this.tick = 0
     this.vx = 0;
     this.vy = 0;
-    this.g = 0.05;
+    this.g = 0.4;
     this.dispose = true;
     this.auraImg = new Image();
     this.auraImg.src = "/public/Imagenes/swordShine1.png";

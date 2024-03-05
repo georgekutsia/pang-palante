@@ -79,6 +79,7 @@ let stabDuration = 400; //cuanto dura cuando haces el estoque, para poder dejar 
 const CTXW = ctx.canvas.width
 const CTXH = ctx.canvas.height
 const gameSpeed = 60;
+let itemTakenImages = "../public/Imagenes/itemTaken1.png";
 
 const mapArray = [
   "/public/Imagenes/background/map1.webp",
