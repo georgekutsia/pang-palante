@@ -25,8 +25,7 @@ class Player {
     this.charging = 0;  // acumula la carga, lo que dibuja el semicírculo
     this.chargingFires = false; //   se pone en true mientras carga el disparo fuerte de fuego
     this.megaFireBlaster = true; //al ponerse en true, se puede activar la K
-    this.megaFireBlasterAmount = 91; //la carga del blaster. cada 10, es una bola
-    this.blasterAmount = Math.floor(this.megaFireBlasterAmount / 10)
+    this.megaFireBlasterAmount = 31; //la carga del blaster. cada 10, es una bola
     this.electroAmount = 30; //cantidad de carga eléctrica que tiene
     this.fireAmount = 30; //cantidad de fuegos que puedes disparar con N
     this.hookAmount = 50; // la cantidad de hooks con J
