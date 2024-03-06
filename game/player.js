@@ -11,9 +11,7 @@ class Player {
     this.vy = 0;
     this.g = 2; //gravedad
     this.r = 0; //rozamiento
-    this.feet = this.y + this.h
     this.auraIsActive = false;
-    this.auraTime = 5000;
     this.frameTick = 1;
     this.bulletArray = [];
     this.bulletFireArray = [];
@@ -26,9 +24,10 @@ class Player {
     this.fading = 0; //necesario para el parpadeo del personaje cuando es inmune
     this.charging = 0;  // acumula la carga, lo que dibuja el semicírculo
     this.chargingFires = false; //   se pone en true mientras carga el disparo fuerte de fuego
-    this.megaFireBlaster = false; //al ponerse en true, se puede activar la K
+    this.megaFireBlaster = true; //al ponerse en true, se puede activar la K
+    this.megaFireBlasterAmount = 91; //la carga del blaster. cada 10, es una bola
+    this.blasterAmount = Math.floor(this.megaFireBlasterAmount / 10)
     this.electroAmount = 30; //cantidad de carga eléctrica que tiene
-    this.megaFireBlasterAmount = 31; //la carga del blaster. cada 10, es una bola
     this.fireAmount = 30; //cantidad de fuegos que puedes disparar con N
     this.hookAmount = 50; // la cantidad de hooks con J
     this.barAmount = 320; //la cantidad de barras disponibles con M
@@ -358,7 +357,7 @@ handleRightDodge = (event) =>{ //*
     }
     for (let i = 0; i < this.charging /10 -1; i++) {
       if(this.charging >= 11)
-      this.ctx.drawImage(this.weaponFire, this.x-20 + i*5, this.y-15, this.w , this.h);
+      this.ctx.drawImage(this.weaponFire, this.x-this.w + i*20, this.y-25, this.w/4 , this.h/2);
     }
     if (this.barAmount >= 1) {
       this.barInfo$$.innerText = `x ${this.barAmount}`
@@ -399,10 +398,10 @@ handleRightDodge = (event) =>{ //*
     }
 
     if(this.charging >=1){
-      this.charger.draw(this.x + 5, this.y + 10, this.charging, 16, 15, "yellow", "red")
+      this.charger.draw(this.x + 24, this.y + 33, this.charging, 52, 51, "black", "red")
     }
     if(this.electroAmount >=1){
-      this.charger.draw(this.x + 25, this.y + 30, this.electroAmount, 39, 38, "blue", "green")
+      this.charger.draw(this.x + 25, this.y + 30, this.electroAmount/1.5, 39, 38, "blue", "green")
     }
     if(this.electroAmount <=0) {this.electricShieldIsActive = false; H = 0}
     if(this.electroAmount > 1) H = 72
@@ -446,7 +445,7 @@ handleRightDodge = (event) =>{ //*
         this.w * 2,
         this.h * 2
       );
-      this.electroAmount -= 0.05;
+      this.electroAmount -=  (10 - shieldsDuration/1000)/100; // para que a mayor duración de escudo, mas lento se descargue la electricidad
     }
     if(this.swordEquipped && R === 82){
       this.ctx.drawImage(this.swordBack, this.x, this.y + 25, this.w/1.4, this.h/1.4);
@@ -795,11 +794,11 @@ handleRightDodge = (event) =>{ //*
           this.blasterExplosion.play();
           this.blasterCharging.volume = 0;
           if(i % 10 === 0  && i % 20 !==0 ){
-            const bulletFire = new WeaponFire(this.ctx, this.x + this.w-i, this.y, this.ctx.canvas.width/20, this.ctx.canvas.width/18)
+            const bulletFire = new WeaponFire(this.ctx, this.x + i*2, this.y - 30)
             this.bulletFireArray.push(bulletFire);
           }
           if(i % 20 === 0 && i >= 10){
-            const bulletFire = new WeaponFire(this.ctx, this.x +i, this.y, this.ctx.canvas.width/20, this.ctx.canvas.width/18)
+            const bulletFire = new WeaponFire(this.ctx, this.x - i *2, this.y - 30)
             this.bulletFireArray.push(bulletFire);
           }
         }

@@ -148,8 +148,12 @@ class Game {
         // inftroGame1();
         // setTimeout(() => {
         // level1(this.ctx, this.bubbles, this.platforms, this.levelBalls, this.boxes)
-        level5( this.ctx, this.bubbles, this.platforms, this.stairs,  this.healings, this.bars, this.boxes,this.levelBalls);
+        // level5( this.ctx, this.bubbles, this.platforms, this.stairs,  this.healings, this.bars, this.boxes,this.levelBalls);
 
+        for (let i = 0; i < 15; i++) {
+          let spa =  new Electro(this.ctx, 300 + i*50, CTXH - 30, 10, 30)
+          this.electros.push(spa)
+        }
           // let sta =  new Stair(this.ctx, 200, CTXH - 150, 100, 150)
           // let sta1 =  new Stair(this.ctx, 600, CTXH - 150, 100, 150)
           // this.stairs.push(sta, sta1)
@@ -314,8 +318,13 @@ class Game {
     //función para comprobar las colisiones
     this.spikes.forEach((spike) => {//player con spikes
       if (spike.collides(this.player) && !playerIsImmune) {
-        if (!this.player.auraIsActive) {
+        if (!this.player.auraIsActive && !this.player.electricShieldIsActive) {
           spike.active = true;
+          let loseCoins =  getRandomNumber(4);
+          if(loseCoins === 1){
+            coins -= 5;
+            
+          }
           this.player.wasNotDamaged = false;
           this.player.loseLife(spike.damage, true); //el daño al jugador se le hace según lo que marca el daño de la burbuja. a burbuja más pequeña, menos daño
         }
@@ -637,7 +646,7 @@ this.cannons.forEach((cann) => {//  cannon con fire
         eventInfo(munEscudo$$)
         setTimeout(() => {
           this.player.auraIsActive = false;
-        }, this.player.auraTime);
+        }, shieldsDuration*2);
       } else return true;
     });
     this.levers.forEach((lever) => {
@@ -663,7 +672,11 @@ this.cannons.forEach((cann) => {//  cannon con fire
     });
     this.electros.forEach((electro) => {
       if (electro.collides(this.player)) {
-            this.player.electroAmount += 5;
+        if(this.player.electroAmount <= 90){
+          this.player.electroAmount += 5;
+        } else{
+          coins += 30;
+        }
             this.electroItemSound.play()
             electro.dispose = false;
         this.player.itemJustTaken = true;

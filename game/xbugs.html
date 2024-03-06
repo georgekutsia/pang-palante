@@ -6,164 +6,19 @@ la aceleración afecta a cuando se dispara hacia la derecha en el boss con balas
 
 cuando playerIsImmune los disparos explosivos atraviesan las bars del player, pero no es importante
 
-actualizar instrucciones
-
-info de sword al pulsar sobre el icono de la derecha de espada
-
-en level infinito sale el mapa al cambiar de nivel que no existe
+info de sword al pulsar sobre el icono de la derecha de espada>
 
 electro charger al comprar es raro
 
 hooks podrían empujar los bubbles un poco mas arriba
 
-
 y rebote sobre pelotas otra vez
 
+animación para cuando pierde dinero con spikes
+
+quizas podemos hacer que las escaleras se alarguen con carga eléctrica
 
 
+crear algun item que aumente las chargers de megablaster
 
-
-
-// Variables globales
-const canvas = document.getElementById('canvas');
-const ctx = canvas.getContext('2d');
-const game = new Game(ctx);
-
-// Función para manejar clics en el canvas
-canvas.addEventListener('click', handleClick);
-
-// Función para manejar clics en el canvas
-function handleClick(event) {
-  const rect = canvas.getBoundingClientRect();
-  const clickX = event.clientX - rect.left;
-  const clickY = event.clientY - rect.top;
-  
-  // Comprueba si el clic fue en el jugador
-  if (
-    clickX >= game.points.x &&
-    clickX <= game.points.x + game.points.w + 80 &&
-    clickY >= game.points.y &&
-    clickY <= game.points.y + game.points.h
-  ) {
-    alert("player");
-    return;
-  }
-
-  // Comprueba si el clic fue en alguna burbuja
-  if (isPointInsideAnyPlatform(game.bubbles, clickX, clickY)) {
-    alert("burbuja");
-    return;
-  }
-
-  // Comprueba si el clic fue en alguna burbuja oscura
-  if (isPointInsideAnyPlatform(game.darkBubbles, clickX, clickY)) {
-    alert("burbuja oscura");
-    return;
-  }
-
-  // Comprueba si el clic fue en algún lanzallamas
-  if (isPointInsideAnyPlatform(game.flamethrowers, clickX, clickY)) {
-    alert("lanzallamas");
-    return;
-  }
-
-  // Comprueba si el clic fue en algún arma de fuego
-  if (isPointInsideAnyPlatform(game.machineguns, clickX, clickY)) {
-    alert("arma de fuego");
-    return;
-  }
-
-  // Comprueba si el clic fue en alguna curación
-  if (isPointInsideAnyPlatform(game.healings, clickX, clickY)) {
-    alert("curación");
-    return;
-  }
-
-  // Comprueba si el clic fue en alguna barra
-  if (isPointInsideAnyPlatform(game.bars, clickX, clickY)) {
-    alert("barra");
-    return;
-  }
-
-  // Comprueba si el clic fue en alguna plataforma
-  if (isPointInsideAnyPlatform(game.platforms, clickX, clickY)) {
-    alert("plataforma");
-    return;
-  }
-
-
-  if (isPointInsideAnyPlatform(game.bouncers, clickX, clickY)) {
-    alert("bouncers");
-    return;
-  }
-  if (isPointInsideAnyPlatform(game.spikes, clickX, clickY)) {
-    alert("spikes");
-    return;
-  }
-  if (isPointInsideAnyPlatform(game.stairs, clickX, clickY)) {
-    alert("stairs");
-    return;
-  }
-  if (isPointInsideAnyPlatform(game.auras, clickX, clickY)) {
-    alert("auras");
-    return;
-  }
-  if (isPointInsideAnyPlatform(game.boxes, clickX, clickY)) {
-    alert("boxes");
-    return;
-  }
-  if (isPointInsideAnyPlatform(game.blasters, clickX, clickY)) {
-    alert("blasters");
-    return;
-  }
-  if (isPointInsideAnyPlatform(game.levelBalls, clickX, clickY)) {
-    alert("levelBalls");
-    return;
-  }
-  if (isPointInsideAnyPlatform(game.gatlings, clickX, clickY)) {
-    alert("gatlings");
-    return;
-  }
-  if (isPointInsideAnyPlatform(game.cannons, clickX, clickY)) {
-    alert("cannons");
-    return;
-  }
-  if (isPointInsideAnyPlatform(game.levers, clickX, clickY)) {
-    alert("levers");
-    return;
-  }
-  if (isPointInsideAnyPlatform(game.coins, clickX, clickY)) {
-    alert("coins");
-    return;
-  }
-  if (isPointInsideAnyPlatform(game.hooks, clickX, clickY)) {
-    alert("hooks");
-    return;
-  }
-  if (isPointInsideAnyPlatform(game.electros, clickX, clickY)) {
-    alert("electros");
-    return;
-  }
-  if (isPointInsideAnyPlatform(game.swords, clickX, clickY)) {
-    alert("swords");
-    return;
-  }
-  if (isPointInsideAnyPlatform(game.miniBoses, clickX, clickY)) {
-    alert("miniBoses");
-    return;
-  }
-
-
-}
-
-// Función para comprobar si se hizo clic en algún objeto de un array
-function isPointInsideAnyPlatform(array, x, y) {
-  return array.some((obj) => {
-    return (
-      x >= obj.x &&
-      x <= obj.x + obj.w &&
-      y >= obj.y &&
-      y <= obj.y + obj.h
-    );
-  });
-}
+poder comprar retry

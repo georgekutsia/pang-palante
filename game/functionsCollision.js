@@ -9,7 +9,7 @@ function checkBubbleCollision(bubbles, player, bubbleSplash2, bubblePopSound1, p
           bubble.isElectrified = true;
           setTimeout(() => {
             bubble.isElectrified = false;
-          }, electricShieldTime);
+          }, shieldsDuration);
         }
         if(!playerIsImmune){
           if(player.y + player.h <= bubble.y +30 && bubble.w>=20){

@@ -347,12 +347,13 @@ shopBarResistance$$.addEventListener("click", function(){
     buySmall.play()
     barResistanceLevel = 1;
     coins -=50;
+    barLife = 3;
     shopBarResistance$$.innerHTML = `  <span><i style="font-size: calc(14px + 0.53vw)" class="fa-solid fa-anchor"></i> x 3</span> <br> <i style="font-size: calc(8px + 0.3vw)" class="fa-solid fa-angles-up fonts-i"></i><span id="velocidad-text">Resistance</span>  <br> 55<i class="fa-solid fa-coins"></i> `
   } else if( coins >= 60 && barResistanceLevel === 1){
     buySmall.play()
     barResistanceLevel = 2;
     coins -=60;
-    barLife = 3;
+    barLife = 4;
     shopBarResistance$$.innerHTML = `<span><i style="font-size: calc(14px + 0.53vw)" class="fa-solid fa-anchor"></i> x 4</span> <br> <i style="font-size: calc(8px + 0.3vw)" class="fa-solid fa-angles-up fonts-i"></i><span id="velocidad-text">Resistance</span>  <br> 60<i class="fa-solid fa-coins"></i> `
   } else if( coins >= 70 && barResistanceLevel === 2){
     buySmall.play()
@@ -364,7 +365,7 @@ shopBarResistance$$.addEventListener("click", function(){
     buySmall.play()
     barResistanceLevel = 4;
     coins -=80;
-    barLife = 7;
+    barLife = 6;
     shopBarResistance$$.innerHTML = ` <span style="color:rgb(243, 160, 234)"><i style="font-size: calc(14px + 0.53vw)" class="fa-solid fa-anchor"></i> x 6</span> <br> `
   } 
 })
@@ -381,35 +382,34 @@ shopElectricShield$$.addEventListener("click", function(){
     game.player.electroAmount += 10;
     coins -= 30;
     buySmall.play()
-    electricShieldTime = 6000;
+    shieldsDuration = 6000;
     shopElectricShield$$.innerHTML = `</i> <span id="electro-text"><i style="font-size: calc(8px + 0.4vw)" class="fa-solid fa-bolt-lightning"></i>Electro</span>  <br> 50<i class="fa-solid fa-coins"></i>+2<i class="fa-solid fa-plug-circle-plus"></i>`
   } else if( coins >= 35 && electricShieldlevel === 2){
     electricShieldlevel = 3;
     game.player.electroAmount += 10;
     coins -= 35;
     buySmall.play()
-    electricShieldTime = 7000;
+    shieldsDuration = 7000;
     shopElectricShield$$.innerHTML = `</i> <span id="electro-text"><i style="font-size: calc(8px + 0.4vw)" class="fa-solid fa-bolt-lightning"></i>Electro</span>  <br> 50<i class="fa-solid fa-coins"></i>+3<i class="fa-solid fa-plug-circle-plus"></i>`
   } else if( coins >= 40 && electricShieldlevel === 3){
     electricShieldlevel = 4;
     game.player.electroAmount += 10;
     coins -= 40;
     buySmall.play()
-    electricShieldTime = 8000;
+    shieldsDuration = 8000;
     shopElectricShield$$.disabled = true; 
     shopElectro$$.style.display = "block"
     shopElectricShield$$.innerHTML = ` </i> <span id="electro-text" style="color:rgb(243, 160, 234)" ><i style="font-size:calc(10px + 0.6vw)" class="fa-solid fa-bolt-lightning"></i></span>  <i class="fa-solid fa-plug-circle-plus"></i>  4 `
   } 
 })
 
-
 shopElectro$$.addEventListener("click", function(){
-  if(coins >=50){
+  if(coins >=30 &&     game.player.electroAmount <= 85){
     buySmall.play()
     game.player.electroAmount += 10;
+    coins-=30
   }
 })
-
 
 
 toggleShop$$.addEventListener("click", ()=>{

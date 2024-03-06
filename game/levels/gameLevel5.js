@@ -26,7 +26,6 @@ function addPlatforms5(ctx, platforms, healings, boxes, stairs,bars){
     const platform5 = new Platform(ctx, CTXW-285, CTXH - 160, 195, 15, "../public/Imagenes/obstacles/platformSolid3.png", false, true, true);
     const platform6 = new Platform(ctx, CTXW-535, CTXH - 250, 195, 15, "../public/Imagenes/obstacles/platformSolid3.png", false, false, true);
     const platform7 = new Platform(ctx, CTXW-735, CTXH - 350, 165, 15, "../public/Imagenes/obstacles/platformSolid3.png", false, false, true);
-  const platform8 = new Platform(ctx, CTXW - 400, CTXH - 100, 145, 15, "../public/Imagenes/obstacles/platformSolid4.png", true, false, true, 0, 0, 140, 230, 0, 0, true);
 
     platforms.push( platform1,platform2, platform3,platform4, platform5, platform6, platform7);
     const healingItem = new Healing(ctx, 20, 70)
