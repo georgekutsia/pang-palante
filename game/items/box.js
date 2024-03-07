@@ -175,6 +175,8 @@ class Box {
     if(this.boxImg.frame >8) this.boxHitBreakingLongSound.play();
     if(this.boxImg.frame > 8){ 
       coins+=2;
+      game.player.life.amountOfGainedCoins = 2;
+      game.player.life.isGaining = true;
       this.burningBoxSound.volume = 0;
       this.coinsSound1.play()
       this.dispose = false; 

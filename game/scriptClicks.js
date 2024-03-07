@@ -143,7 +143,7 @@ function handleClick(event) {
   }
   if (isPointInsideAnyPlatform(game.electros, clickX, clickY)) {
     
-        showModal(`Lanzallamas`, `&nbsp&nbsp  Aumenta la carga eléctrica para el escudo. Si estás por encima de la capacidad total de carga de tu personaje, en su lugar obtendrás dinero. <br/>&nbsp&nbsp Para activa el escudo eléctrico pulsa  <span style="color: blue; font-size: 20px;">H</span>. Vuelve a pulsarla para desactivar. Con el escudo eléctrico activo, eres inmune a la mayoría de daños, electrificas algunas plataformas, burbujas y armas propias para potenciarlas, por ejemplo las barras y espadas.   `).then(() => {
+        showModal(`Electro`, `&nbsp&nbsp  Aumenta la carga eléctrica para el escudo. Si estás por encima de la capacidad total de carga de tu personaje, en su lugar obtendrás dinero. <br/>&nbsp&nbsp Para activa el escudo eléctrico pulsa  <span style="color: blue; font-size: 20px;">H</span>. Vuelve a pulsarla para desactivar. Con el escudo eléctrico activo, eres inmune a la mayoría de daños, electrificas algunas plataformas, burbujas y armas propias para potenciarlas, por ejemplo las barras y espadas.   `).then(() => {
       game.start();
     });
     return;
@@ -246,7 +246,7 @@ function isPointInsideAnyPlatform(platforms, x, y) {
 function showModal(title, content) {
   return new Promise((resolve, reject) => {
  let randomColorsForBackground1 =  getRandomNumber( 100)
- let randomColorsForBackground2 =  getRandomNumber( 100)
+ let randomColorsForBackground2 =  P( 100)
  let randomColorsForBackground3 =  getRandomNumber( 100)
 
     // Crear el elemento del modal

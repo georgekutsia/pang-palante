@@ -72,8 +72,6 @@ class Game {
     this.barHit.volume = 0.05;
     this.changeLevelSound1 = new Audio("/public/sounds/changeLevelSound1.mp3");
     this.changeLevelSound1.volume = 0.1;
-    this.playerHeals = new Audio("/public/sounds/heal1.mp3");
-    this.playerHeals.volume = 0.1;
     this.playerBar = new Audio("/public/sounds/barItemRechargeSound.mp3");
     this.playerBar.volume = 0.1;
     this.electroItemSound = new Audio("/public/sounds/electrofire/elecrtroItemSound.mp3");
@@ -150,10 +148,20 @@ class Game {
         // level1(this.ctx, this.bubbles, this.platforms, this.levelBalls, this.boxes)
         // level5( this.ctx, this.bubbles, this.platforms, this.stairs,  this.healings, this.bars, this.boxes,this.levelBalls);
 
-        for (let i = 0; i < 15; i++) {
-          let spa =  new Electro(this.ctx, 300 + i*50, CTXH - 30, 10, 30)
-          this.electros.push(spa)
-        }
+          let spa =  new Bars(this.ctx, 300, CTXH - 30, 10, 30)
+          this.bars.push(spa)
+          let box =  new Box(this.ctx, 500, 30, 3)
+          this.boxes.push(box)
+          let electro =  new Electro(this.ctx, 600, CTXH - 30, 10, 30)
+          this.electros.push(electro)
+          let coin =  new Coins(this.ctx, 800, CTXH - 30, 10, 30)
+          let coin1 =  new Coins(this.ctx, 850, CTXH - 30, 10, 30)
+          let coin2 =  new Coins(this.ctx, 900, CTXH - 30, 10, 30)
+          this.coins.push(coin, coin1, coin2)
+          let heal =  new Healing(this.ctx, 200, CTXH - 30, 10, 30)
+          let heal1 =  new Healing(this.ctx, 100, CTXH - 30, 10, 30)
+          let heal2 =  new Healing(this.ctx, 50, CTXH - 30, 10, 30)
+          this.healings.push(heal, heal1, heal2)
           // let sta =  new Stair(this.ctx, 200, CTXH - 150, 100, 150)
           // let sta1 =  new Stair(this.ctx, 600, CTXH - 150, 100, 150)
           // this.stairs.push(sta, sta1)
@@ -467,6 +475,8 @@ class Game {
             bullet.x = -200
             if (platform.life <= 0) {
               coins+=2;
+              this.player.life.amountOfGainedCoins = 2;
+              this.player.life.isGaining = true;
               this.coinsSound1.play()
               platform.x = -200;
             }
@@ -602,7 +612,8 @@ this.cannons.forEach((cann) => {//  cannon con fire
       if (healing.collides(this.player)) {
         eventInfo(munSalud$$)
         this.player.gainLife();
-        this.playerHeals.play();
+        this.player.healSound.play();
+        this.player.life.isHealing = true;
         itemTakenImages = "../public/Imagenes/itemTakenHealing1.png";
         this.player.itemJustTaken = true;
         healing.x = -100; // situa fuera del canvas la burbuja que colisiona con el player y luego isVisible la elimina del array
@@ -612,9 +623,10 @@ this.cannons.forEach((cann) => {//  cannon con fire
     this.bars.forEach((bar) => {// bars  choca con el personaje
       if (bar.collides(this.player)) {
         this.player.barAmount += 2;
-        this.playerBar.play();
+        this.player.ammoSound.play();
         this.player.itemJustTaken = true;
         eventInfo(munCadena$$)
+        itemTakenImages = "../public/Imagenes/itemTakenBullet1.png";
         bar.x = -100; // situa fuera del canvas la burbuja que colisiona con el player y luego isVisible la elimina del array
       } else return true;
     });
@@ -657,6 +669,8 @@ this.cannons.forEach((cann) => {//  cannon con fire
     this.coins.forEach((coin) => {
       if (coin.collides(this.player)) {
             coins+= coin.amountOfCoins;
+            this.player.life.amountOfGainedCoins = coin.amountOfCoins;
+            this.player.life.isGaining = true;
             coin.dispose = false;
         this.player.itemJustTaken = true;
       } else return true;
@@ -687,7 +701,7 @@ this.cannons.forEach((cann) => {//  cannon con fire
         this.player.swordEquipped = true;
         this.player.swordLevel ++;
         sword.dispose = false;
-        itemTakenImages = "../public/Imagenes/itemTaken1.png";
+        itemTakenImages = "../public/Imagenes/itemTakenHealing1.png";
         this.player.itemJustTaken = true;
       } else return true;
     });
