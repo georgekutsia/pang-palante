@@ -73,7 +73,7 @@ class Player {
     this.swordRightStab.src = "/public/Imagenes/dodgeRightSwordImg.png";
     
     this.swingSwordState = true;
-    this.swordEquipped = false;
+    this.swordEquipped = true;
     this.swordLevel = 0;
     this.swordPowerUp = 8;
     this.swordPower1 = true;
@@ -94,6 +94,10 @@ class Player {
     this.hookShoot.volume = 0.05
     this.electroSoundOn = new Audio("/public/sounds/electrofire/electrifingShield.mp3")
     this.electroSoundOn.volume = 0.1
+    this.ammoSound = new Audio("/public/sounds/shooting/revolverSpin.mp3")
+    this.ammoSound.volume = 0.1
+    this.healSound = new Audio("/public/sounds/shooting/drinkBeer.mp3");
+    this.healSound.volume = 0.5;
 
     this.barInfo$$ = document.getElementById("bar-info")
     this.fireInfo$$ = document.getElementById("fire-info")
