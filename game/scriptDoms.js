@@ -72,6 +72,11 @@ let minion5$$ = document.querySelector(".minion5")
 let minion6$$ = document.querySelector(".minion6")
 let boss1$$ = document.querySelector(".boss1")
 
+
+
+// let sincrongeniero$$ = document.querySelector(".sincrongeniero")
+
+
 let poltra$$ = document.getElementById("poltra-scrap0")
 
 

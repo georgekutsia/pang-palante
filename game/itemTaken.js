@@ -1,8 +1,10 @@
 class ItemTaken {
-  constructor(ctx) {
+  constructor(ctx, x, y) {
     this.ctx = ctx;
-    this.x = game.player.x ;
+    this.x =  game.player.x ;
     this.y = game.player.y - game.player.h*5;
+    this.extraX = x || 0;
+    this.extraY = y || 0;
     this.img = new Image();
     this.img.src = itemTakenImages
     this.img.framex = 0;
@@ -20,8 +22,8 @@ class ItemTaken {
       (this.img.framey * this.img.height) / 6,
       this.img.width / 3,
       this.img.height / 6,
-      this.x,
-      this.y,
+      this.x + this.extraX,
+      this.y + this.extraY ,
       this.w,
       this.h
     );

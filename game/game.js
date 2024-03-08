@@ -65,6 +65,11 @@ class Game {
     this.coinsSound1.volume = 0.1; 
     this.coinsSound2 = new Audio("../public/sounds/coinsSound2.mp3")
     this.coinsSound2.volume = 0.1; 
+    this.coinsItemSound = new Audio("/public/sounds/items/gainCoinsSound.mp3")
+    this.coinsItemSound.volume = 0.3
+    this.blasterItemSound = new Audio("/public/sounds/items/blasterItemSound.mp3")
+    this.blasterItemSound.volume = 0.3
+
 
     this.darkBubbleExplosion = new Audio("../public/sounds/darkBubbleExplosion.mp3")
     this.darkBubbleExplosion.volume = 0.1; 
@@ -148,19 +153,27 @@ class Game {
         // level1(this.ctx, this.bubbles, this.platforms, this.levelBalls, this.boxes)
         // level5( this.ctx, this.bubbles, this.platforms, this.stairs,  this.healings, this.bars, this.boxes,this.levelBalls);
 
-          let spa =  new Bars(this.ctx, 300, CTXH - 30, 10, 30)
+          let gat =  new BubbleGatling(this.ctx)
+          this.gatlings.push(gat)
+          let hoo =  new Hook(this.ctx, 450, CTXH - 150)
+          this.hooks.push(hoo)
+          let lan =  new Flamethrower(this.ctx, 400, CTXH - 150)
+          this.flamethrowers.push(lan)
+          let spa =  new Bars(this.ctx, 300, CTXH - 150, 10, 30)
           this.bars.push(spa)
           let box =  new Box(this.ctx, 500, 30, 3)
           this.boxes.push(box)
-          let electro =  new Electro(this.ctx, 600, CTXH - 30, 10, 30)
+          let blast = new MegaFireBlaster(this.ctx, 640, CTXH-190)
+          this.blasters.push(blast);  
+          let electro =  new Electro(this.ctx, 600, CTXH - 150, 10, 30)
           this.electros.push(electro)
-          let coin =  new Coins(this.ctx, 800, CTXH - 30, 10, 30)
-          let coin1 =  new Coins(this.ctx, 850, CTXH - 30, 10, 30)
-          let coin2 =  new Coins(this.ctx, 900, CTXH - 30, 10, 30)
+          let coin =  new Coins(this.ctx, 800, CTXH - 150, 10, 30)
+          let coin1 =  new Coins(this.ctx, 850, CTXH - 150, 10, 30)
+          let coin2 =  new Coins(this.ctx, 900, CTXH - 150, 10, 30)
           this.coins.push(coin, coin1, coin2)
-          let heal =  new Healing(this.ctx, 200, CTXH - 30, 10, 30)
-          let heal1 =  new Healing(this.ctx, 100, CTXH - 30, 10, 30)
-          let heal2 =  new Healing(this.ctx, 50, CTXH - 30, 10, 30)
+          let heal =  new Healing(this.ctx, 150, CTXH - 250,)
+          let heal1 =  new Healing(this.ctx, 100, CTXH - 200,)
+          let heal2 =  new Healing(this.ctx, 50, CTXH - 150,)
           this.healings.push(heal, heal1, heal2)
           // let sta =  new Stair(this.ctx, 200, CTXH - 150, 100, 150)
           // let sta1 =  new Stair(this.ctx, 600, CTXH - 150, 100, 150)
@@ -587,6 +600,7 @@ this.cannons.forEach((cann) => {//  cannon con fire
     this.flamethrowers.forEach((flame) => {// flamethrowers  choca con el personaje
       if (flame.collides(this.player)) {
         N = 78;
+        itemTakenImages = "../public/Imagenes/itemTakenBullet1.png";
         this.player.itemJustTaken = true;
         eventInfo(munLanzallamas$$)
         this.player.fireAmount += 3; // sumamos 5 balas de fuego
@@ -599,6 +613,7 @@ this.cannons.forEach((cann) => {//  cannon con fire
     this.machineguns.forEach((machinegun) => {// machineguns  choca con el personaje
       if (machinegun.collides(this.player)) {
         recharge = 50;
+        itemTakenImages = "../public/Imagenes/itemTakenBullet1.png";
         this.player.itemJustTaken = true;
         eventInfo(munAmetralladora$$)
         setTimeout(() => {
@@ -624,9 +639,9 @@ this.cannons.forEach((cann) => {//  cannon con fire
       if (bar.collides(this.player)) {
         this.player.barAmount += 2;
         this.player.ammoSound.play();
-        this.player.itemJustTaken = true;
         eventInfo(munCadena$$)
         itemTakenImages = "../public/Imagenes/itemTakenBullet1.png";
+        this.player.itemJustTaken = true;
         bar.x = -100; // situa fuera del canvas la burbuja que colisiona con el player y luego isVisible la elimina del array
       } else return true;
     });
@@ -644,13 +659,15 @@ this.cannons.forEach((cann) => {//  cannon con fire
       if (blaster.collides(this.player)) {
         this.player.megaFireBlaster = true;
         this.player.megaFireBlasterAmount += 31;
+        this.blasterItemSound.play()
+
+        itemTakenImages = "../public/Imagenes/itemTakenBlaster1.png";
         this.player.itemJustTaken = true;
         eventInfo(munMegablaster$$)
         blaster.dispose = true; // situa fuera del canvas la burbuja que colisiona con el player y luego isVisible la elimina del array
       } else return true;
     });
-    this.auras.forEach((aura) => {
-      // aditionalaura  choca con el personaje
+    this.auras.forEach((aura) => { // aditionalaura  choca con el personaje
       if (aura.collides(this.player)) {
         this.player.auraIsActive = true;
         aura.dispose = false;
@@ -670,6 +687,9 @@ this.cannons.forEach((cann) => {//  cannon con fire
       if (coin.collides(this.player)) {
             coins+= coin.amountOfCoins;
             this.player.life.amountOfGainedCoins = coin.amountOfCoins;
+            this.coinsItemSound.play()
+        this.player.extraY = +20;
+            itemTakenImages = "../public/Imagenes/itemTakenCoins2.png";
             this.player.life.isGaining = true;
             coin.dispose = false;
         this.player.itemJustTaken = true;
@@ -680,6 +700,7 @@ this.cannons.forEach((cann) => {//  cannon con fire
             eventInfo(munHook$$)
             this.player.hookAmount += 2;
             hook.dispose = false;
+        itemTakenImages = "../public/Imagenes/itemTakenBullet1.png";
         this.player.itemJustTaken = true;
 
       } else return true;
@@ -688,6 +709,9 @@ this.cannons.forEach((cann) => {//  cannon con fire
       if (electro.collides(this.player)) {
         if(this.player.electroAmount <= 90){
           this.player.electroAmount += 5;
+        itemTakenImages = "../public/Imagenes/itemTakenElectro.png";
+        this.player.extraY = -30;
+        this.player.itemJustTaken = true;
         } else{
           coins += 30;
         }
