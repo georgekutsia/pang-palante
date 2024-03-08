@@ -30,7 +30,7 @@ function handleClick(event) {
 
   // Comprueba si el clic fue en algún lanzallamas
   if (isPointInsideAnyPlatform(game.flamethrowers, clickX, clickY)) {
-    showModal(`Lanzallamas`, `&nbsp&nbsp Cargas para el lanzallamas. Para usar el lanzallamas pulsa la tecla <span style="color: blue; font-size: 20px;">N</span>  <br/>&nbsp&nbsp El fuego puede quemar algunos objetos, pero no afecta a las plataformas. <br/>&nbsp&nbsp Al chocar con burbujas, las evapora poco a poco, evitando así que exploten en más burbujas pequeñas`).then(() => {
+    showModal(`Lanzallamas <span style="font-style: italic; font-size: 18px;">Item para recoger</span> `, `&nbsp&nbsp Cargas para el lanzallamas. Para usar el lanzallamas pulsa la tecla <span style="color: blue; font-size: 20px;">N</span>  <br/>&nbsp&nbsp El fuego puede quemar algunos objetos, pero no afecta a las plataformas. <br/>&nbsp&nbsp Al chocar con burbujas, las evapora poco a poco, evitando así que exploten en más burbujas pequeñas`).then(() => {
       game.start();
     });
     return;
@@ -38,7 +38,7 @@ function handleClick(event) {
   // Comprueba si el clic fue en algún arma de fuego
   if (isPointInsideAnyPlatform(game.machineguns, clickX, clickY)) {
     
-        showModal(`Ametralladora`, `&nbsp&nbsp Durante 10 segundos podrás disparar las balas básicas ¡ a una velocidad abrumadora !`).then(() => {
+        showModal(`Ametralladora <span style="font-style: italic; font-size: 18px;">Item para recoger</span> `, `&nbsp&nbsp Durante 10 segundos podrás disparar las balas básicas ¡ a una velocidad abrumadora !`).then(() => {
       game.start();
     });
     return;
@@ -46,7 +46,7 @@ function handleClick(event) {
 
   // Comprueba si el clic fue en alguna curación
   if (isPointInsideAnyPlatform(game.healings, clickX, clickY)) {
-        showModal(`Poción de bar`, `&nbsp&nbsp Recuperas 1 punto de salud. Si tienes 10 o más puntos de salud mejora tu velocidad de movimiento <br/>&nbsp&nbsp Recuerda que si pasas de nivel sin recibir daño, obtienes dinero adicional `).then(() => {
+        showModal(`Poción de bar <span style="font-style: italic; font-size: 18px;">Item para recoger</span> `, `&nbsp&nbsp Recuperas 1 punto de salud. Si tienes 10 o más puntos de salud mejora tu velocidad de movimiento <br/>&nbsp&nbsp Recuerda que si pasas de nivel sin recibir daño, obtienes dinero adicional `).then(() => {
       game.start();
     });
     return;
@@ -54,20 +54,20 @@ function handleClick(event) {
 
   // Comprueba si el clic fue en alguna barra
   if (isPointInsideAnyPlatform(game.bars, clickX, clickY)) {
-        showModal(`Barras`, `&nbsp&nbsp Barras de lanzamiento, una  munición especial que resiste 2 impactos de burbujas de colores y es totalmente resistente a las burbujas oscuras. <br/>&nbsp&nbsp En la tienda puedes comprar tanto barras como mejorar su resistencia, para que aguante más impactos de burbujas de colores  <br/>&nbsp&nbsp Se pueden cargar las barras con el escudo eléctrico del personaje, haciéndolas más resistentes y que duren más tiempo. Cuanto más esté en contacto con la electricidad, mayor el efect.`).then(() => {
+        showModal(`Barras <span style="font-style: italic; font-size: 18px;">Item para recoger</span> `, `&nbsp&nbsp Barras de lanzamiento, una  munición especial que resiste 2 impactos de burbujas de colores y es totalmente resistente a las burbujas oscuras. <br/>&nbsp&nbsp En la tienda puedes comprar tanto barras como mejorar su resistencia, para que aguante más impactos de burbujas de colores  <br/>&nbsp&nbsp Se pueden cargar las barras con el escudo eléctrico del personaje, haciéndolas más resistentes y que duren más tiempo. Cuanto más esté en contacto con la electricidad, mayor el efect.`).then(() => {
       game.start();
     });
     return;
   }
 
   if (isPointInsideAnyPlatform(game.bouncers, clickX, clickY)) {
-        showModal(`Plataforma emburbujada`, `&nbsp&nbsp A diferencia de las plataformas normales, es imposible quedarse quieto en estas plataformas emburbujadas. Aprovecha los rebotes para llegar a donde puedas!`).then(() => {
+        showModal(`Plataforma emburbujada <span style="font-style: italic; font-size: 18px;">Item para recoger</span> `, `&nbsp&nbsp A diferencia de las plataformas normales, es imposible quedarse quieto en estas plataformas emburbujadas. Aprovecha los rebotes para llegar a donde puedas!`).then(() => {
       game.start();
     });
     return;
   }
   if (isPointInsideAnyPlatform(game.spikes, clickX, clickY)) {
-        showModal(`Trampa de pinchos`, `&nbsp&nbsp Cuidado con los pinchos! Hacen daño y a veces incluso podrías perder dinero!`).then(() => {
+        showModal(`Trampa de pinchos `, `&nbsp&nbsp Cuidado con los pinchos! Hacen daño y a veces incluso podrías perder dinero!`).then(() => {
       game.start();
     });
     return;
@@ -80,70 +80,62 @@ function handleClick(event) {
     return;
   }
   if (isPointInsideAnyPlatform(game.auras, clickX, clickY)) {
-        showModal(`Aura burbuja`, `&nbsp&nbsp El aura te protege de casi todos los daños durante un corto período de tiempo`).then(() => {
+        showModal(`Aura burbuja <span style="font-style: italic; font-size: 18px;">Item para recoger</span> `, `&nbsp&nbsp El aura te protege de casi todos los daños durante un corto período de tiempo`).then(() => {
       game.start();
     });
     return;
   }
   if (isPointInsideAnyPlatform(game.boxes, clickX, clickY)) {
-    
-        showModal(`Caja`, `&nbsp&nbsp Las cajas contienen todo tipom de recompensas. Algunas aleatorias, otras específicas. <br/>&nbsp&nbsp  También tienen cierta cantidad de resistencia según el material del que están hechos. Se pueden quemar`).then(() => {
+        showModal(`Caja`, `&nbsp&nbsp Las cajas contienen todo tipo de recompensas. Algunas aleatorias, otras específicas. <br/>&nbsp&nbsp  También tienen cierta cantidad de resistencia según el material del que están hechas y se pueden quemar`).then(() => {
       game.start();
     });
     return;
   }
   if (isPointInsideAnyPlatform(game.blasters, clickX, clickY)) {
-    
-        showModal(`Megablaster`, `&nbsp&nbsp Un super disparo de fuego que aumenta según el tiempo que mantengas pulsada la letra <span style="color: blue; font-size: 20px;">K</span>.<br/>&nbsp&nbsp   Se puede mejorar la potencia de los disparos, pero al principio solo cargará hasta 3 explosiones de fuego. Durante el juego podrás adquirir mejoras del arma `).then(() => {
+        showModal(`Megablaster <span style="font-style: italic; font-size: 18px;">Item para recoger</span> `, `&nbsp&nbsp Un super disparo de fuego que aumenta según el tiempo que mantengas pulsada la letra <span style="color: blue; font-size: 20px;">K</span>.<br/>&nbsp&nbsp   Se puede mejorar la potencia de los disparos, pero al principio solo cargará hasta 3 explosiones de fuego. Durante el juego podrás adquirir mejoras del arma `).then(() => {
       game.start();
     });
     return;
   }
   if (isPointInsideAnyPlatform(game.levelBalls, clickX, clickY)) {
-    
-        showModal(`Lanzallamas`, `&nbsp&nbsp`).then(() => {
+        showModal(`Cristal de contención`, `&nbsp&nbsp Esta bola contienen un químico que impide alejarse de la zona a quienes estén presentes. <br/>&nbsp&nbsp  Está protegida por una energía química que sólo se desactiva activando las palancas que la mantienen encendida y reacciona con las burbujas presentes, así que debes explotarlas para que la aleación cambie.  <br/>&nbsp&nbsp  Si no hay burbujas ni palancas sin activar, se podrá romper y avanzar...`).then(() => {
       game.start();
     });
     return;
   }
   if (isPointInsideAnyPlatform(game.gatlings, clickX, clickY)) {
-    
-        showModal(`Lanzallamas`, `&nbsp&nbsp`).then(() => {
+        showModal(`Gatling`, `&nbsp&nbsp Cuidado! Es una creación especial de <span style="font-style: italic; font-size: 18px; color: purple">Sincrongeniero.</span> <img class="sincrongeniero" width="100px" src="/public//Imagenes/minions/Sincrongeniero.png" alt="Sincrongeniero"> <br/>&nbsp&nbsp Tiene muchas creaciones que BubbleMaster usa para desplegar sus armas químicas, como las burbujas. Te perseguirá hasta tenerte en línea y luego va a disparar sin parar!  <br/>&nbsp&nbsp Son muy difíciles de destruir, casi imposibles. Mejor huír que enfrentrlos.`).then(() => {
       game.start();
     });
     return;
   }
   if (isPointInsideAnyPlatform(game.cannons, clickX, clickY)) {
-    
-        showModal(`Lanzallamas`, `&nbsp&nbsp`).then(() => {
+        showModal(`Cañones de burbolas`, `&nbsp&nbsp Uno de los mejores inventos de Sincrongeniero, estos cañones disparan burbolas, muy parecidas a las burbujas normales, pero tienen nombre ya que se me acaba de ocurrir. Se pueden dañar, incluso con fuego. A veces se retirarán cuando hayan lanzado cierta cantidad de burbolas o haya pasado suficiente tiempo, pero para no lidiar con ellas, será más fácil destruirlas.`).then(() => {
       game.start();
     });
     return;
   }
   if (isPointInsideAnyPlatform(game.levers, clickX, clickY)) {
-    
-        showModal(`Lanzallamas`, `&nbsp&nbsp`).then(() => {
+        showModal(`Palanca`, `&nbsp&nbsp Debes activar todas las palancas del nivel para desactivar la protección del cristal de contención `).then(() => {
       game.start();
     });
     return;
   }
   if (isPointInsideAnyPlatform(game.coins, clickX, clickY)) {
-    
-        showModal(`Lanzallamas`, `&nbsp&nbsp`).then(() => {
+        showModal(`Monedas <span style="font-style: italic; font-size: 18px;">Item para recoger</span> `, `&nbsp&nbsp Adquieres 10 monedas. Usa el dinero para comprar mejoras y objetos en la tienda`).then(() => {
       game.start();
     });
     return;
   }
   if (isPointInsideAnyPlatform(game.hooks, clickX, clickY)) {
-    
-        showModal(`Lanzallamas`, `&nbsp&nbsp`).then(() => {
+        showModal(`Ganchos <span style="font-style: italic; font-size: 18px;">Item para recoger</span> `, `&nbsp&nbsp  Obtienes 2 ganchos que se activan con <span style="color: blue; font-size: 20px;">J</span> y te lleva hasta el objeto a la que se haya enganchado. A veces necesitas un salto para propulsarte mejor <br/>&nbsp&nbsp `).then(() => {
       game.start();
     });
     return;
   }
   if (isPointInsideAnyPlatform(game.electros, clickX, clickY)) {
     
-        showModal(`Electro`, `&nbsp&nbsp  Aumenta la carga eléctrica para el escudo. Si estás por encima de la capacidad total de carga de tu personaje, en su lugar obtendrás dinero. <br/>&nbsp&nbsp Para activa el escudo eléctrico pulsa  <span style="color: blue; font-size: 20px;">H</span>. Vuelve a pulsarla para desactivar. Con el escudo eléctrico activo, eres inmune a la mayoría de daños, electrificas algunas plataformas, burbujas y armas propias para potenciarlas, por ejemplo las barras y espadas.   `).then(() => {
+        showModal(`Electro <span style="font-style: italic; font-size: 18px;">Item para recoger</span> `, `&nbsp&nbsp  Aumenta la carga eléctrica para el escudo. Si estás por encima de la capacidad total de carga de tu personaje, en su lugar obtendrás dinero. <br/>&nbsp&nbsp Para activa el escudo eléctrico pulsa  <span style="color: blue; font-size: 20px;">H</span>. Vuelve a pulsarla para desactivar. Con el escudo eléctrico activo, eres inmune a la mayoría de daños, electrificas algunas plataformas, burbujas y armas propias para potenciarlas, por ejemplo las barras y espadas.   `).then(() => {
       game.start();
     });
     return;
@@ -163,48 +155,47 @@ function handleClick(event) {
     return;
   }
   if (isPointInsideAnyPlatform(game.player.bulletFireArray, clickX, clickY)) {
-    showModal(`Lanzallamas`, `&nbsp&nbsp El fuego puede quemar algunos objetos, pero no afecta a las plataformas. <br/>&nbsp&nbsp Al chocar con burbujas, las evapora poco a poco, evitando así que exploten en más burbujas pequeñas`).then(() => {
+    showModal(`Fuego <span style="font-style: italic; font-size: 18px;">Munición</span>`, `&nbsp&nbsp El fuego puede quemar algunos objetos, pero no afecta a las plataformas. <br/>&nbsp&nbsp Al chocar con burbujas, las evapora poco a poco, evitando así que exploten en más burbujas pequeñas`).then(() => {
       game.start();
     });
     return;
   }
   if (isPointInsideAnyPlatform(game.player.bulletArray, clickX, clickY)) {
-    
-        showModal(`Lanzallamas`, `&nbsp&nbsp`).then(() => {
+        showModal(`Burbujas <span style="font-style: italic; font-size: 18px;">Munición</span>`, `&nbsp&nbsp`).then(() => {
       game.start();
     });
     return;
   }
   if (isPointInsideAnyPlatform(game.player.bulletBarArray, clickX, clickY)) {
-    showModal(`Barras`, `&nbsp&nbsp Barras de lanzamiento, una  munición especial que resiste 2 impactos de burbujas de colores y es totalmente resistente a las burbujas oscuras. <br/>&nbsp&nbsp En la tienda puedes comprar tanto barras como mejorar su resistencia, para que aguante más impactos de burbujas de colores  <br/>&nbsp&nbsp Se pueden cargar las barras con el escudo eléctrico del personaje, haciéndolas más resistentes y que duren más tiempo. Cuanto más esté en contacto con la electricidad, mayor el efect.`).then(() => {
+    showModal(`Barras <span style="font-style: italic; font-size: 18px;">Munición</span>`, `&nbsp&nbsp Barras de lanzamiento, una  munición especial que resiste 2 impactos de burbujas de colores y es totalmente resistente a las burbujas oscuras. <br/>&nbsp&nbsp En la tienda puedes comprar tanto barras como mejorar su resistencia, para que aguante más impactos de burbujas de colores  <br/>&nbsp&nbsp Se pueden cargar las barras con el escudo eléctrico del personaje, haciéndolas más resistentes y que duren más tiempo. Cuanto más esté en contacto con la electricidad, mayor el efecto.`).then(() => {
       game.start();
     });
     return;
   }
   if (isPointInsideAnyPlatform(game.player.bulletPlatformArray, clickX, clickY)) {
     
-        showModal(`Lanzallamas`, `&nbsp&nbsp`).then(() => {
+        showModal(`Plataforma <span style="font-style: italic; font-size: 18px;">Munición</span>`, `&nbsp&nbsp`).then(() => {
       game.start();
     });
     return;
   }
   if (isPointInsideAnyPlatform(game.player.hooksArray, clickX, clickY)) {
     
-        showModal(`Lanzallamas`, `&nbsp&nbsp`).then(() => {
+        showModal(`Ganchos <span style="font-style: italic; font-size: 18px;">Munición</span>`, `&nbsp&nbsp`).then(() => {
       game.start();
     });
     return;
   }
   if (isPointInsideAnyPlatform(game.player.swordArray, clickX, clickY)) {
     
-        showModal(`Lanzallamas`, `&nbsp&nbsp`).then(() => {
+        showModal(`Espada Burbujaglória <span style="font-style: italic; font-size: 18px;">Arma especial</span>`, `&nbsp&nbsp`).then(() => {
       game.start();
     });
     return;
   }
 
   if (isPointInsideAnyBubble(game.bubbles, clickX, clickY)) {
-    
+
         showModal(`Lanzallamas`, `&nbsp&nbsp`).then(() => {
       game.start();
     });
@@ -246,7 +237,7 @@ function isPointInsideAnyPlatform(platforms, x, y) {
 function showModal(title, content) {
   return new Promise((resolve, reject) => {
  let randomColorsForBackground1 =  getRandomNumber( 100)
- let randomColorsForBackground2 =  P( 100)
+ let randomColorsForBackground2 =  getRandomNumber( 100)
  let randomColorsForBackground3 =  getRandomNumber( 100)
 
     // Crear el elemento del modal

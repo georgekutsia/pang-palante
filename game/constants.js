@@ -100,3 +100,7 @@ const mapArray = [
   "/public/Imagenes/background/map16.webp",
 ]
 //cuando se ralentice  this.g de player en 0.6, this.playerSpeed =  4 y gameSpeed en 20;
+
+
+let coinsSoundYa = new Audio("/public/sounds/items/gainCoinsSound.mp3")
+coinsSoundYa.volume = 0.3

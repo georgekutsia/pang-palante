@@ -255,3 +255,8 @@ mapChangeLevel$$.addEventListener("mouseout", () => {
   mapChangeLevel$$.style.width = "calc(20px + 0.7vw)";
 
 });
+
+// sincrongeniero$$.addEventListener("click", () => {
+// console.log("bulala")
+// });
+

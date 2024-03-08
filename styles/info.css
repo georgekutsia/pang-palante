@@ -302,3 +302,11 @@ z-index: 24;
     display: none;
     transition: all 1s ease-in-out;
   }
+
+
+  .sincrongeniero{
+    transition: all 0.3s ease-in-out;
+  }
+  .sincrongeniero:hover{
+    scale: 2;
+  }

@@ -52,7 +52,8 @@ class Player {
     this.diagonalShoot = false;
     this.walkingSpeed = 0;
     this.itemJustTaken = false;
-
+    this.extraX =  0;
+    this.extraY =  0;
 
     this.weaponFire = new Image();
     this.weaponFire.src = "/public/Imagenes/weaponFire.png";
@@ -455,8 +456,10 @@ handleRightDodge = (event) =>{ //*
     }
 
     if(this.itemJustTaken){
-      let sparkle = new ItemTaken(this.ctx);
+      let sparkle = new ItemTaken(this.ctx, this.extraX, this.extraY);
       this.itemTakens.push(sparkle)
+        this.extraX =  0;
+        this.extraY =  0;
       this.itemJustTaken = false;
     }
     this.itemTakens.forEach((sparkle) => {sparkle.draw();}); // paso 3: dibujo cada bullet que se dispare
@@ -933,11 +936,11 @@ handleRightDodge = (event) =>{ //*
       }
     }
     swingSword(){
+      if(this.vy !=0){
+        this.vy = jumpHeight
+        this.g = 0.8
+      }
         if(this.swingSwordState){
-          if(this.vy > 0 || this.vy < 0){
-            this.vy = jumpHeight
-            this.g = 0.8
-          }
           if(!this.electricShieldIsActive){
             let sword = new WeaponSword(this.ctx, this.x - 60, this.y - 70, this.swingSwordState, 0, 0, 0, false )
             this.swordArray.push(sword)
@@ -946,10 +949,10 @@ handleRightDodge = (event) =>{ //*
             this.swordArray.push(sword)
           }
           if(this.swordPower1){
-            const bullet1 = new BasicWeapon(this.ctx, this.x +8, this.y, bulletDirection, -14,  -0.2, false, 20);
-            const bullet2 = new BasicWeapon(this.ctx, this.x + 8, this.y, bulletDirection, -15, -2, false, 20 );
-            const bullet3 = new BasicWeapon(this.ctx, this.x + 8, this.y, bulletDirection, -15, -4, false, 20 );
-            const bullet4 = new BasicWeapon(this.ctx, this.x + 8, this.y, bulletDirection, -13, -6, false, 20 );
+            const bullet1 = new BasicWeapon(this.ctx, this.x +8, this.y - 40, bulletDirection, -14,  -0.2, false, 20);
+            const bullet2 = new BasicWeapon(this.ctx, this.x + 8, this.y - 40, bulletDirection, -15, -2, false, 20 );
+            const bullet3 = new BasicWeapon(this.ctx, this.x + 8, this.y - 40, bulletDirection, -15, -4, false, 20 );
+            const bullet4 = new BasicWeapon(this.ctx, this.x + 8, this.y - 40, bulletDirection, -13, -6, false, 20 );
             this.bulletArray.push(bullet1, bullet2, bullet3, bullet4 );
           }
         } else {
@@ -961,10 +964,10 @@ handleRightDodge = (event) =>{ //*
           this.swordArray.push(sword)
         }
         if(this.swordPower1){
-          const bullet1 = new BasicWeapon(this.ctx, this.x +8, this.y, bulletDirection, 14,  -0.2, false, 20);
-          const bullet2 = new BasicWeapon(this.ctx, this.x + 8, this.y, bulletDirection, 15, -2 , false, 20);
-          const bullet3 = new BasicWeapon(this.ctx, this.x + 8, this.y, bulletDirection, 15, -4, false, 20);
-          const bullet4 = new BasicWeapon(this.ctx, this.x + 8, this.y, bulletDirection, 13, -6, false, 20);
+          const bullet1 = new BasicWeapon(this.ctx, this.x +8, this.y - 40, bulletDirection, 14,  -0.2, false, 20);
+          const bullet2 = new BasicWeapon(this.ctx, this.x + 8, this.y - 40, bulletDirection, 15, -2 , false, 20);
+          const bullet3 = new BasicWeapon(this.ctx, this.x + 8, this.y - 40, bulletDirection, 15, -4, false, 20);
+          const bullet4 = new BasicWeapon(this.ctx, this.x + 8, this.y - 40, bulletDirection, 13, -6, false, 20);
           this.bulletArray.push(bullet1, bullet2, bullet3, bullet4 );
         }
       }
