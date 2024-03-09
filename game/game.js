@@ -45,46 +45,9 @@ class Game {
     this.totalCannonBubbleCount = 0;
     this.changingLevelSoChangeImage = true;
     this.dispached = true;
-    // sounds sounds sounds
-    this.bubblePopSound1 = new Audio("../public/sounds/bubblePop1.mp3"); //todo --  Sonido paso 1) guardar la ruta del sonido en una variable
-    this.bubblePopSound1.volume = 0.3; // todo -- Sonido paso 2) ponerle volumen, auque no es obligatorio
-    this.gameOver1 = new Audio("../public/sounds/gameOver1.mp3");
-    this.gameOver1.volume = 0.05; //
-    this.gameOver2 = new Audio("../public/sounds/gameOverSound.mp3");
-    this.gameOver2.volume = 0.2; //
-    this.gameBackgroundMusic = new Audio("../public/sounds/backgroundMusic1.mp3");
-    this.gameBackgroundMusic.volume = 0.1; //
     this.changingLevel = false;
-    this.bubbleSplash2 = new Audio("../public/sounds/bubbleSplash2.mp3");
-    this.bubbleSplash2.volume = 0.1;
-    this.platformHitSolid = new Audio("../public/sounds/platformHitSolid.mp3")
-    this.platformHitSolid.volume = 0.1; 
-    this.platformHitBreak = new Audio("../public/sounds/platformHitBreak.mp3")
-    this.platformHitBreak.volume = 0.1; 
-    this.coinsSound1 = new Audio("../public/sounds/coinsSound1.mp3")
-    this.coinsSound1.volume = 0.1; 
-    this.coinsSound2 = new Audio("../public/sounds/coinsSound2.mp3")
-    this.coinsSound2.volume = 0.1; 
-    this.coinsItemSound = new Audio("/public/sounds/items/gainCoinsSound.mp3")
-    this.coinsItemSound.volume = 0.3
-    this.blasterItemSound = new Audio("/public/sounds/items/blasterItemSound.mp3")
-    this.blasterItemSound.volume = 0.3
+    // sounds sounds sounds
 
-
-    this.darkBubbleExplosion = new Audio("../public/sounds/darkBubbleExplosion.mp3")
-    this.darkBubbleExplosion.volume = 0.1; 
-    this.barHit = new Audio("/public/sounds/shooting/barHit.mp3");
-    this.barHit.volume = 0.05;
-    this.changeLevelSound1 = new Audio("/public/sounds/changeLevelSound1.mp3");
-    this.changeLevelSound1.volume = 0.1;
-    this.playerBar = new Audio("/public/sounds/barItemRechargeSound.mp3");
-    this.playerBar.volume = 0.1;
-    this.electroItemSound = new Audio("/public/sounds/electrofire/elecrtroItemSound.mp3");
-    this.electroItemSound.volume = 0.1;
-    this.minibossArrivingShip = new Audio("/public/sounds/minibossArrivingShip3.mp3")
-    this.minibossArrivingShip.volume = 0.05;
-    this.miniBossTalk1 = new Audio("/public/sounds/miniBossTalk1.mp3")
-    this.miniBossTalk1.volume = 0.05;
     
     this.tickMiniBoss1 = 0;
     this.tickMiniBoss2 = 0;
@@ -151,30 +114,8 @@ class Game {
         // inftroGame1();
         // setTimeout(() => {
         // level1(this.ctx, this.bubbles, this.platforms, this.levelBalls, this.boxes)
-        // level5( this.ctx, this.bubbles, this.platforms, this.stairs,  this.healings, this.bars, this.boxes,this.levelBalls);
+        level6( this.ctx, this.bubbles, this.platforms,this.bouncers, this.stairs,  this.healings, this.bars, this.boxes, this.spikes,this.levelBalls, this.stairs);
 
-          let gat =  new BubbleGatling(this.ctx)
-          this.gatlings.push(gat)
-          let hoo =  new Hook(this.ctx, 450, CTXH - 150)
-          this.hooks.push(hoo)
-          let lan =  new Flamethrower(this.ctx, 400, CTXH - 150)
-          this.flamethrowers.push(lan)
-          let spa =  new Bars(this.ctx, 300, CTXH - 150, 10, 30)
-          this.bars.push(spa)
-          let box =  new Box(this.ctx, 500, 30, 3)
-          this.boxes.push(box)
-          let blast = new MegaFireBlaster(this.ctx, 640, CTXH-190)
-          this.blasters.push(blast);  
-          let electro =  new Electro(this.ctx, 600, CTXH - 150, 10, 30)
-          this.electros.push(electro)
-          let coin =  new Coins(this.ctx, 800, CTXH - 150, 10, 30)
-          let coin1 =  new Coins(this.ctx, 850, CTXH - 150, 10, 30)
-          let coin2 =  new Coins(this.ctx, 900, CTXH - 150, 10, 30)
-          this.coins.push(coin, coin1, coin2)
-          let heal =  new Healing(this.ctx, 150, CTXH - 250,)
-          let heal1 =  new Healing(this.ctx, 100, CTXH - 200,)
-          let heal2 =  new Healing(this.ctx, 50, CTXH - 150,)
-          this.healings.push(heal, heal1, heal2)
           // let sta =  new Stair(this.ctx, 200, CTXH - 150, 100, 150)
           // let sta1 =  new Stair(this.ctx, 600, CTXH - 150, 100, 150)
           // this.stairs.push(sta, sta1)
@@ -341,10 +282,10 @@ class Game {
       if (spike.collides(this.player) && !playerIsImmune) {
         if (!this.player.auraIsActive && !this.player.electricShieldIsActive) {
           spike.active = true;
-          let loseCoins =  getRandomNumber(4);
+          spikeSound.play()
+          let loseCoins =  getRandomNumber(1);
           if(loseCoins === 1){
-            coins -= 5;
-            
+            losingMoney(this.player, 5) 
           }
           this.player.wasNotDamaged = false;
           this.player.loseLife(spike.damage, true); //el daño al jugador se le hace según lo que marca el daño de la burbuja. a burbuja más pequeña, menos daño
@@ -368,6 +309,7 @@ class Game {
         this.player.g = 2;
       }
       if (stair.collidesSides(this.player)) {
+
         this.player.vy = 0;
         this.player.g = 0.2;
         setTimeout(() => {
@@ -378,6 +320,9 @@ class Game {
         W = 87
         jumpDownDistance = 0;
         this.player.canClimb = true;
+        if(this.player.vy != 0){
+          stairSound.play()
+        }
       } else {
         // this.player.canClimb = false;    // esto impide que suba a las otras esfcaleras, solo a la ultima del array
         return true;
@@ -385,15 +330,15 @@ class Game {
     });
     //bubbles...bubbles...bubbles...bubbles...bubbles...
     //bubbles...bubbles...bubbles...bubbles...bubbles...
-      checkBubbleCollision(this.bubbles, this.player, this.bubbleSplash2, this.bubblePopSound1, this.puffBubbles, this.ctx, this.platforms, this.bouncers, this.boxes)
+      checkBubbleCollision(this.bubbles, this.player, this.puffBubbles, this.ctx, this.platforms, this.bouncers, this.boxes)
     this.gatlings.forEach((e) => {  
-      checkBubbleCollision(e.bubbleArray, this.player, this.bubbleSplash2, this.bubblePopSound1, this.puffBubbles, this.ctx, this.platforms, this.bouncers, this.boxes)
+      checkBubbleCollision(e.bubbleArray, this.player, this.puffBubbles, this.ctx, this.platforms, this.bouncers, this.boxes)
     })
     this.cannons.forEach((e) => {
-      checkBubbleCollision(e.bubbleArray, this.player, this.bubbleSplash2, this.bubblePopSound1, this.puffBubbles, this.ctx, this.platforms, this.bouncers, this.boxes)
+      checkBubbleCollision(e.bubbleArray, this.player, this.puffBubbles, this.ctx, this.platforms, this.bouncers, this.boxes)
     })
     this.miniBoses.forEach((e) => {
-      checkBubbleCollision(e.bubbleArray, this.player, this.bubbleSplash2, this.bubblePopSound1, this.puffBubbles, this.ctx, this.platforms, this.bouncers, this.boxes)
+      checkBubbleCollision(e.bubbleArray, this.player, this.puffBubbles, this.ctx, this.platforms, this.bouncers, this.boxes)
     })
     this.miniBoses.forEach((e) => {e.explosiveArray.forEach((exp) => { if(exp.collides(this.player)){
         if(this.player.electricShieldIsActive || this.player.auraIsActive){
@@ -403,9 +348,9 @@ class Game {
           this.player.loseLife(exp.damage, true);
           exp.exploded = true;
           if(exp.bigBomb){
-            exp.fireExplosionBig.play()
+            fireExplosionBig.play()
           } else {
-            exp.fireExplosionSmall.play()
+            fireExplosionSmall.play()
           }
           exp.img.frame = 5;
           exp.vx = this.player.vx;
@@ -417,9 +362,9 @@ class Game {
     this.miniBoses.forEach((e) => {e.explosiveArray.forEach((exp) => { 
       if(exp.collidesBoss(e)){
         if(exp.bigBomb){
-          exp.fireExplosionBig.play()
+          fireExplosionBig.play()
         } else {
-          exp.fireExplosionSmall.play()
+          fireExplosionSmall.play()
         }
         exp.exploded = true;
         exp.vx = miniBossVx;
@@ -440,18 +385,18 @@ class Game {
 
 
 
-    checkDarkBubbleCollision(this.darkBubbles, this.player, this.bubbleSplash2, this.platforms, this.darkBubbleExplosion, this.bubbles, this.puffBubbles, this.bouncers)
+    checkDarkBubbleCollision(this.darkBubbles, this.player, this.platforms, this.bubbles, this.puffBubbles, this.bouncers)
 
     //weaponBar..weaponBar..weaponBar..weaponBar..
     //weaponBar..weaponBar..weaponBar..weaponBar..
 
-    checkBarCollisions(this.player.bulletBarArray, this.platforms, this.barHit, this.player);
-    checkBarCollisions(this.player.bulletBarArray, this.bouncers, this.barHit, this.player);
-    checkBarCollisions(this.player.bulletBarArray, this.boxes, this.barHit, this.player);
+    checkBarCollisions(this.player.bulletBarArray, this.platforms, this.player);
+    checkBarCollisions(this.player.bulletBarArray, this.bouncers, this.player);
+    checkBarCollisions(this.player.bulletBarArray, this.boxes, this.player);
 
-    checkHookCollisions(this.player.hooksArray, this.platforms, this.barHit, this.player);
-    checkHookCollisions(this.player.hooksArray, this.bouncers, this.barHit, this.player);
-    checkHookCollisions(this.player.hooksArray, this.boxes, this.barHit, this.player);
+    checkHookCollisions(this.player.hooksArray, this.platforms, this.player);
+    checkHookCollisions(this.player.hooksArray, this.bouncers, this.player);
+    checkHookCollisions(this.player.hooksArray, this.boxes, this.player);
     
     this.player.bulletBarArray.forEach((bar) =>{
       if(bar.collides(this.player)){
@@ -476,10 +421,10 @@ class Game {
       this.player.bulletArray.forEach((bullet) => {
         if (bullet.collides(platform)) {
           if (!platform.isSolid) {
-            this.platformHitSolid.play()
+            platformHitSolid.play()
             basicBulletBounce(bullet, platform);
           } else {
-            this.platformHitBreak.play()
+            platformHitBreak.play()
             const newColor = platform.calculateNewColor();
             platform.color = newColor;
             if(bullet.isBig){
@@ -490,7 +435,7 @@ class Game {
               coins+=2;
               this.player.life.amountOfGainedCoins = 2;
               this.player.life.isGaining = true;
-              this.coinsSound1.play()
+              coinsSound1.play()
               platform.x = -200;
             }
           }
@@ -571,8 +516,8 @@ this.miniBoses.forEach((mini) => {//  miniboss con player
 this.cannons.forEach((cann) => {//  cannon con fire
   this.player.bulletFireArray =  this.player.bulletFireArray.filter((bullet) => {
     if (bullet.collides(cann) ) {
-      cann.cannonIgniteSound.play()
-      cann.burningCannonSound.play()
+      cannonIgniteSound.play()
+      burningCannonSound.play()
       cann.cannonHit();
       cann.burning = true;
       cann.burningForce++
@@ -602,6 +547,7 @@ this.cannons.forEach((cann) => {//  cannon con fire
         N = 78;
         itemTakenImages = "../public/Imagenes/itemTakenBullet1.png";
         this.player.itemJustTaken = true;
+        ammoSound.play();
         eventInfo(munLanzallamas$$)
         this.player.fireAmount += 3; // sumamos 5 balas de fuego
         if (this.player.fireAmount >= 28) {//para que el charger que se dibuja haga el semicírculo
@@ -615,6 +561,7 @@ this.cannons.forEach((cann) => {//  cannon con fire
         recharge = 50;
         itemTakenImages = "../public/Imagenes/itemTakenBullet1.png";
         this.player.itemJustTaken = true;
+        ammoSound.play();
         eventInfo(munAmetralladora$$)
         setTimeout(() => {
           recharge = 500;
@@ -622,12 +569,11 @@ this.cannons.forEach((cann) => {//  cannon con fire
         machinegun.x = -100; // situa fuera del canvas la burbuja que colisiona con el player y luego isVisible la elimina del array
       } else return true;
     });
-    this.healings.forEach((healing) => {
-      // healings  choca con el personaje
+    this.healings.forEach((healing) => {// healings  choca con el personaje
       if (healing.collides(this.player)) {
         eventInfo(munSalud$$)
         this.player.gainLife();
-        this.player.healSound.play();
+        healSound.play();
         this.player.life.isHealing = true;
         itemTakenImages = "../public/Imagenes/itemTakenHealing1.png";
         this.player.itemJustTaken = true;
@@ -638,7 +584,7 @@ this.cannons.forEach((cann) => {//  cannon con fire
     this.bars.forEach((bar) => {// bars  choca con el personaje
       if (bar.collides(this.player)) {
         this.player.barAmount += 2;
-        this.player.ammoSound.play();
+        ammoSound.play();
         eventInfo(munCadena$$)
         itemTakenImages = "../public/Imagenes/itemTakenBullet1.png";
         this.player.itemJustTaken = true;
@@ -649,7 +595,7 @@ this.cannons.forEach((cann) => {//  cannon con fire
     this.steps.forEach((step) => {// steps  choca con el personaje
       if (step.collides(this.player)) {
         this.player.stepsAmount += 5;
-        this.playerBar.play();
+        playerBar.play();
         this.player.itemJustTaken = true;
         eventInfo(munStep$$)
         step.x = -100; // situa fuera del canvas la burbuja que colisiona con el player y luego isVisible la elimina del array
@@ -659,8 +605,7 @@ this.cannons.forEach((cann) => {//  cannon con fire
       if (blaster.collides(this.player)) {
         this.player.megaFireBlaster = true;
         this.player.megaFireBlasterAmount += 31;
-        this.blasterItemSound.play()
-
+        blasterItemSound.play()
         itemTakenImages = "../public/Imagenes/itemTakenBlaster1.png";
         this.player.itemJustTaken = true;
         eventInfo(munMegablaster$$)
@@ -671,6 +616,7 @@ this.cannons.forEach((cann) => {//  cannon con fire
       if (aura.collides(this.player)) {
         this.player.auraIsActive = true;
         aura.dispose = false;
+        itemTakenImages = "../public/Imagenes/itemTokenAura1.png";
         this.player.itemJustTaken = true;
         eventInfo(munEscudo$$)
         setTimeout(() => {
@@ -687,8 +633,8 @@ this.cannons.forEach((cann) => {//  cannon con fire
       if (coin.collides(this.player)) {
             coins+= coin.amountOfCoins;
             this.player.life.amountOfGainedCoins = coin.amountOfCoins;
-            this.coinsItemSound.play()
-        this.player.extraY = +20;
+            coinsItemSound.play()
+            this.player.extraY = +20;
             itemTakenImages = "../public/Imagenes/itemTakenCoins2.png";
             this.player.life.isGaining = true;
             coin.dispose = false;
@@ -698,6 +644,7 @@ this.cannons.forEach((cann) => {//  cannon con fire
     this.hooks.forEach((hook) => {
       if (hook.collides(this.player)) {
             eventInfo(munHook$$)
+            ammoSound.play();
             this.player.hookAmount += 2;
             hook.dispose = false;
         itemTakenImages = "../public/Imagenes/itemTakenBullet1.png";
@@ -715,7 +662,7 @@ this.cannons.forEach((cann) => {//  cannon con fire
         } else{
           coins += 30;
         }
-            this.electroItemSound.play()
+            electroItemSound.play()
             electro.dispose = false;
         this.player.itemJustTaken = true;
       } else return true;
@@ -746,8 +693,8 @@ this.cannons.forEach((cann) => {//  cannon con fire
     this.cannons.forEach((cann) => {//  cannon con fire
       this.player.bulletFireArray =  this.player.bulletFireArray.filter((bullet) => {
         if (bullet.collides(cann) ) {
-          cann.cannonIgniteSound.play()
-          cann.burningCannonSound.play()
+          cannonIgniteSound.play()
+          burningCannonSound.play()
           cann.cannonHit();
           cann.burning = true;
           cann.burningForce++
@@ -813,8 +760,8 @@ this.cannons.forEach((cann) => {//  cannon con fire
     this.boxes.forEach((box) => {//  box con fire
       this.player.bulletFireArray =  this.player.bulletFireArray.filter((bullet) => {
         if (bullet.collides(box) ) {
-          box.boxIgniteSound.play()
-          box.burningBoxSound.play()
+          boxIgniteSound.play()
+          burningBoxSound.play()
           box.burning = true;
           box.burningForce++
           if(box.burningForce > 5) box.burningForce = 5;
@@ -843,7 +790,7 @@ this.cannons.forEach((cann) => {//  cannon con fire
           if (levelBall.isActive) {
             ballBroke = false;
             levelBall.ballBroke = true;
-            levelBall.breakingLevelBallSound.play();
+            breakingLevelBallSound.play();
             if(GAMELEVEL <= 1500){
               this.levelChange();
             }
@@ -857,7 +804,7 @@ this.cannons.forEach((cann) => {//  cannon con fire
             bullet.y = -30;
           } else if (!levelBall.isActive && levelBall.winCondition) {
             levelBall.ballShieldBreaking = true;
-            levelBall.forceFieldFailSound.play();
+            forceFieldFailSound.play();
             setTimeout(() => {
               levelBall.isActive = true;
             }, 300);
@@ -907,10 +854,10 @@ if(this.player.wasNotDamaged) {
   }
 }
   levelChange() {      
-    if(this.player.wasNotDamaged) {coins+=20; this.coinsSound2.play();}
+    if(this.player.wasNotDamaged) {coins+=20; coinsSound2.play();}
     if(!this.isInfiniteChanging){
     setTimeout(() => {
-      this.changeLevelSound1.play();
+      changeLevelSound1.play();
       GAMELEVEL += 1;
       this.changingLevel = true;
       this.indiceAleatorio = Math.floor(Math.random() * this.frases.length);
@@ -931,7 +878,7 @@ if(this.player.wasNotDamaged) {
           level4( this.ctx, this.bubbles, this.platforms, this.stairs,  this.healings, this.bars, this.boxes,this.levelBalls);
         } else if (GAMELEVEL === 5) {
           this.background.img.src ="/public/Imagenes/background/background5.jpeg";
-          level5( this.ctx, this.bubbles, this.platforms, this.stairs,  this.healings, this.bars, this.boxes,this.levelBalls);
+        level5( this.ctx, this.bubbles, this.platforms, this.stairs,  this.healings, this.bars, this.boxes,this.levelBalls, this.auras);
         } else if (GAMELEVEL === 6) {
           this.background.img.src ="/public/Imagenes/background/background6.jpeg";
           level6( this.ctx, this.bubbles, this.platforms,this.bouncers, this.stairs,  this.healings, this.bars, this.boxes, this.spikes,this.levelBalls, this.stairs);
@@ -981,11 +928,11 @@ if(this.player.wasNotDamaged) {
           }, 3000);
         } else if (GAMELEVEL === 16){//pero 21 en realidad
           addMiniboss1()
-          this.miniBossTalk1.play()
+          miniBossTalk1.play()
           setTimeout(() => {
             let bo = new MiniBoss1(ctx, CTXW - 70, -50)
             this.miniBoses.push(bo);
-            this.minibossArrivingShip.play()
+            minibossArrivingShip.play()
             this.dispached = false;
           }, 6100);
         }
@@ -1222,9 +1169,9 @@ if(this.player.wasNotDamaged) {
     this.emptyAllPlayerArrays()
     infiniteLeveling = 0;
     GAMELEVEL = 1;
-    this.gameBackgroundMusic.pause();
-    this.gameOver1.play();
-    this.gameOver2.play();
+    gameBackgroundMusic.pause();
+     gameOver1.play();
+     gameOver2.play();
     let randomIndex = Math.floor(Math.random() * this.gameOverImgs.length);
     gameOverBackground$$.src = this.gameOverImgs[randomIndex];
     gameOverBackground$$.style.display = "block";

@@ -1,18 +1,18 @@
 
 
-function checkBubbleCollision(bubbles, player, bubbleSplash2, bubblePopSound1, puffBubbles, ctx, platforms, bouncers, boxes){
+function checkBubbleCollision(bubbles, player, puffBubbles, ctx, platforms, bouncers, boxes){
   bubbles.forEach((bubble) => {//player con bubble
     if(bubble.collides(player)) {
-        if(player.electricShieldIsActive){
-          electroShockSound.play()
-          bubble.vy = -10;
-          bubble.isElectrified = true;
-          setTimeout(() => {
-            bubble.isElectrified = false;
-          }, shieldsDuration);
-        }
-        if(!playerIsImmune){
-          if(player.y + player.h <= bubble.y +30 && bubble.w>=20){
+      if(player.electricShieldIsActive){
+        electroShockSound.play()
+        bubble.vy = -10;
+        bubble.isElectrified = true;
+        setTimeout(() => {
+          bubble.isElectrified = false;
+        }, shieldsDuration);
+      }
+      if(!playerIsImmune){
+          if(player.y + player.h <= bubble.y +30 && bubble.w>=20 && boots){
             player.vy = -10;
           } else {
             if (!player.auraIsActive && !player.electricShieldIsActive) { 
@@ -25,6 +25,8 @@ function checkBubbleCollision(bubbles, player, bubbleSplash2, bubblePopSound1, p
       bubbleSplash2.play();
     } else return true;
   });
+
+
  bubbles.forEach((bubble) => {//  bubble con bullet
     player.bulletArray = player.bulletArray.filter((bullet) => {
       if (bullet.collides(bubble) && !bullet.isBig) {
@@ -76,7 +78,7 @@ function checkBubbleCollision(bubbles, player, bubbleSplash2, bubblePopSound1, p
     platforms.forEach((platform) => {
       if (platform.collides(bubble)) {
         if (platform.isBouncable) {
-        bubble.bubbleBounceSound.play()
+        bubbleBounceSound.play()
           bounceFromObstacles(bubble, platform);
         } else if (!platform.isBouncable) {
           bubble.y = platform.y - bubble.h;
@@ -90,7 +92,7 @@ function checkBubbleCollision(bubbles, player, bubbleSplash2, bubblePopSound1, p
   bubbles.forEach((bubble) => {//bubble con boxes
     boxes.forEach((box) => {
       if (box.collides(bubble)) {
-        bubble.bubbleBounceSound.play()
+        bubbleBounceSound.play()
         bounceFromObstacles(bubble, box);
       } else return true;
     });
@@ -99,7 +101,7 @@ function checkBubbleCollision(bubbles, player, bubbleSplash2, bubblePopSound1, p
   bubbles.forEach((bubble) => {//bubble con bouncer
     bouncers.forEach((bouncer) => {
       if (bouncer.collides(bubble)) {
-        bubble.bubbleBounceSound.play()
+        bubbleBounceSound.play()
         bounceFromObstacles(bubble, bouncer, 5);
       } else return true;
     });
@@ -164,7 +166,6 @@ function platformPlayerCollision(player, platform){
       player.hookedOnPlatform = false;
       player.g = 1;
     }
-
   }
   if (player.x + player.w >= platform.x + platform.w  || player.x <= platform.x) {//colisión por los lados de la plataforma. Por alguna razón, funciona
     jumpDownDistance = 0;
@@ -172,12 +173,12 @@ function platformPlayerCollision(player, platform){
   }
 }
 
-function barCollidesObstacle(bar, obstacle, barHit, player){
+function barCollidesObstacle(bar, obstacle, player){
     bar.solidState = true;
     bar.y = obstacle.y + obstacle.h;
     bar.vy = 0;
     barHit.play();
-    player.shootBarSound.volume = 0;
+    shootBarSound.volume = 0;
     bar.img.src = "../public/Imagenes/weaponBarSolid.png";
 }
 
@@ -193,7 +194,7 @@ function checkBarCollisions(bulletBarArray, obstacles, collisionHandler, player)
 
 
 
-function checkHookCollisions(hookArray, obstacles, barHit, player) {
+function checkHookCollisions(hookArray, obstacles, player) {
   hookArray.forEach((hook) => {
     obstacles.forEach((obstacle) => {
       if (hook.collidesTop(obstacle)) {
@@ -234,7 +235,7 @@ function bossFireCollision (miniBoses, object){
 
 
 
-  function checkDarkBubbleCollision(darkBubbles, player, bubbleSplash2, platforms, darkBubbleExplosion, bubbles, puffBubbles, bouncers){
+  function checkDarkBubbleCollision(darkBubbles, player, platforms, bubbles, puffBubbles, bouncers){
     darkBubbles.forEach((bubble) => {//player darkbubble
       if (bubble.collides(player) && !playerIsImmune) {
         if(player.y + player.h <= bubble.y +30 ){
@@ -243,6 +244,7 @@ function bossFireCollision (miniBoses, object){
           if (!player.auraIsActive) {
             player.loseLife(bubble.damage, true); //el daño al jugador se le hace según lo que marca el daño de la burbuja. a burbuja más pequeña, menos daño
             bubble.vy = -bubbleSpeedY; // rebota encima del jugador haciéndole daño
+            losingMoney(player, 3)
           }
         }
         player.wasNotDamaged = false;
@@ -257,11 +259,11 @@ function bossFireCollision (miniBoses, object){
             const newColor = platform.calculateNewColor();
             platform.color = newColor;
             if(bubble.w >= CTXW/4){
-              darkBubbleExplosion(darkBubbleExplosion, bubble, bubbles, puffBubbles)//explota y genera bubbles pequeños
+              darkBubbleExplosion( bubble, bubbles, puffBubbles)//explota y genera bubbles pequeños
             }
           }
           if (platform.isBouncable) {
-            bubble.bubbleBounceSound.play();
+            darkBubbleBounceSound.play();
             bounceFromObstacles(bubble, platform);
           } else if (!platform.isBouncable) {
             bubble.y = platform.y - bubble.h;
@@ -276,7 +278,7 @@ function bossFireCollision (miniBoses, object){
    darkBubbles.forEach((bubble) => {//bubble con darkBubble
      bouncers.forEach((bouncer) => {
         if (bouncer.collides(bubble)) {
-          bubble.bubbleBounceSound.play();
+          darkBubbleBounceSound.play();
           bounceFromObstacles(bubble, bouncer);
         } else return true;
       });
@@ -294,16 +296,23 @@ function bossFireCollision (miniBoses, object){
     darkBubbles.forEach((bubble) => {//  darkbubble con bullet
       player.bulletArray = player.bulletArray.filter((bullet) => {
         if (bullet.collides(bubble)) {
-          bubble.w += 2;
-          bubble.h += 2;
+          bubble.w += 20;
+          bubble.h += 20;
           bubble.x -= 1;
           bubble.y -= 1;
-          bubble.darkBubbbleHit.play()
+          darkBubbbleHit.play()
           if(bubble.w >= CTXW/4){
-            darkBubbleExplosion(darkBubbleExplosion, bubble, bubbles, puffBubbles)//explota y genera bubbles pequeños
+            darkBubbleExplosion( bubble, bubbles, puffBubbles)//explota y genera bubbles pequeños
           }
           return false;
         } else return true;
       });
     });
+  }
+
+  
+  function losingMoney (player, amount){
+    coins -= amount
+    player.life.isLosing = true;
+    player.life.amountOfGainedCoins = amount;
   }

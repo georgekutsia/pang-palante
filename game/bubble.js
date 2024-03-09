@@ -24,9 +24,7 @@ class Bubble { //posX posY, ancho, alto, velX, velY, gravedad, buleano si hay gr
     this.isElectrified = false;
     this.electroTick = 0;
     this.willBounce = willBounce;
-
-    this.bubbleBounceSound = new Audio("../public/sounds/bubbleBounce.mp3") //todo -- paso 1 traer el sonido y almacenarlo en una variable
-    this.bubbleBounceSound.volume = 0.1;  //todo -- paso 2, no obligatorio, determinarle volumen de 0 a 1, creo
+    this.replicateTick = 0;
   }
   draw() {
     // Dibujar el círculo detrás de la burbuja
@@ -60,16 +58,17 @@ class Bubble { //posX posY, ancho, alto, velX, velY, gravedad, buleano si hay gr
     this.y += this.vy;
     this.x += this.vx;
     this.gTick++
+    this.replicateTick++;
     if (this.y + this.h >= this.ctx.canvas.height ){
-      this.bubbleBounceSound.play()//todo --paso 3 llamar a .play() para invocar el sonido donde sea necesario
+      bubbleBounceSound.play()//todo --paso 3 llamar a .play() para invocar el sonido donde sea necesario
       this.vy = -Math.abs(this.w/20 + 7); 
     }
     if(this.x + this.w >= this.ctx.canvas.width && this.willBounce){
-      this.bubbleBounceSound.play()//todo --paso 3 llamar a .play() para invocar el sonido donde sea necesario
+      bubbleBounceSound.play()//todo --paso 3 llamar a .play() para invocar el sonido donde sea necesario
       this.vx = -bubbleSpeedX;
     }
     if(this.x <= 0&& this.willBounce){
-      this.bubbleBounceSound.play()//todo --paso 3 llamar a .play() para invocar el sonido donde sea necesario
+      bubbleBounceSound.play()//todo --paso 3 llamar a .play() para invocar el sonido donde sea necesario
       this.vx = bubbleSpeedX;
     }
     if(this.isElectrified){
@@ -90,6 +89,11 @@ class Bubble { //posX posY, ancho, alto, velX, velY, gravedad, buleano si hay gr
         clearTimeout(this.setTimeout)
         this.isSlowGravity = false;
       }, this.slowGrvityDuration);
+    }
+    if(this.replicateTick === replicationTime && this.w >=46){
+      const newBubble = new Bubble(this.ctx, this.x, this.y, this.w, this.h, -this.vx, this.vy, this.g, this.isSlowGravity, this.slowGrvityDuration, this.damage, this.willBounce, this.img.src);
+      game.bubbles.push(newBubble);
+      this.replicateTick = 0; // Reinicia el contador de replicación
     }
   }
   

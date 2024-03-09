@@ -98,7 +98,6 @@ function  itemDropOnStairs (items, platforms){
         if(item.y + item.h <= platform.y +20){
           item.vy = 0.5; 
         }
-        console.log("hey")
       }
     })
   })
@@ -156,15 +155,15 @@ function bigWeaponBubble (ctx, bullet, player){ //la burbuja gigante que dispara
   player.bulletArray.push(bullet1, bullet2,bullet3,bullet4)
 }
 
-function darkBubbleExplosion(darkBubbleExplosion, bubble, bubbles, puffBubbles){
-  darkBubbleExplosion.play()
-  const bub1 = new Bubble(ctx, bubble.x, bubble.y, 15, 15, -1.5, -0.5)
-  const bub2 = new Bubble(ctx, bubble.x - 50, bubble.y, 15, 15, -1, -0.5)
-  const bub3 = new Bubble(ctx, bubble.x - 10, bubble.y, 15, 15, -0.5, -0.5)
-  const bub4 = new Bubble(ctx, bubble.x + 30, bubble.y, 15, 15, 0.01, -0.5)
-  const bub5 = new Bubble(ctx, bubble.x + 70, bubble.y, 15, 15, 0.5, -0.5)
-  const bub6 = new Bubble(ctx, bubble.x + 110, bubble.y, 15, 15, 1, -0.5)
-  const bub7 = new Bubble(ctx, bubble.x + 150, bubble.y, 15, 15, 1.5, -0.5)
+function darkBubbleExplosion( bubble, bubbles, puffBubbles){
+  darkBubbleExplodedSound.play()
+  const bub1 = new Bubble(ctx, bubble.x, bubble.y, 50, 50, -2.5, -5.5)
+  const bub2 = new Bubble(ctx, bubble.x - 50, bubble.y, 50, 50, -1.5, -5.5)
+  const bub3 = new Bubble(ctx, bubble.x - 10, bubble.y, 50, 50, -0.5, -5.5)
+  const bub4 = new Bubble(ctx, bubble.x + 30, bubble.y, 50, 50, 0.01, -5.5)
+  const bub5 = new Bubble(ctx, bubble.x + 70, bubble.y, 50, 50, 0.5, -5.5)
+  const bub6 = new Bubble(ctx, bubble.x + 110, bubble.y, 50, 50, 1.5, -5.5)
+  const bub7 = new Bubble(ctx, bubble.x + 150, bubble.y, 50, 50, 2.5, -5.5)
   bubbles.push(bub1, bub2, bub3, bub4, bub5, bub6, bub7)
   const puffBubble = new BubblePuff(ctx, bubble.x ,bubble.y, bubble.w, bubble.h );
   puffBubbles.push(puffBubble);

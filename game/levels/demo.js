@@ -245,3 +245,38 @@ function addLever(ctx, levers){
   let lev = new Lever(ctx)
   levers.push(lev);
 }
+
+
+
+function itemsDemo(ctx, stairs, bubbles, darkBubbles, spikes, gatlings, hooks, flamethrowers, bars, boxes, blasters, electros, coins, healings){
+  let stair = new Stair(ctx, 1000, CTXH - 100, 80, 100)
+  stairs.push(stair)
+    let bubbb =  new Bubble(ctx, 10, 20, 90, 90, 3, 2)
+    bubbles.push(bubbb)
+    let darkB =  new DarkBubble(ctx, 10, 20, 90, 90, 3, 2)
+    darkBubbles.push(darkB)
+    let spa =  new Spikes(ctx, 10, CTXH-20)
+    spikes.push(spa)
+    let gat =  new BubbleGatling(ctx)
+    gatlings.push(gat)
+    let hoo =  new Hook(ctx, 450, CTXH - 150)
+    hooks.push(hoo)
+    let lan =  new Flamethrower(ctx, 400, CTXH - 150)
+    flamethrowers.push(lan)
+    let ba =  new Bars(ctx, 300, CTXH - 150, 10, 30)
+    bars.push(ba)
+    let box =  new Box(ctx, 500, 30, 3)
+    boxes.push(box)
+    let blast = new MegaFireBlaster(ctx, 640, CTXH-190)
+    blasters.push(blast);  
+    let electro =  new Electro(ctx, 600, CTXH - 150, 10, 30)
+    electros.push(electro)
+    let coin =  new Coins(ctx, 800, CTXH - 150, 10, 30)
+    let coin1 =  new Coins(ctx, 850, CTXH - 150, 10, 30)
+    let coin2 =  new Coins(ctx, 900, CTXH - 150, 10, 30)
+    coins.push(coin, coin1, coin2)
+    let heal =  new Healing(ctx, 150, CTXH - 250,)
+    let heal1 =  new Healing(ctx, 100, CTXH - 200,)
+    let heal2 =  new Healing(ctx, 50, CTXH - 150,)
+    healings.push(heal, heal1, heal2)
+}

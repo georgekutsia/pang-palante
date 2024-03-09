@@ -7,7 +7,6 @@ class Stair {
     this.y = y || this.ctx.canvas.height - this.h; // Posición vertical (coordenada y), valor predeterminado o especificado
     this.img = new Image(); // Imagen asociada a la escalera
     this.img.src = obstacleImg || "/public/Imagenes/obstacles/stair1.png"; // Ruta de la imagen de la escalera
-
   }
 
   draw() {
@@ -17,7 +16,6 @@ class Stair {
 
   move() {
     // Método para actualizar la posición de la escalera en función de su velocidad
-
   }
 
   isVisible() {

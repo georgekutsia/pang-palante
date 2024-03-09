@@ -55,6 +55,10 @@ let shopSuperGun3$$ = document.getElementById("shop-superGun3")
 let shopSuperGun4$$ = document.getElementById("shop-superGun4")
 let shopBarResistance$$ = document.getElementById("shop-barResistane")
 let shopElectricShield$$ = document.getElementById("shop-electricShield")
+let shopBoots$$ = document.getElementById("shop-boots")
+let shopRetry$$ = document.getElementById("shop-retry")
+let bulletBlock1$$ = document.getElementById("bullet-block1")
+let bulletBlock2$$ = document.getElementById("bullet-block2")
 
 
 let demoFriend1$$ = document.querySelector(".demoFriend1")

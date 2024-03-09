@@ -21,7 +21,7 @@
     position: absolute;
     top: 0;
     right: 1vw;
-    display: none;
+    display: block;
     opacity: 0;
   }
   #shop-btn{
@@ -30,13 +30,13 @@
     top: 3.5vh;
     display: flex;
     flex-direction: column;
-  margin-top: calc(23px + 1.3vw);
-  filter: drop-shadow(0px 3px 3px rgba(0, 105, 175, 0.9));
+    margin-top: calc(23px + 1.3vw);
+    filter: drop-shadow(0px 3px 3px rgba(0, 105, 175, 0.9));
   }
 
   
 #shop-shield{
-  font-size: calc(10px + 0.8vw);
+  font-size: calc(10px + 0.5vw);
   background: none;
   border: none;
 }
@@ -48,8 +48,8 @@
   margin-right: 5px;
   border-radius: 5px;
   transition: 0.5s ease-in-out;
-  font-size: calc(10px + 0.8vw);
-  padding: 6px 0.5vw;
+  font-size: calc(10px + 0.5vw);
+  padding: 2px 4px;
   margin-bottom: 5px;
 }
 
@@ -110,4 +110,12 @@
 
 .fa-anchor{
   transform: rotate(180deg);
+}
+
+
+#shop-superGun2{
+  align-self: center;
+}
+#bullet-block1{
+  margin: auto;
 }

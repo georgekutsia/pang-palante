@@ -39,15 +39,12 @@ class MiniBoss1 {
     this.burning = true;
     this.burningForce = 0;
     this.damage0 = 0;
-    
-    this.minibossFlyingShip = new Audio("/public/sounds/minibossFlyingShip.mp3")
-    this.minibossFlyingShip.volume = 0.3;
     this.arriving = true;
   }
 
   draw() {
 if(this.arriving){
-  this.minibossFlyingShip.play();
+  minibossFlyingShip.play();
   this.arriving = false;
   setTimeout(() => {
     this.arriving = true;

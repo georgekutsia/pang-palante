@@ -31,9 +31,6 @@ constructor(ctx, x, y) {
     this.ballBreaks.frame = 0;
     this.ballBreaksTick = 0;
     this.ballBroke = false;
-    this.breakingLevelBallSound = new Audio("/public/sounds/breakingLevelBallSound1.mp3");
-    this.breakingLevelBallSound.volume = 0.1
-    
   //cuando resiste el daño de las balas y sale el escudo de plasma
     this.ballShieldForce = new Image(); 
     this.ballShieldForce.src = "/public/Imagenes/ballShieldForce.png"; 
@@ -41,8 +38,6 @@ constructor(ctx, x, y) {
     this.ballShieldForceTick = 0;
     this.ballShieldForceTickTimer = 0;
     this.ballShieldForceResist = false;;
-    this.forceFieldSound = new Audio("/public/sounds/forceField.mp3")
-    this.forceFieldSound.volume = 0.1
 
     //el efecto de romperse cuando ya no tiene ball shield
     this.ballShieldBreak = new Image(); 
@@ -50,7 +45,6 @@ constructor(ctx, x, y) {
     this.ballShieldBreak.frame = 0;
     this.ballShieldBreakTick = 0;
     this.ballShieldBreaking = false;
-    this.forceFieldFailSound = new Audio("/public/sounds/forceFieldFailSound.mp3")
   }
   draw() {
     if(!this.ballBroke) {
@@ -62,7 +56,7 @@ constructor(ctx, x, y) {
 
     if(this.ballShieldForceResist){
       this.ballShieldForceTickTimer++;
-      this.forceFieldSound.play()
+      forceFieldSound.play()
       if(this.ballShieldForceTickTimer >= 100) {
         this.ballShieldForceResist = false;
       this.ballShieldForceTickTimer = 0;
