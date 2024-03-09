@@ -15,8 +15,7 @@ class BubbleCannon {
     this.imgTick = 0;
     this.bubbleArray = [];
     this.damage = 0.001;
-    this.bubbleGatlingSound = new Audio("/public/sounds/shooting/bubbleGatling.mp3")
-    this.bubbleGatlingSound.volume = 0.1;
+
     this.img.frame = 0;
     this.tick = 0;
     this.shooting = true;
@@ -35,10 +34,7 @@ class BubbleCannon {
     this.burningTick = 0;
     this.burning = false;
     this.burningForce = 0;
-    this.cannonIgniteSound = new Audio("/public/sounds/electrofire/boxBurning.mp3")
-    this.cannonIgniteSound.volume = 0.03;
-    this.burningCannonSound = new Audio("/public/sounds/electrofire/burningBox.mp3")
-    this.burningCannonSound.volume = 0.05;
+
   }
 
   draw() {

@@ -23,22 +23,6 @@ class Box {
     this.damage0 = 0;
     this.amountOfLoot = amountOfLoot || 0;
 
-
-    this.boxHitSound = new Audio("/public/sounds/box/boxHit.mp3")
-    this.boxHitSound.volume = 0.03;
-    this.boxHitBreakSound = new Audio("/public/sounds/box/boxBreak.mp3")
-    this.boxHitBreakSound.volume = 0.03;
-    this.boxHitBreakingLongSound = new Audio("/public/sounds/box/boxBreakingLong.mp3")
-    this.boxHitBreakingLongSound.volume = 0.03;
-    this.boxImpactMetalic = new Audio("/public/sounds/box/boxImpactMetalic.mp3")
-    this.boxImpactMetalic.volume = 0.01;
-    this.boxIgniteSound = new Audio("/public/sounds/electrofire/boxBurning.mp3")
-    this.boxIgniteSound.volume = 0.03;
-    this.burningBoxSound = new Audio("/public/sounds/electrofire/burningBox.mp3")
-    this.burningBoxSound.volume = 0.05;
-
-    this.coinsSound1 = new Audio("../public/sounds/coinsSound1.mp3")
-    this.coinsSound1.volume = 1; 
     this.boxLevel = boxLevel;// de 1 a 3 determina la resistenci de la caja
     this.containsRandom = containsRandom || false; //determina si el loot será random o no. mirar en funciones
     this.lootNumber = lootNumber || 5
@@ -148,13 +132,13 @@ class Box {
           this.damage0 +=1;
           if(this.damage0 >=3){
             this.boxImg.frame+=1;
-            this.boxImpactMetalic.play();
+            boxImpactMetalic.play();
             this.damage0 = 0;
           }
         }
         if(this.boxLevel===1) {
           this.boxImg.frame+=1;
-          this.boxImpactMetalic.play();
+          boxImpactMetalic.play();
         }
         if(this.boxLevel===2) {
           this.boxImg.frame+=2;
@@ -170,15 +154,15 @@ class Box {
     }
   }
   hitingSound(){
-    if(this.boxImg.frame <= 4) {this.boxHitSound.play()}
-    if(this.boxImg.frame >=5 && this.boxImg.frame <=8) this.boxHitBreakSound.play()
-    if(this.boxImg.frame >8) this.boxHitBreakingLongSound.play();
+    if(this.boxImg.frame <= 4) {boxHitSound.play()}
+    if(this.boxImg.frame >=5 && this.boxImg.frame <=8) boxHitBreakSound.play()
+    if(this.boxImg.frame >8) boxHitBreakingLongSound.play();
     if(this.boxImg.frame > 8){ 
       coins+=2;
       game.player.life.amountOfGainedCoins = 2;
       game.player.life.isGaining = true;
-      this.burningBoxSound.volume = 0;
-      this.coinsSound1.play()
+      burningBoxSound.volume = 0;
+      coinsSound1.play()
       this.dispose = false; 
     }
   }
@@ -187,13 +171,13 @@ class Box {
     if(this.boxLevel===0) {
       if(this.damage0 >=4){
         this.boxImg.frame+=1;
-        this.boxImpactMetalic.play();
+        boxImpactMetalic.play();
         this.damage0 = 0;
       }
     }
     if(this.boxLevel===1 && this.damage0 >=3) {
       this.boxImg.frame+=1;
-      this.boxImpactMetalic.play();
+      boxImpactMetalic.play();
       this.damage0 = 0;
     }
     if(this.boxLevel===2 && this.damage0 >= 2) {

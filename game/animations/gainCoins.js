@@ -1,12 +1,12 @@
 class GainCoins {
-  constructor(ctx, x) {
+  constructor(ctx, x, vy, vx) {
     this.ctx = ctx;
     this.x = x || 60;
     this.y = 40;
     this.w = this.ctx.canvas.width/35;
     this.h =  this.ctx.canvas.width/50;
-    this.vx = 0;
-    this.vy =  -3;
+    this.vx = vx || 0;
+    this.vy = vy ||  -3;
     this.g = 0.055;
     this.img = new Image();
     this.img.src = "/public/Imagenes/gainCoins1.png";
@@ -36,6 +36,7 @@ class GainCoins {
     this.tick++;
     this.vy += this.g
     this.y += this.vy
+    this.x += this.vx
     if (this.tick > 1) {
       this.img.framey++; 
       this.tick = 0;

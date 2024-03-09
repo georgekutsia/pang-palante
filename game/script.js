@@ -256,7 +256,3 @@ mapChangeLevel$$.addEventListener("mouseout", () => {
 
 });
 
-// sincrongeniero$$.addEventListener("click", () => {
-// console.log("bulala")
-// });
-

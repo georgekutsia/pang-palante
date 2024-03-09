@@ -10,8 +10,8 @@
   <link rel="stylesheet" href="./styles/ammos.css" />
   <script src="./game/game.js" defer></script>
   <script src="./game/functions.js" defer></script>
+  <script src="./game/sounds.js" defer></script>
   <script src="./game/functionsForLeveling.js" defer></script>
-  <script src="./game/canvasHoverFunctions.js" defer></script>
   <script src="./game/functionsCollision.js" defer></script>
   <script src="./game/functionDemo.js" defer></script>
   <script src="./game/functionMinions.js" defer></script>
@@ -133,18 +133,24 @@
       </div>
     </div>
     <div id="shop-btn">
-      <button id="shop-shield">50<i class="fa-solid fa-coins"></i> <i style="font-size: calc(14px + 0.53vw)" class="fa-solid fa-globe"></i></button>
-      <button id="shop-fire">20<i class="fa-solid fa-coins"></i> <i style="font-size: calc(14px + 0.53vw)" class="fa-solid fa-fire-flame-simple"></i></button>
-      <button id="shop-bar">25<i class="fa-solid fa-coins"></i> <i style="font-size: calc(14px + 0.53vw)" class="fa-solid fa-anchor"></i></button>
-      <button id="shop-electro">30<i class="fa-solid fa-coins"></i> <i style="font-size: calc(14px + 0.53vw)" class="fa-solid fa-bolt-lightning"></i></button>
-      <button id="shop-superGun"><i style="font-size: calc(14px + 0.53vw)" class="fa-solid fa-bullseye"></i> <br>Nivel 0 </button>
-      <button id="shop-superGun1">90<i class="fa-solid fa-coins"></i> <i style="font-size: calc(14px + 0.53vw)" class="fa-solid fa-angles-up"></i> <br>Nivel 1 </button>
-      <button id="shop-superGun2">100<i class="fa-solid fa-coins"></i> <i style="font-size: calc(14px + 0.53vw)" class="fa-solid fa-angles-up"></i> <br>Nivel 2 </button>
-      <button id="shop-superGun3">110<i class="fa-solid fa-coins"></i> <i style="font-size: calc(14px + 0.53vw)" class="fa-solid fa-angles-up"></i> <br>Nivel 3 </button>
-      <button id="shop-superGun4">120<i class="fa-solid fa-coins"></i> <i style="font-size: calc(14px + 0.53vw)" class="fa-solid fa-angles-up"></i> <br>Nivel 4 </button>
-      <button id="shop-speedGun"> <span><i style="font-size: calc(14px + 0.53vw)" class="fa-solid fa-gauge-simple-high"></i> x 2</span> <br> <i style="font-size: calc(8px + 0.3vw)" class="fa-solid fa-angles-up fonts-i"></i><span id="velocidad-text">Velocidad</span>  <br> 50<i class="fa-solid fa-coins"></i> </button>
-      <button id="shop-barResistane"> <span><i style="font-size: calc(14px + 0.53vw)" class="fa-solid fa-anchor"></i> x 2</span> <br> <i style="font-size: calc(8px + 0.3vw)" class="fa-solid fa-angles-up fonts-i"></i><span id="velocidad-text">Resistance</span>  <br> 50<i class="fa-solid fa-coins"></i> </button>
+      <button id="shop-shield">50<i class="fa-solid fa-coins"></i> <i style="font-size: calc(14px + 0.3vw)" class="fa-solid fa-globe"></i></button>
+      <button id="shop-fire">20<i class="fa-solid fa-coins"></i> <i style="font-size: calc(14px + 0.3vw)" class="fa-solid fa-fire-flame-simple"></i></button>
+      <button id="shop-bar">25<i class="fa-solid fa-coins"></i> <i style="font-size: calc(14px + 0.3vw)" class="fa-solid fa-anchor"></i></button>
+      <button id="shop-electro">30<i class="fa-solid fa-coins"></i> <i style="font-size: calc(14px + 0.3vw)" class="fa-solid fa-bolt-lightning"></i></button>
+      <button id="shop-superGun"><i style="font-size: calc(14px + 0.3vw)" class="fa-solid fa-bullseye"></i>Nivel 0 </button>
+      <div id="bullet-block1">
+        <button id="shop-superGun1"> 90 <i class="fa-solid fa-coins"></i> <i style="font-size: calc(14px + 0.3vw)" class="fa-solid fa-angles-up"></i> <br> Nivel 1 </button>
+        <button id="shop-superGun2"> 100 <i class="fa-solid fa-coins"></i> <i style="font-size: calc(14px + 0.3vw)" class="fa-solid fa-angles-up"></i> <br> Nivel 2 </button>
+      </div>
+      <div id="bullet-block2">
+        <button id="shop-superGun3"> 110 <i class="fa-solid fa-coins"></i> <i style="font-size: calc(14px + 0.3vw)" class="fa-solid fa-angles-up"></i> <br> Nivel 3 </button>
+        <button id="shop-superGun4"> 120 <i class="fa-solid fa-coins"></i> <i style="font-size: calc(14px + 0.3vw)" class="fa-solid fa-angles-up"></i> <br> Nivel 4 </button>
+      </div>
+      <button id="shop-speedGun"> <span><i style="font-size: calc(14px + 0.3vw)" class="fa-solid fa-gauge-simple-high"></i> </span> <i style="font-size: calc(8px + 0.3vw)" class="fa-solid fa-angles-up fonts-i"></i><span id="velocidad-text">Vel</span>  <br> 50<i class="fa-solid fa-coins"></i> </button>
+      <button id="shop-barResistane"> <span><i style="font-size: calc(14px + 0.3vw)" class="fa-solid fa-anchor"></i> x 2</span> <i style="font-size: calc(8px + 0.3vw)" class="fa-solid fa-angles-up fonts-i"></i><span id="velocidad-text"> Res</span>  <br> 50<i class="fa-solid fa-coins"></i> </button>
       <button id="shop-electricShield"> </i> <span id="electro-text"><i style="font-size: calc(8px + 0.4vw)" class="fa-solid fa-bolt-lightning"></i>Electro</span>  <br> 130<i class="fa-solid fa-coins"></i> </button>
+      <button id="shop-boots"> </i> <span id="boots-text"><i style="font-size: calc(8px + 0.4vw)" class="fa-solid fa-shoe-prints"></i>reBotas</span>  <br> 65<i class="fa-solid fa-coins"></i> </button>
+      <button id="shop-retry"> </i> <span id="retry-text"><i style="font-size: calc(8px + 0.4vw)" class="fa-solid fa-arrow-rotate-left"></i> Retry</span>  <br> 150<i class="fa-solid fa-coins"></i> </button>
     </div>
   <section id="moves-div">
     <div>

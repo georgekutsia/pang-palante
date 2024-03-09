@@ -82,24 +82,6 @@ class Player {
     this.keySwitchCounter = 0;
     this.stabDirection = true;
 
-    this.blasterExplosion = new Audio("../public/sounds/megablasterBlastSound.mp3");
-    this.blasterExplosion.volume = 0.5; //
-    this.blasterCharging = new Audio("../public/sounds/blasterChargindSound.mp3");
-    this.blasterCharging.volume = 0.5; //
-    this.playerDamageSound1 = new Audio("../public/sounds/playerDamageSound1.mp3");
-    this.playerDamageSound1.volume = 0.05; //
-    this.shootSound = new Audio("/public/sounds/shooting/weaponShootSound.mp3");
-    this.shootSound.volume = 0.1;
-    this.shootBarSound = new Audio("/public/sounds/shooting/shootBarSound2.mp3");
-    this.hookShoot = new Audio("/public/sounds/shooting/hookShort.m4a")
-    this.hookShoot.volume = 0.05
-    this.electroSoundOn = new Audio("/public/sounds/electrofire/electrifingShield.mp3")
-    this.electroSoundOn.volume = 0.1
-    this.ammoSound = new Audio("/public/sounds/shooting/revolverSpin.mp3")
-    this.ammoSound.volume = 0.1
-    this.healSound = new Audio("/public/sounds/shooting/drinkBeer.mp3");
-    this.healSound.volume = 0.5;
-
     this.barInfo$$ = document.getElementById("bar-info")
     this.fireInfo$$ = document.getElementById("fire-info")
     this.hookInfo$$ = document.getElementById("hook-info")
@@ -205,12 +187,12 @@ class Player {
       this.megaFireBlaster = true; // No estoy seguro de tu lógica, pero asegúrate de que se active correctamente
       this.chargingFires = true;
       this.charging++;
-      this.blasterCharging.volume = 1;
-      this.blasterCharging.play();
+      blasterCharging.volume = 1;
+      blasterCharging.play();
 
       if (this.charging >= this.megaFireBlasterAmount) {
         this.charging = this.megaFireBlasterAmount;
-        this.blasterCharging.volume = 0;
+        blasterCharging.volume = 0;
       }
     }
   }
@@ -224,8 +206,8 @@ class Player {
       this.megaFireBlaster = false;
       if (this.charging >= 3) {
         for (let i = 0; i < this.charging; i++) {
-          this.blasterExplosion.play();
-          this.blasterCharging.volume = 0;
+          blasterExplosion.play();
+          blasterCharging.volume = 0;
 
           if (i % 10 === 0 && i % 20 !== 0) {
             const bulletFire = new WeaponFire(this.ctx, this.x + this.w - i, this.y, this.ctx.canvas.width / 20, this.ctx.canvas.width / 18)
@@ -490,7 +472,7 @@ handleRightDodge = (event) =>{ //*
     bulletDirection = this.vx/2
     if(this.vx){
       this.frameTick++
-      if (this.frameTick > 3  ) {
+      if (this.frameTick > 5  ) {
         this.img.frame++;
         this.frameTick = 0;
       }
@@ -707,17 +689,17 @@ handleRightDodge = (event) =>{ //*
       D = 0;
       this.chargingFires = true;
       this.charging++;
-      this.blasterCharging.volume = 1;
-      this.blasterCharging.play()
+      blasterCharging.volume = 1;
+      blasterCharging.play()
       if(this.charging >= this.megaFireBlasterAmount){
         this.charging = this.megaFireBlasterAmount;
-      this.blasterCharging.volume = 0;
+      blasterCharging.volume = 0;
       }
     }
     if(key === J){
       if(this.hookAmount > 0){
       this.shootHook();
-      this.hookShoot.play()
+          hookShoot.play()
           this.hookAmount--;
         } 
       }
@@ -725,7 +707,7 @@ handleRightDodge = (event) =>{ //*
       if(this.clickedH === false){
         this.electricShieldIsActive = true;
         this.clickedH = true;
-        this.electroSoundOn.play()
+        electroSoundOn.play()
       } else if(this.clickedH === true){
         this.electricShieldIsActive = false;
         this.clickedH = false;
@@ -797,8 +779,8 @@ handleRightDodge = (event) =>{ //*
       this.megaFireBlaster = false;
       if(this.charging >= 3){
         for (let i = 0; i < this.charging; i++) {
-          this.blasterExplosion.play();
-          this.blasterCharging.volume = 0;
+          blasterExplosion.play();
+          blasterCharging.volume = 0;
           if(i % 10 === 0  && i % 20 !==0 ){
             const bulletFire = new WeaponFire(this.ctx, this.x + i*2, this.y - 30)
             this.bulletFireArray.push(bulletFire);
@@ -825,7 +807,7 @@ handleRightDodge = (event) =>{ //*
   loseLife(damage, immuneState){
     this.life.total -= damage;
     playerIsImmune = immuneState;
-    this.playerDamageSound1.play();
+    playerDamageSound1.play();
     setTimeout(() => {  // para desactivar immune y que el personaje deje de parpadear
         playerIsImmune = false;
         this.fading = 0;
@@ -843,7 +825,7 @@ handleRightDodge = (event) =>{ //*
       const bullet = new BasicWeapon(this.ctx, this.x + 5, this.y, bulletDirection, 3, 0.001);
       this.bulletArray.push(bullet);
     }
-    this.shootSound.play()
+    shootSound.play()
   }
   shootDouble() {// paso 1: invoca el disparo desde la posicion del personaje o su cercanía
     if(this.shootUp){
@@ -853,7 +835,7 @@ handleRightDodge = (event) =>{ //*
       const bullet1 = new BasicWeapon(this.ctx, this.x +3, this.y, bulletDirection, 3, -0.1);
       this.bulletArray.push(bullet1);//paso 2: crea un array vacío en el constructor y luego haz un push de cada bullet;
     }
-    this.shootSound.play()
+    shootSound.play()
   }
   shootTriple() {// paso 1: invoca el disparo desde la posicion del personaje o su cercanía
     if(this.shootUp){
@@ -865,11 +847,11 @@ handleRightDodge = (event) =>{ //*
       const bullet2 = new BasicWeapon(this.ctx, this.x - 3, this.y, bulletDirection, 3, -0.3);
       this.bulletArray.push(bullet1, bullet2);//paso 2: crea un array vacío en el constructor y luego haz un push de cada bullet;
     }
-    this.shootSound.play()
+    shootSound.play()
 
   }
   shootCuatruple() {// paso 1: invoca el disparo desde la posicion del personaje o su cercanía
-    this.shootSound.play()
+    shootSound.play()
     if(this.bigWeaponBubblesMaxAmount <= 7){
       this.bigWeaponBubblesMaxAmount  += 1
     const bullet6 = new BasicWeapon(this.ctx, this.x-2, this.y +5, bulletDirection, 0, -2, true);
@@ -882,7 +864,7 @@ handleRightDodge = (event) =>{ //*
   }
   }
   shootQuintuple(){
-    this.shootSound.play()
+    shootSound.play()
     if(this.bigWeaponBubblesMaxAmount <= 7){
       this.bigWeaponBubblesMaxAmount  += 1
       const bullet7 = new BasicWeapon(this.ctx, this.x - 10, this.y - 10, bulletDirection, -0.7, -0.3, true, 450);
@@ -895,25 +877,25 @@ handleRightDodge = (event) =>{ //*
   }
 
   shootDodgeQ() {// paso 1: invoca el disparo desde la posicion del personaje o su cercanía
-    this.shootSound.play()
+    shootSound.play()
     const bullet = new BasicWeapon(this.ctx, this.x - 80, this.y, 0, -15, 0.001);
     this.bulletArray.push(bullet);//paso 2: crea un array vacío en el constructor y luego haz un push de cada bullet;
   }
   shootDodgeE() {// paso 1: invoca el disparo desde la posicion del personaje o su cercanía
-    this.shootSound.play()
+    shootSound.play()
     const bullet = new BasicWeapon(this.ctx, this.x + 80, this.y, 0, 15, 0.001);
     this.bulletArray.push(bullet);//paso 2: crea un array vacío en el constructor y luego haz un push de cada bullet;
   }
 
   shootFire(){
     const bulletFire = new WeaponFire(this.ctx, this.x + 15, this.y)
-    bulletFire.fireShootSOund.play()
+    fireShootSOund.play()
     this.bulletFireArray.push(bulletFire);
   }
   shootBar(){
     if(this.barAmount > 0){
-    this.shootBarSound.volume = 0.09;
-    this.shootBarSound.play();
+    shootBarSound.volume = 0.09;
+    shootBarSound.play();
     const bulletBar = new WeaponBar(this.ctx, this.x + this.w/2, this.y)
     this.bulletBarArray.push(bulletBar);
     }

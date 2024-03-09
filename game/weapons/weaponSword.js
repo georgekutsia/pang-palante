@@ -18,12 +18,6 @@ class WeaponSword {
     this.direction = direction || false;
     this.rounds = 0; // cuantos rouns ha hecho la espada
 
-
-    this.stabSound = new Audio("/public/sounds/shooting/stabSwordSound.mp3")
-    this.stabSound.volume = 0.1
-
-    this.swingSound = new Audio("/public/sounds/shooting/swingSwordSound.mp3")
-    this.swingSound.volume = 0.1
   }
 
   draw() {
@@ -33,7 +27,7 @@ class WeaponSword {
     if(this.stab){
       this.direction ? this.img.src = "/public/Imagenes/swordStabRight.png" : this.img.src ="/public/Imagenes/swordStabLeft.png";
       this.direction ? this.vx = 4 : this.vx = -4
-      this.stabSound.play()
+      stabSound.play()
         this.ctx.drawImage(
           this.img,
           this.x,
@@ -43,7 +37,7 @@ class WeaponSword {
           );
     }
     if(!this.stab){
-      this.swingSound.play()
+      swingSound.play()
     if(this.swingDirection){
     this.img.src = "/public/Imagenes/swordSwing10.png";
       this.ctx.drawImage(

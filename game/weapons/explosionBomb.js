@@ -13,10 +13,6 @@ class ExplosionBomb {
     this.img.frame = 0;
     this.tick = 0;
     this.damage = 1;
-    this.fireShotBig = new Audio("/public/sounds/shooting/fireShotBig.mp3")
-    this.fireShotBig.volume = 0.05;
-    this.fireExplosionBig = new Audio("/public/sounds/shooting/fireExplosionBig.mp3")
-    this.fireExplosionBig.volume = 0.05;
     this.exploded = false;
     this.dispose = true;
     this.canCollide = false;
@@ -25,9 +21,9 @@ class ExplosionBomb {
   }
 
   draw() {
-if(this.fireShotBig){
-  this.fireShotBig.play()
-  this.fireShotBig = false;
+if(this.shot){
+  fireShotBig.play()
+  this.shot = false;
 }
     this.ctx.drawImage(
       this.img,
@@ -63,7 +59,7 @@ if(this.fireShotBig){
 
     if(this.y + this.h >= CTXH-1){
       this.exploded = true;
-      this.fireExplosionBig.play()
+      fireExplosionBig.play()
       this.vx = 0;
       this.vy = 0;
       this.g = 0;

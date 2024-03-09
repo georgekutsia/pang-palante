@@ -13,10 +13,6 @@ class ExplosionBullet {
     this.img.frame = 0;
     this.tick = 0;
     this.damage = 0.5;
-    this.fireShotSmall = new Audio("/public/sounds/shooting/fireShotSmall.mp3")
-    this.fireShotSmall.volume = 0.1;
-    this.fireExplosionSmall = new Audio("/public/sounds/shooting/fireExplosionSmall.mp3")
-    this.fireExplosionSmall.volume = 0.05;
     this.exploded = false;
     this.dispose = true;
     this.canCollide = true;
@@ -25,7 +21,7 @@ class ExplosionBullet {
 
   draw() {
     if(this.shot){
-    this.fireShotSmall.play();
+    fireShotSmall.play();
     this.shot = false;
     }
     this.ctx.drawImage(

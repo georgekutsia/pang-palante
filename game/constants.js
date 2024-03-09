@@ -30,7 +30,8 @@ let D = 68;
 
   let finalBoss = false;
   let miniBoss1 = false;
-
+  let replicationTime = 1200; //tiempo de replicación de burbujas, pero en scripClicks no me deja poner más de 3 letras
+  let replicationSeconds = replicationTime/60;
   let miniBossVx = 0;// para qeu burningColors se mantenga pegada a la nave mientras se mueve
   let miniBossVy = 0;// para qeu burningColors se mantenga pegada a la nave mientras se mueve
 
@@ -44,6 +45,7 @@ let buyBig = new Audio("/public/sounds/buyBig.mp3")
 buyBig.volume = 0.1;
 let buySmall = new Audio("/public/sounds/buySmall1.mp3")
 buySmall.volume = 0.1;
+
 
 let trainingRoom = 0;// configura en cual sala está entreando 
 let moved = false //para mover info de un lado a otro
@@ -66,6 +68,7 @@ let infiniteLeveling = 0;
 let coins = 1200;
 let ballBroke = true;
 let retry = 2;  // cuantas vecs se puede reinentar el juego
+let priceRetry = 150
 let basicWeaponLevel  = 0; //para mejorar cuantas balas dispara
 let basicWeaponLevelingChanged = 0;
 let basicWeaponSpeed = 0;
@@ -78,7 +81,8 @@ let swordRounds = 2;
 let stabDuration = 400; //cuanto dura cuando haces el estoque, para poder dejar la espada fija un rato si quires de
 const CTXW = ctx.canvas.width
 const CTXH = ctx.canvas.height
-const gameSpeed = 60;
+let gameSpeed = 60;
+let boots = false;
 let itemTakenImages = "../public/Imagenes/itemTakenSparkle.png";
 
 const mapArray = [

@@ -14,11 +14,11 @@ class Life {
     this.isHealing = true;
     this.gainCoins = [];
     this.isGaining = false;
+    this.isLosing = false;
     this.amountOfGainedCoins = 0;
   }
 
   draw() {
-
     this.ctx.save();
     this.ctx.drawImage(this.imgHalf, this.x, this.y, this.w, this.h);
     let place
@@ -42,8 +42,7 @@ class Life {
     if (this.isGaining) {
       for (let i = 0; i < this.amountOfGainedCoins; i++) {
         setTimeout(() => {
-          
-          let coins = new GainCoins(this.ctx, 50 + i*4, 100 )
+          let coins = new GainCoins(this.ctx, 50 + i*4 )
           this.gainCoins.push(coins)
         }, 100 + i*150);
       }
@@ -51,7 +50,15 @@ class Life {
     }
 
 
-
+    if(this.isLosing){
+      for (let i = 0; i < 5; i++) {
+        setTimeout(() => {
+          let coins = new GainCoins(this.ctx, 50 + i*4, 1, -2);
+          this.gainCoins.push(coins);
+        }, 100 + i*150);
+    }
+    this.isLosing = false;
+  }
     this.healingHearts.forEach(heart => heart.draw())
     this.healingHearts.forEach(heart => heart.move())
     this.healingHearts = this.healingHearts.filter(heart => heart.isVisible())

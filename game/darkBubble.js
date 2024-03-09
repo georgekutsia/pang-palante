@@ -7,17 +7,14 @@ class DarkBubble {
     this.h = h || this.ctx.canvas.width / 14;  //altura calculada respecto al canvas
     this.vx = vx || bubbleSpeedX;
     this.vy = vy || bubbleSpeedY;
-    this.g = g || 0.05;
+    this.g = g || 0.2;
     this.sizing = 0.01;
     this.sizeChange = sizeChange || false;
     this.willShrink = willShrink || false;
     this.damage = damage || 1; // daño especificado o 1
     this.img = new Image();   //crear nueva imágene ne canvas
     this.img.src =  "../public/Imagenes/darkBubble1.png";  //definir cual es la nueva imagen
-    this.darkBubbbleHit = new Audio("../public/sounds/darkBubbleHit2.mp3")
-    this.darkBubbbleHit.volume = 0.1;
-    this.bubbleBounceSound = new Audio("../public/sounds/darkBallBounce.mp3") //todo -- paso 1 traer el sonido y almacenarlo en una variable
-    this.bubbleBounceSound.volume = 0.05;  //todo -- paso 2, no obligatorio, determinarle volumen de 0 a 1, creo
+
   }
   draw() {
     // Dibujar el círculo detrás de la burbuja
@@ -42,22 +39,22 @@ class DarkBubble {
     }
 
     if (this.y + this.h >= this.ctx.canvas.height ){
-      this.bubbleBounceSound.play()//todo --paso 3 llamar a .play() para invocar el sonido donde sea necesario
+      darkBubbleBounceSound.play()//todo --paso 3 llamar a .play() para invocar el sonido donde sea necesario
       this.vy = -bubbleSpeedY; 
     }
     if(this.x + this.w >= this.ctx.canvas.width){
-      this.bubbleBounceSound.play()//todo --paso 3 llamar a .play() para invocar el sonido donde sea necesario
+      darkBubbleBounceSound.play()//todo --paso 3 llamar a .play() para invocar el sonido donde sea necesario
       this.vx = -bubbleSpeedX;
     }
     if(this.x <= 0){
-      this.bubbleBounceSound.play()//todo --paso 3 llamar a .play() para invocar el sonido donde sea necesario
+      darkBubbleBounceSound.play()//todo --paso 3 llamar a .play() para invocar el sonido donde sea necesario
       this.vx = bubbleSpeedX;
     }
 
   }
   
   isVisible(){
-    return  this.x > -2 && this.x <= this.ctx.canvas.width;  //determina cuándo es visible el obstáculo
+    return  this.x > -50 && this.x <= this.ctx.canvas.width + 40;  //determina cuándo es visible el obstáculo
   }
   collides(objetivo) {  //chequéa la colisión. 
     const colX = this.x <= objetivo.x + objetivo.w  && this.x + this.w > objetivo.x;   

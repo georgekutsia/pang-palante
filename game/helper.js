@@ -269,6 +269,11 @@ shopSuperGun2$$.addEventListener("click", function(){
     basicWeaponLevel = 2;
     shopSuperGun2$$.innerText = "Nivel 2"
     shopSuperGun2$$.style.color = "rgb(254, 0, 224)"
+    shopSuperGun1$$.style.fontSize = " calc(10px + 0.18vw)"
+    shopSuperGun2$$.style.fontSize = " calc(10px + 0.18vw)"
+    bulletBlock1$$.style.display = "flex"
+
+
     shopSuperGun3$$.style.display = "block"
   } else if(basicWeaponLevel >= 2){
     basicWeaponLevel  = 2;
@@ -309,7 +314,11 @@ shopSuperGun4$$.addEventListener("click", function(){
     }
     basicWeaponLevel  = 4 ;
     shopSuperGun4$$.innerText = "Nivel 4"
+    shopSuperGun$$.innerHTML = "Nivel 0"
     shopSuperGun4$$.style.color = "rgb(254, 0, 224)"
+    shopSuperGun3$$.style.fontSize = " calc(10px + 0.18vw)"
+    shopSuperGun4$$.style.fontSize = " calc(10px + 0.18vw)"
+    bulletBlock2$$.style.display = "flex";
   } else if(basicWeaponLevel >= 4){
     basicWeaponLevel  = 4;
     shopSuperGun$$.style.border = "none"
@@ -327,15 +336,15 @@ shopSpeedGun$$.addEventListener("click", function(){
     buySmall.play()
     coins -=50;
     basicWeaponSpeed = 3
-    shopSpeedGun$$.innerHTML = ` <span><i style="font-size: calc(14px + 0.53vw)" class="fa-solid fa-gauge-simple-high"></i> x 3</span>   <br> <i class="fa-solid fa-angles-up fonts-i"></i><span id="velocidad-text">Velocidad</span>   <br> 60<i class="fa-solid fa-coins"></i>`
+    shopSpeedGun$$.innerHTML = ` <span><i style="font-size: calc(14px + 0.53vw)" class="fa-solid fa-gauge-simple-high"></i> x 3</span>   <i class="fa-solid fa-angles-up fonts-i"></i><span id="velocidad-text"> Vel</span>   <br> 60<i class="fa-solid fa-coins"></i>`
   } else if(basicWeaponSpeed === 3 && coins >= 60){
     buySmall.play()
     basicWeaponSpeed = 5
-    shopSpeedGun$$.innerHTML = ` <span><i style="font-size: calc(14px + 0.53vw)" class="fa-solid fa-gauge-simple-high"></i> x 4</span>  <br> <i class="fa-solid fa-angles-up fonts-i"></i><span id="velocidad-text">Velocidad</span>   <br> 70<i class="fa-solid fa-coins"></i>`
+    shopSpeedGun$$.innerHTML = ` <span><i style="font-size: calc(14px + 0.53vw)" class="fa-solid fa-gauge-simple-high"></i> x 4</span>  <i class="fa-solid fa-angles-up fonts-i"></i><span id="velocidad-text"> Vel</span>   <br> 70<i class="fa-solid fa-coins"></i>`
   } else if(basicWeaponSpeed === 5 && coins >= 70){
     buySmall.play()
     basicWeaponSpeed = 8
-    shopSpeedGun$$.innerHTML = ` <span><i style="font-size: calc(14px + 0.53vw)" class="fa-solid fa-gauge-simple-high"></i> x 5</span>  <br> <i class="fa-solid fa-angles-up fonts-i"></i><span id="velocidad-text">Velocidad</span>   <br> 80<i class="fa-solid fa-coins"></i>`
+    shopSpeedGun$$.innerHTML = ` <span><i style="font-size: calc(14px + 0.53vw)" class="fa-solid fa-gauge-simple-high"></i> x 5</span>  <i class="fa-solid fa-angles-up fonts-i"></i><span id="velocidad-text"> Vel</span>   <br> 80<i class="fa-solid fa-coins"></i>`
   } else if(basicWeaponSpeed === 8 && coins >= 80){
     buySmall.play()
     basicWeaponSpeed = 12
@@ -348,19 +357,19 @@ shopBarResistance$$.addEventListener("click", function(){
     barResistanceLevel = 1;
     coins -=50;
     barLife = 3;
-    shopBarResistance$$.innerHTML = `  <span><i style="font-size: calc(14px + 0.53vw)" class="fa-solid fa-anchor"></i> x 3</span> <br> <i style="font-size: calc(8px + 0.3vw)" class="fa-solid fa-angles-up fonts-i"></i><span id="velocidad-text">Resistance</span>  <br> 55<i class="fa-solid fa-coins"></i> `
+    shopBarResistance$$.innerHTML = `  <span><i style="font-size: calc(14px + 0.53vw)" class="fa-solid fa-anchor"></i> x 3</span>  <i style="font-size: calc(8px + 0.3vw)" class="fa-solid fa-angles-up fonts-i"></i><span id="velocidad-text"> Res</span>  <br> 55<i class="fa-solid fa-coins"></i> `
   } else if( coins >= 60 && barResistanceLevel === 1){
     buySmall.play()
     barResistanceLevel = 2;
     coins -=60;
     barLife = 4;
-    shopBarResistance$$.innerHTML = `<span><i style="font-size: calc(14px + 0.53vw)" class="fa-solid fa-anchor"></i> x 4</span> <br> <i style="font-size: calc(8px + 0.3vw)" class="fa-solid fa-angles-up fonts-i"></i><span id="velocidad-text">Resistance</span>  <br> 60<i class="fa-solid fa-coins"></i> `
+    shopBarResistance$$.innerHTML = `<span><i style="font-size: calc(14px + 0.53vw)" class="fa-solid fa-anchor"></i> x 4</span>  <i style="font-size: calc(8px + 0.3vw)" class="fa-solid fa-angles-up fonts-i"></i><span id="velocidad-text"> Res</span>  <br> 60<i class="fa-solid fa-coins"></i> `
   } else if( coins >= 70 && barResistanceLevel === 2){
     buySmall.play()
     barResistanceLevel = 3;
     coins -=70;
     barLife = 5;
-    shopBarResistance$$.innerHTML = ` <span><i style="font-size: calc(14px + 0.53vw)" class="fa-solid fa-anchor"></i> x 5</span> <br> <i style="font-size: calc(8px + 0.3vw)" class="fa-solid fa-angles-up fonts-i"></i><span id="velocidad-text">Resistance</span>  <br> 65<i class="fa-solid fa-coins"></i> `
+    shopBarResistance$$.innerHTML = ` <span><i style="font-size: calc(14px + 0.53vw)" class="fa-solid fa-anchor"></i> x 5</span>  <i style="font-size: calc(8px + 0.3vw)" class="fa-solid fa-angles-up fonts-i"></i><span id="velocidad-text"> Res</span>  <br> 65<i class="fa-solid fa-coins"></i> `
   } else if( coins >= 80 && barResistanceLevel === 3){
     buySmall.play()
     barResistanceLevel = 4;
@@ -408,6 +417,27 @@ shopElectro$$.addEventListener("click", function(){
     buySmall.play()
     game.player.electroAmount += 10;
     coins-=30
+  }
+})
+
+shopBoots$$.addEventListener("click", function(){
+  if(coins >=65 && boots === false){
+    buyBig.play()
+    boots = true;
+    coins-=65;
+    shopBoots$$.innerHTML = `<i style="font-size: calc(8px + 0.4vw)" class="fa-solid fa-shoe-prints"> </i> <i class="fa-solid fa-check"></i>`;
+    shopBoots$$.disabled = true;
+  }
+})
+
+
+shopRetry$$.addEventListener("click", function(){
+  if(coins >= priceRetry){
+    buyBig.play()
+    retry ++;
+    coins-= priceRetry; 
+    priceRetry += 50;
+    shopRetry$$.innerHTML = `</i> <span id="retry-text"><i style="font-size: calc(8px + 0.4vw)" class="fa-solid fa-arrow-rotate-left"></i> Retry</span>  <br> ${priceRetry}<i class="fa-solid fa-coins"></i>`
   }
 })
 
