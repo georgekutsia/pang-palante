@@ -1,5 +1,5 @@
 class Spikes { 
-  constructor(ctx, x,  y, w, h, isMoving, vx,  obstacleImg) {
+  constructor(ctx, x, y, w, h, isMoving, vx,  obstacleImg) {
     this.ctx = ctx; // Contexto del canvas
     this.x = x || 100; // Posición horizontal (coordenada x), valor predeterminado o especificado
     this.w = w || this.ctx.canvas.width / 13; // Ancho de la escalera, valor predeterminado o especificado

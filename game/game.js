@@ -39,9 +39,9 @@ class Game {
     this.hooks = []; 
     this.electros = []; 
     this.swords = []; 
-    this.swords = []; 
     this.miniBoses = []; 
     this.explosions = []; 
+    this.chests = []; 
     this.totalCannonBubbleCount = 0;
     this.changingLevelSoChangeImage = true;
     this.dispached = true;
@@ -111,11 +111,14 @@ class Game {
   start() {
     if(!this.gameStarted){
       if (GAMELEVEL === 1) {
+        level11( this.ctx, this.bubbles, this.platforms, this.stairs,  this.healings, this.bars, this.boxes,this.levelBalls, this.levers);
+        let che = new Chest(this.ctx, 700, 10);
+        this.chests.push(che)
+        let swa = new Sword(this.ctx, 800, 300)
+        this.swords.push(swa)
         // inftroGame1();
         // setTimeout(() => {
         // level1(this.ctx, this.bubbles, this.platforms, this.levelBalls, this.boxes)
-        level6( this.ctx, this.bubbles, this.platforms,this.bouncers, this.stairs,  this.healings, this.bars, this.boxes, this.spikes,this.levelBalls, this.stairs);
-
           // let sta =  new Stair(this.ctx, 200, CTXH - 150, 100, 150)
           // let sta1 =  new Stair(this.ctx, 600, CTXH - 150, 100, 150)
           // this.stairs.push(sta, sta1)
@@ -194,6 +197,7 @@ class Game {
     this.hooks = this.hooks.filter((e) => e.isVisible()); //elimina cada obstáculo que ya no es visible y vacía el array
     this.electros = this.electros.filter((e) => e.isVisible()); //elimina cada obstáculo que ya no es visible y vacía el array
     this.swords = this.swords.filter((e) => e.isVisible()); //elimina cada obstáculo que ya no es visible y vacía el array
+    this.chests = this.chests.filter((e) => e.isVisible()); //elimina cada obstáculo que ya no es visible y vacía el array
     this.miniBoses = this.miniBoses.filter((e) => e.isVisible()); //elimina cada obstáculo que ya no es visible y vacía el array
     this.healings = this.healings.filter((e) => e.isVisible()); //elimina cada obstáculo que ya no es visible y vacía el array
     this.bars = this.bars.filter((e) => e.isVisible()); //elimina cada obstáculo que ya no es visible y vacía el array
@@ -206,6 +210,7 @@ class Game {
     this.stairs.forEach((e) => e.draw());
     this.spikes.forEach((e) => e.draw());
     this.explosions.forEach((e) => e.draw());
+    this.chests.forEach((e) => e.draw());
     this.platforms.forEach((e) => e.draw());
     this.bouncers.forEach((e) => e.draw());
     this.player.draw(); //dibuja al personaje y todo lo que se dibuja en la clase de personaje
@@ -225,6 +230,7 @@ class Game {
     this.coins.forEach((e) => e.draw()); //dibuja cada obstáculo
     this.hooks.forEach((e) => e.draw()); //dibuja cada obstáculo
     this.electros.forEach((e) => e.draw()); //dibuja cada obstáculo
+    this.chests.forEach((e) => e.draw()); //dibuja cada obstáculo
     this.swords.forEach((e) => e.draw()); //dibuja cada obstáculo
     this.miniBoses.forEach((e) => e.draw()); //dibuja cada obstáculo
     this.bars.forEach((e) => e.draw()); //dibuja cada obstáculo
@@ -256,6 +262,7 @@ class Game {
     this.hooks.forEach((e) => e.move()); //mueve los obstáculos
     this.electros.forEach((e) => e.move()); //mueve los obstáculos
     this.swords.forEach((e) => e.move()); //mueve los obstáculos
+    this.chests.forEach((e) => e.move()); //mueve los obstáculos
     this.miniBoses.forEach((e) => e.move()); //mueve los obstáculos
     this.bars.forEach((e) => e.move()); //mueve los obstáculos
     this.steps.forEach((e) => e.move()); //mueve los obstáculos
@@ -309,7 +316,6 @@ class Game {
         this.player.g = 2;
       }
       if (stair.collidesSides(this.player)) {
-
         this.player.vy = 0;
         this.player.g = 0.2;
         setTimeout(() => {
@@ -318,6 +324,8 @@ class Game {
       }
       if (stair.collides(this.player)) {
         W = 87
+        this.player.g = 0.2;
+
         jumpDownDistance = 0;
         this.player.canClimb = true;
         if(this.player.vy != 0){
@@ -357,7 +365,6 @@ class Game {
           exp.canCollide = false;
         }
     }})})
-
 
     this.miniBoses.forEach((e) => {e.explosiveArray.forEach((exp) => { 
       if(exp.collidesBoss(e)){
@@ -545,7 +552,7 @@ this.cannons.forEach((cann) => {//  cannon con fire
     this.flamethrowers.forEach((flame) => {// flamethrowers  choca con el personaje
       if (flame.collides(this.player)) {
         N = 78;
-        itemTakenImages = "../public/Imagenes/itemTakenBullet1.png";
+        itemTakenImages = "../public/Imagenes/itemTakenBullet2.png";
         this.player.itemJustTaken = true;
         ammoSound.play();
         eventInfo(munLanzallamas$$)
@@ -559,7 +566,7 @@ this.cannons.forEach((cann) => {//  cannon con fire
     this.machineguns.forEach((machinegun) => {// machineguns  choca con el personaje
       if (machinegun.collides(this.player)) {
         recharge = 50;
-        itemTakenImages = "../public/Imagenes/itemTakenBullet1.png";
+        itemTakenImages = "../public/Imagenes/itemTakenBullet2.png";
         this.player.itemJustTaken = true;
         ammoSound.play();
         eventInfo(munAmetralladora$$)
@@ -586,7 +593,7 @@ this.cannons.forEach((cann) => {//  cannon con fire
         this.player.barAmount += 2;
         ammoSound.play();
         eventInfo(munCadena$$)
-        itemTakenImages = "../public/Imagenes/itemTakenBullet1.png";
+        itemTakenImages = "../public/Imagenes/itemTakenBullet2.png";
         this.player.itemJustTaken = true;
         bar.x = -100; // situa fuera del canvas la burbuja que colisiona con el player y luego isVisible la elimina del array
       } else return true;
@@ -647,7 +654,7 @@ this.cannons.forEach((cann) => {//  cannon con fire
             ammoSound.play();
             this.player.hookAmount += 2;
             hook.dispose = false;
-        itemTakenImages = "../public/Imagenes/itemTakenBullet1.png";
+        itemTakenImages = "../public/Imagenes/itemTakenBullet2.png";
         this.player.itemJustTaken = true;
 
       } else return true;
@@ -669,11 +676,23 @@ this.cannons.forEach((cann) => {//  cannon con fire
     });
     this.swords.forEach((sword) => {
       if (sword.collides(this.player)) {
-        this.player.swordEquipped = true;
-        this.player.swordLevel ++;
+        setTimeout(() => {
+          this.player.swordEquipped = true;
+          this.player.swordLevel ++;
+        }, 1300);
+        swordTakenSoundFuncion()
         sword.dispose = false;
-        itemTakenImages = "../public/Imagenes/itemTakenHealing1.png";
+        this.player.extraX = -50
+        this.player.extraY = -70;
+        this.player.extraW = 120;
+        itemTakenImages = "../public/Imagenes/itemTakenSword1.png";
         this.player.itemJustTaken = true;
+      } else return true;
+    });
+    this.chests.forEach((chest) => {
+      if (chest.collides(this.player)) {
+        chest.activated = true;
+
       } else return true;
     });
     // cannons..
@@ -715,7 +734,7 @@ this.cannons.forEach((cann) => {//  cannon con fire
 
     // boxes...
     // boxes...
-      itemDropOn(this.platforms,this.boxes,this.stairs, this.flamethrowers,this.machineguns,this.healings, this.bars,this.blasters,this.auras,this.coins,this.steps,this.levers,this.hooks,this.electros,this.swords)
+      itemDropOn(this.platforms,this.boxes,this.stairs, this.flamethrowers,this.machineguns,this.healings, this.bars,this.blasters,this.auras,this.coins,this.steps,this.levers,this.hooks,this.electros,this.swords, this.chests)
 
     this.boxes.forEach((box) => {// box con player
       if (box.collides(this.player)) {
@@ -735,7 +754,8 @@ this.cannons.forEach((cann) => {//  cannon con fire
     this.boxes.forEach((box) => {
       if (box.boxImg.frame > 8) {
         if(box.bubblePopup){
-          addBubble1(this.ctx, this.bubbles)
+          let newBub = new Bubble(this.ctx)
+          this.bubbles.push(newBub);
         }
         if (box.containsRandom) {
           randomLootFromBox(this.ctx,this.flamethrowers,this.healings,this.bars,this.auras,this.machineguns,this.blasters,this.coins,this.steps,this.hooks,  box.x ,box.y );
@@ -868,8 +888,8 @@ if(this.player.wasNotDamaged) {
         this.changingLevel = false;
         this.levelBalls = [];
         if (GAMELEVEL === 2) {
-          level2(this.ctx,this.bubbles,this.platforms,this.boxes,this.levelBalls);
           this.background.img.src ="/public/Imagenes/background/background2.jpeg";
+          level2(this.ctx, this.bubbles, this.platforms, this.boxes,  this.levelBalls)
         } else if (GAMELEVEL === 3) {
           this.background.img.src ="/public/Imagenes/background/background3.jpeg";
           level3(this.ctx,this.bubbles,this.platforms,this.stairs,this.boxes,this.healings,this.levelBalls);
@@ -884,16 +904,23 @@ if(this.player.wasNotDamaged) {
           level6( this.ctx, this.bubbles, this.platforms,this.bouncers, this.stairs,  this.healings, this.bars, this.boxes, this.spikes,this.levelBalls, this.stairs);
         } else if (GAMELEVEL === 7) {
           this.background.img.src ="/public/Imagenes/background/background7.jpeg";
-          level7( this.ctx, this.bubbles, this.platforms,this.bouncers, this.stairs,  this.healings, this.bars, this.boxes, this.spikes,this.levelBalls, this.stairs);
+        level7( this.ctx, this.bubbles, this.platforms,this.bouncers, this.stairs,  this.healings, this.bars, this.boxes, this.spikes,this.levelBalls, this.stairs);
         } else if (GAMELEVEL === 8) {
           this.background.img.src ="/public/Imagenes/background/background8.jpeg";
-        level8(this.ctx, this.bubbles, this.platforms, this.stairs, this.boxes,  this.levelBalls, this.stairs, this.hooks, this.levers)
+        level8( this.ctx, this.bubbles, this.platforms,this.bouncers, this.stairs,  this.healings, this.bars, this.boxes,  this.levelBalls,this.spikes, this.levers);
+          setTimeout(() => {
+            bubbles4popup(this.ctx, this.bubbles);
+            }, 40000);
         } else if (GAMELEVEL === 9) {
           this.background.img.src ="/public/Imagenes/background/background9.jpeg";
-          level9( this.ctx, this.bubbles, this.platforms,this.bouncers, this.stairs,  this.healings, this.bars, this.boxes,  this.levelBalls,this.spikes, this.levers);
+          level9(this.ctx, this.bubbles, this.platforms,  this.boxes,  this.levelBalls, this.hooks, this.levers);
+          setTimeout(() => {
+            bubbles4popup(this.ctx, this.bubbles);
+            }, 40000);
         }else if (GAMELEVEL === 10) {
           this.background.img.src ="/public/Imagenes/background/background10.jpeg";
-          level10( this.ctx, this.bubbles, this.platforms, this.stairs,  this.healings, this.bars, this.boxes,this.levelBalls, this.coins);
+        level10( this.ctx, this.bubbles, this.platforms, this.stairs,  this.healings, this.bars, this.boxes,this.levelBalls, this.coins, this.gatlings);
+
         } else if (GAMELEVEL === 11) {
           this.background.img.src ="/public/Imagenes/background/background11.jpeg";
         level11( this.ctx, this.bubbles, this.platforms, this.stairs,  this.healings, this.bars, this.boxes,this.levelBalls, this.levers);
@@ -1045,11 +1072,9 @@ if(this.player.wasNotDamaged) {
         setTimeout(() => {
           let boss = new MiniBoss1(ctx, CTXW-60, -200, CTXW/5, CTXW/5, 0, 0, 10, true, false, false);
           this.miniBoses.push(boss);
-
           let bub1 = new Bubble(this.ctx, 20, 30, 20, 20)
           let bub2 = new Bubble(this.ctx, CTXW-40, 30, 20, 20)
           this.bubbles.push(bub1, bub2)
-
           const levelBall1 = new LevelBall(ctx, 120, 0)
           this.levelBalls.push(levelBall1)
         }, 20000);
@@ -1068,10 +1093,6 @@ if(this.player.wasNotDamaged) {
         demoPhase = 13;
       }
     }
-
-
-
-
     if(GAMELEVEL===11 && this.levelBalls.every(e =>e.winCondition===true)){
         this.platforms.forEach(element => {
           element.isSolid = true;
@@ -1226,7 +1247,7 @@ if(this.player.wasNotDamaged) {
   shootStep(stepPlace) {
     if(this.player.platformCreator && this.player.stepsAmount > 0){
       this.player.stepsAmount--;
-      const plat = new Platform(ctx, this.player.x + stepPlace, this.player.y - 10, 15, 5, "/public/Imagenes/obstacles/stepsSolid2.png", true, true, true);
+      const plat = new Platform(ctx, this.player.x + stepPlace, this.player.y - 10, 65, 10, "/public/Imagenes/obstacles/stepsSolid2.png", true, true, true, );
       this.platforms.push(plat);
       setTimeout(() => {
         const index = this.platforms.indexOf(plat);

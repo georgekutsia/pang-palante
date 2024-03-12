@@ -3,8 +3,8 @@ class Sword {
     this.ctx = ctx;
     this.x = x || Math.random() * this.ctx.canvas.width; ;
     this.y = y ||  Math.random() * this.ctx.canvas.height - 40 ;
-    this.w = this.ctx.canvas.width / 20;
-    this.h = this.ctx.canvas.width / 16;
+    this.w = this.ctx.canvas.width / 28;
+    this.h = this.ctx.canvas.width / 22;
     this.tick = 0
     this.vx = 0;
     this.vy = 0;
@@ -41,9 +41,13 @@ class Sword {
     this.y += this.vy;
     this.x += this.vx;
     if (this.y + this.h >= this.ctx.canvas.height ){
-      this.vy = 0; 
+      this.vy = -0.2; 
       this.g = 0;
-    }
+      setTimeout(() => {
+        this.vy = 0.2;
+        this.g = 0;
+      }, 1000);
+    } 
   }
   isVisible() {
     return this.dispose;

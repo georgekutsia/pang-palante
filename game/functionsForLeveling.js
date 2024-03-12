@@ -49,7 +49,7 @@ function levelChangeMessagesDisplay(){
   levelChangeText4$$.style.display = "none";
 }
 
-function specificLootFromBox(ctx, specificLoot, flamethrowers, healings, bars, auras,machineguns,blasters, coins, steps, hooks, electros, x, y){
+function specificLootFromBox(ctx, specificLoot, flamethrowers, healings, bars, auras, machineguns, blasters, coins, steps, hooks, electros, x, y){
   if(specificLoot === 1){
     const flamethrower = new Flamethrower(ctx, x, y  )
     flamethrowers.push(flamethrower)

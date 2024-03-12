@@ -1,7 +1,7 @@
 class Player {
   constructor(ctx) {
     this.ctx = ctx;
-    this.x =720;
+    this.x =420;
     this.h = this.ctx.canvas.width / 19;
     this.y = this.ctx.canvas.height - this.h;
     this.w = this.ctx.canvas.width / 23;
@@ -30,7 +30,7 @@ class Player {
     this.fireAmount = 30; //cantidad de fuegos que puedes disparar con N
     this.hookAmount = 50; // la cantidad de hooks con J
     this.barAmount = 320; //la cantidad de barras disponibles con M
-    this.stepsAmount = 0; //cantidad de plataformas que puedes crear con O / P
+    this.stepsAmount = 10; //cantidad de plataformas que puedes crear con O / P
     this.ableToJump = false;
     this.wasNotDamaged = true;
     this.bigWeaponBubblesMaxAmount = 0;
@@ -54,6 +54,8 @@ class Player {
     this.itemJustTaken = false;
     this.extraX =  0;
     this.extraY =  0;
+    this.extraW =  0;
+    this.extraH =  0;
 
     this.weaponFire = new Image();
     this.weaponFire.src = "/public/Imagenes/weaponFire.png";
@@ -74,7 +76,7 @@ class Player {
     this.swordRightStab.src = "/public/Imagenes/dodgeRightSwordImg.png";
     
     this.swingSwordState = true;
-    this.swordEquipped = true;
+    this.swordEquipped = false;
     this.swordLevel = 0;
     this.swordPowerUp = 8;
     this.swordPower1 = true;
@@ -434,14 +436,16 @@ handleRightDodge = (event) =>{ //*
       this.electroAmount -=  (10 - shieldsDuration/1000)/100; // para que a mayor duración de escudo, mas lento se descargue la electricidad
     }
     if(this.swordEquipped && R === 82){
-      this.ctx.drawImage(this.swordBack, this.x, this.y + 25, this.w/1.4, this.h/1.4);
+      this.ctx.drawImage(this.swordBack, this.x + 5, this.y + 25, this.w/1.4, this.h/1.4);
     }
 
     if(this.itemJustTaken){
-      let sparkle = new ItemTaken(this.ctx, this.extraX, this.extraY);
+      let sparkle = new ItemTaken(this.ctx, this.extraX, this.extraY, this.extraW, this.extraH);
       this.itemTakens.push(sparkle)
         this.extraX =  0;
         this.extraY =  0;
+        this.extraW =  0;
+        this.extraH =  0;
       this.itemJustTaken = false;
     }
     this.itemTakens.forEach((sparkle) => {sparkle.draw();}); // paso 3: dibujo cada bullet que se dispare

@@ -132,3 +132,22 @@ let bubbleBounceSound = new Audio("../public/sounds/bubbleBounce.mp3")
 bubbleBounceSound.volume = 0.05;  
 let darkBubbleBounceSound = new Audio("../public/sounds/darkBallBounce.mp3") 
 darkBubbleBounceSound.volume = 0.05;  
+
+let swordTakenSound1 = new Audio("/public/sounds/swordTakenSound1.mp3")
+swordTakenSound1.volume = 0.1
+let swordTakenSound2 = new Audio("/public/sounds/swordTakenSound1.mp3")
+swordTakenSound2.volume = 0.1
+let swordTakenSound3 = new Audio("/public/sounds/swordTakenSound2.mp3")
+swordTakenSound3.volume = 0.1
+
+function swordTakenSoundFuncion(){
+setTimeout(() => {
+swordTakenSound1.play()
+}, 200);
+setTimeout(() => {
+swordTakenSound2.play()
+}, 700);
+setTimeout(() => {
+swordTakenSound3.play()
+}, 900);
+}

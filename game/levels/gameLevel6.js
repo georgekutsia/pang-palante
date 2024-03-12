@@ -14,13 +14,13 @@ function levelBallItem6(ctx, levelBalls) {
 }
 
 function addBubble6(ctx, bubbles){ 
-  const bubble0 = new Bubble(ctx, 105, 100, 80, 80, 0.00001, 0.00001, 0.00001, true, 30000 )
-  const bubble1 = new Bubble(ctx, CTXW - 75, CTXH-100, 20, 20, -9 )
-  const bubble2 = new Bubble(ctx,CTXW - 65, CTXH-100, 20, 20, -9 )
-  const bubble3 = new Bubble(ctx, CTXW -55, CTXH-100, 20, 20, -9 )
-  const bubble4 = new Bubble(ctx, CTXW -45, CTXH-100, 20, 20, -9 )
-  const bubble5 = new Bubble(ctx, CTXW -35, CTXH-100, 20, 20, -9 )
-  const bubble6 = new Bubble(ctx, CTXW -25, CTXH-100, 20, 20, -9 )
+  const bubble0 = new Bubble(ctx, 105, 100, 80, 80, 0.00001, -0.1, 0.0001, true, 10000 )
+  const bubble1 = new Bubble(ctx, CTXW - 75, CTXH-100, 20, 20, -7 )
+  const bubble2 = new Bubble(ctx,CTXW - 65, CTXH-100, 20, 20, -6.8 )
+  const bubble3 = new Bubble(ctx, CTXW -55, CTXH-100, 20, 20, -6.7 )
+  const bubble4 = new Bubble(ctx, CTXW -45, CTXH-100, 20, 20, -6.6 )
+  const bubble5 = new Bubble(ctx, CTXW -35, CTXH-100, 20, 20, -6.5 )
+  const bubble6 = new Bubble(ctx, CTXW -55, CTXH-100, 20, 20, -6.4 )
   const bubble7 = new Bubble(ctx, CTXW-140, CTXH-220 , 110, 110, -1.5)
   bubbles.push(bubble0, bubble1, bubble2, bubble3, bubble4, bubble5, bubble6, bubble7);
 }

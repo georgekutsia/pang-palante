@@ -127,15 +127,19 @@ function checkBubbleCollision(bubbles, player, puffBubbles, ctx, platforms, boun
 function bouncerPlayerCollision(player, bouncer){
   if (player.y +  player.h/2 <= bouncer.y   ) {
     player.vy =  -15 ;
+    player.g = 1;
   }
   if (player.y +  player.h/2 >= bouncer.y   ) {
     player.vy =  15 ;
+    player.g = 1;
   }
   if(player.x + player.w/2 <= bouncer.x ){
-    player.vx = -10 ;
+    player.vx = -6 ;
+    player.g = 1;
   }
   if(player.x + player.w/2> bouncer.x + bouncer.w ){
-    player.vx = 10 ;
+    player.vx = 6 ;
+    player.g = 1;
   }
 
 }
@@ -198,13 +202,14 @@ function checkHookCollisions(hookArray, obstacles, player) {
   hookArray.forEach((hook) => {
     obstacles.forEach((obstacle) => {
       if (hook.collidesTop(obstacle)) {
-          player.hookedOnPlatform = true;;
+          player.hookedOnPlatform = true;
+          player.y = player.y - 10
           player.vy = -26;
           hook.solidState = true;
           hook.y = obstacle.y + obstacle.h;
           hook.vy = 0;
+          hook.dispose = false;
           barHit.play();
-          hook.img.src = "../public/Imagenes/weaponBarSolid.png";
           setTimeout(() => {
             player.g = 1
           }, 500);

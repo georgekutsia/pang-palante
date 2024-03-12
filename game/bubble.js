@@ -2,9 +2,9 @@ class Bubble { //posX posY, ancho, alto, velX, velY, gravedad, buleano si hay gr
   constructor(ctx, x , y, w, h, vx, vy, g, isSlowGravity, slowGrvityDuration, damage, willBounce = true, bubbleImg ) {
     this.ctx = ctx;
     this.x = x || Math.random() * this.ctx.canvas.width; //el obstáculo aparece desde arriba del canvas 
-    this.y = y  || -30; // el obstáculo sale de una altura específica o de alguna altura randóm
-    this.w = w || this.ctx.canvas.width / 14;  //anchura calculada respecto al canvas      ctxw/18 hará que se divida otras 2 veces
-    this.h = h || this.ctx.canvas.width / 14;  //altura calculada respecto al canvas
+    this.y = y  || -10; // el obstáculo sale de una altura específica o de alguna altura randóm
+    this.w = w || this.ctx.canvas.width / 18;  //anchura calculada respecto al canvas      ctxw/18 hará que se divida otras 2 veces
+    this.h = h || this.ctx.canvas.width / 18;  //altura calculada respecto al canvas
     this.vx = vx || bubbleSpeedX;
     this.vy = vy || bubbleSpeedY;
     this.wvy = this.w / 10
@@ -59,6 +59,10 @@ class Bubble { //posX posY, ancho, alto, velX, velY, gravedad, buleano si hay gr
     this.x += this.vx;
     this.gTick++
     this.replicateTick++;
+    if(this.y <= -200){
+      this.vy = 0;
+      this.g = 0.2
+    }
     if (this.y + this.h >= this.ctx.canvas.height ){
       bubbleBounceSound.play()//todo --paso 3 llamar a .play() para invocar el sonido donde sea necesario
       this.vy = -Math.abs(this.w/20 + 7); 

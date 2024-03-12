@@ -1,16 +1,18 @@
 class ItemTaken {
-  constructor(ctx, x, y) {
+  constructor(ctx, x, y, extraW, extraH) {
     this.ctx = ctx;
     this.x =  game.player.x ;
     this.y = game.player.y - game.player.h*5;
     this.extraX = x || 0;
     this.extraY = y || 0;
+    this.extraW = extraW || 0;
+    this.extraH = extraH || 0;
     this.img = new Image();
     this.img.src = itemTakenImages
     this.img.framex = 0;
     this.img.framey = 0;
-    this.w =  this.ctx.canvas.width / 15;;
-    this.h =this.ctx.canvas.width / 15; 
+    this.w =  this.ctx.canvas.width / 15 + this.extraW;
+    this.h =this.ctx.canvas.width / 15 + this.extraH; 
     this.tick = 0;
     this.dispose = true;
   }

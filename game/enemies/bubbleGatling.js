@@ -1,10 +1,10 @@
 class BubbleGatling {
-  constructor(ctx, gatlingMoveSpeed, x) {
+  constructor(ctx, gatlingMoveSpeed, x, bubbleWidth ) {
     this.ctx = ctx;
     this.x = x ||  this.ctx.canvas.width/2 -30;
-    this.y =  -4;
-    this.w = this.ctx.canvas.width / 21;
-    this.h = this.ctx.canvas.width / 13;
+    this.y =  -14;
+    this.w = this.ctx.canvas.width / 30;
+    this.h = this.ctx.canvas.width / 20;
     this.tick = 0
     this.vx = 0;
     this.vy = 0;
@@ -17,7 +17,8 @@ class BubbleGatling {
     this.bubbleArray = []
     this.playerDetected = false;
     this.damage = 0.001
-    this.gatlingMoveSpeed = gatlingMoveSpeed || 0.1;
+    this.gatlingMoveSpeed = gatlingMoveSpeed || 0.5;
+    this.bubbleWidth = bubbleWidth || 0
   }
 
   draw() {
@@ -36,7 +37,7 @@ class BubbleGatling {
     this.vy += this.g;
     this.x += this.vx;
     this.y += this.vy;
-    if(this.y + this.h >= 18) {this.g = 0; this.vy =0;};
+    if(this.y + this.h >= 60) {this.g = 0; this.vy =0;};
     this.bubbleArray.forEach((e)=>e.move());
   }
 
@@ -49,13 +50,13 @@ class BubbleGatling {
     }
   }
   shootingBubble(){
-    if(this.playerDetected){
-        let bubble = new Bubble(ctx, this.x + this.w/2, this.y +this.h, this.w/2, this.w/2, -0.1)
+    if(this.playerDetected && this.y + this.h >= 60 ){  //bubbleWidth es el tamaño de las burbujas y hay que resituar desde donde dispara según el tamaño
+        let bubble = new Bubble(ctx, this.x + this.w/2 - 10 - this.bubbleWidth/2, this.y +this.h, this.w/2 + this.bubbleWidth, this.w/2+ this.bubbleWidth, -0.1)
         this.bubbleArray.push( bubble)
         bubbleGatlingSound.play()
         this.x -= 5;
-        this.vy = -3;
-        this.g = 1;
+        this.vy = -4 - this.bubbleWidth/10;
+        this.g = 0.4;
         this.playerDetected = false;
     }
   }
