@@ -42,7 +42,7 @@ class Life {
     if (this.isGaining) {
       for (let i = 0; i < this.amountOfGainedCoins; i++) {
         setTimeout(() => {
-          let coins = new GainCoins(this.ctx, 50 + i*4 )
+          let coins = new GainCoins(this.ctx, 50 + i*2 )
           this.gainCoins.push(coins)
         }, 100 + i*150);
       }

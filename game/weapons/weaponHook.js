@@ -40,25 +40,10 @@ class WeaponHook {
   move() {
     this.x += this.vx;
     this.y += this.vy;
-    setTimeout(() => {
-      this.dispose = false;
-    }, 4000);
-    if( this.solidState) {
-      this.tick--;
-      this.img.src = "../public/Imagenes/weaponBarSolid.png";
-      this.vy = 0;
-      if(this.tick <= 20) {
-        this.fading++
-        if(this.fading >=10){
-          this.fading = 0;
-        }
-      }
-      if(this.tick <=0) {
+    this.tick++
+      if(this.tick >=100) {
         this.dispose = false;
-        this.tick = -1
       }
-    }
-
   }
   collides(objetivo) {
     const colX =this.x <= objetivo.x + objetivo.w && this.x + this.w > objetivo.x;
