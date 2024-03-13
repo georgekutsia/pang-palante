@@ -40,6 +40,7 @@ let munMegablaster$$ = document.querySelector(".munMegablaster")
 let munSalud$$ = document.querySelector(".munSalud")
 let munHook$$ = document.querySelector(".munHook")
 let munStep$$ = document.querySelector(".munStep")
+let munElectro$$ = document.querySelector(".munElectro")
 let toggleShop$$ = document.getElementById("toggle-shop")
 
 // shop btns

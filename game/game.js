@@ -111,7 +111,7 @@ class Game {
   start() {
     if(!this.gameStarted){
       if (GAMELEVEL === 1) {
-        level11( this.ctx, this.bubbles, this.platforms,  this.healings, this.bars, this.boxes,this.levelBalls, this.levers, this.chests, this.electros, this.bouncers);
+        level13( this.ctx, this.bubbles, this.platforms, this.stairs,  this.healings, this.bars, this.boxes,this.levelBalls,  this.darkBubbles);
 
         // inftroGame1();
         // setTimeout(() => {
@@ -665,7 +665,8 @@ this.cannons.forEach((cann) => {//  cannon con fire
     this.electros.forEach((electro) => {
       if (electro.collides(this.player)) {
         if(this.player.electroAmount <= 90){
-          this.player.electroAmount += 5;
+          this.player.electroAmount += 3;
+        eventInfo(munElectro$$)
         itemTakenImages = "../public/Imagenes/itemTakenElectro.png";
         this.player.extraY = -30;
         this.player.itemJustTaken = true;
@@ -927,21 +928,15 @@ if(this.player.wasNotDamaged) {
         }else if (GAMELEVEL === 10) {
           this.background.img.src ="/public/Imagenes/background/background10.jpeg";
         level10( this.ctx, this.bubbles, this.platforms, this.stairs,  this.healings, this.bars, this.boxes,this.levelBalls, this.coins, this.gatlings);
-
         } else if (GAMELEVEL === 11) {
           this.background.img.src ="/public/Imagenes/background/background11.jpeg";
-        level11( this.ctx, this.bubbles, this.platforms, this.stairs,  this.healings, this.bars, this.boxes,this.levelBalls, this.levers);
-          
+        level11( this.ctx, this.bubbles, this.platforms,  this.healings, this.bars, this.boxes,this.levelBalls, this.levers, this.chests, this.electros, this.bouncers);
         } else if (GAMELEVEL === 12) {
           this.background.img.src ="/public/Imagenes/background/background12.jpeg";
-
-        level12( this.ctx, this.bubbles, this.platforms, this.stairs,  this.healings, this.bars, this.boxes,this.levelBalls, this.gatlings);
-          
+        level12( this.ctx, this.platforms,  this.healings, this.bars, this.boxes,this.levelBalls, this.gatlings, this.levers);     
         } else if (GAMELEVEL === 13) {//there
           this.background.img.src ="/public/Imagenes/background/background13.jpeg";
-
         level13( this.ctx, this.bubbles, this.platforms, this.stairs,  this.healings, this.bars, this.boxes,this.levelBalls,  this.darkBubbles);
-          
         } else if (GAMELEVEL === 14) {
           this.background.img.src ="/public/Imagenes/background/background14.jpeg";
 

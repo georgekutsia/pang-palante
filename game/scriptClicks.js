@@ -67,7 +67,7 @@ function handleClick(event) {
   }
 
   if (isPointInside(game.bouncers, clickX, clickY)) {
-        showModal(`Plataforma emburbujada <span style="font-style: italic; font-size: 18px;">Item para recoger</span> `, `&nbsp&nbsp A diferencia de las plataformas normales, es imposible quedarse quieto en estas plataformas emburbujadas. Aprovecha los rebotes para llegar a donde puedas!`).then(() => {
+        showModal(`Plataforma emburbujada <span style="font-style: italic; font-size: 18px;">Item para recoger</span> `, `&nbsp&nbsp A diferencia de las plataformas normales, es imposible quedarse quieto en estas plataformas emburbujadas. Aprovecha los rebotes para llegar a donde puedas! <br/>&nbsp&nbsp  La química de BubbleMaster a veces falla! así que puede variar mucho la distancia y fuerza del rebote.`).then(() => {
       game.start();
     });
     return;
@@ -110,7 +110,7 @@ function handleClick(event) {
     return;
   }
   if (isPointInside(game.gatlings, clickX, clickY)) {
-        showModal(`Gatling`, `&nbsp&nbsp Cuidado! Es una creación especial de <span style="font-style: italic; font-size: 18px; color: purple">Sincrongeniero.</span> <img class="sincrongeniero" width="100px" src="/public//Imagenes/minions/Sincrongeniero.png" alt="Sincrongeniero"> <br/>&nbsp&nbsp Tiene muchas creaciones que BubbleMaster usa para desplegar sus armas químicas, como las burbujas. Te perseguirá hasta tenerte en línea y luego va a disparar sin parar!  <br/>&nbsp&nbsp Son muy difíciles de destruir, casi imposibles. Mejor huír que enfrentrlos.`).then(() => {
+        showModal(`Gatling`, `&nbsp&nbsp Cuidado! Es una creación especial de <span style="font-style: italic; font-size: 18px; color: purple">Sincrongeniero.</span> <img class="sincrongeniero" width="100px" src="/public//Imagenes/minions/Sincrongeniero.png" alt="Sincrongeniero"> <br/>&nbsp&nbsp Tiene muchas creaciones que BubbleMaster usa para desplegar sus armas químicas, como las burbujas. Te perseguirá hasta tenerte en línea y luego va a disparar sin parar!  <br/>&nbsp&nbsp Son muy difíciles de destruir, casi imposibles. Mejor huír que enfrentrlos. <br/>&nbsp&nbsp Según su tamaño, pueden disparar burbujas más grandes, moverse más rápido o disparar más munición. <br/>&nbsp&nbsp La forma más efectiva de dañarlos es con la pistola de bolas mientras estás con escuro eléctrico. Eso provocará que electrocutes las armas y se queden inservibles.`).then(() => {
       game.start();
     });
     return;
@@ -147,6 +147,12 @@ function handleClick(event) {
   }
   if (isPointInside(game.swords, clickX, clickY)) {
         showModal(`Espada`, `&nbsp&nbsp Espada Bubujaglória. Un arma especial del G.C.A.M. que te permite hacer ataques físicos especiales. Si recoges varias espadas, se fusionan, aumentando sus habilidades. <br/>&nbsp&nbsp Pulsa <span style="color: blue; font-size: 20px;">R</span> para hacer un barrido superior. Empieza con dos barridos seguidos a un lado y en la siguiente acción lo hará al otro lado. Si haces el barrido en salto, también te impulsa un poco más hacia arriba. <br/>&nbsp&nbsp Si pulsas  <span style="color: blue; font-size: 20px;">F</span> harás una estocada en la dirección del último movimiento. La estocada es un ataque poderoso que puede explotar varias burbujas a la vez al contacto y también te protege. <br/>&nbsp&nbsp A medida que golpeas con la espada, cargas su poder especial, y al cargar del todo podrás disparar Burbalas adicionals con cada barrido. `).then(() => {
+      game.start();
+    });
+    return;
+  }
+  if (isPointInside(game.chests, clickX, clickY)) {
+        showModal(`Cofre`, `&nbsp&nbsp Contiene un objeto o arma especial. Acércate para abrirlo! `).then(() => {
       game.start();
     });
     return;
