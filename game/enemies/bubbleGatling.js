@@ -1,10 +1,10 @@
 class BubbleGatling {
-  constructor(ctx, gatlingMoveSpeed, x, bubbleWidth ) {
+  constructor(ctx, gatlingMoveSpeed, x, bubbleWidth = 0, amountOsShoots ) {
     this.ctx = ctx;
     this.x = x ||  this.ctx.canvas.width/2 -30;
     this.y =  -14;
-    this.w = this.ctx.canvas.width / 30;
-    this.h = this.ctx.canvas.width / 20;
+    this.w = this.ctx.canvas.width / 30 + bubbleWidth/2;
+    this.h = this.ctx.canvas.width / 20 + bubbleWidth/2;
     this.tick = 0
     this.vx = 0;
     this.vy = 0;
@@ -18,7 +18,8 @@ class BubbleGatling {
     this.playerDetected = false;
     this.damage = 0.001
     this.gatlingMoveSpeed = gatlingMoveSpeed || 0.5;
-    this.bubbleWidth = bubbleWidth || 0
+    this.bubbleWidth = bubbleWidth || 0;
+    this.amountOsShoots = amountOsShoots || 10;
   }
 
   draw() {
@@ -46,7 +47,9 @@ class BubbleGatling {
     if( this.x !== player.x && this.x > player.x) this.vx = -this.gatlingMoveSpeed
     if(this.x+ this.w/2 >= player.x + this.w/2  && this.x+ this.w/2 <= player.x + this.w/2 + 1 ) {
       this.playerDetected = true;
-      this.shootingBubble()
+      if(this.bubbleArray.length <= this.amountOsShoots){
+        this.shootingBubble()
+      }
     }
   }
   shootingBubble(){
