@@ -1,6 +1,6 @@
 class Platform {
   // anchura 125 requiere 3 impactos.    145 require 4     195 requiere 5     245 require 6
-  constructor(ctx, x, y, w, h, obstacleImg, isSolid, isBrakable, isBouncable, vx, vy, xLimit1, xLimit2, yLimit1, yLimit2, canBeElectrified) {
+  constructor(ctx, x, y, w, h, obstacleImg, isSolid, isBrakable, isBouncable, vx, vy, xLimit1, xLimit2, yLimit1, yLimit2, canBeElectrified, canMoveY) {
     this.ctx = ctx;
     this.x = x || 100;
     this.w = w || this.ctx.canvas.width / 13;
@@ -30,7 +30,9 @@ class Platform {
     this.isBouncable = isBouncable || false;
     this.goingToBreak = false;
     this.isElectrified = false;
-    this.canBeElectrified = canBeElectrified ||false;
+    this.canBounce = false;
+    this.canMoveY = canMoveY || false;
+    this.canBeElectrified = canBeElectrified || false;
     this.braking = 150;
     //la vida de la plataforma depende de su tamaño, lo que significa que depende de Red, que es la anchura más la altura multiplicada por 2. 
     this.divisibleWithLife = this.life / 25 //como le restamos vida de 25 en 25, obtenemos cuantas veces se le podrá restar antes de llegar a 0 o menos//! a veces hay que restar 25 por un fallo
@@ -85,14 +87,14 @@ class Platform {
     this.x += this.vx;
     this.y += this.vy;
     if(this.vx && this.x + this.w >= this.xLimit2){
-        this.vx = -this.speedX|| -0.5;
+        this.vx = -this.speedX|| -1.5;
     } else if (this.vx && this.x <= this.xLimit1){
-      this.vx = this.speedX|| 0.5;
+      this.vx = this.speedX|| 1.5;
     }
     if(this.vy && this.y + this.h >= this.yLimit2){
-      this.vy = -this.speedY
+      this.vy = -this.speedY  || -1.5;
     } else if(this.vy && this.y <= this.yLimit1){
-      this.vy = this.speedY
+      this.vy = this.speedY || 1.5
     }
 
     if(this.isElectrified){

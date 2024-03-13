@@ -126,20 +126,46 @@ function checkBubbleCollision(bubbles, player, puffBubbles, ctx, platforms, boun
 
 function bouncerPlayerCollision(player, bouncer){
   if (player.y +  player.h/2 <= bouncer.y   ) {
-    player.vy =  -15 ;
-    player.g = 1;
+    if(bouncer.canBounce){
+      player.vy =  -15 ;
+      player.g = 1;
+    } else {
+      player.vy = -1;
+      player.vx = 0;  
+    }
   }
   if (player.y +  player.h/2 >= bouncer.y   ) {
+    if(bouncer.canBounce){
     player.vy =  15 ;
     player.g = 1;
+  } else {
+    player.vy = 1;
+    player.vx = 0;
+  }
   }
   if(player.x + player.w/2 <= bouncer.x ){
+    if(bouncer.canBounce){
     player.vx = -6 ;
     player.g = 1;
+  } else {
+    player.x  = player.x - 1;
+    D = 0;
+    setTimeout(() => {
+      D = 68;
+    }, 100);
+  }
   }
   if(player.x + player.w/2> bouncer.x + bouncer.w ){
+    if(bouncer.canBounce){
     player.vx = 6 ;
     player.g = 1;
+  } else {
+    player.x  = player.x + 1;
+    A = 0;
+    setTimeout(() => {
+      A = 65
+    }, 100);
+  }
   }
 
 }
@@ -148,7 +174,10 @@ function platformPlayerCollision(player, platform){
   if (player.y <= platform.y - player.h/1.5&& player.x <= platform.x + platform.w && player.x + player.w > platform.x) {
     if(player.electricShieldIsActive && platform.canBeElectrified && !platform.isElectrified){  // si el jugador activa el escudo eléctrico, la plataforma puede ser electrificada y luego se activa
       electroPlatformSound.play()
-      platform.vx = -0.5;
+      platform.vx = -1.5;
+      if(platform.canMoveY){
+        platform.vy = -1.5;
+      }
       platform.isElectrified = true;  //activa la animación de electricidad y movimiento
     }
     if (platform.isBrakable) {
@@ -201,18 +230,22 @@ function checkBarCollisions(bulletBarArray, obstacles, collisionHandler, player)
 function checkHookCollisions(hookArray, obstacles, player) {
   hookArray.forEach((hook) => {
     obstacles.forEach((obstacle) => {
-      if (hook.collidesTop(obstacle)) {
-          player.hookedOnPlatform = true;
-          player.y = player.y - 10
-          player.vy = -26;
-          hook.solidState = true;
-          hook.y = obstacle.y + obstacle.h;
-          hook.vy = 0;
-          hook.dispose = false;
-          barHit.play();
-          setTimeout(() => {
-            player.g = 1
-          }, 500);
+      if (hook.collidesTop(obstacle) 
+      ) {
+    if(obstacle.canBeElectrified === false
+      || obstacle.canBounce === true){
+        player.hookedOnPlatform = true;
+        player.y = player.y - 10
+        player.vy = -26;
+        hook.solidState = true;
+        hook.y = obstacle.y + obstacle.h;
+        hook.vy = 0;
+        hook.dispose = false;
+        barHit.play();
+        setTimeout(() => {
+          player.g = 1
+        }, 500);
+      }
       }
     });
   });

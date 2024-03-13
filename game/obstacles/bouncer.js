@@ -1,5 +1,5 @@
 class Bouncer { 
-  constructor(ctx, x,  y, w, h, vx, vy, obstacleImg) {
+  constructor(ctx, x,  y, w, h, canBounce = true,  vx, vy, obstacleImg) {
     this.ctx = ctx; // Contexto del canvas
     this.x = x || 100; // Posición horizontal (coordenada x), valor predeterminado o especificado
     this.w = w || this.ctx.canvas.width / 13; // Ancho de la escalera, valor predeterminado o especificado
@@ -9,7 +9,7 @@ class Bouncer {
     this.vy = vy || 0;
     this.img = new Image(); // Imagen asociada a la escalera
     this.img.src = obstacleImg || "/public/Imagenes/obstacles/platfomJump3.png"; // Ruta de la imagen de la escalera
-
+    this.canBounce = canBounce; //para evitar que pueda engancharse el hook
   }
 
   draw() {

@@ -125,6 +125,11 @@ stabSound.volume = 0.1
 let swingSound = new Audio("/public/sounds/shooting/swingSwordSound.mp3")
 swingSound.volume = 0.1
 
+let chestOpen1 = new Audio("/public/sounds/items/chestOpen1.mp3")
+chestOpen1.volume = 0.1;
+let chestOpenItemDrop1 = new Audio("/public/sounds/items/chestOpenItemDrop1.mp3")
+chestOpenItemDrop1.volume = 0.05;
+
 
 let darkBubbbleHit = new Audio("../public/sounds/darkBubbleHit2.mp3")
 darkBubbbleHit.volume = 0.1;
@@ -151,3 +156,7 @@ setTimeout(() => {
 swordTakenSound3.play()
 }, 900);
 }
+
+
+let leverActivationSound1 = new Audio("/public/sounds/leverActivation1.mp3")
+leverActivationSound1.volume = 0.1;
