@@ -111,11 +111,8 @@ class Game {
   start() {
     if(!this.gameStarted){
       if (GAMELEVEL === 1) {
-        level11( this.ctx, this.bubbles, this.platforms, this.stairs,  this.healings, this.bars, this.boxes,this.levelBalls, this.levers);
-        let che = new Chest(this.ctx, 700, 10);
-        this.chests.push(che)
-        let swa = new Sword(this.ctx, 800, 300)
-        this.swords.push(swa)
+        level11( this.ctx, this.bubbles, this.platforms,  this.healings, this.bars, this.boxes,this.levelBalls, this.levers, this.chests, this.electros, this.bouncers);
+
         // inftroGame1();
         // setTimeout(() => {
         // level1(this.ctx, this.bubbles, this.platforms, this.levelBalls, this.boxes)
@@ -128,7 +125,7 @@ class Game {
         // }, 25000);
       }
       if(GAMELEVEL === 100) {
-        levelInfinite( this.ctx, this.bubbles, this.platforms, this.bouncers, this.spikes, this.stairs, this.flamethrowers, this.machineguns, this.healings, this.auras, this.boxes, this.blasters, this.levelBalls, this.gatlings, this.darkBubbles)
+        levelInfinite( this.ctx, this.bubbles, this.platforms, this.bouncers, this.spikes, this.stairs, this.flamethrowers, this.machineguns, this.healings, this.auras, this.boxes, this.blasters, this.levelBalls, this.gatlings, this.darkBubbles,)
       }
       if(GAMELEVEL === 1987 ) {
         infoIntro1()
@@ -549,9 +546,10 @@ this.cannons.forEach((cann) => {//  cannon con fire
 
 
     // items que mejoran el personaje
-    this.flamethrowers.forEach((flame) => {// flamethrowers  choca con el personaje
+    this.flamethrowers.forEach((flame) => {// flamethrowers choca con el personaje
       if (flame.collides(this.player)) {
         N = 78;
+        this.player.extraY = -50;
         itemTakenImages = "../public/Imagenes/itemTakenBullet2.png";
         this.player.itemJustTaken = true;
         ammoSound.play();
@@ -566,6 +564,7 @@ this.cannons.forEach((cann) => {//  cannon con fire
     this.machineguns.forEach((machinegun) => {// machineguns  choca con el personaje
       if (machinegun.collides(this.player)) {
         recharge = 50;
+        this.player.extraY = -50;
         itemTakenImages = "../public/Imagenes/itemTakenBullet2.png";
         this.player.itemJustTaken = true;
         ammoSound.play();
@@ -593,6 +592,7 @@ this.cannons.forEach((cann) => {//  cannon con fire
         this.player.barAmount += 2;
         ammoSound.play();
         eventInfo(munCadena$$)
+        this.player.extraY = -50;
         itemTakenImages = "../public/Imagenes/itemTakenBullet2.png";
         this.player.itemJustTaken = true;
         bar.x = -100; // situa fuera del canvas la burbuja que colisiona con el player y luego isVisible la elimina del array
@@ -602,7 +602,9 @@ this.cannons.forEach((cann) => {//  cannon con fire
     this.steps.forEach((step) => {// steps  choca con el personaje
       if (step.collides(this.player)) {
         this.player.stepsAmount += 5;
-        playerBar.play();
+        this.player.extraY = -50;
+        ammoSound.play();
+        itemTakenImages = "../public/Imagenes/itemTakenBullet2.png";
         this.player.itemJustTaken = true;
         eventInfo(munStep$$)
         step.x = -100; // situa fuera del canvas la burbuja que colisiona con el player y luego isVisible la elimina del array
@@ -654,6 +656,7 @@ this.cannons.forEach((cann) => {//  cannon con fire
             ammoSound.play();
             this.player.hookAmount += 2;
             hook.dispose = false;
+            this.player.extraY = -50;
         itemTakenImages = "../public/Imagenes/itemTakenBullet2.png";
         this.player.itemJustTaken = true;
 
@@ -686,13 +689,17 @@ this.cannons.forEach((cann) => {//  cannon con fire
         this.player.extraY = -70;
         this.player.extraW = 120;
         itemTakenImages = "../public/Imagenes/itemTakenSword1.png";
+
         this.player.itemJustTaken = true;
       } else return true;
     });
     this.chests.forEach((chest) => {
       if (chest.collides(this.player)) {
         chest.activated = true;
-
+        chestOpen1.play();
+        setTimeout(() => {
+          chestOpenItemDrop1.play()
+        }, 800);
       } else return true;
     });
     // cannons..
@@ -1238,10 +1245,10 @@ if(this.player.wasNotDamaged) {
   }
   keyUp(key){
     if(key === P){
-      this.shootStep(15);
+      this.shootStep(65);
     }
     if(key === O){
-      this.shootStep(-18);
+      this.shootStep(-68);
     }
   }
   shootStep(stepPlace) {

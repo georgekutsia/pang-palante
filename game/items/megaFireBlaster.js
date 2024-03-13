@@ -3,8 +3,8 @@ class MegaFireBlaster {
     this.ctx = ctx;
     this.x = x || Math.random() * this.ctx.canvas.width; ;
     this.y = y ||  Math.random() * this.ctx.canvas.height - 40 ;
-    this.w = this.ctx.canvas.width / 18;
-    this.h = this.ctx.canvas.width / 16;
+    this.w = this.ctx.canvas.width / 30;
+    this.h = this.ctx.canvas.width / 25;
     this.tick = 0
     this.vx = 0;
     this.vy = 0;

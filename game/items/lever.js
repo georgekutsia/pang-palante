@@ -14,6 +14,7 @@ constructor(ctx, x, y) {
     this.img.frame = 0;
     this.activated = false;
     this.dispose = true;
+    this.soundActivated = true;
   }
   draw() {
     this.ctx.drawImage(
@@ -36,6 +37,11 @@ constructor(ctx, x, y) {
       this.g = 0;
     }
       if(this.activated){
+        if(this.soundActivated){
+          leverActivationSound1.play()
+          this.soundActivated = false;
+        }
+
         this.tick++;
         if(this.tick > 6){
           this.img.frame++;

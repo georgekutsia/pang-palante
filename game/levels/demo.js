@@ -247,36 +247,52 @@ function addLever(ctx, levers){
 }
 
 
+// itemsDemo(this.ctx, this.stairs, this.bubbles, this.darkBubbles, this.spikes, this.gatlings, this.hooks, this.flamethrowers, this.bars, this.boxes, this.blasters, this.electros, this.coins, this.healings, this.platforms, this.chests, this.swords, this.auras)
 
-function itemsDemo(ctx, stairs, bubbles, darkBubbles, spikes, gatlings, hooks, flamethrowers, bars, boxes, blasters, electros, coins, healings){
-  let stair = new Stair(ctx, 1000, CTXH - 100, 80, 100)
-  stairs.push(stair)
-    let bubbb =  new Bubble(ctx, 10, 20, 90, 90, 3, 2)
-    bubbles.push(bubbb)
-    let darkB =  new DarkBubble(ctx, 10, 20, 90, 90, 3, 2)
-    darkBubbles.push(darkB)
-    let spa =  new Spikes(ctx, 10, CTXH-20)
+function itemsDemo(ctx, stairs, bubbles, darkBubbles, spikes, gatlings, hooks, flamethrowers, bars, boxes, blasters, electros, coins, healings, platforms, chests, swords, auras){
+
+    const platform1 = new Platform(ctx, 50, CTXH-120, 160, 15, "../public/Imagenes/obstacles/platformSolid1.png", false, false, true,);
+    const platform2 = new Platform(ctx, CTXW/2 + 100, CTXH-140, 150, 15, "../public/Imagenes/obstacles/platformSolid1.png", false, false, true,);
+    platforms.push(platform1, platform2)
+
+    let che = new Chest(ctx, 800, CTXH-250);
+    chests.push(che)
+    // let swa = new Sword(ctx, 800, 300)
+    // swords.push(swa)
+    const aura = new Aura(ctx, 225, CTXH-50)
+    auras.push(aura)
+    let stair = new Stair(ctx, 950, CTXH - 140, 70, 140)
+    stairs.push(stair)
+    // let bubbb =  new Bubble(ctx, 10, 20, 90, 90, 3, 2)
+    // bubbles.push(bubbb)
+    // let darkB =  new DarkBubble(ctx, 10, 20, 90, 90, 3, 2)
+    // darkBubbles.push(darkB)
+    let spa =  new Spikes(ctx, 10, CTXH-40)
     spikes.push(spa)
     let gat =  new BubbleGatling(ctx)
     gatlings.push(gat)
-    let hoo =  new Hook(ctx, 450, CTXH - 150)
+    let hoo =  new Hook(ctx, 10, CTXH - 150)
     hooks.push(hoo)
-    let lan =  new Flamethrower(ctx, 400, CTXH - 150)
-    flamethrowers.push(lan)
-    let ba =  new Bars(ctx, 300, CTXH - 150, 10, 30)
+    let lan =  new Flamethrower(ctx, 35, CTXH - 150)
+    let lan1 =  new Flamethrower(ctx, 65, CTXH - 150)
+    let lan2 =  new Flamethrower(ctx, 95, CTXH - 150)
+    let lan3 =  new Flamethrower(ctx, 125, CTXH - 150)
+    let lan4 =  new Flamethrower(ctx, 155, CTXH - 150)
+    flamethrowers.push(lan, lan1, lan2, lan3, lan4)
+    let ba =  new Bars(ctx, 75, CTXH - 60, 10, 30)
     bars.push(ba)
     let box =  new Box(ctx, 500, 30, 3)
     boxes.push(box)
     let blast = new MegaFireBlaster(ctx, 640, CTXH-190)
     blasters.push(blast);  
-    let electro =  new Electro(ctx, 600, CTXH - 150, 10, 30)
+    let electro =  new Electro(ctx, 150, CTXH - 50, 10, 30)
     electros.push(electro)
-    let coin =  new Coins(ctx, 800, CTXH - 150, 10, 30)
-    let coin1 =  new Coins(ctx, 850, CTXH - 150, 10, 30)
-    let coin2 =  new Coins(ctx, 900, CTXH - 150, 10, 30)
+    let coin =  new Coins(ctx, CTXW-150, CTXH - 150, 30, 30, 3)
+    let coin1 =  new Coins(ctx, CTXW-110, CTXH - 150, 30, 30, 3)
+    let coin2 =  new Coins(ctx, CTXW-60, CTXH - 150, 50, 50, 10)
     coins.push(coin, coin1, coin2)
-    let heal =  new Healing(ctx, 150, CTXH - 250,)
-    let heal1 =  new Healing(ctx, 100, CTXH - 200,)
-    let heal2 =  new Healing(ctx, 50, CTXH - 150,)
+    let heal =  new Healing(ctx, CTXW-250, CTXH - 200,)
+    let heal1 =  new Healing(ctx, CTXW-290, CTXH - 200,)
+    let heal2 =  new Healing(ctx, CTXW-330, CTXH - 200,)
     healings.push(heal, heal1, heal2)
 }
