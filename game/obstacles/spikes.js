@@ -13,7 +13,6 @@ class Spikes {
     this.active = false;
     this.isMoving = isMoving || false;
     this.vx = vx || 0
-    this.vxx = vx
   }
 
   draw() {
@@ -35,9 +34,9 @@ class Spikes {
     this.x += this.vx;
     if(this.isMoving){
       if(this.x + this.w >= CTXW){
-        this.vx = -this.vxx;
-      } else if(this.x <= 3){
-        this.vx = this.vxx;
+        this.vx = this.vx * -1;
+      } else if(this.x <= 2){
+        this.vx = this.vx * -1;
       }
     }
     if(this.active){

@@ -28,6 +28,8 @@ class Box {
     this.containsRandom = containsRandom || false; //determina si el loot será random o no. mirar en funciones
     this.lootNumber = lootNumber || 5
     this.bubblePopup = bubblePopup || false;
+
+    this.hitWithSword = true;
   }
 
   draw() {
@@ -187,6 +189,25 @@ class Box {
     }
     if(this.boxLevel===3) {
       this.boxImg.frame+=2;
+    }
+    this.hitingSound()
+  }  
+  boxHitSword(){
+    if(this.hitWithSword){
+      if(this.boxLevel===1) {
+        this.boxImg.frame+=2;
+        boxImpactMetalic.play();
+      }
+      if(this.boxLevel === 3 ) {
+        this.boxImg.frame+=2;
+      }
+      if(this.boxLevel === 3) {
+        this.boxImg.frame+=2;
+      }
+      this.hitWithSword = false;
+      setTimeout(() => {
+      this.hitWithSword = true;
+      }, 500);
     }
     this.hitingSound()
   }  

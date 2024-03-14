@@ -30,7 +30,7 @@ let D = 68;
 
   let finalBoss = false;
   let miniBoss1 = false;
-  let replicationTime = 1200; //tiempo de replicación de burbujas, pero en scripClicks no me deja poner más de 3 letras
+  let replicationTime = 2400; 
   let replicationSeconds = replicationTime/60;
   let miniBossVx = 0;// para qeu burningColors se mantenga pegada a la nave mientras se mueve
   let miniBossVy = 0;// para qeu burningColors se mantenga pegada a la nave mientras se mueve
@@ -61,7 +61,7 @@ let barLife = 2; // las veces que puede la bola chocar con la barra antes de des
 let immuneTime = 2000;
 let shieldsDuration = 5000;
 let jumpDownDistance = 0;
-let bubbleSpeedY = 4;
+let bubbleSpeedY = 10;
 let bubbleSpeedX = 3;
 let GAMELEVEL = 0;
 let infiniteLeveling = 0;

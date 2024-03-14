@@ -79,7 +79,7 @@ class Player {
     this.swordEquipped = false;
     this.swordLevel = 0;
     this.swordPowerUp = 8;
-    this.swordPower1 = true;
+    this.swordPower1 = false;
     this.swordCooldown = 0;
     this.keySwitchCounter = 0;
     this.stabDirection = true;
