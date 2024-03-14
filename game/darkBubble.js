@@ -8,7 +8,7 @@ class DarkBubble {
     this.vx = vx || bubbleSpeedX;
     this.vy = vy || bubbleSpeedY;
     this.g = g || 0.2;
-    this.sizing = 0.01;
+    this.sizing = 0.1;
     this.sizeChange = sizeChange || false;
     this.willShrink = willShrink || false;
     this.damage = damage || 1; // daño especificado o 1
@@ -35,6 +35,9 @@ class DarkBubble {
         this.sizing = 0.01
       } else if(this.w >= 70 && this.willShrink){
         this.sizing = -0.01
+      }
+      if(this.w >= CTXW/3){
+        darkBubbleExplosion( this, game.bubbles, game.puffBubbles)//explota y genera bubbles pequeño
       }
     }
 

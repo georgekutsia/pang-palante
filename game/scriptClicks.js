@@ -146,7 +146,7 @@ function handleClick(event) {
     return;
   }
   if (isPointInside(game.swords, clickX, clickY)) {
-        showModal(`Espada`, `&nbsp&nbsp Espada Bubujaglória. Un arma especial del G.C.A.M. que te permite hacer ataques físicos especiales. Si recoges varias espadas, se fusionan, aumentando sus habilidades. <br/>&nbsp&nbsp Pulsa <span style="color: blue; font-size: 20px;">R</span> para hacer un barrido superior. Empieza con dos barridos seguidos a un lado y en la siguiente acción lo hará al otro lado. Si haces el barrido en salto, también te impulsa un poco más hacia arriba. <br/>&nbsp&nbsp Si pulsas  <span style="color: blue; font-size: 20px;">F</span> harás una estocada en la dirección del último movimiento. La estocada es un ataque poderoso que puede explotar varias burbujas a la vez al contacto y también te protege. <br/>&nbsp&nbsp A medida que golpeas con la espada, cargas su poder especial, y al cargar del todo podrás disparar Burbalas adicionals con cada barrido. `).then(() => {
+        showModal(`Espada`, `&nbsp&nbsp Espada Bubujaglória. Un arma especial del G.C.A.M. que te permite hacer ataques físicos especiales. Si recoges varias espadas, se fusionan, aumentando sus habilidades. <br/>&nbsp&nbsp Pulsa <span style="color: blue; font-size: 20px;">R</span> para hacer un barrido superior. Empieza con dos barridos seguidos a un lado y en la siguiente acción lo hará al otro lado. Si haces el barrido en salto, también te impulsa un poco más hacia arriba. <br/>&nbsp&nbsp Si pulsas  <span style="color: blue; font-size: 20px;">F</span> harás una estocada en la dirección del último movimiento. La estocada es un ataque poderoso que puede explotar varias burbujas a la vez al contacto y también te protege. <br/>&nbsp&nbsp A medida que golpeas con la espada, cargas su poder especial, y al cargar del todo podrás disparar  Burbalas adicionals con cada barrido. `).then(() => {
       game.start();
     });
     return;
@@ -208,7 +208,7 @@ function handleClick(event) {
     return;
   }
   if (isPointInsideAnyBubble(game.darkBubbles, clickX, clickY)) {
-        showModal(`Burbujas oscuras`, `&nbsp&nbsp Creadas con una disolución distinta, que reacciona a las burbalas, pero a diferencia de las burbujas normales, éstas burbujas no se rompen con los impactos de las burbalas y no le afecta el fuego ni la electricidad. Las burbalas aumentan su volumen hasta que la tensión es grande y explota en burbujas más pequeñas.  <br/> &nbsp&nbsp Una venaja al enfrentarlos son las municiones de barra, que no se rompen con las burbujas oscuras. `).then(() => {
+        showModal(`Burbujas oscuras`, `&nbsp&nbsp Creadas con una disolución distinta, que reacciona a las Burbalas, pero a diferencia de las burbujas normales, éstas burbujas no se rompen con los impactos de las Burbalas y no le afecta el fuego ni la electricidad. Las Burbalas aumentan su volumen hasta que la tensión es grande y explota en burbujas más pequeñas.  <br/> &nbsp&nbsp Una venaja al enfrentarlos son las municiones de barra, que no se rompen con las burbujas oscuras. `).then(() => {
       game.start();
     });
     return;

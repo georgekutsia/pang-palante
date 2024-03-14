@@ -21,10 +21,10 @@ function addBubble15(ctx, bubbles){
 }
 
 function addPlatforms15(ctx, platforms){
-    const platform1 = new Platform(ctx, 45, CTXH-25, 25, 5, "../public/Imagenes/obstacles/platformSolid1.png", false, false, true);
-    const platform2 = new Platform(ctx, 75, CTXH-50, 25, 5, "../public/Imagenes/obstacles/platformSolid2.png", false, false, true);
-    const platform3 = new Platform(ctx, 25, CTXH-60, 25, 5, "../public/Imagenes/obstacles/platformSolid2.png", false, false, true);
-    const platform4 = new Platform(ctx, 5, CTXH-90, 25, 5, "../public/Imagenes/obstacles/platformSolid2.png", false, false, true, 0.5, 0, 1, 160);
+    const platform1 = new Platform(ctx, 45, CTXH-225, 125, 15, "../public/Imagenes/obstacles/platformSolid1.png", true, false, true);
+    const platform2 = new Platform(ctx, 75, CTXH-50, 125, 15, "../public/Imagenes/obstacles/platformSolid2.png", false, false, true);
+    const platform3 = new Platform(ctx, 25, CTXH-60, 125, 15, "../public/Imagenes/obstacles/platformSolid2.png", false, false, true);
+    const platform4 = new Platform(ctx, 5, CTXH-90, 125, 15, "../public/Imagenes/obstacles/platformSolid2.png", false, false, true, 0.5, 0, 1, 160);
     const platform5 = new Platform(ctx, 140, 35, 45, 5, "../public/Imagenes/obstacles/platformSolid1.png", false, false, true);
     const platform6 = new Platform(ctx, CTXW-30, 70, 30, 5, "../public/Imagenes/obstacles/platformSolid1.png", false, false, true);
     platforms.push( platform1, platform2, platform3,platform4,platform5,platform6);
@@ -55,10 +55,11 @@ function addHealings15(ctx, healings){
 }
 
   function addBoxes15(ctx, boxes){
-    const box1 = new Box(ctx, CTXW-20, 20,  3, false, 0, false)
-    const box2 = new Box(ctx, CTXW-70, CTXH-63,  1, false, 0, false)
-    const box3 = new Box(ctx, CTXW-70, CTXH-45,  1, false, 0, false)
-    boxes.push( box1,box2,box3)
+    const box1 = new Box(ctx, CTXW-220, CTXH-270,  3, false, 0, false)
+    const box2 = new Box(ctx, CTXW-220, CTXH-210,  3, false, 0, false)
+    const box3 = new Box(ctx, CTXW-520, CTXH-150,  3, false, 0, false)
+    const box4 = new Box(ctx, CTXW-220, CTXH-90,  3, false, 0, false)
+    boxes.push( box1,box2,box3,box4)
   }
 
   function barItem15(ctx, bars){
@@ -71,7 +72,7 @@ function addHealings15(ctx, healings){
   }
 
   function addCannon15(ctx, cannons){
-    let can = new BubbleCannon(ctx, 0, 60, 10, 0.00001)
-    let can1 = new BubbleCannon(ctx, 0, 100, 6, 0.00001)
+    let can = new BubbleCannon(ctx, 0, 60, 15, 0.0001)
+    let can1 = new BubbleCannon(ctx, 0, 100, 14, 0.0001)
     cannons.push(can, can1)
   }

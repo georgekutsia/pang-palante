@@ -3,8 +3,8 @@ class BubbleCannon {
     this.ctx = ctx;
     this.x = x || 0;
     this.y = y || 80;
-    this.w = w || this.ctx.canvas.width / 22;
-    this.h = h || this.ctx.canvas.width / 15;
+    this.w = w || this.ctx.canvas.width / 35;
+    this.h = h || this.ctx.canvas.width / 28;
     this.vx = vx || 0;
     this.vy = vy || 0;
     this.tick = 0
@@ -13,7 +13,6 @@ class BubbleCannon {
     this.img.src = "/public/Imagenes/cannon.png";
     this.img.frame = 0;
     this.imgTick = 0;
-    this.bubbleArray = [];
     this.damage = 0.001;
 
     this.img.frame = 0;
@@ -54,8 +53,6 @@ class BubbleCannon {
       this.h
     );
     
-    this.bubbleArray.forEach((e)=>e.draw());
-    this.bubbleArray = this.bubbleArray.filter((e)=>e.isVisible());
 
     if(this.x <= -5)this.shooting = false;
     if(this.x <= -35)this.dispose = false;
@@ -130,7 +127,6 @@ class BubbleCannon {
     this.y += this.vy;
     this.delay--
     if(this.y + this.h >= 18) {this.g = 0; this.vy =0;};
-    this.bubbleArray.forEach((e)=>e.move());
     if(this.shooting && this.delay <= 0){
       this.delay = 0;
       this.tick++;
@@ -174,7 +170,7 @@ cannonHit(){
 }
   shootingBubble(){
     let bubble = new Bubble(ctx, this.x + this.w/2+10, this.y +this.h/2-5, this.w/2, this.w/2, this.bubX, this.bubY, this.gG)
-    this.bubbleArray.push( bubble)
+    game.bubbles.push( bubble)
   }
   isVisible() {
     return this.dispose;

@@ -42,7 +42,7 @@ class Game {
     this.miniBoses = []; 
     this.explosions = []; 
     this.chests = []; 
-    this.totalCannonBubbleCount = 0;
+    // this.totalCannonBubbleCount = 0;
     this.changingLevelSoChangeImage = true;
     this.dispached = true;
     this.changingLevel = false;
@@ -110,9 +110,9 @@ class Game {
 
   start() {
     if(!this.gameStarted){
-      if (GAMELEVEL === 1) {
-        level13( this.ctx, this.bubbles, this.platforms, this.stairs,  this.healings, this.bars, this.boxes,this.levelBalls,  this.darkBubbles);
-
+      if (GAMELEVEL === 14) {
+        level15( this.ctx,this.platforms, this.bubbles, this.levelBalls, this.darkBubbles, this.cannons, this.boxes);
+        
         // inftroGame1();
         // setTimeout(() => {
         // level1(this.ctx, this.bubbles, this.platforms, this.levelBalls, this.boxes)
@@ -339,9 +339,7 @@ class Game {
     this.gatlings.forEach((e) => {  
       checkBubbleCollision(e.bubbleArray, this.player, this.puffBubbles, this.ctx, this.platforms, this.bouncers, this.boxes)
     })
-    this.cannons.forEach((e) => {
-      checkBubbleCollision(e.bubbleArray, this.player, this.puffBubbles, this.ctx, this.platforms, this.bouncers, this.boxes)
-    })
+
     this.miniBoses.forEach((e) => {
       checkBubbleCollision(e.bubbleArray, this.player, this.puffBubbles, this.ctx, this.platforms, this.bouncers, this.boxes)
     })
@@ -447,6 +445,8 @@ class Game {
         } else return true;
       });
     });
+    swordCollision(this.platforms, this.player, this.boxes, this.puffBubbles)
+
 
     this.platforms.forEach((bubble) => {//  bubble con bullet
       this.player.bulletArray.forEach((bullet) => {
@@ -779,7 +779,7 @@ this.cannons.forEach((cann) => {//  cannon con fire
             specificLootFromBox(this.ctx, box.lootNumber,this.flamethrowers,this.healings,this.bars,this.auras,this.machineguns,this.blasters,this.coins,this.steps, this.hooks,this.electros, box.x + box.w/2+3, box.y + box.h/2);
           }
           for (let i = 0; i < box.amountOfLoot; i++) {
-            specificLootFromBox(this.ctx, box.lootNumber,this.flamethrowers,this.healings,this.bars,this.auras,this.machineguns,this.blasters,this.coins,this.steps, this.hooks,this.electros, box.x + box.w/2-5 + i*2, box.y + box.h/2 -i*4);      
+            specificLootFromBox(this.ctx, box.lootNumber,this.flamethrowers,this.healings,this.bars,this.auras,this.machineguns,this.blasters,this.coins,this.steps, this.hooks,this.electros, box.x + box.w/2-5 + i*20, box.y + box.h/2 -i*10);      
           }
         }
       }
@@ -939,9 +939,7 @@ if(this.player.wasNotDamaged) {
         level13( this.ctx, this.bubbles, this.platforms, this.stairs,  this.healings, this.bars, this.boxes,this.levelBalls,  this.darkBubbles);
         } else if (GAMELEVEL === 14) {
           this.background.img.src ="/public/Imagenes/background/background14.jpeg";
-
-        level14( this.ctx, this.bubbles, this.platforms,  this.healings, this.boxes, this.levelBalls, this.darkBubbles, this.spikes, this.bars);
-          
+        level14( this.ctx, this.bubbles, this.platforms,  this.healings, this.boxes, this.levelBalls, this.darkBubbles, this.spikes, this.bars, this.auras, this.levers);
         } else if (GAMELEVEL === 15) {
           this.background.img.src ="/public/Imagenes/background/background15.jpeg";
           setInterval(() => {
@@ -1031,13 +1029,13 @@ if(this.player.wasNotDamaged) {
         this.emptyAllPlayerArrays()
         demoFunctions.mostrarVariosTextosPocoAPoco5()
         addDemo5(this.ctx, this.platforms, this.levers, this.levelBalls,this.boxes, this.darkBubbles, this.spikes, this.healings)
-        this.totalCannonBubbleCount = this.cannons.reduce((total, cannon) => {
-          if (cannon.bubbleArray.length > 0) {
-              return total + cannon.bubbleArray.length;
-          } else {
-              return total;
-          }
-      }, 0);
+      //   this.totalCannonBubbleCount = this.cannons.reduce((total, cannon) => {
+      //     if (cannon.bubbleArray.length > 0) {
+      //         return total + cannon.bubbleArray.length;
+      //     } else {
+      //         return total;
+      //     }
+      // }, 0);
         demoPhase = 7;
       }
       if(demoPhase === 8){
@@ -1048,18 +1046,18 @@ if(this.player.wasNotDamaged) {
           demoPhase = 9;
       }
       if(demoPhase === 9){
-        this.totalCannonBubbleCount = this.cannons.reduce((total, cannon) => {
-          if (cannon.bubbleArray.length > 0) {
-              return total + cannon.bubbleArray.length;
-          } else {
-              return total;
-          }
-      }, 0);
-      if(this.totalCannonBubbleCount >=10){
-        this.cannons.forEach((cannon) => cannon.shootInterval = 30000)
-      } else {
-        this.cannons.forEach((cannon) => cannon.shootInterval = 15000)
-      }
+      //   this.totalCannonBubbleCount = this.cannons.reduce((total, cannon) => {
+      //     if (cannon.bubbleArray.length > 0) {
+      //         return total + cannon.bubbleArray.length;
+      //     } else {
+      //         return total;
+      //     }
+      // }, 0);
+      // if(this.totalCannonBubbleCount >=10){
+      //   this.cannons.forEach((cannon) => cannon.shootInterval = 30000)
+      // } else {
+      //   this.cannons.forEach((cannon) => cannon.shootInterval = 15000)
+      // }
       }
       if(demoPhase === 10){
         this.levelBalls = [];
@@ -1230,6 +1228,7 @@ if(this.player.wasNotDamaged) {
     this.hooks = [];
     this.electros = [];
     this.swords = [];
+    this.chests = [];
     this.miniBoses = [];
   }
   emptyAllPlayerArrays(){

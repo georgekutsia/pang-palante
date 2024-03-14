@@ -1,6 +1,6 @@
 
 start$$.addEventListener("click", function () {
-  GAMELEVEL = 1;
+  GAMELEVEL = 14;
   canvas.style.display = "block";
   restart$$.style.display = "block";
   retry$$.style.display = "block";

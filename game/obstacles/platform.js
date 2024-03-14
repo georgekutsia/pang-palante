@@ -20,6 +20,7 @@ class Platform {
     this.yLimit2 = yLimit2 || CTXH
     this.speedX = vx || 0;
     this.speedY = vy || 0;
+    this.damagedBySword = 1;
     this.color = "#ff0000"; // Color predeterminado, puedes ajustarlo según tus necesidades
     this.red =  (this.w + this.h) ; // solo usamos como numero fijo a recoger el rojo, que dependerá de la anchura total de la plataforma
     this.green = Math.random() * 140;
@@ -117,6 +118,14 @@ class Platform {
       this.red += Math.floor(this.redLeft)    //Math.floor no lo lleva exacta exactamente hasta 255, pero no importa mucho
       this.green += Math.floor(this.greenLeft);
       this.blue += Math.floor(this.blueLeft);
+  }
+  calculateNewColorSword() {
+    // Calcular un nuevo color basado en la posición de la plataforma
+      this.life -= this.damagedBySword;
+      this.red += Math.floor(this.redLeft/20)    //Math.floor no lo lleva exacta exactamente hasta 255, pero no importa mucho
+      this.green += Math.floor(this.greenLeft/20);
+      this.blue += Math.floor(this.blueLeft/20);
+      console.log(this.life)
   }
 
   isVisible() {

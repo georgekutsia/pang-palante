@@ -296,7 +296,7 @@ function bossFireCollision (miniBoses, object){
           if(platform.isSolid){
             const newColor = platform.calculateNewColor();
             platform.color = newColor;
-            if(bubble.w >= CTXW/4){
+            if(bubble.w >= CTXW/8){
               darkBubbleExplosion( bubble, bubbles, puffBubbles)//explota y genera bubbles pequeños
             }
           }
@@ -339,7 +339,7 @@ function bossFireCollision (miniBoses, object){
           bubble.x -= 1;
           bubble.y -= 1;
           darkBubbbleHit.play()
-          if(bubble.w >= CTXW/4){
+          if(bubble.w >= CTXW/5){
             darkBubbleExplosion( bubble, bubbles, puffBubbles)//explota y genera bubbles pequeños
           }
           return false;
@@ -353,4 +353,49 @@ function bossFireCollision (miniBoses, object){
     coins -= amount
     player.life.isLosing = true;
     player.life.amountOfGainedCoins = amount;
+  }
+
+
+
+
+
+  function swordCollision(platforms, player, boxes, puffBubbles){
+    platforms.forEach((platform) => {//sword con bullets normales
+      player.swordArray.forEach((bullet) => {
+        if (bullet.collides(platform)) {
+          if (!platform.isSolid) {
+            platformHitSolid.play()
+            basicBulletBounce(bullet, platform);
+          } else {
+            platformHitBreak.play()
+            const newColor = platform.calculateNewColorSword();
+            platform.damagedBySword = 3;
+            platform.color = newColor;
+            if (platform.life <= 0) {
+              coins+=5;
+              player.life.amountOfGainedCoins = 5;
+              player.life.isGaining = true;
+              coinsSound1.play()
+              platform.x = -200;
+            }
+          }
+          return true;
+        } else return true;
+      });
+    });
+
+
+    boxes.forEach((box) => {//  box con bullet
+      player.swordArray.filter((bullet) => {
+        if (bullet.collides(box)) {
+          box.boxHitSword();
+          const puffBubble = new BubblePuff(ctx, box.x, box.y + box.h / 2,box.w,box.h);
+          puffBubbles.push(puffBubble);
+          return false;
+        } else return true;
+      });
+    });
+
+
+
   }
