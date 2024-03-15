@@ -21,10 +21,10 @@ class WeaponSword {
   }
 
   draw() {
-    setTimeout(() => {
-      this.dispose = false;
-    }, stabDuration);
     if(this.stab){
+      setTimeout(() => {
+        this.dispose = false;
+      }, stabDuration);
       this.direction ? this.img.src = "/public/Imagenes/swordStabRight.png" : this.img.src ="/public/Imagenes/swordStabLeft.png";
       this.direction ? this.vx = 4 : this.vx = -4
       stabSound.play()
@@ -85,12 +85,11 @@ class WeaponSword {
         this.tick = 0
       }
       if(this.img.frame > 4){
-        if(this.rounds <= swordRounds){
-          this.img.frame = 0;
+        if(this.rounds < swordRounds){
           this.rounds ++;
+          this.img.frame = 0;
         } else {
-          swordRounds = 0;
-          this.dispose;
+          this.dispose = false;
         }
       }
     }
@@ -101,12 +100,11 @@ class WeaponSword {
         this.tick = 0
       }
       if(this.img.frame < 0){
-        if(this.rounds <= swordRounds){
+        if(this.rounds < swordRounds){
           this.img.frame = 4  ;
           this.rounds ++;
         } else {
-          swordRounds = 0;
-          this.dispose;
+          this.dispose = false;
         }
       }
     }

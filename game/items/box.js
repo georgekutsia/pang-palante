@@ -194,6 +194,8 @@ class Box {
   }  
   boxHitSword(){
     if(this.hitWithSword){
+      const puffBubble = new BubblePuff(ctx, this.x, this.y + this.h / 2,this.w, this.h);
+      game.puffBubbles.push(puffBubble);
       if(this.boxLevel===1) {
         this.boxImg.frame+=2;
         boxImpactMetalic.play();
@@ -211,9 +213,6 @@ class Box {
     }
     this.hitingSound()
   }  
-
-
-
 
   isVisible() {
     return this.dispose;

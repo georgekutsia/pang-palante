@@ -22,9 +22,11 @@ class Bubble { //posX posY, ancho, alto, velX, velY, gravedad, buleano si hay gr
     this.electrified.frame = 0;
     this.randomColor = getRandomColor();
     this.isElectrified = false;
+    this.isElectrifiedButBig = 0;
     this.electroTick = 0;
     this.willBounce = willBounce;
     this.replicateTick = 0;
+    this.hitAmount = 0;
   }
   draw() {
     // Dibujar el círculo detrás de la burbuja
@@ -59,7 +61,7 @@ class Bubble { //posX posY, ancho, alto, velX, velY, gravedad, buleano si hay gr
     this.x += this.vx;
     this.gTick++
     this.replicateTick++;
-    if(this.y <= -200){
+    if(this.y <= -350){
       this.vy = 0;
       this.g = 0.2
     }
@@ -76,8 +78,9 @@ class Bubble { //posX posY, ancho, alto, velX, velY, gravedad, buleano si hay gr
       this.vx = bubbleSpeedX;
     }
     if(this.isElectrified){
-      this.w -= 0.25 + electricShieldlevel/150
-      this.h -= 0.25 + electricShieldlevel/150
+      this.w -= (0.25 + electricShieldlevel/150) - this.isElectrifiedButBig
+      this.h -= (0.25 + electricShieldlevel/150) - this.isElectrifiedButBig
+      console.log(this.w)
       this.electroTick++;
       if(this.electroTick >3){
         this.electrified.frame++;

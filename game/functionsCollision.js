@@ -6,6 +6,11 @@ function checkBubbleCollision(bubbles, player, puffBubbles, ctx, platforms, boun
       if(player.electricShieldIsActive){
         electroShockSound.play()
         bubble.vy = -10;
+        if(bubble.w >= 150){
+          bubble.isElectrifiedButBig = 0.1; //permite que las burbujas muy grandes no disminuyan tanto de tamaño
+        } else {
+          bubble.isElectrifiedButBig = 0; //permite que las burbujas muy grandes no disminuyan tanto de tamaño
+        }
         bubble.isElectrified = true;
         setTimeout(() => {
           bubble.isElectrified = false;
@@ -30,8 +35,25 @@ function checkBubbleCollision(bubbles, player, puffBubbles, ctx, platforms, boun
  bubbles.forEach((bubble) => {//  bubble con bullet
     player.bulletArray = player.bulletArray.filter((bullet) => {
       if (bullet.collides(bubble) && !bullet.isBig) {
-        bubblePuff(bubble, puffBubbles, bubbles, ctx);
-       bubblePopSound1.play();
+        if(bubble.w >= 100 && bubble.w <= 199 ){
+          bubbleAbsorbBullet.play()
+          bubble.hitAmount++;
+          bubble.hitAmount++;
+          bubble.w += 10;
+          bubble.h += 10;
+        } else if (bubble.w >= 200){
+          bubbleAbsorbBullet.play()
+          bubble.hitAmount++
+          bubble.w += 10;
+          bubble.h += 10;
+        }else {
+          bubblePuff(bubble, puffBubbles, bubbles, ctx);
+          bubblePopSound1.play();
+        }
+        if(bubble.hitAmount >= 6){
+          bubblePuff(bubble, puffBubbles, bubbles, ctx);
+          bubblePopSound1.play();
+        }
         return false;
       } else return true;
     });
@@ -48,8 +70,13 @@ function checkBubbleCollision(bubbles, player, puffBubbles, ctx, platforms, boun
   bubbles.forEach((bubble) => {//bubble con fire
     player.bulletFireArray.forEach((bullet) => {
       if (bullet.collides(bubble)) {
-        bubble.w -= bullet.damage;
-        bubble.h -= bullet.damage;
+        if(bubble.w >= 80){
+          bubble.w -= bullet.damage/5;
+          bubble.h -= bullet.damage/5;
+        }else {
+          bubble.w -= bullet.damage;
+          bubble.h -= bullet.damage;
+        }
         if (bubble.w <= bubble.explodingSize * 2) {
           const elx = bubble.x;
           const ely = bubble.y;
@@ -63,12 +90,18 @@ function checkBubbleCollision(bubbles, player, puffBubbles, ctx, platforms, boun
   bubbles.forEach((bubble) => {//  bulletBar con Bubble
     player.bulletBarArray.forEach((bullet) => {
       if (bullet.collides(bubble)) {
-        bullet.life -= 1;
-        if (bullet.life <= 0) {
-          bullet.dispose = false;
+        if(bubble.w >=200){
+          bullet.solidState = true;
+        }else if (bubble.w >=140 && bubble.w <= 199) {
+          bullet.solidState = true;
+        } else {
+          bullet.life --;
+          bubblePuff(bubble, puffBubbles, bubbles, ctx);
+          bubblePopSound1.play(); //todo -- Sonido paso 3) invocar el sonido
+          if (bullet.life <= 0) {
+            bullet.dispose = false;
+          }
         }
-        bubblePuff(bubble, puffBubbles, bubbles, ctx);
-        bubblePopSound1.play(); //todo -- Sonido paso 3) invocar el sonido
         return false;
       } else return true;
     });
@@ -359,7 +392,7 @@ function bossFireCollision (miniBoses, object){
 
 
 
-  function swordCollision(platforms, player, boxes, puffBubbles){
+  function swordCollision(platforms, player, boxes){
     platforms.forEach((platform) => {//sword con bullets normales
       player.swordArray.forEach((bullet) => {
         if (bullet.collides(platform)) {
@@ -389,8 +422,7 @@ function bossFireCollision (miniBoses, object){
       player.swordArray.filter((bullet) => {
         if (bullet.collides(box)) {
           box.boxHitSword();
-          const puffBubble = new BubblePuff(ctx, box.x, box.y + box.h / 2,box.w,box.h);
-          puffBubbles.push(puffBubble);
+
           return false;
         } else return true;
       });

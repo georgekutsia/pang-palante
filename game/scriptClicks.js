@@ -36,7 +36,7 @@ function handleClick(event) {
 
   // Comprueba si el clic fue en algún lanzallamas
   if (isPointInside(game.flamethrowers, clickX, clickY)) {
-    showModal(`Lanzallamas <span style="font-style: italic; font-size: 18px;">Item para recoger</span> `, `&nbsp&nbsp Cargas para el lanzallamas. Para usar el lanzallamas pulsa la tecla <span style="color: blue; font-size: 20px;">N</span>  <br/>&nbsp&nbsp El fuego puede quemar algunos objetos, pero no afecta a las plataformas. <br/>&nbsp&nbsp Al chocar con burbujas, las evapora poco a poco, evitando así que exploten en más burbujas pequeñas`).then(() => {
+    showModal(`Lanzallamas <span style="font-style: italic; font-size: 18px;">Item para recoger</span> `, `&nbsp&nbsp Cargas para el lanzallamas. Para usar el lanzallamas pulsa la tecla <span style="color: blue; font-size: 20px;">N</span>  <br/>&nbsp&nbsp El fuego puede quemar algunos objetos, pero no afecta a las plataformas. <br/>&nbsp&nbsp Al chocar con burbujas, las evapora poco a poco, evitando así que exploten en más burbujas pequeñas. Ten en cuenta también que cuanto más grande sea la burbuja, menos le afecta el daño del fuego.`).then(() => {
       game.start();
     });
     return;
@@ -146,7 +146,7 @@ function handleClick(event) {
     return;
   }
   if (isPointInside(game.swords, clickX, clickY)) {
-        showModal(`Espada`, `&nbsp&nbsp Espada Bubujaglória. Un arma especial del G.C.A.M. que te permite hacer ataques físicos especiales. Si recoges varias espadas, se fusionan, aumentando sus habilidades. <br/>&nbsp&nbsp Pulsa <span style="color: blue; font-size: 20px;">R</span> para hacer un barrido superior. Empieza con dos barridos seguidos a un lado y en la siguiente acción lo hará al otro lado. Si haces el barrido en salto, también te impulsa un poco más hacia arriba. <br/>&nbsp&nbsp Si pulsas  <span style="color: blue; font-size: 20px;">F</span> harás una estocada en la dirección del último movimiento. La estocada es un ataque poderoso que puede explotar varias burbujas a la vez al contacto y también te protege. <br/>&nbsp&nbsp A medida que golpeas con la espada, cargas su poder especial, y al cargar del todo podrás disparar  Burbalas adicionals con cada barrido. `).then(() => {
+        showModal(`Espada`, `&nbsp&nbsp Espada Bubujaglória. Un arma especial del G.C.A.M. que te permite hacer ataques físicos especiales. Si recoges varias espadas, se fusionan, aumentando sus habilidades. <br/>&nbsp&nbsp Pulsa <span style="color: blue; font-size: 20px;">R</span> para hacer un barrido superior. Empieza con un barrido a un lado y en la siguiente acción lo hará al otro lado. Si haces el barrido en salto, también te impulsa un poco más hacia arriba. <br/>&nbsp&nbsp Si pulsas  <span style="color: blue; font-size: 20px;">F</span> harás una estocada en la dirección del último movimiento. La estocada es un ataque poderoso que puede explotar varias burbujas a la vez al contacto y también te protege. <br/>&nbsp&nbsp A medida que golpeas con la espada, cargas su poder especial, y al cargar del todo podrás disparar  Burbalas adicionals con cada barrido. `).then(() => {
       game.start();
     });
     return;
@@ -164,7 +164,7 @@ function handleClick(event) {
     return;
   }
   if (isPointInside(game.player.bulletFireArray, clickX, clickY)) {
-    showModal(`Fuego <span style="font-style: italic; font-size: 18px;">Munición</span>`, `&nbsp&nbsp El fuego puede quemar algunos objetos, pero no afecta a las plataformas. <br/>&nbsp&nbsp Al chocar con burbujas, las evapora poco a poco, evitando así que exploten en más burbujas pequeñas`).then(() => {
+    showModal(`Fuego <span style="font-style: italic; font-size: 18px;">Munición</span>`, `&nbsp&nbsp El fuego puede quemar algunos objetos, pero no afecta a las plataformas. <br/>&nbsp&nbsp Al chocar con burbujas, las evapora poco a poco, evitando así que exploten en más burbujas pequeñas. Ten en cuenta también que cuanto más grande sea la burbuja, menos le afecta el daño del fuego.`).then(() => {
       game.start();
     });
     return;
@@ -194,7 +194,7 @@ function handleClick(event) {
     return;
   }
   if (isPointInside(game.player.swordArray, clickX, clickY)) { 
-        showModal(`Espada Burbujaglória <span style="font-style: italic; font-size: 18px;">Arma especial</span>`, `&nbsp&nbsp Espada Bubujaglória. Un arma especial del G.C.A.M. que te permite hacer ataques físicos especiales. Si recoges varias espadas, se fusionan, aumentando sus habilidades. <br/>&nbsp&nbsp Pulsa <span style="color: blue; font-size: 20px;">R</span> para hacer un barrido superior. Empieza con dos barridos seguidos a un lado y en la siguiente acción lo hará al otro lado. Si haces el barrido en salto, también te impulsa un poco más hacia arriba. <br/>&nbsp&nbsp Si pulsas  <span style="color: blue; font-size: 20px;">F</span> harás una estocada en la dirección del último movimiento. La estocada es un ataque poderoso que puede explotar varias burbujas a la vez al contacto y también te protege. <br/>&nbsp&nbsp A medida que golpeas con la espada, cargas su poder especial, y al cargar del todo podrás disparar Burbalas adicionals con cada barrido. `).then(() => {
+        showModal(`Espada Burbujaglória <span style="font-style: italic; font-size: 18px;">Arma especial</span>`, `&nbsp&nbsp Espada Bubujaglória. Un arma especial del G.C.A.M. que te permite hacer ataques físicos especiales. Si recoges varias espadas, se fusionan, aumentando sus habilidades. <br/>&nbsp&nbsp Pulsa <span style="color: blue; font-size: 20px;">R</span> para hacer un barrido superior. Empieza con un barrido a un lado y en la siguiente acción lo hará al otro lado. Si haces el barrido en salto, también te impulsa un poco más hacia arriba. <br/>&nbsp&nbsp Si pulsas  <span style="color: blue; font-size: 20px;">F</span> harás una estocada en la dirección del último movimiento. La estocada es un ataque poderoso que puede explotar varias burbujas a la vez al contacto y también te protege. <br/>&nbsp&nbsp A medida que golpeas con la espada, cargas su poder especial, y al cargar del todo podrás disparar Burbalas adicionals con cada barrido. `).then(() => {
       game.start();
     });
     return;
@@ -202,7 +202,7 @@ function handleClick(event) {
 
   if (isPointInsideAnyBubble(game.bubbles, clickX, clickY)) {
         showModal(`Burbujas`, `&nbsp&nbsp Simplemente llamadas burbujas, son un arma química de BubbleMaster. Al explotar tienen la capacidad de replicarse hasta hacerse más pequeñas. Si su tamaño disminuye hasta cierto punto, implosionan por su propia tensión. <br/> &nbsp&nbsp El fuego y la electricidad parecen provocar una rección química especial que les disminuye de tamaño. También la espada Burbujaglória les causa mucho daño.<br/>&nbsp&nbsp Si ignoras las burbujas grandes, al cabo de un tiempo (${replicationSeconds} segs) 
-        replicarán a si mismas. No sabemos cuál es la intención de Bubblemaster, pero claramente tiene intenciones malévolas y hay que detenerlo. Sus burbujas son capaces de volver ciertos objetos en burbuja al impactar y hacen daño a los seres vivos cambiando su composición química hasta que mueren. <br/>&nbsp&nbsp Algunos objetos especiales te permiten aprovechar sus propiedades para tu bien. Por ejemplo las botas que vende Poltra-scrap te permiten saltar encima de las burbujas`).then(() => {
+        se replicarán a si mismas. No sabemos cuál es la intención de Bubblemaster, pero claramente tiene intenciones malévolas y hay que detenerlo. Sus burbujas son capaces de volver ciertos objetos en burbuja al impactar y hacen daño a los seres vivos cambiando su composición química hasta que mueren. <br/>&nbsp&nbsp Algunos objetos especiales te permiten aprovechar sus propiedades para tu bien. Por ejemplo las botas que vende Poltra-scrap te permiten saltar encima de las burbujas. <br/>&nbsp&nbsp Dependiendo del tamaño, el efecto de todas tus armas puede variar. `).then(() => {
       game.start();
     });
     return;
