@@ -3,8 +3,8 @@ constructor(ctx, x, y) {
     this.ctx = ctx;
     this.x = x || Math.random() * this.ctx.canvas.width; //el obstáculo aparece desde arriba del canvas 
     this.y =  y || Math.random() * this.ctx.canvas.height; // el obstáculo sale de una altura específica o de alguna altura randóm
-    this.w = this.ctx.canvas.width / 42;  //anchura calculada respecto al canvas
-    this.h = this.ctx.canvas.width / 24;  //altura calculada respecto al canvas
+    this.w = this.ctx.canvas.width / 52;  //anchura calculada respecto al canvas
+    this.h = this.ctx.canvas.width / 35;  //altura calculada respecto al canvas
     this.vy = 0;
     this.vx = 0;
 

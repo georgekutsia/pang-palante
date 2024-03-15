@@ -117,6 +117,9 @@ let fireExplosionBig = new Audio("/public/sounds/shooting/fireExplosionBig.mp3")
 let fireShootSOund = new Audio("/public/sounds/electrofire/fireShootSound.mp3")
  fireShootSOund.volume = 0.05;
 
+let bubbleAbsorbBullet = new Audio("/public/sounds/bubbleAbsorbBullet.mp3")
+bubbleAbsorbBullet.volume = 0.1;
+
 
 
 let stabSound = new Audio("/public/sounds/shooting/stabSwordSound.mp3")

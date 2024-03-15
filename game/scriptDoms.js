@@ -87,18 +87,11 @@ let poltra$$ = document.getElementById("poltra-scrap0")
 
 let miniBoss1TalkImg$$ = document.getElementById("miniBoss1")
 
-
-
-
-
 let shopSpeedGun$$ = document.getElementById("shop-speedGun")
 let actionsDiv$$ = document.getElementById("actions-div")
 let movesDiv$$ = document.getElementById("moves-div")
 
 let ammosCount$$ = document.getElementById("ammos-count")
-
-
-
 
 let btnInstrucciones$$ = document.getElementById("btn-instrucciones")
 let btnCambiarSala$$ = document.getElementById("cambiar-sala")

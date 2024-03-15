@@ -6,7 +6,7 @@ class BasicWeapon {
     this.vx = vx || 0;
     this.vy = vy || -13;
     this.direction = direction;
-    this.radius =  CTXW / 110; // radio del círculo
+    this.radius =  CTXW / 200; // radio del círculo
     this.color = getRandomColor(); // función para obtener un color aleatorio
     this.tick = 0;
     this.isBig = isBig || false;

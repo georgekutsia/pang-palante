@@ -111,8 +111,11 @@ class Game {
   start() {
     if(!this.gameStarted){
       if (GAMELEVEL === 14) {
-        level15( this.ctx,this.platforms, this.bubbles, this.levelBalls, this.darkBubbles, this.cannons, this.boxes);
-        
+        // let swa  =  new Sword(this.ctx, 500, 500)
+        // let swa1  =  new Sword(this.ctx, 600, 500)
+        // let swa2  =  new Sword(this.ctx, 700, 500)
+        // this.swords.push(swa, swa1, swa2)
+
         // inftroGame1();
         // setTimeout(() => {
         // level1(this.ctx, this.bubbles, this.platforms, this.levelBalls, this.boxes)
@@ -198,8 +201,8 @@ class Game {
     this.miniBoses = this.miniBoses.filter((e) => e.isVisible()); //elimina cada obstáculo que ya no es visible y vacía el array
     this.healings = this.healings.filter((e) => e.isVisible()); //elimina cada obstáculo que ya no es visible y vacía el array
     this.bars = this.bars.filter((e) => e.isVisible()); //elimina cada obstáculo que ya no es visible y vacía el array
-    this.steps = this.steps.filter((e) => e.isVisible()); //elimina cada obstáculo que ya no es visible y vacía el array
     this.puffBubbles = this.puffBubbles.filter((e) => e.isVisible()); //elimina cada obstáculo que ya no es visible y vacía el array
+    this.steps = this.steps.filter((e) => e.isVisible()); //elimina cada obstáculo que ya no es visible y vacía el array
   }
 
   draw() {
@@ -212,7 +215,6 @@ class Game {
     this.bouncers.forEach((e) => e.draw());
     this.player.draw(); //dibuja al personaje y todo lo que se dibuja en la clase de personaje
     this.points.draw(); //dibuja al personaje y todo lo que se dibuja en la clase de personaje
-    this.puffBubbles.forEach((e) => e.draw()); //dibuja cada obstáculo
     this.boxes.forEach((e) => e.draw()); //dibuja cada obstáculo
     this.bubbles.forEach((e) => e.draw()); //dibuja cada obstáculo
     this.darkBubbles.forEach((e) => e.draw()); //dibuja cada obstáculo
@@ -232,6 +234,7 @@ class Game {
     this.miniBoses.forEach((e) => e.draw()); //dibuja cada obstáculo
     this.bars.forEach((e) => e.draw()); //dibuja cada obstáculo
     this.steps.forEach((e) => e.draw()); //dibuja cada obstáculo
+    this.puffBubbles.forEach((e) => e.draw()); //dibuja cada obstáculo
     this.levelBalls.forEach((e) => e.draw()); //dibuja cada obstáculo
     demoMessageDisable();
   }
@@ -445,7 +448,7 @@ class Game {
         } else return true;
       });
     });
-    swordCollision(this.platforms, this.player, this.boxes, this.puffBubbles)
+    swordCollision(this.platforms, this.player, this.boxes)
 
 
     this.platforms.forEach((bubble) => {//  bubble con bullet
@@ -683,10 +686,13 @@ this.cannons.forEach((cann) => {//  cannon con fire
         setTimeout(() => {
           this.player.swordEquipped = true;
           this.player.swordLevel ++;
+          R = 82;
+          F = 70
+          swordRounds++;
         }, 1300);
         swordTakenSoundFuncion()
         sword.dispose = false;
-        this.player.extraX = -50
+        this.player.extraX = -60
         this.player.extraY = -70;
         this.player.extraW = 120;
         itemTakenImages = "../public/Imagenes/itemTakenSword1.png";
@@ -746,7 +752,7 @@ this.cannons.forEach((cann) => {//  cannon con fire
 
     this.boxes.forEach((box) => {// box con player
       if (box.collides(this.player)) {
-          platformPlayerCollision(this.player, box)
+        bouncerPlayerCollision(this.player, box)
       }
     });
     this.boxes.forEach((box) => {//  box con bullet
@@ -942,10 +948,10 @@ if(this.player.wasNotDamaged) {
         level14( this.ctx, this.bubbles, this.platforms,  this.healings, this.boxes, this.levelBalls, this.darkBubbles, this.spikes, this.bars, this.auras, this.levers);
         } else if (GAMELEVEL === 15) {
           this.background.img.src ="/public/Imagenes/background/background15.jpeg";
+          level15( this.ctx,this.platforms, this.bubbles, this.levelBalls, this.darkBubbles, this.cannons, this.boxes, this.healings, this.flamethrowers);
           setInterval(() => {
             this.cannons.forEach(c => c.shooting = true)
           }, 36000);
-          level15( this.ctx,this.platforms, this.bubbles, this.levelBalls, this.darkBubbles, this.cannons, this.boxes);
           setInterval(() => {
             this.otherBubbles++
             this.cannons.forEach(c =>c.shooting = true)

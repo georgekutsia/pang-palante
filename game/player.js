@@ -24,7 +24,7 @@ class Player {
     this.fading = 0; //necesario para el parpadeo del personaje cuando es inmune
     this.charging = 0;  // acumula la carga, lo que dibuja el semicírculo
     this.chargingFires = false; //   se pone en true mientras carga el disparo fuerte de fuego
-    this.megaFireBlaster = true; //al ponerse en true, se puede activar la K
+    this.megaFireBlaster = false; //al ponerse en true, se puede activar la K
     this.megaFireBlasterAmount = 31; //la carga del blaster. cada 10, es una bola
     this.electroAmount = 30; //cantidad de carga eléctrica que tiene
     this.fireAmount = 30; //cantidad de fuegos que puedes disparar con N
@@ -80,7 +80,7 @@ class Player {
     this.swordLevel = 0;
     this.swordPowerUp = 8;
     this.swordPower1 = false;
-    this.swordCooldown = 0;
+    this.swordCooldown = 2000;
     this.keySwitchCounter = 0;
     this.stabDirection = true;
 
@@ -558,11 +558,11 @@ handleRightDodge = (event) =>{ //*
 
   if(this.swordPowerUp >=10){
     this.swordPower1 = true;
-    this.swordCooldown = 500;
+    this.swordCooldown = 5500;
     setTimeout(() => {
     this.swordPower1 = false;
     this.swordPowerUp = 0;
-    this.swordCooldown = 0;
+    this.swordCooldown = 2000;
     }, 10000);
   }
 }
@@ -702,9 +702,13 @@ handleRightDodge = (event) =>{ //*
     }
     if(key === J){
       if(this.hookAmount > 0){
-      this.shootHook();
+          this.shootHook();
           hookShoot.play()
           this.hookAmount--;
+          J = 0;
+          setTimeout(() => {
+            J = 74;
+          }, 1000);
         } 
       }
     if(key === H){
@@ -720,16 +724,14 @@ handleRightDodge = (event) =>{ //*
       }
       if(key === R){
         this.swingSword();
-        if(this.swordLevel >=2){
-          setTimeout(() => {
+        this.swingSwordState = !this.swingSwordState
+        if(this.swordLevel >=3){
             this.swingSword();
-          }, 200);
         }
-          this.swingSwordState = !this.swingSwordState
         R = 0
         setTimeout(() => {
           R = 82;
-        }, 800 - this.swordCooldown);
+        }, 6000 - this.swordCooldown);
         }
 
         if(key === F){
@@ -737,7 +739,7 @@ handleRightDodge = (event) =>{ //*
           F = 0;
           setTimeout(() => {
             F = 70;
-          }, 3000);
+          }, stabRecharge);
         }
         
   }

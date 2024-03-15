@@ -53,11 +53,11 @@ body {
 
 #start-background{
   position: absolute;
-  top: 1vw;
+  top: 1vh;
   left: 50%;
   transform: translate(-50%, 0%);
-  width: 86vw;
-  height: 41vw;
+  max-width: 90vw;
+  max-height: 90vh;
   min-width: 100px;
   min-height: 100px;
 }
@@ -167,8 +167,8 @@ padding: 15px 15px;
 #pang-demo{
   position: absolute;
   border: none;
-  top:6%;
-  left:15%;
+  top:10vh;
+  left:calc(50vw - 20vw);
   font-size: calc(12px + 0.7vw);
   transition: 0.3s ease-in-out;
   transform: translate(-50%, -50%);
