@@ -524,6 +524,10 @@ this.miniBoses.forEach((mini) => {//  minions con bullet
   this.player.bulletFireArray.forEach((bullet) => {
     if (bullet.collidesMiniboss1(mini)){
       mini.miniBossBurn();
+      console.log("lsdjnaldjns")
+      setTimeout(() => {
+        bullet.y = -100
+      }, 500);
     } else return true;
   });
 });
@@ -991,9 +995,9 @@ if(this.player.wasNotDamaged) {
             }
           }, 3000);
         } else if (GAMELEVEL === 16){//pero 21 en realidad
-        addMiniboss1(this.ctx, this.levelBalls);
-          miniBossTalk1.play();
-          setTimeout(() => {
+            addMiniboss1(this.ctx, this.levelBalls);
+            miniBossTalk1.play();
+            setTimeout(() => {
             let bo = new MiniBoss1(ctx, CTXW - 340, -50, CTXW/4, CTXW/4, 0, 0, 15, true, true, true, "/public/Imagenes/minions/MiniBoss1.webp");
             this.miniBoses.push(bo);
             minibossArrivingShip.play();
