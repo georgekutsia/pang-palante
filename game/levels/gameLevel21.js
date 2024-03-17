@@ -38,9 +38,10 @@ function addLever(ctx, levers){
   levers.push(lev);
 }
 
-function addMiniboss1(){
+function addMiniboss1(ctx, levelBalls){
   finalBoss = true;
   miniBoss1 = true;
   dodgeCooldown = dodgeCooldown/2;
   minionsTalking.miniBossTalk1();
+  levelBallItemMiniBoss1(ctx, levelBalls)
 }

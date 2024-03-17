@@ -17,7 +17,6 @@ class ExplosionBomb {
     this.dispose = true;
     this.canCollide = false;
     this.shot = true;
-    this.bigBomb = true;
   }
 
   draw() {
@@ -75,7 +74,7 @@ if(this.shot){
   collidesBoss(objetivo) {
     if(this.canCollide){
     const colX = this.x + this.w >= objetivo.x + 50 && this.x <= objetivo.x + objetivo.w;
-    const colY = this.y + this.h > objetivo.y + 140 && this.y < objetivo.y + objetivo.h;
+    const colY = this.y + this.h > objetivo.y + objetivo.h/2 && this.y < objetivo.y + objetivo.h;
       return colX && colY;
     }
   }

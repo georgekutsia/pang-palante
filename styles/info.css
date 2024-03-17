@@ -265,9 +265,9 @@ z-index: 24;
   }
 
   #miniBoss1{
-    width: 10vw;
+    width: 7vw;
     position: absolute;
-    right: 10vw;
+    right: calc(50vw - 30vw);
     top: 5vh;
     display: none;
   transition: all 1s ease-in-out;

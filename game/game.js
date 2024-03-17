@@ -112,9 +112,9 @@ class Game {
     if(!this.gameStarted){
       if (GAMELEVEL === 15) {
 
-        addMiniboss1();
+        addMiniboss1(this.ctx, this.levelBalls);
         miniBossTalk1.play();
-          let bo = new MiniBoss1(ctx, CTXW - 340, -50, CTXW/4, CTXW/4, 0, 0, 5, true, true, true, "/public/Imagenes/minions/MiniBoss1.webp");
+          let bo = new MiniBoss1(ctx, CTXW - 340, -50, CTXW/4, CTXW/4, 0, 0, 15, true, true, true, "/public/Imagenes/minions/MiniBoss1.webp");
           this.miniBoses.push(bo);
           minibossArrivingShip.play();
           this.dispached = false;
@@ -354,6 +354,8 @@ class Game {
     this.miniBoses.forEach((e) => {
       checkBubbleCollision(e.bubbleArray, this.player, this.puffBubbles, this.ctx, this.platforms, this.bouncers, this.boxes)
     })
+
+
     this.miniBoses.forEach((e) => {e.explosiveArray.forEach((exp) => { if(exp.collides(this.player)){
         if(this.player.electricShieldIsActive || this.player.auraIsActive){
             exp.vx = exp.vx * -1;
@@ -361,29 +363,50 @@ class Game {
         } else if (!this.player.electricShieldIsActive || !this.player.auraIsActive){
           this.player.loseLife(exp.damage, true);
           exp.exploded = true;
-          if(exp.bigBomb){
             fireExplosionBig.play()
-          } else {
-            fireExplosionSmall.play()
-          }
           exp.img.frame = 5;
           exp.vx = this.player.vx;
           exp.canCollide = false;
         }
     }})})
-
     this.miniBoses.forEach((e) => {e.explosiveArray.forEach((exp) => { 
       if(exp.collidesBoss(e)){
-        if(exp.bigBomb){
-          fireExplosionBig.play()
-        } else {
           fireExplosionSmall.play()
-        }
         exp.exploded = true;
         exp.vx = miniBossVx;
         exp.vy = miniBossVy;
         e.miniBossBurn()
     }})})
+
+
+    this.miniBoses.forEach((e) => {e.bulletArray.forEach((exp) => { if(exp.collides(this.player)){
+      if(this.player.electricShieldIsActive || this.player.auraIsActive){
+          exp.vx = -exp.vx;
+      } else if (!this.player.electricShieldIsActive || !this.player.auraIsActive){
+        this.player.loseLife(exp.damage, true);
+        exp.exploded = true;
+        if(exp.bigBomb){
+          fireExplosionBig.play()
+        } else {
+          fireExplosionSmall.play()
+        }
+        exp.img.frame = 5;
+        exp.vx = this.player.vx;
+        exp.canCollide = false;
+      }
+  }})})
+  this.miniBoses.forEach((e) => {e.bulletArray.forEach((exp) => { 
+    if(exp.collidesBoss(e)){
+      if(exp.bigBomb){
+        fireExplosionBig.play()
+      } else {
+        fireExplosionSmall.play()
+      }
+      exp.exploded = true;
+      exp.vx = miniBossVx;
+      exp.vy = miniBossVy;
+      e.miniBossBurn()
+  }})})
 
     
     bossFireCollision(this.miniBoses, this.stairs)
@@ -968,10 +991,10 @@ if(this.player.wasNotDamaged) {
             }
           }, 3000);
         } else if (GAMELEVEL === 16){//pero 21 en realidad
-          addMiniboss1();
+        addMiniboss1(this.ctx, this.levelBalls);
           miniBossTalk1.play();
           setTimeout(() => {
-            let bo = new MiniBoss1(ctx, CTXW - 70, -50);
+            let bo = new MiniBoss1(ctx, CTXW - 340, -50, CTXW/4, CTXW/4, 0, 0, 15, true, true, true, "/public/Imagenes/minions/MiniBoss1.webp");
             this.miniBoses.push(bo);
             minibossArrivingShip.play();
             this.dispached = false;

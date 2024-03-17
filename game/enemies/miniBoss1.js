@@ -130,12 +130,12 @@ if(this.arriving){
 
     this.shootingIntervalBubbleTick++
     if(this.shootingIntervalBubbleTick >= this.shootingIntervalBubble){
-      this.shootingIntervalBubble = getRandomNumberDecimals(200, 500)
-      this.shootingBubble1(-1, 25, 25)
+      this.shootingIntervalBubble = getRandomNumberDecimals(200, 1500)
+      this.shootingBubble1(-1.5, -2.5, 40, 40)
       if(this.life <= 20 ){
-        this.shootingBubble1(-1.4, 20, 20)
-        this.shootingBubble1(-1.6, 20, 20)
-        this.shootingBubble1(-1.8, 20, 20)
+        this.shootingBubble1(-1.4, -7, 60, 60)
+        this.shootingBubble1(-1.6,-8.5, 60, 60)
+        this.shootingBubble1(-1.8,-9.5, 60, 60)
       }
       this.shootingIntervalBubbleTick = 0;
     }
@@ -161,19 +161,19 @@ if(this.arriving){
   }
   shootingExplosive(){
     if(this.gun1){
-      let explo = new ExplosionBullet(this.ctx, this.x , this.y + this.h/2, CTXW/15, CTXW/15, -8);
+      let explo = new ExplosionBullet(this.ctx, this.x - 50, this.y + this.h/2, CTXW/15, CTXW/15, -8);
       // this.bulletArray.push(explo)
     }
   }
   shootingBomb(){
     if(this.gun2){
       let explo = new ExplosionBomb(this.ctx, this.x, this.y - 100, CTXW/10, CTXW/10, -this.distanceFromPlayer/200, -10);
-      this.explosiveArray.push(explo)
+      // this.explosiveArray.push(explo)
     }
   }
-  shootingBubble1(speedX, size){
+  shootingBubble1(speedX, speedY, size){
     if(this.gun3){
-      let bubble2 = new Bubble(ctx, this.x , this.y + this.h/2 , size, size, -0.5, speedX, 0.0001, true, 700, 0, false)
+      let bubble2 = new Bubble(ctx, this.x , this.y + this.h/2 , size, size, speedX, speedY, 0.2, false, 0, 0, false)
       this.bubbleArray.push(bubble2);
     }
   }
@@ -258,6 +258,10 @@ if(this.arriving){
       this.vy = -2;
       this.vx = 0.5;
       setTimeout(() => {
+        setTimeout(() => {
+          finalBoss = false;
+          miniBoss1 = false
+        }, 4000);
         this.dispose = false;
       }, 3000);
       if(this.bossTalkGone){

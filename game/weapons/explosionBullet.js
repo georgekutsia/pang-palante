@@ -63,9 +63,9 @@ class ExplosionBullet {
     }
   }
   collidesBoss(objetivo) {
-    // const colX = this.x + this.w >= objetivo.x && this.x <= objetivo.x + objetivo.w;;
-    // const colY =this.y + this.h -5 > objetivo.y +20  && this.y < objetivo.y + objetivo.h ;
-    // return colX && colY;
+    const colX = this.x + this.w >= objetivo.x + 50 && this.x <= objetivo.x + objetivo.w;
+    const colY = this.y + this.h > objetivo.y && this.y < objetivo.y + objetivo.h/2;
+      return colX && colY;
   }
   isVisible() {
     return this.dispose;
