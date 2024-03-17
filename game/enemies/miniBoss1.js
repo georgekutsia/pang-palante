@@ -260,7 +260,8 @@ if(this.arriving){
       setTimeout(() => {
         setTimeout(() => {
           finalBoss = false;
-          miniBoss1 = false
+          miniBoss1 = false;
+          game.player.shootUp = true;
         }, 4000);
         this.dispose = false;
       }, 3000);

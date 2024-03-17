@@ -58,7 +58,7 @@ if(this.isElectrified){
     this.x += this.vx;
     this.y += this.vy;
     if(finalBoss){
-      this.vx = -0.3
+      this.vx = -1.3
     }
     if(this.isElectrified){
       electroBarSound.play();

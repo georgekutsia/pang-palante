@@ -584,6 +584,7 @@ handleRightDodge = (event) =>{ //*
         this.img.src = "../public/Imagenes/pangPjNuevoIzquierda2.png";
         this.vx = -playerSpeed;
       } else {
+        this.img.src = "../public/Imagenes/pangPjNuevoDerecha2.png";
         this.walkingSpeed = 10
         this.vx = -playerSpeed + 0.8;
       }
@@ -601,7 +602,7 @@ handleRightDodge = (event) =>{ //*
       }
     if(finalBoss && this.keySwitchCounter >= 2) {
       this.shootUp = false;
-    }
+    } 
     this.img.src = "../public/Imagenes/pangPjNuevoDerecha2.png";
     this.frameAmount = 8;
     }
@@ -672,14 +673,19 @@ handleRightDodge = (event) =>{ //*
         }, 500);
     }
     if(key === ALT && this.vy === 0 || key === ALT && this.ableToJump === true){
-      this.img.src = "../public/Imagenes/pjJump1.png";
-      this.frameAmount = 1;
+      if(!finalBoss){
+        this.img.src = "../public/Imagenes/pjJump1.png";
+        this.frameAmount = 1;
+        setTimeout(() => {
+          this.img.src = "../public/Imagenes/pjShoot3.png";
+          this.frameAmount = 4;
+          this.img.frame = 0;
+        }, 300);
+      } else {
+      this.img.src = "../public/Imagenes/pangPjNuevoDerecha2.png";
+      this.frameAmount = 8;
+      }
       this.img.frame = 0;
-      setTimeout(() => {
-        this.img.src = "../public/Imagenes/pjShoot3.png";
-        this.frameAmount = 4;
-        this.img.frame = 0;
-      }, 300);
       this.vy = jumpHeight;
       this.g = 1
       this.ableToJump = false;
