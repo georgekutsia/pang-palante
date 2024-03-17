@@ -28,8 +28,8 @@ function addPlatforms15(ctx, platforms){
     const platform14 = new Platform(ctx, 100, 210, 125, 15, "../public/Imagenes/obstacles/platformSolid1.png", true, false, true);
     const platform2 = new Platform(ctx,  CTXW-300, 150, 125, 15, "../public/Imagenes/obstacles/platformSolid1.png", true, false, true);
     const platform3 = new Platform(ctx, 25, CTXH-60, 125, 15, "../public/Imagenes/obstacles/platformSolid2.png", false, false, true);
-    const platform4 = new Platform(ctx, 30, CTXH-230, 125, 15, "../public/Imagenes/obstacles/platformSolid2.png", false, false, true, 2.5, 0, 50, 500);
-    const platform5 = new Platform(ctx, 900, CTXH-120, 125, 15, "../public/Imagenes/obstacles/platformSolid2.png", false, false, true, 1.5, 0, 300, 1100);
+    const platform4 = new Platform(ctx, 30, CTXH-260, 125, 15, "../public/Imagenes/obstacles/platformSolid2.png", false, false, true, 2.5, 0, 50, 500);
+    const platform5 = new Platform(ctx, 900, CTXH-160, 125, 15, "../public/Imagenes/obstacles/platformSolid2.png", false, false, true, 1.5, 0, 300, 1100);
     platforms.push( platform1,platform11,platform12, platform13, platform14, platform2, platform3,platform4,platform5);
 }
 

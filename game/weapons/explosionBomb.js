@@ -3,11 +3,11 @@ class ExplosionBomb {
     this.ctx = ctx;
     this.x = x;
     this.y = y;
-    this.w = w  || this.ctx.canvas.width/ 29;
-    this.h = h || this.ctx.canvas.width/ 29;
+    this.w = w  || this.ctx.canvas.width/ 60;
+    this.h = h || this.ctx.canvas.width/ 60;
     this.vx = vx || -0.065; // minimo ajuste para que el fuego vaya recto de verdad, ya que al aumentar de tamaño solo se expande hacia al derecha
     this.vy = vy || 0;
-    this.g = 0.05
+    this.g = 0.1
     this.img = new Image();
     this.img.src = "/public/Imagenes/explosion3.png";
     this.img.frame = 0;
@@ -44,7 +44,7 @@ if(this.shot){
     this.tick++
     setTimeout(() => {
       this.dispose = false;
-    }, 4000);
+    }, 9000);
     if(this.tick >= 5){
       this.img.frame++;
       this.tick = 0
@@ -74,8 +74,8 @@ if(this.shot){
   }
   collidesBoss(objetivo) {
     if(this.canCollide){
-    const colX = this.x + this.w >= objetivo.x && this.x <= objetivo.x + objetivo.w;
-    const colY = this.y + this.h > objetivo.y + 40 && this.y < objetivo.y + objetivo.h/2;
+    const colX = this.x + this.w >= objetivo.x + 50 && this.x <= objetivo.x + objetivo.w;
+    const colY = this.y + this.h > objetivo.y + 140 && this.y < objetivo.y + objetivo.h;
       return colX && colY;
     }
   }

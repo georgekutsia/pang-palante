@@ -15,7 +15,7 @@ class Platform {
     this.vx = vx || 0;
     this.vy = vy || 0;
     this.xLimit1   = xLimit1   || -40
-    this.xLimit2 = xLimit2 || CTXW + 40
+    this.xLimit2 = xLimit2 || CTXW + 140
     this.yLimit1 = yLimit1 || CTXH
     this.yLimit2 = yLimit2 || CTXH
     this.speedX = vx || 0;
@@ -129,7 +129,7 @@ class Platform {
   }
 
   isVisible() {
-    return this.x > -40 && this.x <= this.ctx.canvas.width + 40;
+    return this.x > -140 && this.x <= this.ctx.canvas.width + 40;
   }
 
   collides(objetivo) {

@@ -3,16 +3,16 @@
 
 
 function levelBallItemMiniBoss1(ctx, levelBalls) {  
-  const levelBall = new LevelBall(ctx, ctx.canvas.width/2, 0)
+  const levelBall = new LevelBall(ctx, CTXW/2, 0)
   levelBalls.push(levelBall)
 }
 
 function addPlatformsMiniBoss1(ctx, platforms){
-  let y = getRandomNumber(70)
-  let w = getRandomNumber(30)
+  let y = getRandomNumber(200)
+  let w = getRandomNumber(90)
   let breakable = Math.random() > 0.5;
   let jumpable = Math.random() > 0.5;
-  const platform1 = new Platform(ctx, CTXW - 20, CTXH-20 - y, 15 + w, 5, "../public/Imagenes/obstacles/platformSolid2.png", breakable, jumpable, true, -0.3, 0);
+  const platform1 = new Platform(ctx, CTXW -100 - 20, CTXH-90 - y, 70 + w, 15, "../public/Imagenes/obstacles/platformSolid2.png", breakable, jumpable, true, -1.3, 0);
   platforms.push( platform1 );
 
 }

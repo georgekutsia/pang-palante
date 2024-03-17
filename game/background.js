@@ -7,7 +7,7 @@ class Background {
     this.h = this.ctx.canvas.height;
     this.img = new Image();
     this.img.src = "/public/Imagenes/background/background1.jpg";
-    this.vx = -0.3;
+    this.vx = -1.3;
 
   }
 
