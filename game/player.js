@@ -517,7 +517,7 @@ handleRightDodge = (event) =>{ //*
         this.img.frame++;
         this.frameTick = 0;
       }
-    if (this.img.frame > 4) {
+    if (this.img.frame > this.frameAmount-1) {
       this.img.frame = 0;
     }
     if (this.y <= 0) {
@@ -828,7 +828,7 @@ handleRightDodge = (event) =>{ //*
       const bullet = new BasicWeapon(this.ctx, this.x + this.w/1.8, this.y, bulletDirection);
       this.bulletArray.push(bullet);//paso 2: crea un array vacío en el constructor y luego haz un push de cada bullet;
     } else{
-      const bullet = new BasicWeapon(this.ctx, this.x + 5, this.y, bulletDirection, 3, 0.001);
+      const bullet = new BasicWeapon(this.ctx, this.x + 5, this.y, bulletDirection, 13, 0.001);
       this.bulletArray.push(bullet);
     }
     shootSound.play()
@@ -838,7 +838,7 @@ handleRightDodge = (event) =>{ //*
       const bullet1 = new BasicWeapon(this.ctx, this.x - 10, this.y, bulletDirection);
       this.bulletArray.push(bullet1);//paso 2: crea un array vacío en el constructor y luego haz un push de cada bullet;
     } else{
-      const bullet1 = new BasicWeapon(this.ctx, this.x +3, this.y, bulletDirection, 3, -0.1);
+      const bullet1 = new BasicWeapon(this.ctx, this.x +3, this.y, bulletDirection, 13, -0.5);
       this.bulletArray.push(bullet1);//paso 2: crea un array vacío en el constructor y luego haz un push de cada bullet;
     }
     shootSound.play()
@@ -849,8 +849,8 @@ handleRightDodge = (event) =>{ //*
       const bullet2 = new BasicWeapon(this.ctx, this.x + this.w, this.y, bulletDirection, 1 + basicWeaponSpeed/2);
       this.bulletArray.push(bullet1, bullet2);//paso 2: crea un array vacío en el constructor y luego haz un push de cada bullet;
     } else{
-      const bullet1 = new BasicWeapon(this.ctx, this.x , this.y, bulletDirection, 3, -0.2);
-      const bullet2 = new BasicWeapon(this.ctx, this.x - 3, this.y, bulletDirection, 3, -0.3);
+      const bullet1 = new BasicWeapon(this.ctx, this.x , this.y, bulletDirection, 13, -0.9);
+      const bullet2 = new BasicWeapon(this.ctx, this.x - 3, this.y, bulletDirection, 13, -1.5);
       this.bulletArray.push(bullet1, bullet2);//paso 2: crea un array vacío en el constructor y luego haz un push de cada bullet;
     }
     shootSound.play()

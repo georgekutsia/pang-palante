@@ -26,6 +26,10 @@ class Background {
       if (this.x + this.w <= 0) {
         this.x = 0;
       }
+    } else{
+      this.x = 0;
+      this.y = 0;
+    this.img.src = "/public/Imagenes/background/background1.jpg";
     }
   }
 }
