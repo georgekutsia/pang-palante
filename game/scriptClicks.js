@@ -158,7 +158,7 @@ function handleClick(event) {
     return;
   }
   if (isPointInside(game.miniBoses, clickX, clickY)) {
-        showModal(`Minion`, `&nbsp&nbsp  BubbleMaster cuenta con gran cantidad de seguidores que se consideran sus minions. Son absolutamente fieles a su causa y no dudarán en destruir a cualquier que se ponga en su camino. <span style="color: blue; font-size: 20px;">R</span>  Hay poca información acerca de sus habilidades y poderes, así que tendrás que adaptarte en medio del combate.`).then(() => {
+        showModal(`Minion`, `&nbsp&nbsp  BubbleMaster cuenta con gran cantidad de seguidores que se consideran sus minions. Son absolutamente fieles a su causa y no dudarán en destruir a cualquiera que se ponga en su camino.  <br/>&nbsp&nbsp  Hay poca información acerca de sus habilidades y poderes, así que tendrás que adaptarte en medio del combate.`).then(() => {
       game.start();
     });
     return;

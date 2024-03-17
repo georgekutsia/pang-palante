@@ -110,7 +110,15 @@ class Game {
 
   start() {
     if(!this.gameStarted){
-      if (GAMELEVEL === 14) {
+      if (GAMELEVEL === 15) {
+
+        addMiniboss1();
+        miniBossTalk1.play();
+          let bo = new MiniBoss1(ctx, CTXW - 340, -50, CTXW/4, CTXW/4, 0, 0, 5, true, true, true, "/public/Imagenes/minions/MiniBoss1.webp");
+          this.miniBoses.push(bo);
+          minibossArrivingShip.play();
+          this.dispached = false;
+
         // let swa  =  new Sword(this.ctx, 500, 500)
         // let swa1  =  new Sword(this.ctx, 600, 500)
         // let swa2  =  new Sword(this.ctx, 700, 500)
@@ -960,12 +968,12 @@ if(this.player.wasNotDamaged) {
             }
           }, 3000);
         } else if (GAMELEVEL === 16){//pero 21 en realidad
-          addMiniboss1()
-          miniBossTalk1.play()
+          addMiniboss1();
+          miniBossTalk1.play();
           setTimeout(() => {
-            let bo = new MiniBoss1(ctx, CTXW - 70, -50)
+            let bo = new MiniBoss1(ctx, CTXW - 70, -50);
             this.miniBoses.push(bo);
-            minibossArrivingShip.play()
+            minibossArrivingShip.play();
             this.dispached = false;
           }, 6100);
         }
@@ -1017,7 +1025,6 @@ if(this.player.wasNotDamaged) {
         this.emptyAllPlayerArrays()
           demoFunctions.mostrarVariosTextosPocoAPoco3()
           addDemo3(this.ctx, this.platforms, this.levers, this.bubbles, this.levelBalls)
-
           demoPhase = 3;
       }
       if(demoPhase === 4){
@@ -1027,7 +1034,6 @@ if(this.player.wasNotDamaged) {
           demoFunctions.mostrarVariosTextosPocoAPoco4()
           addDemo4(this.ctx, this.platforms, this.levers, this.bubbles, this.levelBalls, this.boxes)
           demoPhase = 5;
-
       }
       if(demoPhase === 6){
         this.levelBalls = [];
@@ -1076,7 +1082,7 @@ if(this.player.wasNotDamaged) {
         addDemo7(this.ctx, this.platforms, this.swords);
         demoFunctions.mostrarVariosTextosPocoAPoco7()
         setTimeout(() => {
-          let boss = new MiniBoss1(ctx, CTXW-60, -200, CTXW/5, CTXW/5, 0, 0, 10, true, false, false);
+          let boss = new MiniBoss1(ctx, CTXW-60, -200, CTXW/5, CTXW/5, 0, 0, 10, true, false, false, "/public/Imagenes/minions/miniBoss2.png");
           this.miniBoses.push(boss);
           let bub1 = new Bubble(this.ctx, 20, 30, 20, 20)
           let bub2 = new Bubble(this.ctx, CTXW-40, 30, 20, 20)
@@ -1114,55 +1120,29 @@ if(this.player.wasNotDamaged) {
         }
       }
     }
-
-  
   checkBoss(){
     if(miniBoss1){
-      this.tickMiniBoss1++;
-      this.tickMiniBoss2++;
-      this.tickMiniBoss3++;
-      if(this.randomIsOn){
-        this.randomNumberForTick1 = Math.random() * 300;
-        this.randomIsOn = false;
-      }
-      if(this.tickMiniBoss1 >= 850 + this.randomNumberForTick1){  
-        addPlatformsMiniBoss1(this.ctx, this.platforms)
-        this.tickMiniBoss1 = 0;
-        this.randomIsOn = true;
-      }
-      if(this.tickMiniBoss2 >= 1250 + this.randomNumberForTick1){  
-        boxItemMiniBoss1(this.ctx, this.boxes);
-        this.tickMiniBoss2 = 0;
-        this.randomIsOn = true;
-      }
-      if(this.tickMiniBoss3 >= 1450 + this.randomNumberForTick1){  
-        addBouncerMiniBoss1(this.ctx, this.bouncers)
-        this.tickMiniBoss3 = 0;
-        this.randomIsOn = true;
-      }
+
       if (this.miniBoses.every((mini) => mini.life <= 50) && !this.dispached) {
         let randomNumber = Math.floor(Math.random() * 4); // Generar un número aleatorio entre 0 y 2
         if (randomNumber === 0) {
-          let heali = new Healing(this.ctx, CTXW - getRandomNumber(40), 70);
+          let heali = new Healing(this.ctx, CTXW - 100-getRandomNumber(40), 70);
           this.healings.push(heali);
         } else if (randomNumber === 1) {
-          let fire = new Flamethrower(this.ctx, CTXW - getRandomNumber(40), 70);
+          let fire = new Flamethrower(this.ctx, CTXW - 100-getRandomNumber(40), 70);
           this.flamethrowers.push(fire);
         } else if (randomNumber === 2) {
-          let bar = new Bars(this.ctx, CTXW - getRandomNumber(40), 70);
+          let bar = new Bars(this.ctx, CTXW - 100-getRandomNumber(40), 70);
           this.bars.push(bar);
         } else if (randomNumber === 3){
-          const hook = new Hook(  this.ctx, CTXW - getRandomNumber(40), 70)
+          const hook = new Hook(  this.ctx, CTXW - 100-getRandomNumber(40), 70)
           this.hooks.push(hook)
         }
-        let breakable = Math.random() > 0.5;
-        let jumpable = Math.random() > 0.5;
-        const platform = new Platform(this.ctx, CTXW - 30, CTXH-25 , 35, 5, "../public/Imagenes/obstacles/platformSolid2.png", breakable, jumpable, true, -0.3);
-        this.platforms.push( platform);
+        addPlatformsMiniBoss1(this.ctx, this.platforms)
         this.dispached = true;
         setTimeout(() => {
           this.dispached = false;
-        }, 5000);
+        }, 50000);
       }
     }
   }

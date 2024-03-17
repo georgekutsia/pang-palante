@@ -43,7 +43,7 @@ class ExplosionBullet {
     this.tick++
     setTimeout(() => {
       this.dispose = false;
-    }, 4000);
+    }, 9000);
     if(this.tick >= 3){
       this.img.frame++;
       this.tick = 0
@@ -57,15 +57,15 @@ class ExplosionBullet {
 
   collides(objetivo) {
     if(this.canCollide && !playerIsImmune){
-      const colX = this.x  <= objetivo.x + objetivo.w  && this.x + this.w > objetivo.x ;
-      const colY =this.y + this.h -5 > objetivo.y && this.y < objetivo.y + objetivo.h;
+      const colX = this.x  <= objetivo.x + objetivo.w/2.4  && this.x + this.w > objetivo.x ;
+      const colY =this.y + this.h -5 > objetivo.y +20  && this.y < objetivo.y + objetivo.h ;
       return colX && colY;
     }
   }
   collidesBoss(objetivo) {
-      const colX = this.x  <= objetivo.x + objetivo.w  && this.x - this.w > objetivo.x ;
-      const colY =this.y + this.h -5 > objetivo.y && this.y < objetivo.y + objetivo.h;
-      return colX && colY;
+    // const colX = this.x + this.w >= objetivo.x && this.x <= objetivo.x + objetivo.w;;
+    // const colY =this.y + this.h -5 > objetivo.y +20  && this.y < objetivo.y + objetivo.h ;
+    // return colX && colY;
   }
   isVisible() {
     return this.dispose;

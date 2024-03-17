@@ -1,28 +1,29 @@
 class MiniBoss1 {
-  constructor(ctx, x, y, w, h, vx, vy, life, gun1 = true, gun2 = true, gun3= true) {
+  constructor(ctx, x, y, w, h, vx, vy, life, gun1 = true, gun2 = true, gun3= true, ) {
     this.ctx = ctx;
-    this.x = x ||  this.ctx.canvas.width -30;
-    this.y = y || -4;
-    this.w = w || this.ctx.canvas.width / 4;
-    this.h = h || this.ctx.canvas.width / 4;
+    this.x = x ||  this.ctx.canvas.width - 230;
+    this.y = y || -100;
+    this.w = w || this.ctx.canvas.width / 6;
+    this.h = h || this.ctx.canvas.width / 6;
     this.tick = 0
     this.vx = vx || 0;
     this.vy =  vy || 1;
-    this.g = -0.005;
+    this.g = -0.5;
     this.tick = 0;
     this.dispose = true;
     this.img = new Image();
-    this.img.src = "/public/Imagenes/minions/miniBoss2.png";
+    this.img.src = "/public/Imagenes/minions/MiniBoss1.webp";
     this.img.frame = 0;
     this.imgTick = 0;
     this.playerDetected = false;
     this.bubbleArray = [];
     this.explosiveArray = [];
+    this.bulletArray = [];
     this.burningColorsArray = [];
     this.explosions = [];
     this.shootOne = true;  // el primer tipo de disparo especial
     this.oneShot = true; // para que dispare solo una vez al detectar al jugador
-    this.life = life || 11;
+    this.life = life || 45;
 
     this.gun1 = gun1;
     this.gun2 = gun2;
@@ -35,13 +36,11 @@ class MiniBoss1 {
     this.burningLevel = 0;
     this.explodingLevel = 0;
     //burning...
-
     this.burning = true;
     this.burningForce = 0;
     this.damage0 = 0;
     this.arriving = true;
   }
-
   draw() {
 if(this.arriving){
   minibossFlyingShip.play();
@@ -70,6 +69,8 @@ if(this.arriving){
     this.bubbleArray = this.bubbleArray.filter((e) =>e.isVisible()); 
     this.explosiveArray.forEach(bub => bub.draw())
     this.explosiveArray = this.explosiveArray.filter((e) =>e.isVisible()); 
+    this.bulletArray.forEach(bub => bub.draw())
+    this.bulletArray = this.bulletArray.filter((e) =>e.isVisible()); 
     this.explosions.forEach(bub => bub.draw())
     this.explosions = this.explosions.filter((e) =>e.isVisible()); 
     this.burningColorsArray.forEach(bub => bub.draw())
@@ -84,15 +85,15 @@ if(this.arriving){
     miniBossVy = this.vy
     if(this.vy >= 1) this.vy = 0.4
     if(this.vy <= -1) this.vy = -0.4; 
-    if(this.y >= 70 ){
-      this.g = -0.01;
+    if(this.y >= 470 ){
+      this.g = -1;
       if(this.shootOne){
         this.shootingBomb()
         this.shootOne = false;
       }
     } 
     if(this.y <= 40){
-      this.g = 0.01;
+      this.g = 1;
       this.shootOne = true;
     }
     this.tick++
@@ -141,10 +142,10 @@ if(this.arriving){
 
     this.bubbleArray.forEach(bub => bub.move())
     this.explosiveArray.forEach(bub => bub.move())
+    this.bulletArray.forEach(bub => bub.move())
     this.explosions.forEach(bub => bub.move())
     this.burningColorsArray.forEach(bub => bub.move())
   }
-
   checkPosition(player){
     if(this.y + this.h/1.8 >= player.y  && this.y + this.h/1.8 <= player.y  + 5 ) {
       this.playerDetected = true;
@@ -158,42 +159,36 @@ if(this.arriving){
       }, this.distanceFromPlayer*2 + 300);
     }
   }
-
   shootingExplosive(){
     if(this.gun1){
-      let explo = new ExplosionBullet(this.ctx, this.x , this.y + this.h/2, CTXW/15, CTXW/15, -2);
-      this.explosiveArray.push(explo)
+      let explo = new ExplosionBullet(this.ctx, this.x , this.y + this.h/2, CTXW/15, CTXW/15, -8);
+      // this.bulletArray.push(explo)
     }
   }
   shootingBomb(){
     if(this.gun2){
-      let explo = new ExplosionBomb(this.ctx, this.x, this.y - 10, CTXW/5, CTXW/5, -this.distanceFromPlayer/100, -2.5);
-      // this.explosiveArray.push(explo)
+      let explo = new ExplosionBomb(this.ctx, this.x, this.y - 100, CTXW/10, CTXW/10, -this.distanceFromPlayer/200, -10);
+      this.explosiveArray.push(explo)
     }
   }
-
   shootingBubble1(speedX, size){
     if(this.gun3){
       let bubble2 = new Bubble(ctx, this.x , this.y + this.h/2 , size, size, -0.5, speedX, 0.0001, true, 700, 0, false)
       this.bubbleArray.push(bubble2);
     }
   }
-
   checkDistance(player){
       this.distanceFromPlayer = this.x - player.x;
   }    
-
   miniBossHit(){
     this.life -= 1;
   }
   miniBossBurn(){
     this.life -= 0.005;
   }
-  
-
   burningShip(){
       if( this.life <= 50 && this.burningLevel === 0 ){
-        let fire =  new BurningColors(this.ctx, this.x, this.y, 60, 60)
+        let fire =  new BurningColors(this.ctx, this.x, this.y + this.h/7, 200, 200)
         this.burningColorsArray.push(fire);
         if(finalBoss){
           minionsTalking.miniBossTalk2();
@@ -201,20 +196,18 @@ if(this.arriving){
         this.burningLevel = 1;
       }
       if( this.life <= 40 && this.burningLevel === 1 ){
-
-        let fire =  new BurningColors(this.ctx, this.x + 40, this.y - this.h/4, 70, 70)
+        let fire =  new BurningColors(this.ctx, this.x + this.w/2, this.y + this.h/3, 180, 180)
         this.burningColorsArray.push(fire);
         this.burningLevel = 2;
-
       }
-      if( this.life <=  30&& this.burningLevel === 2 ){
-        let fire =  new BurningColors(this.ctx, this.x + this.w /2, this.y+ this.h/10, 60, 60)
+      if( this.life <= 30 && this.burningLevel === 2 ){
+        let fire =  new BurningColors(this.ctx, this.x + this.w /4, this.y+ this.h/16, 250, 250)
         this.burningColorsArray.push(fire);
         this.burningLevel = 3;
 
       }
       if( this.life <= 20 && this.burningLevel === 3 ){
-        let fire =  new BurningColors(this.ctx, this.x + this.w/5, this.y, 80, 80)
+        let fire =  new BurningColors(this.ctx, this.x + this.w/2, this.y - this.h/10, 200, 200)
         this.burningColorsArray.push(fire);
         if(finalBoss){
         minionsTalking.miniBossTalk3();
@@ -222,7 +215,7 @@ if(this.arriving){
         this.burningLevel = 4;
       }
       if( this.life <= 10 && this.burningLevel === 4 ){
-        let fire =  new BurningColors(this.ctx, this.x + this.w/4.3, this.y - this.h/20, 120, 70)
+        let fire =  new BurningColors(this.ctx, this.x + this.w/6, this.y + this.h/7, 300, 300)
         this.burningColorsArray.push(fire);
         this.burningLevel = 5;
       }
