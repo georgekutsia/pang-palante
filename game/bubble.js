@@ -109,7 +109,7 @@ class Bubble { //posX posY, ancho, alto, velX, velY, gravedad, buleano si hay gr
   }
   collides(objetivo) {  //chequéa la colisión. 
     const colX = this.x <= objetivo.x + objetivo.w  && this.x + this.w > objetivo.x;   
-    const colY = this.y + this.h > objetivo.y && this.y < objetivo.y + objetivo.h;
+    const colY = this.y + this.h >= objetivo.y && this.y <= objetivo.y + objetivo.h;
     return colX && colY;
   }
 
