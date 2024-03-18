@@ -148,6 +148,7 @@ function checkBubbleCollision(bubbles, player, puffBubbles, ctx, platforms, boun
         coins += 2;
         bubble.swordSpeed = -2;
         player.swordPowerUp++;
+        handleSwordClick()
         bubblePuff(bubble, puffBubbles, bubbles, ctx);
         bubblePopSound1.play(); //todo -- Sonido paso 3) invocar el sonido
         return false;
@@ -428,7 +429,4 @@ function bossFireCollision (miniBoses, object){
         } else return true;
       });
     });
-
-
-
   }
