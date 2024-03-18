@@ -111,14 +111,19 @@ class Game {
   start() {
     if(!this.gameStarted){
       if (GAMELEVEL === 15) {
-        addMiniboss1(this.ctx, this.levelBalls);
-        miniBossTalk1.play();
-          let bo = new MiniBoss1(this.ctx, CTXW - 340, -50, CTXW/4, CTXW/4, 0, 0, 95, true, true, true, "/public/Imagenes/minions/MiniBoss1.webp");
-          this.miniBoses.push(bo);
-          minibossArrivingShip.play();
-          this.dispached = false;
+        // addMiniboss1(this.ctx, this.levelBalls);
+        // miniBossTalk1.play();
+        //   let bo = new MiniBoss1(this.ctx, CTXW - 340, -50, CTXW/4, CTXW/4, 0, 0, 95, true, true, true, "/public/Imagenes/minions/MiniBoss1.webp");
+        //   this.miniBoses.push(bo);
+        //   minibossArrivingShip.play();
+        //   this.dispached = false;
           let sta = new Stair(this.ctx, 40, CTXH - 150, 90, 150);
           this.stairs.push(sta)
+
+          let darkB = new DarkBubble(this.ctx, 600, 300, 80, 80);
+          this.darkBubbles.push(darkB);
+          let leve = new Lever(this.ctx, 800, 450);
+          this.levers.push(leve)
         // let swa  =  new Sword(this.ctx, 500, 500)
         // let swa1  =  new Sword(this.ctx, 600, 500)
         // let swa2  =  new Sword(this.ctx, 700, 500)
@@ -683,6 +688,15 @@ this.cannons.forEach((cann) => {//  cannon con fire
       lever.activated = true;
       } else return true;
     });
+    this.levers.forEach((lever) => {
+      this.darkBubbles.forEach((bubble) => { 
+      if (lever.collides(bubble)) {
+      lever.activated = false;
+      lever.img.frame = 0;
+      } else return true;
+    })
+    });
+
     this.coins.forEach((coin) => {
       if (coin.collides(this.player)) {
             coins+= coin.amountOfCoins;
