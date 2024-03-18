@@ -103,6 +103,19 @@ const mapArray = [
   "/public/Imagenes/background/map15.webp",
   "/public/Imagenes/background/map16.webp",
 ]
+const miniBossHitWeapons = [
+  "../public/Imagenes/puffBubble2.png",
+  "../public/Imagenes/puffBubble3.png",
+  "../public/Imagenes/puffBubble4.png",
+  "../public/Imagenes/puffBubble5.png",
+  "../public/Imagenes/puffBubble6.png",
+  "../public/Imagenes/puffBubble7.png",
+  "../public/Imagenes/puffBubble8.png",
+  "../public/Imagenes/puffBubble9.png",
+  "../public/Imagenes/puffBubble10.png",
+  "../public/Imagenes/puffBubble11.png",
+
+]
 //cuando se ralentice  this.g de player en 0.6, this.playerSpeed =  4 y gameSpeed en 20;
 
 

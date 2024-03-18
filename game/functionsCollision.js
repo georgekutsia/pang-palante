@@ -35,7 +35,7 @@ function checkBubbleCollision(bubbles, player, puffBubbles, ctx, platforms, boun
  bubbles.forEach((bubble) => {//  bubble con bullet
     player.bulletArray = player.bulletArray.filter((bullet) => {
       if (bullet.collides(bubble) && !bullet.isBig) {
-        if(bubble.w >= 100 && bubble.w <= 199 ){
+        if(bubble.w >= 130 && bubble.w <= 199 ){
           bubbleAbsorbBullet.play()
           bubble.hitAmount++;
           bubble.hitAmount++;

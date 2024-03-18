@@ -22,6 +22,9 @@ constructor(ctx, x, y, g) {
     if (this.y + this.h >= CTXH-5 ){
       this.vy = 0; 
       this.g = 0;
+      if(finalBoss){
+        this.vx = -1.3
+      }
     }
   }
   isVisible(){

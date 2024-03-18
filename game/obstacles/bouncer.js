@@ -23,7 +23,7 @@ class Bouncer {
   }
 
   isVisible() {
-    return this.x > -20 && this.x <= this.ctx.canvas.width + 30;
+    return this.x > -10 && this.x <= this.ctx.canvas.width + 130;
   }
 
   collides(objetivo) {

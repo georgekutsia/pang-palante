@@ -21,6 +21,9 @@ constructor(ctx, x, y) {
     if (this.y + this.h >= this.ctx.canvas.height-1 ){
       this.vy = 0; 
       this.g = 0;
+      if(finalBoss){
+        this.vx = -1.3
+      }
     }
   }
   isVisible(){

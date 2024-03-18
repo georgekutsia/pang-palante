@@ -103,7 +103,7 @@ function  itemDropOnStairs (items, platforms){
   })
 }   
 
-function itemDropOn(platforms, boxes, stairs,flamethrowers, machineguns, healings,bars, blasters,  auras, coins, steps, levers, hooks, electros, swords, chests){
+function itemDropOn(platforms, boxes, stairs, bouncers, flamethrowers, machineguns, healings,bars, blasters,  auras, coins, steps, levers, hooks, electros, swords, chests){
   itemDropOnPlatform(flamethrowers, platforms);
   itemDropOnPlatform(machineguns, platforms);
   itemDropOnPlatform(healings, platforms);
@@ -117,6 +117,20 @@ function itemDropOn(platforms, boxes, stairs,flamethrowers, machineguns, healing
   itemDropOnPlatform(electros, platforms);
   itemDropOnPlatform(swords, platforms);
   itemDropOnPlatform(chests, platforms);
+
+  itemDropOnPlatform(flamethrowers, bouncers);
+  itemDropOnPlatform(machineguns, bouncers);
+  itemDropOnPlatform(healings, bouncers);
+  itemDropOnPlatform(bars, bouncers);
+  itemDropOnPlatform(blasters, bouncers);
+  itemDropOnPlatform(auras, bouncers);
+  itemDropOnPlatform(coins, bouncers);
+  itemDropOnPlatform(steps, bouncers);
+  itemDropOnPlatform(levers, bouncers);
+  itemDropOnPlatform(hooks, bouncers);
+  itemDropOnPlatform(electros, bouncers);
+  itemDropOnPlatform(swords, bouncers);
+  itemDropOnPlatform(chests, bouncers);
 
 
   itemDropOnPlatform(flamethrowers, boxes);

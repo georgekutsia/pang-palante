@@ -36,6 +36,9 @@ constructor(ctx, x, y) {
     if (this.y + this.h >= this.ctx.canvas.height-6){
       this.vy = 0; 
       this.g = 0;
+      if(finalBoss){
+        this.vx = -1.3
+      }
     }
       if(this.activated){
         this.tick++;
