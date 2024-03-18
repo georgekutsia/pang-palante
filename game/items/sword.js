@@ -43,6 +43,9 @@ class Sword {
     if (this.y + this.h >= this.ctx.canvas.height ){
       this.vy = -0.2; 
       this.g = 0;
+      if(finalBoss){
+        this.vx = -1.3
+      }
       setTimeout(() => {
         this.vy = 0.2;
         this.g = 0;

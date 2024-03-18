@@ -49,7 +49,6 @@ if(this.arriving){
     this.arriving = true;
   }, 60000);
 }
-    if(this.boxLevel===1)this.img.src = "/public/Imagenes/box1.png";
     this.ctx.drawImage(
       this.img,
       (this.img.frame * this.img.width) / 6,
@@ -118,20 +117,12 @@ if(this.arriving){
     if(this.burningShip.framey > 1.5 ) {
       this.burningShip.framey = 0
       this.burningShip.framex = 0;
-      // if(this.boxLevel === 0) {
-      //   this.damage0 +=1;
-      //   if(this.damage0 >=3){
-      //     this.boxImg.frame+=1;
-      //     this.boxImpactMetalic.play();
-      //     this.damage0 = 0;
-      //   }
-      // }
     }
 
     this.shootingIntervalBubbleTick++
     if(this.shootingIntervalBubbleTick >= this.shootingIntervalBubble){
       this.shootingIntervalBubble = getRandomNumberDecimals(200, 1500)
-      this.shootingBubble1(-1.5, -2.5, 40, 40)
+      this.shootingBubble1(-1.5, -2.5, 100, 100)
       if(this.life <= 20 ){
         this.shootingBubble1(-1.4, -7, 60, 60)
         this.shootingBubble1(-1.6,-8.5, 60, 60)

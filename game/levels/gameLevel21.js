@@ -12,7 +12,7 @@ function addPlatformsMiniBoss1(ctx, platforms){
   let w = getRandomNumber(90)
   let breakable = Math.random() > 0.5;
   let jumpable = Math.random() > 0.5;
-  const platform1 = new Platform(ctx, CTXW -100 - 20, CTXH-90 - y, 70 + w, 15, "../public/Imagenes/obstacles/platformSolid2.png", breakable, jumpable, true, -1.3, 0);
+  const platform1 = new Platform(ctx, CTXW , CTXH-90 - y, 70 + w, 15, "../public/Imagenes/obstacles/platformSolid2.png", breakable, jumpable, true, -1.3, 0);
   platforms.push( platform1 );
 
 }
@@ -21,14 +21,13 @@ function addBouncerMiniBoss1(ctx, bouncers){
   let y = getRandomNumber(70)
   let h = getRandomNumber(10)
   let w = getRandomNumber(15)
-  const bouncer1 = new Bouncer(ctx, CTXW - 20, CTXH-20 - y, 10 + w, 5+h, -0.3)
+  const bouncer1 = new Bouncer(ctx, CTXW + 20, CTXH-100 - y, 100 + w, 15+h, true, -1.3)
   bouncers.push(bouncer1)
 }
 
 function boxItemMiniBoss1(ctx, boxes) {   
   let y = getRandomNumber(60)
-
-  const box1 = new Box(ctx, CTXW + 20,  10 + y,  3, true, 3, false, 0, -0.3)
+  const box1 = new Box(ctx, CTXW + 40,  CTXH-100 - y,  3, true, 3, false, 0, -1.3)
   boxes.push(box1,)
 }
 

@@ -111,14 +111,14 @@ class Game {
   start() {
     if(!this.gameStarted){
       if (GAMELEVEL === 15) {
-
         addMiniboss1(this.ctx, this.levelBalls);
         miniBossTalk1.play();
-          let bo = new MiniBoss1(ctx, CTXW - 340, -50, CTXW/4, CTXW/4, 0, 0, 15, true, true, true, "/public/Imagenes/minions/MiniBoss1.webp");
+          let bo = new MiniBoss1(this.ctx, CTXW - 340, -50, CTXW/4, CTXW/4, 0, 0, 95, true, true, true, "/public/Imagenes/minions/MiniBoss1.webp");
           this.miniBoses.push(bo);
           minibossArrivingShip.play();
           this.dispached = false;
-
+          let sta = new Stair(this.ctx, 40, CTXH - 150, 90, 150);
+          this.stairs.push(sta)
         // let swa  =  new Sword(this.ctx, 500, 500)
         // let swa1  =  new Sword(this.ctx, 600, 500)
         // let swa2  =  new Sword(this.ctx, 700, 500)
@@ -316,6 +316,10 @@ class Game {
         })
     })
     this.stairs.forEach((stair) => {//player con stair
+      if(this.player.electricShieldIsActive){
+        stair.y -= 0.1;
+        stair.h += 0.1;
+      }
       if (stair.collidesTop(this.player)) {
         this.player.vy = 0;
         this.player.y = stair.y - this.player.h;
@@ -449,7 +453,10 @@ class Game {
     // colisiones con Platform
     this.platforms.forEach((platform) => {// platform con player
       if (platform.collides(this.player)) {
-          platformPlayerCollision(this.player, platform)
+          platformPlayerCollision(this.player, platform);
+          if(finalBoss){
+            this.player.img.frame = 0; //para que se quede quieto al estar encima de la plataforma
+          }
       }
     });
 
@@ -516,7 +523,8 @@ this.miniBoses.forEach((mini) => {//  minions con bullet
   this.player.bulletArray = this.player.bulletArray.filter((bullet) => {
     if (bullet.collidesMiniboss1(mini) && !bullet.isBig) {
       mini.miniBossHit();
-      return false;
+      let puf = new BubblePuff(ctx, mini.x + getRandomNumber(mini.w - 30), mini.y +mini.h/4 + getRandomNumber(mini.h/4) , 80, 80, miniBossHitWeapons[getRandomNumber(10)]);
+      this.puffBubbles.push(puf)
     } else return true;
   });
 });
@@ -524,7 +532,6 @@ this.miniBoses.forEach((mini) => {//  minions con bullet
   this.player.bulletFireArray.forEach((bullet) => {
     if (bullet.collidesMiniboss1(mini)){
       mini.miniBossBurn();
-      console.log("lsdjnaldjns")
       setTimeout(() => {
         bullet.y = -100
       }, 500);
@@ -549,7 +556,7 @@ this.miniBoses.forEach((e) => {e.explosiveArray.forEach((exp) => {
   })})})
 
 this.miniBoses.forEach((mini) => {//  miniboss con player
-    if (mini.collides(this.player) && !playerIsImmune) {
+    if (mini.collides(this.player) && !playerIsImmune && !this.player.auraIsActive) {
       this.player.loseLife(2, true)
       return false;
     } else return true;
@@ -564,7 +571,7 @@ this.cannons.forEach((cann) => {//  cannon con fire
       cann.burning = true;
       cann.burningForce++
       if(cann.burningForce > 5) cann.burningForce = 5;
-      const puffBubble = new BubblePuff(ctx, cann.x, cann.y + cann.h / 2,cann.w, cann.h, "../public/Imagenes/puffBubble2.png");
+      const puffBubble = new BubblePuff(this.ctx, cann.x, cann.y + cann.h / 2,cann.w, cann.h, "../public/Imagenes/puffBubble2.png");
       this.puffBubbles.push(puffBubble);
       return false;
 
@@ -783,7 +790,7 @@ this.cannons.forEach((cann) => {//  cannon con fire
 
     // boxes...
     // boxes...
-      itemDropOn(this.platforms,this.boxes,this.stairs, this.flamethrowers,this.machineguns,this.healings, this.bars,this.blasters,this.auras,this.coins,this.steps,this.levers,this.hooks,this.electros,this.swords, this.chests)
+      itemDropOn(this.platforms,this.boxes,this.stairs, this.bouncers, this.flamethrowers,this.machineguns,this.healings, this.bars,this.blasters,this.auras,this.coins,this.steps,this.levers,this.hooks,this.electros,this.swords, this.chests)
 
     this.boxes.forEach((box) => {// box con player
       if (box.collides(this.player)) {
@@ -1149,27 +1156,40 @@ if(this.player.wasNotDamaged) {
     }
   checkBoss(){
     if(miniBoss1){
-
-      if (this.miniBoses.every((mini) => mini.life <= 50) && !this.dispached) {
-        let randomNumber = Math.floor(Math.random() * 4); // Generar un número aleatorio entre 0 y 2
-        if (randomNumber === 0) {
-          let heali = new Healing(this.ctx, CTXW - 100-getRandomNumber(40), 70);
-          this.healings.push(heali);
-        } else if (randomNumber === 1) {
-          let fire = new Flamethrower(this.ctx, CTXW - 100-getRandomNumber(40), 70);
-          this.flamethrowers.push(fire);
-        } else if (randomNumber === 2) {
-          let bar = new Bars(this.ctx, CTXW - 100-getRandomNumber(40), 70);
-          this.bars.push(bar);
-        } else if (randomNumber === 3){
-          const hook = new Hook(  this.ctx, CTXW - 100-getRandomNumber(40), 70)
-          this.hooks.push(hook)
-        }
-        addPlatformsMiniBoss1(this.ctx, this.platforms)
+      let randomNumber = Math.floor(Math.random() * 4); // Generar un número aleatorio entre 0 y 2
+      if ( !this.dispached) {
+        if(   this.miniBoses.every((mini) => mini.life <= 150)){
+          if (randomNumber === 0) {
+            let heali = new Healing(this.ctx, CTXW -getRandomNumber(10), 70);
+            this.healings.push(heali);
+            } else if (randomNumber === 1) {
+              let fire = new Flamethrower(this.ctx, CTXW -getRandomNumber(10), 70);
+              this.flamethrowers.push(fire);
+            } else if (randomNumber === 2) {
+              let bar = new Bars(this.ctx, CTXW -getRandomNumber(10), 70);
+              this.bars.push(bar);
+            } else if (randomNumber === 3){
+              const hook = new Hook(  this.ctx, CTXW -getRandomNumber(10), 70)
+              this.hooks.push(hook)
+            }
+          }
+          switch (getRandomNumber(3)) {
+            case 3:
+              addPlatformsMiniBoss1(this.ctx, this.platforms)
+              break;
+            case 2:
+              addBouncerMiniBoss1(this.ctx, this.bouncers)
+              break;
+            case 1:
+              boxItemMiniBoss1(this.ctx, this.boxes)
+              break;
+            default:
+              break;
+          }
         this.dispached = true;
         setTimeout(() => {
           this.dispached = false;
-        }, 50000);
+        }, 3000);
       }
     }
   }

@@ -80,7 +80,7 @@ function handleClick(event) {
   }
   if (isPointInside(game.stairs, clickX, clickY)) {
     
-        showModal(`Escaleras`, `&nbsp&nbsp  Escaleras. Subes y bajas. Puedes quedarte arriba, pero a veces hace cosas raras. No me lo tengas en cuenta, mira todo lo demás que he hecho!!! `).then(() => {
+        showModal(`Escaleras`, `&nbsp&nbsp  Escaleras. Subes y bajas. Puedes quedarte arriba, pero a veces hace cosas raras. No me lo tengas en cuenta, mira todo lo demás que he hecho!!!  <br/>&nbsp&nbsp Las escaleras también reaccionan a la carga eléctrica del personaje, así que podrás hacer que se alarguen si activas el escudo eléctrico mientras estás encima`).then(() => {
       game.start();
     });
     return;
@@ -158,7 +158,8 @@ function handleClick(event) {
     return;
   }
   if (isPointInside(game.miniBoses, clickX, clickY)) {
-        showModal(`Minion`, `&nbsp&nbsp  BubbleMaster cuenta con gran cantidad de seguidores que se consideran sus minions. Son absolutamente fieles a su causa y no dudarán en destruir a cualquiera que se ponga en su camino.  <br/>&nbsp&nbsp  Hay poca información acerca de sus habilidades y poderes, así que tendrás que adaptarte en medio del combate.`).then(() => {
+        showModal(`Minion`, `&nbsp&nbsp  BubbleMaster cuenta con gran cantidad de seguidores que se consideran sus minions. Son absolutamente fieles a su causa y no dudarán en destruir a cualquiera que se ponga en su camino.  <br/>&nbsp&nbsp  Hay poca información acerca de sus habilidades y poderes, así que tendrás que adaptarte en medio del combate.
+        <br/>&nbsp&nbsp  <span style="font-style: italic; font-size: 24px;">Fase especial</span> <br/>&nbsp&nbsp  Las peleas contra los jefes tienen un sistema especial de combate y cambian algunos comportamientos. Por ejemplo, si pulsas W, cambiarás la dirección del disparo hacia arriba, pero si pulsas dos veces D, podrás disparar hacia la derecha.`).then(() => {
       game.start();
     });
     return;

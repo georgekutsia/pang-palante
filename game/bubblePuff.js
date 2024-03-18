@@ -12,6 +12,7 @@ class BubblePuff {
   }
 
   draw() {
+    console.log("here")
     this.ctx.drawImage(
       this.img,
       (this.img.frame * this.img.width) / 5,
