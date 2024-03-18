@@ -84,6 +84,7 @@ const CTXW = ctx.canvas.width
 const CTXH = ctx.canvas.height
 let gameSpeed = 60;
 let boots = false;
+let globalAlphaForSword = 0.3;
 let itemTakenImages = "../public/Imagenes/itemTakenSparkle.png";
 const mapArray = [
   "/public/Imagenes/background/map1.webp",

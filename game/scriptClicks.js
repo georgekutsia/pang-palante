@@ -239,6 +239,51 @@ function isPointInside(platforms, x, y) {
     );
   });
 }
+function sword(platforms, x, y) {
+  return platforms.some((plat) => {
+    return (
+      x >= plat.x &&
+      x <= plat.x + plat.w  &&
+      y >= plat.y &&
+      y <= plat.y + plat.h 
+    );
+  });
+}
+canvas.addEventListener('click', swordClick);
+
+function handleSwordClick() {
+  let intervalId = setInterval(() => {
+    globalAlphaForSword += 0.1;
+    if (globalAlphaForSword >= 1) {
+      clearInterval(intervalId); // Detiene el intervalo cuando globalAlphaForSword llega a cero
+    }
+  }, 50); 
+  setTimeout(() => {
+    let intervalId = setInterval(() => {
+      globalAlphaForSword -= 0.1;
+      if (globalAlphaForSword <= 0.3) {
+        clearInterval(intervalId); // Detiene el intervalo cuando globalAlphaForSword llega a cero
+      }
+    }, 50); // 5
+  }, 3000);
+}
+
+// Manejar el clic de la espada cuando se hace clic en el canvas
+function swordClick(event) {
+  const rect = canvas.getBoundingClientRect();
+  const clickX = event.clientX - rect.left;
+  const clickY = event.clientY - rect.top;
+
+  if (
+    clickX >= CTXW-45 &&
+    clickX <= CTXW-45 + 30 &&
+    clickY >= 5 &&
+    clickY <= 100
+  ) {
+    console.log("blabla")
+    handleSwordClick(); // Llama a la función para manejar el clic de la espada
+  }
+}
 
 function showModal(title, content) {
   return new Promise((resolve, reject) => {

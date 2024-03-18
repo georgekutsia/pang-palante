@@ -20,6 +20,7 @@ class Player {
     this.hooksArray = [];
     this.swordArray = []; //
     this.itemTakens = [];
+    this.swordSparkles = []
     this.frameAmount = 8;
     this.fading = 0; //necesario para el parpadeo del personaje cuando es inmune
     this.charging = 0;  // acumula la carga, lo que dibuja el semicírculo
@@ -71,15 +72,16 @@ class Player {
     this.swordBack.src = "/public/Imagenes/swordBack.png";
     
     this.swordCharging = new Image();
-    this.swordCharging.src = "/public/Imagenes/espadaCargando1.png";
+    this.swordCharging.src = "/public/Imagenes/espadaCargando2.png";
     
     this.swordLeftStab = new Image();
     this.swordLeftStab.src = "/public/Imagenes/dodgeLeftSwordImg.png";
     this.swordRightStab = new Image();
     this.swordRightStab.src = "/public/Imagenes/dodgeRightSwordImg.png";
+    this.swordSparkleActive = true;
     
     this.swingSwordState = true;
-    this.swordEquipped = false;
+    this.swordEquipped = true;
     this.swordLevel = 0;
     this.swordPowerUp = 8;
     this.swordPower1 = false;
@@ -380,16 +382,25 @@ handleRightDodge = (event) =>{ //*
       this.fireInfo$$.innerText = ``
       this.fireImg$$.style.display = "none"
     }
-    if(this.swordEquipped === true){    
-      this.ctx.drawImage(this.swordCharging,CTXW-50, 10, 50, 150);
+    if (this.swordEquipped === true) {    
+      this.ctx.globalAlpha = globalAlphaForSword;
+      this.ctx.drawImage(this.swordCharging, CTXW - 50, 10, 50, 150);
+      const gradient = this.ctx.createLinearGradient(CTXW - 30, 18, CTXW - 20, 45 + this.swordPowerUp * 10);
+      gradient.addColorStop(0, 'violet');
+      gradient.addColorStop(0.5, 'yellow'); 
+      gradient.addColorStop(1, 'red'); 
+      
+      this.ctx.fillStyle = gradient;
+      this.ctx.fillRect(CTXW - 30, 18, 10, this.swordPowerUp * 10);
+      this.ctx.globalAlpha = 1;
 
-      if(this.swordLevel >= 0) this.swordInfo$$.innerText = ` lvl ${this.swordLevel}`;
-      this.swordImg$$.style.display = "flex"
-    } else{
-      this.swordInfo$$.innerText = ``
-      this.swordImg$$.style.display = "none"
-    }
-console.log(this.swordPowerUp)
+      if (this.swordLevel >= 0) this.swordInfo$$.innerText = ` lvl ${this.swordLevel}`;
+      this.swordImg$$.style.display = "flex";
+  } else {
+      this.swordInfo$$.innerText = ``;
+      this.swordImg$$.style.display = "none";
+  }
+  
     if(this.charging >=1){
       this.charger.draw(this.x + 24, this.y + 33, this.charging, 52, 51, "black", "red")
     }
@@ -454,7 +465,7 @@ console.log(this.swordPowerUp)
       this.itemJustTaken = false;
     }
     this.itemTakens.forEach((sparkle) => {sparkle.draw();}); // paso 3: dibujo cada bullet que se dispare
-
+    this.swordSparkles.forEach((swo) => {swo.draw();}); // paso 3: dibujo cada bullet que se dispare
   }
 
   move() {
@@ -560,14 +571,27 @@ console.log(this.swordPowerUp)
   this.hooksArray.forEach((bullet) => {bullet.move();}); // paso 3: dibujo cada bullet que se dispare
   this.swordArray.forEach((sparkle) => {sparkle.move();}); // paso 3: dibujo cada bullet que se dispare
   this.itemTakens.forEach((sparkle) => {sparkle.move();}); // paso 3: dibujo cada bullet que se dispare
+  this.swordSparkles.forEach((sparkle) => {sparkle.move();}); // paso 3: dibujo cada bullet que se dispare
 
   if(this.swordPowerUp >=10){
+    this.swordPowerUp = 10;
     this.swordPower1 = true;
     this.swordCooldown = 5500;
+    if(this.swordSparkleActive){
+      let swordSparkle1 = new BurningColors(this.ctx, CTXW - 38, -30, 80, 80)
+        this.swordSparkles.push(swordSparkle1)
+      for (let i = 0; i < 9; i++) {
+        let swordSparkle2 = new BurningColors(this.ctx, CTXW - 43, -40 + i*9, 110, 120)
+        this.swordSparkles.push( swordSparkle2)
+      }
+      this.swordSparkleActive = false;
+    }
     setTimeout(() => {
     this.swordPower1 = false;
     this.swordPowerUp = 0;
     this.swordCooldown = 2000;
+    this.swordSparkleActive = true;
+    this.swordSparkles = []
     }, 10000);
   }
 }
