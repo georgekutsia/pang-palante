@@ -112,6 +112,7 @@ function checkBubbleCollision(bubbles, player, puffBubbles, ctx, platforms, boun
       if (platform.collides(bubble)) {
         if (platform.isBouncable) {
         bubbleBounceSound.play()
+        console.log("ldjsnadljnsa")
           bounceFromObstacles(bubble, platform);
         } else if (!platform.isBouncable) {
           bubble.y = platform.y - bubble.h;

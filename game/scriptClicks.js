@@ -28,7 +28,7 @@ function handleClick(event) {
   }
 
   if (isPointInside(game.platforms, clickX, clickY, )) {
-    showModal(`Plataformas`, `&nbsp&nbsp Las plataformas podrían romperse a base de disparos (dependiendo del tamaño tiene más o menos resistencia) o simplemente poniéndote encima. También hay algunos enemigos poderosos que podrían romper la plataforma. <br/>&nbsp&nbsp Las que tienen reborde rojo se pueden activar con electricidad, pero no puedes usar gancho sobre esas plataformas. <br/>&nbsp&nbsp También hay algunas defectuosas que son pegajosas, así que atrapan las burbujas sobre su superficie.`).then(() => {
+    showModal(`Plataformas`, `&nbsp&nbsp Las plataformas podrían romperse a base de disparos (dependiendo del tamaño tiene más o menos resistencia) o simplemente poniéndote encima. También hay algunos enemigos poderosos que podrían romper la plataforma. <br/>&nbsp&nbsp Las que tienen reborde rojo se pueden activar con electricidad, pero no puedes usar gancho sobre esas plataformas. También puedes activar los Steps que creas al adquirir la habilidad de crear plataformas con el personaje <br/>&nbsp&nbsp También hay algunas defectuosas que son pegajosas, así que atrapan las burbujas sobre su superficie.`).then(() => {
       game.start();
     });
     return;
