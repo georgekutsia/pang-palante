@@ -255,6 +255,7 @@ function handleSwordClick() {
   let intervalId = setInterval(() => {
     globalAlphaForSword += 0.1;
     if (globalAlphaForSword >= 1) {
+      globalAlphaForSword = 1;
       clearInterval(intervalId); // Detiene el intervalo cuando globalAlphaForSword llega a cero
     }
   }, 50); 
@@ -262,6 +263,7 @@ function handleSwordClick() {
     let intervalId = setInterval(() => {
       globalAlphaForSword -= 0.1;
       if (globalAlphaForSword <= 0.3) {
+            globalAlphaForSword = 0.3;
         clearInterval(intervalId); // Detiene el intervalo cuando globalAlphaForSword llega a cero
       }
     }, 50); // 5
