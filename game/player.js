@@ -81,9 +81,9 @@ class Player {
     this.swordSparkleActive = true;
     
     this.swingSwordState = true;
-    this.swordEquipped = true;
+    this.swordEquipped = false;
     this.swordLevel = 0;
-    this.swordPowerUp = 8;
+    this.swordPowerUp = 0;
     this.swordPower1 = false;
     this.swordCooldown = 2000;
     this.keySwitchCounter = 0;
@@ -385,13 +385,13 @@ handleRightDodge = (event) =>{ //*
     if (this.swordEquipped === true) {    
       this.ctx.globalAlpha = globalAlphaForSword;
       this.ctx.drawImage(this.swordCharging, CTXW - 50, 10, 50, 150);
-      const gradient = this.ctx.createLinearGradient(CTXW - 30, 18, CTXW - 20, 45 + this.swordPowerUp * 10);
+      const gradient = this.ctx.createLinearGradient(CTXW - 30, 18, CTXW - 20, 45 + this.swordPowerUp * 5);
       gradient.addColorStop(0, 'violet');
       gradient.addColorStop(0.5, 'yellow'); 
-      gradient.addColorStop(1, 'red'); 
+      gradient.addColorStop(0.8, 'red'); 
       
       this.ctx.fillStyle = gradient;
-      this.ctx.fillRect(CTXW - 30, 18, 10, this.swordPowerUp * 10);
+      this.ctx.fillRect(CTXW - 30, 18, 10, this.swordPowerUp * 5);
       this.ctx.globalAlpha = 1;
 
       if (this.swordLevel >= 0) this.swordInfo$$.innerText = ` lvl ${this.swordLevel}`;
@@ -573,8 +573,8 @@ handleRightDodge = (event) =>{ //*
   this.itemTakens.forEach((sparkle) => {sparkle.move();}); // paso 3: dibujo cada bullet que se dispare
   this.swordSparkles.forEach((sparkle) => {sparkle.move();}); // paso 3: dibujo cada bullet que se dispare
 
-  if(this.swordPowerUp >=10){
-    this.swordPowerUp = 10;
+  if(this.swordPowerUp >=20){
+    this.swordPowerUp = 20;
     this.swordPower1 = true;
     this.swordCooldown = 5500;
     if(this.swordSparkleActive){
