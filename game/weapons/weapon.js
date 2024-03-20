@@ -1,16 +1,23 @@
 class BasicWeapon {
-  constructor(ctx, x, y, direction, vx, vy, isBig, basicBulletDuration) {
+  constructor(ctx, x, y, direction, vx, vy, isBig, basicBulletDuration, electrified = game.player.electricBurbalasIsActive) {
     this.ctx = ctx;
     this.x = x;
     this.y = y;
     this.vx = vx || 0;
-    this.vy = vy || -13;
+    this.vy = vy || -11;
     this.direction = direction;
-    this.radius =  CTXW / 200; // radio del círculo
+    this.radius =  CTXW / (200) ; // radio del círculo
     this.color = getRandomColor(); // función para obtener un color aleatorio
     this.tick = 0;
     this.isBig = isBig || false;
     this.basicBulletDuration =  basicBulletDuration || 250;
+
+    this.electrified = electrified;
+    this.electricBurbalas = new Image();
+    this.electricBurbalas.src = "/public/Imagenes/electricBurbalas1.png";F
+    this.electricBurbalas.frameX = 0;
+    this.electricBurbalas.frameY = 0;
+    this.electricBurbalasTick = 0;
   }
 
   draw() {
@@ -31,6 +38,19 @@ class BasicWeapon {
     this.ctx.stroke();
     this.ctx.closePath();
 
+    if(this.electrified){
+      this.ctx.drawImage(
+        this.electricBurbalas,
+        (this.electricBurbalas.frameX * this.electricBurbalas.width) / 5,
+        (this.electricBurbalas.frameY * this.electricBurbalas.height) / 2,
+        this.electricBurbalas.width / 5,
+        this.electricBurbalas.height / 2,
+        this.x - this.radius * 5,
+        this.y - this.radius * 5,
+        this.radius * 12,
+        this.radius * 12
+        );
+      }
   }
 
   move() {
@@ -46,6 +66,20 @@ class BasicWeapon {
     if (this.tick >= this.basicBulletDuration) {
       this.y = -200;
     }
+    this.electricBurbalasTick++;
+    if(this.electricBurbalasTick > 1){
+      this.electricBurbalas.frameX++
+      this.electricBurbalasTick = 0;
+    }
+    if(this.electricBurbalas.frameX > 5){
+      this.electricBurbalas.frameY ++
+      this.electricBurbalas.frameX = 0;
+    } 
+    if(this.electricBurbalas.frameY > 2){
+      this.electricBurbalas.frameY = 0;
+      this.electricBurbalas.frameX = 0;
+      this.electricBurbalasTick = 0;
+    } 
   }
 
   collides(objetivo) {

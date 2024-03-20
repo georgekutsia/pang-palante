@@ -25,12 +25,12 @@ const minionsTalking = {
     textoMinionsPianoPiano("miniBoss1-talk1");
     setTimeout(() => {
       document.getElementById("miniBoss1-talk1").style.opacity = "0";
-    }, 30000);
+    }, 3000);
 
     setTimeout(() => {
       document.getElementById("miniBoss1-talk1").style.display = "none";
     textoMinionsPianoPiano("miniBoss1-talk2");
-    }, 30500);
+    }, 3050);
 
     setTimeout(() => {
       miniBoss1TalkImg$$.style.top = "-150px";

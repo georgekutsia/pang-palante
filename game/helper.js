@@ -451,18 +451,38 @@ toggleShop$$.addEventListener("click", ()=>{
 })
 
 
-game.player.hookImg$$.addEventListener("click", ()=>{
-  eventInfo(munHook$$)
+game.player.barImg$$.addEventListener("click", ()=>{
+  // eventInfo(munCadena$$)
+  showModal(`Barras <span style="font-style: italic; font-size: 18px;">Item para recoger</span> `, `&nbsp&nbsp Barras de lanzamiento <span style="color: blue; font-size: 20px;">M</span>, una  munición especial que resiste 2 impactos de burbujas de colores y es totalmente resistente a las burbujas oscuras. <br/>&nbsp&nbsp En la tienda puedes comprar tanto barras como mejorar su resistencia, para que aguante más impactos de burbujas de colores  <br/>&nbsp&nbsp Se pueden cargar las barras con el escudo eléctrico del personaje, haciéndolas más resistentes y que duren más tiempo. Cuanto más esté en contacto con la electricidad, mayor el efect.`).then(() => {
+    game.start();
+  });
+  return;
 })
 game.player.fireImg$$.addEventListener("click", ()=>{
-  eventInfo(munLanzallamas$$)
+  // eventInfo(munLanzallamas$$)
+  showModal(`Lanzallamas <span style="font-style: italic; font-size: 18px;">Item para recoger</span> `, `&nbsp&nbsp Cargas para el lanzallamas. Para usar el lanzallamas pulsa la tecla <span style="color: blue; font-size: 20px;">N</span>  <br/>&nbsp&nbsp El fuego puede quemar algunos objetos, pero no afecta a las plataformas. <br/>&nbsp&nbsp Al chocar con burbujas, las evapora poco a poco, evitando así que exploten en más burbujas pequeñas. Ten en cuenta también que cuanto más grande sea la burbuja, menos le afecta el daño del fuego.`).then(() => {
+    game.start();
+  });
+  return;
 })
-game.player.barImg$$.addEventListener("click", ()=>{
-  eventInfo(munCadena$$)
+game.player.hookImg$$.addEventListener("click", ()=>{
+  // eventInfo(munHook$$)
+  showModal(`Ganchos <span style="font-style: italic; font-size: 18px;">Munición</span>`, `&nbsp&nbsp Una munición especial que te impulsa hasta ciertos objetos sobre los que tiene la capacidad de engancharse <span style="color: blue; font-size: 20px;">J</span>. Úsalos para esquivar, moverte rápido y obtener ventaja en una gran variedad de situaciones.`).then(() => {
+    game.start();
+  });
+  return;
 })
 game.player.stepImg$$.addEventListener("click", ()=>{
-  eventInfo(munStep$$)
+  // eventInfo(munStep$$)
+  showModal(`Steps`, `&nbsp&nbsp Coloca  (<span style="color: blue; font-size: 20px;">O </span>a la izquierda - <span style="color: blue; font-size: 20px;">P</span> a la derecha) plataformas pequeñas y endebles, pero que puedes usar para llegar a lugares complicados. <br/>&nbsp&nbsp  Se romperán rápido, pero te pueden proteger en algunas situaciones y también se pueden activar con electricidad`).then(() => {
+    game.start();
+  });
+  return;
 })
 game.player.swordImg$$.addEventListener("click", ()=>{
   // eventInfo(munStep$$)
+  showModal(`Espada`, `&nbsp&nbsp Espada Bubujaglória. Un arma especial del G.C.A.M. que te permite hacer ataques físicos especiales. Si recoges varias espadas, se fusionan, aumentando sus habilidades. <br/>&nbsp&nbsp Pulsa <span style="color: blue; font-size: 20px;">R</span> para hacer un barrido superior. Empieza con un barrido a un lado y en la siguiente acción lo hará al otro lado. Si haces el barrido en salto, también te impulsa un poco más hacia arriba. <br/>&nbsp&nbsp Si pulsas  <span style="color: blue; font-size: 20px;">F</span> harás una estocada en la dirección del último movimiento. La estocada es un ataque poderoso que puede explotar varias burbujas a la vez al contacto y también te protege. <br/>&nbsp&nbsp A medida que golpeas con la espada, cargas su poder especial, y al cargar del todo podrás disparar  Burbalas adicionals con cada barrido. `).then(() => {
+    game.start();
+  });
+  return; 
 })

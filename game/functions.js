@@ -53,17 +53,6 @@ function invertImage(ctx, x, y, w, h, img) {
 }
 
 
-
-
-function flamethrowerItem(ctx, flamethrowers) {  
-  const flamethrower = new Flamethrower(ctx)
-  flamethrowers.push(flamethrower)
-}
-function machinegunItem(ctx, machineguns) {  
-  const machinegun = new Machinegun(ctx)
-  machineguns.push(machinegun)
-}
-
 function getRandomColor() {
   const red = Math.floor(Math.random() * 160);
   const green = Math.floor(Math.random() * 160);

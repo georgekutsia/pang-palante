@@ -20,6 +20,8 @@ class BubbleGatling {
     this.gatlingMoveSpeed = gatlingMoveSpeed || 0.5;
     this.bubbleWidth = bubbleWidth || 0;
     this.amountOsShoots = amountOsShoots || 30;
+    this.moving = true;
+    this.electrifEffect = true;
   }
 
   draw() {
@@ -43,12 +45,25 @@ class BubbleGatling {
   }
 
   checkPosition(player){
-    if( this.x !== player.x && this.x <player.x) this.vx = this.gatlingMoveSpeed
-    if( this.x !== player.x && this.x > player.x) this.vx = -this.gatlingMoveSpeed
-    if(this.x+ this.w/2 >= player.x + this.w/2  && this.x+ this.w/2 <= player.x + this.w/2 + 1 ) {
-      this.playerDetected = true;
-      if(this.bubbleArray.length <= this.amountOsShoots){
-        this.shootingBubble()
+    if(this.moving){
+      if( this.x !== player.x && this.x <player.x) this.vx = this.gatlingMoveSpeed
+      if( this.x !== player.x && this.x > player.x) this.vx = -this.gatlingMoveSpeed
+      if(this.x+ this.w/2 >= player.x + this.w/2  && this.x+ this.w/2 <= player.x + this.w/2 + 1 ) {
+        this.playerDetected = true;
+        if(this.bubbleArray.length <= this.amountOsShoots){
+          this.shootingBubble()
+        }
+      }
+    } else {
+      this.vx = 0;
+      this.vy = 0;
+      if(this.electrifEffect){
+        setTimeout(() => {
+            let shock = new ElectricShock(game.ctx, this.x - 20, this.y - 60, 100, 200, "/public/Imagenes/electricBurbalas1.png");
+            game.electricShocks.push(shock)
+          this.electrifEffect = true;
+          }, 2500);
+          this.electrifEffect = false;
       }
     }
   }

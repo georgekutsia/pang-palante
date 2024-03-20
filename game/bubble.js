@@ -97,7 +97,7 @@ class Bubble { //posX posY, ancho, alto, velX, velY, gravedad, buleano si hay gr
         this.isSlowGravity = false;
       }, this.slowGrvityDuration);
     }
-    if(this.replicateTick === replicationTime && this.w >=50){
+    if(this.replicateTick === replicationTime && this.w >= 90){
       const newBubble = new Bubble(this.ctx, this.x, this.y, this.w, this.h, -this.vx, this.vy, this.g, this.isSlowGravity, this.slowGrvityDuration, this.damage, this.willBounce, this.img.src);
       game.bubbles.push(newBubble);
       this.replicateTick = 0; // Reinicia el contador de replicación

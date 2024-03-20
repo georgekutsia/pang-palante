@@ -14,7 +14,7 @@ function levelBallItem3(ctx, levelBalls) {
 }
 
 function addBubble3(ctx, bubbles){ 
-  const bubble1 = new Bubble(ctx, 130, -50, CTXW / 7, CTXW / 7, -1)
+  const bubble1 = new Bubble(ctx, 130, -50, 110, 110, -1)
   bubbles.push(bubble1);
 }
 

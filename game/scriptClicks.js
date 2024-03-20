@@ -18,12 +18,29 @@ function handleClick(event) {
     return;
   }
   if (isPointInsideObject( game.player, clickX, clickY, )) {
-    showModal(`Natus`, ` <span style="font-weight: 900; font-size: 20px;">Munición</span> : <br/>   <span style="color:darkblue">  Carga de Lanzallamas -> ${game.player.fireAmount}</span> <span style="color:darkblue">  &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Munición barra -> ${game.player.barAmount}</span> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <span style="color:darkblue">  Carga eléctrica -> ${game.player.electroAmount}</span> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <span style="color:darkblue">   Cantidad de blasters -> ${Math.floor(game.player.megaFireBlasterAmount / 10)}</span> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <span style="color:darkblue">   Cantidad de ganchos -> ${game.player.hookAmount}</span>    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <span style="color:darkblue"> Plataformas disponibles -> ${game.player.stepsAmount}</span>  
-    <br/>  <span style="font-weight: 900; font-size: 20px;">Mejoras tecnológicas</span>: <br/> <span style="color:darkred">  Nivel del arma básica -> ${basicWeaponLevel} </span>  &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <span style="color:darkred">  Duración de escudos y del daño eléctico-> ${shieldsDuration/1000}s </span> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <span style="color:darkred"> Resistencia de las barras -> ${barLife}</span>   
-    <br/> <span style="font-weight: 900; font-size: 20px;">Armas especiales</span>: <br/>  <span style="color: red"> Espada Burbujaglória </span> <br/><span style="color: darkred">  Nivel -> ${game.player.swordLevel} </span>  &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp      <span style="color: darkred">   Fuerza de estocada    -> ${stabDuration/10} </span>   &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp      <span style="color: darkred">  Cantidad de barridos por acción    -> ${swordRounds} </span> 
-     <br/>  &nbsp&nbsp Manejando un gran arsenal de armas y poderes, debes derrotar las fuerzas que intentan invadir las islas, empezanado por las costas. <br/>&nbsp&nbsp La información sobre las armas principales está en el icono i de la izquierda. <br/>&nbsp&nbsp El resto de las indicaciones que salen sobre el jugador es para ayudarte visualmente a ver si puedes esquivar <<  >> , si tienes cargas eléctricas, poténcias ígneas, armas de combate cuerpo a cuerpo equipadas etc.  `).then(() => {
-      game.start();
-    });
+    if(game.player.electricShieldIsActive){
+      showModal(`Electric Shield`, ` El escudo eléctrico, a parte de protegerte del daño, tiene otras propiedades adicionales muy poderosas: 
+      <br/><span style="font-weight: 400; font-size: 20px;"> 1) </span> Si las burbujas de colores caen sobre el escudo, quedan electrificadas y encojen con el tiempo;;
+      <br/><span style="font-weight: 400; font-size: 20px;"> 2) </span> Eres inmune a algunas trampas de suelo;
+      <br/><span style="font-weight: 400; font-size: 20px;"> 3) </span> Las burbalas disparadas a través del escudo eléctrico atraviesan dañando las burbujas de colores;
+      <br/><span style="font-weight: 400; font-size: 20px;"> 4) </span> Las burbalas disparadas a través del escudo eléctrico dañan y desconectan ${electrifiedGatlingTime/1000}s las Gatlings;
+      <br/><span style="font-weight: 400; font-size: 20px;"> 5) </span> Puedes activar algunas plataformas <span style="font-style: italic; font-size: 14px;"> (las que tienen reborde rojo) </span> y también los Steps que creas;
+      <br/><span style="font-weight: 400; font-size: 20px;"> 5) </span> Electrificar las Barras las hará  más anchas y resistentes cuanto más los electrifiques;
+      <br/><span style="font-weight: 400; font-size: 20px;"> 5) </span> Las escaleras pueden ser electrificadas y crecerán poco a poco;
+      `).then(() => {
+        game.start();
+      });
+    } else {
+
+      showModal(`Natus`, ` <span style="font-weight: 900; font-size: 20px;">Munición</span> : <br/>   <span style="color:darkblue">  Carga de Lanzallamas -> ${game.player.fireAmount}</span> <span style="color:darkblue">  &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Munición barra -> ${game.player.barAmount}</span> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <span style="color:darkblue">  Carga eléctrica -> ${game.player.electroAmount}</span> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <span style="color:darkblue">   Cantidad de blasters -> ${Math.floor(game.player.megaFireBlasterAmount / 10)}</span> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <span style="color:darkblue">   Cantidad de ganchos -> ${game.player.hookAmount}</span>    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <span style="color:darkblue"> Plataformas disponibles -> ${game.player.stepsAmount}</span>  
+      <br/>  <span style="font-weight: 900; font-size: 20px;">Mejoras tecnológicas</span>: <br/> <span style="color:darkred">  Nivel del arma básica -> ${basicWeaponLevel} </span>  &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <span style="color:darkred">  Duración de escudos y del daño eléctico-> ${shieldsDuration/1000}s </span> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <span style="color:darkred"> Resistencia de las barras -> ${barLife}</span>   
+      <br/> <span style="font-weight: 900; font-size: 20px;">Armas especiales</span>: 
+      <br/>  <span style="color: red"> Espada Burbujaglória </span> <br/><span style="color: darkred">  Nivel -> ${game.player.swordLevel} </span>  &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp      <span style="color: darkred">   Fuerza de estocada    -> ${stabDuration/10} </span>   &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp      <span style="color: darkred">  Cantidad de barridos por acción    -> ${(Math.abs(swordRounds))} </span> 
+      <br/>  &nbsp&nbsp Manejando un gran arsenal de armas y poderes, debes derrotar las fuerzas que intentan invadir las islas, empezanado por las costas. <br/>&nbsp&nbsp La información sobre las armas principales está en el icono i de la izquierda. <br/>&nbsp&nbsp El resto de las indicaciones que salen sobre el jugador es para ayudarte visualmente a ver si puedes esquivar <<  >> , si tienes cargas eléctricas, poténcias ígneas, armas de combate cuerpo a cuerpo equipadas etc.  
+      <br/> &nbsp&nbsp  El escudo eléctrico (<span style="color: blue; font-size: 20px;">H</span>) tiene muchas propiedades que mejoran tanto los disparos básicos, como algunas otras habilidades. Las Burbalas electrificadas son las únicas capaces de afectar a las Gatlings.  Pulsa sobre el escudo mientras está activo para ver más información`).then(() => {
+        game.start();
+      });
+    }
     return;
   }
 
@@ -60,7 +77,7 @@ function handleClick(event) {
 
   // Comprueba si el clic fue en alguna barra
   if (isPointInside(game.bars, clickX, clickY)) {
-        showModal(`Barras <span style="font-style: italic; font-size: 18px;">Item para recoger</span> `, `&nbsp&nbsp Barras de lanzamiento, una  munición especial que resiste 2 impactos de burbujas de colores y es totalmente resistente a las burbujas oscuras. <br/>&nbsp&nbsp En la tienda puedes comprar tanto barras como mejorar su resistencia, para que aguante más impactos de burbujas de colores  <br/>&nbsp&nbsp Se pueden cargar las barras con el escudo eléctrico del personaje, haciéndolas más resistentes y que duren más tiempo. Cuanto más esté en contacto con la electricidad, mayor el efect.`).then(() => {
+    showModal(`Barras <span style="font-style: italic; font-size: 18px;">Item para recoger</span> `, `&nbsp&nbsp Barras de lanzamiento <span style="color: blue; font-size: 20px;">M</span>, una  munición especial que resiste 2 impactos de burbujas de colores y es totalmente resistente a las burbujas oscuras. <br/>&nbsp&nbsp En la tienda puedes comprar tanto barras como mejorar su resistencia, para que aguante más impactos de burbujas de colores  <br/>&nbsp&nbsp Se pueden cargar las barras con el escudo eléctrico del personaje, haciéndolas más resistentes y que duren más tiempo. Cuanto más esté en contacto con la electricidad, mayor el efect.`).then(() => {
       game.start();
     });
     return;
@@ -134,7 +151,13 @@ function handleClick(event) {
     return;
   }
   if (isPointInside(game.hooks, clickX, clickY)) {
-        showModal(`Ganchos <span style="font-style: italic; font-size: 18px;">Item para recoger</span> `, `&nbsp&nbsp  Obtienes 2 ganchos que se activan con <span style="color: blue; font-size: 20px;">J</span> y te lleva hasta el objeto a la que se haya enganchado. A veces necesitas un salto para propulsarte mejor <br/>&nbsp&nbsp `).then(() => {
+    showModal(`Ganchos <span style="font-style: italic; font-size: 18px;">Munición</span>`, `&nbsp&nbsp Una munición especial que te impulsa hasta ciertos objetos sobre los que tiene la capacidad de engancharse <span style="color: blue; font-size: 20px;">J</span>. Úsalos para esquivar, moverte rápido y obtener ventaja en una gran variedad de situaciones.`).then(() => {
+      game.start();
+    });
+    return;
+  }
+  if (isPointInside(game.steps, clickX, clickY)) {
+    showModal(`Steps`, `&nbsp&nbsp Coloca  (<span style="color: blue; font-size: 20px;">O </span>a la izquierda - <span style="color: blue; font-size: 20px;">P</span> a la derecha) plataformas pequeñas y endebles, pero que puedes usar para llegar a lugares complicados. <br/>&nbsp&nbsp  Se romperán rápido, pero te pueden proteger en algunas situaciones y también se pueden activar con electricidad`).then(() => {
       game.start();
     });
     return;
@@ -252,6 +275,7 @@ function sword(platforms, x, y) {
 canvas.addEventListener('click', swordClick);
 
 function handleSwordClick() {
+  
   let intervalId = setInterval(() => {
     globalAlphaForSword += 0.1;
     if (globalAlphaForSword >= 1) {
@@ -268,6 +292,7 @@ function handleSwordClick() {
       }
     }, 50); // 5
   }, 3000);
+
 }
 
 // Manejar el clic de la espada cuando se hace clic en el canvas
@@ -282,7 +307,13 @@ function swordClick(event) {
     clickY >= 5 &&
     clickY <= 100
   ) {
-    console.log("blabla")
+    if(game.player.swordEquipped){
+      showModal(`Espada Burbujaglória`, `&nbsp&nbsp A medida que haces daño con la espada, se va cargando su poder especial. Dependiendo del nivel de la espada, el poder especial puede hacer de todo, durar más e incluso cargarse más rápido. <br/> &nbsp&nbsp
+        Actualmente cargado   <span style="font-weight: 500; font-size: 20px; color: red"> ${game.player.swordPowerUp}  </span> de <span style="font-weight: 500; font-size: 20px; color: darkred"> ${powerToGetForSword}  </span>  `).then(() => {
+        game.start();
+      });
+      return; 
+    }
     handleSwordClick(); // Llama a la función para manejar el clic de la espada
   }
 }
