@@ -20,7 +20,7 @@ function addBubble5(ctx, bubbles){
 
 function addPlatforms5(ctx, platforms, healings, boxes, stairs,bars, auras){
     const platform1 = new Platform(ctx, 10, CTXH-230, 135, 15, "../public/Imagenes/obstacles/platformSolid2.png", false, false, true);
-    const platform2 = new Platform(ctx, 200, CTXH-220, 235, 15, "../public/Imagenes/obstacles/platformSolid3.png", false, false, true);
+    const platform2 = new Platform(ctx, 200, CTXH-220, 235, 15, "../public/Imagenes/obstacles/platformSolid3.png", true, false, true);
     const platform3 = new Platform(ctx, 250, CTXH-110, 135, 15, "../public/Imagenes/obstacles/platformSolid3.png", false, false, true);
     const platform5 = new Platform(ctx, CTXW-285, CTXH - 160, 195, 15, "../public/Imagenes/obstacles/platformSolid3.png", false, true, true);
     const platform6 = new Platform(ctx, CTXW-535, CTXH - 250, 195, 15, "../public/Imagenes/obstacles/platformSolid3.png", false, false, true);

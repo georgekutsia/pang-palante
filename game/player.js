@@ -47,6 +47,7 @@ class Player {
     this.electricShieldImg.frame = 0;
     this.electricShieldIsActive = false;
     this.electricShieldImgTick = 0;
+    this.electricBurbalasIsActive = false;
     this.clickedH = false;
     this.shootUp = true;
     this.canClimb= false;
@@ -70,16 +71,13 @@ class Player {
     this.barItem.src = "/public/Imagenes/barItem.png";
     this.swordBack = new Image();
     this.swordBack.src = "/public/Imagenes/swordBack.png";
-    
     this.swordCharging = new Image();
     this.swordCharging.src = "/public/Imagenes/espadaCargando2.png";
-    
     this.swordLeftStab = new Image();
     this.swordLeftStab.src = "/public/Imagenes/dodgeLeftSwordImg.png";
     this.swordRightStab = new Image();
     this.swordRightStab.src = "/public/Imagenes/dodgeRightSwordImg.png";
     this.swordSparkleActive = true;
-    
     this.swingSwordState = true;
     this.swordEquipped = false;
     this.swordLevel = 0;
@@ -407,7 +405,7 @@ handleRightDodge = (event) =>{ //*
     if(this.electroAmount >=1){
       this.charger.draw(this.x + 25, this.y + 30, this.electroAmount/1.5, 39, 38, "blue", "green")
     }
-    if(this.electroAmount <=0) {this.electricShieldIsActive = false; H = 0}
+    if(this.electroAmount <=0) {this.electricShieldIsActive = false; H = 0; this.electricBurbalasIsActive = false;}
     if(this.electroAmount > 1) H = 72
     if(playerIsImmune){
       this.fading++
@@ -464,6 +462,10 @@ handleRightDodge = (event) =>{ //*
         this.extraH =  0;
       this.itemJustTaken = false;
     }
+
+
+
+
     this.itemTakens.forEach((sparkle) => {sparkle.draw();}); // paso 3: dibujo cada bullet que se dispare
     this.swordSparkles.forEach((swo) => {swo.draw();}); // paso 3: dibujo cada bullet que se dispare
   }
@@ -478,6 +480,8 @@ handleRightDodge = (event) =>{ //*
       jumpHeight  = -16;
       playerSpeed = 8;
     }
+
+
     // this.canClimb ? W = 87 : 0;
     if(!finalBoss){
       this.velocidadX = this.vx += this.r;
@@ -573,8 +577,8 @@ handleRightDodge = (event) =>{ //*
   this.itemTakens.forEach((sparkle) => {sparkle.move();}); // paso 3: dibujo cada bullet que se dispare
   this.swordSparkles.forEach((sparkle) => {sparkle.move();}); // paso 3: dibujo cada bullet que se dispare
 
-  if(this.swordPowerUp >=20){
-    this.swordPowerUp = 20;
+  if(this.swordPowerUp >= powerToGetForSword){
+    this.swordPowerUp = powerToGetForSword;
     this.swordPower1 = true;
     this.swordCooldown = 5500;
     if(this.swordSparkleActive){
@@ -749,10 +753,12 @@ handleRightDodge = (event) =>{ //*
     if(key === H){
       if(this.clickedH === false){
         this.electricShieldIsActive = true;
+        this.electricBurbalasIsActive = true;
         this.clickedH = true;
         electroSoundOn.play()
       } else if(this.clickedH === true){
         this.electricShieldIsActive = false;
+        this.electricBurbalasIsActive = false;
         this.clickedH = false;
         this.electroAmount = this.electroAmount
       }

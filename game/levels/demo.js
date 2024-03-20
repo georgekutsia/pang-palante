@@ -247,9 +247,9 @@ function addLever(ctx, levers){
 }
 
 
-// itemsDemo(this.ctx, this.stairs, this.bubbles, this.darkBubbles, this.spikes, this.gatlings, this.hooks, this.flamethrowers, this.bars, this.boxes, this.blasters, this.electros, this.coins, this.healings, this.platforms, this.chests, this.swords, this.auras)
+// itemsDemo(this.ctx, this.stairs, this.bubbles, this.darkBubbles, this.spikes, this.gatlings, this.hooks, this.flamethrowers, this.bars, this.boxes, this.blasters, this.electros, this.coins, this.healings, this.platforms, this.chests, this.swords, this.auras, this.steps)
 
-function itemsDemo(ctx, stairs, bubbles, darkBubbles, spikes, gatlings, hooks, flamethrowers, bars, boxes, blasters, electros, coins, healings, platforms, chests, swords, auras){
+function itemsDemo(ctx, stairs, bubbles, darkBubbles, spikes, gatlings, hooks, flamethrowers, bars, boxes, blasters, electros, coins, healings, platforms, chests, swords, auras, steps){
 
     const platform1 = new Platform(ctx, 50, CTXH-120, 160, 15, "../public/Imagenes/obstacles/platformSolid1.png", false, false, true,);
     const platform2 = new Platform(ctx, CTXW/2 + 100, CTXH-140, 150, 15, "../public/Imagenes/obstacles/platformSolid1.png", false, false, true,);
@@ -295,4 +295,7 @@ function itemsDemo(ctx, stairs, bubbles, darkBubbles, spikes, gatlings, hooks, f
     let heal1 =  new Healing(ctx, CTXW-290, CTXH - 200,)
     let heal2 =  new Healing(ctx, CTXW-330, CTXH - 200,)
     healings.push(heal, heal1, heal2)
+
+    let ste = new Steps(ctx, 350, 600)
+    steps.push(ste)
 }

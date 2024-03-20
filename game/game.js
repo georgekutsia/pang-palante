@@ -38,10 +38,12 @@ class Game {
     this.coins = []; 
     this.hooks = []; 
     this.electros = []; 
+    this.electros = []; 
     this.swords = []; 
     this.miniBoses = []; 
     this.explosions = []; 
     this.chests = []; 
+    this.electricShocks = []; 
     // this.totalCannonBubbleCount = 0;
     this.changingLevelSoChangeImage = true;
     this.dispached = true;
@@ -110,30 +112,20 @@ class Game {
 
   start() {
     if(!this.gameStarted){
-      if (GAMELEVEL === 15) {
+      if (GAMELEVEL === 1) {
         // addMiniboss1(this.ctx, this.levelBalls);
         // miniBossTalk1.play();
         //   let bo = new MiniBoss1(this.ctx, CTXW - 340, -50, CTXW/4, CTXW/4, 0, 0, 95, true, true, true, "/public/Imagenes/minions/MiniBoss1.webp");
         //   this.miniBoses.push(bo);
         //   minibossArrivingShip.play();
-          this.dispached = false;
-
-          itemsDemo(this.ctx, this.stairs, this.bubbles, this.darkBubbles, this.spikes, this.gatlings, this.hooks, this.flamethrowers, this.bars, this.boxes, this.blasters, this.electros, this.coins, this.healings, this.platforms, this.chests, this.swords, this.auras)
-
-        // let swa  =  new Sword(this.ctx, 500, 500)
-        // let swa1  =  new Sword(this.ctx, 600, 500)
-        // let swa2  =  new Sword(this.ctx, 700, 500)
-        // this.swords.push(swa, swa1, swa2)
+        //   this.dispached = false;
 
         // inftroGame1();
         // setTimeout(() => {
         // level1(this.ctx, this.bubbles, this.platforms, this.levelBalls, this.boxes)
-          // let sta =  new Stair(this.ctx, 200, CTXH - 150, 100, 150)
-          // let sta1 =  new Stair(this.ctx, 600, CTXH - 150, 100, 150)
-          // this.stairs.push(sta, sta1)
         // }, 15000);
         // setTimeout(() => {
-          // addBubble1(this.ctx, this.bubbles)
+        //   addBubble1(this.ctx, this.bubbles)
         // }, 25000);
       }
       if(GAMELEVEL === 100) {
@@ -143,6 +135,7 @@ class Game {
         infoIntro1()
         this.background.img.src = "../public/Imagenes/background/backgroundTraining4.webp";
         setTimeout(() => {
+          addDemo1Electro(this.ctx,  this.platforms, this.electros)
           addDemo1Electro(this.ctx,  this.platforms, this.electros)
           this.background.img.src = "../public/Imagenes/background/backgroundTraining0.webp";
         }, 10500);
@@ -205,6 +198,7 @@ class Game {
     this.coins = this.coins.filter((e) => e.isVisible()); //elimina cada obstáculo que ya no es visible y vacía el array
     this.hooks = this.hooks.filter((e) => e.isVisible()); //elimina cada obstáculo que ya no es visible y vacía el array
     this.electros = this.electros.filter((e) => e.isVisible()); //elimina cada obstáculo que ya no es visible y vacía el array
+    this.electricShocks = this.electricShocks.filter((e) => e.isVisible()); //elimina cada obstáculo que ya no es visible y vacía el array
     this.swords = this.swords.filter((e) => e.isVisible()); //elimina cada obstáculo que ya no es visible y vacía el array
     this.chests = this.chests.filter((e) => e.isVisible()); //elimina cada obstáculo que ya no es visible y vacía el array
     this.miniBoses = this.miniBoses.filter((e) => e.isVisible()); //elimina cada obstáculo que ya no es visible y vacía el array
@@ -238,6 +232,7 @@ class Game {
     this.coins.forEach((e) => e.draw()); //dibuja cada obstáculo
     this.hooks.forEach((e) => e.draw()); //dibuja cada obstáculo
     this.electros.forEach((e) => e.draw()); //dibuja cada obstáculo
+    this.electricShocks.forEach((e) => e.draw()); //dibuja cada obstáculo
     this.chests.forEach((e) => e.draw()); //dibuja cada obstáculo
     this.swords.forEach((e) => e.draw()); //dibuja cada obstáculo
     this.miniBoses.forEach((e) => e.draw()); //dibuja cada obstáculo
@@ -270,6 +265,7 @@ class Game {
     this.coins.forEach((e) => e.move()); //mueve los obstáculos
     this.hooks.forEach((e) => e.move()); //mueve los obstáculos
     this.electros.forEach((e) => e.move()); //mueve los obstáculos
+    this.electricShocks.forEach((e) => e.move()); //mueve los obstáculos
     this.swords.forEach((e) => e.move()); //mueve los obstáculos
     this.chests.forEach((e) => e.move()); //mueve los obstáculos
     this.miniBoses.forEach((e) => e.move()); //mueve los obstáculos
@@ -317,16 +313,17 @@ class Game {
         })
     })
     this.stairs.forEach((stair) => {//player con stair
-      if(this.player.electricShieldIsActive){
-        stair.y -= 0.1;
-        stair.h += 0.1;
-      }
+
       if (stair.collidesTop(this.player)) {
         this.player.vy = 0;
         this.player.y = stair.y - this.player.h;
         jumpDownDistance = 3;
         W = 0;
         this.player.g = 2;
+        if(this.player.electricShieldIsActive){
+          stair.y -= 0.1;
+          stair.h += 0.1;
+        }
       }
       if (stair.collidesSides(this.player)) {
         this.player.vy = 0;
@@ -344,6 +341,10 @@ class Game {
         if(this.player.vy != 0){
           stairSound.play()
         }
+        if(this.player.electricShieldIsActive){
+          stair.y -= 0.1;
+          stair.h += 0.1;
+        }
       } else {
         // this.player.canClimb = false;    // esto impide que suba a las otras esfcaleras, solo a la ultima del array
         return true;
@@ -359,6 +360,7 @@ class Game {
     this.miniBoses.forEach((e) => {
       checkBubbleCollision(e.bubbleArray, this.player, this.puffBubbles, this.ctx, this.platforms, this.bouncers, this.boxes)
     })
+
 
 
     this.miniBoses.forEach((e) => {e.explosiveArray.forEach((exp) => { if(exp.collides(this.player)){
@@ -424,9 +426,8 @@ class Game {
     bossFireCollision(this.miniBoses, this.player.bulletBarArray)
     bossFireCollision(this.miniBoses, this.player.bulletPlatformArray)
 
-
-
     checkDarkBubbleCollision(this.darkBubbles, this.player, this.platforms, this.bubbles, this.puffBubbles, this.bouncers)
+    swordCollision(this.platforms, this.player, this.boxes)
 
     //weaponBar..weaponBar..weaponBar..weaponBar..
     //weaponBar..weaponBar..weaponBar..weaponBar..
@@ -487,7 +488,24 @@ class Game {
         } else return true;
       });
     });
-    swordCollision(this.platforms, this.player, this.boxes)
+console.log(this.gatlings)
+    this.gatlings.forEach((gatling) => {//gatling con bullets normales
+      this.player.bulletArray.forEach((bullet) => {
+        if (bullet.collides(gatling) && bullet.electrified) {
+            let shock = new ElectricShock(this.ctx, gatling.x - 20, gatling.y - 100, 100, 200);
+            this.electricShocks.push(shock)
+            gatling.moving = false;
+            setTimeout(() => {
+              gatling.moving = true;
+              gatling.vx = 0;
+            }, electrifiedGatlingTime);
+              bullet.y = -300;
+          return true;
+        } else return true;
+      });
+    });
+
+
 
 
     this.platforms.forEach((bubble) => {//  bubble con bullet
@@ -970,9 +988,10 @@ if(this.player.wasNotDamaged) {
         } else if (GAMELEVEL === 7) {
           this.background.img.src ="/public/Imagenes/background/background7.jpeg";
         level7( this.ctx, this.bubbles, this.platforms,this.bouncers, this.stairs,  this.healings, this.bars, this.boxes, this.spikes,this.levelBalls, this.stairs);
+          this.player.x = 100;
         } else if (GAMELEVEL === 8) {
           this.background.img.src ="/public/Imagenes/background/background8.jpeg";
-        level8( this.ctx, this.bubbles, this.platforms,this.bouncers, this.stairs,  this.healings, this.bars, this.boxes,  this.levelBalls,this.spikes, this.levers);
+        level8( this.ctx, this.bubbles, this.platforms,this.bouncers, this.stairs, this.bars, this.boxes,  this.levelBalls,this.spikes, this.levers, this.healings,);
           setTimeout(() => {
             bubbles4popup(this.ctx, this.bubbles);
             }, 40000);
@@ -1014,15 +1033,18 @@ if(this.player.wasNotDamaged) {
             addMiniboss1(this.ctx, this.levelBalls);
             miniBossTalk1.play();
             setTimeout(() => {
-            let bo = new MiniBoss1(ctx, CTXW - 340, -50, CTXW/4, CTXW/4, 0, 0, 15, true, true, true, "/public/Imagenes/minions/MiniBoss1.webp");
+            let bo = new MiniBoss1(this.ctx, CTXW - 340, -50, CTXW/4, CTXW/4, 0, 0, 15, true, true, true, "/public/Imagenes/minions/MiniBoss1.webp");
             this.miniBoses.push(bo);
             minibossArrivingShip.play();
             this.dispached = false;
           }, 6100);
-        }
+        } else if(GAMELEVEL === 17){
+          alert("ganaste. a comer pipas!")
+        } 
       }, 3000);
     }, 1000);
-  } else{
+  } 
+  else{
     this.changingLevel = true;
     this.indiceAleatorio = Math.floor(Math.random() * this.frases.length);
     GAMELEVEL += 1;
@@ -1260,6 +1282,7 @@ if(this.player.wasNotDamaged) {
     this.stairs = [];
     this.blasters = [];
     this.spikes = [];
+    this.auras = []; 
     this.explosions = [];
     this.bars = [];
     this.boxes= [];

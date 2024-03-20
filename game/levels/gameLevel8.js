@@ -1,12 +1,13 @@
 
-function level8(ctx, bubbles, platforms,bouncers, stairs,healings, bars, boxes,  levelBalls, spikes, levers){
-  addPlatforms8(ctx, platforms, healings, boxes, stairs, bars)
+function level8(ctx, bubbles, platforms,bouncers, stairs, bars, boxes,  levelBalls, spikes, levers, healings){
+  addPlatforms8(ctx, platforms, boxes, stairs, bars)
   levelBallItem8(ctx, levelBalls)
   addBubble8(ctx, bubbles)
   addBouncer8(ctx,bouncers)
   addSpikes8(ctx, spikes)
   boxItem8(ctx, boxes)
   addLever8(ctx, levers)
+  addHealer8(ctx, healings)
 }
 
 function levelBallItem8(ctx, levelBalls) {  
@@ -60,6 +61,12 @@ function boxItem8(ctx, boxes) {
 function addLever8(ctx, levers){
   let lever = new Lever(ctx, 550, 130)
   levers.push(lever)
+}
+function addHealer8(ctx, healers){
+  let heal1 = new Healing(ctx, 200, 300)
+  let heal2 = new Healing(ctx, 480, 130)
+  let heal3 = new Healing(ctx, CTXW-40, 130)
+  healers.push(heal1, heal2, heal3)
 }
 
 

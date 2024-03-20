@@ -1,5 +1,3 @@
-
-
 function checkBubbleCollision(bubbles, player, puffBubbles, ctx, platforms, bouncers, boxes){
   bubbles.forEach((bubble) => {//player con bubble
     if(bubble.collides(player)) {
@@ -54,7 +52,11 @@ function checkBubbleCollision(bubbles, player, puffBubbles, ctx, platforms, boun
           bubblePuff(bubble, puffBubbles, bubbles, ctx);
           bubblePopSound1.play();
         }
-        return false;
+        if(bullet.electrified){
+          return true
+        } else {
+          return false;
+        }
       } else return true;
     });
   });
@@ -157,8 +159,6 @@ function checkBubbleCollision(bubbles, player, puffBubbles, ctx, platforms, boun
   });
 }
 
-
-
 function bouncerPlayerCollision(player, bouncer){
   if (player.y +  player.h/2 <= bouncer.y   ) {
     if(bouncer.canBounce){
@@ -260,8 +260,6 @@ function checkBarCollisions(bulletBarArray, obstacles, collisionHandler, player)
   });
 }
 
-
-
 function checkHookCollisions(hookArray, obstacles, player) {
   hookArray.forEach((hook) => {
     obstacles.forEach((obstacle) => {
@@ -286,12 +284,6 @@ function checkHookCollisions(hookArray, obstacles, player) {
   });
 }
 
-
-
-
-
-//miniboses fire
-
 function bossFireCollision (miniBoses, object){
   miniBoses.forEach((e) => {e.explosiveArray.forEach((exp) => {
     object.forEach((ob) => {
@@ -304,9 +296,6 @@ function bossFireCollision (miniBoses, object){
       }})})
     })
   }
-
-
-
 
   function checkDarkBubbleCollision(darkBubbles, player, platforms, bubbles, puffBubbles, bouncers){
     darkBubbles.forEach((bubble) => {//player darkbubble
@@ -383,16 +372,11 @@ function bossFireCollision (miniBoses, object){
     });
   }
 
-  
   function losingMoney (player, amount){
     coins -= amount
     player.life.isLosing = true;
     player.life.amountOfGainedCoins = amount;
   }
-
-
-
-
 
   function swordCollision(platforms, player, boxes){
     platforms.forEach((platform) => {//sword con bullets normales

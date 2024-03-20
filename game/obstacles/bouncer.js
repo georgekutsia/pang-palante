@@ -19,7 +19,6 @@ class Bouncer {
   move() {
     this.x += this.vx;
     this.y += this.vy;
-
   }
 
   isVisible() {
