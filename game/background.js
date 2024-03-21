@@ -29,7 +29,6 @@ class Background {
     } else{
       this.x = 0;
       this.y = 0;
-    this.img.src = "/public/Imagenes/background/background1.jpg";
     }
   }
 }

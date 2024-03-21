@@ -129,23 +129,20 @@ class Game {
         // }, 25000);
       }
       if(GAMELEVEL === 100) {
+        
         levelInfinite( this.ctx, this.bubbles, this.platforms, this.bouncers, this.spikes, this.stairs, this.flamethrowers, this.machineguns, this.healings, this.auras, this.boxes, this.blasters, this.levelBalls, this.gatlings, this.darkBubbles,)
       }
       if(GAMELEVEL === 1987 ) {
-        infoIntro1()
-        this.background.img.src = "../public/Imagenes/background/backgroundTraining4.webp";
-        setTimeout(() => {
-          addDemo1Electro(this.ctx,  this.platforms, this.electros)
-          addDemo1Electro(this.ctx,  this.platforms, this.electros)
-          this.background.img.src = "../public/Imagenes/background/backgroundTraining0.webp";
-        }, 10500);
-        setTimeout(() => {
+
+        // infoIntro1()
+        // this.background.img.src = "../public/Imagenes/background/backgroundTraining4.webp";
+        // setTimeout(() => {
+        //   addDemo1Electro(this.ctx,  this.platforms, this.electros)
+        //   this.background.img.src = "../public/Imagenes/background/backgroundTraining0.webp";
+        // }, 10500);
+        // setTimeout(() => {
           addDemo1(this.ctx, this.platforms)
-        }, 30000);
-
-
-
-
+        // }, 30000);
 
       }
     }
@@ -488,7 +485,6 @@ class Game {
         } else return true;
       });
     });
-console.log(this.gatlings)
     this.gatlings.forEach((gatling) => {//gatling con bullets normales
       this.player.bulletArray.forEach((bullet) => {
         if (bullet.collides(gatling) && bullet.electrified) {
@@ -1067,7 +1063,7 @@ if(this.player.wasNotDamaged) {
       this.player.life.total = 3;
       GAMELEVEL<= 1800 ? this.gameOver() : this.demoOver(); 
     }
-      if (this.bubbles.length <= 0 && this.gatlings.every(gat => gat.bubbleArray.length <= 0) && this.cannons.every(can => can.bubbleArray.length <= 0) && this.levers.every(lev =>lev.activated)&& this.miniBoses.length <= 0) {
+      if (this.bubbles.length <= 0 && this.gatlings.every(gat => gat.bubbleArray.length <= 0) && this.levers.every(lev =>lev.activated)&& this.miniBoses.length <= 0) {
         this.levelBalls.forEach(e => (e.img.src = e.img.newSrc));
         this.levelBalls.forEach(e => (e.winCondition = true));
       } else {this.levelBalls.forEach(e => (e.winCondition = false))}
@@ -1085,11 +1081,13 @@ if(this.player.wasNotDamaged) {
         }
       }
       if(demoPhase === 2 && this.levers.every(lever =>lever.activated === true)){
-        this.levelBalls = [];
+        setTimeout(() => {
+          this.levelBalls = [];
           this.emptyAllGameArrays()
-        this.emptyAllPlayerArrays()
+          this.emptyAllPlayerArrays()
+        addDemo3(this.ctx, this.platforms, this.levers, this.bubbles, this.levelBalls, this.boxes)
+        }, 1000);
           demoFunctions.mostrarVariosTextosPocoAPoco3()
-          addDemo3(this.ctx, this.platforms, this.levers, this.bubbles, this.levelBalls)
           demoPhase = 3;
       }
       if(demoPhase === 4){
@@ -1106,13 +1104,6 @@ if(this.player.wasNotDamaged) {
         this.emptyAllPlayerArrays()
         demoFunctions.mostrarVariosTextosPocoAPoco5()
         addDemo5(this.ctx, this.platforms, this.levers, this.levelBalls,this.boxes, this.darkBubbles, this.spikes, this.healings)
-      //   this.totalCannonBubbleCount = this.cannons.reduce((total, cannon) => {
-      //     if (cannon.bubbleArray.length > 0) {
-      //         return total + cannon.bubbleArray.length;
-      //     } else {
-      //         return total;
-      //     }
-      // }, 0);
         demoPhase = 7;
       }
       if(demoPhase === 8){
@@ -1122,20 +1113,7 @@ if(this.player.wasNotDamaged) {
           addDemo6(this.ctx, this.platforms, this.levers, this.levelBalls,this.boxes, this.gatlings, this.cannons);
           demoPhase = 9;
       }
-      if(demoPhase === 9){
-      //   this.totalCannonBubbleCount = this.cannons.reduce((total, cannon) => {
-      //     if (cannon.bubbleArray.length > 0) {
-      //         return total + cannon.bubbleArray.length;
-      //     } else {
-      //         return total;
-      //     }
-      // }, 0);
-      // if(this.totalCannonBubbleCount >=10){
-      //   this.cannons.forEach((cannon) => cannon.shootInterval = 30000)
-      // } else {
-      //   this.cannons.forEach((cannon) => cannon.shootInterval = 15000)
-      // }
-      }
+
       if(demoPhase === 10){
         this.levelBalls = [];
         this.emptyAllGameArrays()
@@ -1233,13 +1211,12 @@ if(this.player.wasNotDamaged) {
     }, 500);
     setTimeout(() => {
     demoOverBackground$$.style.display = 'none';
-      
       if(demoPhase < 5){
         this.levelBalls = [];
         demoFunctions.mostrarVariosTextosPocoAPoco3()
-        addDemo3(this.ctx, this.platforms, this.levers, this.bubbles, this.levelBalls)
+        addDemo3(this.ctx, this.platforms, this.levers, this.bubbles, this.levelBalls, this.boxes)
         demoPhase = 3;
-      } else {
+      } else if(demoPhase >=5){
         this.levelBalls = [];
         demoFunctions.mostrarVariosTextosPocoAPoco5()
         addDemo5(this.ctx, this.platforms, this.levers, this.levelBalls,this.boxes, this.darkBubbles, this.spikes, this.healings)

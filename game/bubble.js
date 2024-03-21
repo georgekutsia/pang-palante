@@ -27,6 +27,8 @@ class Bubble { //posX posY, ancho, alto, velX, velY, gravedad, buleano si hay gr
     this.willBounce = willBounce;
     this.replicateTick = 0;
     this.hitAmount = 0;
+    this.timeTick = 0;
+    this.repTimeInSeconds = replicationSeconds
   }
   draw() {
     // Dibujar el círculo detrás de la burbuja
@@ -54,6 +56,15 @@ class Bubble { //posX posY, ancho, alto, velX, velY, gravedad, buleano si hay gr
         this.h 
       );
     }
+    if(this.w >= 101){
+      this.ctx.fillStyle = "black"
+      this.timeTick++
+      if(this.timeTick >= 60){
+        this.repTimeInSeconds --;
+        this.timeTick = 0;
+      }
+      this.ctx.fillText(`${(this.repTimeInSeconds)}`, this.x + this.w/3 , this.y + this.h/1.5, 40, 20);
+    }
   }
   move() {
     this.vy += this.g;  //efecto gravedad, aumenta la velocidad a medida que baja
@@ -80,7 +91,6 @@ class Bubble { //posX posY, ancho, alto, velX, velY, gravedad, buleano si hay gr
     if(this.isElectrified){
       this.w -= (0.25 + electricShieldlevel/150) - this.isElectrifiedButBig
       this.h -= (0.25 + electricShieldlevel/150) - this.isElectrifiedButBig
-      console.log(this.w)
       this.electroTick++;
       if(this.electroTick >3){
         this.electrified.frame++;
@@ -97,11 +107,12 @@ class Bubble { //posX posY, ancho, alto, velX, velY, gravedad, buleano si hay gr
         this.isSlowGravity = false;
       }, this.slowGrvityDuration);
     }
-    if(this.replicateTick === replicationTime && this.w >= 90){
+    if(this.replicateTick === replicationTime && this.w >= 101){
       const newBubble = new Bubble(this.ctx, this.x, this.y, this.w, this.h, -this.vx, this.vy, this.g, this.isSlowGravity, this.slowGrvityDuration, this.damage, this.willBounce, this.img.src);
       game.bubbles.push(newBubble);
       this.replicateTick = 0; // Reinicia el contador de replicación
     }
+
   }
   
   isVisible(){

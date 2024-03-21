@@ -174,9 +174,9 @@ const demoFunctions = {
       document.getElementById("demo-text18").style.display = "none";
       btnInstrucciones$$.style.display = "block"
       btnInstrucciones$$.addEventListener("click", ()=>{
-              this.mostrarVariosTextosPocoAPoco3();
+        this.mostrarVariosTextosPocoAPoco3();
       })
-    }, 17000);
+    }, 21000);
   },
 
   mostrarVariosTextosPocoAPoco4() {

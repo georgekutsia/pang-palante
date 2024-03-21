@@ -125,7 +125,6 @@ class Platform {
       this.red += Math.floor(this.redLeft/20)    //Math.floor no lo lleva exacta exactamente hasta 255, pero no importa mucho
       this.green += Math.floor(this.greenLeft/20);
       this.blue += Math.floor(this.blueLeft/20);
-      console.log(this.life)
   }
 
   isVisible() {

@@ -114,7 +114,6 @@ function checkBubbleCollision(bubbles, player, puffBubbles, ctx, platforms, boun
       if (platform.collides(bubble)) {
         if (platform.isBouncable) {
         bubbleBounceSound.play()
-        console.log("ldjsnadljnsa")
           bounceFromObstacles(bubble, platform);
         } else if (!platform.isBouncable) {
           bubble.y = platform.y - bubble.h;
@@ -337,7 +336,7 @@ function bossFireCollision (miniBoses, object){
     });
 
 
-   darkBubbles.forEach((bubble) => {//bubble con darkBubble
+   darkBubbles.forEach((bubble) => {//bouncer con darkBubble
      bouncers.forEach((bouncer) => {
         if (bouncer.collides(bubble)) {
           darkBubbleBounceSound.play();
@@ -360,8 +359,8 @@ function bossFireCollision (miniBoses, object){
         if (bullet.collides(bubble)) {
           bubble.w += 20;
           bubble.h += 20;
-          bubble.x -= 1;
-          bubble.y -= 1;
+          bubble.x -= 10;
+          bubble.y -= 10;
           darkBubbbleHit.play()
           if(bubble.w >= CTXW/5){
             darkBubbleExplosion( bubble, bubbles, puffBubbles)//explota y genera bubbles pequeños

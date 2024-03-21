@@ -279,11 +279,15 @@ z-index: 24;
 
   #btn-instrucciones{
     position: absolute;
-    padding: 5px 10px;
+    padding: 3px 6px;
     background-color: rgb(0, 255, 255);
-    top: 1%;
-    right: 10%;
+    top: 0.2%;
+    right: 5%;
     display: none;
+    font-size:calc(10px + 0.1vw);
+  }
+  #btn-instrucciones:hover{
+    box-shadow: 2px 2px 2px black;
   }
   #cambiar-sala{
     position: absolute;
