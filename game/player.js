@@ -482,7 +482,6 @@ handleRightDodge = (event) =>{ //*
     }
 
 
-    // this.canClimb ? W = 87 : 0;
     if(!finalBoss){
       this.velocidadX = this.vx += this.r;
       if(this.velocidadX <= 1.5 && this.velocidadX >= -1.5 && this.r !==0){
@@ -494,6 +493,7 @@ handleRightDodge = (event) =>{ //*
     this.x += this.velocidadX;
     this.y += this.vy;
     bulletDirection = this.vx/2
+
     if(this.vx){
       this.frameTick++
       if (this.frameTick > 5  ) {
@@ -602,14 +602,23 @@ handleRightDodge = (event) =>{ //*
 
 //consultar constantes para el código de cada teclahjkl-
   keyDown(key) {
-    if(finalBoss) W = 87;
+    if(finalBoss) {W = 87; }
     if (key === W ) {
       this.keySwitchCounter = 0;
       if(this.canClimb){
+        this.img.src = "../public/Imagenes/pjStairs1.png";
+        this.frameAmount = 4;
+          this.img.frame++
+          if(this.img.frame > 3){
+            this.img.frame = 0;
+          }
+        if(this.vy != 0){
+          this.frameTick++;
+        }
         this.vy = -playerSpeed;
       } 
     if(finalBoss) this.shootUp = true;
-    }
+    } 
     if (key === A ) {
       this.stabDirection = false;
       this.frameTick++;
@@ -617,6 +626,7 @@ handleRightDodge = (event) =>{ //*
         this.img.src = "../public/Imagenes/pangPjNuevoIzquierda2.png";
         this.vx = -playerSpeed;
       } else {
+        this.img.frame = 0;
         this.img.src = "../public/Imagenes/pangPjNuevoDerecha2.png";
         this.walkingSpeed = 10
         this.vx = -playerSpeed + 0.8;
@@ -631,11 +641,11 @@ handleRightDodge = (event) =>{ //*
       } else {
         this.walkingSpeed = 10;
         this.vx = playerSpeed - 0.8;
-
       }
     if(finalBoss && this.keySwitchCounter >= 2) {
       this.shootUp = false;
     } 
+    this.img.frame = 0;
     this.img.src = "../public/Imagenes/pangPjNuevoDerecha2.png";
     this.frameAmount = 8;
     }
@@ -670,14 +680,23 @@ handleRightDodge = (event) =>{ //*
     }
 
     if(key === B ){
+      totalShootsPerLevel++
       if(basicWeaponLevel >= 0)this.shoot();
       if(basicWeaponLevel >= 1)this.shootDouble()
       if(basicWeaponLevel >= 2)this.shootTriple()
       if(basicWeaponLevel >= 3)this.shootCuatruple()
       if(basicWeaponLevel >= 4)this.shootQuintuple()
       if(!finalBoss){
-        this.img.src = "../public/Imagenes/pjShoot3.png";
-        this.frameAmount = 4;
+        if(this.vx <0){
+        this.img.src = "../public/Imagenes/pangPjNuevoIzquierda3.png";
+        this.frameAmount = 8;
+        } else if(this.vx > 0){
+        this.img.src = "../public/Imagenes/pangPjNuevoDerecha3.png";
+        this.frameAmount = 8;
+        } else if(this.vx = 0){
+          this.img.src = "../public/Imagenes/pjShoot3.png";
+          this.frameAmount = 4;
+        }
       }
       this.img.frame = 1;
       B = 0;
@@ -707,14 +726,16 @@ handleRightDodge = (event) =>{ //*
     }
     if(key === ALT && this.vy === 0 || key === ALT && this.ableToJump === true){
       if(!finalBoss){
+        this.img.frame = 0;
         this.img.src = "../public/Imagenes/pjJump1.png";
         this.frameAmount = 1;
         setTimeout(() => {
-          this.img.src = "../public/Imagenes/pjShoot3.png";
-          this.frameAmount = 4;
           this.img.frame = 0;
+          this.frameAmount = 4;
+          this.img.src = "../public/Imagenes/pjShoot3.png";
         }, 300);
       } else {
+        this.img.frame = 0;
       this.img.src = "../public/Imagenes/pangPjNuevoDerecha2.png";
       this.frameAmount = 8;
       }
@@ -861,11 +882,14 @@ handleRightDodge = (event) =>{ //*
     }, immuneTime);
   }
   
-  gainLife(){
-    this.life.total += 1;
+  gainLife(amount){
+    this.life.total += amount;
   }
   shoot() {// paso 1: invoca el disparo desde la posicion del personaje o su cercanía
     if(this.shootUp){
+          if(finalBoss){
+            this.img.src = "../public/Imagenes/pangPjNuevoDerecha3.png";
+          }
       const bullet = new BasicWeapon(this.ctx, this.x + this.w/1.8, this.y, bulletDirection);
       this.bulletArray.push(bullet);//paso 2: crea un array vacío en el constructor y luego haz un push de cada bullet;
     } else{
@@ -904,7 +928,7 @@ handleRightDodge = (event) =>{ //*
     const bullet6 = new BasicWeapon(this.ctx, this.x-2, this.y +5, bulletDirection, 0, -2, true);
     this.bigWeaponBubblesMaxAmount  += 1
     setTimeout(() => {
-      this.bigWeaponBubblesMaxAmount -= 1; 
+      this.bigWeaponBubblesMaxAmount -= 4; 
     }, 5000);
     if(this.bigWeaponBubblesMaxAmount < 0) this.bigWeaponBubblesMaxAmount = 0;
     this.bulletArray.push(bullet6);//paso 2: crea un array vacío en el constructor y luego haz un push de cada bullet;
@@ -918,7 +942,7 @@ handleRightDodge = (event) =>{ //*
       const bullet8 = new BasicWeapon(this.ctx, this.x + 14, this.y - 10, bulletDirection, 0.7, -0.3, true, 450);
       this.bulletArray.push(bullet7, bullet8);//paso 2: crea un array vacío en el constructor y luego haz 
       setTimeout(() => {
-        this.bigWeaponBubblesMaxAmount -= 1; 
+        this.bigWeaponBubblesMaxAmount -= 4; 
       }, 5000);
     }
   }
@@ -935,9 +959,14 @@ handleRightDodge = (event) =>{ //*
   }
 
   shootFire(){
-    const bulletFire = new WeaponFire(this.ctx, this.x + 15, this.y)
     fireShootSOund.play()
-    this.bulletFireArray.push(bulletFire);
+    if(this.shootUp){
+      const bulletFire = new WeaponFire(this.ctx, this.x + 15, this.y)
+      this.bulletFireArray.push(bulletFire);
+    } else {
+      const bulletFire = new WeaponFire(this.ctx, this.x + 15, this.y, 40, 40, 2, -0.1)
+      this.bulletFireArray.push(bulletFire)
+    }
   }
   shootBar(){
     if(this.barAmount > 0){

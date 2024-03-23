@@ -1,4 +1,3 @@
-let demoPhase = 1;
 
 function textoPianoPiano(cualquierIdDeTexto) {
   let elemento$$ = document.getElementById(cualquierIdDeTexto);
@@ -207,7 +206,7 @@ const demoFunctions = {
     textoPianoPiano("demo-text21");
     setTimeout(() => {
       textoPianoPiano("demo-text22");
-      }, 2000);
+      }, 2500);
     setTimeout(() => {
       document.getElementById("demo-text21").style.display = "none";
       document.getElementById("demo-text22").style.display = "none";
@@ -217,30 +216,33 @@ const demoFunctions = {
       })
     }, 6000);
   },
-
-
   mostrarVariosTextosPocoAPoco6() {
     btnInstrucciones$$.style.display = "none"
-    document.getElementById("demo-text19").style.display = "none";
-    document.getElementById("demo-text20").style.display = "none";
-    textoPianoPiano("demo-text21");
-    setTimeout(() => {
-      textoPianoPiano("demo-text22");
-      }, 2000);
-      setTimeout(() => {
     document.getElementById("demo-text21").style.display = "none";
     document.getElementById("demo-text22").style.display = "none";
+    textoPianoPiano("demo-text22a");
+    setTimeout(() => {
+      textoPianoPiano("demo-text22b");
+      }, 2500);
+      setTimeout(() => {
+      textoPianoPiano("demo-text22c");
+      }, 4000);
+      setTimeout(() => {
+    document.getElementById("demo-text22a").style.display = "none";
+    document.getElementById("demo-text22b").style.display = "none";
+    document.getElementById("demo-text22c").style.display = "none";
         btnInstrucciones$$.style.display = "block"
         btnInstrucciones$$.addEventListener("click", ()=>{
                 this.mostrarVariosTextosPocoAPoco6();
         })
-      }, 5000);
+      }, 8000);
   },
 
   mostrarVariosTextosPocoAPoco7() {
     btnInstrucciones$$.style.display = "none"
-    document.getElementById("demo-text21").style.display = "none";
-    document.getElementById("demo-text22").style.display = "none";
+    document.getElementById("demo-text22a").style.display = "none";
+    document.getElementById("demo-text22b").style.display = "none";
+    document.getElementById("demo-text22c").style.display = "none";
     textoPianoPiano("demo-text23");
     setTimeout(() => {
       textoPianoPiano("demo-text24");
@@ -262,7 +264,43 @@ const demoFunctions = {
         })
       },12000);
   },
-
+  mostrarVariosTextosPocoAPoco8() {
+    btnInstrucciones$$.style.display = "none"
+    document.getElementById("demo-text23").style.display = "none";
+    document.getElementById("demo-text24").style.display = "none";
+    document.getElementById("demo-text25").style.display = "none";
+    document.getElementById("demo-text26").style.display = "none";
+    textoPianoPiano("demo-text27");
+    setTimeout(() => {
+    textoPianoPiano("demo-text28");
+    }, 1000);
+    setTimeout(() => {
+    textoPianoPiano("demo-text29");
+    }, 3000);
+    setTimeout(() => {
+      document.getElementById("demo-text27").style.display = "none";
+      document.getElementById("demo-text28").style.display = "none";
+      document.getElementById("demo-text29").style.display = "none";
+    }, 6800);
+    setTimeout(() => {
+      toggleShop$$.style.display = "block";
+      setTimeout(() => {
+        toggleShop$$.style.opacity = "1";
+        textoPianoPiano("demo-text30");
+          }, 20);
+        }, 7000);
+        setTimeout(() => {
+        textoPianoPiano("demo-text301");
+        }, 10000);
+    setTimeout(() => {
+      document.getElementById("demo-text30").style.display = "none";
+      document.getElementById("demo-text301").style.display = "none";
+      btnInstrucciones$$.style.display = "block"
+      btnInstrucciones$$.addEventListener("click", ()=>{
+        this.mostrarVariosTextosPocoAPoco8();
+      })
+    }, 15000);
+  },
 };
 
 
@@ -297,22 +335,25 @@ function demoMessageDisable() {
     document.getElementById("demo-text13").style.display = "none";
     document.getElementById("demo-text14").style.display = "none";
   }
-  if (demoPhase >= 5) {
+  if (demoPhase >= 6) {
     document.getElementById("demo-text15").style.display = "none";
     document.getElementById("demo-text16").style.display = "none";
     document.getElementById("demo-text17").style.display = "none";
     document.getElementById("demo-text18").style.display = "none";
-  }
-
-  if (demoPhase >= 6) {
     document.getElementById("demo-text19").style.display = "none";
     document.getElementById("demo-text20").style.display = "none";
   }
+
   if (demoPhase >= 8) {
     document.getElementById("demo-text21").style.display = "none";
     document.getElementById("demo-text22").style.display = "none";
   }
-  if (demoPhase >= 11) {
+  if (demoPhase >= 10) {
+    document.getElementById("demo-text22a").style.display = "none";
+    document.getElementById("demo-text22b").style.display = "none";
+    document.getElementById("demo-text22c").style.display = "none";
+  }
+  if (demoPhase >= 12) {
     document.getElementById("demo-text23").style.display = "none";
     document.getElementById("demo-text24").style.display = "none";
     document.getElementById("demo-text25").style.display = "none";

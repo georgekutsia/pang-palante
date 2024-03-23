@@ -1,10 +1,10 @@
 class WeaponFire {
-  constructor(ctx, x, y,  w, h) {
+  constructor(ctx, x, y,  w, h, vx, vy) {
     this.ctx = ctx;
     this.x = x;
     this.y = y;
-    this.vx = -0.18; // minimo ajuste para que el fuego vaya recto de verdad, ya que al aumentar de tamaño solo se expande hacia al derecha
-    this.vy = -1.5;
+    this.vx = vx || -0.18; // minimo ajuste para que el fuego vaya recto de verdad, ya que al aumentar de tamaño solo se expande hacia al derecha
+    this.vy = vy || -1.5;
     this.img = new Image();
     this.img.src = "../public/Imagenes/weaponFire1.png";
     this.img.frame = 0;

@@ -11,7 +11,7 @@ class BasicWeapon {
     this.tick = 0;
     this.isBig = isBig || false;
     this.basicBulletDuration =  basicBulletDuration || 250;
-
+    this.dispose = true;
     this.electrified = electrified;
     this.electricBurbalas = new Image();
     this.electricBurbalas.src = "/public/Imagenes/electricBurbalas1.png";F
@@ -63,8 +63,9 @@ class BasicWeapon {
       this.vy = -this.vy;
     }
     this.tick++;
-    if (this.tick >= this.basicBulletDuration) {
-      this.y = -200;
+    if (this.tick >= this.basicBulletDuration|| this.y <= -10) {
+      bullsEyeForHealth = 0;
+      this.dispose = false;
     }
     this.electricBurbalasTick++;
     if(this.electricBurbalasTick > 1){
@@ -96,7 +97,7 @@ class BasicWeapon {
   }
 
   isVisible() {
-    return this.y >= -2  && this.y < CTXH && this.x >= 0 && this.x < CTXW;
+    return this.dispose
   }
 }
 

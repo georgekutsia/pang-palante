@@ -12,7 +12,7 @@ function handleClick(event) {
     return;
   }
   if (isPointInsideObject( game.player.life, clickX, clickY, )) {
-    showModal(`Salud`, `&nbsp&nbsp Si pierdes toda la vida, pierdes el juego. Puedes obtener vidas con algunos objetos y a 10 o más puntos de vida, mejoran tus habilidades físicas.`).then(() => {
+    showModal(`Salud`, `&nbsp&nbsp Si pierdes toda la vida, pierdes el juego. Puedes obtener vidas con algunos objetos y a 10 o más puntos de vida, mejoran tus habilidades físicas. <br/>&nbsp&nbsp  Si aciertas ${amountOfBullsEyeForHealth} disparos seguidos con las Burbalas del arma básica sobre las burbujas, recuperas medio punto de salud. Si fallas, se reinicia el contador. Puedes romper cajas y plataformas, no afecta al conteo total.  <br/>&nbsp&nbsp  Si pasa de nivel sin haber fallado ningún disparo, recuperas 1 punto de vida.`).then(() => {
       game.start();
     });
     return;

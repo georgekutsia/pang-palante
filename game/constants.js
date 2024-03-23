@@ -87,6 +87,12 @@ let boots = false;
 let globalAlphaForSword = 0.3;
 let powerToGetForSword = 20;
 let electrifiedGatlingTime = 5000;
+
+let brokenBoxes = 0; //para contar cuantas cajas se rompen
+let bullsEyeForHealth = 0;
+let amountOfBullsEyeForHealth = 15;
+let totalShootsPerLevel = 0; //cuenta cuantos disparos se hice en un nivel, para compararlo si el total de bullsEyeForHealth es igual, o si es distinto, para dar vida adicional al cambiar de nivel
+let totalShootsPerLevelSucces = 0;
 let itemTakenImages = "../public/Imagenes/itemTakenSparkle.png";
 const mapArray = [
   "/public/Imagenes/background/map1.webp",

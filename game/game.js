@@ -38,7 +38,7 @@ class Game {
     this.coins = []; 
     this.hooks = []; 
     this.electros = []; 
-    this.electros = []; 
+    this.cristalBalls = []; 
     this.swords = []; 
     this.miniBoses = []; 
     this.explosions = []; 
@@ -48,7 +48,7 @@ class Game {
     this.changingLevelSoChangeImage = true;
     this.dispached = true;
     this.changingLevel = false;
-    // sounds sounds sounds
+    this.intervalForElectro = true;
 
     
     this.tickMiniBoss1 = 0;
@@ -113,12 +113,12 @@ class Game {
   start() {
     if(!this.gameStarted){
       if (GAMELEVEL === 1) {
-        // addMiniboss1(this.ctx, this.levelBalls);
-        // miniBossTalk1.play();
-        //   let bo = new MiniBoss1(this.ctx, CTXW - 340, -50, CTXW/4, CTXW/4, 0, 0, 95, true, true, true, "/public/Imagenes/minions/MiniBoss1.webp");
-        //   this.miniBoses.push(bo);
-        //   minibossArrivingShip.play();
-        //   this.dispached = false;
+        addMiniboss1(this.ctx, this.levelBalls);
+        miniBossTalk1.play();
+          let bo = new MiniBoss1(this.ctx, CTXW - 340, -50, CTXW/4, CTXW/4, 0, 0, 95, true, true, true, "/public/Imagenes/minions/MiniBoss1.webp");
+          this.miniBoses.push(bo);
+          minibossArrivingShip.play();
+          this.dispached = false;
 
         // inftroGame1();
         // setTimeout(() => {
@@ -133,17 +133,17 @@ class Game {
         levelInfinite( this.ctx, this.bubbles, this.platforms, this.bouncers, this.spikes, this.stairs, this.flamethrowers, this.machineguns, this.healings, this.auras, this.boxes, this.blasters, this.levelBalls, this.gatlings, this.darkBubbles,)
       }
       if(GAMELEVEL === 1987 ) {
-
-        // infoIntro1()
-        // this.background.img.src = "../public/Imagenes/background/backgroundTraining4.webp";
+        infoIntro1()
+        let cri = new CristalBall(this.ctx, 100, 100);
+        this.cristalBalls.push(cri)
+        this.background.img.src = "../public/Imagenes/background/backgroundTraining4.webp";
         // setTimeout(() => {
-        //   addDemo1Electro(this.ctx,  this.platforms, this.electros)
-        //   this.background.img.src = "../public/Imagenes/background/backgroundTraining0.webp";
+          addDemo1Electro(this.ctx,  this.platforms, this.electros)
+          this.background.img.src = "../public/Imagenes/background/backDemo5.png";
         // }, 10500);
         // setTimeout(() => {
           addDemo1(this.ctx, this.platforms)
         // }, 30000);
-
       }
     }
 
@@ -195,6 +195,7 @@ class Game {
     this.coins = this.coins.filter((e) => e.isVisible()); //elimina cada obstáculo que ya no es visible y vacía el array
     this.hooks = this.hooks.filter((e) => e.isVisible()); //elimina cada obstáculo que ya no es visible y vacía el array
     this.electros = this.electros.filter((e) => e.isVisible()); //elimina cada obstáculo que ya no es visible y vacía el array
+    this.cristalBalls = this.cristalBalls.filter((e) => e.isVisible()); //elimina cada obstáculo que ya no es visible y vacía el array
     this.electricShocks = this.electricShocks.filter((e) => e.isVisible()); //elimina cada obstáculo que ya no es visible y vacía el array
     this.swords = this.swords.filter((e) => e.isVisible()); //elimina cada obstáculo que ya no es visible y vacía el array
     this.chests = this.chests.filter((e) => e.isVisible()); //elimina cada obstáculo que ya no es visible y vacía el array
@@ -229,6 +230,7 @@ class Game {
     this.coins.forEach((e) => e.draw()); //dibuja cada obstáculo
     this.hooks.forEach((e) => e.draw()); //dibuja cada obstáculo
     this.electros.forEach((e) => e.draw()); //dibuja cada obstáculo
+    this.cristalBalls.forEach((e) => e.draw()); //dibuja cada obstáculo
     this.electricShocks.forEach((e) => e.draw()); //dibuja cada obstáculo
     this.chests.forEach((e) => e.draw()); //dibuja cada obstáculo
     this.swords.forEach((e) => e.draw()); //dibuja cada obstáculo
@@ -262,6 +264,7 @@ class Game {
     this.coins.forEach((e) => e.move()); //mueve los obstáculos
     this.hooks.forEach((e) => e.move()); //mueve los obstáculos
     this.electros.forEach((e) => e.move()); //mueve los obstáculos
+    this.cristalBalls.forEach((e) => e.move()); //mueve los obstáculos
     this.electricShocks.forEach((e) => e.move()); //mueve los obstáculos
     this.swords.forEach((e) => e.move()); //mueve los obstáculos
     this.chests.forEach((e) => e.move()); //mueve los obstáculos
@@ -314,6 +317,8 @@ class Game {
       if (stair.collidesTop(this.player)) {
         this.player.vy = 0;
         this.player.y = stair.y - this.player.h;
+      this.player.img.src = "../public/Imagenes/pjShoot3.png";
+      this.player.frameAmount = 4;
         jumpDownDistance = 3;
         W = 0;
         this.player.g = 2;
@@ -366,8 +371,9 @@ class Game {
             exp.vy = exp.vy * -1;
         } else if (!this.player.electricShieldIsActive || !this.player.auraIsActive){
           this.player.loseLife(exp.damage, true);
+        this.player.wasNotDamaged = false;
           exp.exploded = true;
-            fireExplosionBig.play()
+          ireExplosionBig.play()
           exp.img.frame = 5;
           exp.vx = this.player.vx;
           exp.canCollide = false;
@@ -375,7 +381,7 @@ class Game {
     }})})
     this.miniBoses.forEach((e) => {e.explosiveArray.forEach((exp) => { 
       if(exp.collidesBoss(e)){
-          fireExplosionSmall.play()
+        fireExplosionSmall.play()
         exp.exploded = true;
         exp.vx = miniBossVx;
         exp.vy = miniBossVy;
@@ -388,6 +394,7 @@ class Game {
           exp.vx = -exp.vx;
       } else if (!this.player.electricShieldIsActive || !this.player.auraIsActive){
         this.player.loseLife(exp.damage, true);
+        this.player.wasNotDamaged = false;
         exp.exploded = true;
         if(exp.bigBomb){
           fireExplosionBig.play()
@@ -638,7 +645,7 @@ this.cannons.forEach((cann) => {//  cannon con fire
     this.healings.forEach((healing) => {// healings  choca con el personaje
       if (healing.collides(this.player)) {
         eventInfo(munSalud$$)
-        this.player.gainLife();
+        this.player.gainLife(healing.amount);
         healSound.play();
         this.player.life.isHealing = true;
         itemTakenImages = "../public/Imagenes/itemTakenHealing1.png";
@@ -833,7 +840,7 @@ this.cannons.forEach((cann) => {//  cannon con fire
     this.boxes.forEach((box) => {
       if (box.boxImg.frame > 8) {
         if(box.bubblePopup){
-          let newBub = new Bubble(this.ctx)
+          let newBub = new Bubble(this.ctx, box.x , box.y + box.h + 10, 50, 50, box.vx + 0.1, 0.01)
           this.bubbles.push(newBub);
         }
         if (box.containsRandom) {
@@ -945,17 +952,35 @@ this.cannons.forEach((cann) => {//  cannon con fire
     levelChangeText1$$.innerText = `Siguiente nivel ${GAMELEVEL}`;
     levelChangeText2$$.innerText = `${this.frases[this.indiceAleatorio]}`;
 if(this.player.wasNotDamaged) {
-  levelChangeText3$$.innerText = `+20 monedas por no recibir daño`;
+  levelChangeText3$$.style.color = `rgb(214, 211, 4)`;
+  levelChangeText3$$.innerText = `¡+20 monedas por no recibir daño!`;
 } else {
-  levelChangeText3$$.innerText = ``;
+  levelChangeText3$$.style.color = `white`;
+  levelChangeText3$$.innerText = `Evita recibir daño para ganar monedas adicionales`;
 }
-  levelChangeText4$$.innerText = ``;
+
+if( totalShootsPerLevel === totalShootsPerLevelSucces ){
+  levelChangeText4$$.style.color = `rgb(0, 199, 173)`;
+  levelChangeText4$$.innerText = `¡Recuperas vida adicional por no fallar ningún disparo!`;
+} else {
+  levelChangeText4$$.style.color = `white`;
+  levelChangeText4$$.innerText = `Acertar todos los disparos te recupera una vida`;
+}
   }
+
 }
   levelChange() {      
-    if(this.player.wasNotDamaged) {coins+=20; coinsSound2.play();}
     if(!this.isInfiniteChanging){
-    setTimeout(() => {
+      setTimeout(() => {
+        setTimeout(() => {
+          if(this.player.wasNotDamaged) {
+            coins+=20; coinsSound2.play(); 
+            this.player.life.amountOfGainedCoins = 20;
+            this.player.life.isGaining = true;}
+          if(totalShootsPerLevel === totalShootsPerLevelSucces) {
+            this.player.life.total++,  
+            this.player.life.isHealing = true;}
+        }, 1000);
       changeLevelSound1.play();
       GAMELEVEL += 1;
       this.changingLevel = true;
@@ -1037,7 +1062,9 @@ if(this.player.wasNotDamaged) {
         } else if(GAMELEVEL === 17){
           alert("ganaste. a comer pipas!")
         } 
-      }, 3000);
+        totalShootsPerLevel = 0;
+        totalShootsPerLevelSucces = 0;
+      }, 4500);
     }, 1000);
   } 
   else{
@@ -1070,8 +1097,8 @@ if(this.player.wasNotDamaged) {
     if(GAMELEVEL === 1987){
       if(demoPhase === 1){
         if(this.platforms.length<=2 && this.electros.length <=0 && this.gameTime >= 800){
-        this.emptyAllGameArrays()
-        this.emptyAllPlayerArrays()
+        this.background.img.src = "../public/Imagenes/background/backDemo2.png";
+          this.emptyAll()
           this.player.y = CTXH - 20;
           this.player.x = 50
           addDemo2(this.ctx, this.platforms, this.bouncers, this.stairs, this.levers)
@@ -1080,72 +1107,100 @@ if(this.player.wasNotDamaged) {
           demoPhase = 2;
         }
       }
+      if(demoPhase === 2 || demoPhase === 3){
+        if(this.electros.length === 0 && this.intervalForElectro){
+          this.intervalForElectro = false;
+          setTimeout(() => {
+            addDemoElectricItem(this.ctx, this.electros)
+            this.intervalForElectro = true;
+          }, 5000);
+        }
+      }
       if(demoPhase === 2 && this.levers.every(lever =>lever.activated === true)){
+        this.background.img.src = "../public/Imagenes/background/backDemo6.png";
         setTimeout(() => {
           this.levelBalls = [];
-          this.emptyAllGameArrays()
-          this.emptyAllPlayerArrays()
-        addDemo3(this.ctx, this.platforms, this.levers, this.bubbles, this.levelBalls, this.boxes)
+          this.emptyAll()
+          addDemo3(this.ctx, this.platforms, this.levers, this.bubbles, this.levelBalls, this.boxes)
         }, 1000);
           demoFunctions.mostrarVariosTextosPocoAPoco3()
           demoPhase = 3;
       }
       if(demoPhase === 4){
+        this.background.img.src = "../public/Imagenes/background/backDemo3.png";
         this.levelBalls = [];
-        this.emptyAllGameArrays()
-        this.emptyAllPlayerArrays()
+        this.emptyAll()
           demoFunctions.mostrarVariosTextosPocoAPoco4()
           addDemo4(this.ctx, this.platforms, this.levers, this.bubbles, this.levelBalls, this.boxes)
           demoPhase = 5;
       }
       if(demoPhase === 6){
+        this.background.img.src = "../public/Imagenes/background/backDemo10.webp";
         this.levelBalls = [];
-        this.emptyAllGameArrays()
-        this.emptyAllPlayerArrays()
+        this.emptyAll()
         demoFunctions.mostrarVariosTextosPocoAPoco5()
         addDemo5(this.ctx, this.platforms, this.levers, this.levelBalls,this.boxes, this.darkBubbles, this.spikes, this.healings)
         demoPhase = 7;
       }
       if(demoPhase === 8){
+        this.background.img.src = "../public/Imagenes/background/backDemo11.webp";
           this.levelBalls = [];
-          this.emptyAllGameArrays()
-          this.emptyAllPlayerArrays()
+          this.emptyAll()
+          demoFunctions.mostrarVariosTextosPocoAPoco6()
           addDemo6(this.ctx, this.platforms, this.levers, this.levelBalls,this.boxes, this.gatlings, this.cannons);
           demoPhase = 9;
       }
-
       if(demoPhase === 10){
+        this.background.img.src = "../public/Imagenes/background/backDemo12.webp";
         this.levelBalls = [];
-        this.emptyAllGameArrays()
-        this.emptyAllPlayerArrays()
-        let bub1 = new Bubble(this.ctx, 20, 30, 30, 30)
-        let bub2 = new Bubble(this.ctx, CTXW-40, 30, 30, 30)
-        this.bubbles.push(bub1, bub2)
-        
-        addDemo7(this.ctx, this.platforms, this.swords);
+        this.emptyAll()
+        addDemo7(this.ctx, this.platforms, this.swords, this.bouncers, this.machineguns);
         demoFunctions.mostrarVariosTextosPocoAPoco7()
         setTimeout(() => {
-          let boss = new MiniBoss1(ctx, CTXW-60, -200, CTXW/5, CTXW/5, 0, 0, 10, true, false, false, "/public/Imagenes/minions/miniBoss2.png");
-          this.miniBoses.push(boss);
-          let bub1 = new Bubble(this.ctx, 20, 30, 20, 20)
-          let bub2 = new Bubble(this.ctx, CTXW-40, 30, 20, 20)
-          this.bubbles.push(bub1, bub2)
-          const levelBall1 = new LevelBall(ctx, 120, 0)
-          this.levelBalls.push(levelBall1)
-        }, 20000);
-        setInterval(() => {
-          boxMoveDemo7(this.ctx, this.boxes)
+            addBubblesDemo7(this.ctx, this.bubbles)
+            addLevelBallDemo7(this.ctx, this.levelBalls)
         }, 15000);
+        boxMoveDemo7(this.ctx, this.boxes, this.hooks, this.healings)
+          if(this.boxes.length<= 0) {
+            setTimeout(() => {
+            boxMoveDemo7(this.ctx, this.boxes, this.hooks, this.healings)
+          }, 2000);
+          }
         demoPhase = 11
       }
+      if(demoPhase === 11 && this.boxes.length <= 0){
+        boxMoveDemo7(this.ctx, this.boxes, this.hooks, this.healings)
+      }
       if(demoPhase === 12){
-        this.emptyAllGameArrays()
-        this.emptyAllPlayerArrays()
+        this.background.img.src = "../public/Imagenes/background/backDemo4.png";
+        this.levelBalls = [];
+        this.emptyAll()
+        addDemo8(this.ctx, this.boxes, this.levelBalls)
+        demoFunctions.mostrarVariosTextosPocoAPoco8()
+        setTimeout(() => {
+        addCoinsDemo8(this.ctx, this.coins)
+        }, 15000);
+        demoPhase = 13;
+      }
+      if(demoPhase === 13 && this.player.life.total  <=1.5 && this.healings <= 1){
+        addLifeDemo8(this.ctx, this.healings)
+      }
+        if(demoPhase === 13 && this.boxes.length <= 0){
+          addDemo8(this.ctx, this.boxes, this.levelBalls)
+        
+        }
+        if(demoPhase === 13 && this.coins.length<= 0 && coins <= 100){
+        addCoinsDemo8(this.ctx, this.coins)
+      }
+      
+      if(demoPhase === 14){
+        this.levelBalls = [];
+        this.emptyAll()
         introAyudaFinal1$$.style.display = "block"
         setTimeout(() => {
           window.location.reload();
         }, 10000);
-        demoPhase = 13;
+        demoPhase = 15;
       }
     }
     if(GAMELEVEL===11 && this.levelBalls.every(e =>e.winCondition===true)){
@@ -1182,14 +1237,21 @@ if(this.player.wasNotDamaged) {
               this.hooks.push(hook)
             }
           }
-          switch (getRandomNumber(3)) {
+          switch (getRandomNumber(10)) {
+            case 1:
+            case 2:
             case 3:
+            case 4:
+            case 5:
               addPlatformsMiniBoss1(this.ctx, this.platforms)
               break;
-            case 2:
+            case 6:
+            case 7:
+            case 8:
               addBouncerMiniBoss1(this.ctx, this.bouncers)
               break;
-            case 1:
+            case 9:
+            case 10:
               boxItemMiniBoss1(this.ctx, this.boxes)
               break;
             default:
@@ -1198,7 +1260,7 @@ if(this.player.wasNotDamaged) {
         this.dispached = true;
         setTimeout(() => {
           this.dispached = false;
-        }, 3000);
+        }, 8000);
       }
     }
   }
@@ -1262,6 +1324,7 @@ if(this.player.wasNotDamaged) {
     this.auras = []; 
     this.explosions = [];
     this.bars = [];
+    this.steps = [];
     this.boxes= [];
     this.gatlings = [];
     this.cannons = [];
@@ -1269,6 +1332,7 @@ if(this.player.wasNotDamaged) {
     this.coins = [];
     this.hooks = [];
     this.electros = [];
+    this.cristalBalls = [];
     this.swords = [];
     this.chests = [];
     this.miniBoses = [];
@@ -1277,7 +1341,18 @@ if(this.player.wasNotDamaged) {
     this.player.bulletArray = [];
     this.player.bulletBarArray = [];
     this.player.bulletFireArray = [];
-
+  }
+  emptyAllPlayerBullets(){
+    this.player.electroAmount = 0;
+    this.player.fireAmount = 0;
+    this.player.hookAmount = 0;
+    this.player.barAmount = 0;
+    this.player.stepsAmount = 0;
+  }
+  emptyAll(){
+    this.emptyAllGameArrays()
+    this.emptyAllPlayerArrays()
+    this.emptyAllPlayerBullets()
   }
   keyUp(key){
     if(key === P){

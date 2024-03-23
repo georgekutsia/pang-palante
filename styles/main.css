@@ -262,32 +262,36 @@ padding: 15px 15px;
 
 .level-change-text{
   position: absolute;
+  color: white;
   transform: translate(-50%, -50%);
-  text-shadow: 2px 2px white;
-  background-color: rgba(255, 255, 255, 0.358);
+  text-shadow: 2px 2px 2px black;
+  background-color: rgba(0, 0, 0, 0.468);
   border-radius: 20px;
   padding: 5px 20px;
   display: none;
 }
 #level-change-text1{
-  top: 50%;
+  top: 60%;
   left: 50%;
   font-size: calc(20px + 1.3vw);
 
 }
 
 #level-change-text2{
-  top: 40%;
+  top: 53%;
   left: 50%;
   font-size: calc(20px + 1.3vw);
 }
 #level-change-text3{
-  top: 30%;
-  left: 30%;
+  top: 5%;
+  left: 50%;
+  color: rgb(214, 211, 4);
+
 }
 #level-change-text4{
-  top: 40%;
-  left: 20%;
+  top: 11%;
+  left: 50%;
+  color: rgb(0, 199, 173);
 }
 
 

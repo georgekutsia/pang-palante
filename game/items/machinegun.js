@@ -1,5 +1,5 @@
 class Machinegun {  
-constructor(ctx, x, y) {
+constructor(ctx, x, y, g) {
     this.ctx = ctx;
     this.x = x || Math.random() * this.ctx.canvas.width; //el obstáculo aparece desde arriba del canvas 
     this.y =  y || Math.random() * this.ctx.canvas.height; // el obstáculo sale de una altura específica o de alguna altura randóm
@@ -7,7 +7,7 @@ constructor(ctx, x, y) {
     this.h = this.ctx.canvas.width / 22;  //altura calculada respecto al canvas
     this.vx = 0;
     this.vy = 0;
-    this.g = 0.3;
+    this.g = g || 0.3;
     this.img = new Image();   //crear nueva imágene ne canvas
     this.img.src =  "/public/Imagenes/machinegun.png";  //definir cual es la nueva imagen
   }

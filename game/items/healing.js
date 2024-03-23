@@ -1,13 +1,13 @@
 class Healing {  
-constructor(ctx, x, y, g) {
+constructor(ctx, x, y, g, w, h, amount) {
     this.ctx = ctx;
     this.x =  x || Math.random() * this.ctx.canvas.width; //el obstáculo aparece desde arriba del canvas 
     this.y = y  || this.ctx.canvas.height - 80; // el obstáculo sale de una altura específica o de alguna altura randóm
-    this.w = this.ctx.canvas.width / 40;  //anchura calculada respecto al canvas
-    this.h = this.ctx.canvas.width / 40;  //altura calculada respecto al canvas
+    this.w = w || this.ctx.canvas.width / 40;  //anchura calculada respecto al canvas
+    this.h = h || this.ctx.canvas.width / 40;  //altura calculada respecto al canvas
     this.vy = 0;
     this.vx = 0;
-
+    this.amount = 1 || amount
     this.g = g || 0.3;
     this.img = new Image();   //crear nueva imágene ne canvas
     this.img.src = "/public/Imagenes/healing.png";  //definir cual es la nueva imagen
