@@ -130,3 +130,55 @@ const miniBossHitWeapons = [
 
 let coinsSoundYa = new Audio("/public/sounds/items/gainCoinsSound.mp3")
 coinsSoundYa.volume = 0.3
+
+
+
+const changeFrases = [
+  "Bien hecho! sigue así",
+  "Cada vez lo haces mejor!",
+  "No te rindas! Ya lo tienes!",
+  "Eres Imparable! Dale caña",
+  "Das miedo! avanza más!",
+  "Cuidado donde apuntas!",
+  "Esto se pondrá dificil!",
+  "He visto marines menos hábiles!",
+  "Una respiro y a seguir",
+  "Eres el orgullo de la patria!",
+  "Que la adrenalina potencie tus disparos!",
+  "¡Estás on fire! ¡Sigue así!",
+  "¡Tienes el control! ¡No te detengas!",
+  "¡Tus habilidades son impresionantes!",
+  "¡Eres una máquina! ¡Sigue adelante!",
+  "¡No hay obstáculo que te detenga!",
+  "¡Tu determinación es inspiradora!",
+  "¡Eres un verdadero guerrero!",
+  " ¡Continúa luchando!",
+  "¡Tu perseverancia es admirable!",
+  "¡Demuestra tu valentía y sigue adelante!",
+  "¡Eres una fuerza imparable! ",
+  "¡Mantén el ritmo!",
+];
+const changeListaImagenes = [
+  "/public/Imagenes/background/changeLevel1.webp",
+  "/public/Imagenes/background/changeLevel2.webp",
+  "/public/Imagenes/background/changeLevel3.webp",
+  "/public/Imagenes/background/changeLevel4.webp",
+  "/public/Imagenes/background/changeLevel5.webp",
+  "/public/Imagenes/background/changeLevel6.webp",
+  "/public/Imagenes/background/changeLevel7.webp",
+  "/public/Imagenes/background/changeLevel8.webp",
+  "/public/Imagenes/background/changeLevel9.webp",
+  "/public/Imagenes/background/changeLevel10.webp",
+]
+const changeGameOverImgs = [
+  "/public/Imagenes/background/gameOverImg1.webp",
+  "/public/Imagenes/background/gameOverImg2.webp",
+  "/public/Imagenes/background/gameOverImg3.webp",
+  "/public/Imagenes/background/gameOverImg4.webp",
+  "/public/Imagenes/background/gameOverImg5.webp",
+  "/public/Imagenes/background/gameOverImg6.webp",
+  "/public/Imagenes/background/gameOverImg7.webp",
+  "/public/Imagenes/background/gameOverImg8.webp",
+  "/public/Imagenes/background/gameOverImg9.webp",
+  "/public/Imagenes/background/gameOverImg10.webp",
+]

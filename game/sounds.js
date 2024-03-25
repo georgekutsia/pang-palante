@@ -56,7 +56,9 @@ let playerDamageSound1 = new Audio("../public/sounds/playerDamageSound1.mp3");
 playerDamageSound1.volume = 0.05; //
 let shootSound = new Audio("/public/sounds/shooting/weaponShootSound.mp3");
 shootSound.volume = 0.1;
-let shootBarSound = new Audio("/public/sounds/shooting/shootBarSound2.mp3");
+let collectSound2 = new Audio("/public/sounds/items/collectSound2.mp3");
+collectSound2.volume = 0.09;
+
 let hookShoot = new Audio("/public/sounds/shooting/hookShort.m4a")
 hookShoot.volume = 0.05
 let electroSoundOn = new Audio("/public/sounds/electrofire/electrifingShield.mp3")
@@ -114,8 +116,6 @@ let fireExplosionBig = new Audio("/public/sounds/shooting/fireExplosionBig.mp3")
  let fireExplosionSmall = new Audio("/public/sounds/shooting/fireExplosionSmall.mp3")
  fireExplosionSmall.volume = 0.05;
 
-let fireShootSOund = new Audio("/public/sounds/electrofire/fireShootSound.mp3")
- fireShootSOund.volume = 0.05;
 
 let bubbleAbsorbBullet = new Audio("/public/sounds/bubbleAbsorbBullet.mp3")
 bubbleAbsorbBullet.volume = 0.1;

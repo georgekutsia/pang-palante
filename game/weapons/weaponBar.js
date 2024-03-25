@@ -23,9 +23,18 @@ class WeaponBar {
     this.solidState = false;  //al pasar a true, empieza la cuenta atrás para que desaparezca;
     this.life = barLife //las veces que la barra puede chocar contra las burbujas antes de desaparecer
     this.hittingTop = true;
-  }
 
-  draw() {
+    this.shootBarSound = new Audio("/public/sounds/shooting/shootBarSound2.mp3");
+    this.shootBarSound.volume = 0.03;
+    this.shoot = true;
+
+}
+
+draw() {
+  if(this.shoot){
+    this.shootBarSound.play();
+    this.shoot = false;
+  }
     if(this.fading >= 10 ) {
       this.ctx.globalAlpha = 0.3;
     }

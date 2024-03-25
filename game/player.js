@@ -27,8 +27,8 @@ class Player {
     this.chargingFires = false; //   se pone en true mientras carga el disparo fuerte de fuego
     this.megaFireBlaster = false; //al ponerse en true, se puede activar la K
     this.megaFireBlasterAmount = 31; //la carga del blaster. cada 10, es una bola
-    this.electroAmount = 30; //cantidad de carga eléctrica que tiene
-    this.fireAmount = 30; //cantidad de fuegos que puedes disparar con N
+    this.electroAmount = 40; //cantidad de carga eléctrica que tiene
+    this.fireAmount = 40; //cantidad de fuegos que puedes disparar con N
     this.hookAmount = 50; // la cantidad de hooks con J
     this.barAmount = 320; //la cantidad de barras disponibles con M
     this.stepsAmount = 10; //cantidad de plataformas que puedes crear con O / P
@@ -68,7 +68,7 @@ class Player {
     this.machinegunPaint = new Image();
     this.machinegunPaint.src = "/public/Imagenes/machinegunPaint.png";
     this.barItem = new Image();
-    this.barItem.src = "/public/Imagenes/barItem.png";
+    this.barItem.src = "/public/Imagenes/barItem2.png";
     this.swordBack = new Image();
     this.swordBack.src = "/public/Imagenes/swordBack.png";
     this.swordCharging = new Image();
@@ -86,6 +86,8 @@ class Player {
     this.swordCooldown = 2000;
     this.keySwitchCounter = 0;
     this.stabDirection = true;
+    this.tickFireElectro = 0;
+
 
     this.barInfo$$ = document.getElementById("bar-info")
     this.fireInfo$$ = document.getElementById("fire-info")
@@ -959,7 +961,6 @@ handleRightDodge = (event) =>{ //*
   }
 
   shootFire(){
-    fireShootSOund.play()
     if(this.shootUp){
       const bulletFire = new WeaponFire(this.ctx, this.x + 15, this.y)
       this.bulletFireArray.push(bulletFire);
@@ -970,8 +971,6 @@ handleRightDodge = (event) =>{ //*
   }
   shootBar(){
     if(this.barAmount > 0){
-    shootBarSound.volume = 0.09;
-    shootBarSound.play();
     const bulletBar = new WeaponBar(this.ctx, this.x + this.w/2, this.y)
     this.bulletBarArray.push(bulletBar);
     }
@@ -980,6 +979,17 @@ handleRightDodge = (event) =>{ //*
     let hook = new WeaponHook(this.ctx, this.x, this.y)
     this.hooksArray.push(hook);
   }
+  slowIncreaseFireElectro(howMuch){
+    let inter =  setInterval(() => {
+      this.electroAmount++;
+      this.fireAmount++;
+    }, 50);
+    setTimeout(() => {
+      clearInterval(inter);
+    }, howMuch);
+  }
+
+
   stabSword(){
       if(this.stabDirection){
         let stab = new WeaponSword(this.ctx, this.x - 100, this.y - 20 , true, 0, 300, 80, true, true );

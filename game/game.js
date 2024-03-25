@@ -6,8 +6,6 @@ class Game {
     this.bubbleGatling = new BubbleGatling(ctx); //traemos la clase Player para usarlo. Todo lo que esté en la clase player también aparecerá
     this.background = new Background(ctx); // traemos la clase Background para usarlo
     this.points = new Points(ctx); // traemos la clase Background para usarlo
-    this.levelChengingImg = new Image(ctx);
-    this.levelChengingImg.src = "/public/Imagenes/background/background0.jpeg";
     this.interval = null; //sirve para pausar el juego
     this.bubbleTick = 0;
     this.randomColor = null;
@@ -58,55 +56,6 @@ class Game {
     this.randomNumberForTick1
 
     // Obtén un índice aleatorio
-    this.frases = [
-      "Bien hecho! sigue así",
-      "Cada vez lo haces mejor!",
-      "No te rindas! Ya lo tienes!",
-      "Eres Imparable! Dale caña",
-      "Das miedo! avanza más!",
-      "Cuidado donde apuntas!",
-      "Esto se pondrá dificil!",
-      "He visto marines menos hábiles!",
-      "Una respiro y a seguir",
-      "Eres el orgullo de la patria!",
-      "Que la adrenalina potencie tus disparos!",
-      "¡Estás on fire! ¡Sigue así!",
-      "¡Tienes el control! ¡No te detengas!",
-      "¡Tus habilidades son impresionantes!",
-      "¡Eres una máquina! ¡Sigue adelante!",
-      "¡No hay obstáculo que te detenga!",
-      "¡Tu determinación es inspiradora!",
-      "¡Eres un verdadero guerrero!",
-      " ¡Continúa luchando!",
-      "¡Tu perseverancia es admirable!",
-      "¡Demuestra tu valentía y sigue adelante!",
-      "¡Eres una fuerza imparable! ",
-      "¡Mantén el ritmo!",
-    ];
-    this.listaImagenes = [
-      "/public/Imagenes/background/changeLevel1.webp",
-      "/public/Imagenes/background/changeLevel2.webp",
-      "/public/Imagenes/background/changeLevel3.webp",
-      "/public/Imagenes/background/changeLevel4.webp",
-      "/public/Imagenes/background/changeLevel5.webp",
-      "/public/Imagenes/background/changeLevel6.webp",
-      "/public/Imagenes/background/changeLevel7.webp",
-      "/public/Imagenes/background/changeLevel8.webp",
-      "/public/Imagenes/background/changeLevel9.webp",
-      "/public/Imagenes/background/changeLevel10.webp",
-    ]
-    this.gameOverImgs = [
-      "/public/Imagenes/background/gameOverImg1.webp",
-      "/public/Imagenes/background/gameOverImg2.webp",
-      "/public/Imagenes/background/gameOverImg3.webp",
-      "/public/Imagenes/background/gameOverImg4.webp",
-      "/public/Imagenes/background/gameOverImg5.webp",
-      "/public/Imagenes/background/gameOverImg6.webp",
-      "/public/Imagenes/background/gameOverImg7.webp",
-      "/public/Imagenes/background/gameOverImg8.webp",
-      "/public/Imagenes/background/gameOverImg9.webp",
-      "/public/Imagenes/background/gameOverImg10.webp",
-    ]
     this.indiceAleatorio;
   }
 
@@ -134,7 +83,7 @@ class Game {
       }
       if(GAMELEVEL === 1987 ) {
         infoIntro1()
-        let cri = new CristalBall(this.ctx, 100, 100);
+        let cri = new CristalBall(this.ctx, 100, 100, 40, 40,  1, 2, 3);
         this.cristalBalls.push(cri)
         this.background.img.src = "../public/Imagenes/background/backgroundTraining4.webp";
         // setTimeout(() => {
@@ -473,14 +422,16 @@ class Game {
             platformHitSolid.play()
             basicBulletBounce(bullet, platform);
           } else {
+          totalShootsPerLevelSucces++
             platformHitBreak.play()
             const newColor = platform.calculateNewColor();
             platform.color = newColor;
             if(bullet.isBig){
               bigWeaponBubble(this.ctx, bullet,  this.player)
             }
-            bullet.x = -200
+            bullet.dispose = false;
             if (platform.life <= 0) {
+              totalShootsPerLevelSucces++
               coins+=2;
               this.player.life.amountOfGainedCoins = 2;
               this.player.life.isGaining = true;
@@ -502,25 +453,12 @@ class Game {
               gatling.moving = true;
               gatling.vx = 0;
             }, electrifiedGatlingTime);
-              bullet.y = -300;
+              bullet.dispose = false;
           return true;
         } else return true;
       });
     });
 
-
-
-
-    this.platforms.forEach((bubble) => {//  bubble con bullet
-      this.player.bulletArray.forEach((bullet) => {
-          if (bullet.collides(bubble) && bullet.isBig) {
-            bigWeaponBubble(this.ctx, bullet,  this.player)
-            bullet.y = -300;
-          } else return true;
-        });
-      });
-
-  
 
     //colisiones con bouncers
     this.bouncers.forEach((bouncer) => {
@@ -555,7 +493,7 @@ this.miniBoses.forEach((mini) => {//  minions con bullet
     if (bullet.collidesMiniboss1(mini)){
       mini.miniBossBurn();
       setTimeout(() => {
-        bullet.y = -100
+        bullet.dispose = false;
       }, 500);
     } else return true;
   });
@@ -700,6 +638,20 @@ this.cannons.forEach((cann) => {//  cannon con fire
         }, shieldsDuration*2);
       } else return true;
     });
+
+
+    this.cristalBalls.forEach((cristalBall) => {//  cristalBalls con bullet
+      this.player.bulletArray = this.player.bulletArray.filter((bullet) => {
+        if (bullet.collides(cristalBall) && !bullet.isBig) {
+          cristalBall.img.frame = 0;
+          cristalBall.imgNumber++;
+          cristalBall.itemSound.volume = 0;    
+          collectSound2.play()
+          return false;
+        } else return true;
+      });
+    });
+
     this.levers.forEach((lever) => {
       if (lever.collides(this.player)) {
       lever.activated = true;
@@ -833,10 +785,20 @@ this.cannons.forEach((cann) => {//  cannon con fire
           box.boxHit();
           const puffBubble = new BubblePuff(ctx, box.x, box.y + box.h / 2,box.w,box.h);
           this.puffBubbles.push(puffBubble);
+          totalShootsPerLevelSucces++
           return false;
         } else return true;
       });
     });
+
+    this.boxes.forEach((box) => {
+      this.player.bulletArray.forEach((bullet) => {
+        if(bullet.collides(box) && bullet.isBig){
+          bigWeaponBubble(this.ctx, bullet, this.player)
+          return false
+        }else return true;  
+      })
+    })
     this.boxes.forEach((box) => {
       if (box.boxImg.frame > 8) {
         if(box.bubblePopup){
@@ -881,15 +843,6 @@ this.cannons.forEach((cann) => {//  cannon con fire
 
 
 
-    this.boxes.forEach((box) => {
-      this.player.bulletArray.forEach((bullet) => {
-        if(bullet.collides(box) && bullet.isBig){
-          bigWeaponBubble(this.ctx, bullet, this.player)
-          return false
-        }else return true;  
-      })
-    })
-
     this.levelBalls.forEach((levelBall) => {//levelBall con bullets normales
       this.player.bulletArray.forEach((bullet) => {
         if (bullet.collides(levelBall)) {
@@ -907,7 +860,6 @@ this.cannons.forEach((cann) => {//  cannon con fire
             levelBall.isActive = false;
           } else if (!levelBall.isActive && !levelBall.winCondition) {
             levelBall.ballShieldForceResist = true;
-            bullet.y = -30;
           } else if (!levelBall.isActive && levelBall.winCondition) {
             levelBall.ballShieldBreaking = true;
             forceFieldFailSound.play();
@@ -915,20 +867,24 @@ this.cannons.forEach((cann) => {//  cannon con fire
               levelBall.isActive = true;
             }, 300);
           }
+          bullet.dispose = false;
+          totalShootsPerLevelSucces++
           return false;
         } else return true;
       });
     });
+    console.log(totalShootsPerLevelSucces, totalShootsPerLevel, bullsEyeForHealth)
+
   }
   changingLevels(){
   if (this.changingLevel) {
     if(this.changingLevelSoChangeImage){
-      let indiceAleatorio = Math.floor(Math.random() * this.listaImagenes.length);
+      let indiceAleatorio = Math.floor(Math.random() * changeListaImagenes.length);
       if(GAMELEVEL <100){
         mapChangeLevel$$.style.width = 'calc(200px + 2vw)';
         mapChangeLevel$$.style.top = '35vh';
         mapChangeLevel$$.style.left = '20vw';
-        changingLevelImg$$.src = this.listaImagenes[indiceAleatorio];
+        changingLevelImg$$.src = changeListaImagenes[indiceAleatorio];
         mapChangeLevel$$.src = mapArray[GAMELEVEL - 1];
         mapChangeLevel$$.style.display = 'block';
         setTimeout(() => {
@@ -950,7 +906,7 @@ this.cannons.forEach((cann) => {//  cannon con fire
     levelChangeText3$$.style.display = "block";
     levelChangeText4$$.style.display = "block";
     levelChangeText1$$.innerText = `Siguiente nivel ${GAMELEVEL}`;
-    levelChangeText2$$.innerText = `${this.frases[this.indiceAleatorio]}`;
+    levelChangeText2$$.innerText = `${changeFrases[this.indiceAleatorio]}`;
 if(this.player.wasNotDamaged) {
   levelChangeText3$$.style.color = `rgb(214, 211, 4)`;
   levelChangeText3$$.innerText = `¡+20 monedas por no recibir daño!`;
@@ -1296,8 +1252,8 @@ if( totalShootsPerLevel === totalShootsPerLevelSucces ){
     gameBackgroundMusic.pause();
      gameOver1.play();
      gameOver2.play();
-    let randomIndex = Math.floor(Math.random() * this.gameOverImgs.length);
-    gameOverBackground$$.src = this.gameOverImgs[randomIndex];
+    let randomIndex = Math.floor(Math.random() * changeGameOverImgs.length);
+    gameOverBackground$$.src = changeGameOverImgs[randomIndex];
     gameOverBackground$$.style.display = "block";
     gameOverBackgroundText$$.style.display = "block"
     gameOverX$$.style.display = "block"

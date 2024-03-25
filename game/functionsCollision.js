@@ -78,7 +78,7 @@ function checkBubbleCollision(bubbles, player, puffBubbles, ctx, platforms, boun
           bullsEyeForHealth = 0;
         }
         bigWeaponBubble(ctx, bullet,  player)
-        bullet.y = -300;
+        bullet.dispose = false;
       } else return true;
     });
   });
@@ -259,7 +259,7 @@ function barCollidesObstacle(bar, obstacle, player){
     bar.y = obstacle.y + obstacle.h;
     bar.vy = 0;
     barHit.play();
-    shootBarSound.volume = 0;
+    bar.shootBarSound.volume = 0;
     bar.img.src = "../public/Imagenes/weaponBarSolid.png";
 }
 

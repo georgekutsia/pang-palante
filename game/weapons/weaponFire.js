@@ -13,9 +13,19 @@ class WeaponFire {
     this.flameSpinTick = 0;
     this.damage = 0.08;
 
+
+    this.fireShootSOund = new Audio("/public/sounds/shooting/fireWeaponSound2.mp3")
+    this.fireShootSOund.volume = 0.03;
+    this.shoot = true;
+
+
   }
 
   draw() {
+    if(this.shoot){
+      this.fireShootSOund.play();
+      this.shoot = false;
+    }
     this.ctx.drawImage(
       this.img,
       (this.img.frame * this.img.width) / 5,
