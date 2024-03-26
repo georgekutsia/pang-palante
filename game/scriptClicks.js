@@ -32,7 +32,7 @@ function handleClick(event) {
       });
     } else {
 
-      showModal(`Natus`, ` <span style="font-weight: 900; font-size: 20px;">Munición</span> : <br/>   <span style="color:darkblue">  Carga de Lanzallamas -> ${game.player.fireAmount}</span> <span style="color:darkblue">  &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Munición barra -> ${game.player.barAmount}</span> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <span style="color:darkblue">  Carga eléctrica -> ${game.player.electroAmount}</span> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <span style="color:darkblue">   Cantidad de blasters -> ${Math.floor(game.player.megaFireBlasterAmount / 10)}</span> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <span style="color:darkblue">   Cantidad de ganchos -> ${game.player.hookAmount}</span>    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <span style="color:darkblue"> Plataformas disponibles -> ${game.player.stepsAmount}</span>  
+      showModal(`Natus`, ` <span style="font-weight: 900; font-size: 20px;">Munición</span> <img class="sincrongeniero" width="100px" src="/public//Imagenes/minions/Sincrongeniero.png" alt="Sincrongeniero"> : <br/>   <span style="color:darkblue">  Carga de Lanzallamas -> ${game.player.fireAmount}</span> <span style="color:darkblue">  &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Munición barra -> ${game.player.barAmount}</span> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <span style="color:darkblue">  Carga eléctrica -> ${game.player.electroAmount}</span> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <span style="color:darkblue">   Cantidad de blasters -> ${Math.floor(game.player.megaFireBlasterAmount / 10)}</span> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <span style="color:darkblue">   Cantidad de ganchos -> ${game.player.hookAmount}</span>    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <span style="color:darkblue"> Plataformas disponibles -> ${game.player.stepsAmount}</span>  
       <br/>  <span style="font-weight: 900; font-size: 20px;">Mejoras tecnológicas</span>: <br/> <span style="color:darkred">  Nivel del arma básica -> ${basicWeaponLevel} </span>  &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <span style="color:darkred">  Duración de escudos y del daño eléctico-> ${shieldsDuration/1000}s </span> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <span style="color:darkred"> Resistencia de las barras -> ${barLife}</span>   
       <br/> <span style="font-weight: 900; font-size: 20px;">Armas especiales</span>: 
       <br/>  <span style="color: red"> Espada Burbujaglória </span> <br/><span style="color: darkred">  Nivel -> ${game.player.swordLevel} </span>  &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp      <span style="color: darkred">   Fuerza de estocada    -> ${stabDuration/10} </span>   &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp      <span style="color: darkred">  Cantidad de barridos por acción    -> ${(Math.abs(swordRounds))} </span> 
@@ -45,7 +45,7 @@ function handleClick(event) {
   }
 
   if (isPointInside(game.platforms, clickX, clickY, )) {
-    showModal(`Plataformas`, `&nbsp&nbsp Las plataformas podrían romperse a base de disparos (dependiendo del tamaño tiene más o menos resistencia) o simplemente poniéndote encima. También hay algunos enemigos poderosos que podrían romper la plataforma. <br/>&nbsp&nbsp Las que tienen reborde rojo se pueden activar con electricidad, pero no puedes usar gancho sobre esas plataformas. También puedes activar los Steps que creas al adquirir la habilidad de crear plataformas con el personaje <br/>&nbsp&nbsp También hay algunas defectuosas que son pegajosas, así que atrapan las burbujas sobre su superficie.`).then(() => {
+    showModal(`Plataformas`, `&nbsp&nbsp Las plataformas podrían romperse a base de disparos (dependiendo del tamaño tiene más o menos resistencia) o simplemente poniéndote encima. También hay algunos enemigos poderosos que podrían romper la plataforma. <br/>&nbsp&nbsp Las que tienen reborde rojo se pueden activar con electricidad, pero no puedes usar gancho sobre esas plataformas. También puedes activar los Steps que creas al adquirir la habilidad de crear plataformas con el personaje <br/>&nbsp&nbsp También hay algunas defectuosas que son pegajosas, así que atrapan las burbujas sobre su superficie.`, `/public/Imagenes/gameBtns/blasterGunImg.png`).then(() => {
       game.start();
     });
     return;
@@ -318,7 +318,7 @@ function swordClick(event) {
   }
 }
 
-function showModal(title, content) {
+function showModal(title, content, img) {
   return new Promise((resolve, reject) => {
  let randomColorsForBackground1 =  getRandomNumber( 100)
  let randomColorsForBackground2 =  getRandomNumber( 100)

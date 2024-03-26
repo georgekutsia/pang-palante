@@ -27,8 +27,8 @@ class Player {
     this.chargingFires = false; //   se pone en true mientras carga el disparo fuerte de fuego
     this.megaFireBlaster = false; //al ponerse en true, se puede activar la K
     this.megaFireBlasterAmount = 31; //la carga del blaster. cada 10, es una bola
-    this.electroAmount = 40; //cantidad de carga eléctrica que tiene
-    this.fireAmount = 40; //cantidad de fuegos que puedes disparar con N
+    this.electroAmount = 10; //cantidad de carga eléctrica que tiene
+    this.fireAmount = 10; //cantidad de fuegos que puedes disparar con N
     this.hookAmount = 50; // la cantidad de hooks con J
     this.barAmount = 320; //la cantidad de barras disponibles con M
     this.stepsAmount = 10; //cantidad de plataformas que puedes crear con O / P
@@ -902,7 +902,7 @@ handleRightDodge = (event) =>{ //*
   }
   shootDouble() {// paso 1: invoca el disparo desde la posicion del personaje o su cercanía
     if(this.shootUp){
-      const bullet1 = new BasicWeapon(this.ctx, this.x - 10, this.y, bulletDirection);
+      const bullet1 = new BasicWeapon(this.ctx, this.x + this.w/4, this.y, bulletDirection);
       this.bulletArray.push(bullet1);//paso 2: crea un array vacío en el constructor y luego haz un push de cada bullet;
     } else{
       const bullet1 = new BasicWeapon(this.ctx, this.x +3, this.y, bulletDirection, 13 + basicWeaponSpeed, -0.5 + basicWeaponSpeed);

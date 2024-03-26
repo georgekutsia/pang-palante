@@ -100,10 +100,12 @@ class CristalBall {
         game.player.life.isGaining = true;
         coins += 50;
           break;
-        case 1:
+        case 3:
           game.player.slowIncreaseFireElectro(700)
           break;
-        case 3:
+        case 1:
+          let lev = new WeaponLeveling(game.ctx, game.player.x, game.player.y - 100, 100, 100, "/public/Imagenes/weaponLvl2.png");
+          game.weaponLevelings.push(lev)
           basicWeaponLevel++;
           setTimeout(() => {
             basicWeaponLevel--;

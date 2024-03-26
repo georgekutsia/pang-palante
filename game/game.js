@@ -42,6 +42,7 @@ class Game {
     this.explosions = []; 
     this.chests = []; 
     this.electricShocks = []; 
+    this.weaponLevelings = []; 
     // this.totalCannonBubbleCount = 0;
     this.changingLevelSoChangeImage = true;
     this.dispached = true;
@@ -85,6 +86,8 @@ class Game {
         infoIntro1()
         let cri = new CristalBall(this.ctx, 100, 100, 40, 40,  1, 2, 3);
         this.cristalBalls.push(cri)
+ 
+
         this.background.img.src = "../public/Imagenes/background/backgroundTraining4.webp";
         // setTimeout(() => {
           addDemo1Electro(this.ctx,  this.platforms, this.electros)
@@ -145,6 +148,7 @@ class Game {
     this.hooks = this.hooks.filter((e) => e.isVisible()); //elimina cada obstáculo que ya no es visible y vacía el array
     this.electros = this.electros.filter((e) => e.isVisible()); //elimina cada obstáculo que ya no es visible y vacía el array
     this.cristalBalls = this.cristalBalls.filter((e) => e.isVisible()); //elimina cada obstáculo que ya no es visible y vacía el array
+    this.weaponLevelings = this.weaponLevelings.filter((e) => e.isVisible()); //elimina cada obstáculo que ya no es visible y vacía el array
     this.electricShocks = this.electricShocks.filter((e) => e.isVisible()); //elimina cada obstáculo que ya no es visible y vacía el array
     this.swords = this.swords.filter((e) => e.isVisible()); //elimina cada obstáculo que ya no es visible y vacía el array
     this.chests = this.chests.filter((e) => e.isVisible()); //elimina cada obstáculo que ya no es visible y vacía el array
@@ -180,6 +184,7 @@ class Game {
     this.hooks.forEach((e) => e.draw()); //dibuja cada obstáculo
     this.electros.forEach((e) => e.draw()); //dibuja cada obstáculo
     this.cristalBalls.forEach((e) => e.draw()); //dibuja cada obstáculo
+    this.weaponLevelings.forEach((e) => e.draw()); //dibuja cada obstáculo
     this.electricShocks.forEach((e) => e.draw()); //dibuja cada obstáculo
     this.chests.forEach((e) => e.draw()); //dibuja cada obstáculo
     this.swords.forEach((e) => e.draw()); //dibuja cada obstáculo
@@ -214,6 +219,7 @@ class Game {
     this.hooks.forEach((e) => e.move()); //mueve los obstáculos
     this.electros.forEach((e) => e.move()); //mueve los obstáculos
     this.cristalBalls.forEach((e) => e.move()); //mueve los obstáculos
+    this.weaponLevelings.forEach((e) => e.move()); //mueve los obstáculos
     this.electricShocks.forEach((e) => e.move()); //mueve los obstáculos
     this.swords.forEach((e) => e.move()); //mueve los obstáculos
     this.chests.forEach((e) => e.move()); //mueve los obstáculos
@@ -1289,6 +1295,7 @@ if( totalShootsPerLevel === totalShootsPerLevelSucces ){
     this.hooks = [];
     this.electros = [];
     this.cristalBalls = [];
+    this.weaponLevelings = [];
     this.swords = [];
     this.chests = [];
     this.miniBoses = [];
