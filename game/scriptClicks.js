@@ -31,7 +31,6 @@ function handleClick(event) {
         game.start();
       });
     } else {
-
       showModal(`Natus`, ` <span style="font-weight: 900; font-size: 20px;">Munición</span> <img class="sincrongeniero" width="100px" src="/public//Imagenes/minions/Sincrongeniero.png" alt="Sincrongeniero"> : <br/>   <span style="color:darkblue">  Carga de Lanzallamas -> ${game.player.fireAmount}</span> <span style="color:darkblue">  &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Munición barra -> ${game.player.barAmount}</span> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <span style="color:darkblue">  Carga eléctrica -> ${game.player.electroAmount}</span> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <span style="color:darkblue">   Cantidad de blasters -> ${Math.floor(game.player.megaFireBlasterAmount / 10)}</span> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <span style="color:darkblue">   Cantidad de ganchos -> ${game.player.hookAmount}</span>    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <span style="color:darkblue"> Plataformas disponibles -> ${game.player.stepsAmount}</span>  
       <br/>  <span style="font-weight: 900; font-size: 20px;">Mejoras tecnológicas</span>: <br/> <span style="color:darkred">  Nivel del arma básica -> ${basicWeaponLevel} </span>  &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <span style="color:darkred">  Duración de escudos y del daño eléctico-> ${shieldsDuration/1000}s </span> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <span style="color:darkred"> Resistencia de las barras -> ${barLife}</span>   
       <br/> <span style="font-weight: 900; font-size: 20px;">Armas especiales</span>: 
@@ -274,28 +273,20 @@ function sword(platforms, x, y) {
 }
 canvas.addEventListener('click', swordClick);
 
-function handleSwordClick() {
-  
-  let intervalId = setInterval(() => {
-    globalAlphaForSword += 0.1;
-    if (globalAlphaForSword >= 1) {
-      globalAlphaForSword = 1;
-      clearInterval(intervalId); // Detiene el intervalo cuando globalAlphaForSword llega a cero
-    }
-  }, 50); 
+// Manejar el clic de la espada cuando se hace clic en el canvas
+
+function handleSwordClick(){
+  globalAlphaForSword = 1;
   setTimeout(() => {
     let intervalId = setInterval(() => {
       globalAlphaForSword -= 0.1;
       if (globalAlphaForSword <= 0.3) {
-            globalAlphaForSword = 0.3;
+        globalAlphaForSword = 0.3;
         clearInterval(intervalId); // Detiene el intervalo cuando globalAlphaForSword llega a cero
       }
     }, 50); // 5
-  }, 3000);
-
+  }, 1500);
 }
-
-// Manejar el clic de la espada cuando se hace clic en el canvas
 function swordClick(event) {
   const rect = canvas.getBoundingClientRect();
   const clickX = event.clientX - rect.left;
@@ -308,22 +299,78 @@ function swordClick(event) {
     clickY <= 100
   ) {
     if(game.player.swordEquipped){
-      showModal(`Espada Burbujaglória`, `&nbsp&nbsp A medida que haces daño con la espada, se va cargando su poder especial. Dependiendo del nivel de la espada, el poder especial puede hacer de todo, durar más e incluso cargarse más rápido. <br/> &nbsp&nbsp
+      globalAlphaForSword = 1;
+      setTimeout(() => {
+        showModal(`Espada Burbujaglória`, `&nbsp&nbsp A medida que haces daño con la espada, se va cargando su poder especial. Dependiendo del nivel de la espada, el poder especial puede hacer de todo, durar más e incluso cargarse más rápido. <br/> &nbsp&nbsp
         Actualmente cargado   <span style="font-weight: 500; font-size: 20px; color: red"> ${game.player.swordPowerUp}  </span> de <span style="font-weight: 500; font-size: 20px; color: darkred"> ${powerToGetForSword}  </span>  `).then(() => {
-        game.start();
-      });
-      return; 
+          game.start();
+          setTimeout(() => {
+            let intervalId = setInterval(() => {
+              globalAlphaForSword -= 0.1;
+              if (globalAlphaForSword <= 0.3) {
+                globalAlphaForSword = 0.3;
+                clearInterval(intervalId); // Detiene el intervalo cuando globalAlphaForSword llega a cero
+              }
+            }, 50); // 5
+          }, 3000);
+        });
+        return; 
+      }, 700);
     }
-    handleSwordClick(); // Llama a la función para manejar el clic de la espada
   }
 }
+
+canvas.addEventListener('click', basicWeaponClick);
+
+function basicWeaponClick(event) {
+  const rect = canvas.getBoundingClientRect();
+  const clickX = event.clientX - rect.left;
+  const clickY = event.clientY - rect.top;
+
+  if (
+    clickX >= CTXW-100 &&
+    clickX <= CTXW &&
+    clickY >= CTXH -100 &&
+    clickY <= CTXH
+  ) {
+      globalAlphaForBasicWeapon = 1;  
+      let weaponImgSizingInterval =  setInterval(() => {
+        weaponImgSizing++
+        if(weaponImgSizing >= 100){
+        clearInterval(weaponImgSizingInterval)
+        }
+      }, 5);
+      setTimeout(() => {
+        showModal(`BurbalaBlaster`, `&nbsp&nbsp El arma básica usada en la lucha contra las abominaciones y creaciones de Bubblemaster. Se puede mejorar en la tienda de Poltra-scrap y podrás cambiar los niveles del arma según necesidad. No siempre es conveniente luchar con el arma al máximo nivel.`).then(() => {
+          game.start();
+          setTimeout(() => {
+                let weaponImgSizingInterval =  setInterval(() => {
+                weaponImgSizing--;
+                if(weaponImgSizing <= 0){
+                clearInterval(weaponImgSizingInterval)
+              }
+            }, 20);
+          }, 500);
+          setTimeout(() => {
+            let intervalId = setInterval(() => {
+              globalAlphaForBasicWeapon -= 0.1;
+              if (globalAlphaForBasicWeapon <= 0.3) {
+                    globalAlphaForBasicWeapon = 0.3;
+                clearInterval(intervalId); // Detiene el intervalo cuando globalAlphaForSword llega a cero
+              }
+            }, 50); // 5
+          }, 3000);
+        });
+        return; 
+      }, 800);
+      }
+  }
 
 function showModal(title, content, img) {
   return new Promise((resolve, reject) => {
  let randomColorsForBackground1 =  getRandomNumber( 100)
  let randomColorsForBackground2 =  getRandomNumber( 100)
  let randomColorsForBackground3 =  getRandomNumber( 100)
-
     // Crear el elemento del modal
     const modal = document.createElement('div');
     modal.className = 'modal fade';

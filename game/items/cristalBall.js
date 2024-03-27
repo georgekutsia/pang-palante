@@ -20,6 +20,7 @@ class CristalBall {
   }
 
   draw() {
+    this.showBasicWeapon()
     if(this.shoot){
       this.itemSound.play();
       this.shoot = false;
@@ -104,18 +105,37 @@ class CristalBall {
           game.player.slowIncreaseFireElectro(700)
           break;
         case 1:
-          let lev = new WeaponLeveling(game.ctx, game.player.x, game.player.y - 100, 100, 100, "/public/Imagenes/weaponLvl2.png");
-          game.weaponLevelings.push(lev)
+          basicWeaponImgChange()
           basicWeaponLevel++;
           setTimeout(() => {
             basicWeaponLevel--;
-          }, 20000);
+          }, 25000);
           break;
         default:
           break;
       }
   }
-
+  showBasicWeapon(){
+    switch (basicWeaponLevel) {
+      case 0:
+        game.player.basicWeapon.src = "/public/Imagenes/basicWeaponLevl1.png";
+        break;
+      case 1:
+        game.player.basicWeapon.src = "/public/Imagenes/basicWeaponLevl2.png";
+        break;
+      case 2:
+        game.player.basicWeapon.src = "/public/Imagenes/basicWeaponLevl3.png";
+        break;
+      case 3:
+        game.player.basicWeapon.src = "/public/Imagenes/basicWeaponLevl4.png";
+        break;
+      case 4:
+        game.player.basicWeapon.src = "/public/Imagenes/basicWeaponLevl5.png";
+        break;
+      default:
+        break;
+    }
+  }
 
   collides(aura) {
     const colX = this.x <= aura.x + aura.w && this.x + this.w > aura.x;

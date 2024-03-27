@@ -84,9 +84,6 @@ class Game {
       }
       if(GAMELEVEL === 1987 ) {
         infoIntro1()
-        let cri = new CristalBall(this.ctx, 100, 100, 40, 40,  1, 2, 3);
-        this.cristalBalls.push(cri)
- 
 
         this.background.img.src = "../public/Imagenes/background/backgroundTraining4.webp";
         // setTimeout(() => {
@@ -720,13 +717,12 @@ this.cannons.forEach((cann) => {//  cannon con fire
           F = 70
           swordRounds++;
         }, 1300);
-        swordTakenSoundFuncion()
+        swordTakenSoundFuncion() //el sonido de coger la espada
         sword.dispose = false;
         this.player.extraX = this.player.extraX-60
         this.player.extraY = this.player.extraY-70;
         this.player.extraW = 120;
         itemTakenImages = "../public/Imagenes/itemTakenSword1.png";
-
         this.player.itemJustTaken = true;
       } else return true;
     });

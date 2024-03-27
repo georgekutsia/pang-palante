@@ -39,6 +39,8 @@ class Player {
     this.hookedOnPlatform = false;
     this.img = new Image();
     this.img.src = "../public/Imagenes/pangPjNuevoDerecha2.png";
+    this.basicWeapon = new Image();
+    this.basicWeapon.src = "../public/Imagenes/basicWeaponLevl1.png";
     this.img.frame = 3;
     this.auraImg = new Image();
     this.auraImg.src = "/public/Imagenes/aura1.png";
@@ -79,7 +81,7 @@ class Player {
     this.swordRightStab.src = "/public/Imagenes/dodgeRightSwordImg.png";
     this.swordSparkleActive = true;
     this.swingSwordState = true;
-    this.swordEquipped = false;
+    this.swordEquipped = true;
     this.swordLevel = 0;
     this.swordPowerUp = 0;
     this.swordPower1 = false;
@@ -87,7 +89,7 @@ class Player {
     this.keySwitchCounter = 0;
     this.stabDirection = true;
     this.tickFireElectro = 0;
-
+    this.weaponUpgrading = true;
 
     this.barInfo$$ = document.getElementById("bar-info")
     this.fireInfo$$ = document.getElementById("fire-info")
@@ -142,188 +144,188 @@ class Player {
     this.blasterBtn$$.addEventListener('touchend', this.handleMegablasterU);
     this.blasterBtn$$.addEventListener('touchcancel', this.handleMegablasterU);
   }
-  handleShoot = (event) => {//*
-    event.preventDefault(); 
-    if(basicWeaponLevel >= 0)this.shoot();
-    if(basicWeaponLevel >= 1)this.shootDouble()
-    if(basicWeaponLevel >= 2)this.shootTriple()
-    if(basicWeaponLevel >= 3)this.shootCuatruple()
-    if(basicWeaponLevel >= 4)this.shootQuintuple()
-    this.img.src = "../public/Imagenes/pjShoot3.png";
-    this.frameAmount = 4;
-    this.img.frame = 1;
-    B = 0;
-    setTimeout(() => {
-      this.img.frame = 0;
-    }, 50); // para que parezca que dispara y se levanta al poco tiempo
-    setTimeout(() => {
-      B = 66;
-    }, recharge);
-    }
-  handleShootU = () =>{ //*
-    this.img.src = "../public/Imagenes/pjShoot3.png";
-    this.frameAmount = 4;
-    this.img.frame = 0;
-  }
-  handleFIre = (event) => {//*
-    event.preventDefault(); 
-    if(this.fireAmount > 0){ 
-      this.fireAmount -= 1;
-      this.shootFire();
-      if(this.fireAmount <= 0){
-        N = 0;
-      }
-    }
-  }
-  handleCadena = (event) => {
-    event.preventDefault(); 
-    this.shootBar();
-    this.barAmount--;
-    if(this.barAmount <= 0)this.barAmount = 0;
-    M = 0
-      setTimeout(() => {
-        M = 77
-      }, 100);
-  }
-  handleMegablaster = (event) => {
-    event.preventDefault(); 
-    if (this.megaFireBlaster) {
-      A = 65;
-      D = 68;
-      this.chargingFires = false;
-      this.megaFireBlaster = true; // No estoy seguro de tu lógica, pero asegúrate de que se active correctamente
-      this.chargingFires = true;
-      this.charging++;
-      blasterCharging.volume = 1;
-      blasterCharging.play();
+//   handleShoot = (event) => {//*
+//     event.preventDefault(); 
+//     if(basicWeaponLevel >= 0)this.shoot();
+//     if(basicWeaponLevel >= 1)this.shootDouble()
+//     if(basicWeaponLevel >= 2)this.shootTriple()
+//     if(basicWeaponLevel >= 3)this.shootCuatruple()
+//     if(basicWeaponLevel >= 4)this.shootQuintuple()
+//     this.img.src = "../public/Imagenes/pjShoot3.png";
+//     this.frameAmount = 4;
+//     this.img.frame = 1;
+//     B = 0;
+//     setTimeout(() => {
+//       this.img.frame = 0;
+//     }, 50); // para que parezca que dispara y se levanta al poco tiempo
+//     setTimeout(() => {
+//       B = 66;
+//     }, recharge);
+//     }
+//   handleShootU = () =>{ //*
+//     this.img.src = "../public/Imagenes/pjShoot3.png";
+//     this.frameAmount = 4;
+//     this.img.frame = 0;
+//   }
+//   handleFIre = (event) => {//*
+//     event.preventDefault(); 
+//     if(this.fireAmount > 0){ 
+//       this.fireAmount -= 1;
+//       this.shootFire();
+//       if(this.fireAmount <= 0){
+//         N = 0;
+//       }
+//     }
+//   }
+//   handleCadena = (event) => {
+//     event.preventDefault(); 
+//     this.shootBar();
+//     this.barAmount--;
+//     if(this.barAmount <= 0)this.barAmount = 0;
+//     M = 0
+//       setTimeout(() => {
+//         M = 77
+//       }, 100);
+//   }
+//   handleMegablaster = (event) => {
+//     event.preventDefault(); 
+//     if (this.megaFireBlaster) {
+//       A = 65;
+//       D = 68;
+//       this.chargingFires = false;
+//       this.megaFireBlaster = true; // No estoy seguro de tu lógica, pero asegúrate de que se active correctamente
+//       this.chargingFires = true;
+//       this.charging++;
+//       blasterCharging.volume = 1;
+//       blasterCharging.play();
 
-      if (this.charging >= this.megaFireBlasterAmount) {
-        this.charging = this.megaFireBlasterAmount;
-        blasterCharging.volume = 0;
-      }
-    }
-  }
+//       if (this.charging >= this.megaFireBlasterAmount) {
+//         this.charging = this.megaFireBlasterAmount;
+//         blasterCharging.volume = 0;
+//       }
+//     }
+//   }
 
-  handleMegablasterU = (event) => {
-    event.preventDefault(); 
-    if (this.megaFireBlaster) {
-      A = 0;
-      D = 0;
-      this.chargingFires = false;
-      this.megaFireBlaster = false;
-      if (this.charging >= 3) {
-        for (let i = 0; i < this.charging; i++) {
-          blasterExplosion.play();
-          blasterCharging.volume = 0;
+//   handleMegablasterU = (event) => {
+//     event.preventDefault(); 
+//     if (this.megaFireBlaster) {
+//       A = 0;
+//       D = 0;
+//       this.chargingFires = false;
+//       this.megaFireBlaster = false;
+//       if (this.charging >= 3) {
+//         for (let i = 0; i < this.charging; i++) {
+//           blasterExplosion.play();
+//           blasterCharging.volume = 0;
 
-          if (i % 10 === 0 && i % 20 !== 0) {
-            const bulletFire = new WeaponFire(this.ctx, this.x + this.w - i, this.y, this.ctx.canvas.width / 20, this.ctx.canvas.width / 18)
-            this.bulletFireArray.push(bulletFire);
-          }
+//           if (i % 10 === 0 && i % 20 !== 0) {
+//             const bulletFire = new WeaponFire(this.ctx, this.x + this.w - i, this.y, this.ctx.canvas.width / 20, this.ctx.canvas.width / 18)
+//             this.bulletFireArray.push(bulletFire);
+//           }
 
-          if (i % 20 === 0 && i >= 10) {
-            const bulletFire = new WeaponFire(this.ctx, this.x + i, this.y, this.ctx.canvas.width / 20, this.ctx.canvas.width / 18)
-            this.bulletFireArray.push(bulletFire);
-          }
-        }
-        this.charging -= this.charging;
-      }
-    }
-  }
+//           if (i % 20 === 0 && i >= 10) {
+//             const bulletFire = new WeaponFire(this.ctx, this.x + i, this.y, this.ctx.canvas.width / 20, this.ctx.canvas.width / 18)
+//             this.bulletFireArray.push(bulletFire);
+//           }
+//         }
+//         this.charging -= this.charging;
+//       }
+//     }
+//   }
 
-  handleJump = (event) => {
-    event.preventDefault(); 
-    if (this.vy === 0 || this.ableToJump === true) {
-      this.vy = jumpHeight;
-      this.g = 2;
-      this.ableToJump = false;
-      setTimeout(() => {
-        this.jumpBtn$$.addEventListener("touchstart", this.handleJumpTouchStart);
-      }, jumpCooldown);
-    }
-  };
-  handleUp = (event) => {
-  if(W === 87){
-    event.preventDefault(); 
-    this.vy = -playerSpeed;
-  }
-    }
-    handleRight = (event) => {
-      event.preventDefault(); 
-      this.vx = playerSpeed;
-      this.img.src = "../public/Imagenes/pangPjNuevoDerecha2.png";
-      this.frameAmount = 8;
-    }
-    handleLeft = (event) => {
-  event.preventDefault(); 
-      this.frameTick++;
-      this.vx = -playerSpeed;
-      this.img.src = "../public/Imagenes/pangPjNuevoIzquierda2";
-      this.frameAmount = 8;
-    }
-    handleDown = (event) => {
-   event.preventDefault(); 
-       this.vy = playerSpeed;
-       this.y = this.y + jumpDownDistance;  // para que al estar encima de la escalera, hago un salto hacia abajo y deje de tener posición fija
-}
-handleUpU = (event) => { //*
-  event.preventDefault(); 
-    this.vy = 0;
-    W = 0;
-}
-handleDownU = (event) => {//*
-  event.preventDefault(); 
-  this.vx = 0;
-  this.vy = 0;
-  this.img.src = "../public/Imagenes/pjShoot3.png";
-  this.frameAmount = 4;
-  this.img.frame = 0;
-}
-handleLeftU = (event) =>{//*
-  event.preventDefault(); 
-  this.vx = 0;
-  this.img.src = "../public/Imagenes/pjShoot3.png";
-  this.frameAmount = 4;
-  this.img.frame = 0;
-}
-handleRightU = (event) =>{//*
-  event.preventDefault(); 
-  this.vx = 0;
-  this.img.src = "../public/Imagenes/pjShoot3.png";
-  this.frameAmount = 4;
-  this.img.frame = 0;
-}
+//   handleJump = (event) => {
+//     event.preventDefault(); 
+//     if (this.vy === 0 || this.ableToJump === true) {
+//       this.vy = jumpHeight;
+//       this.g = 2;
+//       this.ableToJump = false;
+//       setTimeout(() => {
+//         this.jumpBtn$$.addEventListener("touchstart", this.handleJumpTouchStart);
+//       }, jumpCooldown);
+//     }
+//   };
+//   handleUp = (event) => {
+//   if(W === 87){
+//     event.preventDefault(); 
+//     this.vy = -playerSpeed;
+//   }
+//     }
+//     handleRight = (event) => {
+//       event.preventDefault(); 
+//       this.vx = playerSpeed;
+//       this.img.src = "../public/Imagenes/pangPjNuevoDerecha2.png";
+//       this.frameAmount = 8;
+//     }
+//     handleLeft = (event) => {
+//   event.preventDefault(); 
+//       this.frameTick++;
+//       this.vx = -playerSpeed;
+//       this.img.src = "../public/Imagenes/pangPjNuevoIzquierda2";
+//       this.frameAmount = 8;
+//     }
+//     handleDown = (event) => {
+//    event.preventDefault(); 
+//        this.vy = playerSpeed;
+//        this.y = this.y + jumpDownDistance;  // para que al estar encima de la escalera, hago un salto hacia abajo y deje de tener posición fija
+// }
+// handleUpU = (event) => { //*
+//   event.preventDefault(); 
+//     this.vy = 0;
+//     W = 0;
+// }
+// handleDownU = (event) => {//*
+//   event.preventDefault(); 
+//   this.vx = 0;
+//   this.vy = 0;
+//   this.img.src = "../public/Imagenes/pjShoot3.png";
+//   this.frameAmount = 4;
+//   this.img.frame = 0;
+// }
+// handleLeftU = (event) =>{//*
+//   event.preventDefault(); 
+//   this.vx = 0;
+//   this.img.src = "../public/Imagenes/pjShoot3.png";
+//   this.frameAmount = 4;
+//   this.img.frame = 0;
+// }
+// handleRightU = (event) =>{//*
+//   event.preventDefault(); 
+//   this.vx = 0;
+//   this.img.src = "../public/Imagenes/pjShoot3.png";
+//   this.frameAmount = 4;
+//   this.img.frame = 0;
+// }
 
-handleLeftDodge = (event) =>{//*
-  event.preventDefault(); 
-  if(Q === 81){
-    this.shootDodgeQ()
-    this.r = 0.4;
-    this.vx = -6;
-    this.img.frame = 0;
-    Q = 0;
-    E = 0;
-    setTimeout(() => {
-      Q = 81;
-      E = 69;
-    }, dodgeCooldown);
-  }
-}
-handleRightDodge = (event) =>{ //*
-  event.preventDefault(); 
-  if(Q === 81){
-    this.shootDodgeE()
-    this.r = -0.4;
-    this.vx = 6;
-    this.img.frame = 0;
-    Q = 0;
-    E = 0;
-    setTimeout(() => {
-      Q = 81;
-      E = 69;
-    }, dodgeCooldown);
- }
-}
+// handleLeftDodge = (event) =>{//*
+//   event.preventDefault(); 
+//   if(Q === 81){
+//     this.shootDodgeQ()
+//     this.r = 0.4;
+//     this.vx = -6;
+//     this.img.frame = 0;
+//     Q = 0;
+//     E = 0;
+//     setTimeout(() => {
+//       Q = 81;
+//       E = 69;
+//     }, dodgeCooldown);
+//   }
+// }
+// handleRightDodge = (event) =>{ //*
+//   event.preventDefault(); 
+//   if(Q === 81){
+//     this.shootDodgeE()
+//     this.r = -0.4;
+//     this.vx = 6;
+//     this.img.frame = 0;
+//     Q = 0;
+//     E = 0;
+//     setTimeout(() => {
+//       Q = 81;
+//       E = 69;
+//     }, dodgeCooldown);
+//  }
+// }
   draw() {
     this.bulletArray.forEach((bullet) => {bullet.draw();}); // paso 3: dibujo cada bullet que se dispare
     this.bulletFireArray.forEach((bullet) => {bullet.draw();}); // paso 3: dibujo cada bullet que se dispare
@@ -406,6 +408,11 @@ handleRightDodge = (event) =>{ //*
     }
     if(this.electroAmount >=1){
       this.charger.draw(this.x + 25, this.y + 30, this.electroAmount/1.5, 39, 38, "blue", "green")
+    }
+    if(this.weaponUpgrading){
+      this.ctx.globalAlpha = globalAlphaForBasicWeapon;
+      this.ctx.drawImage(this.basicWeapon, CTXW-100 - weaponImgSizing, CTXH - 100 - weaponImgSizing, 100 + weaponImgSizing, 100 + weaponImgSizing);
+      this.ctx.globalAlpha = 1;
     }
     if(this.electroAmount <=0) {this.electricShieldIsActive = false; H = 0; this.electricBurbalasIsActive = false;}
     if(this.electroAmount > 1) H = 72

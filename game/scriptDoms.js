@@ -61,6 +61,8 @@ let shopRetry$$ = document.getElementById("shop-retry")
 let bulletBlock1$$ = document.getElementById("bullet-block1")
 let bulletBlock2$$ = document.getElementById("bullet-block2")
 
+let toggleShopExtra$$ = document.getElementById('toggle-shop-extra');
+let extraShop$$ = document.getElementById("extra-shop")
 
 let demoFriend1$$ = document.querySelector(".demoFriend1")
 let demoFriend2$$ = document.querySelector(".demoFriend2")

@@ -84,3 +84,18 @@ function specificLootFromBox(ctx, specificLoot, flamethrowers, healings, bars, a
 }
 
 
+function basicWeaponImgChange(){
+  if(basicWeaponLevel === 0){
+    let lev = new WeaponLeveling(game.ctx, CTXW-100 , CTXH - 100, 100, 100, "/public/Imagenes/weaponLvl2.png");
+    game.weaponLevelings.push(lev)
+  } else if( basicWeaponLevel === 1){
+    let lev = new WeaponLeveling(game.ctx, CTXW-100 , CTXH - 100, 100, 100, "/public/Imagenes/weaponLvl3.png");
+    game.weaponLevelings.push(lev)
+  }else if( basicWeaponLevel === 2){
+    let lev = new WeaponLeveling(game.ctx, CTXW-100 , CTXH - 100, 100, 100, "/public/Imagenes/weaponLvl4.png");
+    game.weaponLevelings.push(lev)
+  }else if( basicWeaponLevel === 3){
+    let lev = new WeaponLeveling(game.ctx, CTXW-100 , CTXH - 100, 100, 100, "/public/Imagenes/weaponLvl5.png");
+    game.weaponLevelings.push(lev)
+  }
+}

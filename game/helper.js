@@ -241,13 +241,14 @@ shopSuperGun$$.addEventListener("click", function(){
 
 shopSuperGun1$$.addEventListener("click", function(){
   if(coins >=90 && basicWeaponLevel < 1){
+    basicWeaponImgChange()
     if(basicWeaponLevel < 1 && basicWeaponLevelingChanged === 0) {
       coins -=90;
       basicWeaponLevelingChanged++;
       buySmall.play()
     }
     basicWeaponLevel = 1;
-    shopSuperGun1$$.innerText = "Nivel 1"
+    shopSuperGun1$$.innerText = "NVL 1"
     shopSuperGun1$$.style.color = "rgb(254, 0, 224)"
     shopSuperGun2$$.style.display = "block"
   } else if(basicWeaponLevel >= 1){
@@ -261,20 +262,23 @@ shopSuperGun1$$.addEventListener("click", function(){
 })
 shopSuperGun2$$.addEventListener("click", function(){
   if(coins >=100 && basicWeaponLevel < 2){
+    basicWeaponImgChange()
     if(basicWeaponLevel < 2 && basicWeaponLevelingChanged === 1) {
       coins -=90;
       basicWeaponLevelingChanged++;
       buySmall.play()
     }
     basicWeaponLevel = 2;
-    shopSuperGun2$$.innerText = "Nivel 2"
+    shopSuperGun2$$.innerText = "NVL 2"
     shopSuperGun2$$.style.color = "rgb(254, 0, 224)"
     shopSuperGun1$$.style.fontSize = " calc(10px + 0.18vw)"
     shopSuperGun2$$.style.fontSize = " calc(10px + 0.18vw)"
     bulletBlock1$$.style.display = "flex"
-
-
     shopSuperGun3$$.style.display = "block"
+    shopSuperGun1$$.style.transition = "none"
+    shopSuperGun2$$.style.transition = "none"
+    shopSuperGun1$$.style.minWidth = "0px"
+    shopSuperGun2$$.style.minWidth = "0px"
   } else if(basicWeaponLevel >= 2){
     basicWeaponLevel  = 2;
     shopSuperGun$$.style.border = "none"
@@ -282,17 +286,20 @@ shopSuperGun2$$.addEventListener("click", function(){
     shopSuperGun2$$.style.border = "3px solid rgb(154, 130, 184)"
     shopSuperGun3$$.style.border = "none"
     shopSuperGun4$$.style.border = "none"
+
+
   }
 })
 shopSuperGun3$$.addEventListener("click", function(){
   if(coins >=110 && basicWeaponLevel < 3){
+    basicWeaponImgChange()
     if(basicWeaponLevel < 3 && basicWeaponLevelingChanged === 2) {
       coins -=110;
       basicWeaponLevelingChanged++;
       buySmall.play()
     }
     basicWeaponLevel  = 3;
-    shopSuperGun3$$.innerText = "Nivel 3"
+    shopSuperGun3$$.innerText = "NVL 3"
     shopSuperGun3$$.style.color = "rgb(254, 0, 224)"
     shopSuperGun4$$.style.display = "block"
   } else if(basicWeaponLevel >= 3){
@@ -307,18 +314,24 @@ shopSuperGun3$$.addEventListener("click", function(){
 
 shopSuperGun4$$.addEventListener("click", function(){
   if(coins >=120 && basicWeaponLevel < 4){
+    basicWeaponImgChange()
+
     if(basicWeaponLevel < 4 && basicWeaponLevelingChanged === 3) {
       coins -=120;
       basicWeaponLevelingChanged++;
       buySmall.play()
     }
     basicWeaponLevel  = 4 ;
-    shopSuperGun4$$.innerText = "Nivel 4"
-    shopSuperGun$$.innerHTML = "Nivel 0"
+    shopSuperGun4$$.innerText = "NVL 4"
+    shopSuperGun$$.innerHTML = "NVL 0"
     shopSuperGun4$$.style.color = "rgb(254, 0, 224)"
     shopSuperGun3$$.style.fontSize = " calc(10px + 0.18vw)"
     shopSuperGun4$$.style.fontSize = " calc(10px + 0.18vw)"
     bulletBlock2$$.style.display = "flex";
+    shopSuperGun3$$.style.transition = "none"
+    shopSuperGun4$$.style.transition = "none"
+    shopSuperGun3$$.style.minWidth = "0px"
+    shopSuperGun4$$.style.minWidth = "0px"
   } else if(basicWeaponLevel >= 4){
     basicWeaponLevel  = 4;
     shopSuperGun$$.style.border = "none"
@@ -331,6 +344,7 @@ shopSuperGun4$$.addEventListener("click", function(){
 
 
 // speed gun
+
 shopSpeedGun$$.addEventListener("click", function(){
   if(basicWeaponSpeed === 0 && coins >= 50){
     buySmall.play()
@@ -485,4 +499,39 @@ game.player.swordImg$$.addEventListener("click", ()=>{
     game.start();
   });
   return; 
+})
+
+
+
+
+
+
+toggleShopExtra$$.addEventListener('mouseenter', function() {
+  this.classList.add('fa-bounce');
+});
+
+toggleShopExtra$$.addEventListener('mouseleave', function() {
+  this.classList.remove('fa-bounce');
+});
+
+
+toggleShopExtra$$.addEventListener("click", function(){
+  if(extraShop$$.style.display === "block"){
+    extraShop$$.style.opacity ="0";
+    extraShop$$.style.top ="1%";
+    extraShop$$.style.right = "5%";
+    setTimeout(() => {
+    extraShop$$.style.display = "none";
+  }, 400);
+  game.start();
+} else{
+  extraShop$$.style.display = "block"
+  setTimeout(() => {
+    extraShop$$.style.translate = "(-50%, -50%)";
+    extraShop$$.style.opacity ="1";
+    extraShop$$.style.top ="10%";
+    extraShop$$.style.right = "40%";
+  }, 50);
+    game.stop();
+  }
 })

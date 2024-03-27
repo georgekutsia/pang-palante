@@ -296,3 +296,24 @@ function itemsDemo(ctx, stairs, bubbles, darkBubbles, spikes, gatlings, hooks, f
     let ste = new Steps(ctx, 350, 600)
     steps.push(ste)
 }
+
+
+
+specialItems(this.ctx, this.cristalBalls)
+function specialItems(ctx, cristalBalls){
+
+  let cri = new CristalBall(ctx, 100, 100, 40, 40,  1, 2, 3);
+  cristalBalls.push(cri)
+  setTimeout(() => {
+    let cri = new CristalBall(ctx, 100, 100, 40, 40,  1, 2, 3);
+    cristalBalls.push(cri)
+  }, 4000);
+  setTimeout(() => {
+    let cri = new CristalBall(ctx, 100, 100, 40, 40,  1, 2, 3);
+    cristalBalls.push(cri)
+  }, 8000);
+  setTimeout(() => {
+    let cri = new CristalBall(ctx, 100, 100, 40, 40,  1, 2, 3);
+    cristalBalls.push(cri)
+  }, 14000);
+}

@@ -5,26 +5,24 @@
   display: none;
   border: none;
   background-color: transparent;
-  border-radius: 50%;
   transition: all 0.3s ease-in-out;
 }
-#toggle-shop:hover{
-  filter: drop-shadow(0px 6px 6px rgba(0, 105, 175, 0.9));
-}
+
 #toggle-shop img{
   width: calc(30px + 2vw);
   padding: 5px;
   }
+
   
 @media only screen and (min-height: 420px) {
   #toggle-shop{
     position: absolute;
     top: 0;
-    right: 1vw;
+    right: 0;
     display: block;
     opacity: 0;
   }
-  #shop-btn{
+  #shop-btn {
     position: absolute;
     right: 0vw;
     top: 3.5vh;
@@ -34,37 +32,44 @@
     filter: drop-shadow(0px 3px 3px rgba(0, 105, 175, 0.9));
   }
 
-  
-#shop-shield{
-  font-size: calc(10px + 0.5vw);
-  background: none;
-  border: none;
-}
 
-#shop-btn button{
+
+
+.shop-btns{
   background: none;
   border: none;
-  background-color: hwb(175 74% 2%);
+  background-image: url("/public/Imagenes/background/backgroundShop1.png");
   margin-right: 5px;
   border-radius: 5px;
-  transition: 0.5s ease-in-out;
+  transition: 0.2s ease-in-out;
   font-size: calc(10px + 0.5vw);
   padding: 2px 4px;
-  margin-bottom: 5px;
+  margin-bottom: 4px;
+  min-width: 80px;
+}
+.shop-btns:hover,
+.shop-btns:hover .shop-btns i {
+  filter: drop-shadow(0px 3px 3px rgba(232, 151, 10, 0.9));
+  text-shadow: 1px 1px 1px rgba(75, 42, 1, 0.454);
 }
 
-#shop-btn button:hover{
-  background-color: rgb(246, 199, 246);
-  filter: drop-shadow(0px 3px 3px rgba(175, 0, 122, 0.9));
-
+.bullet-block-btns button{
+  background: none;
+  border: none;
+  background-image: url("/public/Imagenes/background/backgroundShop1.png");
+  margin-right: 5px;
+  border-radius: 5px;
+  transition: 0.3s ease-in-out;
+  font-size: calc(10px + 0.5vw);
+  padding: 2px 4px;
+  margin-bottom: 2px;
 }
-
+.bullet-block-btns button:hover{
+  filter: drop-shadow(0px 3px 3px rgba(232, 151, 10, 0.9));
+  font-weight: 700;
+}
 #shop-btn, i{
   font-size: calc(8px + 0.3vw);
-}
-#shop-superGun{
-  margin-top: calc(5px + 0.3vh);
-  color: rgb(254, 0, 224);
 }
 
 #shop-superGun2, 
@@ -73,35 +78,11 @@
   display: none;
 }
 
-
-#shop-speedGun{
-  margin-top: calc(5px + 0.3vh);
 }
-#velocidad-text{
-  font-size: calc(6px + 0.5vw);
 
-}
-#shop-speedGun>span{
-  color: rgb(254, 0, 224);
-}}
 
-#shop-barResistane>span{
-  color: rgb(254, 0, 224);
-
-}
-#shop-barResistane{
-  margin-top: calc(5px + 0.3vh);
-}
 #shop-electro{
   display: none;
-}
-#shop-electricShield>span{
-  color: rgb(254, 0, 224);
-  
-
-}
-#shop-electricShield{
-  margin-top: calc(5px + 0.3vh);
 }
 
 #shop-btn, #moves-div{
@@ -119,3 +100,52 @@
 #bullet-block1{
   margin: auto;
 }
+#toggle-shop-extra{
+  border: none;
+  background-color: transparent;
+  transition: all 0.3s ease-in-out;
+  filter: drop-shadow(0px 3px 3px rgba(0, 105, 175, 0.9));
+}
+#toggle-shop-extra:hover{
+  filter: drop-shadow(3px 3px 3px rgba(246, 226, 1, 0.9));
+}
+#toggle-shop-extra img{
+  width: calc(20px + 2vw);
+  padding: 5px;
+  background-color: transparent;
+  }
+  
+  .icons-size1{
+    font-size: calc(12px + 0.2vw)
+  }
+  .icons-size2{
+    font-size: calc(14px + 0.3vw)
+  }
+
+
+
+
+
+  #extra-shop {
+    display: none;
+    opacity: 0;
+    position: absolute;
+    top: 1%;
+    right: 10%;
+    transform : translate(0%, 0%);
+    transition: 0.4s all ease-in-out;
+    background-image: url("/public//Imagenes/background/backgroundBtnShop1.png");
+    background-size: cover; /* La imagen de fondo se ajustará para estar completamente visible dentro del contenedor */
+    padding: 25px 15px;
+  }
+  
+  #extra-shop .shop-btns {
+    min-width: 100px; /* Establece un ancho fijo para todos los botones */
+  }
+  
+  .tooltip {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  
