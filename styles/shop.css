@@ -136,7 +136,7 @@
     transition: 0.4s all ease-in-out;
     background-image: url("/public//Imagenes/background/backgroundBtnShop1.png");
     background-size: cover; /* La imagen de fondo se ajustará para estar completamente visible dentro del contenedor */
-    padding: 25px 15px;
+    padding: 35px 15px;
   }
   
   #extra-shop .shop-btns {
@@ -149,3 +149,6 @@
     left: 0;
   }
   
+  .extra-shop-div{
+  margin-top: 5px;
+  }

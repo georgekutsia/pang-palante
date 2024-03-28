@@ -27,7 +27,6 @@ class WeaponBar {
     this.shootBarSound = new Audio("/public/sounds/shooting/shootBarSound2.mp3");
     this.shootBarSound.volume = 0.03;
     this.shoot = true;
-
 }
 
 draw() {

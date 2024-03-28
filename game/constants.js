@@ -59,7 +59,7 @@ let weaponBarSolidTick = 350;//el tiempo que se pasa la barra en estado sólido
 let fireSizing = 0.3 //el aumento de ancho y alto de la bala de fuego a medida que sube
 let barLife = 2; // las veces que puede la bola chocar con la barra antes de desaparecer
 let immuneTime = 2000;
-let shieldsDuration = 5000;
+let shieldsDuration = 4000;
 let jumpDownDistance = 0;
 let bubbleSpeedY = 10;
 let bubbleSpeedX = 3;
@@ -183,3 +183,8 @@ const changeGameOverImgs = [
   "/public/Imagenes/background/gameOverImg9.webp",
   "/public/Imagenes/background/gameOverImg10.webp",
 ]
+
+
+
+const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))

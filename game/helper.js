@@ -204,25 +204,37 @@ shopShield$$.addEventListener("click", function(){
     buySmall.play()
     game.player.auraIsActive = true;
     coins -= 50;
+    faShakeWhenBuy(this);
     setTimeout(() => {
       game.player.auraIsActive = false;
     }, 7000);
   }
 })
+
+function faShakeWhenBuy(button) {
+  button.classList.add('fa-shake');
+  setTimeout(() => {
+    button.classList.remove('fa-shake');
+  }, 100); 
+}
+
 shopFire$$.addEventListener("click", function(){
   if(coins >= 20 && game.player.fireAmount <= 28){
-    buySmall.play()
+    buySmall.play();
     game.player.fireAmount += 3;
     coins -= 20; 
     N = 78;
+    faShakeWhenBuy(this);
   }
-})
+});
+
 shopBar$$.addEventListener("click", function(){
   if(coins >= 25){
     buySmall.play()
-    game.player.barAmount += 2;
+    game.player.barAmount += 3;
     coins -= 25; 
     M = 77;
+    faShakeWhenBuy(this);
   }
 })
 
@@ -236,12 +248,14 @@ shopSuperGun$$.addEventListener("click", function(){
   shopSuperGun2$$.style.border = "none"
   shopSuperGun3$$.style.border = "none"
   shopSuperGun4$$.style.border = "none"
+  faShakeWhenBuy(this);
 })
 
 
 shopSuperGun1$$.addEventListener("click", function(){
   if(coins >=90 && basicWeaponLevel < 1){
-    basicWeaponImgChange()
+    basicWeaponImgChange();
+    faShakeWhenBuy(this);
     if(basicWeaponLevel < 1 && basicWeaponLevelingChanged === 0) {
       coins -=90;
       basicWeaponLevelingChanged++;
@@ -261,6 +275,7 @@ shopSuperGun1$$.addEventListener("click", function(){
   }
 })
 shopSuperGun2$$.addEventListener("click", function(){
+  faShakeWhenBuy(this);
   if(coins >=100 && basicWeaponLevel < 2){
     basicWeaponImgChange()
     if(basicWeaponLevel < 2 && basicWeaponLevelingChanged === 1) {
@@ -291,6 +306,7 @@ shopSuperGun2$$.addEventListener("click", function(){
   }
 })
 shopSuperGun3$$.addEventListener("click", function(){
+  faShakeWhenBuy(this);
   if(coins >=110 && basicWeaponLevel < 3){
     basicWeaponImgChange()
     if(basicWeaponLevel < 3 && basicWeaponLevelingChanged === 2) {
@@ -313,9 +329,9 @@ shopSuperGun3$$.addEventListener("click", function(){
 })
 
 shopSuperGun4$$.addEventListener("click", function(){
+  faShakeWhenBuy(this);
   if(coins >=120 && basicWeaponLevel < 4){
     basicWeaponImgChange()
-
     if(basicWeaponLevel < 4 && basicWeaponLevelingChanged === 3) {
       coins -=120;
       basicWeaponLevelingChanged++;
@@ -346,88 +362,107 @@ shopSuperGun4$$.addEventListener("click", function(){
 // speed gun
 
 shopSpeedGun$$.addEventListener("click", function(){
+  faShakeWhenBuy(this);
   if(basicWeaponSpeed === 0 && coins >= 50){
     buySmall.play()
     coins -=50;
     basicWeaponSpeed = 3
-    shopSpeedGun$$.innerHTML = ` <span><i style="font-size: calc(14px + 0.53vw)" class="fa-solid fa-gauge-simple-high"></i> x 3</span>   <i class="fa-solid fa-angles-up fonts-i"></i><span id="velocidad-text"> Vel</span>   <br> 60<i class="fa-solid fa-coins"></i>`
+    shopSpeedGun$$.innerHTML = ` <span><i class="fa-solid fa-gauge-simple-high"></i> </span> <i style="font-size: calc(8px + 0.3vw)" class="fa-solid fa-angles-up fonts-i"></i> <span id="velocidad-text"> </span>60<i class="fa-solid fa-coins"></i>`
   } else if(basicWeaponSpeed === 3 && coins >= 60){
     buySmall.play()
     basicWeaponSpeed = 5
-    shopSpeedGun$$.innerHTML = ` <span><i style="font-size: calc(14px + 0.53vw)" class="fa-solid fa-gauge-simple-high"></i> x 4</span>  <i class="fa-solid fa-angles-up fonts-i"></i><span id="velocidad-text"> Vel</span>   <br> 70<i class="fa-solid fa-coins"></i>`
+    shopSpeedGun$$.innerHTML = ` <span><i class="fa-solid fa-gauge-simple-high"></i> </span> <i style="font-size: calc(8px + 0.3vw)" class="fa-solid fa-angles-up fonts-i"></i> <span id="velocidad-text"> </span>70<i class="fa-solid fa-coins"></i>`
   } else if(basicWeaponSpeed === 5 && coins >= 70){
     buySmall.play()
     basicWeaponSpeed = 8
-    shopSpeedGun$$.innerHTML = ` <span><i style="font-size: calc(14px + 0.53vw)" class="fa-solid fa-gauge-simple-high"></i> x 5</span>  <i class="fa-solid fa-angles-up fonts-i"></i><span id="velocidad-text"> Vel</span>   <br> 80<i class="fa-solid fa-coins"></i>`
+    shopSpeedGun$$.innerHTML = ` <span><i class="fa-solid fa-gauge-simple-high"></i> </span> <i style="font-size: calc(8px + 0.3vw)" class="fa-solid fa-angles-up fonts-i"></i> <span id="velocidad-text"> </span>80<i class="fa-solid fa-coins"></i>`
   } else if(basicWeaponSpeed === 8 && coins >= 80){
     buySmall.play()
     basicWeaponSpeed = 12
-    shopSpeedGun$$.innerHTML = ` <span style="color:rgb(243, 160, 234)"><i style="font-size: calc(14px + 0.53vw)" class="fa-solid fa-gauge-simple-high"></i> x 6   </span>`
+    shopSpeedGun$$.style.color = "rgb(164, 5, 164)"
+    shopSpeedGun$$.innerHTML = ` <span ><i style="font-size:calc(10px + 0.5vw)" class="fa-solid fa-gauge-simple-high"></i> </span>  <span id="velocidad-text"> MAX </span>`
+    shopSpeedGun$$.disabled = true
   } 
 })
+
 shopBarResistance$$.addEventListener("click", function(){
   if( coins >= 50 && barResistanceLevel === 0){
+  faShakeWhenBuy(this);
     buySmall.play()
     barResistanceLevel = 1;
     coins -=50;
     barLife = 3;
-    shopBarResistance$$.innerHTML = `  <span><i style="font-size: calc(14px + 0.53vw)" class="fa-solid fa-anchor"></i> x 3</span>  <i style="font-size: calc(8px + 0.3vw)" class="fa-solid fa-angles-up fonts-i"></i><span id="velocidad-text"> Res</span>  <br> 55<i class="fa-solid fa-coins"></i> `
+    shopBarResistance$$.innerHTML = `<span><i class="fa-solid fa-anchor"></i> x 4</span> <i style="font-size: calc(8px + 0.3vw)" class="fa-solid fa-angles-up fonts-i"> </i><span id="velocidad-text"></span> 60<i class="fa-solid fa-coins"></i> `
   } else if( coins >= 60 && barResistanceLevel === 1){
+  faShakeWhenBuy(this);
     buySmall.play()
     barResistanceLevel = 2;
     coins -=60;
     barLife = 4;
-    shopBarResistance$$.innerHTML = `<span><i style="font-size: calc(14px + 0.53vw)" class="fa-solid fa-anchor"></i> x 4</span>  <i style="font-size: calc(8px + 0.3vw)" class="fa-solid fa-angles-up fonts-i"></i><span id="velocidad-text"> Res</span>  <br> 60<i class="fa-solid fa-coins"></i> `
+    shopBarResistance$$.innerHTML = `<span><i class="fa-solid fa-anchor"></i> x 5</span> <i style="font-size: calc(8px + 0.3vw)" class="fa-solid fa-angles-up fonts-i"> </i><span id="velocidad-text"></span> 70<i class="fa-solid fa-coins"></i>`
   } else if( coins >= 70 && barResistanceLevel === 2){
+  faShakeWhenBuy(this);
     buySmall.play()
     barResistanceLevel = 3;
     coins -=70;
     barLife = 5;
-    shopBarResistance$$.innerHTML = ` <span><i style="font-size: calc(14px + 0.53vw)" class="fa-solid fa-anchor"></i> x 5</span>  <i style="font-size: calc(8px + 0.3vw)" class="fa-solid fa-angles-up fonts-i"></i><span id="velocidad-text"> Res</span>  <br> 65<i class="fa-solid fa-coins"></i> `
+    shopBarResistance$$.innerHTML = ` <span><i class="fa-solid fa-anchor"></i> x 6</span> <i style="font-size: calc(8px + 0.3vw)" class="fa-solid fa-angles-up fonts-i"> </i><span id="velocidad-text"></span> 80<i class="fa-solid fa-coins"></i> `
   } else if( coins >= 80 && barResistanceLevel === 3){
+  faShakeWhenBuy(this);
     buySmall.play()
     barResistanceLevel = 4;
     coins -=80;
     barLife = 6;
-    shopBarResistance$$.innerHTML = ` <span style="color:rgb(243, 160, 234)"><i style="font-size: calc(14px + 0.53vw)" class="fa-solid fa-anchor"></i> x 6</span> <br> `
+    shopBarResistance$$.disabled = true;
+    shopBarResistance$$.style.color = "rgb(164, 5, 164)"
+    shopBarResistance$$.innerHTML = ` <span ><i style="font-size: calc(14px + 0.4vw)" class="fa-solid fa-anchor"></i> x 6</span> <br> `
   } 
 })
+
+
 shopElectricShield$$.addEventListener("click", function(){
   if( coins >= 130 && electricShieldlevel === 0){
+  faShakeWhenBuy(this);
     electricShieldlevel = 1;
     game.player.electroAmount += 10;
     coins -=130;
     buyBig.play()
     H = 72;
-    shopElectricShield$$.innerHTML = `</i> <span id="electro-text"><i style="font-size: calc(8px + 0.4vw)" class="fa-solid fa-bolt-lightning"></i>Electro</span>  <br> 50<i class="fa-solid fa-coins"></i>+1<i class="fa-solid fa-plug-circle-plus"></i>`
+    shieldsDuration = 5000;
+    shopElectricShield$$.innerHTML = `</i> <span id="electro-text"><i style="font-size: calc(8px + 0.4vw)" class="fa-solid fa-bolt-lightning"></i> </span> 30<i class="fa-solid fa-coins"></i> `
   } else if( coins >= 30 && electricShieldlevel === 1){
+  faShakeWhenBuy(this);
     electricShieldlevel = 2;
     game.player.electroAmount += 10;
     coins -= 30;
     buySmall.play()
     shieldsDuration = 6000;
-    shopElectricShield$$.innerHTML = `</i> <span id="electro-text"><i style="font-size: calc(8px + 0.4vw)" class="fa-solid fa-bolt-lightning"></i>Electro</span>  <br> 50<i class="fa-solid fa-coins"></i>+2<i class="fa-solid fa-plug-circle-plus"></i>`
+    shopElectricShield$$.innerHTML = `</i> <span id="electro-text"><i style="font-size: calc(8px + 0.4vw)" class="fa-solid fa-bolt-lightning"></i> </span> 35<i class="fa-solid fa-coins"></i> `
   } else if( coins >= 35 && electricShieldlevel === 2){
+  faShakeWhenBuy(this);
     electricShieldlevel = 3;
     game.player.electroAmount += 10;
     coins -= 35;
     buySmall.play()
     shieldsDuration = 7000;
-    shopElectricShield$$.innerHTML = `</i> <span id="electro-text"><i style="font-size: calc(8px + 0.4vw)" class="fa-solid fa-bolt-lightning"></i>Electro</span>  <br> 50<i class="fa-solid fa-coins"></i>+3<i class="fa-solid fa-plug-circle-plus"></i>`
+    shopElectricShield$$.innerHTML = `</i> <span id="electro-text"><i style="font-size: calc(8px + 0.4vw)" class="fa-solid fa-bolt-lightning"></i> </span> 40<i class="fa-solid fa-coins"></i> `
   } else if( coins >= 40 && electricShieldlevel === 3){
+  faShakeWhenBuy(this);
     electricShieldlevel = 4;
     game.player.electroAmount += 10;
     coins -= 40;
     buySmall.play()
     shieldsDuration = 8000;
     shopElectricShield$$.disabled = true; 
-    shopElectro$$.style.display = "block"
-    shopElectricShield$$.innerHTML = ` </i> <span id="electro-text" style="color:rgb(243, 160, 234)" ><i style="font-size:calc(10px + 0.6vw)" class="fa-solid fa-bolt-lightning"></i></span>  <i class="fa-solid fa-plug-circle-plus"></i>  4 `
+    shopElectro$$.style.display = "block";
+    shopElectricShield$$.style.color = "rgb(164, 5, 164)";
+    shopElectricShield$$.innerHTML = ` </i> <span id="electro-text"  ><i style="font-size:calc(10px + 0.5vw)" class="fa-solid fa-bolt-lightning"></i></span>  <i class="fa-solid fa-plug-circle-plus"></i>  4 `
   } 
 })
 
 shopElectro$$.addEventListener("click", function(){
-  if(coins >=30 &&     game.player.electroAmount <= 85){
+  if(coins >=30 && game.player.electroAmount <= 85){
+  faShakeWhenBuy(this);
     buySmall.play()
     game.player.electroAmount += 10;
     coins-=30
@@ -435,11 +470,13 @@ shopElectro$$.addEventListener("click", function(){
 })
 
 shopBoots$$.addEventListener("click", function(){
-  if(coins >=65 && boots === false){
+  if(coins >=105 && boots === false){
+  faShakeWhenBuy(this);
     buyBig.play()
     boots = true;
-    coins-=65;
-    shopBoots$$.innerHTML = `<i style="font-size: calc(8px + 0.4vw)" class="fa-solid fa-shoe-prints"> </i> <i class="fa-solid fa-check"></i>`;
+    coins-=105;
+    shopBoots$$.style.color = "rgb(164, 5, 164)";
+    shopBoots$$.innerHTML = `<i style="font-size: calc(8px + 0.6vw)" class="fa-solid fa-shoe-prints"> </i> &nbsp<i style="font-size: calc(8px + 1vw)"  class="fa-solid fa-check"></i>`;
     shopBoots$$.disabled = true;
   }
 })
@@ -447,11 +484,12 @@ shopBoots$$.addEventListener("click", function(){
 
 shopRetry$$.addEventListener("click", function(){
   if(coins >= priceRetry){
+  faShakeWhenBuy(this);
     buyBig.play()
     retry ++;
     coins-= priceRetry; 
-    priceRetry += 50;
-    shopRetry$$.innerHTML = `</i> <span id="retry-text"><i style="font-size: calc(8px + 0.4vw)" class="fa-solid fa-arrow-rotate-left"></i> Retry</span>  <br> ${priceRetry}<i class="fa-solid fa-coins"></i>`
+    priceRetry += 30;
+    shopRetry$$.innerHTML = `<button data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Comprar 1 repetición de nivel" class="shop-btns" id="shop-retry"> </i> </span> ${priceRetry}<i class="fa-solid fa-coins"></i> </i> <span id="retry-text"><i style="font-size: calc(8px + 0.4vw)" class="fa-solid fa-arrow-rotate-left"></i> </button>`
   }
 })
 
@@ -466,35 +504,30 @@ toggleShop$$.addEventListener("click", ()=>{
 
 
 game.player.barImg$$.addEventListener("click", ()=>{
-  // eventInfo(munCadena$$)
   showModal(`Barras <span style="font-style: italic; font-size: 18px;">Item para recoger</span> `, `&nbsp&nbsp Barras de lanzamiento <span style="color: blue; font-size: 20px;">M</span>, una  munición especial que resiste 2 impactos de burbujas de colores y es totalmente resistente a las burbujas oscuras. <br/>&nbsp&nbsp En la tienda puedes comprar tanto barras como mejorar su resistencia, para que aguante más impactos de burbujas de colores  <br/>&nbsp&nbsp Se pueden cargar las barras con el escudo eléctrico del personaje, haciéndolas más resistentes y que duren más tiempo. Cuanto más esté en contacto con la electricidad, mayor el efect.`).then(() => {
     game.start();
   });
   return;
 })
 game.player.fireImg$$.addEventListener("click", ()=>{
-  // eventInfo(munLanzallamas$$)
   showModal(`Lanzallamas <span style="font-style: italic; font-size: 18px;">Item para recoger</span> `, `&nbsp&nbsp Cargas para el lanzallamas. Para usar el lanzallamas pulsa la tecla <span style="color: blue; font-size: 20px;">N</span>  <br/>&nbsp&nbsp El fuego puede quemar algunos objetos, pero no afecta a las plataformas. <br/>&nbsp&nbsp Al chocar con burbujas, las evapora poco a poco, evitando así que exploten en más burbujas pequeñas. Ten en cuenta también que cuanto más grande sea la burbuja, menos le afecta el daño del fuego.`).then(() => {
     game.start();
   });
   return;
 })
 game.player.hookImg$$.addEventListener("click", ()=>{
-  // eventInfo(munHook$$)
   showModal(`Ganchos <span style="font-style: italic; font-size: 18px;">Munición</span>`, `&nbsp&nbsp Una munición especial que te impulsa hasta ciertos objetos sobre los que tiene la capacidad de engancharse <span style="color: blue; font-size: 20px;">J</span>. Úsalos para esquivar, moverte rápido y obtener ventaja en una gran variedad de situaciones.`).then(() => {
     game.start();
   });
   return;
 })
 game.player.stepImg$$.addEventListener("click", ()=>{
-  // eventInfo(munStep$$)
   showModal(`Steps`, `&nbsp&nbsp Coloca  (<span style="color: blue; font-size: 20px;">O </span>a la izquierda - <span style="color: blue; font-size: 20px;">P</span> a la derecha) plataformas pequeñas y endebles, pero que puedes usar para llegar a lugares complicados. <br/>&nbsp&nbsp  Se romperán rápido, pero te pueden proteger en algunas situaciones y también se pueden activar con electricidad`).then(() => {
     game.start();
   });
   return;
 })
 game.player.swordImg$$.addEventListener("click", ()=>{
-  // eventInfo(munStep$$)
   showModal(`Espada`, `&nbsp&nbsp Espada Bubujaglória. Un arma especial del G.C.A.M. que te permite hacer ataques físicos especiales. Si recoges varias espadas, se fusionan, aumentando sus habilidades. <br/>&nbsp&nbsp Pulsa <span style="color: blue; font-size: 20px;">R</span> para hacer un barrido superior. Empieza con un barrido a un lado y en la siguiente acción lo hará al otro lado. Si haces el barrido en salto, también te impulsa un poco más hacia arriba. <br/>&nbsp&nbsp Si pulsas  <span style="color: blue; font-size: 20px;">F</span> harás una estocada en la dirección del último movimiento. La estocada es un ataque poderoso que puede explotar varias burbujas a la vez al contacto y también te protege. <br/>&nbsp&nbsp A medida que golpeas con la espada, cargas su poder especial, y al cargar del todo podrás disparar  Burbalas adicionals con cada barrido. `).then(() => {
     game.start();
   });
