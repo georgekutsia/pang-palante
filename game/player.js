@@ -82,10 +82,10 @@ class Player {
     this.swordSparkleActive = true;
     this.swingSwordState = true;
     this.swordEquipped = true;
-    this.swordLevel = 0;
+    this.swordLevel = 1;
     this.swordPowerUp = 0;
     this.swordPower1 = false;
-    this.swordCooldown = 2000;
+    this.swordCooldown = 0;
     this.keySwitchCounter = 0;
     this.stabDirection = true;
     this.tickFireElectro = 0;
@@ -589,7 +589,7 @@ class Player {
   if(this.swordPowerUp >= powerToGetForSword){
     this.swordPowerUp = powerToGetForSword;
     this.swordPower1 = true;
-    this.swordCooldown = 5500;
+    this.swordCooldown = 2500;
     if(this.swordSparkleActive){
       let swordSparkle1 = new BurningColors(this.ctx, CTXW - 38, -30, 80, 80)
         this.swordSparkles.push(swordSparkle1)
@@ -602,7 +602,7 @@ class Player {
     setTimeout(() => {
     this.swordPower1 = false;
     this.swordPowerUp = 0;
-    this.swordCooldown = 2000;
+    this.swordCooldown = 0;
     this.swordSparkleActive = true;
     this.swordSparkles = []
     }, 10000);
@@ -802,7 +802,7 @@ class Player {
         R = 0
         setTimeout(() => {
           R = 82;
-        }, 6000 - this.swordCooldown);
+        }, swordSwingCooldown - this.swordCooldown);
         }
 
         if(key === F){

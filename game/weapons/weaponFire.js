@@ -13,11 +13,9 @@ class WeaponFire {
     this.flameSpinTick = 0;
     this.damage = 0.08;
 
-
     this.fireShootSOund = new Audio("/public/sounds/shooting/fireWeaponSound2.mp3")
     this.fireShootSOund.volume = 0.03;
     this.shoot = true;
-
 
   }
 
@@ -39,8 +37,8 @@ class WeaponFire {
     );
   }
   move() {
-    this.x += this.vx;
-    this.y += this.vy;
+    this.x += this.vx + fireWeaponSpeedXWhenCollides;
+    this.y += this.vy + fireWeaponSpeedYWhenCollides;
     this.w += fireSizing; //aumenta el ancho de la bala mientras sube
     this.h += fireSizing; //aumenta la altura de la bala mientra sube
     this.flameSpinTick++
@@ -61,6 +59,11 @@ class WeaponFire {
       const colX = this.x <= objetivo.x + objetivo.w && this.x + this.w > objetivo.x;
       const colY = this.y + this.h > objetivo.y && this.y < objetivo.y + objetivo.h/2;
       return colX && colY;
+  }
+  shootFireToSides(){
+    let newFire1 = new WeaponFire(this.ctx, this.x + this.w/2, this.y + this.h/2, 30, 30, 2, 0)
+    let newFire2 = new WeaponFire(this.ctx, this.x + this.w/2, this.y + this.h/2, 30, 30, -2, 0)
+    game.player.bulletFireArray.push(newFire1, newFire2)
   }
   isVisible() {
     return this.y + this.h >= 0;

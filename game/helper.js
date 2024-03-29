@@ -369,19 +369,97 @@ shopSpeedGun$$.addEventListener("click", function(){
     basicWeaponSpeed = 3
     shopSpeedGun$$.innerHTML = ` <span><i class="fa-solid fa-gauge-simple-high"></i> </span> <i style="font-size: calc(8px + 0.3vw)" class="fa-solid fa-angles-up fonts-i"></i> <span id="velocidad-text"> </span>60<i class="fa-solid fa-coins"></i>`
   } else if(basicWeaponSpeed === 3 && coins >= 60){
+    coins -=60;
     buySmall.play()
     basicWeaponSpeed = 5
     shopSpeedGun$$.innerHTML = ` <span><i class="fa-solid fa-gauge-simple-high"></i> </span> <i style="font-size: calc(8px + 0.3vw)" class="fa-solid fa-angles-up fonts-i"></i> <span id="velocidad-text"> </span>70<i class="fa-solid fa-coins"></i>`
   } else if(basicWeaponSpeed === 5 && coins >= 70){
+    coins -=70;
     buySmall.play()
     basicWeaponSpeed = 8
     shopSpeedGun$$.innerHTML = ` <span><i class="fa-solid fa-gauge-simple-high"></i> </span> <i style="font-size: calc(8px + 0.3vw)" class="fa-solid fa-angles-up fonts-i"></i> <span id="velocidad-text"> </span>80<i class="fa-solid fa-coins"></i>`
   } else if(basicWeaponSpeed === 8 && coins >= 80){
+    coins -=80;
     buySmall.play()
     basicWeaponSpeed = 12
     shopSpeedGun$$.style.color = "rgb(164, 5, 164)"
     shopSpeedGun$$.innerHTML = ` <span ><i style="font-size:calc(10px + 0.5vw)" class="fa-solid fa-gauge-simple-high"></i> </span>  <span id="velocidad-text"> MAX </span>`
     shopSpeedGun$$.disabled = true
+  } 
+})
+shopSwordStab$$.addEventListener("click", function(){
+  faShakeWhenBuy(this);
+  if(stabLevel === 0 && coins >= 70){
+    buySmall.play()
+    coins -=70;
+    stabDuration = 600;
+    stabLevel++;
+    shopSwordStab$$.innerHTML = ` <i style="font-size: calc(8px + 0.6vw)"  class="fa-solid fa-khanda"></i><i class="fa-solid fa-gauge-simple-high"></i> </span> <i style="font-size: calc(8px + 0.3vw)" class="fa-solid fa-angles-up fonts-i"></i> <span id="velocidad-text"> </span> 75 <i class="fa-solid fa-coins"></i> `
+  } else if(stabLevel === 1 &&  coins >= 75){
+    coins -=75;
+    stabDuration = 900;
+    stabLevel++;
+    buySmall.play()
+    shopSwordStab$$.innerHTML = ` <i style="font-size: calc(8px + 0.6vw)"  class="fa-solid fa-khanda"></i><i class="fa-solid fa-gauge-simple-high"></i> </span> <i style="font-size: calc(8px + 0.3vw)" class="fa-solid fa-angles-up fonts-i"></i> <span id="velocidad-text"> </span> 80 <i class="fa-solid fa-coins"></i> `
+  } else if(stabLevel === 2 &&  coins >= 85){
+    coins -=85;
+    stabDuration = 1100;
+    stabLevel++;
+    buySmall.play()
+    shopSwordStab$$.style.color = "rgb(164, 5, 164)"
+    shopSwordStab$$.innerHTML = ` <i style="font-size: calc(8px + 0.6vw)"  class="fa-solid fa-khanda"></i><i class="fa-solid fa-gauge-simple-high"></i> </span> MAX `
+    shopSwordStab$$.disabled = true
+  } 
+})
+shopSwordSpeed$$.addEventListener("click", function(){
+  faShakeWhenBuy(this);
+  if(stabSpeedLevel === 0 && coins >= 45){
+    buySmall.play()
+    coins -=45;
+    stabSpeed += 8;
+    stabSpeedLevel++;
+    shopSwordSpeed$$.innerHTML = `<i style="font-size: calc(8px + 0.6vw)"  class="fa-solid fa-khanda"></i> <i class="fa-solid fa-gauge-simple-high"></i> </span> <i style="font-size: calc(8px + 0.3vw)" class="fa-solid fa-angles-up fonts-i"> </i><span id="velocidad-text"></span>  75 <i class="fa-solid fa-coins"></i> `
+  } else if(stabSpeedLevel === 1 &&  coins >=  75){
+    coins -= 75;
+    stabSpeed += 8;
+    stabSpeedLevel++;
+    buySmall.play()
+    shopSwordSpeed$$.innerHTML = `<i style="font-size: calc(8px + 0.6vw)"  class="fa-solid fa-khanda"></i> <i class="fa-solid fa-gauge-simple-high"></i> </span> <i style="font-size: calc(8px + 0.3vw)" class="fa-solid fa-angles-up fonts-i"> </i><span id="velocidad-text"></span>  115 <i class="fa-solid fa-coins"></i> `
+  } else if(stabSpeedLevel === 2 &&  coins >= 115){
+    coins -= 115;
+    stabSpeed += 8;
+    stabSpeedLevel++;
+    buySmall.play()
+    shopSwordSpeed$$.style.color = "rgb(164, 5, 164)"
+    shopSwordSpeed$$.innerHTML = `<i style="font-size: calc(8px + 0.6vw)"  class="fa-solid fa-khanda"></i> <i class="fa-solid fa-gauge-simple-high"></i> </span>  </i><span id="velocidad-text"></span> MAX `
+    shopSwordSpeed$$.disabled = true
+  } 
+})
+shopSwordRecharge$$.addEventListener("click", function(){
+  faShakeWhenBuy(this);
+  if(stabRechargeLevel === 0 && coins >= 75){
+    buySmall.play()
+    coins -=75;
+    stabRecharge -= 1000;
+    swordSwingCooldown -= 500;
+    stabRechargeLevel++;
+    shopSwordRecharge$$.innerHTML = `<i style="font-size: calc(8px + 0.6vw)"  class="fa-solid fa-khanda"></i>  <i class="fa-solid fa-clock"></i> - 1s </span> <span id="velocidad-text"></span> 90 <i class="fa-solid fa-coins"></i> `
+  } else if(stabRechargeLevel === 1 &&  coins >=  90){
+    coins -= 90;
+    stabRecharge -= 1000;
+    swordSwingCooldown -= 500;
+    stabRechargeLevel++;
+    buySmall.play()
+    shopSwordRecharge$$.innerHTML = `<i style="font-size: calc(8px + 0.6vw)"  class="fa-solid fa-khanda"></i>  <i class="fa-solid fa-clock"></i> - 1s </span> <span id="velocidad-text"></span> 115 <i class="fa-solid fa-coins"></i> `
+  } else if(stabRechargeLevel === 2 &&  coins >= 115){
+    coins -= 115;
+    stabRecharge -= 1000;
+    swordSwingCooldown -= 500;
+    stabRechargeLevel++;
+    buySmall.play()
+    shopSwordRecharge$$.style.color = "rgb(164, 5, 164)"
+    shopSwordRecharge$$.innerHTML = `<i style="font-size: calc(8px + 0.6vw)"  class="fa-solid fa-khanda"></i>  <i class="fa-solid fa-clock"></i> </span> <span id="velocidad-text"></span> - 3s  `
+    shopSwordRecharge$$.disabled = true
   } 
 })
 
@@ -429,34 +507,34 @@ shopElectricShield$$.addEventListener("click", function(){
     buyBig.play()
     H = 72;
     shieldsDuration = 5000;
-    shopElectricShield$$.innerHTML = `</i> <span id="electro-text"><i style="font-size: calc(8px + 0.4vw)" class="fa-solid fa-bolt-lightning"></i> </span> 30<i class="fa-solid fa-coins"></i> `
-  } else if( coins >= 30 && electricShieldlevel === 1){
+    shopElectricShield$$.innerHTML = `</i> <span id="electro-text"><i style="font-size: calc(8px + 0.4vw)" class="fa-solid fa-bolt-lightning"></i> </span> 45<i class="fa-solid fa-coins"></i> `
+  } else if( coins >= 45 && electricShieldlevel === 1){
   faShakeWhenBuy(this);
     electricShieldlevel = 2;
     game.player.electroAmount += 10;
-    coins -= 30;
+    coins -= 45;
     buySmall.play()
     shieldsDuration = 6000;
-    shopElectricShield$$.innerHTML = `</i> <span id="electro-text"><i style="font-size: calc(8px + 0.4vw)" class="fa-solid fa-bolt-lightning"></i> </span> 35<i class="fa-solid fa-coins"></i> `
-  } else if( coins >= 35 && electricShieldlevel === 2){
+    shopElectricShield$$.innerHTML = `</i> <span id="electro-text"><i style="font-size: calc(8px + 0.4vw)" class="fa-solid fa-bolt-lightning"></i> </span> 65<i class="fa-solid fa-coins"></i> `
+  } else if( coins >= 65 && electricShieldlevel === 2){
   faShakeWhenBuy(this);
     electricShieldlevel = 3;
     game.player.electroAmount += 10;
-    coins -= 35;
+    coins -= 65;
     buySmall.play()
     shieldsDuration = 7000;
-    shopElectricShield$$.innerHTML = `</i> <span id="electro-text"><i style="font-size: calc(8px + 0.4vw)" class="fa-solid fa-bolt-lightning"></i> </span> 40<i class="fa-solid fa-coins"></i> `
-  } else if( coins >= 40 && electricShieldlevel === 3){
+    shopElectricShield$$.innerHTML = `</i> <span id="electro-text"><i style="font-size: calc(8px + 0.4vw)" class="fa-solid fa-bolt-lightning"></i> </span> 85<i class="fa-solid fa-coins"></i> `
+  } else if( coins >= 85 && electricShieldlevel === 3){
   faShakeWhenBuy(this);
     electricShieldlevel = 4;
     game.player.electroAmount += 10;
-    coins -= 40;
+    coins -= 85;
     buySmall.play()
     shieldsDuration = 8000;
     shopElectricShield$$.disabled = true; 
     shopElectro$$.style.display = "block";
     shopElectricShield$$.style.color = "rgb(164, 5, 164)";
-    shopElectricShield$$.innerHTML = ` </i> <span id="electro-text"  ><i style="font-size:calc(10px + 0.5vw)" class="fa-solid fa-bolt-lightning"></i></span>  <i class="fa-solid fa-plug-circle-plus"></i>  4 `
+    shopElectricShield$$.innerHTML = ` </i> <span id="electro-text"  ><i style="font-size:calc(10px + 0.5vw)" class="fa-solid fa-bolt-lightning"></i></span> + 4s `
   } 
 })
 
@@ -469,6 +547,7 @@ shopElectro$$.addEventListener("click", function(){
   }
 })
 
+
 shopBoots$$.addEventListener("click", function(){
   if(coins >=105 && boots === false){
   faShakeWhenBuy(this);
@@ -478,6 +557,34 @@ shopBoots$$.addEventListener("click", function(){
     shopBoots$$.style.color = "rgb(164, 5, 164)";
     shopBoots$$.innerHTML = `<i style="font-size: calc(8px + 0.6vw)" class="fa-solid fa-shoe-prints"> </i> &nbsp<i style="font-size: calc(8px + 1vw)"  class="fa-solid fa-check"></i>`;
     shopBoots$$.disabled = true;
+  }
+})
+
+shopBulletWithFire$$.addEventListener("click", function(){
+  if(coins >=115 && shopBulletWithFire === false){
+  faShakeWhenBuy(this);
+    buyBig.play()
+    shopBulletWithFire = true;
+    coins-=115;
+    shopBulletWithFire$$.style.color = "rgb(164, 5, 164)";
+    shopBulletWithFire$$.innerHTML = `<i style="font-size: calc(8px + 0.4vw)" class="fa-solid fa-circle-dot"></i> -> <i style="font-size: calc(8px + 0.4vw)" class="fa-solid fa-fire-flame-curved"></i> <i style="font-size: calc(8px + 1vw)"  class="fa-solid fa-check"></i>`;
+    shopBulletWithFire$$.disabled = true;
+  }
+})
+
+shopLife$$.addEventListener("click", function(){
+  if(coins >= 120){
+    coins-=120;
+    maxLife += 2;
+    maxLifePrice += 30;
+    game.player.life.total++
+    faShakeWhenBuy(this);
+    shopLife$$.innerHTML = `</i> <span id="boots-text"><i style="font-size: calc(8px + 0.4vw)"  class="fa-solid fa-heart-pulse"> </i> </span>${maxLifePrice} <i class="fa-solid fa-coins"></i>`;
+    if(maxLifePrice >= 211) {
+      shopLife$$.disabled = true; 
+      shopLife$$.style.color = "rgb(164, 5, 164)";
+      shopLife$$.innerHTML = `</i> <span id="boots-text"><i style="font-size: calc(8px + 0.4vw)"  class="fa-solid fa-heart-pulse"> </i> </span>+ 8 MAX`;
+    }
   }
 })
 

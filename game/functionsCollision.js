@@ -30,7 +30,7 @@ function checkBubbleCollision(bubbles, player, puffBubbles, ctx, platforms, boun
   });
 
 
- bubbles.forEach((bubble) => {//  bubble con bullet
+  bubbles.forEach((bubble) => {//  bubble con bullet
     player.bulletArray = player.bulletArray.filter((bullet) => {
       if (bullet.collides(bubble) && !bullet.isBig) {
         bullsEyeForHealth++;
@@ -422,6 +422,20 @@ function bossFireCollision (miniBoses, object){
         if (bullet.collides(box)) {
           box.boxHitSword();
 
+          return false;
+        } else return true;
+      });
+    });
+  }
+
+
+
+  function bulletCollidesFire(player){
+    player.bulletArray.forEach((bullet) => {//  bulletBar con bullet
+      player.bulletFireArray.forEach((fire) => {
+        if (bullet.collides(fire) && bulletCollidesFireActive) {
+          fire.shootFireToSides();
+          bullet.dispose = false;
           return false;
         } else return true;
       });

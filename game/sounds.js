@@ -163,3 +163,17 @@ swordTakenSound3.play()
 
 let leverActivationSound1 = new Audio("/public/sounds/leverActivation1.mp3")
 leverActivationSound1.volume = 0.1;
+
+
+let electroShockSound = new Audio("/public/sounds/electrofire/electrifingBall.mp3")
+electroShockSound.volume = 0.1
+let electroPlatformSound = new Audio("/public/sounds/electrofire/electrifingPlatforms.mp3")
+electroPlatformSound.volume = 0.05
+let electroBarSound = new Audio("/public/sounds/electrofire/electrifing.mp3")
+electroBarSound.volume = 0.01;
+let buyBig = new Audio("/public/sounds/buyBig.mp3")
+buyBig.volume = 0.1;
+let buySmall = new Audio("/public/sounds/buySmall1.mp3")
+buySmall.volume = 0.1;
+let coinsSoundYa = new Audio("/public/sounds/items/gainCoinsSound.mp3")
+coinsSoundYa.volume = 0.3

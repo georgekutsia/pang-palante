@@ -299,7 +299,8 @@ function itemsDemo(ctx, stairs, bubbles, darkBubbles, spikes, gatlings, hooks, f
 
 
 
-specialItems(this.ctx, this.cristalBalls)
+// specialItems(this.ctx, this.cristalBalls)
+
 function specialItems(ctx, cristalBalls){
 
   let cri = new CristalBall(ctx, 100, 100, 40, 40,  1, 2, 3);

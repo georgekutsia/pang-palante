@@ -35,8 +35,8 @@ class Life {
       this.ctx.drawImage(this.imgHalf, place + 30, this.y, this.w, this.h);
     }
     this.ctx.restore();
-    if(this.total >= 10){
-      this.total = 10
+    if(this.total >= maxLife){
+      this.total = maxLife
     }
 
     if (this.isGaining) {

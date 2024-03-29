@@ -22,11 +22,9 @@ class WeaponSword {
 
   draw() {
     if(this.stab){
-      setTimeout(() => {
-        this.dispose = false;
-      }, stabDuration);
+
       this.direction ? this.img.src = "/public/Imagenes/swordStabRight.png" : this.img.src ="/public/Imagenes/swordStabLeft.png";
-      this.direction ? this.vx = 4 : this.vx = -4
+      this.direction ? this.vx = stabSpeed : this.vx = -stabSpeed
       stabSound.play()
         this.ctx.drawImage(
           this.img,
@@ -89,7 +87,9 @@ class WeaponSword {
           this.rounds ++;
           this.img.frame = 0;
         } else {
+        setTimeout(() => {
           this.dispose = false;
+        }, stabDuration);
         }
       }
     }
@@ -104,7 +104,9 @@ class WeaponSword {
           this.img.frame = 4  ;
           this.rounds ++;
         } else {
-          this.dispose = false;
+          setTimeout(() => {
+            this.dispose = false;
+          }, stabDuration);
         }
       }
     }

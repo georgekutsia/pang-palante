@@ -83,15 +83,16 @@ class Game {
         levelInfinite( this.ctx, this.bubbles, this.platforms, this.bouncers, this.spikes, this.stairs, this.flamethrowers, this.machineguns, this.healings, this.auras, this.boxes, this.blasters, this.levelBalls, this.gatlings, this.darkBubbles,)
       }
       if(GAMELEVEL === 1987 ) {
-        infoIntro1()
+itemsDemo(this.ctx, this.stairs, this.bubbles, this.darkBubbles, this.spikes, this.gatlings, this.hooks, this.flamethrowers, this.bars, this.boxes, this.blasters, this.electros, this.coins, this.healings, this.platforms, this.chests, this.swords, this.auras, this.steps)
 
-        this.background.img.src = "../public/Imagenes/background/backgroundTraining4.webp";
+        // infoIntro1()
+        // this.background.img.src = "../public/Imagenes/background/backgroundTraining4.webp";
         // setTimeout(() => {
-          addDemo1Electro(this.ctx,  this.platforms, this.electros)
-          this.background.img.src = "../public/Imagenes/background/backDemo5.png";
+          // addDemo1Electro(this.ctx,  this.platforms, this.electros)
+          // this.background.img.src = "../public/Imagenes/background/backDemo5.png";
         // }, 10500);
         // setTimeout(() => {
-          addDemo1(this.ctx, this.platforms)
+          // addDemo1(this.ctx, this.platforms)
         // }, 30000);
       }
     }
@@ -370,7 +371,7 @@ class Game {
       exp.vy = miniBossVy;
       e.miniBossBurn()
   }})})
-
+  bulletCollidesFire(this.player)
     
     bossFireCollision(this.miniBoses, this.stairs)
     bossFireCollision(this.miniBoses, this.platforms)

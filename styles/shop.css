@@ -127,8 +127,8 @@
 
 
   #extra-shop {
-    display: none;
-    opacity: 0;
+    /* display: none; */
+    /* opacity: 0; */
     position: absolute;
     top: 1%;
     right: 10%;
@@ -151,4 +151,23 @@
   
   .extra-shop-div{
   margin-top: 5px;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  }
+  .extra-shop-div h3{
+    background-image: url("/public/Imagenes/background/extraShopTitle1.png");
+    background-size:contain;
+    background-repeat: no-repeat;
+    text-shadow: 1px 1px 1px white;
+  }
+
+  .extra-shop-div-h1{
+    padding: 1px 20px;
+  }
+  .extra-shop-div-h2{
+    padding: 5px 15px;
+  }
+  .extra-shop-div-h3{
+    padding: 7px 15px;
   }

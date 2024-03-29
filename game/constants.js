@@ -35,16 +35,7 @@ let D = 68;
   let miniBossVx = 0;// para qeu burningColors se mantenga pegada a la nave mientras se mueve
   let miniBossVy = 0;// para qeu burningColors se mantenga pegada a la nave mientras se mueve
 
-let electroShockSound = new Audio("/public/sounds/electrofire/electrifingBall.mp3")
-electroShockSound.volume = 0.1
-let electroPlatformSound = new Audio("/public/sounds/electrofire/electrifingPlatforms.mp3")
-electroPlatformSound.volume = 0.05
-let electroBarSound = new Audio("/public/sounds/electrofire/electrifing.mp3")
-electroBarSound.volume = 0.01;
-let buyBig = new Audio("/public/sounds/buyBig.mp3")
-buyBig.volume = 0.1;
-let buySmall = new Audio("/public/sounds/buySmall1.mp3")
-buySmall.volume = 0.1;
+
 
 
 let trainingRoom = 0;// configura en cual sala está entreando 
@@ -65,7 +56,8 @@ let bubbleSpeedY = 10;
 let bubbleSpeedX = 3;
 let GAMELEVEL = 0;
 let infiniteLeveling = 0;
-let coins = 1200;
+let coins = 3200;
+let shopBulletWithFire = false;
 let ballBroke = true;
 let retry = 2;  // cuantas vecs se puede reinentar el juego
 let priceRetry = 150
@@ -74,11 +66,15 @@ let basicWeaponLevelingChanged = 0;
 let basicWeaponSpeed = 0;
 let barResistanceLevel = 0;
 let electricShieldlevel = 0;
-let shootFail = 0; //se acumula durante el nivel. si todas las balas aciertan, queda en 0. si el resultado es diferente, es que ha fallado
-let playerIsImmune = false;  // vuelve los collides de  muchas cosas en false;
+let playerIsImmune = false;  // vuelve los collides de muchas cosas en false;
 let ayudasInfoArray = [];
 let swordRounds = -1;
-let stabDuration = 3400; //cuanto dura cuando haces el estoque, para poder dejar la espada fija un rato si quires de
+let stabDuration = 300; //cuanto dura cuando haces el estoque, para poder dejar la espada fija un rato si quires de
+let stabLevel = 0;
+let stabSpeed = 4;
+let stabSpeedLevel = 0;
+let swordSwingCooldown = 4000;
+let stabRechargeLevel = 0;
 let stabRecharge = 6000;
 const CTXW = ctx.canvas.width
 const CTXH = ctx.canvas.height
@@ -94,6 +90,11 @@ let bullsEyeForHealth = 0;
 let amountOfBullsEyeForHealth = 15;
 let totalShootsPerLevel = 0; //cuenta cuantos disparos se hice en un nivel, para compararlo si el total de bullsEyeForHealth es igual, o si es distinto, para dar vida adicional al cambiar de nivel
 let totalShootsPerLevelSucces = 0;
+let maxLife = 6;
+let maxLifePrice = 120;
+let fireWeaponSpeedXWhenCollides = 0;
+let fireWeaponSpeedYWhenCollides = 1;
+let bulletCollidesFireActive = false;
 let itemTakenImages = "../public/Imagenes/itemTakenSparkle.png";
 const mapArray = [
   "/public/Imagenes/background/map1.webp",
@@ -127,13 +128,6 @@ const miniBossHitWeapons = [
 
 ]
 //cuando se ralentice  this.g de player en 0.6, this.playerSpeed =  4 y gameSpeed en 20;
-
-
-let coinsSoundYa = new Audio("/public/sounds/items/gainCoinsSound.mp3")
-coinsSoundYa.volume = 0.3
-
-
-
 const changeFrases = [
   "Bien hecho! sigue así",
   "Cada vez lo haces mejor!",
@@ -183,8 +177,6 @@ const changeGameOverImgs = [
   "/public/Imagenes/background/gameOverImg9.webp",
   "/public/Imagenes/background/gameOverImg10.webp",
 ]
-
-
 
 const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
 const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
