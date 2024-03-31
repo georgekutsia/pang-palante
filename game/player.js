@@ -25,7 +25,7 @@ class Player {
     this.fading = 0; //necesario para el parpadeo del personaje cuando es inmune
     this.charging = 0;  // acumula la carga, lo que dibuja el semicírculo
     this.chargingFires = false; //   se pone en true mientras carga el disparo fuerte de fuego
-    this.megaFireBlaster = false; //al ponerse en true, se puede activar la K
+    this.megaFireBlaster = true; //al ponerse en true, se puede activar la K
     this.megaFireBlasterAmount = 31; //la carga del blaster. cada 10, es una bola
     this.electroAmount = 10; //cantidad de carga eléctrica que tiene
     this.fireAmount = 10; //cantidad de fuegos que puedes disparar con N
@@ -783,12 +783,16 @@ class Player {
     if(key === H){
       if(this.clickedH === false){
         this.electricShieldIsActive = true;
-        this.electricBurbalasIsActive = true;
+          if(electrifiedBurbalas){
+            this.electricBurbalasIsActive = true;
+          }
         this.clickedH = true;
         electroSoundOn.play()
       } else if(this.clickedH === true){
         this.electricShieldIsActive = false;
-        this.electricBurbalasIsActive = false;
+        if(electrifiedBurbalas){
+          this.electricBurbalasIsActive = false;
+        }
         this.clickedH = false;
         this.electroAmount = this.electroAmount
       }

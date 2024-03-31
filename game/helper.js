@@ -548,10 +548,23 @@ shopElectro$$.addEventListener("click", function(){
 })
 
 
+
+
+shopElectroBullet$$.addEventListener("click", function(){
+  if(coins >=80 && boots === false){
+  faShakeWhenBuy(this);
+    buyBig.play()
+    electrifiedBurbalas = true;
+    coins-=80;
+    shopElectroBullet$$.style.color = "rgb(164, 5, 164)";
+    shopElectroBullet$$.innerHTML = `<i class="fa-solid fa-circle-dot"></i> -> <i style="font-size: calc(8px + 0.4vw)" class="fa-solid fa-bolt-lightning"></i> </span>  `;
+    shopElectroBullet$$.disabled = true;
+  }
+})
 shopBoots$$.addEventListener("click", function(){
   if(coins >=105 && boots === false){
   faShakeWhenBuy(this);
-    buyBig.play()
+    buyBig.play();
     boots = true;
     coins-=105;
     shopBoots$$.style.color = "rgb(164, 5, 164)";
@@ -559,11 +572,23 @@ shopBoots$$.addEventListener("click", function(){
     shopBoots$$.disabled = true;
   }
 })
+shopFireSpeed$$.addEventListener("click", function(){
+  if(coins >=180 && fireDesaceleration === false){
+  faShakeWhenBuy(this);
+    buyBig.play();
+    boots = true;
+    coins-=180;
+    fireDesaceleration = true;
+    shopFireSpeed$$.style.color = "rgb(164, 5, 164)";
+    shopFireSpeed$$.innerHTML = `<i  style="font-size: calc(8px + 0.4vw)"  class=" fa-solid fa-gauge-simple-high"></i> <i style="font-size: calc(8px + 0.4vw)" class=" fa-solid fa-fire-flame-simple"></i> <i  style="font-size: calc(8px + 1vw)"  class="fa-solid fa-check"></i> `;
+    shopFireSpeed$$.disabled = true;
+  }
+})
 
 shopBulletWithFire$$.addEventListener("click", function(){
   if(coins >=115 && shopBulletWithFire === false){
   faShakeWhenBuy(this);
-    buyBig.play()
+    buyBig.play();
     shopBulletWithFire = true;
     coins-=115;
     shopBulletWithFire$$.style.color = "rgb(164, 5, 164)";
@@ -584,6 +609,21 @@ shopLife$$.addEventListener("click", function(){
       shopLife$$.disabled = true; 
       shopLife$$.style.color = "rgb(164, 5, 164)";
       shopLife$$.innerHTML = `</i> <span id="boots-text"><i style="font-size: calc(8px + 0.4vw)"  class="fa-solid fa-heart-pulse"> </i> </span>+ 8 MAX`;
+    }
+  }
+})
+
+shopShootLife$$.addEventListener("click", function(){
+  if(coins >= 80){
+    coins-=80;
+    amountOfBullsEyeForHealth -= 2;
+    shopShootLifePrice += 30;
+    faShakeWhenBuy(this);
+    shopShootLife$$.innerHTML = `</i> <span id="boots-text"><i class="fa-solid fa-circle-dot"></i> -> <i style="font-size: calc(8px + 0.4vw)"  class="fa-solid fa-heart-pulse"> </i> </span> ${shopShootLifePrice} <i class="fa-solid fa-coins"> </i> `;
+    if(shopShootLifePrice >= 169) {
+      shopShootLife$$.disabled = true; 
+      shopShootLife$$.style.color = "rgb(164, 5, 164)";
+      shopShootLife$$.innerHTML = `</i> <span id="boots-text"><i class="fa-solid fa-circle-dot"></i> -><i style="font-size: calc(8px + 0.4vw)"  class="fa-solid fa-heart-pulse"> </i> </span> MAX`;
     }
   }
 })

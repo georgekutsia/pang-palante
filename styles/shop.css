@@ -49,9 +49,10 @@
 }
 .shop-btns:hover,
 .shop-btns:hover .shop-btns i {
-  filter: drop-shadow(0px 3px 3px rgba(232, 151, 10, 0.9));
+  filter: drop-shadow(0px 3px 3px rgba(232, 151, 10, 0.9)) brightness(1.2);
   text-shadow: 1px 1px 1px rgba(75, 42, 1, 0.454);
 }
+
 
 .bullet-block-btns button{
   background: none;

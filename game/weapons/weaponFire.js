@@ -4,7 +4,7 @@ class WeaponFire {
     this.x = x;
     this.y = y;
     this.vx = vx || -0.18; // minimo ajuste para que el fuego vaya recto de verdad, ya que al aumentar de tamaño solo se expande hacia al derecha
-    this.vy = vy || -1.5;
+    this.vy = vy || -0.5;
     this.img = new Image();
     this.img.src = "../public/Imagenes/weaponFire1.png";
     this.img.frame = 0;
@@ -37,6 +37,7 @@ class WeaponFire {
     );
   }
   move() {
+    this.vy = this.vy -= fireWeaponSpeedYWhenCollides
     this.x += this.vx + fireWeaponSpeedXWhenCollides;
     this.y += this.vy + fireWeaponSpeedYWhenCollides;
     this.w += fireSizing; //aumenta el ancho de la bala mientras sube

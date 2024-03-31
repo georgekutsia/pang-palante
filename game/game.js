@@ -83,7 +83,7 @@ class Game {
         levelInfinite( this.ctx, this.bubbles, this.platforms, this.bouncers, this.spikes, this.stairs, this.flamethrowers, this.machineguns, this.healings, this.auras, this.boxes, this.blasters, this.levelBalls, this.gatlings, this.darkBubbles,)
       }
       if(GAMELEVEL === 1987 ) {
-itemsDemo(this.ctx, this.stairs, this.bubbles, this.darkBubbles, this.spikes, this.gatlings, this.hooks, this.flamethrowers, this.bars, this.boxes, this.blasters, this.electros, this.coins, this.healings, this.platforms, this.chests, this.swords, this.auras, this.steps)
+      itemsDemo(this.ctx, this.stairs, this.bubbles, this.darkBubbles, this.spikes, this.gatlings, this.hooks, this.flamethrowers, this.bars, this.boxes, this.blasters, this.electros, this.coins, this.healings, this.platforms, this.chests, this.swords, this.auras, this.steps)
 
         // infoIntro1()
         // this.background.img.src = "../public/Imagenes/background/backgroundTraining4.webp";
@@ -622,7 +622,6 @@ this.cannons.forEach((cann) => {//  cannon con fire
     this.blasters.forEach((blaster) => {// blasters  choca con el personaje
       if (blaster.collides(this.player)) {
         this.player.megaFireBlaster = true;
-        this.player.megaFireBlasterAmount += 31;
         blasterItemSound.play()
         itemTakenImages = "../public/Imagenes/itemTakenBlaster1.png";
         this.player.itemJustTaken = true;

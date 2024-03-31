@@ -86,14 +86,17 @@ function checkBubbleCollision(bubbles, player, puffBubbles, ctx, platforms, boun
   bubbles.forEach((bubble) => {//bubble con fire
     player.bulletFireArray.forEach((bullet) => {
       if (bullet.collides(bubble)) {
+        if(fireDesaceleration){
+          bullet.vy = -0.3;
+        }
         if(bubble.w >= 80){
           bubble.w -= bullet.damage/5;
           bubble.h -= bullet.damage/5;
-        }else {
+        } else {
           bubble.w -= bullet.damage;
           bubble.h -= bullet.damage;
         }
-        if (bubble.w <= bubble.explodingSize * 2) {
+        if (bubble.w <= bubble.explodingSize) {
           const elx = bubble.x;
           const ely = bubble.y;
           const puffBubble = new BubblePuff( ctx, elx, ely, bubble.w, bubble.h);
