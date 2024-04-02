@@ -22,10 +22,10 @@ function handleClick(event) {
       showModal(`Electric Shield`, ` El escudo eléctrico, a parte de protegerte del daño, tiene otras propiedades adicionales muy poderosas: 
       <br/><span style="font-weight: 400; font-size: 20px;"> 1) </span> Si las burbujas de colores caen sobre el escudo, quedan electrificadas y encojen con el tiempo;;
       <br/><span style="font-weight: 400; font-size: 20px;"> 2) </span> Eres inmune a algunas trampas de suelo;
-      <br/><span style="font-weight: 400; font-size: 20px;"> 3) </span> Las burbalas disparadas a través del escudo eléctrico atraviesan dañando las burbujas de colores;
-      <br/><span style="font-weight: 400; font-size: 20px;"> 4) </span> Las burbalas disparadas a través del escudo eléctrico dañan y desconectan ${electrifiedGatlingTime/1000}s las Gatlings;
+      <br/><span style="font-weight: 400; font-size: 20px;"> 3) </span> Las burbalas disparadas a través del escudo eléctrico atraviesan reventando las burbujas de colores(comprar en tienda);
+      <br/><span style="font-weight: 400; font-size: 20px;"> 4) </span> Las burbalas disparadas a través del escudo eléctrico dañan y desconectan ${electrifiedGatlingTime/1000}s las Gatlings(comprar en tienda);
       <br/><span style="font-weight: 400; font-size: 20px;"> 5) </span> Puedes activar algunas plataformas <span style="font-style: italic; font-size: 14px;"> (las que tienen reborde rojo) </span> y también los Steps que creas;
-      <br/><span style="font-weight: 400; font-size: 20px;"> 5) </span> Electrificar las Barras las hará  más anchas y resistentes cuanto más los electrifiques;
+      <br/><span style="font-weight: 400; font-size: 20px;"> 5) </span> Electrificar las Barras las hará más anchas y resistentes cuanto más los electrifiques;
       <br/><span style="font-weight: 400; font-size: 20px;"> 5) </span> Las escaleras pueden ser electrificadas y crecerán poco a poco;
       `).then(() => {
         game.start();

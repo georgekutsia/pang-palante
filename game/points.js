@@ -19,9 +19,7 @@ class Points {
     this.ctx.fillText(`x ${coins}`, this.x + 35, this.y + 25)
     this.ctx.restore();
   }
-move(){
 
-}
 addOnePoint(){
   this.coins++;
 }

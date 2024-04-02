@@ -248,7 +248,7 @@ function addLifeDemo8(ctx, healings){
 
 function itemsDemo(ctx, stairs, bubbles, darkBubbles, spikes, gatlings, hooks, flamethrowers, bars, boxes, blasters, electros, coins, healings, platforms, chests, swords, auras, steps){
 
-    const platform1 = new Platform(ctx, 50, CTXH-120, 160, 15, "../public/Imagenes/obstacles/platformSolid1.png", false, false, true,);
+    const platform1 = new Platform(ctx, 40, CTXH-120, 100, 15, "../public/Imagenes/obstacles/platformSolid1.png", false, false, true,);
     const platform2 = new Platform(ctx, CTXW/2 + 100, CTXH-140, 150, 15, "../public/Imagenes/obstacles/platformSolid1.png", false, false, true,);
     platforms.push(platform1, platform2)
 
@@ -260,7 +260,7 @@ function itemsDemo(ctx, stairs, bubbles, darkBubbles, spikes, gatlings, hooks, f
     auras.push(aura)
     let stair = new Stair(ctx, 950, CTXH - 140, 70, 140)
     stairs.push(stair)
-    let bubbb =  new Bubble(ctx, 10, 20, 20, 20, 3, 2)
+    let bubbb =  new Bubble(ctx, 10, 20, 100, 100, 3, 2)
     bubbles.push(bubbb)
     // let darkB =  new DarkBubble(ctx, 10, 20, 90, 90, 3, 2)
     // darkBubbles.push(darkB)

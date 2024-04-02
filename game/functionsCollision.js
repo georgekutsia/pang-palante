@@ -19,8 +19,16 @@ function checkBubbleCollision(bubbles, player, puffBubbles, ctx, platforms, boun
             player.vy = -10;
           } else {
             if (!player.auraIsActive && !player.electricShieldIsActive) { 
-              player.loseLife(bubble.damage, true); //el daño al jugador se le hace según lo que marca el daño de la burbuja. a burbuja más pequeña, menos daño
-              bubble.vy = -bubbleSpeedY; // rebota encima del jugador haciéndole daño
+              // player.loseLife(bubble.damage, true); //el daño al jugador se le hace según lo que marca el daño de la burbuja. a burbuja más pequeña, menos daño
+              // bubble.vy = -bubbleSpeedY; // rebota encima del jugador haciéndole daño
+              if(bubble.w >= 90){
+                player.x = (bubble.x + bubble.w/2) - player.w/2;
+                player.y = (bubble.y + bubble.h/2) - player.h/2;
+                   player.loseLife(0.003, false); //el daño al jugador se le hace según lo que marca el daño de la burbuja. a burbuja más pequeña, menos daño
+              } else {
+                 bubble.vy = -bubbleSpeedY; // rebota encima del jugador haciéndole daño
+                  player.loseLife(bubble.damage, true); //el daño al jugador se le hace según lo que marca el daño de la burbuja. a burbuja más pequeña, menos daño
+              }
             }
           }
       }
@@ -418,25 +426,19 @@ function bossFireCollision (miniBoses, object){
         } else return true;
       });
     });
-
-
     boxes.forEach((box) => {//  box con bullet
       player.swordArray.filter((bullet) => {
         if (bullet.collides(box)) {
           box.boxHitSword();
-
           return false;
         } else return true;
       });
     });
   }
-
-
-
   function bulletCollidesFire(player){
     player.bulletArray.forEach((bullet) => {//  bulletBar con bullet
       player.bulletFireArray.forEach((fire) => {
-        if (bullet.collides(fire) && bulletCollidesFireActive) {
+        if (bullet.collides(fire) && shopBulletWithFire) {
           fire.shootFireToSides();
           bullet.dispose = false;
           return false;

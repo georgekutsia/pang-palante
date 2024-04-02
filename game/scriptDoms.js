@@ -49,6 +49,7 @@ let shopShield$$ = document.getElementById("shop-shield")
 let shopFire$$ = document.getElementById("shop-fire")
 let shopBar$$ = document.getElementById("shop-bar")
 let shopElectro$$ = document.getElementById("shop-electro")
+let shopMegablasterAmount$$ = document.getElementById("shop-megablasterAmount")
 let shopSuperGun$$ = document.getElementById("shop-superGun")
 let shopSuperGun1$$ = document.getElementById("shop-superGun1")
 let shopSuperGun2$$ = document.getElementById("shop-superGun2")
@@ -77,6 +78,8 @@ let demoFriend2$$ = document.querySelector(".demoFriend2")
 let demoFriend3$$ = document.querySelector(".demoFriend3")
 let demoFriend4$$ = document.querySelector(".demoFriend4")
 let demoFriend5$$ = document.querySelector(".demoFriend5")
+
+let extraShopCloseX$$ = document.querySelectorAll(".extra-shop-close-x");
 
 
 let minion1$$ = document.querySelector(".minion1")

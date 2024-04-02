@@ -7,6 +7,7 @@ class Game {
     this.background = new Background(ctx); // traemos la clase Background para usarlo
     this.points = new Points(ctx); // traemos la clase Background para usarlo
     this.interval = null; //sirve para pausar el juego
+    this.intervalCoinsLife = null; //sirve para pausar el juego
     this.bubbleTick = 0;
     this.randomColor = null;
     this.isInfiniteChanging;
@@ -48,8 +49,6 @@ class Game {
     this.dispached = true;
     this.changingLevel = false;
     this.intervalForElectro = true;
-
-    
     this.tickMiniBoss1 = 0;
     this.tickMiniBoss2 = 0;
     this.tickMiniBoss3 = 0;
@@ -70,16 +69,15 @@ class Game {
           minibossArrivingShip.play();
           this.dispached = false;
 
-        // inftroGame1();
+        inftroGame1();
         // setTimeout(() => {
         // level1(this.ctx, this.bubbles, this.platforms, this.levelBalls, this.boxes)
         // }, 15000);
         // setTimeout(() => {
-        //   addBubble1(this.ctx, this.bubbles)
+          // addBubble1(this.ctx, this.bubbles)
         // }, 25000);
       }
       if(GAMELEVEL === 100) {
-        
         levelInfinite( this.ctx, this.bubbles, this.platforms, this.bouncers, this.spikes, this.stairs, this.flamethrowers, this.machineguns, this.healings, this.auras, this.boxes, this.blasters, this.levelBalls, this.gatlings, this.darkBubbles,)
       }
       if(GAMELEVEL === 1987 ) {
@@ -88,11 +86,11 @@ class Game {
         // infoIntro1()
         // this.background.img.src = "../public/Imagenes/background/backgroundTraining4.webp";
         // setTimeout(() => {
-          // addDemo1Electro(this.ctx,  this.platforms, this.electros)
-          // this.background.img.src = "../public/Imagenes/background/backDemo5.png";
+        //   addDemo1Electro(this.ctx,  this.platforms, this.electros)
+        //   this.background.img.src = "../public/Imagenes/background/backDemo5.png";
         // }, 10500);
         // setTimeout(() => {
-          // addDemo1(this.ctx, this.platforms)
+        //   addDemo1(this.ctx, this.platforms)
         // }, 30000);
       }
     }
@@ -103,7 +101,6 @@ class Game {
         retryAmount$$.style.display = "none"
         retry$$.style.display = "none";
       }
-
       this.clear(); //   limpia el canvas. Sin esta función, nunca dejaría de dibujarse lo anterior y no aparentaría movimiento.
       this.move(); // mueve los objetos movibles
       this.draw(); // dibuja lo que haga falta
@@ -116,7 +113,7 @@ class Game {
     }, 1000 / gameSpeed);
 
   }
-
+  
   stop() { //para pausar el juego
     clearInterval(this.interval);
     this.interval = null;
@@ -165,10 +162,10 @@ class Game {
     this.chests.forEach((e) => e.draw());
     this.platforms.forEach((e) => e.draw());
     this.bouncers.forEach((e) => e.draw());
-    this.player.draw(); //dibuja al personaje y todo lo que se dibuja en la clase de personaje
     this.points.draw(); //dibuja al personaje y todo lo que se dibuja en la clase de personaje
-    this.boxes.forEach((e) => e.draw()); //dibuja cada obstáculo
     this.bubbles.forEach((e) => e.draw()); //dibuja cada obstáculo
+    this.player.draw(); //dibuja al personaje y todo lo que se dibuja en la clase de personaje
+    this.boxes.forEach((e) => e.draw()); //dibuja cada obstáculo
     this.darkBubbles.forEach((e) => e.draw()); //dibuja cada obstáculo
     this.flamethrowers.forEach((e) => e.draw()); //dibuja cada obstáculo
     this.machineguns.forEach((e) => e.draw()); //dibuja cada obstáculo
@@ -196,7 +193,6 @@ class Game {
   move() {
     this.player.move(); //muve al personaje y todo lo que se mueve en la clase de personaje
     this.background.move(); //muve al personaje y todo lo que se mueve en la clase de personaje
-    this.points.move(); //muve al personaje y todo lo que se mueve en la clase de personaje
     this.bubbles.forEach((e) => e.move()); //mueve los obstáculos
     this.darkBubbles.forEach((e) => e.move()); //mueve los obstáculos
     this.platforms.forEach((e) => e.move()); //mueve los obstáculos
@@ -371,8 +367,7 @@ class Game {
       exp.vy = miniBossVy;
       e.miniBossBurn()
   }})})
-  bulletCollidesFire(this.player)
-    
+    bulletCollidesFire(this.player)
     bossFireCollision(this.miniBoses, this.stairs)
     bossFireCollision(this.miniBoses, this.platforms)
     bossFireCollision(this.miniBoses, this.bouncers)
@@ -710,6 +705,7 @@ this.cannons.forEach((cann) => {//  cannon con fire
     });
     this.swords.forEach((sword) => {
       if (sword.collides(this.player)) {
+        shopButtonsWhenSwordEquipped()
         setTimeout(() => {
           this.player.swordEquipped = true;
           this.player.swordLevel ++;
@@ -879,16 +875,24 @@ this.cannons.forEach((cann) => {//  cannon con fire
 
   }
   changingLevels(){
-  if (this.changingLevel) {
-    if(this.changingLevelSoChangeImage){
-      let indiceAleatorio = Math.floor(Math.random() * changeListaImagenes.length);
-      if(GAMELEVEL <100){
+    if (this.changingLevel) {
+      if(this.changingLevelSoChangeImage){
+        if(GAMELEVEL <100){
+        let indiceAleatorio = Math.floor(Math.random() * changeListaImagenes.length);
+        let indiceAleatorioFrases = Math.floor(Math.random() * changeFrases.length);
         mapChangeLevel$$.style.width = 'calc(200px + 2vw)';
         mapChangeLevel$$.style.top = '35vh';
         mapChangeLevel$$.style.left = '20vw';
         changingLevelImg$$.src = changeListaImagenes[indiceAleatorio];
         mapChangeLevel$$.src = mapArray[GAMELEVEL - 1];
         mapChangeLevel$$.style.display = 'block';
+        changingLevelImg$$.style.display = "block";
+        levelChangeText1$$.style.display = "block";
+        levelChangeText2$$.style.display = "block";
+        levelChangeText3$$.style.display = "block";
+        levelChangeText4$$.style.display = "block";
+        levelChangeText1$$.innerText = `Siguiente nivel ${GAMELEVEL}`;
+        levelChangeText2$$.innerText = `${changeFrases[indiceAleatorioFrases]}`;
         setTimeout(() => {
           if(GAMELEVEL < 100){
             mapChangeLevel$$.style.left = '0.5vw';
@@ -902,13 +906,7 @@ this.cannons.forEach((cann) => {//  cannon con fire
     this.changingLevelSoChangeImage = true;
       }, 5000);
     }
-    changingLevelImg$$.style.display = "block";
-    levelChangeText1$$.style.display = "block";
-    levelChangeText2$$.style.display = "block";
-    levelChangeText3$$.style.display = "block";
-    levelChangeText4$$.style.display = "block";
-    levelChangeText1$$.innerText = `Siguiente nivel ${GAMELEVEL}`;
-    levelChangeText2$$.innerText = `${changeFrases[this.indiceAleatorio]}`;
+
 if(this.player.wasNotDamaged) {
   levelChangeText3$$.style.color = `rgb(214, 211, 4)`;
   levelChangeText3$$.innerText = `¡+20 monedas por no recibir daño!`;
@@ -928,6 +926,7 @@ if( totalShootsPerLevel === totalShootsPerLevelSucces ){
 
 }
   levelChange() {      
+    console.log(GAMELEVEL)
     if(!this.isInfiniteChanging){
       setTimeout(() => {
         setTimeout(() => {
@@ -942,14 +941,16 @@ if( totalShootsPerLevel === totalShootsPerLevelSucces ){
       changeLevelSound1.play();
       GAMELEVEL += 1;
       this.changingLevel = true;
-      this.indiceAleatorio = Math.floor(Math.random() * this.frases.length);
       setTimeout(() => {
         levelChangeMessagesDisplay()
         this.player.wasNotDamaged = true;
         ballBroke = true;
         this.changingLevel = false;
         this.levelBalls = [];
+        console.log("tis")
+
         if (GAMELEVEL === 2) {
+          console.log("heyyyyyy")
           this.background.img.src ="/public/Imagenes/background/background2.jpeg";
           level2(this.ctx, this.bubbles, this.platforms, this.boxes,  this.levelBalls)
         } else if (GAMELEVEL === 3) {

@@ -213,6 +213,7 @@ shopShield$$.addEventListener("click", function(){
 
 function faShakeWhenBuy(button) {
   button.classList.add('fa-shake');
+  game.draw(); //dibuja al personaje y todo lo que se dibuja en la clase de personaje
   setTimeout(() => {
     button.classList.remove('fa-shake');
   }, 100); 
@@ -498,6 +499,26 @@ shopBarResistance$$.addEventListener("click", function(){
 })
 
 
+shopMegablasterAmount$$.addEventListener("click", function(){
+  if( coins >= 75 && megablasterLevel === 0){
+  faShakeWhenBuy(this);
+    buySmall.play()
+    megablasterLevel = 1;
+    coins -=75;
+    game.player.megaFireBlasterAmount += 30
+    shopMegablasterAmount$$.innerHTML = `<i  style="font-size: calc(8px + 0.6vw)" class="fa-solid fa-fire-burner"></i> 95 <i class="icons-size1 fa-solid fa-coins"></i> `
+  } else if( coins >= 95 && megablasterLevel === 1){
+  faShakeWhenBuy(this);
+    buySmall.play()
+    megablasterLevel = 2;
+    coins -= 95;
+    shopMegablasterAmount$$.disabled = true;
+    shopMegablasterAmount$$.style.color = "rgb(164, 5, 164)"
+    shopMegablasterAmount$$.innerHTML = ` <i  style="font-size: calc(8px + 0.6vw)" class="fa-solid fa-fire-burner"></i> MAX </i> `
+  } 
+})
+
+
 shopElectricShield$$.addEventListener("click", function(){
   if( coins >= 130 && electricShieldlevel === 0){
   faShakeWhenBuy(this);
@@ -507,28 +528,28 @@ shopElectricShield$$.addEventListener("click", function(){
     buyBig.play()
     H = 72;
     shieldsDuration = 5000;
-    shopElectricShield$$.innerHTML = `</i> <span id="electro-text"><i style="font-size: calc(8px + 0.4vw)" class="fa-solid fa-bolt-lightning"></i> </span> 45<i class="fa-solid fa-coins"></i> `
-  } else if( coins >= 45 && electricShieldlevel === 1){
+    shopElectricShield$$.innerHTML = `</i> <span id="electro-text"><i style="font-size: calc(8px + 0.4vw)" class="fa-solid fa-bolt-lightning"></i> </span> 65<i class="fa-solid fa-coins"></i> `
+  } else if( coins >= 65 && electricShieldlevel === 1){
   faShakeWhenBuy(this);
     electricShieldlevel = 2;
     game.player.electroAmount += 10;
-    coins -= 45;
+    coins -= 65;
     buySmall.play()
     shieldsDuration = 6000;
-    shopElectricShield$$.innerHTML = `</i> <span id="electro-text"><i style="font-size: calc(8px + 0.4vw)" class="fa-solid fa-bolt-lightning"></i> </span> 65<i class="fa-solid fa-coins"></i> `
-  } else if( coins >= 65 && electricShieldlevel === 2){
+    shopElectricShield$$.innerHTML = `</i> <span id="electro-text"><i style="font-size: calc(8px + 0.4vw)" class="fa-solid fa-bolt-lightning"></i> </span> 85<i class="fa-solid fa-coins"></i> `
+  } else if( coins >= 85 && electricShieldlevel === 2){
   faShakeWhenBuy(this);
     electricShieldlevel = 3;
     game.player.electroAmount += 10;
-    coins -= 65;
+    coins -= 85;
     buySmall.play()
     shieldsDuration = 7000;
-    shopElectricShield$$.innerHTML = `</i> <span id="electro-text"><i style="font-size: calc(8px + 0.4vw)" class="fa-solid fa-bolt-lightning"></i> </span> 85<i class="fa-solid fa-coins"></i> `
-  } else if( coins >= 85 && electricShieldlevel === 3){
+    shopElectricShield$$.innerHTML = `</i> <span id="electro-text"><i style="font-size: calc(8px + 0.4vw)" class="fa-solid fa-bolt-lightning"></i> </span> 105<i class="fa-solid fa-coins"></i> `
+  } else if( coins >= 105 && electricShieldlevel === 3){
   faShakeWhenBuy(this);
     electricShieldlevel = 4;
     game.player.electroAmount += 10;
-    coins -= 85;
+    coins -= 105;
     buySmall.play()
     shieldsDuration = 8000;
     shopElectricShield$$.disabled = true; 
@@ -696,7 +717,7 @@ toggleShopExtra$$.addEventListener('mouseleave', function() {
 
 
 toggleShopExtra$$.addEventListener("click", function(){
-  if(extraShop$$.style.display === "block"){
+  if(extraShop$$.style.display === "block" && !game.interval){//game.interval hace que no se acelere el juego
     extraShop$$.style.opacity ="0";
     extraShop$$.style.top ="1%";
     extraShop$$.style.right = "5%";
@@ -715,3 +736,21 @@ toggleShopExtra$$.addEventListener("click", function(){
     game.stop();
   }
 })
+
+extraShopCloseX$$.forEach(button => {
+  button.addEventListener("click", function() {
+    extraShop$$.style.opacity ="0";
+    extraShop$$.style.top ="1%";
+    extraShop$$.style.right = "5%";
+    setTimeout(() => {
+    extraShop$$.style.display = "none";
+  }, 400);
+  if(!game.interval) game.start();
+  });
+});
+
+function shopButtonsWhenSwordEquipped(){
+  shopSwordStab$$.disabled = false;
+  shopSwordSpeed$$.disabled = false;
+  shopSwordRecharge$$.disabled = false;
+}

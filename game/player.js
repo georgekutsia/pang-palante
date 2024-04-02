@@ -81,7 +81,7 @@ class Player {
     this.swordRightStab.src = "/public/Imagenes/dodgeRightSwordImg.png";
     this.swordSparkleActive = true;
     this.swingSwordState = true;
-    this.swordEquipped = true;
+    this.swordEquipped = false;
     this.swordLevel = 1;
     this.swordPowerUp = 0;
     this.swordPower1 = false;
@@ -1003,12 +1003,12 @@ class Player {
 
   stabSword(){
       if(this.stabDirection){
-        let stab = new WeaponSword(this.ctx, this.x - 100, this.y - 20 , true, 0, 300, 80, true, true );
+        let stab = new WeaponSword(this.ctx, this.x - 120, this.y - 20 , true, 0, 300, 80, true, true );
         this.swordArray.push(stab);
         this.r = -1;
         this.vx = 16 + playerSpeed;
       } else {
-        let stab = new WeaponSword(this.ctx, this.x - 130, this.y - 20, true, 0, 300, 80, true, false );
+        let stab = new WeaponSword(this.ctx, this.x - 110, this.y - 20, true, 0, 300, 80, true, false );
         this.swordArray.push(stab);
         this.r = 1;
         this.vx = -16 - playerSpeed;

@@ -62,9 +62,9 @@ class Life {
     this.healingHearts.forEach(heart => heart.draw())
     this.healingHearts.forEach(heart => heart.move())
     this.healingHearts = this.healingHearts.filter(heart => heart.isVisible())
-    this.gainCoins.forEach(heart => heart.draw())
-    this.gainCoins.forEach(heart => heart.move())
-    this.gainCoins = this.gainCoins.filter(heart => heart.isVisible())
+    this.gainCoins.forEach(coin => coin.draw())
+    this.gainCoins.forEach(coin => coin.move())
+    this.gainCoins = this.gainCoins.filter(coin => coin.isVisible())
   }
 
   isVisible() {

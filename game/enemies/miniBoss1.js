@@ -217,17 +217,17 @@ if(this.arriving){
 
 
   explodingShip(){
-      if(this.life <= 34 && this.explodingLevel === 0){
+      if(this.life <= 44 && this.explodingLevel === 0){
           let explo1 = new Explosion(this.ctx, this.x+ this.w/2,  this.y + this.h/2.5, this.w/4, this.w/4, this.vx, this.vy)
           this.explosions.push(explo1);
           this.explodingLevel = 1;
       }
-      if(this.life <= 28 && this.explodingLevel === 1){
+      if(this.life <= 35 && this.explodingLevel === 1){
           let explo1 = new Explosion(this.ctx, this.x+ this.w/4,  this.y + this.h/4, this.w/4, this.w/4, this.vx, this.vy)
           this.explosions.push(explo1);
           this.explodingLevel = 2;
       }
-      if(this.life <= 16 && this.explodingLevel === 2){
+      if(this.life <= 20 && this.explodingLevel === 2){
           let explo1 = new Explosion(this.ctx, this.x + this.w/3, this.y + this.h/2, this.w/3, this.w/3, this.vx, this.vy)
           this.explosions.push(explo1);
           this.explodingLevel = 3;
