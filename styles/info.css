@@ -288,19 +288,32 @@ z-index: 24;
   }
   #btn-instrucciones-repetir:hover{
     box-shadow: 2px 2px 2px black;
+    opacity: 1;
   }
-  #btn-instrucciones-saltar{
+
+
+  #btn-instrucciones-saltar {
     position: absolute;
     padding: 3px 6px;
     background-color: rgb(0, 255, 255);
     top: 0.2%;
     right: 5%;
     display: none;
-    font-size:calc(10px + 0.1vw);
-  }
-  #btn-instrucciones-saltar:hover{
+    font-size: calc(10px + 0.1vw);
+    opacity: 0.3;
+    transition: opacity 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    box-shadow: 2px 2px 2px transparent; 
+}
+
+#btn-instrucciones-saltar:hover {
     box-shadow: 2px 2px 2px black;
+    opacity: 1;
   }
+
+  #btn-instrucciones-saltar:not(:hover) {
+      transition-delay: 2.5s; 
+  }
+
   #cambiar-sala{
     position: absolute;
     padding: 3px 5px;

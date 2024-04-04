@@ -2,7 +2,7 @@ class Points {
   constructor(ctx) {
     this.ctx = ctx;
     this.x = 10;
-    this.y = 35;
+    this.y = 55;
     this.w = this.ctx.canvas.width/45;
     this.h = this.ctx.canvas.width/45;
     this.img = new Image();

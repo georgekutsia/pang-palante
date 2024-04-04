@@ -100,6 +100,7 @@ let fireWeaponSpeedYWhenCollides = 0.01;
 let fireDesaceleration = false;
 let bulletCollidesFireActive = false;
 let itemTakenImages = "../public/Imagenes/itemTakenSparkle.png";
+let healingDamageIsActivated = false;
 const mapArray = [
   "/public/Imagenes/background/map1.webp",
   "/public/Imagenes/background/map2.webp",

@@ -1,32 +1,35 @@
 function infoIntro1(){
     infoPlayer1$$.style.display = "block"
-    setTimeout(() => {
+    saltarInstrucciones(infoIntro1)
+    timeouts.push(setTimeout(() => {
       infoPlayer1$$.style.display = "none"
       infoPlayer2$$.style.display = "block"
-      setTimeout(() => {
+      timeouts.push(setTimeout(() => {
         infoPlayer2$$.style.display = "none"
         demoFunctions.mostrarVariosTextosPocoAPoco1()
-      }, 6000);
-    }, 4500);
+      }, 6000));
+    }, 4500));
   }
 
 
 
 function inftroGame1(){
+  if(GAMELEVEL === 1){
   demoFriend4$$.style.display = "block"
-  setTimeout(() => {
+  saltarInstrucciones(inftroGame1)
+  timeouts.push(setTimeout(() => {
     demoFriend4$$.style.opacity = "1"
-  }, 100);
+  }, 100));
   textoPianoPiano("gameIntro-text1");
-  setTimeout(() => {
+  timeouts.push(setTimeout(() => {
   textoPianoPiano("gameIntro-text2");
   boss1$$.style.display = "block"
-  setTimeout(() => {
+  timeouts.push(setTimeout(() => {
   boss1$$.style.opacity = "1"
-  }, 200);
+  }, 200));
   
-  }, 2000);
-  setTimeout(() => {
+  }, 2000));
+  timeouts.push(setTimeout(() => {
     document.getElementById("gameIntro-text1").style.display = "none";
     document.getElementById("gameIntro-text2").style.display = "none";
   textoPianoPiano("gameIntro-text3");
@@ -36,36 +39,36 @@ function inftroGame1(){
   minion4$$.style.display = "block";
   minion5$$.style.display = "block";
   minion6$$.style.display = "block";
-  setTimeout(() => {
+  timeouts.push(setTimeout(() => {
     minion1$$.style.opacity = "1";
-  }, 200)
-  setTimeout(() => {
+  }, 200))
+  timeouts.push(setTimeout(() => {
     minion2$$.style.opacity = "1";
-  }, 300)
-  setTimeout(() => {
+  }, 300))
+  timeouts.push(setTimeout(() => {
     minion3$$.style.opacity = "1";
-  }, 400)
-  setTimeout(() => {
+  }, 400))
+  timeouts.push(setTimeout(() => {
     minion4$$.style.opacity = "1";
-  }, 500)
-  setTimeout(() => {
+  }, 500))
+  timeouts.push(setTimeout(() => {
     minion5$$.style.opacity = "1";
-  }, 600)
-  setTimeout(() => {
+  }, 600))
+  timeouts.push(setTimeout(() => {
     minion6$$.style.opacity = "1";
-  }, 700)
-  }, 6000);
-  setTimeout(() => {
+  }, 700))
+  }, 6000));
+  timeouts.push(setTimeout(() => {
   textoPianoPiano("gameIntro-text4");
-  }, 8000);
-  setTimeout(() => {
+  }, 8000));
+  timeouts.push(setTimeout(() => {
     minion1$$.style.opacity = "0";
     minion2$$.style.opacity = "0";
     minion3$$.style.opacity = "0";
     minion4$$.style.opacity = "0";
     minion5$$.style.opacity = "0";
     minion6$$.style.opacity = "0";
-    setTimeout(() => {
+    timeouts.push(setTimeout(() => {
       boss1$$.style.opacity = "0"
       minion1$$.style.display = "none";
       minion2$$.style.display = "none";
@@ -73,58 +76,59 @@ function inftroGame1(){
       minion4$$.style.display = "none";
       minion5$$.style.display = "none";
       minion6$$.style.display = "none";
-      setTimeout(() => {
+      timeouts.push(setTimeout(() => {
       boss1$$.style.display = "none"
-      }, 500);
-    }, 500);
-  }, 13000);
+      }, 500));
+    }, 500));
+  }, 13000));
 
-  setTimeout(() => {
+  timeouts.push(setTimeout(() => {
   demoFriend4$$.style.opacity = "0"
   demoFriend5$$.style.display = "block"
-  setTimeout(() => {
+  timeouts.push(setTimeout(() => {
   demoFriend4$$.style.display = "none"
     demoFriend5$$.style.opacity = "1"
-    setTimeout(() => {
+    timeouts.push(setTimeout(() => {
       poltra$$.style.display = "flex";
-      setTimeout(() => {
+      timeouts.push(setTimeout(() => {
       poltra$$.style.opacity = "1";
-      }, 800);
-      setTimeout(() => {
+      }, 800));
+      timeouts.push(setTimeout(() => {
       poltra$$.style.right = "1vw";
       poltra$$.style.top = "0.5vw";
       poltra$$.style.width = "calc(35px + 2vw"
-          setTimeout(() => {
+          timeouts.push(setTimeout(() => {
             poltra$$.style.display = "none";
               toggleShop$$.style.display = "block";
-              setTimeout(() => {
+              timeouts.push(setTimeout(() => {
               toggleShop$$.style.opacity = "1";
-              }, 20);
-          }, 1000);
-      }, 2500);
-    }, 300);
-  }, 500);
+              }, 20));
+          }, 1000));
+      }, 2500));
+    }, 300));
+  }, 500));
     document.getElementById("gameIntro-text3").style.display = "none";
     document.getElementById("gameIntro-text4").style.display = "none";
       textoPianoPiano("gameIntro-text5");
-        setTimeout(() => {
+        timeouts.push(setTimeout(() => {
       textoPianoPiano("gameIntro-text6");
-        }, 2000);
-        setTimeout(() => {
+        }, 2000));
+        timeouts.push(setTimeout(() => {
           document.getElementById("gameIntro-text5").style.display = "none";
           document.getElementById("gameIntro-text6").style.display = "none";
           demoFriend5$$.style.display = "none";
           demoFriend3$$.style.display = "block";
         textoPianoPiano("gameIntro-text7");
-          setTimeout(() => {
+          timeouts.push(setTimeout(() => {
             demoFriend3$$.style.opacity = "0";
             document.getElementById("gameIntro-text7").style.display = "none";
-            setTimeout(() => {
+            timeouts.push(setTimeout(() => {
               demoFriend3$$.style.display = "none";
-            }, 1000);
-          }, 3000);
-        }, 4000);
-  }, 14000);
+            }, 1000));
+          }, 3000));
+        }, 4000));
+  }, 14000));
+}
 }
 
 
@@ -640,12 +644,24 @@ shopShootLife$$.addEventListener("click", function(){
     amountOfBullsEyeForHealth -= 2;
     shopShootLifePrice += 30;
     faShakeWhenBuy(this);
-    shopShootLife$$.innerHTML = `</i> <span id="boots-text"><i class="fa-solid fa-circle-dot"></i> -> <i style="font-size: calc(8px + 0.4vw)"  class="fa-solid fa-heart-pulse"> </i> </span> ${shopShootLifePrice} <i class="fa-solid fa-coins"> </i> `;
+    shopShootLife$$.innerHTML = `</i> <span id="boots-text"><i class="fa-solid fa-circle-dot"></i> <i style="font-size: calc(8px + 0.3vw)" class="fa-solid fa-angles-up fonts-i"></i> <i style="font-size: calc(8px + 0.4vw)"  class="fa-solid fa-heart-pulse"> </i> </span> ${shopShootLifePrice} <i class="fa-solid fa-coins"> </i> `;
     if(shopShootLifePrice >= 169) {
       shopShootLife$$.disabled = true; 
       shopShootLife$$.style.color = "rgb(164, 5, 164)";
-      shopShootLife$$.innerHTML = `</i> <span id="boots-text"><i class="fa-solid fa-circle-dot"></i> -><i style="font-size: calc(8px + 0.4vw)"  class="fa-solid fa-heart-pulse"> </i> </span> MAX`;
+      shopShootLife$$.innerHTML = `</i> <span id="boots-text"><i class="fa-solid fa-circle-dot"></i>  <i style="font-size: calc(8px + 0.4vw)"  class="fa-solid fa-heart-pulse"> </i> </span> MAX`;
     }
+  }
+})
+shopShootLifeActivation$$.addEventListener("click", function(){
+  if(coins >= 100){
+    coins-=100;
+    amountOfBullsEyeForHealth -= 2;
+    faShakeWhenBuy(this);
+      shopShootLifeActivation$$.disabled = true; 
+      shopShootLife$$.disabled = false; 
+      healingDamageIsActivated = true;
+      shopShootLifeActivation$$.style.color = "rgb(164, 5, 164)";
+      shopShootLifeActivation$$.innerHTML = `</i> <span id="boots-text"><i class="fa-solid fa-circle-dot"></i>  <i style="font-size: calc(8px + 0.4vw)"  class="fa-solid fa-heart-pulse"> </i> </span> <i style="font-size: calc(8px + 0.7vw)"  class="fa-solid fa-check"></i>`;
   }
 })
 

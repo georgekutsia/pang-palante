@@ -62,36 +62,36 @@ class Game {
   start() {
     if(!this.gameStarted){
       if (GAMELEVEL === 1) {
-        addMiniboss1(this.ctx, this.levelBalls);
-        miniBossTalk1.play();
-          let bo = new MiniBoss1(this.ctx, CTXW - 340, -50, CTXW/4, CTXW/4, 0, 0, 95, true, true, true, "/public/Imagenes/minions/MiniBoss1.webp");
-          this.miniBoses.push(bo);
-          minibossArrivingShip.play();
-          this.dispached = false;
+        // addMiniboss1(this.ctx, this.levelBalls);
+        // miniBossTalk1.play();
+        //   let bo = new MiniBoss1(this.ctx, CTXW - 340, -50, CTXW/4, CTXW/4, 0, 0, 95, true, true, true, "/public/Imagenes/minions/MiniBoss1.webp");
+        //   this.miniBoses.push(bo);
+        //   minibossArrivingShip.play();
+        //   this.dispached = false;
 
         inftroGame1();
-        // setTimeout(() => {
-        // level1(this.ctx, this.bubbles, this.platforms, this.levelBalls, this.boxes)
-        // }, 15000);
-        // setTimeout(() => {
-          // addBubble1(this.ctx, this.bubbles)
-        // }, 25000);
+        timeouts.push(setTimeout(() => {
+        level1(this.ctx, this.bubbles, this.platforms, this.levelBalls, this.boxes)
+        }, 15000));
+        timeouts.push(setTimeout(() => {
+          addBubble1(this.ctx, this.bubbles)
+        }, 25000));
       }
       if(GAMELEVEL === 100) {
         levelInfinite( this.ctx, this.bubbles, this.platforms, this.bouncers, this.spikes, this.stairs, this.flamethrowers, this.machineguns, this.healings, this.auras, this.boxes, this.blasters, this.levelBalls, this.gatlings, this.darkBubbles,)
       }
       if(GAMELEVEL === 1987 ) {
-      // itemsDemo(this.ctx, this.stairs, this.bubbles, this.darkBubbles, this.spikes, this.gatlings, this.hooks, this.flamethrowers, this.bars, this.boxes, this.blasters, this.electros, this.coins, this.healings, this.platforms, this.chests, this.swords, this.auras, this.steps)
+      itemsDemo(this.ctx, this.stairs, this.bubbles, this.darkBubbles, this.spikes, this.gatlings, this.hooks, this.flamethrowers, this.bars, this.boxes, this.blasters, this.electros, this.coins, this.healings, this.platforms, this.chests, this.swords, this.auras, this.steps)
 
-        infoIntro1()
-        this.background.img.src = "../public/Imagenes/background/backgroundTraining4.webp";
-        setTimeout(() => {
-          addDemo1Electro(this.ctx,  this.platforms, this.electros)
-          this.background.img.src = "../public/Imagenes/background/backDemo5.png";
-        }, 1500);
-        setTimeout(() => {
-          addDemo1(this.ctx, this.platforms)
-        }, 3000);
+        // infoIntro1()
+        // this.background.img.src = "../public/Imagenes/background/backgroundTraining4.webp";
+        // setTimeout(() => {
+        //   addDemo1Electro(this.ctx,  this.platforms, this.electros)
+        //   this.background.img.src = "../public/Imagenes/background/backDemo5.png";
+        // }, 1500);
+        // setTimeout(() => {
+        //   addDemo1(this.ctx, this.platforms)
+        // }, 3000);
       }
     }
 
@@ -563,7 +563,7 @@ this.cannons.forEach((cann) => {//  cannon con fire
         if (this.player.fireAmount >= 28) {//para que el charger que se dibuja haga el semicírculo
           this.player.fireAmount = 30;
         }
-        flame.x = -100; // situa fuera del canvas la burbuja que colisiona con el player y luego isVisible la elimina del array
+        flame.x = -100;
       } else return true;
     });
     this.machineguns.forEach((machinegun) => {// machineguns  choca con el personaje
@@ -577,7 +577,7 @@ this.cannons.forEach((cann) => {//  cannon con fire
         setTimeout(() => {
           recharge = 500;
         }, 10000);
-        machinegun.x = -100; // situa fuera del canvas la burbuja que colisiona con el player y luego isVisible la elimina del array
+        machinegun.x = -100;
       } else return true;
     });
     this.healings.forEach((healing) => {// healings  choca con el personaje
@@ -585,10 +585,9 @@ this.cannons.forEach((cann) => {//  cannon con fire
         eventInfo(munSalud$$)
         this.player.gainLife(healing.amount);
         healSound.play();
-        this.player.life.isHealing = true;
         itemTakenImages = "../public/Imagenes/itemTakenHealing1.png";
         this.player.itemJustTaken = true;
-        healing.x = -100; // situa fuera del canvas la burbuja que colisiona con el player y luego isVisible la elimina del array
+        healing.x = -100;
       } else return true;
     });
 
@@ -600,7 +599,7 @@ this.cannons.forEach((cann) => {//  cannon con fire
         this.player.extraY = this.player.extraY-50;
         itemTakenImages = "../public/Imagenes/itemTakenBullet2.png";
         this.player.itemJustTaken = true;
-        bar.x = -100; // situa fuera del canvas la burbuja que colisiona con el player y luego isVisible la elimina del array
+        bar.x = -100;
       } else return true;
     });
 
@@ -612,7 +611,7 @@ this.cannons.forEach((cann) => {//  cannon con fire
         itemTakenImages = "../public/Imagenes/itemTakenBullet2.png";
         this.player.itemJustTaken = true;
         eventInfo(munStep$$)
-        step.x = -100; // situa fuera del canvas la burbuja que colisiona con el player y luego isVisible la elimina del array
+        step.x = -100;
       } else return true;
     });
     this.blasters.forEach((blaster) => {// blasters  choca con el personaje
@@ -622,7 +621,7 @@ this.cannons.forEach((cann) => {//  cannon con fire
         itemTakenImages = "../public/Imagenes/itemTakenBlaster1.png";
         this.player.itemJustTaken = true;
         eventInfo(munMegablaster$$)
-        blaster.dispose = true; // situa fuera del canvas la burbuja que colisiona con el player y luego isVisible la elimina del array
+        blaster.dispose = true;
       } else return true;
     });
     this.auras.forEach((aura) => { // aditionalaura  choca con el personaje
@@ -884,7 +883,7 @@ this.cannons.forEach((cann) => {//  cannon con fire
         mapChangeLevel$$.style.top = '35vh';
         mapChangeLevel$$.style.left = '20vw';
         changingLevelImg$$.src = changeListaImagenes[indiceAleatorio];
-        mapChangeLevel$$.src = mapArray[GAMELEVEL - 1];
+        mapChangeLevel$$.src = mapArray[GAMELEVEL - 1]; 
         mapChangeLevel$$.style.display = 'block';
         changingLevelImg$$.style.display = "block";
         levelChangeText1$$.style.display = "block";
@@ -1007,13 +1006,13 @@ if( totalShootsPerLevel === totalShootsPerLevelSucces ){
             }
           }, 3000);
         } else if (GAMELEVEL === 16){//pero 21 en realidad
-            addMiniboss1(this.ctx, this.levelBalls);
-            miniBossTalk1.play();
+          addMiniboss1(this.ctx, this.levelBalls);
+          miniBossTalk1.play();
             setTimeout(() => {
-            let bo = new MiniBoss1(this.ctx, CTXW - 340, -50, CTXW/4, CTXW/4, 0, 0, 15, true, true, true, "/public/Imagenes/minions/MiniBoss1.webp");
-            this.miniBoses.push(bo);
-            minibossArrivingShip.play();
-            this.dispached = false;
+              let bo = new MiniBoss1(this.ctx, CTXW - 340, -50, CTXW/4, CTXW/4, 0, 0, 95, true, true, true, "/public/Imagenes/minions/MiniBoss1.webp");
+              this.miniBoses.push(bo);
+              minibossArrivingShip.play();
+              this.dispached = false;
           }, 6100);
         } else if(GAMELEVEL === 17){
           alert("ganaste. a comer pipas!")

@@ -899,6 +899,7 @@ class Player {
   
   gainLife(amount){
     this.life.total += amount;
+    this.life.isHealing = true;
   }
   shoot() {// paso 1: invoca el disparo desde la posicion del personaje o su cercanía
     if(this.shootUp){

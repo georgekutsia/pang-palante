@@ -39,12 +39,16 @@ function checkBubbleCollision(bubbles, player, puffBubbles, ctx, platforms, boun
   bubbles.forEach((bubble) => {//  bubble con bullet
     player.bulletArray = player.bulletArray.filter((bullet) => {
       if (bullet.collides(bubble) && !bullet.isBig) {
-        bullsEyeForHealth++;
+        let hea = new HealingDamage(ctx, -10 + (bullsEyeForHealth*20), 20)
+        game.player.life.healingDamages.push(hea)
         totalShootsPerLevelSucces++;
-        if(bullsEyeForHealth>= amountOfBullsEyeForHealth){
-          player.life.total+=0.5;
-        player.life.isHealing = true;
-          bullsEyeForHealth = 0;
+        if(healingDamageIsActivated){
+          bullsEyeForHealth++;
+          if(bullsEyeForHealth>= amountOfBullsEyeForHealth){
+            game.player.gainLife(1)
+            bullsEyeForHealth = 0;
+            player.life.healingDamages = []
+          }
         }
         if(bubble.w >= 130 && bubble.w <= 199 ){
           bubbleAbsorbBullet.play()
@@ -76,13 +80,17 @@ function checkBubbleCollision(bubbles, player, puffBubbles, ctx, platforms, boun
  bubbles.forEach((bubble) => {//  bubble con bullet
   player.bulletArray.forEach((bullet) => {
       if (bullet.collides(bubble) && bullet.isBig) {
-        bullsEyeForHealth++;
+        let hea = new HealingDamage(ctx, -10 + (bullsEyeForHealth*20), 20)
+        game.player.life.healingDamages.push(hea)
         totalShootsPerLevelSucces++;
+        if(healingDamageIsActivated){
+        bullsEyeForHealth++;
         if(bullsEyeForHealth>= amountOfBullsEyeForHealth){
-          player.life.total+=0.5;
-        player.life.isHealing = true;
+          game.player.gainLife(1)
           bullsEyeForHealth = 0;
+          player.life.healingDamages = []
         }
+      }
         bigWeaponBubble(ctx, bullet,  player)
         bullet.dispose = false;
       } else return true;

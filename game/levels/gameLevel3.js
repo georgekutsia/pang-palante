@@ -21,7 +21,7 @@ function addBubble3(ctx, bubbles){
 function addPlatforms3(ctx, platforms){
   const platform1 = new Platform(ctx, 200, CTXH - 165, 155, 15, "../public/Imagenes/obstacles/platformSolid3.png", false, false, true);
   const platform2 = new Platform(ctx, 15, 370, 125, 15, "../public/Imagenes/obstacles/platformSolid2.png", false, false, true);
-  const platform3 = new Platform(ctx, CTXW -445, 390, 205, 15, "../public/Imagenes/obstacles/platformSolid3.png", false, false, true);
+  const platform3 = new Platform(ctx, CTXW -455, 390, 205, 15, "../public/Imagenes/obstacles/platformSolid3.png", false, false, true);
   const platform4 = new Platform(ctx, CTXW - 250, CTXH-120, 175, 15, "../public/Imagenes/obstacles/platformSolid3.png", false, false, true);
   platforms.push( platform1, platform2, platform3, platform4);
 }
@@ -45,7 +45,7 @@ function healingItem3(ctx, healings, bubbles) {
   let randomNumber =  getRandomNumber(3)
  switch (randomNumber) {
   case 1:
-    const healingItem1 = new Healing(ctx, 1, 27, 0)
+    const healingItem1 = new Healing(ctx, 20, 27, 0)
     healings.push(healingItem1)
     break;
   case 2:
@@ -53,7 +53,7 @@ function healingItem3(ctx, healings, bubbles) {
     healings.push(healingItem2)
     break;
   case 3:
-    const healingItem3 = new Healing(ctx, 1, 27, 0)
+    const healingItem3 = new Healing(ctx, 20, 27, 0)
     const healingItem4 = new Healing(ctx, 275, 57, 0)
     healings.push(healingItem3, healingItem4)
     const bubble1 = new Bubble(ctx, 130, -450, CTXW / 7, CTXW / 7, -1)

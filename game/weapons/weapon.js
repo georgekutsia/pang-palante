@@ -63,9 +63,10 @@ class BasicWeapon {
       this.vy = -this.vy;
     }
     this.tick++;
-    if (this.tick >= this.basicBulletDuration|| this.y <= -10) {
+    if (this.tick >= this.basicBulletDuration || this.y <= -10) {
       bullsEyeForHealth = 0;
       this.dispose = false;
+      game.player.life.healingDamages = []
     }
     this.electricBurbalasTick++;
     if(this.electricBurbalasTick > 1){

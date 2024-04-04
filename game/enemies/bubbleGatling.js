@@ -69,7 +69,7 @@ class BubbleGatling {
   }
   shootingBubble(){
     if(this.playerDetected && this.y + this.h >= 60 ){  //bubbleWidth es el tamaño de las burbujas y hay que resituar desde donde dispara según el tamaño
-        let bubble = new Bubble(ctx, this.x + this.w/2 - 10 - this.bubbleWidth/2, this.y +this.h, this.w - 10 + this.bubbleWidth, this.w - 10+ this.bubbleWidth, -0.1)
+        let bubble = new Bubble(ctx, this.x + this.w/2 - 10 - this.bubbleWidth/2, this.y +this.h, this.bubbleWidth, this.bubbleWidth, -0.1)
         this.bubbleArray.push( bubble)
         bubbleGatlingSound.play()
         this.x -= 5;

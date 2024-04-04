@@ -15,6 +15,34 @@ function textoPianoPiano(cualquierIdDeTexto) {
     }
   }, 40); // Cambiar velocidad aquí (en milisegundos)
 }
+const timeouts = [];
+
+function saltarInstrucciones(estaFuncion){
+  const clearAllTimeouts = () => {
+      timeouts.forEach(timeout => clearTimeout(timeout));
+  };
+  btnInstruccionesSaltar$$.style.display = "block";
+  btnInstruccionesSaltar$$.addEventListener("click", () => {
+          clearAllTimeouts();
+          hideAllTexts();
+          if(GAMELEVEL === 1){
+            level1(game.ctx, game.bubbles, game.platforms, game.levelBalls, game.boxes);
+            setTimeout(() => {
+              addBubble1(game.ctx, game.bubbles)
+            }, 8000);
+          }
+          btnInstruccionesSaltar$$.style.display = "none";
+          btnInstrucciones$$.style.display = "block";
+          btnInstrucciones$$.addEventListener("click", () => {
+          btnInstrucciones$$.style.display = "none";
+          estaFuncion()
+      });
+      arrowBubbles$$.style.left = "50%";
+      arrowBubbles$$.style.top = "12vh";
+      arrowBubbles$$.style.display = "none";
+  });
+
+}
 function arrowDemoInfo(){
   if(demoPhase ===1){
   setTimeout(() => {
@@ -44,54 +72,38 @@ function arrowDemoInfo(){
 }
 const demoFunctions = {
   demoOverText(){
-    setTimeout(() => {
+    saltarInstrucciones(this.demoOverText)
+    timeouts.push(setTimeout(() => {
       textoPianoPiano("demoOver-text1");
       demoFriend1$$.style.display = "block"
-    }, 1000);
-    setTimeout(() => {
+    }, 1000));
+    timeouts.push(setTimeout(() => {
       document.getElementById("demoOver-text1").style.display = "none";
       textoPianoPiano("demoOver-text2");
-    }, 2600);
-    setTimeout(() => {
+    }, 2600));
+    timeouts.push(setTimeout(() => {
       demoFriend1$$.style.display = "none";
       demoFriend2$$.style.display = "block";
       document.getElementById("demoOver-text2").style.display = "none";
       textoPianoPiano("demoOver-text3");
-    }, 4000);
+    }, 4000));
 
-    setTimeout(() => {
+    timeouts.push(setTimeout(() => {
       document.getElementById("demoOver-text3").style.display = "none";
       demoFriend2$$.style.display = "none"
       demoFriend3$$.style.display = "block"
       textoPianoPiano("demoOver-text4");
-    }, 7000);
-    setTimeout(() => {
+    }, 7000));
+    timeouts.push(setTimeout(() => {
       document.getElementById("demoOver-text4").style.display = "none";
       demoFriend3$$.style.display = "none"
-    }, 9900);
+    }, 9900));
   },
 
   mostrarVariosTextosPocoAPoco1() {
     if (demoPhase === 1) {
         btnInstruccionesSaltar$$.style.display = "block";
-        const timeouts = [];
-        const clearAllTimeouts = () => {
-            timeouts.forEach(timeout => clearTimeout(timeout));
-        };
-        btnInstruccionesSaltar$$.addEventListener("click", () => {
-                clearAllTimeouts();
-                hideAllTexts();
-                btnInstruccionesSaltar$$.style.display = "none";
-                btnInstrucciones$$.style.display = "block";
-                btnInstrucciones$$.addEventListener("click", () => {
-                btnInstrucciones$$.style.display = "none";
-                this.mostrarVariosTextosPocoAPoco1();
-            });
-            arrowBubbles$$.style.left = "50%";
-            arrowBubbles$$.style.top = "12vh";
-            arrowBubbles$$.style.display = "none";
-        });
-
+        saltarInstrucciones(this.mostrarVariosTextosPocoAPoco1)
         timeouts.push(setTimeout(() => {
             textoPianoPiano("demo-text1");
         }, 100));
@@ -170,27 +182,9 @@ const demoFunctions = {
     }
 },
 
-
   mostrarVariosTextosPocoAPoco2() {
   if(demoPhase ===2){
-    btnInstruccionesSaltar$$.style.display = "block";
-    const timeouts = [];
-    const clearAllTimeouts = () => {
-        timeouts.forEach(timeout => clearTimeout(timeout));
-    };
-    btnInstruccionesSaltar$$.addEventListener("click", () => {
-            clearAllTimeouts();
-            hideAllTexts();
-            btnInstruccionesSaltar$$.style.display = "none";
-            btnInstrucciones$$.style.display = "block";
-            btnInstrucciones$$.addEventListener("click", () => {
-            btnInstrucciones$$.style.display = "none";
-            this.mostrarVariosTextosPocoAPoco2();
-        });
-        arrowBubbles$$.style.left = "50%";
-        arrowBubbles$$.style.top = "12vh";
-        arrowBubbles$$.style.display = "none";
-    });
+    saltarInstrucciones(this.mostrarVariosTextosPocoAPoco2)
     btnInstrucciones$$.style.display = "none"
     document.getElementById("demo-text4").style.display = "none";
     document.getElementById("demo-text5").style.display = "none";
@@ -220,38 +214,39 @@ const demoFunctions = {
 
   mostrarVariosTextosPocoAPoco3() {
   if(demoPhase ===3){
+    saltarInstrucciones(this.mostrarVariosTextosPocoAPoco3)
 
     btnInstrucciones$$.style.display = "none"
     document.getElementById("demo-text8").style.display = "none";
     document.getElementById("demo-text9").style.display = "none";
     document.getElementById("demo-text10").style.display = "none";
     textoPianoPiano("demo-text11");
-    setTimeout(() => {
+    timeouts.push(setTimeout(() => {
       textoPianoPiano("demo-text12");
-    }, 1500);
-    setTimeout(() => {
+    }, 1500));
+    timeouts.push(setTimeout(() => {
       textoPianoPiano("demo-text13");
-    }, 3000);
-    setTimeout(() => {
+    }, 3000));
+    timeouts.push(setTimeout(() => {
       textoPianoPiano("demo-text14");
-    }, 5000);
-    setTimeout(() => {
+    }, 5000));
+    timeouts.push(setTimeout(() => {
       document.getElementById("demo-text11").style.display = "none";
       document.getElementById("demo-text12").style.display = "none";
       document.getElementById("demo-text13").style.display = "none";
       document.getElementById("demo-text14").style.display = "none";
       textoPianoPiano("demo-text15");
-      setTimeout(() => {
+      timeouts.push(setTimeout(() => {
         textoPianoPiano("demo-text16");
-      }, 2000);
-      setTimeout(() => {
+      }, 2000));
+      timeouts.push(setTimeout(() => {
         textoPianoPiano("demo-text17");
-      }, 4000);
-      setTimeout(() => {
+      }, 4000));
+      timeouts.push(setTimeout(() => {
         textoPianoPiano("demo-text18");
-      }, 6000);
-    }, 12000);
-    setTimeout(() => {
+      }, 6000));
+    }, 12000));
+    timeouts.push(setTimeout(() => {
       document.getElementById("demo-text15").style.display = "none";
       document.getElementById("demo-text16").style.display = "none";
       document.getElementById("demo-text17").style.display = "none";
@@ -260,12 +255,14 @@ const demoFunctions = {
       btnInstrucciones$$.addEventListener("click", ()=>{
         this.mostrarVariosTextosPocoAPoco3();
       })
-    }, 24000);
+    }, 24000));
   }
   },
 
   mostrarVariosTextosPocoAPoco4() {
   if(demoPhase ===5){
+    saltarInstrucciones(this.mostrarVariosTextosPocoAPoco4)
+
     btnInstrucciones$$.style.display = "none";
     document.getElementById("demo-text11").style.display = "none";
     document.getElementById("demo-text12").style.display = "none";
@@ -276,23 +273,24 @@ const demoFunctions = {
     document.getElementById("demo-text17").style.display = "none";
     document.getElementById("demo-text18").style.display = "none";
     textoPianoPiano("demo-text19");
-    setTimeout(() => {
+    timeouts.push(setTimeout(() => {
       textoPianoPiano("demo-text20");
-      }, 2000);
-      setTimeout(() => {
+      }, 2000));
+      timeouts.push(setTimeout(() => {
         document.getElementById("demo-text19").style.display = "none";
         document.getElementById("demo-text20").style.display = "none";
         btnInstrucciones$$.style.display = "block"
         btnInstrucciones$$.addEventListener("click", ()=>{
                 this.mostrarVariosTextosPocoAPoco4();
         })
-      }, 4000)
+      }, 4000));
     }
   },
 
 
   mostrarVariosTextosPocoAPoco5() {
   if(demoPhase ===7){
+    saltarInstrucciones(this.mostrarVariosTextosPocoAPoco5)
 
     btnInstrucciones$$.style.display = "none"
     document.getElementById("demo-text19").style.display = "none";
@@ -313,6 +311,7 @@ const demoFunctions = {
   },
   mostrarVariosTextosPocoAPoco6() {
   if(demoPhase ===9){
+    saltarInstrucciones(this.mostrarVariosTextosPocoAPoco6)
 
     btnInstrucciones$$.style.display = "none"
     document.getElementById("demo-text21").style.display = "none";
@@ -338,6 +337,7 @@ const demoFunctions = {
 
   mostrarVariosTextosPocoAPoco7() {
     if(demoPhase ===11){
+      saltarInstrucciones(this.mostrarVariosTextosPocoAPoco7)
 
     btnInstrucciones$$.style.display = "none"
     document.getElementById("demo-text22a").style.display = "none";
@@ -367,6 +367,8 @@ const demoFunctions = {
   },
   mostrarVariosTextosPocoAPoco8() {
   if(demoPhase ===13){
+    saltarInstrucciones(this.mostrarVariosTextosPocoAPoco8)
+
     btnInstrucciones$$.style.display = "none"
     document.getElementById("demo-text23").style.display = "none";
     document.getElementById("demo-text24").style.display = "none";
@@ -467,6 +469,41 @@ function demoMessageDisable() {
 
 
 function  hideAllTexts() {
+
+  document.getElementById("gameIntro-text1").style.display = "none";
+  document.getElementById("gameIntro-text2").style.display = "none";
+  boss1$$.style.display = "none"
+  boss1$$.style.opacity = "0"
+
+  minion1$$.style.display = "none";
+  minion2$$.style.display = "none";
+  minion3$$.style.display = "none";
+  minion4$$.style.display = "none";
+  minion5$$.style.display = "none";
+  minion6$$.style.display = "none";
+  minion1$$.style.opacity = "0";
+  minion2$$.style.opacity = "0";
+  minion3$$.style.opacity = "0";
+  minion4$$.style.opacity = "0";
+  minion5$$.style.opacity = "0";
+  minion6$$.style.opacity = "0";
+  document.getElementById("gameIntro-text3").style.display = "none";
+  document.getElementById("gameIntro-text4").style.display = "none";
+  document.getElementById("gameIntro-text5").style.display = "none";
+  document.getElementById("gameIntro-text6").style.display = "none";
+  document.getElementById("gameIntro-text7").style.display = "none";
+
+  demoFriend3$$.style.display = "none";
+  demoFriend3$$.style.opacity = "0";
+  demoFriend4$$.style.display = "none";
+  demoFriend4$$.style.opacity = "0";
+  demoFriend5$$.style.display = "none";
+  demoFriend5$$.style.opacity = "0";
+
+
+
+  infoPlayer1$$.style.display = "none"
+  infoPlayer2$$.style.display = "none"
   document.getElementById("demo-text1").style.display = "none";
   document.getElementById("demo-text2").style.display = "none";
   document.getElementById("demo-text3").style.display = "none";
@@ -505,3 +542,5 @@ function  hideAllTexts() {
   document.getElementById("demo-text25").style.display = "none";
   document.getElementById("demo-text26").style.display = "none";
 };
+
+

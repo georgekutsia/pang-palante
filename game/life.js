@@ -10,7 +10,10 @@ class Life {
     this.img.src = "../public/Imagenes/stats/heart.png";
     this.imgHalf = new Image();
     this.imgHalf.src = "../public/Imagenes/stats/heartHalf.png";
+    this.emptyHeart = new Image();
+    this.emptyHeart.src = "../public/Imagenes/emptyHeart.png";
     this.healingHearts = [];
+    this.healingDamages = [];
     this.isHealing = true;
     this.gainCoins = [];
     this.isGaining = false;
@@ -21,15 +24,22 @@ class Life {
   draw() {
     this.ctx.save();
     this.ctx.drawImage(this.imgHalf, this.x, this.y, this.w, this.h);
+    if(healingDamageIsActivated){
+    for (let i = 0; i < amountOfBullsEyeForHealth; i++) {
+      const emptyHeartX = -5 + i*20;
+      this.ctx.drawImage(this.emptyHeart, emptyHeartX, 15, this.ctx.canvas.width/35, this.ctx.canvas.width/35);
+    }
+  }
     let place
     for (let i = 0; i < Math.floor(this.total); i++) {
       place = this.x + 30*i
-      if (this.isHealing && i === Math.floor(this.total) - 1) {
+      if (this.isHealing && i === Math.floor(this.total) - 1 && this.total < maxLife) {
         let healHeart = new HealingHeart(this.ctx, place+1, 0)
         this.healingHearts.push(healHeart)
-      this.isHealing = false
+        this.isHealing = false
       }
       this.ctx.drawImage(this.img, place, this.y, this.w, this.h);
+      
     }
     if (this.total % 1 !== 0) {
       this.ctx.drawImage(this.imgHalf, place + 30, this.y, this.w, this.h);
@@ -62,7 +72,11 @@ class Life {
     this.healingHearts.forEach(heart => heart.draw())
     this.healingHearts.forEach(heart => heart.move())
     this.healingHearts = this.healingHearts.filter(heart => heart.isVisible())
-    this.gainCoins.forEach(coin => coin.draw())
+    if(healingDamageIsActivated){
+      this.healingDamages.forEach(healDam => healDam.draw())
+      this.healingDamages.forEach(healDam => healDam.move())
+      this.healingDamages = this.healingDamages.filter(healDam => healDam.isVisible())
+    }
     this.gainCoins.forEach(coin => coin.move())
     this.gainCoins = this.gainCoins.filter(coin => coin.isVisible())
   }

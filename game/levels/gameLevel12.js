@@ -42,9 +42,9 @@ function addPlatforms12(ctx, platforms, healings, boxes){
 }
 
 function addGatling12(ctx, gatlings){
-  let gat1 = new BubbleGatling(ctx, 1.3, CTXW-80, 0, 3);
-  let gat2 = new BubbleGatling(ctx, 1.1, CTXW-80, 0, 3);
-  let gat3 = new BubbleGatling(ctx, 0.7, 80, 60, 1);
+  let gat1 = new BubbleGatling(ctx, 1.3, CTXW-80, 20, 3);
+  let gat2 = new BubbleGatling(ctx, 1.1, CTXW-80, 20, 3);
+  let gat3 = new BubbleGatling(ctx, 0.7, 80, 50, 1);
   gatlings.push(gat1, gat2, gat3);
   }
 

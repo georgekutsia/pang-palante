@@ -1,27 +1,26 @@
-class HealingHeart {
+class HealingDamage {
   constructor(ctx, x, y) {
     this.ctx = ctx;
     this.x = x || 200;
-    this.y = 5;
-    this.w = this.ctx.canvas.width/35;
-    this.h =  this.ctx.canvas.width/50;
+    this.y = 10;
+    this.w = this.ctx.canvas.width/30;
+    this.h =  this.ctx.canvas.width/30;
     this.vx = 0;
     this.vy =  0;
     this.img = new Image();
-    this.img.src = "/public/Imagenes/heartHealing.png";
+    this.img.src = "/public/Imagenes/healingHeart.png";
     this.img.frame = 0;
     this.tick = 0;
     this.dispose = true;
+
   }
 
   draw() {
-    console.log("he")
-
       this.ctx.drawImage(
         this.img,
-        (this.img.frame * this.img.width) / 6,
+        (this.img.frame * this.img.width) / 8,
         0,
-        this.img.width / 6,
+        this.img.width / 8,
         this.img.height,
         this.x,
         this.y,
@@ -32,12 +31,12 @@ class HealingHeart {
 
   move() {
     this.tick++;
-    if (this.tick > 4) {
+    if (this.tick > 2) {
       this.img.frame++;
       this.tick = 0;
     }
-    if (this.img.frame > 5) {
-      this.dispose = false;
+    if (this.img.frame > 7) {
+      this.img.frame = 7;
     }
   }
 
