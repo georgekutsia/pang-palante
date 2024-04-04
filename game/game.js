@@ -81,17 +81,17 @@ class Game {
         levelInfinite( this.ctx, this.bubbles, this.platforms, this.bouncers, this.spikes, this.stairs, this.flamethrowers, this.machineguns, this.healings, this.auras, this.boxes, this.blasters, this.levelBalls, this.gatlings, this.darkBubbles,)
       }
       if(GAMELEVEL === 1987 ) {
-      itemsDemo(this.ctx, this.stairs, this.bubbles, this.darkBubbles, this.spikes, this.gatlings, this.hooks, this.flamethrowers, this.bars, this.boxes, this.blasters, this.electros, this.coins, this.healings, this.platforms, this.chests, this.swords, this.auras, this.steps)
+      // itemsDemo(this.ctx, this.stairs, this.bubbles, this.darkBubbles, this.spikes, this.gatlings, this.hooks, this.flamethrowers, this.bars, this.boxes, this.blasters, this.electros, this.coins, this.healings, this.platforms, this.chests, this.swords, this.auras, this.steps)
 
-        // infoIntro1()
-        // this.background.img.src = "../public/Imagenes/background/backgroundTraining4.webp";
-        // setTimeout(() => {
-        //   addDemo1Electro(this.ctx,  this.platforms, this.electros)
-        //   this.background.img.src = "../public/Imagenes/background/backDemo5.png";
-        // }, 10500);
-        // setTimeout(() => {
-        //   addDemo1(this.ctx, this.platforms)
-        // }, 30000);
+        infoIntro1()
+        this.background.img.src = "../public/Imagenes/background/backgroundTraining4.webp";
+        setTimeout(() => {
+          addDemo1Electro(this.ctx,  this.platforms, this.electros)
+          this.background.img.src = "../public/Imagenes/background/backDemo5.png";
+        }, 1500);
+        setTimeout(() => {
+          addDemo1(this.ctx, this.platforms)
+        }, 3000);
       }
     }
 
@@ -155,6 +155,7 @@ class Game {
   }
 
   draw() {
+    console.log(demoPhase)
     this.background.draw(); //dibuja el background
     this.stairs.forEach((e) => e.draw());
     this.spikes.forEach((e) => e.draw());
@@ -322,7 +323,7 @@ class Game {
           this.player.loseLife(exp.damage, true);
         this.player.wasNotDamaged = false;
           exp.exploded = true;
-          ireExplosionBig.play()
+          fireExplosionBig.play()
           exp.img.frame = 5;
           exp.vx = this.player.vx;
           exp.canCollide = false;
@@ -871,7 +872,6 @@ this.cannons.forEach((cann) => {//  cannon con fire
         } else return true;
       });
     });
-    console.log(totalShootsPerLevelSucces, totalShootsPerLevel, bullsEyeForHealth)
 
   }
   changingLevels(){
@@ -926,7 +926,6 @@ if( totalShootsPerLevel === totalShootsPerLevelSucces ){
 
 }
   levelChange() {      
-    console.log(GAMELEVEL)
     if(!this.isInfiniteChanging){
       setTimeout(() => {
         setTimeout(() => {
@@ -947,10 +946,8 @@ if( totalShootsPerLevel === totalShootsPerLevelSucces ){
         ballBroke = true;
         this.changingLevel = false;
         this.levelBalls = [];
-        console.log("tis")
 
         if (GAMELEVEL === 2) {
-          console.log("heyyyyyy")
           this.background.img.src ="/public/Imagenes/background/background2.jpeg";
           level2(this.ctx, this.bubbles, this.platforms, this.boxes,  this.levelBalls)
         } else if (GAMELEVEL === 3) {
@@ -1057,13 +1054,13 @@ if( totalShootsPerLevel === totalShootsPerLevelSucces ){
       if(demoPhase === 1){
         if(this.platforms.length<=2 && this.electros.length <=0 && this.gameTime >= 800){
         this.background.img.src = "../public/Imagenes/background/backDemo2.png";
-          this.emptyAll()
+          // this.emptyAll()
           this.player.y = CTXH - 20;
           this.player.x = 50
           addDemo2(this.ctx, this.platforms, this.bouncers, this.stairs, this.levers)
+          demoPhase = 2;
           demoFunctions.mostrarVariosTextosPocoAPoco2()
           this.player.g = 1;
-          demoPhase = 2;
         }
       }
       if(demoPhase === 2 || demoPhase === 3){
@@ -1079,40 +1076,41 @@ if( totalShootsPerLevel === totalShootsPerLevelSucces ){
         this.background.img.src = "../public/Imagenes/background/backDemo6.png";
         setTimeout(() => {
           this.levelBalls = [];
-          this.emptyAll()
+          // this.emptyAll()
           addDemo3(this.ctx, this.platforms, this.levers, this.bubbles, this.levelBalls, this.boxes)
         }, 1000);
-          demoFunctions.mostrarVariosTextosPocoAPoco3()
-          demoPhase = 3;
+        demoPhase = 3;
+        demoFunctions.mostrarVariosTextosPocoAPoco3()
       }
       if(demoPhase === 4){
         this.background.img.src = "../public/Imagenes/background/backDemo3.png";
         this.levelBalls = [];
-        this.emptyAll()
+        // this.emptyAll()
+        demoPhase = 5;
           demoFunctions.mostrarVariosTextosPocoAPoco4()
           addDemo4(this.ctx, this.platforms, this.levers, this.bubbles, this.levelBalls, this.boxes)
-          demoPhase = 5;
       }
       if(demoPhase === 6){
         this.background.img.src = "../public/Imagenes/background/backDemo10.webp";
         this.levelBalls = [];
-        this.emptyAll()
+        // this.emptyAll()
+        demoPhase = 7;
         demoFunctions.mostrarVariosTextosPocoAPoco5()
         addDemo5(this.ctx, this.platforms, this.levers, this.levelBalls,this.boxes, this.darkBubbles, this.spikes, this.healings)
-        demoPhase = 7;
       }
       if(demoPhase === 8){
         this.background.img.src = "../public/Imagenes/background/backDemo11.webp";
           this.levelBalls = [];
-          this.emptyAll()
+          // this.emptyAll()
+          demoPhase = 9;
           demoFunctions.mostrarVariosTextosPocoAPoco6()
           addDemo6(this.ctx, this.platforms, this.levers, this.levelBalls,this.boxes, this.gatlings, this.cannons);
-          demoPhase = 9;
       }
       if(demoPhase === 10){
         this.background.img.src = "../public/Imagenes/background/backDemo12.webp";
         this.levelBalls = [];
-        this.emptyAll()
+        // this.emptyAll()
+        demoPhase = 11
         addDemo7(this.ctx, this.platforms, this.swords, this.bouncers, this.machineguns);
         demoFunctions.mostrarVariosTextosPocoAPoco7()
         setTimeout(() => {
@@ -1125,7 +1123,6 @@ if( totalShootsPerLevel === totalShootsPerLevelSucces ){
             boxMoveDemo7(this.ctx, this.boxes, this.hooks, this.healings)
           }, 2000);
           }
-        demoPhase = 11
       }
       if(demoPhase === 11 && this.boxes.length <= 0){
         boxMoveDemo7(this.ctx, this.boxes, this.hooks, this.healings)
@@ -1134,12 +1131,12 @@ if( totalShootsPerLevel === totalShootsPerLevelSucces ){
         this.background.img.src = "../public/Imagenes/background/backDemo4.png";
         this.levelBalls = [];
         this.emptyAll()
+        demoPhase = 13;
         addDemo8(this.ctx, this.boxes, this.levelBalls)
         demoFunctions.mostrarVariosTextosPocoAPoco8()
         setTimeout(() => {
         addCoinsDemo8(this.ctx, this.coins)
         }, 15000);
-        demoPhase = 13;
       }
       if(demoPhase === 13 && this.player.life.total  <=1.5 && this.healings <= 1){
         addLifeDemo8(this.ctx, this.healings)

@@ -106,7 +106,8 @@ let movesDiv$$ = document.getElementById("moves-div")
 
 let ammosCount$$ = document.getElementById("ammos-count")
 
-let btnInstrucciones$$ = document.getElementById("btn-instrucciones")
+let btnInstrucciones$$ = document.getElementById("btn-instrucciones-repetir")
+let btnInstruccionesSaltar$$ = document.getElementById("btn-instrucciones-saltar")
 let btnCambiarSala$$ = document.getElementById("cambiar-sala")
 let introAyudaFinal1$$ = document.querySelector(".introAyudaFinal1")
 

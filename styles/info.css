@@ -277,7 +277,7 @@ z-index: 24;
 
 
 
-  #btn-instrucciones{
+  #btn-instrucciones-repetir{
     position: absolute;
     padding: 3px 6px;
     background-color: rgb(0, 255, 255);
@@ -286,7 +286,19 @@ z-index: 24;
     display: none;
     font-size:calc(10px + 0.1vw);
   }
-  #btn-instrucciones:hover{
+  #btn-instrucciones-repetir:hover{
+    box-shadow: 2px 2px 2px black;
+  }
+  #btn-instrucciones-saltar{
+    position: absolute;
+    padding: 3px 6px;
+    background-color: rgb(0, 255, 255);
+    top: 0.2%;
+    right: 5%;
+    display: none;
+    font-size:calc(10px + 0.1vw);
+  }
+  #btn-instrucciones-saltar:hover{
     box-shadow: 2px 2px 2px black;
   }
   #cambiar-sala{

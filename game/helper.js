@@ -572,7 +572,7 @@ shopElectro$$.addEventListener("click", function(){
 
 
 shopElectroBullet$$.addEventListener("click", function(){
-  if(coins >=80 && boots === false){
+  if(coins >=80 && electrifiedBurbalas === false){
   faShakeWhenBuy(this);
     buyBig.play()
     electrifiedBurbalas = true;

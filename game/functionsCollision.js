@@ -19,8 +19,6 @@ function checkBubbleCollision(bubbles, player, puffBubbles, ctx, platforms, boun
             player.vy = -10;
           } else {
             if (!player.auraIsActive && !player.electricShieldIsActive) { 
-              // player.loseLife(bubble.damage, true); //el daño al jugador se le hace según lo que marca el daño de la burbuja. a burbuja más pequeña, menos daño
-              // bubble.vy = -bubbleSpeedY; // rebota encima del jugador haciéndole daño
               if(bubble.w >= 90){
                 player.x = (bubble.x + bubble.w/2) - player.w/2;
                 player.y = (bubble.y + bubble.h/2) - player.h/2;
@@ -190,7 +188,8 @@ function bouncerPlayerCollision(player, bouncer){
       player.g = 1;
     } else {
       player.vy = -1;
-      player.vx = 0;  
+      player.vx = 0;
+    player.ableToJump = true;
     }
   }
   if (player.y +  player.h/2 >= bouncer.y   ) {

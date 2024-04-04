@@ -490,7 +490,9 @@ class Player {
       playerSpeed = 8;
     }
 
-
+    if(this.vx && this.x + this.h <=  CTXH - 5 || this.vy && this.x + this.h <=  CTXH - 5){
+      this.g = 0.8;
+    }
     if(!finalBoss){
       this.velocidadX = this.vx += this.r;
       if(this.velocidadX <= 1.5 && this.velocidadX >= -1.5 && this.r !==0){
