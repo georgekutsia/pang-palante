@@ -78,6 +78,7 @@ let stabRecharge = 6000;
 let electrifiedBurbalas = false;
 const CTXW = ctx.canvas.width
 const CTXH = ctx.canvas.height;
+let timeStopIsActive = false;
 let timeStopped = false;
 let jumpHeight = -16.5;
 let gameSpeed = 60;

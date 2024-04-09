@@ -686,6 +686,17 @@ shopShootBarActivation$$.addEventListener("click", function(){
       shopShootBarActivation$$.innerHTML = `</i> <span id="boots-text"><i class="fa-solid fa-circle-dot"></i>  <i style="font-size: calc(8px + 0.4vw)"  class="fa-solid fa-heart-pulse"> </i> </span> <i style="font-size: calc(8px + 0.7vw)"  class="fa-solid fa-check"></i>`;
   }
 })
+shopShootTimeActivation$$.addEventListener("click", function(){
+  if(coins >= 90){
+    coins-=90;
+    timeStopIsActive = true;
+    faShakeWhenBuy(this);
+      shopShootTimeActivation$$.disabled = true; 
+      shopShootLife$$.disabled = false; 
+      shopShootTimeActivation$$.style.color = "rgb(164, 5, 164)";
+      shopShootTimeActivation$$.innerHTML = `</i> <span id="boots-text"><i class="fa-solid fa-circle-dot"></i>  <i style="font-size: calc(8px + 0.4vw)"  class="fa-solid fa-clock"> </i> </span> <i style="font-size: calc(8px + 0.7vw)"  class="fa-solid fa-check"></i>`;
+  }
+})
 
 
 shopRetry$$.addEventListener("click", function(){

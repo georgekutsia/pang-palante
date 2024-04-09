@@ -1,8 +1,8 @@
 class TimeStop {
   constructor(ctx) {
     this.ctx = ctx;
-    this.x = 50;
-    this.y = 250;
+    this.x= this.ctx.canvas.width - 80;
+    this.y = 10;
     this.w = this.ctx.canvas.width/20;
     this.h =  this.ctx.canvas.width/20;
     this.vx = 0;
@@ -30,7 +30,7 @@ class TimeStop {
 
   move() {
     this.tick++;
-    if (this.tick > 4) {
+    if (this.tick > 0.5) {
       this.img.frame++;
       this.tick = 0;
     }

@@ -33,7 +33,7 @@ function basicBulletBounce(elem1, elem2){
 }
 
 function bubblePuff(bubble, puffBubbles, bubbles, ctx, bullet){
-  if(bullet === true && bubble.timeStopBubble === true){
+  if(bullet === true && bubble.timeStopBubble === true && timeStopIsActive){
     let ti = new TimeStop(ctx);
     game.player.life.timeStopped.push(ti)
     timeStopped = true;
@@ -51,7 +51,7 @@ function bubblePuff(bubble, puffBubbles, bubbles, ctx, bullet){
     gravitySpeed = 0;
     game.stop();
     game.start()
-    }, 20000);
+    }, 10000);
   }
   const elx = bubble.x;
   const ely = bubble.y;
