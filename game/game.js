@@ -69,13 +69,15 @@ class Game {
         //   minibossArrivingShip.play();
         //   this.dispached = false;
 
-        inftroGame1();
-        timeouts.push(setTimeout(() => {
-        level1(this.ctx, this.bubbles, this.platforms, this.levelBalls, this.boxes)
-        }, 15000));
-        timeouts.push(setTimeout(() => {
-          addBubble1(this.ctx, this.bubbles)
-        }, 25000));
+        level15( this.ctx, this.bubbles, this.levelBalls, this.darkBubbles, this.steps);
+
+        // inftroGame1();
+        // timeouts.push(setTimeout(() => {
+        // level1(this.ctx, this.bubbles, this.platforms, this.levelBalls, this.boxes)
+        // }, 20000));
+        // timeouts.push(setTimeout(() => {
+        //   addBubble1(this.ctx, this.bubbles)
+        // }, 30000));
       }
       if(GAMELEVEL === 100) {
         levelInfinite( this.ctx, this.bubbles, this.platforms, this.bouncers, this.spikes, this.stairs, this.flamethrowers, this.machineguns, this.healings, this.auras, this.boxes, this.blasters, this.levelBalls, this.gatlings, this.darkBubbles,)
@@ -155,7 +157,6 @@ class Game {
   }
 
   draw() {
-    console.log(demoPhase)
     this.background.draw(); //dibuja el background
     this.stairs.forEach((e) => e.draw());
     this.spikes.forEach((e) => e.draw());
@@ -230,11 +231,9 @@ class Game {
     //permite hacer keyup y keydown para usar teclado para mover el personaje
     document.addEventListener("keydown", (ev) => {
       this.player.keyDown(ev.keyCode);
-      // this.keyDown(ev.keyCode)
     });
     document.addEventListener("keyup", (ev) => {
       this.player.keyUp(ev.keyCode);
-      this.keyUp(ev.keyCode)
     });
   }
 
@@ -605,8 +604,8 @@ this.cannons.forEach((cann) => {//  cannon con fire
 
     this.steps.forEach((step) => {// steps  choca con el personaje
       if (step.collides(this.player)) {
-        this.player.stepsAmount += 5;
         this.player.extraY = this.player.extraY-50;
+        this.player.stepsAmount += 5;
         ammoSound.play();
         itemTakenImages = "../public/Imagenes/itemTakenBullet2.png";
         this.player.itemJustTaken = true;
@@ -986,15 +985,21 @@ if( totalShootsPerLevel === totalShootsPerLevelSucces ){
         } else if (GAMELEVEL === 12) {
           this.background.img.src ="/public/Imagenes/background/background12.jpeg";
         level12( this.ctx, this.platforms,  this.healings, this.bars, this.boxes,this.levelBalls, this.gatlings, this.levers);     
-        } else if (GAMELEVEL === 13) {//there
+        } else if (GAMELEVEL === 13) {
           this.background.img.src ="/public/Imagenes/background/background13.jpeg";
         level13( this.ctx, this.bubbles, this.platforms, this.stairs,  this.healings, this.bars, this.boxes,this.levelBalls,  this.darkBubbles);
         } else if (GAMELEVEL === 14) {
           this.background.img.src ="/public/Imagenes/background/background14.jpeg";
         level14( this.ctx, this.bubbles, this.platforms,  this.healings, this.boxes, this.levelBalls, this.darkBubbles, this.spikes, this.bars, this.auras, this.levers);
-        } else if (GAMELEVEL === 15) {
+        } else if(GAMELEVEL === 15) {
           this.background.img.src ="/public/Imagenes/background/background15.jpeg";
           level15( this.ctx,this.platforms, this.bubbles, this.levelBalls, this.darkBubbles, this.cannons, this.boxes, this.healings, this.flamethrowers);
+        } else if(GAMELEVEL === 16) {
+          this.background.img.src ="/public/Imagenes/background/background16.jpeg";
+          level16( this.ctx,this.platforms, this.bubbles, this.levelBalls, this.darkBubbles, this.cannons, this.boxes, this.healings, this.flamethrowers);
+        } else if (GAMELEVEL === 17) {
+          this.background.img.src ="/public/Imagenes/background/background17.jpeg";
+          level17( this.ctx,this.platforms, this.bubbles, this.levelBalls, this.darkBubbles, this.cannons, this.boxes, this.healings, this.flamethrowers);
           setInterval(() => {
             this.cannons.forEach(c => c.shooting = true)
           }, 36000);
@@ -1005,7 +1010,7 @@ if( totalShootsPerLevel === totalShootsPerLevelSucces ){
             this.cannons.forEach((c) =>(c.vx = -0.05))
             }
           }, 3000);
-        } else if (GAMELEVEL === 16){//pero 21 en realidad
+        } else if (GAMELEVEL === 18){//pero 21 en realidad
           addMiniboss1(this.ctx, this.levelBalls);
           miniBossTalk1.play();
             setTimeout(() => {
@@ -1041,6 +1046,12 @@ if( totalShootsPerLevel === totalShootsPerLevelSucces ){
   }
 
   checkLevelsState(){
+    if(GAMELEVEL <= 1986){
+      let randomForSpecialItem = getRandomNumber(3000);
+      if(randomForSpecialItem === 1){
+        specialItems(this.ctx, this.cristalBalls)
+      }
+    }
     if (this.player.life.total <= 0){
       this.player.life.total = 3;
       GAMELEVEL<= 1800 ? this.gameOver() : this.demoOver(); 
@@ -1158,10 +1169,21 @@ if( totalShootsPerLevel === totalShootsPerLevelSucces ){
         demoPhase = 15;
       }
     }
+    if(GAMELEVEL === 6 && this.player.hookAmount <=0 && this.boxes.length <= 0 && this.hooks.length <= 0){
+        let newHook = new Hook(this.ctx, CTXW/2, CTXH - 80);
+        this.hooks.push(newHook);
+     }
+    if(GAMELEVEL === 11 && this.player.electroAmount <=0 && this.boxes.length <= 0 && this.electros.length <= 0){
+        let electricity = new Electro(this.ctx, CTXW/2, CTXH - 80);
+        this.electros.push(electricity);
+     }
     if(GAMELEVEL===11 && this.levelBalls.every(e =>e.winCondition===true)){
         this.platforms.forEach(element => {
           element.isSolid = true;
         })
+      }
+      if(GAMELEVEL === 15 && this.steps.length <= 0 && this.player.stepsAmount <= 0){
+        addSteps15(this.ctx, this.steps)
       }
       if(GAMELEVEL===14){
         if(this.platforms.length === 1){
@@ -1310,25 +1332,4 @@ if( totalShootsPerLevel === totalShootsPerLevelSucces ){
     this.emptyAllPlayerArrays()
     this.emptyAllPlayerBullets()
   }
-  keyUp(key){
-    if(key === P){
-      this.shootStep(65);
-    }
-    if(key === O){
-      this.shootStep(-68);
-    }
-  }
-  shootStep(stepPlace) {
-    if(this.player.platformCreator && this.player.stepsAmount > 0){
-      this.player.stepsAmount--;
-      const plat = new Platform(ctx, this.player.x + stepPlace, this.player.y - 10, 65, 10, "/public/Imagenes/obstacles/stepsSolid2.png", true, true, true, 0, 0, 100, CTXW - 165, 200, CTXH - 100, true, true );
-      this.platforms.push(plat);
-      setTimeout(() => {
-        const index = this.platforms.indexOf(plat);
-        if (index !== -1) {
-          this.platforms.splice(index, 1);
-        }
-      }, 10000);
-    }
-  }  
 }

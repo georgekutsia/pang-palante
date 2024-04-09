@@ -1,14 +1,14 @@
-class HealingHeart {
-  constructor(ctx, x, y) {
+class TimeStop {
+  constructor(ctx) {
     this.ctx = ctx;
-    this.x = x || 200;
-    this.y = 5;
-    this.w = this.ctx.canvas.width/35;
-    this.h =  this.ctx.canvas.width/50;
+    this.x = 50;
+    this.y = 250;
+    this.w = this.ctx.canvas.width/20;
+    this.h =  this.ctx.canvas.width/20;
     this.vx = 0;
     this.vy =  0;
     this.img = new Image();
-    this.img.src = "/public/Imagenes/heartHealing.png";
+    this.img.src = "/public/Imagenes/timeStopImg.png";
     this.img.frame = 0;
     this.tick = 0;
     this.dispose = true;
@@ -17,9 +17,9 @@ class HealingHeart {
   draw() {
       this.ctx.drawImage(
         this.img,
-        (this.img.frame * this.img.width) / 6,
+        (this.img.frame * this.img.width) / 12,
         0,
-        this.img.width / 6,
+        this.img.width / 12,
         this.img.height,
         this.x,
         this.y,
@@ -34,8 +34,8 @@ class HealingHeart {
       this.img.frame++;
       this.tick = 0;
     }
-    if (this.img.frame > 5) {
-      this.dispose = false;
+    if (this.img.frame > 11) {
+      this.img.frame = 0;
     }
   }
 

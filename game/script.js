@@ -6,7 +6,6 @@ start$$.addEventListener("click", function () {
   retry$$.style.display = "block";
   startInfinite$$.style.display = "none";
   startDemo$$.style.display = "none";
-  startBackground$$.style.display = "none";
   instruccionesInfo1$$.style.display = "none";
   instruccionesInfo2$$.style.display = "none";
   instruccionesInfo3$$.style.display = "none";
@@ -47,7 +46,6 @@ startInfinite$$.addEventListener("click", function () {
   retry$$.style.display = "block";
   start$$.style.display = "none";
   startDemo$$.style.display = "none";
-  startBackground$$.style.display = "none";
   instruccionesInfo1$$.style.display = "none";
   instruccionesInfo2$$.style.display = "none";
   instruccionesInfo3$$.style.display = "none";
@@ -88,7 +86,6 @@ startDemo$$.addEventListener("click", function () {
   retry$$.style.display = "block";
   start$$.style.display = "none";
   startInfinite$$.style.display = "none";
-  startBackground$$.style.display = "none";
   instruccionesInfo1$$.style.display = "none";
   instruccionesInfo2$$.style.display = "none";
   instruccionesInfo3$$.style.display = "none";

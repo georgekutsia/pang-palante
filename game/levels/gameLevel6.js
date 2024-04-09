@@ -59,13 +59,13 @@ function addSpikes6(ctx, spikes){
 
 function boxItem6(ctx, boxes) {   
   //ctx, x, y, tipo de caja,si es random=true o si es especifico= false,  loot específico
-  const box = new Box(ctx, 820, 370,  0, false, 1, false, 3);
-  const box0 = new Box(ctx, 520, 370,  0, false, 1, false, 3);
-  const box1 = new Box(ctx, 20, 70,  1, false, 2, false);
-  const box2 = new Box(ctx, 390, 235,  2, false, 1, false, 2);
-  const box3 = new Box(ctx, 390, 180,  3, false, 1, false, 2);
-  const box31 = new Box(ctx, 390, 125,  3, false, 1, false, 2);
-  const box32 = new Box(ctx, 390, 75,  3, false, 1, false, 2);
+  const box = new Box(ctx, 820, 370,  0, false, 9, false, 1);
+  const box0 = new Box(ctx, 520, 370,  0, false, 9, false, 1);
+  const box1 = new Box(ctx, 20, 70,  2, false, 2, false);
+  const box2 = new Box(ctx, 390, 235,  2, false, 1, false, 1);
+  const box3 = new Box(ctx, 390, 180,  3, false, 1, false, 1);
+  const box31 = new Box(ctx, 390, 125,  3, false, 1, false, 1);
+  const box32 = new Box(ctx, 390, 75,  3, false, 1, false, 1);
   const box4 = new Box(ctx, CTXW-120, 220,  3, false, 5, false);
   const box5 = new Box(ctx, CTXW-120, 250,  3, false, 5, false);
   const box6 = new Box(ctx, CTXW-120, 280,  3, false, 5, false);

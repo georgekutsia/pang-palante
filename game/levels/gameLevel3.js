@@ -45,7 +45,7 @@ function healingItem3(ctx, healings, bubbles) {
   let randomNumber =  getRandomNumber(3)
  switch (randomNumber) {
   case 1:
-    const healingItem1 = new Healing(ctx, 20, 27, 0)
+    const healingItem1 = new Healing(ctx, 1, 27, 0)
     healings.push(healingItem1)
     break;
   case 2:

@@ -28,7 +28,7 @@ function addPlatforms4(ctx, platforms, healings, boxes, stairs,bars){
       healings.push(healingItem1,healingItem2)
       const box1 = new Box(ctx, 125, 30,  3, false, 5)
       const box2 = new Box(ctx, CTXW-260, 40,  2, false, 2)
-      const box3 = new Box(ctx, CTXW-460, 70,  3, false, 3)
+      const box3 = new Box(ctx, CTXW-460, 70,  3, false, 5)
       boxes.push(box1,box2,box3)
       const stair2 = new Stair(ctx, CTXW -100, CTXH - 180,  70, 180);
       const stair3 = new Stair(ctx, CTXW -300, CTXH - 350,  70, 180);

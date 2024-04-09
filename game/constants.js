@@ -41,8 +41,6 @@ let D = 68;
 let trainingRoom = 0;// configura en cual sala está entreando 
 let moved = false //para mover info de un lado a otro
 let recharge = 400;
-let jumpHeight = -16.5;
-let playerSpeed = 10;
 let jumpCooldown = 500;
 let dodgeCooldown = 2400;
 let bulletDirection = 0;
@@ -79,8 +77,12 @@ let stabRechargeLevel = 0;
 let stabRecharge = 6000;
 let electrifiedBurbalas = false;
 const CTXW = ctx.canvas.width
-const CTXH = ctx.canvas.height
+const CTXH = ctx.canvas.height;
+let timeStopped = false;
+let jumpHeight = -16.5;
 let gameSpeed = 60;
+let playerSpeed = 10;
+let gravitySpeed = 0;
 let boots = false;
 let globalAlphaForSword = 0.3;
 let globalAlphaForBasicWeapon = 0.3;
@@ -101,6 +103,8 @@ let fireDesaceleration = false;
 let bulletCollidesFireActive = false;
 let itemTakenImages = "../public/Imagenes/itemTakenSparkle.png";
 let healingDamageIsActivated = false;
+let barDamageIsActivated = false;
+let amountOfDamageForBar = 0;
 const mapArray = [
   "/public/Imagenes/background/map1.webp",
   "/public/Imagenes/background/map2.webp",
@@ -118,6 +122,8 @@ const mapArray = [
   "/public/Imagenes/background/map14.webp",
   "/public/Imagenes/background/map15.webp",
   "/public/Imagenes/background/map16.webp",
+  "/public/Imagenes/background/map17.webp",
+  "/public/Imagenes/background/map18.webp",
 ]
 const miniBossHitWeapons = [
   "../public/Imagenes/puffBubble2.png",
@@ -132,7 +138,6 @@ const miniBossHitWeapons = [
   "../public/Imagenes/puffBubble11.png",
 
 ]
-//cuando se ralentice  this.g de player en 0.6, this.playerSpeed =  4 y gameSpeed en 20;
 const changeFrases = [
   "Bien hecho! sigue así",
   "Cada vez lo haces mejor!",

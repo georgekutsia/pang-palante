@@ -1,5 +1,5 @@
 class BasicWeapon {
-  constructor(ctx, x, y, direction, vx, vy, isBig, basicBulletDuration, electrified = game.player.electricBurbalasIsActive) {
+  constructor(ctx, x, y, direction, vx, vy, isBig, basicBulletDuration, electrified = game.player.electricBurbalasIsActive, timeStop) {
     this.ctx = ctx;
     this.x = x;
     this.y = y;
@@ -18,9 +18,11 @@ class BasicWeapon {
     this.electricBurbalas.frameX = 0;
     this.electricBurbalas.frameY = 0;
     this.electricBurbalasTick = 0;
+    this.timeStop = timeStop || false;
   }
 
   draw() {
+    console.log(this.timeStop)
     this.ctx.beginPath();
     this.ctx.arc(this.x + this.radius, this.y + this.radius, this.radius-1, 0, 2 * Math.PI);
     this.ctx.fillStyle = this.color;
@@ -63,8 +65,9 @@ class BasicWeapon {
       this.vy = -this.vy;
     }
     this.tick++;
-    if (this.tick >= this.basicBulletDuration || this.y <= -10) {
+    if (this.tick >= this.basicBulletDuration || this.y <= -10 || this.x <= -30 || this.x  >= CTXW + 50) {
       bullsEyeForHealth = 0;
+      amountOfDamageForBar = 0;
       this.dispose = false;
       game.player.life.healingDamages = []
     }

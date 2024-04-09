@@ -31,10 +31,10 @@ class DarkBubble {
     if(this.sizeChange){
       this.w += this.sizing
       this.h += this.sizing
-      if(this.w <= 20){
-        this.sizing = 0.01
-      } else if(this.w >= 70 && this.willShrink){
-        this.sizing = -0.01
+      if(this.w <= 40){
+        this.sizing = 0.2
+      } else if(this.w >= 150 && this.willShrink){
+        this.sizing = -0.2
       }
       if(this.w >= CTXW/3){
         darkBubbleExplosion( this, game.bubbles, game.puffBubbles)//explota y genera bubbles pequeño

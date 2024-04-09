@@ -260,7 +260,7 @@ function itemsDemo(ctx, stairs, bubbles, darkBubbles, spikes, gatlings, hooks, f
     auras.push(aura)
     let stair = new Stair(ctx, 950, CTXH - 140, 70, 140)
     stairs.push(stair)
-    let bubbb =  new Bubble(ctx, 190, 20, 190, 190, 3, 2)
+    let bubbb =  new Bubble(ctx, 190, 20, 26, 26, 3, 2)
     bubbles.push(bubbb)
     // let darkB =  new DarkBubble(ctx, 10, 20, 90, 90, 3, 2)
     // darkBubbles.push(darkB)
@@ -302,19 +302,6 @@ function itemsDemo(ctx, stairs, bubbles, darkBubbles, spikes, gatlings, hooks, f
 // specialItems(this.ctx, this.cristalBalls)
 
 function specialItems(ctx, cristalBalls){
-
-  let cri = new CristalBall(ctx, 100, 100, 40, 40,  1, 2, 3);
+  let cri = new CristalBall(ctx, 100, 100, 40, 40,  2, 2, 3);
   cristalBalls.push(cri)
-  setTimeout(() => {
-    let cri = new CristalBall(ctx, 100, 100, 40, 40,  1, 2, 3);
-    cristalBalls.push(cri)
-  }, 4000);
-  setTimeout(() => {
-    let cri = new CristalBall(ctx, 100, 100, 40, 40,  1, 2, 3);
-    cristalBalls.push(cri)
-  }, 8000);
-  setTimeout(() => {
-    let cri = new CristalBall(ctx, 100, 100, 40, 40,  1, 2, 3);
-    cristalBalls.push(cri)
-  }, 14000);
 }

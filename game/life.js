@@ -14,6 +14,7 @@ class Life {
     this.emptyHeart.src = "../public/Imagenes/emptyHeart.png";
     this.healingHearts = [];
     this.healingDamages = [];
+    this.timeStopped = [];
     this.isHealing = true;
     this.gainCoins = [];
     this.isGaining = false;
@@ -56,7 +57,7 @@ class Life {
           this.gainCoins.push(coins)
         }, 100 + i*150);
       }
-      this.isGaining = false
+      this.isGaining = false;
     }
 
 
@@ -72,12 +73,19 @@ class Life {
     this.healingHearts.forEach(heart => heart.draw())
     this.healingHearts.forEach(heart => heart.move())
     this.healingHearts = this.healingHearts.filter(heart => heart.isVisible())
+
     if(healingDamageIsActivated){
       this.healingDamages.forEach(healDam => healDam.draw())
       this.healingDamages.forEach(healDam => healDam.move())
       this.healingDamages = this.healingDamages.filter(healDam => healDam.isVisible())
     }
+    if(timeStopped){
+      this.timeStopped.forEach(timeSt => timeSt.draw())
+      this.timeStopped.forEach(timeSt => timeSt.move())
+      this.timeStopped = this.timeStopped.filter(timeSt => timeSt.isVisible())
+    }
     this.gainCoins.forEach(coin => coin.move())
+    this.gainCoins.forEach(coin => coin.draw())
     this.gainCoins = this.gainCoins.filter(coin => coin.isVisible())
   }
 

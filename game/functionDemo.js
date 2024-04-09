@@ -499,9 +499,6 @@ function  hideAllTexts() {
   demoFriend4$$.style.opacity = "0";
   demoFriend5$$.style.display = "none";
   demoFriend5$$.style.opacity = "0";
-
-
-
   infoPlayer1$$.style.display = "none"
   infoPlayer2$$.style.display = "none"
   document.getElementById("demo-text1").style.display = "none";

@@ -23,12 +23,12 @@ function addBubble13(ctx, bubbles){
 }
 
 function addPlatforms13(ctx, platforms, healings, boxes, stairs,bars){
-    const platform0 = new Platform(ctx, 1, 350, 125, 15, "../public/Imagenes/obstacles/platformSolid1.png", false, false, true);
-    const platform1 = new Platform(ctx, 200, 450, 125, 15, "../public/Imagenes/obstacles/platformSolid2.png", false, false, true);
-    const platform2 = new Platform(ctx, 400, 550, 125, 15, "../public/Imagenes/obstacles/platformSolid5.png", false, false, true);
-    const platform3 = new Platform(ctx, CTXW - 525, 550, 125, 15, "../public/Imagenes/obstacles/platformSolid1.png", false, false, true);
-    const platform4 = new Platform(ctx, CTXW - 325, 450, 125, 15, "../public/Imagenes/obstacles/platformSolid3.png", false, false, true);
-    const platform5 = new Platform(ctx, CTXW - 125, 350, 125, 15, "../public/Imagenes/obstacles/platformSolid4.png", false, false, true);
+    const platform0 = new Platform(ctx, 1, 450, 135, 15, "../public/Imagenes/obstacles/platformSolid1.png", false, false, true);
+    const platform1 = new Platform(ctx, 200, 500, 135, 15, "../public/Imagenes/obstacles/platformSolid2.png", false, false, true);
+    const platform2 = new Platform(ctx, 400, 550, 135, 15, "../public/Imagenes/obstacles/platformSolid5.png", false, false, true);
+    const platform3 = new Platform(ctx, CTXW - 525, 550, 135, 15, "../public/Imagenes/obstacles/platformSolid1.png", false, false, true);
+    const platform4 = new Platform(ctx, CTXW - 325, 500, 135, 15, "../public/Imagenes/obstacles/platformSolid3.png", false, false, true);
+    const platform5 = new Platform(ctx, CTXW - 125, 450, 135, 15, "../public/Imagenes/obstacles/platformSolid4.png", false, false, true);
     platforms.push(platform0, platform1,platform2,platform3,platform4,platform5);
     const box1 = new Box(ctx, CTXW/2 - 20, 40,  3, true, 0, false)
     boxes.push(box1)

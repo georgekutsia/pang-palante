@@ -20,7 +20,6 @@ class CristalBall {
   }
 
   draw() {
-    this.showBasicWeapon()
     if(this.shoot){
       this.itemSound.play();
       this.shoot = false;
@@ -94,12 +93,12 @@ class CristalBall {
     return this.dispose;
   }
   gainingSpecialAmount(){
-      let randomTreasure = getRandomNumber(1)
+      let randomTreasure = getRandomNumber(3)
       switch (randomTreasure) {
         case 2:
-        game.player.life.amountOfGainedCoins = 50;
+        game.player.life.amountOfGainedCoins = 70;
         game.player.life.isGaining = true;
-        coins += 50;
+        coins += 70;
           break;
         case 3:
           game.player.slowIncreaseFireElectro(700)
@@ -115,27 +114,7 @@ class CristalBall {
           break;
       }
   }
-  showBasicWeapon(){
-    switch (basicWeaponLevel) {
-      case 0:
-        game.player.basicWeapon.src = "/public/Imagenes/basicWeaponLevl1.png";
-        break;
-      case 1:
-        game.player.basicWeapon.src = "/public/Imagenes/basicWeaponLevl2.png";
-        break;
-      case 2:
-        game.player.basicWeapon.src = "/public/Imagenes/basicWeaponLevl3.png";
-        break;
-      case 3:
-        game.player.basicWeapon.src = "/public/Imagenes/basicWeaponLevl4.png";
-        break;
-      case 4:
-        game.player.basicWeapon.src = "/public/Imagenes/basicWeaponLevl5.png";
-        break;
-      default:
-        break;
-    }
-  }
+
 
   collides(aura) {
     const colX = this.x <= aura.x + aura.w && this.x + this.w > aura.x;

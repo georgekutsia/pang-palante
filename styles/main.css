@@ -14,7 +14,10 @@ body {
   max-width: 90vw; /* Establece el ancho máximo del canvas al 90% del ancho de la ventana gráfica */
   max-height: 90vh; /* Establece la altura máxima del canvas al 90% de la altura de la ventana gráfica */
   border: 5px ridge red;
-
+  background-image: URL("/public//Imagenes/background/backgroundPang.webp");
+  background-size: cover; /* Ajusta el fondo para cubrir todo el espacio */
+  background-position: center; /* Centra la imagen de fondo */
+  background-repeat: no-repeat;
 }
 /* iiiiconos */
 .icons-left {
@@ -51,16 +54,16 @@ body {
   left: 0.1vw;
 }
 
-#start-background{
+/* #start-background{
   position: absolute;
   top: 1vh;
   left: 50%;
   transform: translate(-50%, 0%);
-  max-width: 90vw;
-  max-height: 90vh;
-  min-width: 100px;
-  min-height: 100px;
-}
+
+  width: 85vw;
+  height: 40vw;
+  
+} */
 #demoOver-background{
   position: absolute;
   top: 0.2vw;
@@ -151,6 +154,7 @@ padding: 15px 15px;
   color: rgb(0, 189, 213);;
 }
 #pang-startInfinite{
+  display: none;
   position: absolute;
   border: none;
   top:60%;
@@ -167,8 +171,8 @@ padding: 15px 15px;
 #pang-demo{
   position: absolute;
   border: none;
-  top:10vh;
-  left:calc(50vw - 20vw);
+  top:60vh;
+  left: 50vw;
   font-size: calc(12px + 0.7vw);
   transition: 0.3s ease-in-out;
   transform: translate(-50%, -50%);

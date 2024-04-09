@@ -76,7 +76,7 @@ function handleClick(event) {
 
   // Comprueba si el clic fue en alguna barra
   if (isPointInside(game.bars, clickX, clickY)) {
-    showModal(`Barras <span style="font-style: italic; font-size: 18px;">Item para recoger</span> `, `&nbsp&nbsp Barras de lanzamiento <span style="color: blue; font-size: 20px;">M</span>, una  munición especial que resiste 2 impactos de burbujas de colores y es totalmente resistente a las burbujas oscuras. <br/>&nbsp&nbsp En la tienda puedes comprar tanto barras como mejorar su resistencia, para que aguante más impactos de burbujas de colores  <br/>&nbsp&nbsp Se pueden cargar las barras con el escudo eléctrico del personaje, haciéndolas más resistentes y que duren más tiempo. Cuanto más esté en contacto con la electricidad, mayor el efect.`).then(() => {
+    showModal(`Barras <span style="font-style: italic; font-size: 18px;">Item para recoger</span> `, `&nbsp&nbsp Barras de lanzamiento <span style="color: blue; font-size: 20px;">M</span>, una  munición especial que resiste  ${barLife} impactos de burbujas de colores y es totalmente resistente a las burbujas oscuras. <br/>&nbsp&nbsp En la tienda puedes comprar tanto barras como mejorar su resistencia, para que aguante más impactos de burbujas de colores  <br/>&nbsp&nbsp Se pueden cargar las barras con el escudo eléctrico del personaje, haciéndolas más resistentes y que duren más tiempo. Cuanto más esté en contacto con la electricidad, mayor el efect.`).then(() => {
       game.start();
     });
     return;
@@ -149,6 +149,18 @@ function handleClick(event) {
     });
     return;
   }
+  if (isPointInside(game.player.life.healingDamages, clickX, clickY)) {
+        showModal(`Aciertos para sanación <span style="font-style: italic; font-size: 18px;">Habilidad especial</span> `, `&nbsp&nbsp Si aciertas ${amountOfBullsEyeForHealth} disparos seguidos sobre las burbujas, sanas 1 vida. <br/>&nbsp&nbsp  Si no fallas ningún disparo en el nivel, sanas 1 vida adicional al pasar de nivel`).then(() => {
+      game.start();
+    });
+    return;
+  }
+  // if (isPointInside(game.player.life.emptyHeart, clickX, clickY)) {
+  //       showModal(`Aciertos para sanación <span style="font-style: italic; font-size: 18px;">Habilidad especial</span> `, `&nbsp&nbsp Si aciertas ${amountOfBullsEyeForHealth} disparos seguidos sobre las burbujas, sanas 1 vida. <br/>&nbsp&nbsp  Si no fallas ningún disparo en el nivel, sanas 1 vida adicional al pasar de nivel`).then(() => {
+  //     game.start();
+  //   });
+  //   return;
+  // }
   if (isPointInside(game.hooks, clickX, clickY)) {
     showModal(`Ganchos <span style="font-style: italic; font-size: 18px;">Munición</span>`, `&nbsp&nbsp Una munición especial que te impulsa hasta ciertos objetos sobre los que tiene la capacidad de engancharse <span style="color: blue; font-size: 20px;">J</span>. Úsalos para esquivar, moverte rápido y obtener ventaja en una gran variedad de situaciones.`).then(() => {
       game.start();
@@ -199,7 +211,7 @@ function handleClick(event) {
     return;
   }
   if (isPointInside(game.player.bulletBarArray, clickX, clickY)) {
-    showModal(`Barras <span style="font-style: italic; font-size: 18px;">Munición</span>`, `&nbsp&nbsp Barras de lanzamiento, una  munición especial que resiste 2 impactos de burbujas de colores y es totalmente resistente a las burbujas oscuras. <br/>&nbsp&nbsp En la tienda puedes comprar tanto barras como mejorar su resistencia, para que aguante más impactos de burbujas de colores  <br/>&nbsp&nbsp Se pueden cargar las barras con el escudo eléctrico del personaje, haciéndolas más resistentes y que duren más tiempo. Cuanto más esté en contacto con la electricidad, mayor el efecto.`).then(() => {
+    showModal(`Barras <span style="font-style: italic; font-size: 18px;">Munición</span>`, `&nbsp&nbsp Barras de lanzamiento, una  munición especial que resiste ${barLife} impactos de burbujas de colores y es totalmente resistente a las burbujas oscuras. <br/>&nbsp&nbsp En la tienda puedes comprar tanto barras como mejorar su resistencia, para que aguante más impactos de burbujas de colores  <br/>&nbsp&nbsp Se pueden cargar las barras con el escudo eléctrico del personaje, haciéndolas más resistentes y que duren más tiempo. Cuanto más esté en contacto con la electricidad, mayor el efecto.`).then(() => {
       game.start();
     });
     return;

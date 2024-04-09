@@ -126,7 +126,7 @@ function inftroGame1(){
               demoFriend3$$.style.display = "none";
             }, 1000));
           }, 3000));
-        }, 4000));
+        }, 4500));
   }, 14000));
 }
 }
@@ -265,6 +265,7 @@ shopSuperGun1$$.addEventListener("click", function(){
       coins -=90;
       basicWeaponLevelingChanged++;
       buySmall.play()
+      game.player.basicWeapon.src = "/public/Imagenes/basicWeaponLevl2.png";
     }
     basicWeaponLevel = 1;
     shopSuperGun1$$.innerText = "NVL 1"
@@ -272,6 +273,7 @@ shopSuperGun1$$.addEventListener("click", function(){
     shopSuperGun2$$.style.display = "block"
   } else if(basicWeaponLevel >= 1){
     basicWeaponLevel  = 1;    
+    game.player.basicWeapon.src = "/public/Imagenes/basicWeaponLevl2.png";
     shopSuperGun$$.style.border = "none"
     shopSuperGun1$$.style.border = "3px solid rgb(154, 130, 184)"
     shopSuperGun2$$.style.border = "none"
@@ -287,6 +289,8 @@ shopSuperGun2$$.addEventListener("click", function(){
       coins -=90;
       basicWeaponLevelingChanged++;
       buySmall.play()
+    game.player.basicWeapon.src = "/public/Imagenes/basicWeaponLevl3.png";
+
     }
     basicWeaponLevel = 2;
     shopSuperGun2$$.innerText = "NVL 2"
@@ -300,6 +304,7 @@ shopSuperGun2$$.addEventListener("click", function(){
     shopSuperGun1$$.style.minWidth = "0px"
     shopSuperGun2$$.style.minWidth = "0px"
   } else if(basicWeaponLevel >= 2){
+    game.player.basicWeapon.src = "/public/Imagenes/basicWeaponLevl3.png";
     basicWeaponLevel  = 2;
     shopSuperGun$$.style.border = "none"
     shopSuperGun1$$.style.border = "none"
@@ -318,12 +323,16 @@ shopSuperGun3$$.addEventListener("click", function(){
       coins -=110;
       basicWeaponLevelingChanged++;
       buySmall.play()
+    game.player.basicWeapon.src = "/public/Imagenes/basicWeaponLevl4.png";
+
     }
     basicWeaponLevel  = 3;
     shopSuperGun3$$.innerText = "NVL 3"
     shopSuperGun3$$.style.color = "rgb(254, 0, 224)"
     shopSuperGun4$$.style.display = "block"
   } else if(basicWeaponLevel >= 3){
+    game.player.basicWeapon.src = "/public/Imagenes/basicWeaponLevl4.png";
+
     basicWeaponLevel  = 3;
     shopSuperGun$$.style.border = "none"
     shopSuperGun1$$.style.border = "none"
@@ -340,7 +349,9 @@ shopSuperGun4$$.addEventListener("click", function(){
     if(basicWeaponLevel < 4 && basicWeaponLevelingChanged === 3) {
       coins -=120;
       basicWeaponLevelingChanged++;
-      buySmall.play()
+      buySmall.play();
+    game.player.basicWeapon.src = "/public/Imagenes/basicWeaponLevl5.png";
+
     }
     basicWeaponLevel  = 4 ;
     shopSuperGun4$$.innerText = "NVL 4"
@@ -354,6 +365,7 @@ shopSuperGun4$$.addEventListener("click", function(){
     shopSuperGun3$$.style.minWidth = "0px"
     shopSuperGun4$$.style.minWidth = "0px"
   } else if(basicWeaponLevel >= 4){
+    game.player.basicWeapon.src = "/public/Imagenes/basicWeaponLevl5.png";
     basicWeaponLevel  = 4;
     shopSuperGun$$.style.border = "none"
     shopSuperGun1$$.style.border = "none"
@@ -576,11 +588,11 @@ shopElectro$$.addEventListener("click", function(){
 
 
 shopElectroBullet$$.addEventListener("click", function(){
-  if(coins >=80 && electrifiedBurbalas === false){
+  if(coins >=110 && electrifiedBurbalas === false){
   faShakeWhenBuy(this);
     buyBig.play()
     electrifiedBurbalas = true;
-    coins-=80;
+    coins-=110;
     shopElectroBullet$$.style.color = "rgb(164, 5, 164)";
     shopElectroBullet$$.innerHTML = `<i class="fa-solid fa-circle-dot"></i> -> <i style="font-size: calc(8px + 0.4vw)" class="fa-solid fa-bolt-lightning"></i> </span>  `;
     shopElectroBullet$$.disabled = true;
@@ -655,13 +667,23 @@ shopShootLife$$.addEventListener("click", function(){
 shopShootLifeActivation$$.addEventListener("click", function(){
   if(coins >= 100){
     coins-=100;
-    amountOfBullsEyeForHealth -= 2;
     faShakeWhenBuy(this);
       shopShootLifeActivation$$.disabled = true; 
       shopShootLife$$.disabled = false; 
       healingDamageIsActivated = true;
       shopShootLifeActivation$$.style.color = "rgb(164, 5, 164)";
       shopShootLifeActivation$$.innerHTML = `</i> <span id="boots-text"><i class="fa-solid fa-circle-dot"></i>  <i style="font-size: calc(8px + 0.4vw)"  class="fa-solid fa-heart-pulse"> </i> </span> <i style="font-size: calc(8px + 0.7vw)"  class="fa-solid fa-check"></i>`;
+  }
+})
+shopShootBarActivation$$.addEventListener("click", function(){
+  if(coins >= 85){
+    coins-=85;
+    barDamageIsActivated = true;
+    faShakeWhenBuy(this);
+      shopShootBarActivation$$.disabled = true; 
+      shopShootLife$$.disabled = false; 
+      shopShootBarActivation$$.style.color = "rgb(164, 5, 164)";
+      shopShootBarActivation$$.innerHTML = `</i> <span id="boots-text"><i class="fa-solid fa-circle-dot"></i>  <i style="font-size: calc(8px + 0.4vw)"  class="fa-solid fa-heart-pulse"> </i> </span> <i style="font-size: calc(8px + 0.7vw)"  class="fa-solid fa-check"></i>`;
   }
 })
 
@@ -688,7 +710,7 @@ toggleShop$$.addEventListener("click", ()=>{
 
 
 game.player.barImg$$.addEventListener("click", ()=>{
-  showModal(`Barras <span style="font-style: italic; font-size: 18px;">Item para recoger</span> `, `&nbsp&nbsp Barras de lanzamiento <span style="color: blue; font-size: 20px;">M</span>, una  munición especial que resiste 2 impactos de burbujas de colores y es totalmente resistente a las burbujas oscuras. <br/>&nbsp&nbsp En la tienda puedes comprar tanto barras como mejorar su resistencia, para que aguante más impactos de burbujas de colores  <br/>&nbsp&nbsp Se pueden cargar las barras con el escudo eléctrico del personaje, haciéndolas más resistentes y que duren más tiempo. Cuanto más esté en contacto con la electricidad, mayor el efect.`).then(() => {
+  showModal(`Barras <span style="font-style: italic; font-size: 18px;">Item para recoger</span> `, `&nbsp&nbsp Barras de lanzamiento <span style="color: blue; font-size: 20px;">M</span>, una  munición especial que resiste ${barLife} impactos de burbujas de colores y es totalmente resistente a las burbujas oscuras. <br/>&nbsp&nbsp En la tienda puedes comprar tanto barras como mejorar su resistencia, para que aguante más impactos de burbujas de colores  <br/>&nbsp&nbsp Se pueden cargar las barras con el escudo eléctrico del personaje, haciéndolas más resistentes y que duren más tiempo. Cuanto más esté en contacto con la electricidad, mayor el efect.`).then(() => {
     game.start();
   });
   return;

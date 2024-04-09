@@ -114,6 +114,3 @@ function addLever(ctx, levers){
   levers.push(lev);
 }
 
-
-
-

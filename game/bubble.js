@@ -13,7 +13,7 @@ class Bubble { //posX posY, ancho, alto, velX, velY, gravedad, buleano si hay gr
     this.gTick = 0;
     this.isSlowGravity = isSlowGravity || false;
     this.slowGrvityDuration = slowGrvityDuration || 3000; 
-    this.explodingSize = this.ctx.canvas.width/90
+    this.explodingSize = 15
     this.damage = damage || 1; // daño especificado o 1
     this.img = new Image();   //crear nueva imágene ne canvas
     this.img.src = bubbleImg || "../public/Imagenes/bubble.png";  //definir cual es la nueva imagen
@@ -29,6 +29,7 @@ class Bubble { //posX posY, ancho, alto, velX, velY, gravedad, buleano si hay gr
     this.hitAmount = 0;
     this.timeTick = 0;
     this.repTimeInSeconds = replicationSeconds
+    this.timeStopBubble = false; // para el efecto que detiene el tiempo al hacer desaparecer una burbuja con una esquiva
   }
   draw() {
     // Dibujar el círculo detrás de la burbuja
@@ -38,6 +39,10 @@ class Bubble { //posX posY, ancho, alto, velX, velY, gravedad, buleano si hay gr
     this.ctx.fill();
     this.ctx.closePath();
     this.ctx.drawImage(this.img, this.x, this.y, this.w, this.h);  // dibuja el obstáculo
+
+    if(this.w <= this.explodingSize*2) {
+      this.timeStopBubble = true;
+    }
     if(this.w <= this.explodingSize) {
       this.x = -100;
       coins++
@@ -57,13 +62,15 @@ class Bubble { //posX posY, ancho, alto, velX, velY, gravedad, buleano si hay gr
       );
     }
     if(this.w >= 101){
+      this.ctx.save();
+      this.ctx.font = `${this.w/2}px arial`
       this.ctx.fillStyle = "black"
       this.timeTick++
       if(this.timeTick >= 60){
         this.repTimeInSeconds --;
         this.timeTick = 0;
       }
-      this.ctx.fillText(`${(this.repTimeInSeconds)}`, this.x + this.w/3 , this.y + this.h/1.5, 40, 20);
+      this.ctx.fillText(`${(this.repTimeInSeconds)}`, this.x + this.w/3 , this.y + this.h/1.5, this.w/3, 20);
     }
   }
   move() {

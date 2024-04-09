@@ -42,6 +42,13 @@ function checkBubbleCollision(bubbles, player, puffBubbles, ctx, platforms, boun
         let hea = new HealingDamage(ctx, -10 + (bullsEyeForHealth*20), 20)
         game.player.life.healingDamages.push(hea)
         totalShootsPerLevelSucces++;
+        if(barDamageIsActivated){
+          amountOfDamageForBar++;
+          if(amountOfDamageForBar >= 4){
+            amountOfDamageForBar = 0;
+            player.barAmount++;
+          }
+        }
         if(healingDamageIsActivated){
           bullsEyeForHealth++;
           if(bullsEyeForHealth>= amountOfBullsEyeForHealth){
@@ -61,8 +68,8 @@ function checkBubbleCollision(bubbles, player, puffBubbles, ctx, platforms, boun
           bubble.hitAmount++
           bubble.w += 10;
           bubble.h += 10;
-        }else {
-          bubblePuff(bubble, puffBubbles, bubbles, ctx);
+        } else {
+          bubblePuff(bubble, puffBubbles, bubbles, ctx, bullet.timeStop);
           bubblePopSound1.play();
         }
         if(bubble.hitAmount >= 6){
@@ -83,6 +90,13 @@ function checkBubbleCollision(bubbles, player, puffBubbles, ctx, platforms, boun
         let hea = new HealingDamage(ctx, -10 + (bullsEyeForHealth*20), 20)
         game.player.life.healingDamages.push(hea)
         totalShootsPerLevelSucces++;
+        if(barDamageIsActivated){
+          amountOfDamageForBar++;
+          if(amountOfDamageForBar >= 4){
+            amountOfDamageForBar = 0;
+            player.barAmount++;
+          }
+        }
         if(healingDamageIsActivated){
         bullsEyeForHealth++;
         if(bullsEyeForHealth>= amountOfBullsEyeForHealth){

@@ -190,8 +190,13 @@
   .extra-shop-div-h3{
     padding: 7px 15px;
   }
+  .extra-shop-div-h4{
+    padding: 12px 18px;
+  }
 
   .tooltip-inner {
     font-size: 18px; /* Tamaño de fuente deseado */
     min-width: 250px;
   }
+
+  

@@ -36,8 +36,8 @@ function addPlatforms11(ctx, platforms, healings, boxes, bars){
     const healingItem = new Healing(ctx, 320, 70)
     healings.push(healingItem)
     const box1 = new Box(ctx, 980, 170,  3, false, 10, true, 1, 0, 0, true)
-    const box2 = new Box(ctx, 980, 100,  2, false, 10, true, 2, 0, 0, true)
-    const box3 = new Box(ctx, 980, 30,  1, false, 10, true, 3, 0, 0, true)
+    const box2 = new Box(ctx, 980, 100,  2, false, 10, true, 1, 0, 0, true)
+    const box3 = new Box(ctx, 980, 30,  1, false, 10, true,  1, 0, 0, true)
     boxes.push(box1,box2,box3,)
     const bar1 = new Bars(ctx, CTXW-180, CTXH-50, 35, 5);
     const bar2 = new Bars(ctx, CTXW-80, CTXH-50, 35, 5);

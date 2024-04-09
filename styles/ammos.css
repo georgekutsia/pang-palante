@@ -1,7 +1,7 @@
 #ammos-count{
   position: absolute;
   top: 15vw;
-  left: 0.4vw;
+  left: 1vw;
 }
 
 .weaponImg-info{
@@ -13,6 +13,12 @@
 
 #ammos-count div{
   display: flex;
+}
+#ammos-count div h4{
+  display: flex;
+  justify-content:center; /* Centra horizontalmente el contenido */
+  align-items: flex-end; 
+  font-size: calc(10px + 0.5vw);
 }
 #ammos-count div img{
   transition: all 0.4s ease-in-out;

@@ -9,7 +9,7 @@ class Player {
     this.charger = new Charger(ctx)
     this.vx = 0;
     this.vy = 0;
-    this.g = 2; //gravedad
+    this.g = 2;
     this.r = 0; //rozamiento
     this.auraIsActive = false;
     this.frameTick = 1;
@@ -29,9 +29,9 @@ class Player {
     this.megaFireBlasterAmount = 31; //la carga del blaster. cada 10, es una bola
     this.electroAmount = 10; //cantidad de carga eléctrica que tiene
     this.fireAmount = 10; //cantidad de fuegos que puedes disparar con N
-    this.hookAmount = 50; // la cantidad de hooks con J
-    this.barAmount = 320; //la cantidad de barras disponibles con M
-    this.stepsAmount = 10; //cantidad de plataformas que puedes crear con O / P
+    this.hookAmount = 0; // la cantidad de hooks con J
+    this.barAmount = 120; //la cantidad de barras disponibles con M
+    this.stepsAmount = 0; //cantidad de plataformas que puedes crear con O / P
     this.ableToJump = false;
     this.wasNotDamaged = true;
     this.bigWeaponBubblesMaxAmount = 0;
@@ -237,7 +237,7 @@ class Player {
 //     event.preventDefault(); 
 //     if (this.vy === 0 || this.ableToJump === true) {
 //       this.vy = jumpHeight;
-//       this.g = 2;
+//       this.g = 2; + gravitySpeed
 //       this.ableToJump = false;
 //       setTimeout(() => {
 //         this.jumpBtn$$.addEventListener("touchstart", this.handleJumpTouchStart);
@@ -480,18 +480,18 @@ class Player {
   }
 
   move() {
-    if(this.life.total >=  9){
-      jumpCooldown = 300;
-      jumpHeight  = -16;
-      playerSpeed = 14.2;
-    } else{
-      jumpCooldown = 500;
-      jumpHeight  = -16;
-      playerSpeed = 8;
-    }
+    // if(this.life.total >=  9){
+    //   jumpCooldown = 300;
+    //   jumpHeight  = -16;
+    //   playerSpeed = 14.2;
+    // } else{
+    //   jumpCooldown = 500;
+    //   jumpHeight  = -16;
+    //   playerSpeed = 8;
+    // }
 
     if(this.vx && this.x + this.h <=  CTXH - 5 || this.vy && this.x + this.h <=  CTXH - 5){
-      this.g = 0.8;
+      this.g = 0.8 + gravitySpeed
     }
     if(!finalBoss){
       this.velocidadX = this.vx += this.r;
@@ -500,7 +500,7 @@ class Player {
         this.vx = 0;
         this.img.frame = 0;
       }
-    this.vy += this.g
+    this.vy += this.g + gravitySpeed
     this.x += this.velocidadX;
     this.y += this.vy;
     bulletDirection = this.vx/2
@@ -539,7 +539,7 @@ class Player {
       this.vx = 0;
       this.img.frame = 0;
     }
-    this.vy += this.g
+    this.vy += this.g + gravitySpeed
     this.x += this.velocidadX;
     this.y += this.vy;
     bulletDirection = this.vx/2
@@ -752,7 +752,7 @@ class Player {
       }
       this.img.frame = 0;
       this.vy = jumpHeight;
-      this.g = 1
+      this.g = 1 + gravitySpeed;
       this.ableToJump = false;
       ALT = 0;
       setTimeout(() => {
@@ -818,7 +818,12 @@ class Player {
             F = 70;
           }, stabRecharge);
         }
-        
+        if(key === P){
+          this.shootStep(65, CTXW);
+        }
+        if(key === O){
+          this.shootStep(-68, 0);
+        }
   }
   keyUp(key) {
     if (key === W) {
@@ -965,12 +970,12 @@ class Player {
 
   shootDodgeQ() {// paso 1: invoca el disparo desde la posicion del personaje o su cercanía
     shootSound.play()
-    const bullet = new BasicWeapon(this.ctx, this.x - 80, this.y, 0, -15, 0.001);
+    const bullet = new BasicWeapon(this.ctx, this.x - 80, this.y, 0, -15, 0.001, false, 0, false, true);
     this.bulletArray.push(bullet);//paso 2: crea un array vacío en el constructor y luego haz un push de cada bullet;
   }
   shootDodgeE() {// paso 1: invoca el disparo desde la posicion del personaje o su cercanía
     shootSound.play()
-    const bullet = new BasicWeapon(this.ctx, this.x + 80, this.y, 0, 15, 0.001);
+    const bullet = new BasicWeapon(this.ctx, this.x + 80, this.y, 0, 15, 0.001, false, 0, false, true);
     this.bulletArray.push(bullet);//paso 2: crea un array vacío en el constructor y luego haz un push de cada bullet;
   }
 
@@ -1020,7 +1025,7 @@ class Player {
     swingSword(){
       if(this.vy !=0){
         this.vy = jumpHeight
-        this.g = 0.8
+        this.g = 0.8 + gravitySpeed
       }
         if(this.swingSwordState){
           if(!this.electricShieldIsActive){
@@ -1054,4 +1059,17 @@ class Player {
         }
       }
     }
+    shootStep(stepPlace, where) {
+      if(this.platformCreator && this.stepsAmount > 0){
+        this.stepsAmount--;
+        const plat = new Platform(ctx, this.x + stepPlace, this.y - 10, 65, 10, "/public/Imagenes/obstacles/stepsSolid2.png", true, true, true, 0, 0, where, where, 1, 1, true, true );
+        game.platforms.push(plat);
+        setTimeout(() => {
+          const index = this.platforms.indexOf(plat);
+          if (index !== -1) {
+            game.platforms.splice(index, 1);
+          }
+        }, 10000);
+      }
+    }  
 }

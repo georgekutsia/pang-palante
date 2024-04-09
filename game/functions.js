@@ -32,10 +32,30 @@ function basicBulletBounce(elem1, elem2){
   }
 }
 
-function bubblePuff(bubble, puffBubbles, bubbles, ctx){
+function bubblePuff(bubble, puffBubbles, bubbles, ctx, bullet){
+  if(bullet === true && bubble.timeStopBubble === true){
+    let ti = new TimeStop(ctx);
+    game.player.life.timeStopped.push(ti)
+    timeStopped = true;
+    gameSpeed = 20;
+    jumpHeight = -36.5;
+    playerSpeed = 25;
+    gravitySpeed = 1.5;
+    game.stop();
+    game.start()
+    setTimeout(() => {
+    timeStopped = false;
+    gameSpeed = 60;
+    jumpHeight = -16.5;
+    playerSpeed = 10;
+    gravitySpeed = 0;
+    game.stop();
+    game.start()
+    }, 20000);
+  }
   const elx = bubble.x;
   const ely = bubble.y;
-  bubble.x = -200
+  bubble.x = -200;
   const puffBubble = new BubblePuff(ctx, elx, ely, bubble.w, bubble.h)
   puffBubbles.push(puffBubble)      // 0.8 es la direccion y velocidad a la que salen las nuevas, el otro es la dirección
   const smallBubble1 = new Bubble(ctx,  elx, ely, bubble.w/2, bubble.h/2, -bubbleSpeedX, -1 , bubble.g + 0.01, false, false, bubble.damage / 2 )// al explotar una burbuja, crea otra en su lugar, usando su ubicación y dimensiones para hacerla más pequeña
@@ -175,6 +195,3 @@ function darkBubbleExplosion( bubble, bubbles, puffBubbles){
   puffBubbles.push(puffBubble);
   bubble.x = -300
 }
-
-
-

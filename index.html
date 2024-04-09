@@ -80,6 +80,7 @@
   <script src="./game/enemies/miniBoss1.js" defer></script>
   <script src="./game/animations/explosion.js" defer></script>
   <script src="./game/animations/healingHeart.js" defer></script>
+  <script src="./game/animations/timeStop.js" defer></script>
   <script src="./game/animations/healingDamage.js" defer></script>
   <script src="./game/animations/gainCoins.js" defer></script>
   <script src="./game/animations/weaponLeveling.js" defer></script>
@@ -95,7 +96,6 @@
   <title>Document</title>
 </head>
 <body>
-<!-- <canvas id="canvas"></canvas> -->
 
     <canvas id="canvas" width="1400vw" height="670vh"></canvas>
 
@@ -105,10 +105,10 @@
       <img  id="gameOver-backgroundText" src="/public/Imagenes/background/gameOverText.png" alt="game over background">
     </div>
     <div class="icons-btn">
-      <img  id="start-background" src="/public//Imagenes/background/backgroundPang.webp" width="1390vw" height="660vh" alt="start background">
+      <!-- <img  id="start-background" src="/public//Imagenes/background/backgroundPang.webp" alt="start background"> -->
       <img  id="demoOver-background" src="/public//Imagenes/background/demoOverBackground.webp" alt="demoOver background">
       <button  class="icons-left" id="pang-start" >Partida Nivel 1</button>
-      <button class="icons-left" id="pang-startInfinite">Niveles Infinitos</button>
+      <button  class="icons-left" id="pang-startInfinite">Niveles Infinitos</button>
       <button class="icons-left" id="pang-demo">Entrenamiento!</button>
       <button class="icons-left" id="instrucciones-btn">Instrucciones</button>
       <button class="icons-left" id="pang-restart"><i class="fa-solid fa-power-off"></i></button>
@@ -163,17 +163,27 @@
         <button class="extra-shop-close-x">x</button>
       </div>
       <div class="extra-shop-div">
+        <h3 class="extra-shop-div-h4">Burbalablaster</h3>
+      </div>
+      <div class="extra-shop-div">
+        <button data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Aumenta la velocidad de la munición de BurbalaBlaster" class="shop-btns" id="shop-speedGun"> <span><i class="fa-solid fa-gauge-simple-high"></i> </span> <i style="font-size: calc(8px + 0.3vw)" class="fa-solid fa-angles-up fonts-i"></i> <span id="velocidad-text"> </span>50 <i class="fa-solid fa-coins"></i> </button>
+        <button data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Obtienes la habilidad de disparar con Burbalas a tus disparos de Lanzallamas, para dividirlas en otras 2 llamas."  class="shop-btns" id="shop-bulletWithFire"> <span><i class="fa-solid fa-circle-dot"></i> -> <i class="fa-solid fa-fire-flame-curved"></i>  115 <i class="fa-solid fa-coins"></i> </button>
+          <button data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Disparar BurbalaBlaster mientras usas escudo eléctrico, vuelve las balas irrompibles al contacto con las burbujas y desconecta las Gatlings durante unos segundos" class="shop-btns" id="shop-electro-bullet"> <span><i class="fa-solid fa-circle-dot"></i> -> <i style="font-size: calc(8px + 0.4vw)" class="fa-solid fa-bolt-lightning"></i> </span> <i style="font-size: calc(8px + 0.3vw)" class="fa-solid fa-angles-up fonts-i"></i> <span id="velocidad-text"> </span> 110 <i class="fa-solid fa-coins"></i> </button>
+      </div>
+      <div class="extra-shop-div">
+        <button data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Obtienes la habilidad de recuperar vida tras acertar con 15 disparos seguidos sobre burbujas"  class="shop-btns" id="shop-shootLife-activation"> </i> <span ><i class="fa-solid fa-circle-dot"></i> -> <i style="font-size: calc(8px + 0.4vw)"  class="fa-solid fa-heart-pulse"> </i> </span>100 <i class="fa-solid fa-coins"> </i> </button>
+        <button disabled data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Disminuye 2 puntos la cantidad de aciertos seguidos que necesitas para recuperar vida con las Burbalas"  class="shop-btns" id="shop-shootLife"> </i> <span ><i class="fa-solid fa-circle-dot"></i> <i style="font-size: calc(8px + 0.3vw)" class="fa-solid fa-angles-up fonts-i"></i>  <i style="font-size: calc(8px + 0.4vw)"  class="fa-solid fa-heart-pulse"> </i> </span>80 <i class="fa-solid fa-coins"> </i> </button>
+        <button data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Obtienes la habilidad de generar munición de barra cada 4 disparos seguidos que aciertes sobre burbujas"  class="shop-btns" id="shop-shootBar-activation"> </i> <span ><i class="fa-solid fa-circle-dot"></i> -> <i style="font-size: calc(8px + 0.4vw)"  class="fa-solid fa-heart-pulse"> </i> </span>85 <i class="fa-solid fa-coins"> </i> </button>
+      </div>
+      <div class="extra-shop-div">
+        <button data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Obtienes la habilidad de recuperar vida tras acertar con 15 disparos seguidos sobre burbujas"  class="shop-btns" id="shop-shootLife-activation"> </i> <span ><i class="fa-solid fa-circle-dot"></i> -> <i style="font-size: calc(8px + 0.4vw)"  class="fa-solid fa-clock"> </i> </span>100 <i class="fa-solid fa-coins"> </i> </button>
+      </div>
+      <div class="extra-shop-div">
         <h3 class="extra-shop-div-h1">Munición</h3>
       </div>
       <div class="extra-shop-div">
-        <button data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Mejora la velocidad de la munición de BurbalaBlaster" class="shop-btns" id="shop-speedGun"> <span><i class="fa-solid fa-gauge-simple-high"></i> </span> <i style="font-size: calc(8px + 0.3vw)" class="fa-solid fa-angles-up fonts-i"></i> <span id="velocidad-text"> </span>50 <i class="fa-solid fa-coins"></i> </button>
         <button data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Mejora la resistencia de las municiones de Barra"  class="shop-btns" id="shop-barResistane"> <span><i class="fa-solid fa-anchor"></i> x 3</span> <i style="font-size: calc(8px + 0.3vw)" class="fa-solid fa-angles-up fonts-i"> </i><span id="velocidad-text"></span>  50 <i class="fa-solid fa-coins"></i> </button>
-        <button data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Obtienes la habilidad de disparar con Burbalas a tus disparos de Lanzallamas, para dividirlos en otros 2 disparos."  class="shop-btns" id="shop-bulletWithFire"> <span><i class="fa-solid fa-circle-dot"></i> -> <i class="fa-solid fa-fire-flame-curved"></i>  115 <i class="fa-solid fa-coins"></i> </button>
-      </div>
-
-      <div class="extra-shop-div">
-        <button data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Cada vez que los disaros de lanzallamas chocan con una burbuja, se desaceleran, así duran más tiempo quemando todo a su paso"  class="shop-btns" id="shop-fireSpeed"> </i> <span> <i style="font-size: calc(8px + 0.4vw)" class=" fa-solid fa-gauge-simple-high"></i> <i  style="font-size: calc(8px + 0.4vw)"class=" fa-solid fa-fire-flame-simple"></i> </span> 180 <i class="fa-solid fa-coins"></i> </button>
-        <button data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Disparar BurbalaBlaster mientras usas escudo eléctrico, vuelve las balas irrompibles al contacto con las burbujas y desconecta las Gatlings durante unos segundos" class="shop-btns" id="shop-electro-bullet"> <span><i class="fa-solid fa-circle-dot"></i> -> <i style="font-size: calc(8px + 0.4vw)" class="fa-solid fa-bolt-lightning"></i> </span> <i style="font-size: calc(8px + 0.3vw)" class="fa-solid fa-angles-up fonts-i"></i> <span id="velocidad-text"> </span> 80 <i class="fa-solid fa-coins"></i> </button>
+        <button data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Cada vez que los disparos de lanzallamas chocan con una burbuja, se desaceleran, así duran más tiempo quemando todo a su paso"  class="shop-btns" id="shop-fireSpeed"> </i> <span> <i style="font-size: calc(8px + 0.4vw)" class=" fa-solid fa-gauge-simple-high"></i> <i  style="font-size: calc(8px + 0.4vw)"class=" fa-solid fa-fire-flame-simple"></i> </span> 180 <i class="fa-solid fa-coins"></i> </button>
       </div>
       <div class="extra-shop-div">
         <h3 class="extra-shop-div-h2">Equipo</h3>
@@ -188,17 +198,18 @@
         <button data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Aumenta tus puntos de salud máxima en 2 puntos adicionales y te sana 1 punto de vida"  class="shop-btns" id="shop-life"> </i> <span > <i style="font-size: calc(8px + 0.4vw)"  class="fa-solid fa-heart-pulse"> </i> </span>120 <i class="fa-solid fa-coins"> </i> </button>
       </div>
       <div class="extra-shop-div">
-        <button data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Obtienes la habilidad de recuperar vida tras acertar con 15 disparos seguidos"  class="shop-btns" id="shop-shootLife-activation"> </i> <span ><i class="fa-solid fa-circle-dot"></i> -> <i style="font-size: calc(8px + 0.4vw)"  class="fa-solid fa-heart-pulse"> </i> </span>100 <i class="fa-solid fa-coins"> </i> </button>
-        <button disabled data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Disminuye 2 puntos la cantidad de aciertos seguidos que necesitas para recuperar vida con las Burbalas"  class="shop-btns" id="shop-shootLife"> </i> <span ><i class="fa-solid fa-circle-dot"></i> <i style="font-size: calc(8px + 0.3vw)" class="fa-solid fa-angles-up fonts-i"></i>  <i style="font-size: calc(8px + 0.4vw)"  class="fa-solid fa-heart-pulse"> </i> </span>80 <i class="fa-solid fa-coins"> </i> </button>
+
+        
       </div>
       <div class="extra-shop-div">
         <h3 class="extra-shop-div-h3">Tecnología</h3>
       </div>
       <div class="extra-shop-div">
         <button data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Aumenta la duración de electrocución del escudo eléctrico 1 segundo adicional y aumenta en 10 la carga"  class="shop-btns" id="shop-electricShield"> </i> <span id="electro-text"><i style="font-size: calc(8px + 0.4vw)" class="fa-solid fa-bolt-lightning"></i> </span> 45 <i class="fa-solid fa-coins"></i> </button>
-      <button data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Adquirir 10 cargas eléctricas" class="shop-btns" id="shop-electro">30<i class="icons-size1 fa-solid fa-coins"></i> <i class="icons-size2 fa-solid fa-bolt-lightning"></i></button>
-      <button data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Aumenta la capacidad de disparo de tu SuperMegablaster en 3 llamas adicionales" class="shop-btns" id="shop-megablasterAmount"><i  style="font-size: calc(8px + 0.6vw)" class="fa-solid fa-fire-burner"></i> 75 <i class="icons-size1 fa-solid fa-coins"></i> </button>
+        <button data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Adquirir 10 cargas eléctricas" class="shop-btns" id="shop-electro">30<i class="icons-size1 fa-solid fa-coins"></i> <i class="icons-size2 fa-solid fa-bolt-lightning"></i></button>
+        <button data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Aumenta la capacidad de disparo de tu SuperMegablaster en 3 llamas adicionales" class="shop-btns" id="shop-megablasterAmount"><i  style="font-size: calc(8px + 0.6vw)" class="fa-solid fa-fire-burner"></i> 75 <i class="icons-size1 fa-solid fa-coins"></i> </button>
       </div>
+
     </div>
 
 
@@ -263,7 +274,7 @@
     <h4 id="hook-info"></h4>
   </div>
   <div>
-    <img id="step-img" class="weaponImg-info"  src="/public/Imagenes/stepImg.png" alt="weapon-bar">
+    <img id="step-img" class="weaponImg-info"  src="/public/Imagenes/stepImgBag.png" alt="weapon-bar">
     <h4 id="step-info"></h4>
   </div>
   <div>
@@ -274,8 +285,8 @@
 <div>
   <button id="saltar-nivel">Next</button>
 </div>
-<button id="btn-instrucciones-saltar">Saltar instrucciones</button>
-<button id="btn-instrucciones-repetir">Repetir  instrucciones</button>
+<button id="btn-instrucciones-saltar">Saltar <br> instrucciones</button>
+<button id="btn-instrucciones-repetir">Repetir <br>  instrucciones</button>
 <button id="cambiar-sala">Cambiar  <br> de sala</button>
 <div>
   <img class="minions minion1" src="/public/Imagenes/minions/BubbleMasterMinion1.webp" alt="minion1">
