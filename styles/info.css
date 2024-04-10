@@ -340,3 +340,7 @@ z-index: 24;
   .sincrongeniero:hover{
     scale: 2;
   }
+  .tooltip-inner strong {
+    font-weight: bold;
+  }
+  
