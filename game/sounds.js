@@ -133,6 +133,8 @@ chestOpen1.volume = 0.1;
 let chestOpenItemDrop1 = new Audio("/public/sounds/items/chestOpenItemDrop1.mp3")
 chestOpenItemDrop1.volume = 0.05;
 
+let cadenaSoundFinalPiece = new Audio("/public/sounds/cadenaSoundFinalPiece.mp3")
+cadenaSoundFinalPiece.volume = 0.3;
 
 let darkBubbbleHit = new Audio("../public/sounds/darkBubbleHit2.mp3")
 darkBubbbleHit.volume = 0.1;
@@ -141,12 +143,12 @@ bubbleBounceSound.volume = 0.05;
 let darkBubbleBounceSound = new Audio("../public/sounds/darkBallBounce.mp3") 
 darkBubbleBounceSound.volume = 0.05;  
 
-let swordTakenSound1 = new Audio("/public/sounds/swordTakenSound1.mp3")
-swordTakenSound1.volume = 0.1
-let swordTakenSound2 = new Audio("/public/sounds/swordTakenSound1.mp3")
-swordTakenSound2.volume = 0.1
-let swordTakenSound3 = new Audio("/public/sounds/swordTakenSound2.mp3")
-swordTakenSound3.volume = 0.1
+let swordTakenSound1 = new Audio("/public/sounds/swordTakenSound1.mp3");
+swordTakenSound1.volume = 0.1;
+let swordTakenSound2 = new Audio("/public/sounds/swordTakenSound1.mp3");
+swordTakenSound2.volume = 0.1;
+let swordTakenSound3 = new Audio("/public/sounds/swordTakenSound2.mp3");
+swordTakenSound3.volume = 0.1;
 
 function swordTakenSoundFuncion(){
 setTimeout(() => {

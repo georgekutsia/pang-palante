@@ -44,6 +44,11 @@ function checkBubbleCollision(bubbles, player, puffBubbles, ctx, platforms, boun
         totalShootsPerLevelSucces++;
         if(barDamageIsActivated){
           amountOfDamageForBar++;
+          game.cadenaAnim.img.framex++;
+          let cadenaSoundPiece = new Audio("/public/sounds/swordTakenSound1.mp3");
+          cadenaSoundPiece.volume = 0.01
+          cadenaSoundPiece.play();
+
           if(amountOfDamageForBar >= 4){
             amountOfDamageForBar = 0;
             player.barAmount++;
@@ -92,6 +97,12 @@ function checkBubbleCollision(bubbles, player, puffBubbles, ctx, platforms, boun
         totalShootsPerLevelSucces++;
         if(barDamageIsActivated){
           amountOfDamageForBar++;
+          game.cadenaAnim.img.framex++;
+          let cadenaSoundPiece = new Audio("/public/sounds/swordTakenSound1.mp3");
+          cadenaSoundPiece.volume = 0.01
+          cadenaSoundPiece.play();
+
+
           if(amountOfDamageForBar >= 4){
             amountOfDamageForBar = 0;
             player.barAmount++;

@@ -84,6 +84,7 @@ class Life {
       this.timeStopped.forEach(timeSt => timeSt.move())
       this.timeStopped = this.timeStopped.filter(timeSt => timeSt.isVisible())
     }
+
     this.gainCoins.forEach(coin => coin.move())
     this.gainCoins.forEach(coin => coin.draw())
     this.gainCoins = this.gainCoins.filter(coin => coin.isVisible())

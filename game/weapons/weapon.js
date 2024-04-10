@@ -68,6 +68,8 @@ class BasicWeapon {
     if (this.tick >= this.basicBulletDuration || this.y <= -10 || this.x <= -30 || this.x  >= CTXW + 50) {
       bullsEyeForHealth = 0;
       amountOfDamageForBar = 0;
+      game.cadenaAnim.img.framex = -1;
+      game.cadenaAnim.img.framey = 0;
       this.dispose = false;
       game.player.life.healingDamages = []
     }

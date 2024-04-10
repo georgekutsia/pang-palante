@@ -6,6 +6,7 @@ class Game {
     this.bubbleGatling = new BubbleGatling(ctx); //traemos la clase Player para usarlo. Todo lo que esté en la clase player también aparecerá
     this.background = new Background(ctx); // traemos la clase Background para usarlo
     this.points = new Points(ctx); // traemos la clase Background para usarlo
+    this.cadenaAnim = new CadenaAnimation(ctx); // traemos la clase Background para usarlo
     this.interval = null; //sirve para pausar el juego
     this.intervalCoinsLife = null; //sirve para pausar el juego
     this.bubbleTick = 0;
@@ -167,6 +168,7 @@ class Game {
     this.points.draw(); //dibuja al personaje y todo lo que se dibuja en la clase de personaje
     this.bubbles.forEach((e) => e.draw()); //dibuja cada obstáculo
     this.player.draw(); //dibuja al personaje y todo lo que se dibuja en la clase de personaje
+    if(barDamageIsActivated) this.cadenaAnim.draw(); //dibuja al personaje y todo lo que se dibuja en la clase de personaje
     this.boxes.forEach((e) => e.draw()); //dibuja cada obstáculo
     this.darkBubbles.forEach((e) => e.draw()); //dibuja cada obstáculo
     this.flamethrowers.forEach((e) => e.draw()); //dibuja cada obstáculo
@@ -194,6 +196,7 @@ class Game {
   }
   move() {
     this.player.move(); //muve al personaje y todo lo que se mueve en la clase de personaje
+    if(barDamageIsActivated) this.cadenaAnim.move(); //muve al personaje y todo lo que se mueve en la clase de personaje
     this.background.move(); //muve al personaje y todo lo que se mueve en la clase de personaje
     this.bubbles.forEach((e) => e.move()); //mueve los obstáculos
     this.darkBubbles.forEach((e) => e.move()); //mueve los obstáculos
