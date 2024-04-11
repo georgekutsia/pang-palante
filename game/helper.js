@@ -697,6 +697,17 @@ shopShootTimeActivation$$.addEventListener("click", function(){
       shopShootTimeActivation$$.innerHTML = `</i> <span id="boots-text"><i class="fa-solid fa-circle-dot"></i>  <i style="font-size: calc(8px + 0.4vw)"  class="fa-solid fa-clock"> </i> </span> <i style="font-size: calc(8px + 0.7vw)"  class="fa-solid fa-check"></i>`;
   }
 })
+shopShootGatlingActivation$$.addEventListener("click", function(){
+  if(coins >= 105){
+    coins-=105;
+    game.player.burbalaGatlingIsActive = true;
+    faShakeWhenBuy(this);
+    shopShootGatlingActivation$$.disabled = true; 
+    shopShootLife$$.disabled = false; 
+    shopShootGatlingActivation$$.style.color = "rgb(164, 5, 164)";
+    shopShootGatlingActivation$$.innerHTML = `</i> <span id="boots-text"><i class="fa-solid fa-circle-dot"></i>  <i style="font-size: calc(8px + 0.4vw)"  class="fa-solid fa-joint"> </i> </span> <i style="font-size: calc(8px + 0.7vw)"  class="fa-solid fa-check"></i>`;
+  }
+})
 
 
 shopRetry$$.addEventListener("click", function(){

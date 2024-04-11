@@ -28,7 +28,7 @@ class Bubble { //posX posY, ancho, alto, velX, velY, gravedad, buleano si hay gr
     this.replicateTick = 0;
     this.hitAmount = 0;
     this.timeTick = 0;
-    this.repTimeInSeconds = replicationSeconds
+    this.repTimeInSeconds = replicationSeconds;
     this.timeStopBubble = false; // para el efecto que detiene el tiempo al hacer desaparecer una burbuja con una esquiva
   }
   draw() {
@@ -89,11 +89,11 @@ class Bubble { //posX posY, ancho, alto, velX, velY, gravedad, buleano si hay gr
     }
     if(this.x + this.w >= this.ctx.canvas.width && this.willBounce){
       bubbleBounceSound.play()//todo --paso 3 llamar a .play() para invocar el sonido donde sea necesario
-      this.vx = -bubbleSpeedX;
+      this.vx = this.vx * -1;
     }
     if(this.x <= 0&& this.willBounce){
       bubbleBounceSound.play()//todo --paso 3 llamar a .play() para invocar el sonido donde sea necesario
-      this.vx = bubbleSpeedX;
+      this.vx = this.vx * -1;
     }
     if(this.isElectrified){
       this.w -= (0.25 + electricShieldlevel/150) - this.isElectrifiedButBig
@@ -118,6 +118,7 @@ class Bubble { //posX posY, ancho, alto, velX, velY, gravedad, buleano si hay gr
       const newBubble = new Bubble(this.ctx, this.x, this.y, this.w, this.h, -this.vx, this.vy, this.g, this.isSlowGravity, this.slowGrvityDuration, this.damage, this.willBounce, this.img.src);
       game.bubbles.push(newBubble);
       this.replicateTick = 0; // Reinicia el contador de replicación
+      this.repTimeInSeconds = 40;
     }
 
   }

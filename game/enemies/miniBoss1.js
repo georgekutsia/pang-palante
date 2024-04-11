@@ -24,7 +24,7 @@ class MiniBoss1 {
     this.shootOne = true;  // el primer tipo de disparo especial
     this.oneShot = true; // para que dispare solo una vez al detectar al jugador
     this.life = life || 45;
-
+    this.dropStuff = false;
     this.gun1 = gun1;
     this.gun2 = gun2;
     this.gun3 = gun3;
@@ -178,18 +178,21 @@ if(this.arriving){
     this.life -= 0.005;
   }
   burningShip(){
-      if( this.life <= 50 && this.burningLevel === 0 ){
+      if( this.life <= 70 && this.burningLevel === 0 ){
         let fire =  new BurningColors(this.ctx, this.x, this.y + this.h/7, 200, 200)
         this.burningColorsArray.push(fire);
+        this.gun1 = true;
         if(finalBoss){
+          this.dropStuff = true;
           minionsTalking.miniBossTalk2();
         }
         this.burningLevel = 1;
       }
-      if( this.life <= 40 && this.burningLevel === 1 ){
+      if( this.life <= 50 && this.burningLevel === 1 ){
         let fire =  new BurningColors(this.ctx, this.x + this.w/2, this.y + this.h/3, 180, 180)
         this.burningColorsArray.push(fire);
         this.burningLevel = 2;
+        this.gun3 = true;
       }
       if( this.life <= 30 && this.burningLevel === 2 ){
         let fire =  new BurningColors(this.ctx, this.x + this.w /4, this.y+ this.h/16, 250, 250)

@@ -60,6 +60,8 @@ class Player {
     this.extraY =  0;
     this.extraW =  0;
     this.extraH =  0;
+    this.burbalaGatling = 0;
+    this.this = false;
 
     this.weaponFire = new Image();
     this.weaponFire.src = "/public/Imagenes/weaponFire.png";
@@ -327,6 +329,7 @@ class Player {
 //  }
 // }
   draw() {
+    console.log('%cMyProject%cline:331%cthis.burbalaGatling ', 'color:#fff;background:#ee6f57;padding:3px;border-radius:2px', 'color:#fff;background:#1f3c88;padding:3px;border-radius:2px', 'color:#fff;background:rgb(60, 79, 57);padding:3px;border-radius:2px', this.burbalaGatling )
     this.bulletArray.forEach((bullet) => {bullet.draw();}); // paso 3: dibujo cada bullet que se dispare
     this.bulletFireArray.forEach((bullet) => {bullet.draw();}); // paso 3: dibujo cada bullet que se dispare
     this.bulletBarArray.forEach((bullet) => {bullet.draw();}); // paso 3: dibujo cada bullet que se dispare
@@ -691,6 +694,19 @@ class Player {
     }
 
     if(key === B ){
+      if(this.burbalaGatlingIsActive){
+        this.burbalaGatling++;
+        if(this.burbalaGatling >= 10){
+          recharge = 50;
+          setTimeout(() => {
+            recharge = 500;
+            this.this.burbalaGatlingIsActive = false;
+            setTimeout(() => {
+            this.this.burbalaGatlingIsActive = true;
+            }, 20000);
+          }, 10000);
+        }
+      }
       totalShootsPerLevel++
       if(basicWeaponLevel >= 0)this.shoot();
       if(basicWeaponLevel >= 1)this.shootDouble()
@@ -854,6 +870,9 @@ class Player {
     }
 
     if (key === B ) {
+      if(this.this){
+        this.burbalaGatling = 0;
+      }
       if(!finalBoss){
       this.img.src = "../public/Imagenes/pjShoot3.png";
       this.frameAmount = 4;

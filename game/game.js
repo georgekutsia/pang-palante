@@ -65,12 +65,13 @@ class Game {
       if (GAMELEVEL === 1) {
         // addMiniboss1(this.ctx, this.levelBalls);
         // miniBossTalk1.play();
-        //   let bo = new MiniBoss1(this.ctx, CTXW - 340, -50, CTXW/4, CTXW/4, 0, 0, 95, true, true, true, "/public/Imagenes/minions/MiniBoss1.webp");
+        //   let bo = new MiniBoss1(this.ctx, CTXW - 340, -50, CTXW/4, CTXW/4, 0, 0, 95, false, true, false, "/public/Imagenes/minions/MiniBoss1.webp");
         //   this.miniBoses.push(bo);
         //   minibossArrivingShip.play();
         //   this.dispached = false;
 
-        level15( this.ctx, this.bubbles, this.levelBalls, this.darkBubbles, this.steps);
+        level16( this.ctx, this.bubbles, this.levelBalls, this.platforms, this.healings, this.auras,  this.hooks, this.blasters, this.electros, this.coins, this.cannons);
+        // level15( this.ctx, this.bubbles, this.levelBalls, this.darkBubbles, this.steps, this.platforms, this.healings);
 
         // inftroGame1();
         // timeouts.push(setTimeout(() => {
@@ -1199,10 +1200,10 @@ if( totalShootsPerLevel === totalShootsPerLevelSucces ){
       }
     }
   checkBoss(){
-    if(miniBoss1){
+    if(miniBoss1 && this.miniBoses.every((mini) => mini.dropStuff === true)){
       let randomNumber = Math.floor(Math.random() * 4); // Generar un número aleatorio entre 0 y 2
       if ( !this.dispached) {
-        if(   this.miniBoses.every((mini) => mini.life <= 150)){
+        if( this.miniBoses.every((mini) => mini.life <= 150)){
           if (randomNumber === 0) {
             let heali = new Healing(this.ctx, CTXW -getRandomNumber(10), 70);
             this.healings.push(heali);
