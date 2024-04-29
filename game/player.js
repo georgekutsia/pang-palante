@@ -329,7 +329,6 @@ class Player {
 //  }
 // }
   draw() {
-    console.log('%cMyProject%cline:331%cthis.burbalaGatling ', 'color:#fff;background:#ee6f57;padding:3px;border-radius:2px', 'color:#fff;background:#1f3c88;padding:3px;border-radius:2px', 'color:#fff;background:rgb(60, 79, 57);padding:3px;border-radius:2px', this.burbalaGatling )
     this.bulletArray.forEach((bullet) => {bullet.draw();}); // paso 3: dibujo cada bullet que se dispare
     this.bulletFireArray.forEach((bullet) => {bullet.draw();}); // paso 3: dibujo cada bullet que se dispare
     this.bulletBarArray.forEach((bullet) => {bullet.draw();}); // paso 3: dibujo cada bullet que se dispare
@@ -743,6 +742,8 @@ class Player {
       }
     }
     if(key === M){
+      let runn = new Runner(ctx)
+      game.runners.push(runn)
       this.shootBar();
       this.barAmount--;
       if(this.barAmount <= 0)this.barAmount = 0;

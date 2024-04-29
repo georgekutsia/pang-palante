@@ -243,7 +243,7 @@ function handleClick(event) {
     return;
   }
   if (isPointInsideAnyBubble(game.darkBubbles, clickX, clickY)) {
-        showModal(`Burbujas oscuras`, `&nbsp&nbsp Creadas con una disolución distinta, que reacciona a las Burbalas, pero a diferencia de las burbujas normales, éstas burbujas no se rompen con los impactos de las Burbalas y no le afecta el fuego ni la electricidad. Las Burbalas aumentan su volumen hasta que la tensión es grande y explota en burbujas más pequeñas.  <br/> &nbsp&nbsp Una venaja al enfrentarlos son las municiones de barra, que no se rompen con las burbujas oscuras. `).then(() => {
+        showModal(`Burbujas oscuras`, `&nbsp&nbsp Creadas con una disolución distinta, que reacciona a las Burbalas, pero a diferencia de las burbujas normales, éstas burbujas no se rompen con los impactos de las Burbalas y no le afecta el fuego ni la electricidad. Las Burbalas aumentan su volumen hasta que la tensión es grande y explota en burbujas más pequeñas.<br/> &nbsp&nbsp Si choca contigo, perderás algo de tus ganancias y además te envenenará durante 5 segundos, siendo incapaz de ver bien lo que pasa a tu alrededor.  <br/> &nbsp&nbsp Una venaja al enfrentarlos son las municiones de barra, que no se rompen con las burbujas oscuras. `).then(() => {
       game.start();
     });
     return;
@@ -396,9 +396,10 @@ function showModal(title, content, img) {
       <div class="modal-dialog modal-lg" >
         <div class="modal-content " >
         <div class="modal-header" style="background-color: rgb(${randomColorsForBackground1}, ${randomColorsForBackground2}, ${randomColorsForBackground3}); color:  rgb(255, 255, 255)">
-            <h1 class="modal-title fs-4" id="exampleModalLabel">${title}</h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
+        <h1 class="modal-title fs-3 text-center" id="exampleModalLabel" style="width: 100%; text-align: center;">${title}</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+    
           <div class="modal-body"  style="background-color: rgb(${randomColorsForBackground1 + 155}, ${randomColorsForBackground2 + 155}, ${randomColorsForBackground3 + 155}); color:  rgb(0, 0, 0)">
             ${content}
           </div>

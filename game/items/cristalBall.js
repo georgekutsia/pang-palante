@@ -96,7 +96,7 @@ class CristalBall {
       let randomTreasure = getRandomNumber(3)
       switch (randomTreasure) {
         case 2:
-        game.player.life.amountOfGainedCoins = 70;
+        game.player.life.amountOfGainedCoins = 50;
         game.player.life.isGaining = true;
         coins += 70;
           break;

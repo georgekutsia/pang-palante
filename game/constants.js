@@ -106,7 +106,7 @@ let itemTakenImages = "../public/Imagenes/itemTakenSparkle.png";
 let healingDamageIsActivated = false;
 let barDamageIsActivated = true;
 let amountOfDamageForBar = 0;
-
+let darkBubbleCollisionBlind = false;
 
 const mapArray = [
   "/public/Imagenes/background/map1.webp",

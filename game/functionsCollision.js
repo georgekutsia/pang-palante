@@ -1,6 +1,6 @@
 function checkBubbleCollision(bubbles, player, puffBubbles, ctx, platforms, bouncers, boxes){
   bubbles.forEach((bubble) => {//player con bubble
-    if(bubble.collides(player)) {
+    if(bubble.collides(player) && !bubble.runnerBubble) {
       if(player.electricShieldIsActive){
         electroShockSound.play()
         bubble.vy = -10;
@@ -38,7 +38,7 @@ function checkBubbleCollision(bubbles, player, puffBubbles, ctx, platforms, boun
 
   bubbles.forEach((bubble) => {//  bubble con bullet
     player.bulletArray = player.bulletArray.filter((bullet) => {
-      if (bullet.collides(bubble) && !bullet.isBig) {
+      if (bullet.collides(bubble)&& !bubble.runnerBubble && !bullet.isBig) {
         let hea = new HealingDamage(ctx, -10 + (bullsEyeForHealth*20), 20)
         game.player.life.healingDamages.push(hea)
         totalShootsPerLevelSucces++;
@@ -91,7 +91,7 @@ function checkBubbleCollision(bubbles, player, puffBubbles, ctx, platforms, boun
   });
  bubbles.forEach((bubble) => {//  bubble con bullet
   player.bulletArray.forEach((bullet) => {
-      if (bullet.collides(bubble) && bullet.isBig) {
+      if (bullet.collides(bubble)&& !bubble.runnerBubble && bullet.isBig) {
         let hea = new HealingDamage(ctx, -10 + (bullsEyeForHealth*20), 20)
         game.player.life.healingDamages.push(hea)
         totalShootsPerLevelSucces++;
@@ -124,7 +124,7 @@ function checkBubbleCollision(bubbles, player, puffBubbles, ctx, platforms, boun
 
   bubbles.forEach((bubble) => {//bubble con fire
     player.bulletFireArray.forEach((bullet) => {
-      if (bullet.collides(bubble)) {
+      if (bullet.collides(bubble) && !bubble.runnerBubble) {
         if(fireDesaceleration){
           bullet.vy = -0.3;
         }
@@ -147,7 +147,7 @@ function checkBubbleCollision(bubbles, player, puffBubbles, ctx, platforms, boun
   });
   bubbles.forEach((bubble) => {//  bulletBar con Bubble
     player.bulletBarArray.forEach((bullet) => {
-      if (bullet.collides(bubble)) {
+      if (bullet.collides(bubble) && !bubble.runnerBubble) {
         if(bubble.w >=200){
           bullet.solidState = true;
         }else if (bubble.w >=140 && bubble.w <= 199) {
@@ -167,7 +167,7 @@ function checkBubbleCollision(bubbles, player, puffBubbles, ctx, platforms, boun
   
   bubbles.forEach((bubble) => {//bubble con platform
     platforms.forEach((platform) => {
-      if (platform.collides(bubble)) {
+      if (platform.collides(bubble) && !bubble.runnerBubble) {
         if (platform.isBouncable) {
         bubbleBounceSound.play()
           bounceFromObstacles(bubble, platform);
@@ -182,7 +182,7 @@ function checkBubbleCollision(bubbles, player, puffBubbles, ctx, platforms, boun
 
   bubbles.forEach((bubble) => {//bubble con boxes
     boxes.forEach((box) => {
-      if (box.collides(bubble)) {
+      if (box.collides(bubble)&& !bubble.runnerBubble) {
         bubbleBounceSound.play()
         bounceFromObstacles(bubble, box);
       } else return true;
@@ -191,7 +191,7 @@ function checkBubbleCollision(bubbles, player, puffBubbles, ctx, platforms, boun
 
   bubbles.forEach((bubble) => {//bubble con bouncer
     bouncers.forEach((bouncer) => {
-      if (bouncer.collides(bubble)) {
+      if (bouncer.collides(bubble)&& !bubble.runnerBubble) {
         bubbleBounceSound.play()
         bounceFromObstacles(bubble, bouncer, 5);
       } else return true;
@@ -201,7 +201,7 @@ function checkBubbleCollision(bubbles, player, puffBubbles, ctx, platforms, boun
 
   bubbles.forEach((bubble) => {//  bulletBar con Bubble
     player.swordArray.forEach((bullet) => {
-      if (bullet.collides(bubble)) {
+      if (bullet.collides(bubble)&& !bubble.runnerBubble) {
         coins += 2;
         bubble.swordSpeed = -2;
         player.swordPowerUp++;
@@ -356,13 +356,16 @@ function bossFireCollision (miniBoses, object){
   function checkDarkBubbleCollision(darkBubbles, player, platforms, bubbles, puffBubbles, bouncers){
     darkBubbles.forEach((bubble) => {//player darkbubble
       if (bubble.collides(player) && !playerIsImmune) {
-        if(player.y + player.h <= bubble.y +30 ){
+        if(player.y + player.h <= bubble.y + 20 ){
           player.vy = -3;
         } else {
           if (!player.auraIsActive) {
             player.loseLife(bubble.damage, true); //el daño al jugador se le hace según lo que marca el daño de la burbuja. a burbuja más pequeña, menos daño
             bubble.vy = -bubbleSpeedY; // rebota encima del jugador haciéndole daño
-            losingMoney(player, 3)
+            losingMoney(player, 3);
+            darkBubbleCollisionBlind = true;
+            game.stop();
+            game.start()
           }
         }
         player.wasNotDamaged = false;

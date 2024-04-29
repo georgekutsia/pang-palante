@@ -45,6 +45,7 @@ class Game {
     this.chests = []; 
     this.electricShocks = []; 
     this.weaponLevelings = []; 
+    this.runners = []; 
     // this.totalCannonBubbleCount = 0;
     this.changingLevelSoChangeImage = true;
     this.dispached = true;
@@ -70,8 +71,8 @@ class Game {
         //   minibossArrivingShip.play();
         //   this.dispached = false;
 
-        level16( this.ctx, this.bubbles, this.levelBalls, this.platforms, this.healings, this.auras,  this.hooks, this.blasters, this.electros, this.coins, this.cannons);
-        // level15( this.ctx, this.bubbles, this.levelBalls, this.darkBubbles, this.steps, this.platforms, this.healings);
+        // level16( this.ctx, this.bubbles, this.levelBalls, this.platforms, this.healings, this.auras,  this.hooks, this.blasters, this.electros, this.coins, this.cannons);
+        level15( this.ctx, this.bubbles, this.levelBalls, this.darkBubbles, this.steps, this.platforms, this.healings);
 
         // inftroGame1();
         // timeouts.push(setTimeout(() => {
@@ -115,7 +116,19 @@ class Game {
       this.bubbleTick++;
       this.gameTime++; //Cada 60 representan 1 segundo de tiempo en el juego
     }, 1000 / gameSpeed);
-
+    if(darkBubbleCollisionBlind){
+      const darkInterval = setInterval(() => {
+        canvas.style.backgroundImage = `URL("/public/Imagenes/background/flashBackground.webp")`
+        this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height)
+      }, 10);
+      setTimeout(() => {
+        clearInterval(darkInterval);
+      canvas.style.backgroundImage = `URL("/public//Imagenes/background/backgroundPang.webp")`
+      darkBubbleCollisionBlind = false;
+      }, 5000);
+    } else {
+      canvas.style.backgroundImage = `URL("/public//Imagenes/background/backgroundPang.webp")`
+    }
   }
   
   stop() { //para pausar el juego
@@ -149,6 +162,7 @@ class Game {
     this.cristalBalls = this.cristalBalls.filter((e) => e.isVisible()); //elimina cada obstáculo que ya no es visible y vacía el array
     this.weaponLevelings = this.weaponLevelings.filter((e) => e.isVisible()); //elimina cada obstáculo que ya no es visible y vacía el array
     this.electricShocks = this.electricShocks.filter((e) => e.isVisible()); //elimina cada obstáculo que ya no es visible y vacía el array
+    this.runners = this.runners.filter((e) => e.isVisible()); //elimina cada obstáculo que ya no es visible y vacía el array
     this.swords = this.swords.filter((e) => e.isVisible()); //elimina cada obstáculo que ya no es visible y vacía el array
     this.chests = this.chests.filter((e) => e.isVisible()); //elimina cada obstáculo que ya no es visible y vacía el array
     this.miniBoses = this.miniBoses.filter((e) => e.isVisible()); //elimina cada obstáculo que ya no es visible y vacía el array
@@ -186,6 +200,7 @@ class Game {
     this.cristalBalls.forEach((e) => e.draw()); //dibuja cada obstáculo
     this.weaponLevelings.forEach((e) => e.draw()); //dibuja cada obstáculo
     this.electricShocks.forEach((e) => e.draw()); //dibuja cada obstáculo
+    this.runners.forEach((e) => e.draw()); //dibuja cada obstáculo
     this.chests.forEach((e) => e.draw()); //dibuja cada obstáculo
     this.swords.forEach((e) => e.draw()); //dibuja cada obstáculo
     this.miniBoses.forEach((e) => e.draw()); //dibuja cada obstáculo
@@ -221,6 +236,7 @@ class Game {
     this.cristalBalls.forEach((e) => e.move()); //mueve los obstáculos
     this.weaponLevelings.forEach((e) => e.move()); //mueve los obstáculos
     this.electricShocks.forEach((e) => e.move()); //mueve los obstáculos
+    this.runners.forEach((e) => e.move()); //mueve los obstáculos
     this.swords.forEach((e) => e.move()); //mueve los obstáculos
     this.chests.forEach((e) => e.move()); //mueve los obstáculos
     this.miniBoses.forEach((e) => e.move()); //mueve los obstáculos
@@ -438,6 +454,7 @@ class Game {
               coins+=2;
               this.player.life.amountOfGainedCoins = 2;
               this.player.life.isGaining = true;
+
               coinsSound1.play()
               platform.x = -200;
             }
@@ -548,7 +565,15 @@ this.cannons.forEach((cann) => {//  cannon con fire
 // bosssss
 // bosssss
 
-
+this.runners.forEach((run) => {//  runons con bubble
+  this.bubbles.forEach((bub) => {
+    if (bub.collides(run)){
+      if(run.vy === 0){
+        run.trapped()
+      }
+    } else return true;
+  });
+});
 
 
 
@@ -765,12 +790,16 @@ this.cannons.forEach((cann) => {//  cannon con fire
       });
     });
 
-    //que el item se quede sobre la plataforma al caer
-
-
-
-    //para que caiga lentamente por los escalenos antes de llegar al suelo
-
+    //runner..
+    //runner..
+    this.runners.forEach((run) => {//  run con bullet
+      this.player.bulletArray = this.player.bulletArray.filter((bullet) => {
+        if (bullet.collides(run) && run.trappedInBubble) {
+            run.notTrapped()
+          return false;
+        } else return true;
+      });
+    });
     // boxes...
     // boxes...
       itemDropOn(this.platforms,this.boxes,this.stairs, this.bouncers, this.flamethrowers,this.machineguns,this.healings, this.bars,this.blasters,this.auras,this.coins,this.steps,this.levers,this.hooks,this.electros,this.swords, this.chests)

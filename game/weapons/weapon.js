@@ -22,7 +22,6 @@ class BasicWeapon {
   }
 
   draw() {
-    console.log(this.timeStop)
     this.ctx.beginPath();
     this.ctx.arc(this.x + this.radius, this.y + this.radius, this.radius-1, 0, 2 * Math.PI);
     this.ctx.fillStyle = this.color;

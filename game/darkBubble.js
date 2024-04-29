@@ -11,7 +11,7 @@ class DarkBubble {
     this.sizing = 0.1;
     this.sizeChange = sizeChange || false;
     this.willShrink = willShrink || false;
-    this.damage = damage || 1; // daño especificado o 1
+    this.damage = damage || 2; // daño especificado o 1
     this.img = new Image();   //crear nueva imágene ne canvas
     this.img.src =  "../public/Imagenes/darkBubble1.png";  //definir cual es la nueva imagen
 
@@ -41,6 +41,10 @@ class DarkBubble {
       }
     }
 
+    if(this.y <= -400){
+      this.vy = 10;
+      this.g = 0.2;
+    }
     if (this.y + this.h >= this.ctx.canvas.height ){
       darkBubbleBounceSound.play()//todo --paso 3 llamar a .play() para invocar el sonido donde sea necesario
       this.vy = -bubbleSpeedY; 

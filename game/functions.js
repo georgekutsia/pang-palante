@@ -44,6 +44,7 @@ function bubblePuff(bubble, puffBubbles, bubbles, ctx, bullet){
     game.stop();
     game.start()
     setTimeout(() => {
+    game.player.life.timeStopped = [];
     timeStopped = false;
     gameSpeed = 60;
     jumpHeight = -16.5;
@@ -194,4 +195,24 @@ function darkBubbleExplosion( bubble, bubbles, puffBubbles){
   const puffBubble = new BubblePuff(ctx, bubble.x ,bubble.y, bubble.w, bubble.h );
   puffBubbles.push(puffBubble);
   bubble.x = -300
+}
+
+
+function gainingCoins(amount){
+  game.player.life.amountOfGainedCoins = amount;
+  game.player.life.isGaining = true;
+  coins += amount
+}
+
+function detectPlaceToMove(thisx, thisy, destinx, destiny, thisvx, thisvy, speed) {
+  if (this.moving) {
+    if (thisx !== destinx && thisx < destinx) thisvx = speed;
+    if (thisx !== destinx && thisx > destinx) thisvx = -speed;
+    if (thisy !== destiny && thisy < destiny) thisvy = speed;
+    if (thisy !== destiny && thisy > destiny)thisvy = -speed;
+
+    if ( thisx >= destinx && thisx <= destinx + 3 && thisy >= destiny && thisy <= destiny + 3) {
+      alert("destin")
+    }
+  }
 }
