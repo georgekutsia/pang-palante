@@ -59,8 +59,8 @@ function bubblePuff(bubble, puffBubbles, bubbles, ctx, bullet){
   bubble.x = -200;
   const puffBubble = new BubblePuff(ctx, elx, ely, bubble.w, bubble.h)
   puffBubbles.push(puffBubble)      // 0.8 es la direccion y velocidad a la que salen las nuevas, el otro es la dirección
-  const smallBubble1 = new Bubble(ctx,  elx, ely, bubble.w/2, bubble.h/2, -bubbleSpeedX, -1 , bubble.g + 0.01, false, false, bubble.damage / 2, true, "../public/Imagenes/bubble.png", false, false )// al explotar una burbuja, crea otra en su lugar, usando su ubicación y dimensiones para hacerla más pequeña
-  const smallBubble2 = new Bubble(ctx, elx, ely,  bubble.w/2, bubble.h/2, bubbleSpeedX, -1 , bubble.g + 0.01, false, false, bubble.damage / 2, true, "../public/Imagenes/bubble.png", false, false  )
+  const smallBubble1 = new Bubble(ctx,  elx, ely, bubble.w/2, bubble.h/2, -bubbleSpeedX, -1 , bubble.g + 0.01, false, false, bubble.damage / 2, true, "../public/Imagenes/bubble.png", false, false)// al explotar una burbuja, crea otra en su lugar, usando su ubicación y dimensiones para hacerla más pequeña
+  const smallBubble2 = new Bubble(ctx, elx, ely,  bubble.w/2, bubble.h/2, bubbleSpeedX, -1 , bubble.g + 0.01, false, false, bubble.damage / 2, true, "../public/Imagenes/bubble.png", false, false)
   bubbles.push(smallBubble1, smallBubble2)
 }
 

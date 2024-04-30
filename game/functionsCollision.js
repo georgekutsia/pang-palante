@@ -376,7 +376,7 @@ function bossFireCollision (miniBoses, object){
           if (!player.auraIsActive) {
             player.loseLife(bubble.damage, true); //el daño al jugador se le hace según lo que marca el daño de la burbuja. a burbuja más pequeña, menos daño
             bubble.vy = -bubbleSpeedY; // rebota encima del jugador haciéndole daño
-            losingMoney(player, 3);
+            losingMoney(player, 10);
             darkBubbleCollisionBlind = true;
             game.stop();
             game.start()

@@ -105,7 +105,7 @@ constructor(ctx, x, y, g, w, h) {
       gainingCoins(10);
       this.dispose = false;
     } else if(this.x >= CTXW +10 && this.y <= this.ctx.canvas.height - 90 || this.y + this.h <= 0){
-      alert("ciao")
+      losingMoney(game.player, 20) 
       this.dispose = false;
 
     }

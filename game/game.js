@@ -264,7 +264,7 @@ class Game {
         if (!this.player.auraIsActive && !this.player.electricShieldIsActive) {
           spike.active = true;
           spikeSound.play()
-          let loseCoins =  getRandomNumber(1);
+          let loseCoins =  getRandomNumber(5); //probabilidad de perder dinero si te muelen
           if(loseCoins === 1){
             losingMoney(this.player, 5) 
           }
