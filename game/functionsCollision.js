@@ -179,6 +179,20 @@ function checkBubbleCollision(bubbles, player, puffBubbles, ctx, platforms, boun
       } else return true;
     });
   });
+  for (let i = 0; i < bubbles.length; i++) {
+    const bubble1 = bubbles[i];
+    for (let j = 0; j < bubbles.length; j++) {
+      if (i !== j) {
+        const bubble2 = bubbles[j];
+        if (bubble2.collides(bubble1) && !bubble1.runnerBubble1 && bubble1.bounceFromEachOtherB) {
+            bubbleBounceSound.play();
+            bounceFromObstacles(bubble1, bubble2);
+          break;
+        }
+      }
+    }
+  }
+  
 
   bubbles.forEach((bubble) => {//bubble con boxes
     boxes.forEach((box) => {

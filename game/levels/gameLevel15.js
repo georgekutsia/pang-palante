@@ -1,12 +1,12 @@
 
-function level15( ctx, bubbles, levelBalls, darkBubbles, steps, platforms, healings){
+function level15( ctx, bubbles, levelBalls, darkBubbles, steps, platforms, healings, coins){
   levelBallItem15(ctx, levelBalls)
   addBubble15(ctx, bubbles)
   addDarkBubble15(ctx, darkBubbles)
   addSteps15(ctx, steps)
   addPlatforms15(ctx, platforms)
   addHealing15(ctx, healings)
-
+  addCoins15(ctx, coins)
 }
 function levelBallItem15(ctx, levelBalls) {  
       const levelBall2 = new LevelBall(ctx, CTXW/2-20, 0)
@@ -14,9 +14,9 @@ function levelBallItem15(ctx, levelBalls) {
 }
 
 function addBubble15(ctx, bubbles){ 
-    const bubble1 = new Bubble(ctx, CTXW/2 -545, 590, 20, 20, -0.004, 0.08, 0.000017, true, 40000)
-    const bubble2 = new Bubble(ctx, CTXW/2 -75, 590, 20, 20, -0.00001, 0.08, 0.000017, true, 40000)
-    const bubble3 = new Bubble(ctx, CTXW/2 + 395, 590, 20, 20, 0.004, 0.08, 0.000017, true, 40000)
+    const bubble1 = new Bubble(ctx, CTXW/2 -545, 100, 80, 80, -0.004, 0.08, 0.000017, true, 40000)
+    const bubble2 = new Bubble(ctx, CTXW/2 -75, 100, 80, 80, -0.00001, 0.08, 0.000017, true, 40000)
+    const bubble3 = new Bubble(ctx, CTXW/2 + 395, 100, 80, 80, 0.004, 0.08, 0.000017, true, 40000)
     bubbles.push(bubble1, bubble2, bubble3);
 }
 
@@ -35,6 +35,10 @@ function addSteps15(ctx, steps){
   const step1 = new Steps(ctx, 20, 250)
   const step2 = new Steps(ctx, CTXW - 80, 250)
   steps.push(step1, step2)
+}
+function addCoins15(ctx, coins){
+  let coin = new Coins(ctx, 200, CTXH - 50, 40, 40, 5);
+  coins.push(coin)
 }
 
 function addHealing15(ctx, healings){

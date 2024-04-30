@@ -72,7 +72,7 @@ class Game {
         //   this.dispached = false;
 
         // level16( this.ctx, this.bubbles, this.levelBalls, this.platforms, this.healings, this.auras,  this.hooks, this.blasters, this.electros, this.coins, this.cannons);
-        level15( this.ctx, this.bubbles, this.levelBalls, this.darkBubbles, this.steps, this.platforms, this.healings);
+        level15( this.ctx, this.bubbles, this.levelBalls, this.darkBubbles, this.steps, this.platforms, this.healings, this.coins);
 
         // inftroGame1();
         // timeouts.push(setTimeout(() => {
@@ -701,9 +701,10 @@ this.runners.forEach((run) => {//  runons con bubble
             itemTakenImages = "../public/Imagenes/itemTakenCoins2.png";
             this.player.life.isGaining = true;
             coin.dispose = false;
-        this.player.itemJustTaken = true;
+            this.player.itemJustTaken = true;
       } else return true;
     });
+
     this.hooks.forEach((hook) => {
       if (hook.collides(this.player)) {
         eventInfo(munHook$$)

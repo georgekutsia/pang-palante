@@ -1,5 +1,5 @@
 class Bubble { //posX posY, ancho, alto, velX, velY, gravedad, buleano si hay gravedad, cuanto tarda la gravedad, si las bolas rebotan, el daño y la imagen
-  constructor(ctx, x , y, w, h, vx, vy, g, isSlowGravity, slowGrvityDuration, damage, willBounce = true, bubbleImg, runnerBubble ) {
+  constructor(ctx, x , y, w, h, vx, vy, g, isSlowGravity, slowGrvityDuration, damage, willBounce = true, bubbleImg, runnerBubble, bounceFromEachOther ) {
     this.ctx = ctx;
     this.x = x || Math.random() * this.ctx.canvas.width; //el obstáculo aparece desde arriba del canvas 
     this.y = y  || -10; // el obstáculo sale de una altura específica o de alguna altura randóm
@@ -31,6 +31,7 @@ class Bubble { //posX posY, ancho, alto, velX, velY, gravedad, buleano si hay gr
     this.repTimeInSeconds = replicationSeconds;
     this.timeStopBubble = false; // para el efecto que detiene el tiempo al hacer desaparecer una burbuja con una esquiva
     this.runnerBubble = runnerBubble || false;
+    this.bounceFromEachOther = bounceFromEachOther || false;
   }
   draw() {
     // Dibujar el círculo detrás de la burbuja
@@ -75,6 +76,9 @@ class Bubble { //posX posY, ancho, alto, velX, velY, gravedad, buleano si hay gr
     }
   }
   move() {
+    setTimeout(() => {
+      this.bounceFromEachOther = true;
+    }, 500);
     if(this.runnerBubble) this.g = 0
     this.vy += this.g;  //efecto gravedad, aumenta la velocidad a medida que baja
     this.y += this.vy;

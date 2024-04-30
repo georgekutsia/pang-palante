@@ -44,8 +44,6 @@ constructor(ctx, x, y, g, w, h) {
       this.w,
       this.h
     );
-
-
     switch (this.helpMessages) {
         case 0 : 
           this.ctx.font = "22px Arial";
@@ -103,9 +101,13 @@ constructor(ctx, x, y, g, w, h) {
     this.img.src = "/public/Imagenes/koren1.png";  //definir cual es la nueva imagen
     this.vyInBubble = -2;
     }
-    if(this.x >= CTXW +10){
+    if(this.x >= CTXW +10  && this.y >= this.ctx.canvas.height - 90){
       gainingCoins(10);
       this.dispose = false;
+    } else if(this.x >= CTXW +10 && this.y <= this.ctx.canvas.height - 90 || this.y + this.h <= 0){
+      alert("ciao")
+      this.dispose = false;
+
     }
     if(this.x >= CTXW - 250){
       this.helpMessages = 2

@@ -50,6 +50,7 @@ class GainCoins {
       this.rounds++
     }
     if(this.rounds > 2) this.dispose = false;
+
   }
 
   isVisible() {

@@ -753,6 +753,7 @@ class Player {
         }, 500);
     }
     if(key === ALT && this.vy === 0 || key === ALT && this.ableToJump === true){
+      gainingCoins(4)
       if(!finalBoss){
         this.img.frame = 0;
         this.img.src = "../public/Imagenes/pjJump1.png";

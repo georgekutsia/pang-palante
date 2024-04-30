@@ -12,7 +12,6 @@ class TimeStop {
     this.img.frame = 0;
     this.tick = 0;
     this.dispose = true;
-    this.moving = true; // Agregado: propiedad para controlar el movimiento
   }
 
   draw() {
@@ -40,8 +39,7 @@ class TimeStop {
     if (this.img.frame > 11) {
       this.img.frame = 0;
     }
-
-    this.detectPlaceToMove(); // Corregido: llamada al método detectPlaceToMove
+    // Llamada a la función detectPlaceToMove y actualización de vx y vy
   }
 
   isVisible() {
@@ -53,22 +51,4 @@ class TimeStop {
     const colY = this.y + this.h > objetivo.y && this.y < objetivo.y + objetivo.h;
     return colX && colY;
   }
-
-  detectPlaceToMove() {
-    if (this.moving) {
-      if (this.x !== game.player.x && this.x < game.player.x) this.vx = 2;
-      if (this.x !== game.player.x && this.x > game.player.x) this.vx = -2;
-      
-      if (this.x >= game.player.x && this.x <= game.player.x + 3 && this.y >= game.player.y && this.y <= game.player.y + 3) {
-        alert("destin");
-        this.moving = false; // Detener el movimiento cuando alcanza el destino
-      }
-    }
-  }
-}
-
-function gainingCoins(amount) {
-  game.player.life.amountOfGainedCoins = amount;
-  game.player.life.isGaining = true;
-  coins += amount;
 }
