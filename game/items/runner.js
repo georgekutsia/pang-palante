@@ -122,6 +122,17 @@ constructor(ctx, x, y, g, w, h) {
     let bub = new Bubble(ctx, this.x - 10, this.y - 10, this.w * 1.3, this.h * 1.3 , this.vx, this.vy, 0.01, false, false, 0, false, 0, true);
     this.trapBubbles.push(bub);
   }
+
+  darkBubbleHit(){
+    this.vy = -1;
+    this.vx = 0;
+    this.g = 0.01;
+    this.img.src = "/public/Imagenes/koren1Trapped.png";
+    setInterval(() => {
+      this.w -= 0.1;
+      this.h -= 0.1;
+    }, 10);
+  }
   notTrapped(){
     this.vyInBubble = -2;
     this.vy = 3;

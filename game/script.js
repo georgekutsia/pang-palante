@@ -1,3 +1,19 @@
+function positioningButtons(button) {
+  const screenWidth = window.innerWidth;
+  let leftPosition;
+  if (screenWidth >= 2090) {
+    leftPosition = "12.5vw";
+  } else if (screenWidth >= 1801) {
+    leftPosition = "8.2vw";
+  } else if (screenWidth >= 1501) {
+    leftPosition = "3.2vw";
+  } else if (screenWidth >= 1301) {
+    leftPosition = "2.2vw";
+  } else {
+    leftPosition = ".1vw";
+  }
+  button.style.left = leftPosition;
+}
 
 start$$.addEventListener("click", function () {
   GAMELEVEL = 1;
@@ -26,11 +42,9 @@ start$$.addEventListener("click", function () {
       start$$.innerHTML = '<i class="fa-solid fa-play"></i>';  
     } else {
       game.start();
-      start$$.style.left = "0.5vw";
       start$$.style.top = "16vh";
       start$$.style.transform = "translate(0)";
       instruccionesBtn$$.style.top = "11vh";
-      instruccionesBtn$$.style.left = "0.8vw";
       instruccionesBtn$$.style.transform = "translate(0)";
       instruccionesBtn$$.innerHTML = '<i class="fa-solid fa-info"></i>';  
       start$$.innerHTML = '<i class="fa-solid fa-pause"></i>';  
@@ -66,11 +80,9 @@ startInfinite$$.addEventListener("click", function () {
       start$$.innerHTML = '<i class="fa-solid fa-play"></i>';  
     } else {
       game.start();
-      startInfinite$$.style.left = "0.5vw";
       startInfinite$$.style.top = "16vh";
       startInfinite$$.style.transform = "translate(0)";
       instruccionesBtn$$.style.top = "11vh";
-      instruccionesBtn$$.style.left = "0.8vw";
       instruccionesBtn$$.style.transform = "translate(0)";
       instruccionesBtn$$.innerHTML = '<i class="fa-solid fa-info"></i>';  
       startInfinite$$.innerHTML = '<i class="fa-solid fa-pause"></i>';  
@@ -106,11 +118,9 @@ startDemo$$.addEventListener("click", function () {
       startDemo$$.innerHTML = '<i class="fa-solid fa-play"></i>';  
     } else {
       game.start();
-      startDemo$$.style.left = "0.5vw";
       startDemo$$.style.top = "16vh";
       startDemo$$.style.transform = "translate(0)";
       instruccionesBtn$$.style.top = "11vh";
-      instruccionesBtn$$.style.left = "0.8vw";
       instruccionesBtn$$.style.transform = "translate(0)";
       instruccionesBtn$$.innerHTML = '<i class="fa-solid fa-info"></i>';  
       startDemo$$.innerHTML = '<i class="fa-solid fa-pause"></i>';  
@@ -118,6 +128,7 @@ startDemo$$.addEventListener("click", function () {
     }
   }
 )
+
 instruccionesBtn$$.addEventListener("click", function () {
     if(instruccionesInfo1$$.style.display === "block"){
       instruccionesInfo1$$.style.display = "none";

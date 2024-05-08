@@ -14,15 +14,15 @@ function levelBallItem15(ctx, levelBalls) {
 }
 
 function addBubble15(ctx, bubbles){ 
-    const bubble1 = new Bubble(ctx, CTXW/2 -545, 100, 80, 80, -0.004, 0.08, 0.000017, true, 40000)
-    const bubble2 = new Bubble(ctx, CTXW/2 -75, 100, 80, 80, -0.00001, 0.08, 0.000017, true, 40000)
-    const bubble3 = new Bubble(ctx, CTXW/2 + 395, 100, 80, 80, 0.004, 0.08, 0.000017, true, 40000)
+    const bubble1 = new Bubble(ctx, CTXW/2 -545, 100,  150,  150, -0.004, 0.08, 0.000017, true, 40000)
+    const bubble2 = new Bubble(ctx, CTXW/2 -75, 100,  150,  150, -0.00001, 0.08, 0.000017, true, 40000)
+    const bubble3 = new Bubble(ctx, CTXW/2 + 395, 100,  150,  150, 0.004, 0.08, 0.000017, true, 40000)
     bubbles.push(bubble1, bubble2, bubble3);
 }
 
 
   function addDarkBubble15(ctx, darkBubbles){
-      let bu = new DarkBubble(ctx, 1, 90, 20, 20, 0.5, 0.3, 0.000001, 0, true, true)
+      let bu = new DarkBubble(ctx, 500, 290, 20, 20, 0.5, 0.3, 0.000001, 0, true, true)
       darkBubbles.push(bu)
   }
 

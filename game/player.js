@@ -386,6 +386,9 @@ class Player {
       this.fireInfo$$.innerText = ``
       this.fireImg$$.style.display = "none"
     }
+
+
+    
     if (this.swordEquipped === true) {    
       this.ctx.globalAlpha = globalAlphaForSword;
       this.ctx.drawImage(this.swordCharging, CTXW - 50, 10, 50, 150);

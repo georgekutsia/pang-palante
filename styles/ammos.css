@@ -1,7 +1,8 @@
 #ammos-count{
   position: absolute;
-  top: 15vw;
+  top: 26vw;
   left: 1vw;
+  transition: 0.3s ease-in-out;
 }
 
 .weaponImg-info{

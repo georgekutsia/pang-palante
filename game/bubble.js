@@ -32,9 +32,13 @@ class Bubble { //posX posY, ancho, alto, velX, velY, gravedad, buleano si hay gr
     this.timeStopBubble = false; // para el efecto que detiene el tiempo al hacer desaparecer una burbuja con una esquiva
     this.runnerBubble = runnerBubble || false;
     this.bounceFromEachOther = bounceFromEachOther || false;
+    this.bounceVolume = this.w/1000;
+    this.bubbleBounceSound = new Audio("../public/sounds/bubbleBounce.mp3") 
+    this.bubbleBounceSound.volume = this.bounceVolume;  
   }
   draw() {
     // Dibujar el círculo detrás de la burbuja
+    console.log(this.w)
     this.ctx.beginPath();
     this.ctx.arc(this.x + this.w / 2, this.y + this.h / 2, this.w / 2, 0, 2 * Math.PI);
     this.ctx.fillStyle = this.randomColor;
@@ -78,7 +82,7 @@ class Bubble { //posX posY, ancho, alto, velX, velY, gravedad, buleano si hay gr
   move() {
     setTimeout(() => {
       this.bounceFromEachOther = true;
-    }, 500);
+    }, 200);
     if(this.runnerBubble) this.g = 0
     this.vy += this.g;  //efecto gravedad, aumenta la velocidad a medida que baja
     this.y += this.vy;
@@ -90,15 +94,15 @@ class Bubble { //posX posY, ancho, alto, velX, velY, gravedad, buleano si hay gr
       this.g = 0.2
     }
     if (this.y + this.h >= this.ctx.canvas.height && !this.runnerBubble){
-      bubbleBounceSound.play()//todo --paso 3 llamar a .play() para invocar el sonido donde sea necesario
+      this.bubbleBounceSound.play()//todo --paso 3 llamar a .play() para invocar el sonido donde sea necesario
       this.vy = -Math.abs(this.w/20 + 7); 
     }
     if(this.x + this.w >= this.ctx.canvas.width && this.willBounce && !this.runnerBubble){
-      bubbleBounceSound.play()//todo --paso 3 llamar a .play() para invocar el sonido donde sea necesario
+      this.bubbleBounceSound.play()//todo --paso 3 llamar a .play() para invocar el sonido donde sea necesario
       this.vx = this.vx * -1;
     }
     if(this.x <= 0 && this.willBounce && !this.runnerBubble){
-      bubbleBounceSound.play()//todo --paso 3 llamar a .play() para invocar el sonido donde sea necesario
+      this.bubbleBounceSound.play()//todo --paso 3 llamar a .play() para invocar el sonido donde sea necesario
       this.vx = this.vx * -1;
     }
     if(this.isElectrified){

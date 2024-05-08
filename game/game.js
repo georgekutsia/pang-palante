@@ -173,6 +173,11 @@ class Game {
   }
 
   draw() {
+    positioningButtons(start$$)
+    positioningButtons(restart$$)
+    positioningButtons(retry$$)
+    positioningButtons(instruccionesBtn$$)
+    positioningButtons(ammosCount$$)
     this.background.draw(); //dibuja el background
     this.stairs.forEach((e) => e.draw());
     this.spikes.forEach((e) => e.draw());
@@ -565,12 +570,19 @@ this.cannons.forEach((cann) => {//  cannon con fire
 // bosssss
 // bosssss
 
-this.runners.forEach((run) => {//  runons con bubble
+this.runners.forEach((run) => {//  runners con bubble
   this.bubbles.forEach((bub) => {
     if (bub.collides(run)){
       if(run.vy === 0){
         run.trapped()
       }
+    } else return true;
+  });
+});
+this.runners.forEach((run) => {//  runners con bubble
+  this.darkBubbles.forEach((bub) => {
+    if (bub.collides(run)){
+      run.darkBubbleHit()
     } else return true;
   });
 });
@@ -927,7 +939,7 @@ this.runners.forEach((run) => {//  runons con bubble
         levelChangeText2$$.innerText = `${changeFrases[indiceAleatorioFrases]}`;
         setTimeout(() => {
           if(GAMELEVEL < 100){
-            mapChangeLevel$$.style.left = '0.5vw';
+            positioningButtons(mapChangeLevel$$)
             mapChangeLevel$$.style.width = 'calc(20px + 0.7vw)';
             mapChangeLevel$$.style.top = '21vh';
           }

@@ -169,7 +169,7 @@ function checkBubbleCollision(bubbles, player, puffBubbles, ctx, platforms, boun
     platforms.forEach((platform) => {
       if (platform.collides(bubble) && !bubble.runnerBubble) {
         if (platform.isBouncable) {
-        bubbleBounceSound.play()
+       bubble.bubbleBounceSound.play()
           bounceFromObstacles(bubble, platform);
         } else if (!platform.isBouncable) {
           bubble.y = platform.y - bubble.h;
@@ -184,9 +184,9 @@ function checkBubbleCollision(bubbles, player, puffBubbles, ctx, platforms, boun
     for (let j = 0; j < bubbles.length; j++) {
       if (i !== j) {
         const bubble2 = bubbles[j];
-        if (bubble2.collides(bubble1) && !bubble1.runnerBubble1 && bubble1.bounceFromEachOtherB) {
-            bubbleBounceSound.play();
-            bounceFromObstacles(bubble1, bubble2);
+        if (bubble2.collides(bubble1) && !bubble1.runnerBubble1 && bubble1.bounceFromEachOther) {
+           bubble2.bubbleBounceSound.play();
+            bounceFromObstacles(bubble1, bubble2, -10);
           break;
         }
       }
@@ -197,7 +197,7 @@ function checkBubbleCollision(bubbles, player, puffBubbles, ctx, platforms, boun
   bubbles.forEach((bubble) => {//bubble con boxes
     boxes.forEach((box) => {
       if (box.collides(bubble)&& !bubble.runnerBubble) {
-        bubbleBounceSound.play()
+       bubble.bubbleBounceSound.play()
         bounceFromObstacles(bubble, box);
       } else return true;
     });
@@ -206,7 +206,7 @@ function checkBubbleCollision(bubbles, player, puffBubbles, ctx, platforms, boun
   bubbles.forEach((bubble) => {//bubble con bouncer
     bouncers.forEach((bouncer) => {
       if (bouncer.collides(bubble)&& !bubble.runnerBubble) {
-        bubbleBounceSound.play()
+       bubble.bubbleBounceSound.play()
         bounceFromObstacles(bubble, bouncer, 5);
       } else return true;
     });

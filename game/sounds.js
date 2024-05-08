@@ -138,8 +138,7 @@ cadenaSoundFinalPiece.volume = 0.3;
 
 let darkBubbbleHit = new Audio("../public/sounds/darkBubbleHit2.mp3")
 darkBubbbleHit.volume = 0.1;
-let bubbleBounceSound = new Audio("../public/sounds/bubbleBounce.mp3") 
-bubbleBounceSound.volume = 0.05;  
+
 let darkBubbleBounceSound = new Audio("../public/sounds/darkBallBounce.mp3") 
 darkBubbleBounceSound.volume = 0.05;  
 
