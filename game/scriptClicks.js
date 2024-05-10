@@ -1,4 +1,190 @@
 canvas.addEventListener('click', handleClick);
+canvas.addEventListener('mousemove', handleHover);
+function handleHover(event) {
+  const rect = canvas.getBoundingClientRect();
+  const clickX = event.clientX - rect.left;
+  const clickY = event.clientY - rect.top;
+
+  if (isPointInsideObject(game.points, clickX, clickY)) {
+    canvas.style.cursor = "pointer";
+    paintAround(game.points);
+  } else if (isPointInsideObject(game.player.life, clickX, clickY)) {
+    canvas.style.cursor = "pointer";
+    paintAround(game.player.life);
+  } else if (isPointInsideObject(game.player, clickX, clickY)) {
+    canvas.style.cursor = "pointer";
+    paintAround(game.player);
+  } else if (isPointInsideAnyObjectInArray(game.platforms, clickX, clickY)) {
+    canvas.style.cursor = "pointer";
+    paintAroundArray(game.platforms);
+  } else if (isPointInsideAnyObjectInArray(game.bubbles, clickX, clickY)) {
+    canvas.style.cursor = "pointer";
+      paintAroundArray(game.bubbles);
+  } else if (isPointInsideAnyObjectInArray(game.darkBubbles, clickX, clickY)) {
+    canvas.style.cursor = "pointer";
+    paintAroundArray(game.darkBubbles);
+  } else if (isPointInsideAnyObjectInArray(game.flamethrowers, clickX, clickY)) {
+    canvas.style.cursor = "pointer";
+    paintAroundArray(game.flamethrowers);
+  } else if (isPointInsideAnyObjectInArray(game.machineguns, clickX, clickY)) {
+    canvas.style.cursor = "pointer";
+    paintAroundArray(game.machineguns);
+  } else if (isPointInsideAnyObjectInArray(game.healings, clickX, clickY)) {
+    canvas.style.cursor = "pointer";
+    paintAroundArray(game.healings);
+  } else if (isPointInsideAnyObjectInArray(game.bars, clickX, clickY)) {
+    canvas.style.cursor = "pointer";
+    paintAroundArray(game.bars);
+  } else if (isPointInsideAnyObjectInArray(game.bouncers, clickX, clickY)) {
+    canvas.style.cursor = "pointer";
+    paintAroundArray(game.bouncers);
+  } else if (isPointInsideAnyObjectInArray(game.spikes, clickX, clickY)) {
+    canvas.style.cursor = "pointer";
+    paintAroundArray(game.spikes);
+  } else if (isPointInsideAnyObjectInArray(game.stairs, clickX, clickY)) {
+    canvas.style.cursor = "pointer";
+    paintAroundArray(game.stairs);
+  } else if (isPointInsideAnyObjectInArray(game.auras, clickX, clickY)) {
+    canvas.style.cursor = "pointer";
+    paintAroundArray(game.auras);
+  } else if (isPointInsideAnyObjectInArray(game.boxes, clickX, clickY)) {
+    canvas.style.cursor = "pointer";
+    paintAroundArray(game.boxes);
+  } else if (isPointInsideAnyObjectInArray(game.blasters, clickX, clickY)) {
+    canvas.style.cursor = "pointer";
+    paintAroundArray(game.blasters);
+  } else if (isPointInsideAnyObjectInArray(game.levelBalls, clickX, clickY)) {
+    canvas.style.cursor = "pointer";
+    paintAroundArray(game.levelBalls);
+  } else if (isPointInsideAnyObjectInArray(game.gatlings, clickX, clickY)) {
+    canvas.style.cursor = "pointer";
+    paintAroundArray(game.gatlings);
+  } else if (isPointInsideAnyObjectInArray(game.cannons, clickX, clickY)) {
+    canvas.style.cursor = "pointer";
+    paintAroundArray(game.cannons);
+  } else if (isPointInsideAnyObjectInArray(game.levers, clickX, clickY)) {
+    canvas.style.cursor = "pointer";
+    paintAroundArray(game.levers);
+  } else if (isPointInsideAnyObjectInArray(game.coins, clickX, clickY)) {
+    canvas.style.cursor = "pointer";
+    paintAroundArray(game.coins);
+  } else if (isPointInsideAnyObjectInArray(game.player.life.healingDamages, clickX, clickY)) {
+    canvas.style.cursor = "pointer";
+    paintAroundArray(game.player.life.healingDamages);
+  } else if (isPointInsideAnyObjectInArray(game.hooks, clickX, clickY)) {
+    canvas.style.cursor = "pointer";
+    paintAroundArray(game.hooks);
+  } else if (isPointInsideAnyObjectInArray(game.steps, clickX, clickY)) {
+    canvas.style.cursor = "pointer";
+    paintAroundArray(game.steps);
+  } else if (isPointInsideAnyObjectInArray(game.electros, clickX, clickY)) {
+    canvas.style.cursor = "pointer";
+    paintAroundArray(game.electros);
+  } else if (isPointInsideAnyObjectInArray(game.swords, clickX, clickY)) {
+    canvas.style.cursor = "pointer";
+    paintAroundArray(game.swords);
+  } else if (isPointInsideAnyObjectInArray(game.chests, clickX, clickY)) {
+    canvas.style.cursor = "pointer";
+    paintAroundArray(game.chests);
+  } else if (isPointInsideAnyObjectInArray(game.miniBoses, clickX, clickY)) {
+    canvas.style.cursor = "pointer";
+    paintAroundArray(game.miniBoses);
+  } else if (isPointInsideAnyObjectInArray(game.player.bulletFireArray, clickX, clickY)) {
+    canvas.style.cursor = "pointer";
+    paintAroundArray(game.player.bulletFireArray);
+  } else if (isPointInsideAnyObjectInArray(game.player.bulletArray, clickX, clickY)) {
+    canvas.style.cursor = "pointer";
+    paintAroundArray(game.player.bulletArray);
+  } else if (isPointInsideAnyObjectInArray(game.player.bulletBarArray, clickX, clickY)) {
+    canvas.style.cursor = "pointer";
+    paintAroundArray(game.player.bulletBarArray);
+  } else if (isPointInsideAnyObjectInArray(game.player.bulletPlatformsArray, clickX, clickY)) {
+    canvas.style.cursor = "pointer";
+    paintAroundArray(game.player.bulletPlatformsArray);
+  } else if (isPointInsideAnyObjectInArray(game.player.hooksArray, clickX, clickY)) {
+    canvas.style.cursor = "pointer";
+    paintAroundArray(game.player.hooksArray);
+  } else if (isPointInsideAnyObjectInArray(game.player.swordArray, clickX, clickY)) {
+    canvas.style.cursor = "pointer";
+    paintAroundArray(game.player.swordArray);
+  } 
+}
+
+function isPointInsideAnyObjectInArray(objects, x, y) {
+  for (let i = 0; i < objects.length; i++) {
+    if (isPointInsideObject(objects[i], x, y)) {
+      return true;
+    } else {
+      canvas.style.cursor = "default"; // Cambiar el cursor de nuevo al valor predeterminado
+    }
+  }
+  // return false;
+}
+
+
+
+function paintAround(platforms) {
+  let boxInterval
+
+  boxInterval = setInterval(() => {
+  // Establecer el estilo del contorno
+  ctx.strokeStyle = 'rgba(255, 0, 0, 0.5)';
+  ctx.lineWidth = 4; // Línea más gruesa como contorno exterior
+  ctx.lineJoin = 'round'; // Esquinas redondeadas
+  ctx.strokeRect(platforms.x - 2, platforms.y - 2, platforms.w + 4, platforms.h + 4); // Contorno exterior
+
+  ctx.strokeStyle = 'rgba(255, 255, 255, 0.5)'; // Color blanco para la línea interior
+  ctx.lineWidth = 2; // Línea más delgada como contorno interior
+  ctx.strokeRect(platforms.x, platforms.y, platforms.w, platforms.h); // Contorno interior
+
+  platforms.forEach(platform => {
+    // Dibujar contorno doble para cada plataforma
+    ctx.strokeStyle = 'rgba(255, 0, 0, 0.5)';
+    ctx.lineWidth = 4; // Línea más gruesa como contorno exterior
+    ctx.lineJoin = 'round'; // Esquinas redondeadas
+    ctx.strokeRect(platform.x - 2, platform.y - 2, platform.w + 4, platform.h + 4); // Contorno exterior
+
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.5)'; // Color blanco para la línea interior
+    ctx.lineWidth = 2; // Línea más delgada como contorno interior
+    ctx.strokeRect(platform.x, platform.y, platform.w, platform.h); // Contorno interior
+  });
+  }, 1);
+  setTimeout(() => {
+    clearInterval(boxInterval);
+  }, 500);
+}
+
+function paintAroundArray(platforms) {
+  let boxInterval
+
+  boxInterval = setInterval(() => {
+  // Establecer el estilo del contorno
+  ctx.strokeStyle = 'rgba(255, 0, 0, 0.5)';
+  ctx.lineWidth = 4; // Línea más gruesa como contorno exterior
+  ctx.lineJoin = 'round'; // Esquinas redondeadas
+  ctx.strokeRect(platforms[0].x - 2, platforms[0].y - 2, platforms[0].w + 4, platforms[0].h + 4); // Contorno exterior
+
+  ctx.strokeStyle = 'rgba(255, 255, 255, 0.5)'; // Color blanco para la línea interior
+  ctx.lineWidth = 2; // Línea más delgada como contorno interior
+  ctx.strokeRect(platforms[0].x, platforms[0].y, platforms[0].w, platforms[0].h); // Contorno interior
+
+  platforms.forEach(platform => {
+    // Dibujar contorno doble para cada plataforma
+    ctx.strokeStyle = 'rgba(255, 0, 0, 0.5)';
+    ctx.lineWidth = 4; // Línea más gruesa como contorno exterior
+    ctx.lineJoin = 'round'; // Esquinas redondeadas
+    ctx.strokeRect(platform.x - 2, platform.y - 2, platform.w + 4, platform.h + 4); // Contorno exterior
+
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.5)'; // Color blanco para la línea interior
+    ctx.lineWidth = 2; // Línea más delgada como contorno interior
+    ctx.strokeRect(platform.x, platform.y, platform.w, platform.h); // Contorno interior
+  });
+  }, 1);
+  setTimeout(() => {
+    clearInterval(boxInterval);
+  }, 500);
+}
+
 
 function handleClick(event) {
   const rect = canvas.getBoundingClientRect();
@@ -273,6 +459,8 @@ function isPointInside(platforms, x, y) {
     );
   });
 }
+
+
 function sword(platforms, x, y) {
   return platforms.some((plat) => {
     return (

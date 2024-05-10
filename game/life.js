@@ -40,7 +40,6 @@ class Life {
         this.isHealing = false
       }
       this.ctx.drawImage(this.img, place, this.y, this.w, this.h);
-      
     }
     if (this.total % 1 !== 0) {
       this.ctx.drawImage(this.imgHalf, place + 30, this.y, this.w, this.h);

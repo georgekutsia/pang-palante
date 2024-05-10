@@ -337,7 +337,7 @@ padding: 15px 15px;
 #sortable-list{
 list-style: none;
 padding: 0px;
-display: block;
+display: none;
 margin: 5px;
 cursor: grab;
 text-indent: 10px;

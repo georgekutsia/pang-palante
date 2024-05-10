@@ -4,11 +4,11 @@ function positioningButtons(button) {
   if (screenWidth >= 2090) {
     leftPosition = "12.5vw";
   } else if (screenWidth >= 1801) {
-    leftPosition = "8.2vw";
+    leftPosition = "4.2vw";
   } else if (screenWidth >= 1501) {
-    leftPosition = "3.2vw";
-  } else if (screenWidth >= 1301) {
     leftPosition = "2.2vw";
+  } else if (screenWidth >= 1301) {
+    leftPosition = "1.2vw";
   } else {
     leftPosition = ".1vw";
   }
