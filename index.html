@@ -108,9 +108,9 @@
   <div id="bug-list" draggable="true" ondragstart="dragStart(event)">
     <button onclick="showList()">Bugs</button>
     <ul id="sortable-list">
-      <li>el objeto especial y su sonido dura mucho</li>
-      <li>el sonido cuando el personaje está atrapado</li>
-      <li>Volumen de rebote según tamaño</li>
+      <li>Sonidos: personaje cuando está atrapado, runners todos los sonidos, </li>
+      <li>En el boss los runners no reciben daño </li>
+      <li>Introducir los runners de alguna forma </li>
       <li>al recoger items aparece el primer frame de la animación arriba</li>
       <li>indicar de alguna forma un item importante para pasar de nivel, como en level6 que reaparecen los ganchos
         animacion para cuando se rompan los cañones</li>
@@ -120,23 +120,23 @@
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.14.0/Sortable.min.js"></script>
   <script>
-    var sortable = new Sortable(document.getElementById('sortable-list'), {
-      animation: 150,
-      ghostClass: 'sortable-ghost',
-      onEnd: function (evt) {
-        saveListOrder();
-      }
-    });
-  
-    function saveListOrder() {
-      var items = document.getElementById('sortable-list').querySelectorAll('li');
-      var order = [];
-      items.forEach(function(item) {
-        order.push(item.textContent);
-      });
-      localStorage.setItem('sortableListOrder', JSON.stringify(order));
-    }
-  
+var sortable = new Sortable(document.getElementById('sortable-list'), {
+  animation: 150,
+  ghostClass: 'sortable-ghost',
+  onEnd: function (evt) {
+    saveListOrder();
+  }
+});
+
+function saveListOrder() {
+  var items = document.getElementById('sortable-list').querySelectorAll('li');
+  var order = [];
+  items.forEach(function(item) {
+    order.push(item.textContent);
+  });
+  localStorage.setItem('sortableListOrder', JSON.stringify(order));
+}
+
     function loadListOrder() {
       var order = JSON.parse(localStorage.getItem('sortableListOrder'));
       if (order) {
@@ -152,25 +152,6 @@
   
     // Load list order when the page loads
     loadListOrder();
-  
-    // Add event listeners to handle double-click and single-click
-    var listItems = document.querySelectorAll('#sortable-list li');
-    listItems.forEach(function(item) {
-      item.addEventListener('click', function(event) {
-        if (!event.detail || event.detail === 1) {
-          sortable.option("disabled", false);
-        }
-      });
-      item.addEventListener('dblclick', function(event) {
-        sortable.option("disabled", true);
-        this.setAttribute('contenteditable', 'true');
-        this.focus();
-      });
-      item.addEventListener('blur', function() {
-        this.removeAttribute('contenteditable');
-        saveListOrder(); // Save list order when blur event occurs (focus is lost)
-      });
-    });
   </script>
 
     <canvas id="canvas" width="1400vw" height="670vh"></canvas>
@@ -281,6 +262,7 @@
         <button data-bs-toggle="tooltip" data-bs-placement="top"  data-bs-html="true" data-bs-title="<span class='fw-bold text-info'>Pulso cargado</span>  <br/>Aumenta la duración de electrocución del escudo eléctrico 1 segundo adicional y aumenta en 10 la carga"  class="shop-btns" id="shop-electricShield"> </i> <span id="electro-text"><i style="font-size: calc(8px + 0.4vw)" class="fa-solid fa-bolt-lightning"></i> </span> 45 <i class="fa-solid fa-coins"></i> </button>
         <button data-bs-toggle="tooltip" data-bs-placement="top"  data-bs-html="true" data-bs-title="<span class='fw-bold text-info'>Recarga eléctrica</span>  <br/> Adquirir 10 cargas eléctricas" class="shop-btns" id="shop-electro">30<i class="icons-size1 fa-solid fa-coins"></i> <i class="icons-size2 fa-solid fa-bolt-lightning"></i></button>
         <button data-bs-toggle="tooltip" data-bs-placement="top"  data-bs-html="true" data-bs-title="<span class='fw-bold text-info'>Cañones Megablaster</span>  <br/> Aumenta la capacidad de disparo de tu SuperMegablaster en 3 llamas adicionales" class="shop-btns" id="shop-megablasterAmount"><i  style="font-size: calc(8px + 0.6vw)" class="fa-solid fa-fire-burner"></i> 75 <i class="icons-size1 fa-solid fa-coins"></i> </button>
+        <button data-bs-toggle="tooltip" data-bs-placement="top"  data-bs-html="true" data-bs-title="<span class='fw-bold text-info'>Detector de objetos</span>  <br/> Una opción para que al pasar el puntero del ratón sobre los objetos del juego, te destaque los que son explorables. Gratis" class="shop-btns" id="shop-detection"> <i  style="font-size: calc(8px + 0.6vw)" class="fa-solid fa-eye-slash"></i> </button>
       </div>
 
     </div>

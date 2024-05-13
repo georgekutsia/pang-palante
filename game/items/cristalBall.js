@@ -71,6 +71,7 @@ class CristalBall {
     this.y += this.vy;
     this.x += this.vx;
     if(this.x < -30 || this.x >= CTXW + 20){
+    this.itemSound.volume = 0;    
       this.dispose = false;
     }    
     
@@ -84,6 +85,7 @@ class CristalBall {
         this.img.frame = 0;
       } else {
         this.gainingSpecialAmount()
+    this.itemSound.volume = 0;    
         this.dispose = false;
       }
     }

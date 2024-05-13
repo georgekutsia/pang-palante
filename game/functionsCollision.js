@@ -22,16 +22,16 @@ function checkBubbleCollision(bubbles, player, puffBubbles, ctx, platforms, boun
               if(bubble.w >= 90){
                 player.x = (bubble.x + bubble.w/2) - player.w/2;
                 player.y = (bubble.y + bubble.h/2) - player.h/2;
-                   player.loseLife(0.003, false); //el daño al jugador se le hace según lo que marca el daño de la burbuja. a burbuja más pequeña, menos daño
+                player.loseLife(0.003, false); //el daño al jugador se le hace según lo que marca el daño de la burbuja. a burbuja más pequeña, menos daño
               } else {
                  bubble.vy = -bubbleSpeedY; // rebota encima del jugador haciéndole daño
-                  player.loseLife(bubble.damage, true); //el daño al jugador se le hace según lo que marca el daño de la burbuja. a burbuja más pequeña, menos daño
+                bubbleSplash2.play();
+                player.loseLife(bubble.damage, true); //el daño al jugador se le hace según lo que marca el daño de la burbuja. a burbuja más pequeña, menos daño
               }
             }
           }
       }
       player.wasNotDamaged = false;
-      bubbleSplash2.play();
     } else return true;
   });
 
@@ -398,7 +398,7 @@ function bossFireCollision (miniBoses, object){
             }
           }
           if (platform.isBouncable) {
-            darkBubbleBounceSound.play();
+            bubble.darkBubbleBounceSound.play();
             bounceFromObstacles(bubble, platform);
           } else if (!platform.isBouncable) {
             bubble.y = platform.y - bubble.h;
@@ -413,7 +413,7 @@ function bossFireCollision (miniBoses, object){
    darkBubbles.forEach((bubble) => {//bouncer con darkBubble
      bouncers.forEach((bouncer) => {
         if (bouncer.collides(bubble)) {
-          darkBubbleBounceSound.play();
+          bubble.darkBubbleBounceSound.play();
           bounceFromObstacles(bubble, bouncer);
         } else return true;
       });

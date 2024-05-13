@@ -533,6 +533,18 @@ shopMegablasterAmount$$.addEventListener("click", function(){
     shopMegablasterAmount$$.innerHTML = ` <i  style="font-size: calc(8px + 0.6vw)" class="fa-solid fa-fire-burner"></i> MAX </i> `
   } 
 })
+shopDetection$$.addEventListener("click", function(){
+  if(detectionActivated === false){
+  faShakeWhenBuy(this);
+  detectionActivated = true;
+    game.player.megaFireBlasterAmount += 30
+    shopDetection$$.innerHTML = ` <i  style="font-size: calc(8px + 0.6vw)" class="fa-solid fa-eye"></i> `
+  } else if(detectionActivated ===true){
+    detectionActivated = false;
+    game.player.megaFireBlasterAmount += 30
+    shopDetection$$.innerHTML = ` <i  style="font-size: calc(8px + 0.6vw)" class="fa-solid fa-eye-slash"></i> `
+  }
+})
 
 
 shopElectricShield$$.addEventListener("click", function(){

@@ -1,17 +1,22 @@
 canvas.addEventListener('click', handleClick);
 canvas.addEventListener('mousemove', handleHover);
+
 function handleHover(event) {
   const rect = canvas.getBoundingClientRect();
   const clickX = event.clientX - rect.left;
   const clickY = event.clientY - rect.top;
+if(detectionActivated){
 
-  if (isPointInsideObject(game.points, clickX, clickY)) {
+  if (isPointInsideObject(game.points, clickX, clickY) ) {
     canvas.style.cursor = "pointer";
     paintAround(game.points);
   } else if (isPointInsideObject(game.player.life, clickX, clickY)) {
     canvas.style.cursor = "pointer";
     paintAround(game.player.life);
   } else if (isPointInsideObject(game.player, clickX, clickY)) {
+    canvas.style.cursor = "pointer";
+    paintAround(game.player);
+  } else if (isPointInsideObject(game.cadenaAnim, clickX, clickY)) {
     canvas.style.cursor = "pointer";
     paintAround(game.player);
   } else if (isPointInsideAnyObjectInArray(game.platforms, clickX, clickY)) {
@@ -26,10 +31,22 @@ function handleHover(event) {
   } else if (isPointInsideAnyObjectInArray(game.flamethrowers, clickX, clickY)) {
     canvas.style.cursor = "pointer";
     paintAroundArray(game.flamethrowers);
+  } else if (isPointInsideAnyObjectInArray(game.coins, clickX, clickY)) {
+    canvas.style.cursor = "pointer";
+    paintAroundArray(game.coins);
+  }  else if (isPointInsideAnyObjectInArray(game.hooks, clickX, clickY)) {
+    canvas.style.cursor = "pointer";
+    paintAroundArray(game.hooks);
+  }  else if (isPointInsideAnyObjectInArray(game.chests, clickX, clickY)) {
+    canvas.style.cursor = "pointer";
+    paintAroundArray(game.chests);
   } else if (isPointInsideAnyObjectInArray(game.machineguns, clickX, clickY)) {
     canvas.style.cursor = "pointer";
     paintAroundArray(game.machineguns);
-  } else if (isPointInsideAnyObjectInArray(game.healings, clickX, clickY)) {
+  } else if (isPointInsideAnyObjectInArray(game.steps, clickX, clickY)) {
+    canvas.style.cursor = "pointer";
+    paintAroundArray(game.steps);
+  }  else if (isPointInsideAnyObjectInArray(game.healings, clickX, clickY)) {
     canvas.style.cursor = "pointer";
     paintAroundArray(game.healings);
   } else if (isPointInsideAnyObjectInArray(game.bars, clickX, clickY)) {
@@ -59,33 +76,24 @@ function handleHover(event) {
   } else if (isPointInsideAnyObjectInArray(game.gatlings, clickX, clickY)) {
     canvas.style.cursor = "pointer";
     paintAroundArray(game.gatlings);
+  } else if (isPointInsideAnyObjectInArray(game.gatlings.bubbleArray, clickX, clickY)) {
+    canvas.style.cursor = "pointer";
+    paintAroundArray(game.gatlings.bubbleArray);
   } else if (isPointInsideAnyObjectInArray(game.cannons, clickX, clickY)) {
     canvas.style.cursor = "pointer";
     paintAroundArray(game.cannons);
   } else if (isPointInsideAnyObjectInArray(game.levers, clickX, clickY)) {
     canvas.style.cursor = "pointer";
     paintAroundArray(game.levers);
-  } else if (isPointInsideAnyObjectInArray(game.coins, clickX, clickY)) {
-    canvas.style.cursor = "pointer";
-    paintAroundArray(game.coins);
   } else if (isPointInsideAnyObjectInArray(game.player.life.healingDamages, clickX, clickY)) {
     canvas.style.cursor = "pointer";
     paintAroundArray(game.player.life.healingDamages);
-  } else if (isPointInsideAnyObjectInArray(game.hooks, clickX, clickY)) {
-    canvas.style.cursor = "pointer";
-    paintAroundArray(game.hooks);
-  } else if (isPointInsideAnyObjectInArray(game.steps, clickX, clickY)) {
-    canvas.style.cursor = "pointer";
-    paintAroundArray(game.steps);
-  } else if (isPointInsideAnyObjectInArray(game.electros, clickX, clickY)) {
+  }else if (isPointInsideAnyObjectInArray(game.electros, clickX, clickY)) {
     canvas.style.cursor = "pointer";
     paintAroundArray(game.electros);
   } else if (isPointInsideAnyObjectInArray(game.swords, clickX, clickY)) {
     canvas.style.cursor = "pointer";
     paintAroundArray(game.swords);
-  } else if (isPointInsideAnyObjectInArray(game.chests, clickX, clickY)) {
-    canvas.style.cursor = "pointer";
-    paintAroundArray(game.chests);
   } else if (isPointInsideAnyObjectInArray(game.miniBoses, clickX, clickY)) {
     canvas.style.cursor = "pointer";
     paintAroundArray(game.miniBoses);
@@ -109,6 +117,7 @@ function handleHover(event) {
     paintAroundArray(game.player.swordArray);
   } 
 }
+}
 
 function isPointInsideAnyObjectInArray(objects, x, y) {
   for (let i = 0; i < objects.length; i++) {
@@ -128,18 +137,18 @@ function paintAround(platforms) {
 
   boxInterval = setInterval(() => {
   // Establecer el estilo del contorno
-  ctx.strokeStyle = 'rgba(255, 0, 0, 0.5)';
+  ctx.strokeStyle = 'rgba(255, 0, 0, 1)';
   ctx.lineWidth = 4; // Línea más gruesa como contorno exterior
   ctx.lineJoin = 'round'; // Esquinas redondeadas
   ctx.strokeRect(platforms.x - 2, platforms.y - 2, platforms.w + 4, platforms.h + 4); // Contorno exterior
 
-  ctx.strokeStyle = 'rgba(255, 255, 255, 0.5)'; // Color blanco para la línea interior
+  ctx.strokeStyle = 'rgba(255, 255, 255, 1)'; // Color blanco para la línea interior
   ctx.lineWidth = 2; // Línea más delgada como contorno interior
   ctx.strokeRect(platforms.x, platforms.y, platforms.w, platforms.h); // Contorno interior
 
   platforms.forEach(platform => {
     // Dibujar contorno doble para cada plataforma
-    ctx.strokeStyle = 'rgba(255, 0, 0, 0.5)';
+    ctx.strokeStyle = 'rgba(255, 0, 0, 1)';
     ctx.lineWidth = 4; // Línea más gruesa como contorno exterior
     ctx.lineJoin = 'round'; // Esquinas redondeadas
     ctx.strokeRect(platform.x - 2, platform.y - 2, platform.w + 4, platform.h + 4); // Contorno exterior
@@ -159,23 +168,23 @@ function paintAroundArray(platforms) {
 
   boxInterval = setInterval(() => {
   // Establecer el estilo del contorno
-  ctx.strokeStyle = 'rgba(255, 0, 0, 0.5)';
+  ctx.strokeStyle = 'rgba(255, 0, 0, 1)';
   ctx.lineWidth = 4; // Línea más gruesa como contorno exterior
   ctx.lineJoin = 'round'; // Esquinas redondeadas
   ctx.strokeRect(platforms[0].x - 2, platforms[0].y - 2, platforms[0].w + 4, platforms[0].h + 4); // Contorno exterior
 
-  ctx.strokeStyle = 'rgba(255, 255, 255, 0.5)'; // Color blanco para la línea interior
+  ctx.strokeStyle = 'rgba(255, 255, 255, 1)'; // Color blanco para la línea interior
   ctx.lineWidth = 2; // Línea más delgada como contorno interior
   ctx.strokeRect(platforms[0].x, platforms[0].y, platforms[0].w, platforms[0].h); // Contorno interior
 
   platforms.forEach(platform => {
     // Dibujar contorno doble para cada plataforma
-    ctx.strokeStyle = 'rgba(255, 0, 0, 0.5)';
+    ctx.strokeStyle = 'rgba(255, 0, 0, 1)';
     ctx.lineWidth = 4; // Línea más gruesa como contorno exterior
     ctx.lineJoin = 'round'; // Esquinas redondeadas
     ctx.strokeRect(platform.x - 2, platform.y - 2, platform.w + 4, platform.h + 4); // Contorno exterior
 
-    ctx.strokeStyle = 'rgba(255, 255, 255, 0.5)'; // Color blanco para la línea interior
+    ctx.strokeStyle = 'rgba(255, 255, 255, 1)'; // Color blanco para la línea interior
     ctx.lineWidth = 2; // Línea más delgada como contorno interior
     ctx.strokeRect(platform.x, platform.y, platform.w, platform.h); // Contorno interior
   });
@@ -199,6 +208,12 @@ function handleClick(event) {
   }
   if (isPointInsideObject( game.player.life, clickX, clickY, )) {
     showModal(`Salud`, `&nbsp&nbsp Si pierdes toda la vida, pierdes el juego. Como máximo puedes tener ${maxLife} puntos de vida, aunque en la tienda puedes aumentar la capacidad. Puedes obtener vida con algunos objetos y a 10 o más puntos de vida, mejoran tus habilidades físicas. <br/>&nbsp&nbsp  Si aciertas ${amountOfBullsEyeForHealth} disparos seguidos con las Burbalas del arma básica sobre las burbujas, recuperas medio punto de salud. Si fallas, se reinicia el contador. Puedes romper cajas y plataformas, no afecta al conteo total.  <br/>&nbsp&nbsp  Si pasa de nivel sin haber fallado ningún disparo, recuperas 1 punto de vida.`).then(() => {
+      game.start();
+    });
+    return;
+  }
+  if (isPointInsideObject( game.cadenaAnim, clickX, clickY, )) {
+    showModal(`BurBar`, `&nbsp&nbsp Cargas de impacto de Burbalas. A 4 cargas, obtienes 1 munición de barra.`).then(() => {
       game.start();
     });
     return;

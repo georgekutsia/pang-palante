@@ -6,7 +6,6 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 0;
 }
 #canvas {
   margin: 0 auto; /* Esto centra el canvas horizontalmente */

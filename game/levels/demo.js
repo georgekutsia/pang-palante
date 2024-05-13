@@ -254,47 +254,47 @@ function itemsDemo(ctx, stairs, bubbles, darkBubbles, spikes, gatlings, hooks, f
 
     let che = new Chest(ctx, 800, CTXH-250);
     chests.push(che)
-    // let swa = new Sword(ctx, 800, 300)
-    // swords.push(swa)
-    const aura = new Aura(ctx, 225, CTXH-50)
-    auras.push(aura)
-    let stair = new Stair(ctx, 950, CTXH - 140, 70, 140)
-    stairs.push(stair)
-    let bubbb =  new Bubble(ctx, 190, 20, 26, 26, 3, 2)
-    bubbles.push(bubbb)
-    // let darkB =  new DarkBubble(ctx, 10, 20, 90, 90, 3, 2)
-    // darkBubbles.push(darkB)
-    let spa =  new Spikes(ctx, 10, CTXH-40)
-    spikes.push(spa)
-    let gat =  new BubbleGatling(ctx)
-    gatlings.push(gat)
-    let hoo =  new Hook(ctx, 10, CTXH - 150)
-    hooks.push(hoo)
-    let lan =  new Flamethrower(ctx, 35, CTXH - 150)
-    let lan1 =  new Flamethrower(ctx, 65, CTXH - 150)
-    let lan2 =  new Flamethrower(ctx, 95, CTXH - 150)
-    let lan3 =  new Flamethrower(ctx, 125, CTXH - 150)
-    let lan4 =  new Flamethrower(ctx, 155, CTXH - 150)
-    flamethrowers.push(lan, lan1, lan2, lan3, lan4)
-    let ba =  new Bars(ctx, 75, CTXH - 60, 10, 30)
-    bars.push(ba)
-    let box =  new Box(ctx, 500, 30, 3)
-    boxes.push(box)
-    let blast = new MegaFireBlaster(ctx, 640, CTXH-190)
-    blasters.push(blast);  
-    let electro =  new Electro(ctx, 150, CTXH - 50, 10, 30)
-    electros.push(electro)
-    let coin =  new Coins(ctx, CTXW-150, CTXH - 150, 30, 30, 3)
-    let coin1 =  new Coins(ctx, CTXW-110, CTXH - 150, 30, 30, 3)
-    let coin2 =  new Coins(ctx, CTXW-60, CTXH - 150, 50, 50, 10)
-    coins.push(coin, coin1, coin2)
-    let heal =  new Healing(ctx, CTXW-250, CTXH - 200,)
-    let heal1 =  new Healing(ctx, CTXW-290, CTXH - 200,)
-    let heal2 =  new Healing(ctx, CTXW-330, CTXH - 200,)
-    healings.push(heal, heal1, heal2)
+    // let swa = new Sword(ctx, 800, 300);
+    // swords.push(swa);
+    const aura = new Aura(ctx, 225, CTXH-50);
+    auras.push(aura);
+    let stair = new Stair(ctx, 950, CTXH - 140, 70, 140);
+    stairs.push(stair);
+    let bubbb =  new Bubble(ctx, 190, 20, 150, 150, 3, 2);
+    bubbles.push(bubbb);
+    // let darkB =  new DarkBubble(ctx, 10, 20, 90, 90, 3, 2);
+    // darkBubbles.push(darkB);
+    let spa =  new Spikes(ctx, 10, CTXH-40);
+    spikes.push(spa);
+    let gat =  new BubbleGatling(ctx);
+    gatlings.push(gat);
+    let hoo =  new Hook(ctx, 10, CTXH - 150);
+    hooks.push(hoo);
+    let lan =  new Flamethrower(ctx, 35, CTXH - 150);
+    let lan1 =  new Flamethrower(ctx, 65, CTXH - 150);
+    let lan2 =  new Flamethrower(ctx, 95, CTXH - 150);
+    let lan3 =  new Flamethrower(ctx, 125, CTXH - 150);
+    let lan4 =  new Flamethrower(ctx, 155, CTXH - 150);
+    flamethrowers.push(lan, lan1, lan2, lan3, lan4);
+    let ba =  new Bars(ctx, 75, CTXH - 60, 10, 30);
+    bars.push(ba);
+    let box =  new Box(ctx, 500, 30, 3);
+    boxes.push(box);
+    let blast = new MegaFireBlaster(ctx, 640, CTXH-190);
+    blasters.push(blast);;  
+    let electro =  new Electro(ctx, 150, CTXH - 50, 10, 30);
+    electros.push(electro);
+    let coin =  new Coins(ctx, CTXW-150, CTXH - 150, 30, 30, 3);
+    let coin1 =  new Coins(ctx, CTXW-110, CTXH - 150, 30, 30, 3);
+    let coin2 =  new Coins(ctx, CTXW-60, CTXH - 150, 50, 50, 10);
+    coins.push(coin, coin1, coin2);
+    let heal =  new Healing(ctx, CTXW-250, CTXH - 200,);
+    let heal1 =  new Healing(ctx, CTXW-290, CTXH - 200,);
+    let heal2 =  new Healing(ctx, CTXW-330, CTXH - 200,);
+    healings.push(heal, heal1, heal2);
 
-    let ste = new Steps(ctx, 350, 600)
-    steps.push(ste)
+    let ste = new Steps(ctx, 350, 600);
+    steps.push(ste);
 }
 
 

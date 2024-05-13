@@ -22,7 +22,7 @@ function addBubble15(ctx, bubbles){
 
 
   function addDarkBubble15(ctx, darkBubbles){
-      let bu = new DarkBubble(ctx, 500, 290, 20, 20, 0.5, 0.3, 0.000001, 0, true, true)
+      let bu = new DarkBubble(ctx, 500, 590, 20, 20, 0.5, 0.3, 0.000001, 0, true, true)
       darkBubbles.push(bu)
   }
 

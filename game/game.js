@@ -64,23 +64,13 @@ class Game {
   start() {
     if(!this.gameStarted){
       if (GAMELEVEL === 1) {
-        // addMiniboss1(this.ctx, this.levelBalls);
-        // miniBossTalk1.play();
-        //   let bo = new MiniBoss1(this.ctx, CTXW - 340, -50, CTXW/4, CTXW/4, 0, 0, 95, false, true, false, "/public/Imagenes/minions/MiniBoss1.webp");
-        //   this.miniBoses.push(bo);
-        //   minibossArrivingShip.play();
-        //   this.dispached = false;
-
-        // level16( this.ctx, this.bubbles, this.levelBalls, this.platforms, this.healings, this.auras,  this.hooks, this.blasters, this.electros, this.coins, this.cannons);
-        level15( this.ctx, this.bubbles, this.levelBalls, this.darkBubbles, this.steps, this.platforms, this.healings, this.coins);
-
-        // inftroGame1();
-        // timeouts.push(setTimeout(() => {
-        // level1(this.ctx, this.bubbles, this.platforms, this.levelBalls, this.boxes)
-        // }, 20000));
-        // timeouts.push(setTimeout(() => {
-        //   addBubble1(this.ctx, this.bubbles)
-        // }, 30000));
+        inftroGame1();
+        timeouts.push(setTimeout(() => {
+        level1(this.ctx, this.bubbles, this.platforms, this.levelBalls, this.boxes)
+        }, 20000));
+        timeouts.push(setTimeout(() => {
+          addBubble1(this.ctx, this.bubbles)
+        }, 30000));
       }
       if(GAMELEVEL === 100) {
         levelInfinite( this.ctx, this.bubbles, this.platforms, this.bouncers, this.spikes, this.stairs, this.flamethrowers, this.machineguns, this.healings, this.auras, this.boxes, this.blasters, this.levelBalls, this.gatlings, this.darkBubbles,)
@@ -174,6 +164,8 @@ class Game {
 
   draw() {
     positioningButtons(start$$)
+    positioningButtons(startDemo$$)
+    positioningButtons(startInfinite$$)
     positioningButtons(restart$$)
     positioningButtons(retry$$)
     positioningButtons(instruccionesBtn$$)
@@ -1093,8 +1085,8 @@ if( totalShootsPerLevel === totalShootsPerLevelSucces ){
 
   checkLevelsState(){
     if(GAMELEVEL <= 1986){
-      let randomForSpecialItem = getRandomNumber(3000);
-      if(randomForSpecialItem === 1){
+      let randomForSpecialItem = getRandomNumber(5000);
+      if(randomForSpecialItem === 1 && this.cristalBalls.length <= 0){
         specialItems(this.ctx, this.cristalBalls)
       }
     }

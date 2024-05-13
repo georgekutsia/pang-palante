@@ -37,8 +37,6 @@ class Bubble { //posX posY, ancho, alto, velX, velY, gravedad, buleano si hay gr
     this.bubbleBounceSound.volume = this.bounceVolume;  
   }
   draw() {
-    // Dibujar el círculo detrás de la burbuja
-    console.log(this.w)
     this.ctx.beginPath();
     this.ctx.arc(this.x + this.w / 2, this.y + this.h / 2, this.w / 2, 0, 2 * Math.PI);
     this.ctx.fillStyle = this.randomColor;

@@ -14,10 +14,14 @@ class DarkBubble {
     this.damage = damage || 2; // daño especificado o 1
     this.img = new Image();   //crear nueva imágene ne canvas
     this.img.src =  "../public/Imagenes/darkBubble1.png";  //definir cual es la nueva imagen
-
+    this.bounceVolume = 0.1;
+    this.darkBubbleBounceSound = new Audio("../public/sounds/darkBallBounce.mp3") 
   }
   draw() {
     // Dibujar el círculo detrás de la burbuja
+    this.bounceVolume = this.w/800;
+    console.log("vol", this.bounceVolume); 
+    this.darkBubbleBounceSound.volume = this.bounceVolume;  
     this.ctx.beginPath();
     this.ctx.arc(this.x + this.w / 2, this.y + this.h / 2, this.w / 2, 0, 2 * Math.PI);
     this.ctx.fill();
@@ -46,15 +50,15 @@ class DarkBubble {
       this.g = 0.2;
     }
     if (this.y + this.h >= this.ctx.canvas.height ){
-      darkBubbleBounceSound.play()//todo --paso 3 llamar a .play() para invocar el sonido donde sea necesario
+      this.darkBubbleBounceSound.play()//todo --paso 3 llamar a .play() para invocar el sonido donde sea necesario
       this.vy = -bubbleSpeedY; 
     }
     if(this.x + this.w >= this.ctx.canvas.width){
-      darkBubbleBounceSound.play()//todo --paso 3 llamar a .play() para invocar el sonido donde sea necesario
+      this.darkBubbleBounceSound.play()//todo --paso 3 llamar a .play() para invocar el sonido donde sea necesario
       this.vx = -bubbleSpeedX;
     }
     if(this.x <= 0){
-      darkBubbleBounceSound.play()//todo --paso 3 llamar a .play() para invocar el sonido donde sea necesario
+      this.darkBubbleBounceSound.play()//todo --paso 3 llamar a .play() para invocar el sonido donde sea necesario
       this.vx = bubbleSpeedX;
     }
 

@@ -69,6 +69,7 @@ let shopShootLifeActivation$$ = document.getElementById("shop-shootLife-activati
 let shopShootBarActivation$$ = document.getElementById("shop-shootBar-activation")
 let shopShootTimeActivation$$ = document.getElementById("shop-shootTime-activation")
 let shopShootGatlingActivation$$ = document.getElementById("shop-shootGatling-activation")
+let shopDetection$$ = document.getElementById("shop-detection")
 let shopRetry$$ = document.getElementById("shop-retry")
 let bulletBlock1$$ = document.getElementById("bullet-block1")
 let bulletBlock2$$ = document.getElementById("bullet-block2")

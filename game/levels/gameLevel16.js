@@ -15,16 +15,16 @@ function levelBallItem16(ctx, levelBalls) {
 function addBubble16(ctx, bubbles){ 
     const bubble1 = new Bubble(ctx, 10, 220, 35, 35, 14, 0.0008, 0.000017, true, 40000)
     const bubble2 = new Bubble(ctx, CTXW -75, 350, 35, 35, 14, 0.0008, 0.000017, true, 40000)
-    const bubble3 = new Bubble(ctx, 10, 470, 35, 35, 14, 0.0008, 0.000017, true, 40000)
+    const bubble3 = new Bubble(ctx, 10, 450, 35, 35, 14, 0.0008, 0.000017, true, 40000)
     bubbles.push(bubble1, bubble2, bubble3);
 }
 
 
   function addCannon16(ctx, cannons){
-    let can1 = new BubbleCannon(ctx, 0, 120, 30, 0.00001, 0, 0, 0, 0, 0, 20, 12500)
-    let can2 = new BubbleCannon(ctx, 0, 240, 10, 0.00001, 0, 0, 0, 0, 0, 40, 12500)
-    let can3 = new BubbleCannon(ctx, 0, 350, 10, 0.00001, 0, 0, 0, 0, 0, 60, 12500)
-    let can4 = new BubbleCannon(ctx, 0, 450, 10, 0.00001, 0, 0, 0, 0, 0, 80, 12500)
+    let can1 = new BubbleCannon(ctx, 0, 100, 30, 0.00001, 0.000001, 0, 5, 0, 0, 20, 12500)
+    let can2 = new BubbleCannon(ctx, 0, 250, 10, 0.00001, 0.000001, 0, 5, 0, 0, 40, 12500)
+    let can3 = new BubbleCannon(ctx, 0, 370, 10, 0.00001, 0.000001, 0, 5, 0, 0, 60, 12500)
+    let can4 = new BubbleCannon(ctx, 0, 480, 10, 0.00001, 0.000001, 0, 5, 0, 0, 80, 12500)
     cannons.push(can1, can2, can3, can4)
   }
 

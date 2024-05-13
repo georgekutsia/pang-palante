@@ -104,9 +104,10 @@ let fireDesaceleration = false;
 let bulletCollidesFireActive = false;
 let itemTakenImages = "../public/Imagenes/itemTakenSparkle.png";
 let healingDamageIsActivated = false;
-let barDamageIsActivated = true;
+let barDamageIsActivated = false;
 let amountOfDamageForBar = 0;
 let darkBubbleCollisionBlind = false;
+let detectionActivated = false;
 
 const mapArray = [
   "/public/Imagenes/background/map1.webp",
