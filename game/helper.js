@@ -1,6 +1,8 @@
 function infoIntro1(){
+  if(demoStartedSoNoImage === false){
+    demoStartedSoNoImage = true;
     infoPlayer1$$.style.display = "block"
-    saltarInstrucciones(infoIntro1)
+    saltarInstrucciones(infoIntro1);
     timeouts.push(setTimeout(() => {
       infoPlayer1$$.style.display = "none"
       infoPlayer2$$.style.display = "block"
@@ -9,14 +11,18 @@ function infoIntro1(){
         demoFunctions.mostrarVariosTextosPocoAPoco1()
       }, 6000));
     }, 4500));
+  } else {
+    demoFunctions.mostrarVariosTextosPocoAPoco1()
+
+  }
   }
 
 
 
-function inftroGame1(){
+function introGame(){
   if(GAMELEVEL === 1){
   demoFriend4$$.style.display = "block"
-  saltarInstrucciones(inftroGame1)
+  saltarInstrucciones(introGame)
   timeouts.push(setTimeout(() => {
     demoFriend4$$.style.opacity = "1"
   }, 100));
@@ -27,7 +33,6 @@ function inftroGame1(){
   timeouts.push(setTimeout(() => {
   boss1$$.style.opacity = "1"
   }, 200));
-  
   }, 2000));
   timeouts.push(setTimeout(() => {
     document.getElementById("gameIntro-text1").style.display = "none";
@@ -81,7 +86,6 @@ function inftroGame1(){
       }, 500));
     }, 500));
   }, 13000));
-
   timeouts.push(setTimeout(() => {
   demoFriend4$$.style.opacity = "0"
   demoFriend5$$.style.display = "block"
@@ -123,7 +127,9 @@ function inftroGame1(){
             demoFriend3$$.style.opacity = "0";
             document.getElementById("gameIntro-text7").style.display = "none";
             timeouts.push(setTimeout(() => {
-              demoFriend3$$.style.display = "none";
+            demoFriend3$$.style.display = "none";
+            btnInstruccionesSaltar$$.style.display = "none";
+            timeouts = [];
             }, 1000));
           }, 3000));
         }, 4500));

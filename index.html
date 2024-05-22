@@ -108,7 +108,8 @@
   <div id="bug-list" draggable="true" ondragstart="dragStart(event)">
     <button onclick="showList()">Bugs</button>
     <ul id="sortable-list">
-      <li>Sonidos: personaje cuando está atrapado, runners todos los sonidos, </li>
+      <li>Arreglar el entrenamiento. Salta fases y hace cosas raras</li>
+      <li>Sonidos: personaje cuando está atrapado, runners todos los sonidos, el pop de la burbuja de runner</li>
       <li>En el boss los runners no reciben daño </li>
       <li>Introducir los runners de alguna forma </li>
       <li>al recoger items aparece el primer frame de la animación arriba</li>
@@ -120,13 +121,13 @@
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.14.0/Sortable.min.js"></script>
   <script>
-var sortable = new Sortable(document.getElementById('sortable-list'), {
-  animation: 150,
-  ghostClass: 'sortable-ghost',
-  onEnd: function (evt) {
-    saveListOrder();
-  }
-});
+    var sortable = new Sortable(document.getElementById('sortable-list'), {
+      animation: 150,
+      ghostClass: 'sortable-ghost',
+      onEnd: function (evt) {
+        saveListOrder();
+      }
+    });
 
 function saveListOrder() {
   var items = document.getElementById('sortable-list').querySelectorAll('li');

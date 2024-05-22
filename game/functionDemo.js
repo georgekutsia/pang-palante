@@ -18,6 +18,7 @@ function textoPianoPiano(cualquierIdDeTexto) {
 const timeouts = [];
 
 function saltarInstrucciones(estaFuncion){
+
   const clearAllTimeouts = () => {
       timeouts.forEach(timeout => clearTimeout(timeout));
   };
@@ -31,8 +32,15 @@ function saltarInstrucciones(estaFuncion){
               addBubble1(game.ctx, game.bubbles)
             }, 8000);
           }
+          if(GAMELEVEL === 1987 && demoPhase === 1 && game.platforms.length <= 1){
+            addDemo1Electro(game.ctx,  game.platforms, game.electros)
+            addDemo1(game.ctx, game.platforms);
+          game.background.img.src = "../public/Imagenes/background/backDemo5.png";
+
+          }
+          GAMELEVEL === 1 ? btnInstruccionesSaltar$$.style.display = "none": btnInstrucciones$$.style.display = "block";
+
           btnInstruccionesSaltar$$.style.display = "none";
-          btnInstrucciones$$.style.display = "block";
           btnInstrucciones$$.addEventListener("click", () => {
           btnInstrucciones$$.style.display = "none";
           estaFuncion()
@@ -43,10 +51,10 @@ function saltarInstrucciones(estaFuncion){
   });
 
 }
+
 function arrowDemoInfo(){
   if(demoPhase ===1){
   setTimeout(() => {
-    arrowBubbles$$.style.left = "3vw"
     arrowBubbles$$.style.top = "9vh"
     arrowBubbles$$.style.width = "calc(12px + 2vw)"
     setTimeout(() => {
@@ -116,7 +124,17 @@ const demoFunctions = {
             textoPianoPiano("demo-text3");
             arrowBubbles$$.style.display = "block";
             setTimeout(() => {
-                arrowBubbles$$.style.left = "3vw";
+              if (window.innerWidth >= 2090) {
+                arrowBubbles$$.style.left = "14.5vw";
+              } else if (window.innerWidth >= 1801) {
+                arrowBubbles$$.style.left = "6.2vw";
+              } else if (window.innerWidth >= 1501) {
+                arrowBubbles$$.style.left = "4.2vw";
+              } else if (window.innerWidth >= 1301) {
+                arrowBubbles$$.style.left = "3.2vw";
+              } else {
+                arrowBubbles$$ = "1.1vw";
+              }
                 arrowBubbles$$.style.top = "9vh";
                 arrowBubbles$$.style.width = "calc(12px + 2vw)";
             }, 1000);
@@ -132,10 +150,12 @@ const demoFunctions = {
 
         timeouts.push(setTimeout(() => {
             textoPianoPiano("demo-text32");
+            arrowBubbles$$.style.top = "-1vh"
         }, 11000));
 
         timeouts.push(setTimeout(() => {
             textoPianoPiano("demo-text33");
+            arrowBubbles$$.style.top = "3vh"
         }, 13000));
 
         timeouts.push(setTimeout(() => {
@@ -167,6 +187,9 @@ const demoFunctions = {
         }, 31000));
 
         timeouts.push(setTimeout(() => {
+          document.getElementById("demo-text31").style.display = "none";
+          document.getElementById("demo-text32").style.display = "none";
+          document.getElementById("demo-text33").style.display = "none";
             document.getElementById("demo-text4").style.display = "none";
             document.getElementById("demo-text5").style.display = "none";
             document.getElementById("demo-text6").style.display = "none";
@@ -501,6 +524,7 @@ function  hideAllTexts() {
   demoFriend5$$.style.opacity = "0";
   infoPlayer1$$.style.display = "none"
   infoPlayer2$$.style.display = "none"
+  
   document.getElementById("demo-text1").style.display = "none";
   document.getElementById("demo-text2").style.display = "none";
   document.getElementById("demo-text3").style.display = "none";

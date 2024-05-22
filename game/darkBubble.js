@@ -20,7 +20,6 @@ class DarkBubble {
   draw() {
     // Dibujar el círculo detrás de la burbuja
     this.bounceVolume = this.w/800;
-    console.log("vol", this.bounceVolume); 
     this.darkBubbleBounceSound.volume = this.bounceVolume;  
     this.ctx.beginPath();
     this.ctx.arc(this.x + this.w / 2, this.y + this.h / 2, this.w / 2, 0, 2 * Math.PI);

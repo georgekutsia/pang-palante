@@ -296,7 +296,6 @@ function handleClick(event) {
     return;
   }
   if (isPointInside(game.stairs, clickX, clickY)) {
-    
         showModal(`Escaleras`, `&nbsp&nbsp  Escaleras. Subes y bajas. Puedes quedarte arriba, pero a veces hace cosas raras. No me lo tengas en cuenta, mira todo lo demás que he hecho!!!  <br/>&nbsp&nbsp Las escaleras también reaccionan a la carga eléctrica del personaje, así que podrás hacer que se alarguen si activas el escudo eléctrico mientras estás encima`).then(() => {
       game.start();
     });
@@ -536,7 +535,6 @@ function swordClick(event) {
 }
 
 canvas.addEventListener('click', basicWeaponClick);
-
 function basicWeaponClick(event) {
   const rect = canvas.getBoundingClientRect();
   const clickX = event.clientX - rect.left;
@@ -557,7 +555,6 @@ function basicWeaponClick(event) {
       }, 5);
       setTimeout(() => {
         showModal(`BurbalaBlaster`, `&nbsp&nbsp El arma básica usada en la lucha contra las abominaciones y creaciones de Bubblemaster. Se puede mejorar en la tienda de Poltra-scrap y podrás cambiar los niveles del arma según necesidad. No siempre es conveniente luchar con el arma al máximo nivel.`).then(() => {
-          game.start();
           setTimeout(() => {
                 let weaponImgSizingInterval =  setInterval(() => {
                 weaponImgSizing--;
@@ -578,6 +575,7 @@ function basicWeaponClick(event) {
         });
         return; 
       }, 800);
+      game.start();
       }
   }
 
