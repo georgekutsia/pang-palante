@@ -1288,11 +1288,17 @@ if( totalShootsPerLevel === totalShootsPerLevelSucces ){
     }, 500);
     setTimeout(() => {
     demoOverBackground$$.style.display = 'none';
-      if(demoPhase < 5){
+      if(demoPhase === 3){
         this.levelBalls = [];
         demoFunctions.mostrarVariosTextosPocoAPoco3()
         addDemo3(this.ctx, this.platforms, this.levers, this.bubbles, this.levelBalls, this.boxes)
         demoPhase = 3;
+      } else if (demoPhase === 5){
+        this.levelBalls = [];
+        this.emptyAll()
+        demoPhase = 5;
+        demoFunctions.mostrarVariosTextosPocoAPoco4()
+        addDemo4(this.ctx, this.platforms, this.levers, this.bubbles, this.levelBalls, this.boxes)
       } else if(demoPhase >=5){
         this.levelBalls = [];
         demoFunctions.mostrarVariosTextosPocoAPoco5()

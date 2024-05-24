@@ -16,41 +16,49 @@ function textoPianoPiano(cualquierIdDeTexto) {
   }, 40); // Cambiar velocidad aquí (en milisegundos)
 }
 const timeouts = [];
-
 function saltarInstrucciones(estaFuncion){
 
   const clearAllTimeouts = () => {
       timeouts.forEach(timeout => clearTimeout(timeout));
   };
+
+  const mostrarBotonConRetraso = (boton) => {
+      setTimeout(() => {
+          boton.style.display = "block";
+      }, 2000);
+  };
+
   btnInstruccionesSaltar$$.style.display = "block";
   btnInstruccionesSaltar$$.addEventListener("click", () => {
-          clearAllTimeouts();
-          hideAllTexts();
-          if(GAMELEVEL === 1){
-            level1(game.ctx, game.bubbles, game.platforms, game.levelBalls, game.boxes);
-            setTimeout(() => {
+      clearAllTimeouts();
+      hideAllTexts();
+      if(GAMELEVEL === 1){
+          level1(game.ctx, game.bubbles, game.platforms, game.levelBalls, game.boxes);
+          setTimeout(() => {
               addBubble1(game.ctx, game.bubbles)
-            }, 8000);
-          }
-          if(GAMELEVEL === 1987 && demoPhase === 1 && game.platforms.length <= 1){
-            addDemo1Electro(game.ctx,  game.platforms, game.electros)
-            addDemo1(game.ctx, game.platforms);
+          }, 8000);
+      }
+      if(GAMELEVEL === 1987 && demoPhase === 1 && game.platforms.length <= 1){
           game.background.img.src = "../public/Imagenes/background/backDemo5.png";
-
-          }
-          GAMELEVEL === 1 ? btnInstruccionesSaltar$$.style.display = "none": btnInstrucciones$$.style.display = "block";
-
-          btnInstruccionesSaltar$$.style.display = "none";
-          btnInstrucciones$$.addEventListener("click", () => {
+          addDemo1Electro(game.ctx,  game.platforms, game.electros)
+          addDemo1(game.ctx, game.platforms);
+      }
+      
+      btnInstruccionesSaltar$$.style.display = "none";
+      mostrarBotonConRetraso(btnInstrucciones$$);
+      
+      btnInstrucciones$$.addEventListener("click", () => {
           btnInstrucciones$$.style.display = "none";
-          estaFuncion()
+          estaFuncion();
+          mostrarBotonConRetraso(btnInstruccionesSaltar$$);
       });
+
       arrowBubbles$$.style.left = "50%";
       arrowBubbles$$.style.top = "12vh";
       arrowBubbles$$.style.display = "none";
   });
-
 }
+
 
 function arrowDemoInfo(){
   if(demoPhase ===1){

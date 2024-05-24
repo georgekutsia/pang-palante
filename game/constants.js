@@ -40,7 +40,7 @@ let D = 68;
 
 let trainingRoom = 0;// configura en cual sala está entreando 
 let moved = false //para mover info de un lado a otro
-let recharge = 400;
+let recharge = 400; //el tiempo entre disparos de B
 let jumpCooldown = 500;
 let dodgeCooldown = 2400;
 let bulletDirection = 0;

@@ -98,61 +98,120 @@
   <style>.sortable-ghost { opacity: 0.5;
 }
   </style>
-  <script src="./game/sortable-list.js"></script>
+    <script src="./game/sortable-list.js"></script>
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"/>
-      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-  <title>Document</title>
-</head>
-<body>
-  <div id="bug-list" draggable="true" ondragstart="dragStart(event)">
-    <button onclick="showList()">Bugs</button>
-    <ul id="sortable-list">
-      <li>Arreglar el entrenamiento. Salta fases y hace cosas raras</li>
-      <li>Sonidos: personaje cuando está atrapado, runners todos los sonidos, el pop de la burbuja de runner</li>
-      <li>En el boss los runners no reciben daño </li>
-      <li>Introducir los runners de alguna forma </li>
-      <li>al recoger items aparece el primer frame de la animación arriba</li>
-      <li>indicar de alguna forma un item importante para pasar de nivel, como en level6 que reaparecen los ganchos
-        animacion para cuando se rompan los cañones</li>
-    </ul>
-    <button onclick="clearLocalStorage()">Restaurar</button>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"/>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="bug-list" draggable="true" ondragstart="dragStart(event)">
+      <button onclick="showList()">Bugs</button>
+      <ul id="sortable-list">
+          <li>Sonidos: personaje cuando está atrapado, runners todos los sonidos, el pop de la burbuja de runner</li>
+          <li>En el boss los runners no reciben daño </li>
+          <li>Introducir los runners de alguna forma </li>
+          <li>al recoger items aparece el primer frame de la animación arriba</li>
+          <li>indicar de alguna forma un item importante para pasar de nivel, como en level6 que reaparecen los ganchos animacion para cuando se rompan los cañones</li>
+      </ul>
+      <button onclick="clearLocalStorage()">Restaurar</button>
   </div>
-  
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.14.0/Sortable.min.js"></script>
   <script>
-    var sortable = new Sortable(document.getElementById('sortable-list'), {
-      animation: 150,
-      ghostClass: 'sortable-ghost',
-      onEnd: function (evt) {
-        saveListOrder();
-      }
-    });
+      var sortable = new Sortable(document.getElementById('sortable-list'), {
+          animation: 150,
+          ghostClass: 'sortable-ghost',
+          onEnd: function (evt) {
+              saveListOrder();
+          }
+      });
 
-function saveListOrder() {
-  var items = document.getElementById('sortable-list').querySelectorAll('li');
-  var order = [];
-  items.forEach(function(item) {
-    order.push(item.textContent);
-  });
-  localStorage.setItem('sortableListOrder', JSON.stringify(order));
-}
-
-    function loadListOrder() {
-      var order = JSON.parse(localStorage.getItem('sortableListOrder'));
-      if (order) {
-        var ul = document.getElementById('sortable-list');
-        ul.innerHTML = ''; // Clear existing list
-        order.forEach(function(text) {
-          var li = document.createElement('li');
-          li.textContent = text;
-          ul.appendChild(li);
-        });
+      function saveListOrder() {
+          var items = document.getElementById('sortable-list').querySelectorAll('li');
+          var order = [];
+          items.forEach(function(item) {
+              order.push(item.textContent);
+          });
+          localStorage.setItem('sortableListOrder', JSON.stringify(order));
       }
-    }
-  
-    // Load list order when the page loads
-    loadListOrder();
+
+      function loadListOrder() {
+          var order = JSON.parse(localStorage.getItem('sortableListOrder'));
+          if (order) {
+              var ul = document.getElementById('sortable-list');
+              ul.innerHTML = ''; // Clear existing list
+              order.forEach(function(text) {
+                  var li = document.createElement('li');
+                  li.textContent = text;
+                  ul.appendChild(li);
+              });
+              addEventListenersToItems(); // Add event listeners after loading the list
+          }
+      }
+
+      function addEventListenersToItems() {
+          var listItems = document.querySelectorAll('#sortable-list li');
+          listItems.forEach(function(item) {
+              item.addEventListener('click', function(event) {
+                  if (!event.detail || event.detail === 1) {
+                      sortable.option("disabled", false);
+                  }
+              });
+              item.addEventListener('dblclick', function(event) {
+                  sortable.option("disabled", true);
+                  this.setAttribute('contenteditable', 'true');
+                  this.focus();
+              });
+              item.addEventListener('blur', function() {
+                  this.removeAttribute('contenteditable');
+                  saveListOrder(); // Save list order when blur event occurs (focus is lost)
+              });
+          });
+      }
+
+      function clearLocalStorage() {
+          localStorage.removeItem('sortableListOrder');
+          // Opcionalmente, puedes recargar la página después de borrar los datos
+          window.location.reload();
+      }
+
+      function showList(){
+          var listOfBugs = document.getElementById('sortable-list');
+          if(listOfBugs.style.display === "none"){
+              listOfBugs.style.display = "block";
+          } else{
+              listOfBugs.style.display = "none";
+          }
+      }
+
+      function dragStart(event) {
+          var rect = event.target.getBoundingClientRect();
+          var offsetX = event.clientX - rect.left;
+          var offsetY = event.clientY - rect.top;
+          event.dataTransfer.setData("text", offsetX + ',' + offsetY);
+      }
+
+      // Evento para permitir soltar el contenedor en una nueva posición
+      document.addEventListener("dragover", function(event) {
+          event.preventDefault();
+      });
+
+      // Evento para manejar el soltar del contenedor en una nueva posición
+      document.addEventListener("drop", function(event) {
+          event.preventDefault();
+          var data = event.dataTransfer.getData("text").split(',');
+          var offsetX = parseFloat(data[0]);
+          var offsetY = parseFloat(data[1]);
+          var element = document.getElementById('bug-list');
+          element.style.left = (event.clientX - offsetX / 2) + 'px';
+          element.style.top = (event.clientY - offsetY / 2) + 'px';
+      });
+
+      // Load list order when the page loads
+      loadListOrder();
+      // Add event listeners to initial items
+      addEventListenersToItems();
   </script>
 
     <canvas id="canvas" width="1400vw" height="670vh"></canvas>

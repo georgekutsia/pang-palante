@@ -285,6 +285,8 @@ z-index: 24;
     right: 10%;
     display: none;
     font-size:calc(10px + 0.1vw);
+    opacity: 0.3;
+
   }
   #btn-instrucciones-repetir:hover{
     box-shadow: 2px 2px 2px black;
@@ -303,6 +305,7 @@ z-index: 24;
     opacity: 0.3;
     transition: opacity 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
     box-shadow: 2px 2px 2px transparent; 
+
 }
 
 #btn-instrucciones-saltar:hover {

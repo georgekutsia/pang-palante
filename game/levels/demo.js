@@ -13,7 +13,9 @@ function addDemo1(ctx, platforms){
   const platform2 = new Platform(ctx, 400, CTXH-180, 100, 15, "../public/Imagenes/obstacles/platformSolid3.png", false, true, true);
   const platform3 = new Platform(ctx, 900, CTXH-260, 100, 15, "../public/Imagenes/obstacles/platformSolid4.png", false, true, true);
   const platform4 = new Platform(ctx, 1150, CTXH-340, 100, 15, "../public/Imagenes/obstacles/platformSolid8.png", true, false, true, 0, 0, 140, 230, 0, 0, true);
-  platforms.push( platform1,platform2, platform3, platform4);
+  platforms.push( platform1
+    // ,platform2, platform3, platform4
+    );
 }
 
 //!demo 2
@@ -39,10 +41,10 @@ function addDemo3(ctx, platforms, levers, bubbles, levelBalls, boxes){
     const bubble = new Bubble(ctx, 25, 35, 101, 101, 0.3, 0.000001, 0.000001, true, 27000, 0)
     bubbles.push(bubble);
   let lev1 = new Lever(ctx, 25, 45)
-  let lev2 = new Lever(ctx, 30, CTXH-50)
+  let lev2 = new Lever(ctx, 30, CTXH-70)
   levers.push(lev1, lev2);
   const platform1 = new Platform(ctx, 10, 150, 80, 15, "../public/Imagenes/obstacles/platformSolid1.png", true, false, true);
-  const platform2 = new Platform(ctx, 10, 350, 235, 15, "../public/Imagenes/obstacles/platformSolid1.png", false, false, true);
+  const platform2 = new Platform(ctx, 10, 300, 215, 15, "../public/Imagenes/obstacles/platformSolid1.png", false, false, true);
   const platform3 = new Platform(ctx, 150, CTXH-100, 90, 15, "../public/Imagenes/obstacles/platformSolid2.png", false, false, true, 2, 0, 200, 600);
   const platform4 = new Platform(ctx, 600, CTXH-200, 90, 15, "../public/Imagenes/obstacles/platformSolid3.png", false, false, true, 1, 0, 550, 800);
   const platform5 = new Platform(ctx, 1000, CTXH-200, 90, 15, "../public/Imagenes/obstacles/platformSolid4.png", false, false, true, 0, 1, 0, 0, 150, CTXH-200 );

@@ -327,6 +327,7 @@ padding: 15px 15px;
   align-items: center;
   justify-content: center;
   z-index: 20;
+  min-width: 130px;
 }
 
 #bug-list:hover{
@@ -348,7 +349,7 @@ line-height: 20px;
 margin: none;
 padding: none;
 padding: 5px;
-margin: 4px;
+/* margin: 4px; */
 }
 #sortable-list li:nth-child(1)::before {
 content:"1) "

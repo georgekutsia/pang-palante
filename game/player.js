@@ -702,11 +702,12 @@ class Player {
           recharge = 50;
           setTimeout(() => {
             recharge = 500;
-            this.this.burbalaGatlingIsActive = false;
+            this.burbalaGatlingIsActive = false;
+            this.burbalaGatling = 0;
             setTimeout(() => {
-            this.this.burbalaGatlingIsActive = true;
-            }, 20000);
-          }, 10000);
+            this.burbalaGatlingIsActive = true;
+            }, 10000);
+          }, 5000);
         }
       }
       totalShootsPerLevel++
@@ -756,7 +757,7 @@ class Player {
         }, 500);
     }
     if(key === ALT && this.vy === 0 || key === ALT && this.ableToJump === true){
-      gainingCoins(4)
+      // gainingCoins(4)
       if(!finalBoss){
         this.img.frame = 0;
         this.img.src = "../public/Imagenes/pjJump1.png";
