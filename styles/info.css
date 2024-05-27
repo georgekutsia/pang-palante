@@ -22,6 +22,7 @@
 
 .introAyuda1,
 .introAyuda2,
+.introAyudaSiguienteSala,
 .introAyudaFinal1{
   display: none;
 transition: 1s ease-in-out;

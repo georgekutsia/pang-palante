@@ -38,8 +38,8 @@ function addDemo2(ctx, platforms, bouncers, stairs, levers){
 function addDemo3(ctx, platforms, levers, bubbles, levelBalls, boxes){
   const levelBall = new LevelBall(ctx, 190, 0)
   levelBalls.push(levelBall)
-    const bubble = new Bubble(ctx, 25, 35, 101, 101, 0.3, 0.000001, 0.000001, true, 27000, 0)
-    bubbles.push(bubble);
+  const bubble = new Bubble(ctx, 25, 35, 101, 101, 0.3, 0.000001, 0.000001, true, 27000, 0)
+  bubbles.push(bubble);
   let lev1 = new Lever(ctx, 25, 45)
   let lev2 = new Lever(ctx, 30, CTXH-70)
   levers.push(lev1, lev2);
@@ -79,7 +79,7 @@ function addDemo4(ctx, platforms, levers, bubbles, levelBalls, boxes){
   const bubble3 = new Bubble(ctx, 5, CTXH-100, 80, 80, -0.00003, 0.0000001, 0.000001, true, 544444, 0)
   const bubble4 = new Bubble(ctx, CTXW-100, CTXH-100, 80, 80, -0.00003, 0.0000001, 0.000001, true, 544444, 0)
   bubbles.push(bubble1, bubble2, bubble3, bubble4);
-  let lev1 = new Lever(ctx, CTXW-30, 0)
+  let lev1 = new Lever(ctx, CTXW-60, 0)
   let lev2 = new Lever(ctx, 15, 0)
   let lev3 = new Lever(ctx, CTXW/2-10, 0)
   levers.push(lev1, lev2, lev3);

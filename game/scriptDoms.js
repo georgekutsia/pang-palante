@@ -31,6 +31,7 @@ let levelChangeText4$$ = document.getElementById("level-change-text4");
 
 let infoPlayer1$$ = document.querySelector(".introAyuda1")
 let infoPlayer2$$ = document.querySelector(".introAyuda2")
+let infoPlayerSiguienteSala$$ = document.querySelector(".introAyudaSiguienteSala")
 let munAmetralladora$$ = document.querySelector(".munAmetralladora")
 let munCadena$$ = document.querySelector(".munCadena")
 let munEscudo$$ = document.querySelector(".munEscudo")

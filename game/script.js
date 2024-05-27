@@ -154,22 +154,65 @@ retry$$.addEventListener("click", ()=>{
       GAMELEVEL = GAMELEVEL -1; //para que reinicie en el mismo nivel en el que está
       game.levelChange();
   }
-} else {
-  if(demoPhase<=6){
+} else if (GAMELEVEL >= 1987){
+  game.emptyAllGameArrays();
+  game.player.life.total = 3;
+  if(demoPhase <= 2){
+    alert("Está todo bien. Sigue jugando. No entres en pánico. Va, saltamos a la siguiente sala.")
+  } else if(demoPhase === 3){
     game.levelBalls = [];
-    game.emptyAllGameArrays()
-    game.emptyAllPlayerArrays()
-    demoFunctions.mostrarVariosTextosPocoAPoco3()
-    addDemo3(game.ctx, game.platforms, game.levers, game.bubbles, game.levelBalls)
     demoPhase = 3;
-  } else {
+    demoFunctions.mostrarVariosTextosPocoAPoco3()
+    addDemo3(game.ctx, game.platforms, game.levers, game.bubbles, game.levelBalls, game.boxes)
+  } else if (demoPhase === 5){
     game.levelBalls = [];
-    game.emptyAllGameArrays()
-    game.emptyAllPlayerArrays()
+    game.emptyAll()
+    demoPhase = 5;
+    demoFunctions.mostrarVariosTextosPocoAPoco4()
+    addDemo4(game.ctx, game.platforms, game.levers, game.bubbles, game.levelBalls, game.boxes)
+  } else if(demoPhase === 6){
+    game.levelBalls = [];
     demoFunctions.mostrarVariosTextosPocoAPoco5()
     addDemo5(game.ctx, game.platforms, game.levers, game.levelBalls,game.boxes, game.darkBubbles, game.spikes, game.healings)
     demoPhase = 7;
-  }
+    console.log(demoPhase)
+  } else if(demoPhase === 7){
+    game.background.img.src = "../public/Imagenes/background/backDemo10.webp";
+    game.levelBalls = [];
+    game.emptyAll()
+    demoPhase = 7;
+    demoFunctions.mostrarVariosTextosPocoAPoco5()
+    addDemo5(game.ctx, game.platforms, game.levers, game.levelBalls,game.boxes, game.darkBubbles, game.spikes, game.healings)
+    console.log(demoPhase)
+
+  } else if(demoPhase === 9){
+    game.background.img.src = "../public/Imagenes/background/backDemo11.webp";
+      game.levelBalls = [];
+      game.emptyAll()
+      demoPhase = 9;
+      demoFunctions.mostrarVariosTextosPocoAPoco6()
+      addDemo6(game.ctx, game.platforms, game.levers, game.levelBalls,game.boxes, game.gatlings, game.cannons);
+    console.log(demoPhase)
+
+  } else if(demoPhase >= 11){
+    game.background.img.src = "../public/Imagenes/background/backDemo12.webp";
+    game.levelBalls = [];
+    game.emptyAll()
+    demoPhase = 11;
+    addDemo7(game.ctx, game.platforms, game.swords, game.bouncers, game.machineguns);
+    demoFunctions.mostrarVariosTextosPocoAPoco7()
+    setTimeout(() => {
+        addBubblesDemo7(game.ctx, game.bubbles)
+        addLevelBallDemo7(game.ctx, game.levelBalls)
+    }, 15000);
+    boxMoveDemo7(game.ctx, game.boxes, game.hooks, game.healings)
+      if(game.boxes.length<= 0) {
+        setTimeout(() => {
+        boxMoveDemo7(game.ctx, game.boxes, game.hooks, game.healings)
+      }, 2000);
+      }
+    console.log(demoPhase)
+  } 
 }
 })
 
