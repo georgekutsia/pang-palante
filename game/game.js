@@ -46,6 +46,7 @@ class Game {
     this.electricShocks = []; 
     this.weaponLevelings = []; 
     this.runners = []; 
+    this.showSpecialItems = []; 
     // this.totalCannonBubbleCount = 0;
     this.changingLevelSoChangeImage = true;
     this.dispached = true;
@@ -153,6 +154,7 @@ class Game {
     this.weaponLevelings = this.weaponLevelings.filter((e) => e.isVisible()); //elimina cada obstáculo que ya no es visible y vacía el array
     this.electricShocks = this.electricShocks.filter((e) => e.isVisible()); //elimina cada obstáculo que ya no es visible y vacía el array
     this.runners = this.runners.filter((e) => e.isVisible()); //elimina cada obstáculo que ya no es visible y vacía el array
+    this.showSpecialItems = this.showSpecialItems.filter((e) => e.isVisible()); //elimina cada obstáculo que ya no es visible y vacía el array
     this.swords = this.swords.filter((e) => e.isVisible()); //elimina cada obstáculo que ya no es visible y vacía el array
     this.chests = this.chests.filter((e) => e.isVisible()); //elimina cada obstáculo que ya no es visible y vacía el array
     this.miniBoses = this.miniBoses.filter((e) => e.isVisible()); //elimina cada obstáculo que ya no es visible y vacía el array
@@ -198,6 +200,7 @@ class Game {
     this.weaponLevelings.forEach((e) => e.draw()); //dibuja cada obstáculo
     this.electricShocks.forEach((e) => e.draw()); //dibuja cada obstáculo
     this.runners.forEach((e) => e.draw()); //dibuja cada obstáculo
+    this.showSpecialItems.forEach((e) => e.draw()); //dibuja cada obstáculo
     this.chests.forEach((e) => e.draw()); //dibuja cada obstáculo
     this.swords.forEach((e) => e.draw()); //dibuja cada obstáculo
     this.miniBoses.forEach((e) => e.draw()); //dibuja cada obstáculo
@@ -234,6 +237,7 @@ class Game {
     this.weaponLevelings.forEach((e) => e.move()); //mueve los obstáculos
     this.electricShocks.forEach((e) => e.move()); //mueve los obstáculos
     this.runners.forEach((e) => e.move()); //mueve los obstáculos
+    this.showSpecialItems.forEach((e) => e.move()); //mueve los obstáculos
     this.swords.forEach((e) => e.move()); //mueve los obstáculos
     this.chests.forEach((e) => e.move()); //mueve los obstáculos
     this.miniBoses.forEach((e) => e.move()); //mueve los obstáculos
