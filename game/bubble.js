@@ -132,7 +132,7 @@ class Bubble { //posX posY, ancho, alto, velX, velY, gravedad, buleano si hay gr
   }
   
   isVisible(){
-    return  this.x > -10 && this.x <= this.ctx.canvas.width;  //determina cuándo es visible el obstáculo
+    return  this.x > -10 && this.x <= this.ctx.canvas.width && this.y < this.ctx.canvas.height + 10 && this.y > -700;  //determina cuándo es visible el obstáculo
   }
   collides(objetivo) {  //chequéa la colisión. 
     if(!this.runnerBubble){

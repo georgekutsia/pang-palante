@@ -746,10 +746,10 @@ class Player {
       }
     }
     if(key === M){
-      let runn = new Runner(ctx)
-      game.runners.push(runn)
-      let spec = new ShowSpecialItem(ctx, this.x, this.y, 140, 140)
-      game.showSpecialItems.push(spec)
+      // let runn = new Runner(ctx)
+      // game.runners.push(runn)
+      // let spec = new ShowSpecialItem(ctx, this.x, this.y, 140, 140)
+      // game.showSpecialItems.push(spec)
       this.shootBar();
       this.barAmount--;
       if(this.barAmount <= 0)this.barAmount = 0;

@@ -24,7 +24,8 @@ constructor(ctx, x, y) {
     this.isActive = false;
     this.winCondition = false;
     this.bulala = false;
-
+    this.showActivation = false;
+    this.showActivationDisabled = true;
   //cuando se rompe la bola
     this.ballBreaks = new Image();
     this.ballBreaks.src = "/public/Imagenes/levelBall1Breaking.png"
@@ -53,7 +54,11 @@ constructor(ctx, x, y) {
     if(!this.isActive && !this.ballBroke) {
       this.ctx.drawImage(this.imgBallShield, this.x-3, this.y+35, this.w+5, this.w + 5);  // dibuja el escudo protector
     }
-
+    if(this.showActivation === true && this.showActivationDisabled === true) {
+      let spec = new ShowSpecialItem(ctx, this.x - 30, this.y + 10, 100, 100)
+      game.showSpecialItems.push(spec)
+      this.showActivationDisabled = false;
+    }
     if(this.ballShieldForceResist){
       this.ballShieldForceTickTimer++;
       forceFieldSound.play()

@@ -307,3 +307,7 @@ function specialItems(ctx, cristalBalls){
   let cri = new CristalBall(ctx, 100, 100, 40, 40,  2, 2, 3);
   cristalBalls.push(cri)
 }
+function runners(ctx, runners){
+  let runner =  new Runner(ctx);
+  runners.push(runner)
+}

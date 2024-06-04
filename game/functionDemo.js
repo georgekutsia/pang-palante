@@ -34,6 +34,7 @@ function saltarInstrucciones(estaFuncion){
       hideAllTexts();
       if(GAMELEVEL === 1){
           level1(game.ctx, game.bubbles, game.platforms, game.levelBalls, game.boxes);
+          game.checkingBallState = true;
           setTimeout(() => {
               addBubble1(game.ctx, game.bubbles)
           }, 8000);

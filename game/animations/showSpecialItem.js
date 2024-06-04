@@ -8,7 +8,7 @@ class ShowSpecialItem {
     this.vx = 0;
     this.vy = 0;
     this.img = new Image();
-    this.img.src = "/public/Imagenes/showSpecialItem2.png";
+    this.img.src = "/public/Imagenes/showSpecialItem3.png";
     this.img.frame = 0;
     this.tick = 0;
     this.dispose = true;
@@ -32,13 +32,15 @@ class ShowSpecialItem {
     this.x += this.vx;
     this.y += this.vy;
     this.tick++;
-    if (this.tick > 5.5) {
+    if (this.tick > 2.5) {
       this.img.frame++;
       this.tick = 0;
     }
     if (this.img.frame > 19) {
       this.img.frame = 0;
+      this.dispose = false;
     }
+
   }
 
   isVisible() {

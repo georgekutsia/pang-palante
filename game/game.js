@@ -15,6 +15,7 @@ class Game {
     this.gameTime = 0; //cuando el juego se inicia va sumando. Se usa para llevar cuenta del tiempo
     this.otherBubbles = 0;
     this.gameStarted = false;
+    this.checkingBallState = false;
     this.setListeners(); // para que se pueda usar el teclado
     this.bubbles = []; 
     this.darkBubbles = []; 
@@ -71,6 +72,7 @@ class Game {
         }, 20000));
         timeouts.push(setTimeout(() => {
           addBubble1(this.ctx, this.bubbles)
+          this.checkingBallState = true;
         }, 30000));
       }
       if(GAMELEVEL === 100) {
@@ -1089,9 +1091,12 @@ if( totalShootsPerLevel === totalShootsPerLevelSucces ){
 
   checkLevelsState(){
     if(GAMELEVEL <= 1986){
-      let randomForSpecialItem = getRandomNumber(5000);
+      let randomForSpecialItem = getRandomNumber(8000);
       if(randomForSpecialItem === 1 && this.cristalBalls.length <= 0){
         specialItems(this.ctx, this.cristalBalls)
+      }
+      if(randomForSpecialItem % 2000 === 0 && !finalBoss){
+        runners(this.ctx, this.runners)
       }
     }
     if (this.player.life.total <= 0){
@@ -1101,10 +1106,11 @@ if( totalShootsPerLevel === totalShootsPerLevelSucces ){
       if (this.bubbles.length <= 0 && this.gatlings.every(gat => gat.bubbleArray.length <= 0) && this.levers.every(lev =>lev.activated)&& this.miniBoses.length <= 0) {
         this.levelBalls.forEach(e => (e.img.src = e.img.newSrc));
         this.levelBalls.forEach(e => (e.winCondition = true));
+        this.levelBalls.forEach(e => (e.showActivation = true));
       } else {this.levelBalls.forEach(e => (e.winCondition = false))}
     if(GAMELEVEL === 1987){
       if(demoPhase === 1){
-        if(this.platforms.length<=2 && this.electros.length <=0 && this.gameTime >= 200){
+        if(this.platforms.length<=2 && this.electros.length <=0 && this.gameTime >= 1300){
           this.emptyAll();
           this.background.img.src = "../public/Imagenes/background/backDemo2.png";
           this.player.y = CTXH - 20;

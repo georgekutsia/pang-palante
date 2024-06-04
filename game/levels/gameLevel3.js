@@ -56,7 +56,7 @@ function healingItem3(ctx, healings, bubbles) {
     const healingItem3 = new Healing(ctx, 20, 27, 0)
     const healingItem4 = new Healing(ctx, 275, 57, 0)
     healings.push(healingItem3, healingItem4)
-    const bubble1 = new Bubble(ctx, 130, -450, CTXW / 7, CTXW / 7, -1)
+    const bubble1 = new Bubble(ctx, 130, -150, CTXW / 7, CTXW / 7, -1)
     bubbles.push(bubble1);
     break;
   default:
