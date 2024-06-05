@@ -1092,7 +1092,7 @@ if( totalShootsPerLevel === totalShootsPerLevelSucces ){
   checkLevelsState(){
     if(GAMELEVEL <= 1986){
       let randomForSpecialItem = getRandomNumber(8000);
-      if(randomForSpecialItem === 1 && this.cristalBalls.length <= 0){
+      if(randomForSpecialItem % 50 === 0 && this.cristalBalls.length <= 0){
         specialItems(this.ctx, this.cristalBalls)
       }
       if(randomForSpecialItem % 2000 === 0 && !finalBoss){
