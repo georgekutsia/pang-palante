@@ -322,7 +322,7 @@ padding: 15px 15px;
   padding: 5px;
   cursor: move; 
   max-width: 250px; 
-  display: flex;
+  display: none;
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -406,9 +406,11 @@ content:"8) "
   transition: 0.3s ease-in-out all;
 }
 
-
 @media only screen and (min-height: 800px) {
 #canvas {
-  margin-top: 3vw;
+  margin-top: 2vw;
 }
+#changing-level-img{
+  top: 10vh;
 }
+} 

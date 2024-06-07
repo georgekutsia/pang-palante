@@ -15,7 +15,7 @@ function textoPianoPiano(cualquierIdDeTexto) {
     }
   }, 40); // Cambiar velocidad aquí (en milisegundos)
 }
-const timeouts = [];
+let timeouts = [];
 function saltarInstrucciones(estaFuncion){
 
   const clearAllTimeouts = () => {

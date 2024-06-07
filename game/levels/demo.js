@@ -107,7 +107,7 @@ function addDemo5(ctx, platforms, levers, levelBalls, boxes, darkBubbles, spikes
   levers.push(lev1, lev2, lev3);
   const platform1 = new Platform(ctx, 10, CTXH - 200, 135, 15, "../public/Imagenes/obstacles/platformSolid1.png", false, false, true);
   const platform2 = new Platform(ctx, 160, CTXH - 100, 145, 15, "../public/Imagenes/obstacles/platformSolid8.png", false, false, true, 0, 0, 10, 300, 0, 0, true);
-  const platform3 = new Platform(ctx, CTXW/2 -20, CTXH - 300, 80, 15, "../public/Imagenes/obstacles/platformSolid6.png", false , false, true);
+  const platform3 = new Platform(ctx, CTXW/2 -20, CTXH - 300, 80, 80, "../public/Imagenes/obstacles/platformSolid6.png", true , true, true);
   const platform4 = new Platform(ctx, CTXW-295, CTXH - 100, 145, 15, "../public/Imagenes/obstacles/platformSolid8.png", false, false, true, 0, 0, 1100, CTXW, 0, 0, true);
   const platform5 = new Platform(ctx, CTXW-145, CTXH-200, 135, 15, "../public/Imagenes/obstacles/platformSolid4.png", false, false, true,);
   platforms.push(platform1, platform2, platform3, platform4,platform5);
@@ -189,7 +189,7 @@ function boxMoveDemo7(ctx, boxes, hooks, healings){
   boxes.push(box0, box1)
 
   let hook1 = new Hook(ctx, 50, CTXH-150)
-  let hook2 = new Hook(ctx, 1200, CTXH-50)
+  let hook2 = new Hook(ctx, 1200, CTXH-150)
   hooks.push(hook1, hook2)
   let healing1 = new Healing(ctx, 115, 220)
   let healing2 = new Healing(ctx, 1020, 220)
