@@ -14,7 +14,6 @@
   }
 
   
-@media only screen and (min-height: 420px) {
   #toggle-shop{
     position: absolute;
     top: 0;
@@ -79,7 +78,6 @@
   display: none;
 }
 
-}
 
 
 #shop-electro{

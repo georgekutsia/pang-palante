@@ -118,6 +118,8 @@ class Player {
 
     this.upBtn$$.addEventListener("touchstart", this.handleUp);
     this.rightBtn$$.addEventListener("touchstart", this.handleRight);
+    this.rightBtn$$.addEventListener("touchmove", this.handleRightMove);
+    this.rightBtn$$.addEventListener("touchend", this.handleRightEnd);
     this.downBtn$$.addEventListener("touchstart", this.handleDown);
     this.leftBtn$$.addEventListener("touchstart", this.handleLeft);
     this.rightBtnDodge$$.addEventListener("touchstart", this.handleRightDodge);
@@ -148,86 +150,29 @@ class Player {
       this.moveB()
       }
     handleShootU = () =>{ //*
-      this.img.src = "../public/Imagenes/pjShoot3.png";
-      this.frameAmount = 4;
-      this.img.frame = 0;
+      this.moveBUp()
     }
     handleFIre = (event) => {//*
       event.preventDefault();
-      if(this.fireAmount > 0){
-        this.fireAmount -= 1;
-        this.shootFire();
-        if(this.fireAmount <= 0){
-          N = 0;
-        }
-      }
+      this.moveN()
     }
     handleCadena = (event) => {
       event.preventDefault();
-      this.shootBar();
-      this.barAmount--;
-      if(this.barAmount <= 0)this.barAmount = 0;
-      M = 0
-        setTimeout(() => {
-          M = 77
-        }, 100);
+      this.moveM()
     }
     handleMegablaster = (event) => {
       event.preventDefault();
-      if (this.megaFireBlaster) {
-        A = 65;
-        D = 68;
-        this.chargingFires = false;
-        this.megaFireBlaster = true; // No estoy seguro de tu lógica, pero asegúrate de que se active correctamente
-        this.chargingFires = true;
-        this.charging++;
-        blasterCharging.volume = 1;
-        blasterCharging.play();
-
-        if (this.charging >= this.megaFireBlasterAmount) {
-          this.charging = this.megaFireBlasterAmount;
-          blasterCharging.volume = 0;
-        }
-      }
+      this.moveK();
     }
 
     handleMegablasterU = (event) => {
       event.preventDefault();
-      if (this.megaFireBlaster) {
-        A = 0;
-        D = 0;
-        this.chargingFires = false;
-        this.megaFireBlaster = false;
-        if (this.charging >= 3) {
-          for (let i = 0; i < this.charging; i++) {
-            blasterExplosion.play();
-            blasterCharging.volume = 0;
-
-            if (i % 10 === 0 && i % 20 !== 0) {
-              const bulletFire = new WeaponFire(this.ctx, this.x + this.w - i, this.y, this.ctx.canvas.width / 20, this.ctx.canvas.width / 18)
-              this.bulletFireArray.push(bulletFire);
-            }
-
-            if (i % 20 === 0 && i >= 10) {
-              const bulletFire = new WeaponFire(this.ctx, this.x + i, this.y, this.ctx.canvas.width / 20, this.ctx.canvas.width / 18)
-              this.bulletFireArray.push(bulletFire);
-            }
-          }
-          this.charging -= this.charging;
-        }
-      }
+      this.moveKUp();
     }
 
     handleJump = (event) => {
       event.preventDefault();
-      if (this.vy === 0 || this.ableToJump === true) {
-        this.vy = jumpHeight;
-        this.g = 2; + gravitySpeed
-        this.ableToJump = false;
-        setTimeout(() => {
-          this.jumpBtn$$.addEventListener("touchstart", this.handleJumpTouchStart);
-        }, jumpCooldown);
-      }
+      this.moveALT()
     };
     handleUp = (event) => {
     if(W === 87){
@@ -236,17 +181,35 @@ class Player {
     }
       }
       handleRight = (event) => {
+        this.startX = event.touches[0].clientX;
         event.preventDefault();
         this.vx = playerSpeed;
         this.img.src = "../public/Imagenes/pangPjNuevoDerecha2.png";
         this.frameAmount = 8;
       }
+      handleTouchEnd(event) {
+        const endX = event.changedTouches[0].clientX;
+        const deltaX = endX - this.startX;
+
+        if (deltaX > 50) { // Ajusta el valor de 50 según sea necesario
+            this.swipeRight();
+        } else if (deltaX < -50) {
+            this.swipeLeft();
+        }
+    }
+
+    swipeRight() {
+        alert("Swiped Right");
+        // Lógica para el arrastre hacia la derecha
+    }
+
+    swipeLeft() {
+        alert("Swiped Left");
+        // Lógica para el arrastre hacia la izquierda
+    }
       handleLeft = (event) => {
     event.preventDefault();
-        this.frameTick++;
-        this.vx = -playerSpeed;
-        this.img.src = "../public/Imagenes/pangPjNuevoIzquierda2";
-        this.frameAmount = 8;
+        this.moveA()
       }
       handleDown = (event) => {
      event.preventDefault();
@@ -729,7 +692,7 @@ class Player {
     }
   }
 
-  //consultar constantes para el código de cada teclahjkl-
+  //consultar constantes para el código de cada tecla
   keyDown(key) {
     if (finalBoss) {
       W = 87;
@@ -796,69 +759,24 @@ class Player {
   }
   keyUp(key) {
     if (key === W) {
-      this.vy = 0;
-      W = 0; //esto parece que soluciona un bug con la escalera, que si pulsas muy rapido y te sales a un lado, puedes flotar un rato
+        this.moveWUp()
     }
     if (key === A) {
-      this.vx = 0;
-      if (!finalBoss) {
-        this.img.src = "../public/Imagenes/pjShoot3.png";
-        this.frameAmount = 4;
-        this.img.frame = 0;
-      }
-      this.walkingSpeed = 0;
+      this.moveAUp()
+
     }
     if (key === D) {
-      this.vx = 0;
-      if (!finalBoss) {
-        this.img.src = "../public/Imagenes/pjShoot3.png";
-        this.frameAmount = 4;
-        this.img.frame = 0;
-      }
-      this.walkingSpeed = 0;
+      this.moveDUp()
     }
     if (key === S) {
-      this.vy = 0;
+      this.moveSUp();
     }
 
     if (key === B) {
-      if (this.this) {
-        this.burbalaGatling = 0;
-      }
-      if (!finalBoss) {
-        this.img.src = "../public/Imagenes/pjShoot3.png";
-        this.frameAmount = 4;
-        this.img.frame = 0;
-      }
+        this.moveBUp()
     }
     if (key === K && this.megaFireBlaster) {
-      A = 65;
-      D = 68;
-      this.chargingFires = false;
-      this.megaFireBlaster = false;
-      if (this.charging >= 3) {
-        for (let i = 0; i < this.charging; i++) {
-          blasterExplosion.play();
-          blasterCharging.volume = 0;
-          if (i % 10 === 0 && i % 20 !== 0) {
-            const bulletFire = new WeaponFire(
-              this.ctx,
-              this.x + i * 2,
-              this.y - 30
-            );
-            this.bulletFireArray.push(bulletFire);
-          }
-          if (i % 20 === 0 && i >= 10) {
-            const bulletFire = new WeaponFire(
-              this.ctx,
-              this.x - i * 2,
-              this.y - 30
-            );
-            this.bulletFireArray.push(bulletFire);
-          }
-        }
-        this.charging -= this.charging;
-      }
+      this.moveKUp()
     }
   }
 
@@ -1528,5 +1446,75 @@ class Player {
   }
   moveO(){
     this.shootStep(-68, 0);
+  }
+
+
+  // keyDown 
+  moveWUp(){
+    this.vy = 0;
+    W = 0; //esto parece que soluciona un bug con la escalera, que si pulsas muy rapido y te sales a un lado, puedes flotar un rato
+  }
+
+  moveAUp(){
+    this.vx = 0;
+    if (!finalBoss) {
+      this.img.src = "../public/Imagenes/pjShoot3.png";
+      this.frameAmount = 4;
+      this.img.frame = 0;
+    }
+    this.walkingSpeed = 0;
+  }
+  moveDUp(){
+    this.vx = 0;
+    if (!finalBoss) {
+      this.img.src = "../public/Imagenes/pjShoot3.png";
+      this.frameAmount = 4;
+      this.img.frame = 0;
+    }
+    this.walkingSpeed = 0;
+  }
+  moveSUp(){
+    this.vy = 0;
+  }
+moveBUp(){
+  if (this.this) {
+    this.burbalaGatling = 0;
+  }
+  if (!finalBoss) {
+    this.img.src = "../public/Imagenes/pjShoot3.png";
+    this.frameAmount = 4;
+    this.img.frame = 0;
+  }
+}
+
+
+  moveKUp(){
+    A = 65;
+    D = 68;
+    this.chargingFires = false;
+    this.megaFireBlaster = false;
+    if (this.charging >= 3) {
+      for (let i = 0; i < this.charging; i++) {
+        blasterExplosion.play();
+        blasterCharging.volume = 0;
+        if (i % 10 === 0 && i % 20 !== 0) {
+          const bulletFire = new WeaponFire(
+            this.ctx,
+            this.x + i * 2,
+            this.y - 30
+          );
+          this.bulletFireArray.push(bulletFire);
+        }
+        if (i % 20 === 0 && i >= 10) {
+          const bulletFire = new WeaponFire(
+            this.ctx,
+            this.x - i * 2,
+            this.y - 30
+          );
+          this.bulletFireArray.push(bulletFire);
+        }
+      }
+      this.charging -= this.charging;
+    }
   }
 }
