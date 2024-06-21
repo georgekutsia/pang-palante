@@ -741,7 +741,7 @@ class Player {
       this.moveJ();
     }
     if (key === H) {
-      this.moveH;
+      this.moveH();
     }
     if (key === R) {
       this.moveR()

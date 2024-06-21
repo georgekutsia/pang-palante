@@ -524,6 +524,7 @@ function  hideAllTexts() {
   document.getElementById("gameIntro-text5").style.display = "none";
   document.getElementById("gameIntro-text6").style.display = "none";
   document.getElementById("gameIntro-text7").style.display = "none";
+  document.getElementById("gameIntro-text8").style.display = "none";
 
   demoFriend3$$.style.display = "none";
   demoFriend3$$.style.opacity = "0";

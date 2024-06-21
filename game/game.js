@@ -69,11 +69,11 @@ class Game {
         introGame();
         timeouts.push(setTimeout(() => {
         level1(this.ctx, this.bubbles, this.platforms, this.levelBalls, this.boxes)
-        }, 20000));
+        }, 24000));
         timeouts.push(setTimeout(() => {
           addBubble1(this.ctx, this.bubbles)
           this.checkingBallState = true;
-        }, 30000));
+        }, 34000));
       }
       if(GAMELEVEL === 100) {
         levelInfinite( this.ctx, this.bubbles, this.platforms, this.bouncers, this.spikes, this.stairs, this.flamethrowers, this.machineguns, this.healings, this.auras, this.boxes, this.blasters, this.levelBalls, this.gatlings, this.darkBubbles,)
@@ -1091,11 +1091,11 @@ if( totalShootsPerLevel === totalShootsPerLevelSucces ){
 
   checkLevelsState(){
     if(GAMELEVEL <= 1986){
-      let randomForSpecialItem = getRandomNumber(8000);
+      let randomForSpecialItem = getRandomNumber(7500);
       if(randomForSpecialItem === 1 && this.cristalBalls.length <= 0){
         specialItems(this.ctx, this.cristalBalls)
       }
-      if(randomForSpecialItem % 2000 === 0 && !finalBoss){
+      if(randomForSpecialItem % 2500 === 0 && !finalBoss){
         runners(this.ctx, this.runners)
       }
     }

@@ -122,17 +122,22 @@ function introGame(){
           document.getElementById("gameIntro-text6").style.display = "none";
           demoFriend5$$.style.display = "none";
           demoFriend3$$.style.display = "block";
-        textoPianoPiano("gameIntro-text7");
+          textoPianoPiano("gameIntro-text7");
+          timeouts.push(setTimeout(() => {
+          textoPianoPiano("gameIntro-text8");
+          
+          }, 1500))
           timeouts.push(setTimeout(() => {
             demoFriend3$$.style.opacity = "0";
             document.getElementById("gameIntro-text7").style.display = "none";
+            document.getElementById("gameIntro-text8").style.display = "none";
             timeouts.push(setTimeout(() => {
             demoFriend3$$.style.display = "none";
             btnInstruccionesSaltar$$.style.display = "none";
             timeouts = [];
             }, 1000));
-          }, 3000));
-        }, 4500));
+          }, 4500));
+        }, 5500));
   }, 14000));
 }
 }
