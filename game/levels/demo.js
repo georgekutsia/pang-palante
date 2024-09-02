@@ -3,13 +3,13 @@ let demoPhase = 1;
 //!demo1
 function addDemo1Electro(ctx, platforms, electros){
   let elec = new Electro(ctx, 30, CTXH-250);
-  const platform0 = new Platform(ctx, 10, CTXH-200, 90, 15, "../public/Imagenes/obstacles/platformSolid8.png", false, false, true, 0, 0, 400, 800, 0, 0, true);
+  const platform0 = new Platform(ctx, 10, CTXH-240, 90, 15, "../public/Imagenes/obstacles/platformSolid8.png", false, false, true, 0, 0, 400, 800, 0, 0, true);
   platforms.push( platform0);
   electros.push(elec)
 }
 
 function addDemo1(ctx, platforms){
-  const platform1 = new Platform(ctx, 150, CTXH-100, 100, 15, "../public/Imagenes/obstacles/platformSolid2.png", false, false, true);
+  const platform1 = new Platform(ctx, 150, CTXH-100, 100, 15, "../public/Imagenes/obstacles/platformSolid2.png", true, false, true);
   const platform2 = new Platform(ctx, 400, CTXH-180, 100, 15, "../public/Imagenes/obstacles/platformSolid3.png", false, true, true);
   const platform3 = new Platform(ctx, 900, CTXH-260, 100, 15, "../public/Imagenes/obstacles/platformSolid4.png", false, true, true);
   const platform4 = new Platform(ctx, 1150, CTXH-340, 100, 15, "../public/Imagenes/obstacles/platformSolid8.png", true, false, true, 0, 0, 140, 230, 0, 0, true);
